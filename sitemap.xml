@@ -8,7 +8,7 @@
   <url>
     <loc>https://alphaaistockx.com/</loc>
     <lastmod>2025-06-09</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
@@ -91,7 +91,7 @@
     <url>
         <loc>https://alphaaistockx.com/features</loc>
         <lastmod>2025-06-09</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
@@ -99,7 +99,7 @@
   <url>
     <loc>https://alphaaistockx.com/pricing/</loc>
     <lastmod>2025-06-09</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
@@ -144,14 +144,14 @@
     <loc>https://alphaaistockx.com/contact/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://alphaaistockx.com/about/</loc>
-    <lastmod>2024-12-09</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

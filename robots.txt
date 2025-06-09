@@ -3,8 +3,6 @@ Allow: /
 
 Sitemap: https://alphaaistockx.com/sitemap.xml
 
-Crawl-delay: 1
-
 Disallow: /admin/
-Disallow: /api/
 Disallow: /private/
+Disallow: /api/
