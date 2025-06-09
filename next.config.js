@@ -58,9 +58,8 @@ const nextConfig = {
   // CDN asset prefix for production
   assetPrefix: process.env.NODE_ENV === "production" ? "https://cdn.alphaaistockx.com" : "",
 
-  // Enable experimental features for better performance
+  // Simplified experimental features
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
   },
 
