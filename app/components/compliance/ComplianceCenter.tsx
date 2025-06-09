@@ -1,79 +1,60 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Shield, AlertTriangle, CheckCircle, Eye, Lock, FileText, Scale } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  Shield,
+  Lock,
+  FileText,
+  AlertTriangle,
+  CheckCircle,
+  Scale,
+  Globe,
+  Users,
+  Clock,
+  Award,
+  BookOpen,
+  Info,
+} from "lucide-react"
 
 export default function ComplianceCenter() {
-  const regulations = [
+  const complianceItems = [
     {
-      title: "SEC Regulation Best Interest (Reg BI)",
-      status: "compliant",
-      description: "Ensures investment advice is in the best interest of retail customers",
-      lastUpdated: "2024-12-01",
-      category: "Investment Advisory",
+      category: "SEC Regulations",
+      items: [
+        { name: "Regulation Best Interest (Reg BI)", status: "compliant", description: "Investment advice standards" },
+        { name: "Rule 15c3-5 Market Access", status: "compliant", description: "Risk management controls" },
+        { name: "Regulation SHO", status: "compliant", description: "Short sale regulations" },
+        { name: "Rule 606 Order Routing", status: "compliant", description: "Order execution disclosure" },
+      ],
     },
     {
-      title: "FINRA Rule 3110 - Supervision",
-      status: "compliant",
-      description: "Comprehensive supervision of trading activities and customer accounts",
-      lastUpdated: "2024-12-01",
-      category: "Supervision",
+      category: "FINRA Rules",
+      items: [
+        { name: "Rule 3110 Supervision", status: "compliant", description: "Supervisory procedures" },
+        { name: "Rule 2111 Suitability", status: "compliant", description: "Investment suitability" },
+        { name: "Rule 4512 Customer Account", status: "compliant", description: "Account information" },
+        { name: "Rule 3240 Borrowing", status: "compliant", description: "Borrowing arrangements" },
+      ],
     },
     {
-      title: "SEC Rule 15c3-5 - Market Access",
-      status: "compliant",
-      description: "Risk management controls for market access and algorithmic trading",
-      lastUpdated: "2024-12-01",
-      category: "Market Access",
+      category: "Data Protection",
+      items: [
+        { name: "GDPR Compliance", status: "compliant", description: "EU data protection" },
+        { name: "CCPA Compliance", status: "compliant", description: "California privacy rights" },
+        { name: "SOC 2 Type II", status: "certified", description: "Security controls audit" },
+        { name: "ISO 27001", status: "certified", description: "Information security management" },
+      ],
     },
     {
-      title: "Regulation SHO - Short Sales",
-      status: "compliant",
-      description: "Rules governing short sales and locate requirements",
-      lastUpdated: "2024-12-01",
-      category: "Trading Rules",
-    },
-    {
-      title: "GDPR - Data Protection",
-      status: "compliant",
-      description: "European data protection and privacy regulations",
-      lastUpdated: "2024-12-01",
-      category: "Data Privacy",
-    },
-    {
-      title: "CCPA - California Consumer Privacy Act",
-      status: "compliant",
-      description: "California state privacy law for consumer data protection",
-      lastUpdated: "2024-12-01",
-      category: "Data Privacy",
-    },
-  ]
-
-  const riskControls = [
-    {
-      name: "Position Limits",
-      status: "active",
-      description: "Maximum position size limits per security and portfolio",
-      threshold: "$500,000",
-    },
-    {
-      name: "Daily Loss Limits",
-      status: "active",
-      description: "Maximum daily loss limits to prevent excessive risk",
-      threshold: "$50,000",
-    },
-    {
-      name: "Circuit Breakers",
-      status: "active",
-      description: "Automatic trading halts during extreme market volatility",
-      threshold: "10% move",
-    },
-    {
-      name: "Kill Switch",
-      status: "active",
-      description: "Emergency stop for all trading activities",
-      threshold: "Instant",
+      category: "Risk Management",
+      items: [
+        { name: "Position Limits", status: "active", description: "Automated position monitoring" },
+        { name: "Circuit Breakers", status: "active", description: "Market volatility protection" },
+        { name: "Daily Loss Limits", status: "active", description: "Risk exposure controls" },
+        { name: "Emergency Procedures", status: "active", description: "Crisis management protocols" },
+      ],
     },
   ]
 
@@ -81,214 +62,212 @@ export default function ComplianceCenter() {
     {
       title: "Investment Risk Disclosure",
       content:
-        "All investments involve risk, including the potential loss of principal. Past performance does not guarantee future results. The value of investments may fluctuate and investors may lose money.",
+        "All investments involve risk, including potential loss of principal. Past performance does not guarantee future results. AI predictions are based on historical data and market analysis but cannot guarantee accuracy.",
       icon: AlertTriangle,
-      color: "text-yellow-400",
+      type: "warning",
     },
     {
       title: "AI Technology Limitations",
       content:
-        "AI predictions and analysis are based on historical data and algorithms. Market conditions can change rapidly, and AI models may not account for all variables affecting security prices.",
-      icon: Eye,
-      color: "text-blue-400",
+        "Our AI systems provide analysis and recommendations based on available data. Market conditions can change rapidly, and AI predictions should be considered alongside other factors when making investment decisions.",
+      icon: Info,
+      type: "info",
     },
     {
       title: "Not Licensed Investment Advice",
       content:
-        "AlphaAIStockX is not a licensed investment advisor. The platform provides educational tools and analysis for informational purposes only. Consult qualified professionals before making investment decisions.",
-      icon: Scale,
-      color: "text-red-400",
+        "AlphaAIStockX provides educational tools and analysis. This platform does not provide personalized investment advice. Users should consult with licensed financial advisors for investment guidance.",
+      icon: BookOpen,
+      type: "educational",
     },
     {
-      title: "Educational Purpose Only",
+      title: "Data Security & Privacy",
       content:
-        "This platform is designed for educational purposes and to provide advanced trading tools. Users are responsible for their own investment decisions and should never invest more than they can afford to lose.",
-      icon: FileText,
-      color: "text-green-400",
+        "We employ bank-level security measures including 256-bit AES encryption, multi-factor authentication, and regular security audits to protect your personal and financial information.",
+      icon: Lock,
+      type: "security",
     },
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Compliance Overview */}
-      <Card className="bg-gradient-to-r from-green-900/60 to-emerald-900/60 border-green-500/30 backdrop-blur-xl">
+      <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400 flex items-center">
-            <Shield className="mr-2" size={20} />
+          <CardTitle className="flex items-center text-white">
+            <Shield className="h-6 w-6 mr-3 text-green-400" />
             2025 Compliance Status
-            <Badge className="ml-3 bg-green-500">
-              <CheckCircle className="h-3 w-3 mr-1" />
-              FULLY COMPLIANT
-            </Badge>
           </CardTitle>
+          <CardDescription>Full regulatory compliance and risk management framework</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-green-500/10 rounded-lg">
-              <div className="text-3xl font-bold text-green-400 mb-2">100%</div>
-              <p className="text-sm text-gray-400">Regulatory Compliance</p>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-green-400 text-2xl font-bold">100%</p>
+              <p className="text-gray-400 text-sm">SEC Compliant</p>
             </div>
-            <div className="text-center p-4 bg-blue-500/10 rounded-lg">
-              <div className="text-3xl font-bold text-blue-400 mb-2">24/7</div>
-              <p className="text-sm text-gray-400">Monitoring Active</p>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Award className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-blue-400 text-2xl font-bold">SOC 2</p>
+              <p className="text-gray-400 text-sm">Type II Certified</p>
             </div>
-            <div className="text-center p-4 bg-purple-500/10 rounded-lg">
-              <div className="text-3xl font-bold text-purple-400 mb-2">6</div>
-              <p className="text-sm text-gray-400">Regulations Covered</p>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Globe className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-purple-400 text-2xl font-bold">GDPR</p>
+              <p className="text-gray-400 text-sm">EU Compliant</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Lock className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-yellow-400 text-2xl font-bold">256-bit</p>
+              <p className="text-gray-400 text-sm">AES Encryption</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Regulatory Compliance */}
-      <Card className="bg-gray-900/60 border-blue-500/30 backdrop-blur-xl">
-        <CardHeader>
-          <CardTitle className="text-blue-400 flex items-center">
-            <Scale className="mr-2" size={20} />
-            Regulatory Compliance Framework
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {regulations.map((reg, index) => (
-              <div
-                key={index}
-                className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-white font-semibold">{reg.title}</h4>
-                  <div className="flex items-center space-x-2">
-                    <Badge className="bg-green-500">
-                      <CheckCircle className="h-3 w-3 mr-1" />
-                      {reg.status.toUpperCase()}
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-400">
-                      {reg.category}
+      {/* Detailed Compliance */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {complianceItems.map((category, index) => (
+          <Card key={index} className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Scale className="h-5 w-5 mr-2 text-purple-400" />
+                {category.category}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {category.items.map((item, itemIndex) => (
+                  <div key={itemIndex} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                    <div className="flex-1">
+                      <p className="text-white font-medium">{item.name}</p>
+                      <p className="text-gray-400 text-sm">{item.description}</p>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className={`ml-3 ${
+                        item.status === "compliant"
+                          ? "border-green-500/30 text-green-400"
+                          : item.status === "certified"
+                            ? "border-blue-500/30 text-blue-400"
+                            : "border-yellow-500/30 text-yellow-400"
+                      }`}
+                    >
+                      {item.status.toUpperCase()}
                     </Badge>
                   </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Professional Disclaimers */}
+      <Card className="bg-black/20 border-yellow-500/30 backdrop-blur-xl">
+        <CardHeader>
+          <CardTitle className="flex items-center text-white">
+            <FileText className="h-6 w-6 mr-3 text-yellow-400" />
+            Important Disclaimers & Legal Information
+          </CardTitle>
+          <CardDescription>Professional compliance and risk disclosures</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {disclaimers.map((disclaimer, index) => (
+              <div
+                key={index}
+                className={`p-4 rounded-lg border ${
+                  disclaimer.type === "warning"
+                    ? "bg-red-900/20 border-red-500/30"
+                    : disclaimer.type === "info"
+                      ? "bg-blue-900/20 border-blue-500/30"
+                      : disclaimer.type === "educational"
+                        ? "bg-purple-900/20 border-purple-500/30"
+                        : "bg-green-900/20 border-green-500/30"
+                }`}
+              >
+                <div className="flex items-start space-x-3">
+                  <disclaimer.icon
+                    className={`h-6 w-6 mt-1 ${
+                      disclaimer.type === "warning"
+                        ? "text-red-400"
+                        : disclaimer.type === "info"
+                          ? "text-blue-400"
+                          : disclaimer.type === "educational"
+                            ? "text-purple-400"
+                            : "text-green-400"
+                    }`}
+                  />
+                  <div>
+                    <h4 className="text-white font-semibold mb-2">{disclaimer.title}</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">{disclaimer.content}</p>
+                  </div>
                 </div>
-                <p className="text-gray-300 text-sm mb-2">{reg.description}</p>
-                <p className="text-gray-500 text-xs">Last Updated: {reg.lastUpdated}</p>
               </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* Risk Management Controls */}
-      <Card className="bg-gray-900/60 border-orange-500/30 backdrop-blur-xl">
+      {/* Risk Controls */}
+      <Card className="bg-black/20 border-red-500/30 backdrop-blur-xl">
         <CardHeader>
-          <CardTitle className="text-orange-400 flex items-center">
-            <Shield className="mr-2" size={20} />
-            Risk Management Controls
+          <CardTitle className="flex items-center text-white">
+            <AlertTriangle className="h-6 w-6 mr-3 text-red-400" />
+            Active Risk Controls
           </CardTitle>
+          <CardDescription>Real-time risk management and protection systems</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {riskControls.map((control, index) => (
-              <div
-                key={index}
-                className="p-4 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-lg border border-orange-500/30"
-              >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: "Position Limits", value: "$500K", status: "Active", icon: Users },
+              { name: "Daily Loss Limit", value: "5%", status: "Monitoring", icon: AlertTriangle },
+              { name: "Circuit Breakers", value: "10%", status: "Armed", icon: Shield },
+              { name: "Emergency Stop", value: "Instant", status: "Ready", icon: Clock },
+            ].map((control, index) => (
+              <div key={index} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-white font-semibold">{control.name}</h4>
-                  <Badge className="bg-orange-500">
-                    <Eye className="h-3 w-3 mr-1" />
-                    {control.status.toUpperCase()}
+                  <control.icon className="h-5 w-5 text-red-400" />
+                  <Badge variant="outline" className="border-red-500/30 text-red-400 text-xs">
+                    {control.status}
                   </Badge>
                 </div>
-                <p className="text-gray-300 text-sm mb-2">{control.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400 text-xs">Threshold:</span>
-                  <span className="text-orange-400 font-semibold">{control.threshold}</span>
-                </div>
+                <p className="text-white font-semibold">{control.name}</p>
+                <p className="text-red-400 text-lg font-bold">{control.value}</p>
               </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* Legal Disclaimers */}
-      <Card className="bg-gray-900/60 border-red-500/30 backdrop-blur-xl">
-        <CardHeader>
-          <CardTitle className="text-red-400 flex items-center">
-            <AlertTriangle className="mr-2" size={20} />
-            Important Legal Disclaimers
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {disclaimers.map((disclaimer, index) => {
-              const IconComponent = disclaimer.icon
-              return (
-                <div
-                  key={index}
-                  className="p-4 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-lg border border-red-500/30"
-                >
-                  <div className="flex items-center space-x-3 mb-3">
-                    <IconComponent className={`h-5 w-5 ${disclaimer.color}`} />
-                    <h4 className="text-white font-semibold">{disclaimer.title}</h4>
-                  </div>
-                  <p className="text-gray-300 text-sm">{disclaimer.content}</p>
-                </div>
-              )
-            })}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Data Security & Privacy */}
-      <Card className="bg-gray-900/60 border-purple-500/30 backdrop-blur-xl">
-        <CardHeader>
-          <CardTitle className="text-purple-400 flex items-center">
-            <Lock className="mr-2" size={20} />
-            Data Security & Privacy Protection
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">Security Measures</h4>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg">
-                  <span className="text-purple-400">256-bit AES Encryption</span>
-                  <Badge className="bg-green-500">Active</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg">
-                  <span className="text-purple-400">Multi-Factor Authentication</span>
-                  <Badge className="bg-green-500">Active</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg">
-                  <span className="text-purple-400">SOC 2 Type II Compliance</span>
-                  <Badge className="bg-green-500">Certified</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg">
-                  <span className="text-purple-400">Regular Security Audits</span>
-                  <Badge className="bg-green-500">Monthly</Badge>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">Privacy Controls</h4>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg">
-                  <span className="text-blue-400">Data Anonymization</span>
-                  <Badge className="bg-green-500">Active</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg">
-                  <span className="text-blue-400">Right to be Forgotten</span>
-                  <Badge className="bg-green-500">Supported</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg">
-                  <span className="text-blue-400">Data Portability</span>
-                  <Badge className="bg-green-500">Available</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg">
-                  <span className="text-blue-400">Consent Management</span>
-                  <Badge className="bg-green-500">Granular</Badge>
-                </div>
-              </div>
+      {/* Contact & Support */}
+      <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/30">
+        <CardContent className="p-6">
+          <div className="text-center">
+            <h3 className="text-white font-bold text-xl mb-2">Need Compliance Support?</h3>
+            <p className="text-gray-400 mb-4">
+              Our compliance team is available 24/7 to assist with regulatory questions and requirements.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Button className="bg-blue-500 hover:bg-blue-600">
+                <FileText className="h-4 w-4 mr-2" />
+                Download Compliance Report
+              </Button>
+              <Button variant="outline" className="border-purple-500/30">
+                <Users className="h-4 w-4 mr-2" />
+                Contact Compliance Team
+              </Button>
             </div>
           </div>
         </CardContent>

@@ -1,22 +1,28 @@
-const CACHE_NAME = "alphaaistockx-v1"
-const CDN_CACHE = "alphaaistockx-cdn-v1"
-
+const CACHE_NAME = "alphaaistockx-v1.0.0"
 const urlsToCache = [
   "/",
-  "/trading/",
-  "/ai-insights/",
-  "/scanners/",
-  "/portfolio/",
-  "/static/css/main.css",
-  "/static/js/main.js",
+  "/index.html",
+  "/404.html",
+  "/sitemap.xml",
+  "/robots.txt",
+  "/site.webmanifest",
+  "/favicon.ico",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/apple-touch-icon.png",
 ]
 
-// Install event - cache resources
+// Install event
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)))
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Opened cache")
+      return cache.addAll(urlsToCache)
+    }),
+  )
 })
 
-// Fetch event - serve from cache with CDN fallback
+// Fetch event
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
@@ -24,40 +30,22 @@ self.addEventListener("fetch", (event) => {
       if (response) {
         return response
       }
-
-      // Clone the request for CDN
-      const fetchRequest = event.request.clone()
-
-      return fetch(fetchRequest).then((response) => {
-        // Check if valid response
-        if (!response || response.status !== 200 || response.type !== "basic") {
-          return response
-        }
-
-        // Clone response for cache
-        const responseToCache = response.clone()
-
-        caches.open(CDN_CACHE).then((cache) => {
-          cache.put(event.request, responseToCache)
-        })
-
-        return response
-      })
+      return fetch(event.request)
     }),
   )
 })
 
-// Activate event - clean old caches
+// Activate event
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME && cacheName !== CDN_CACHE) {
+          if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName)
           }
         }),
-      )
-    }),
+      ),
+    ),
   )
 })

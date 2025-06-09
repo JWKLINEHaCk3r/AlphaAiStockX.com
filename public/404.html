@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | AlphaAIStockX</title>
+    <meta name="description" content="Page not found on AlphaAIStockX - Revolutionary AI Trading Platform">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #8b5cf6;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            to { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            The page you're looking for doesn't exist on our AI trading platform. 
+            Don't worry - our quantum AI is still processing millions of data points 
+            to help you find the best trading opportunities!
+        </p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🧠 AI Trading</h3>
+                <p>Quantum processing with 94.7% accuracy</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Fast Execution</h3>
+                <p>5-15ms lightning-fast trades</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Real-time Data</h3>
+                <p>2.8M+ data points per second</p>
+            </div>
+        </div>
+        
+        <a href="/" class="back-button">Return to Trading Platform</a>
+    </div>
+</body>
+</html>
