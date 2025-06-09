@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://alphaaistockx.com/</loc>
-    <lastmod>2024-12-09</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -88,10 +88,17 @@
     <priority>0.8</priority>
   </url>
 
+    <url>
+        <loc>https://alphaaistockx.com/features</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
   <!-- Membership & Pricing -->
   <url>
     <loc>https://alphaaistockx.com/pricing/</loc>
-    <lastmod>2024-12-09</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -112,12 +119,12 @@
   </url>
 
   <!-- Legal Pages -->
-  <url>
-    <loc>https://alphaaistockx.com/privacy-policy/</loc>
-    <lastmod>2024-12-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
+    <url>
+        <loc>https://alphaaistockx.com/privacy</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
 
   <url>
     <loc>https://alphaaistockx.com/terms-of-service/</loc>
@@ -126,11 +133,18 @@
     <priority>0.3</priority>
   </url>
 
+    <url>
+        <loc>https://alphaaistockx.com/terms</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
   <url>
     <loc>https://alphaaistockx.com/contact/</loc>
-    <lastmod>2024-12-09</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>

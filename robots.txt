@@ -1,25 +1,10 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://alphaaistockx.com/sitemap.xml
 
-# Crawl-delay for better server performance
 Crawl-delay: 1
 
-# Disallow admin and private areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
-Disallow: /_next/
-Disallow: /static/
-
-# Allow important pages
-Allow: /trading/
-Allow: /ai-insights/
-Allow: /scanners/
-Allow: /analysis/
-Allow: /portfolio/
-Allow: /pricing/
-Allow: /auth/signin/
-Allow: /auth/signup/
