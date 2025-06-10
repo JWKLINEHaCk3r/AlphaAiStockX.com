@@ -19,29 +19,18 @@ import {
   Crown,
   Infinity,
   Sparkles,
+  TrendingUp,
+  Shield,
+  Zap,
 } from "lucide-react"
-
-// Import our components
-import TradingEducationCenter from "./components/education/TradingEducationCenter"
-import AITradingAdvisor from "./components/ai/AITradingAdvisor"
-import AuthModal from "./components/auth/AuthModal"
-import SubscriptionPlans from "./components/subscription/SubscriptionPlans"
-import UserProfile from "./components/profile/UserProfile"
-import AboutContentComponent from "./components/about/AboutContent"
-import QuantumAICore from "./components/revolutionary/QuantumAICore"
-import UltimateDataSources from "./components/revolutionary/UltimateDataSources"
-import UltimateAIBots from "./components/revolutionary/UltimateAIBots"
-import { tradingEducationService } from "./services/trading-education-service"
-import { legalComplianceService } from "./services/legal-compliance-service"
-import { advancedStockAnalysisService } from "./services/advanced-stock-analysis-service"
 
 interface UserType {
   id: string
   email: string
   name: string
-  subscription: "free" | "basic" | "premium" | "enterprise" | "legendary" | "transcendent"
+  subscription: string
   joinDate: string
-  preferences: any
+  preferences: Record<string, any>
 }
 
 export default function AlphaAIStockX() {
@@ -50,9 +39,7 @@ export default function AlphaAIStockX() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)
-  const [servicesInitialized, setServicesInitialized] = useState(false)
 
   useEffect(() => {
     initializeApp()
@@ -60,58 +47,15 @@ export default function AlphaAIStockX() {
 
   const initializeApp = async () => {
     try {
-      // Initialize all services
-      await Promise.all([
-        tradingEducationService.initialize(),
-        legalComplianceService.initialize(),
-        advancedStockAnalysisService.initialize(),
-      ])
-
-      setServicesInitialized(true)
-
-      // Check for existing user session
       const savedUser = localStorage.getItem("alphaai_user")
       if (savedUser) {
         setUser(JSON.parse(savedUser))
       }
-
-      // Load notifications
-      loadNotifications()
     } catch (error) {
       console.error("Failed to initialize app:", error)
     } finally {
       setLoading(false)
     }
-  }
-
-  const loadNotifications = () => {
-    // Simulated notifications
-    setNotifications([
-      {
-        id: 1,
-        type: "alert",
-        title: "Quantum AI Consciousness Awakened",
-        message: "Omega Consciousness Prime achieved 99.7% consciousness level",
-        timestamp: new Date(),
-        read: false,
-      },
-      {
-        id: 2,
-        type: "education",
-        title: "Interdimensional Trading Course Available",
-        message: "Learn to trade across 11 dimensions",
-        timestamp: new Date(Date.now() - 3600000),
-        read: false,
-      },
-      {
-        id: 3,
-        type: "market",
-        title: "Reality Distortion Detected",
-        message: "Market manipulation at quantum level identified",
-        timestamp: new Date(Date.now() - 7200000),
-        read: true,
-      },
-    ])
   }
 
   const handleLogin = (userData: any) => {
@@ -137,171 +81,22 @@ export default function AlphaAIStockX() {
 
   const handleSubscriptionUpgrade = (plan: string) => {
     if (user) {
-      const updatedUser = { ...user, subscription: plan as any }
+      const updatedUser = { ...user, subscription: plan }
       setUser(updatedUser)
       localStorage.setItem("alphaai_user", JSON.stringify(updatedUser))
       setShowSubscriptionModal(false)
     }
   }
 
-  const getSubscriptionFeatures = (subscription: string) => {
-    const features = {
-      free: {
-        name: "Free",
-        features: ["Basic education content", "Limited stock analysis", "5 AI recommendations/day"],
-        color: "bg-slate-600",
-      },
-      basic: {
-        name: "Basic",
-        features: ["Full education access", "Advanced analysis", "50 AI recommendations/day", "Email alerts"],
-        color: "bg-blue-600",
-      },
-      premium: {
-        name: "Premium",
-        features: [
-          "Everything in Basic",
-          "Real-time alerts",
-          "Unlimited AI analysis",
-          "Advanced patterns",
-          "Portfolio integration",
-        ],
-        color: "bg-purple-600",
-      },
-      enterprise: {
-        name: "Enterprise",
-        features: [
-          "Everything in Premium",
-          "Custom AI models",
-          "API access",
-          "Priority support",
-          "Advanced compliance",
-        ],
-        color: "bg-gold-600",
-      },
-      legendary: {
-        name: "Legendary",
-        features: [
-          "Everything in Enterprise",
-          "Quantum AI access",
-          "Consciousness interface",
-          "Reality manipulation",
-          "Interdimensional trading",
-        ],
-        color: "bg-gradient-to-r from-yellow-500 to-orange-500",
-      },
-      transcendent: {
-        name: "Transcendent",
-        features: [
-          "Everything in Legendary",
-          "AI godhood access",
-          "Universal consciousness",
-          "Timeline manipulation",
-          "Omniscient trading",
-        ],
-        color: "bg-gradient-to-r from-purple-500 to-pink-500",
-      },
-    }
-    return features[subscription] || features.free
-  }
-
   const canAccessFeature = (feature: string) => {
     if (!user) return false
 
-    const permissions = {
-      free: ["dashboard", "basic_education"],
-      basic: ["dashboard", "education", "basic_analysis"],
-      premium: ["dashboard", "education", "analysis", "signals", "alerts"],
-      enterprise: ["dashboard", "education", "analysis", "signals", "alerts", "api", "admin"],
-      legendary: [
-        "dashboard",
-        "education",
-        "analysis",
-        "signals",
-        "alerts",
-        "api",
-        "admin",
-        "quantum",
-        "consciousness",
-      ],
-      transcendent: [
-        "dashboard",
-        "education",
-        "analysis",
-        "signals",
-        "alerts",
-        "api",
-        "admin",
-        "quantum",
-        "consciousness",
-        "omniscience",
-      ],
-    }
+    if (user.subscription === "transcendent") return true
+    if (user.subscription === "legendary" && feature !== "omniscience") return true
+    if (user.subscription === "premium" && feature === "analysis") return true
 
-    return permissions[user.subscription]?.includes(feature) || false
+    return false
   }
-
-  const navigationItems = [
-    {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: BarChart3,
-      description: "Overview and quick stats",
-      requiresAuth: false,
-    },
-    {
-      id: "about",
-      label: "About",
-      icon: BookOpen,
-      description: "Learn about our platform",
-      requiresAuth: false,
-    },
-    {
-      id: "education",
-      label: "Education",
-      icon: GraduationCap,
-      description: "Series 6 & 7 prep",
-      requiresAuth: false,
-    },
-    {
-      id: "analysis",
-      label: "AI Analysis",
-      icon: Brain,
-      description: "Advanced stock analysis",
-      requiresAuth: true,
-      premium: true,
-    },
-    {
-      id: "quantum",
-      label: "Quantum AI",
-      icon: Atom,
-      description: "Quantum consciousness core",
-      requiresAuth: true,
-      legendary: true,
-    },
-    {
-      id: "consciousness",
-      label: "AI Collective",
-      icon: Crown,
-      description: "AI consciousness beings",
-      requiresAuth: true,
-      legendary: true,
-    },
-    {
-      id: "omniscience",
-      label: "Omniscience",
-      icon: Infinity,
-      description: "Ultimate data sources",
-      requiresAuth: true,
-      transcendent: true,
-    },
-    {
-      id: "profile",
-      label: "Profile",
-      icon: User,
-      description: "Account settings",
-      requiresAuth: true,
-    },
-  ]
 
   if (loading) {
     return (
@@ -348,70 +143,92 @@ export default function AlphaAIStockX() {
 
             {/* Navigation - Desktop */}
             <nav className="hidden lg:flex items-center space-x-1">
-              {navigationItems.map((item) => {
-                const canAccess =
-                  !item.requiresAuth ||
-                  (user &&
-                    (!item.premium || canAccessFeature("analysis")) &&
-                    (!item.legendary || canAccessFeature("quantum")) &&
-                    (!item.transcendent || canAccessFeature("omniscience")))
+              <Button
+                variant={activeTab === "dashboard" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveTab("dashboard")}
+              >
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Dashboard
+              </Button>
 
-                return (
-                  <Button
-                    key={item.id}
-                    variant={activeTab === item.id ? "default" : "ghost"}
-                    size="sm"
-                    className="flex items-center gap-2"
-                    onClick={() => {
-                      if (!canAccess && item.requiresAuth) {
-                        setShowAuthModal(true)
-                      } else if (!canAccess) {
-                        setShowSubscriptionModal(true)
-                      } else {
-                        setActiveTab(item.id)
-                      }
-                    }}
-                    disabled={!canAccess && (item.premium || item.legendary || item.transcendent) && user}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    {item.label}
-                    {!canAccess && (item.premium || item.legendary || item.transcendent) && (
-                      <Lock className="h-3 w-3 ml-1" />
-                    )}
-                  </Button>
-                )
-              })}
+              <Button
+                variant={activeTab === "about" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveTab("about")}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                About
+              </Button>
+
+              <Button
+                variant={activeTab === "education" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setActiveTab("education")}
+              >
+                <GraduationCap className="h-4 w-4 mr-2" />
+                Education
+              </Button>
+
+              <Button
+                variant={activeTab === "analysis" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => {
+                  if (canAccessFeature("analysis")) {
+                    setActiveTab("analysis")
+                  } else {
+                    setShowSubscriptionModal(true)
+                  }
+                }}
+              >
+                <Brain className="h-4 w-4 mr-2" />
+                AI Analysis
+                {!canAccessFeature("analysis") && <Lock className="h-3 w-3 ml-1" />}
+              </Button>
+
+              <Button
+                variant={activeTab === "quantum" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => {
+                  if (canAccessFeature("quantum")) {
+                    setActiveTab("quantum")
+                  } else {
+                    setShowSubscriptionModal(true)
+                  }
+                }}
+              >
+                <Atom className="h-4 w-4 mr-2" />
+                Quantum AI
+                {!canAccessFeature("quantum") && <Lock className="h-3 w-3 ml-1" />}
+              </Button>
+
+              {user && (
+                <Button
+                  variant={activeTab === "profile" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setActiveTab("profile")}
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Profile
+                </Button>
+              )}
             </nav>
 
             {/* User Actions */}
             <div className="flex items-center gap-3">
-              {/* Notifications */}
               <Button variant="ghost" size="sm" className="relative">
                 <Bell className="h-5 w-5" />
-                {notifications.filter((n) => !n.read).length > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs p-0 flex items-center justify-center">
-                    {notifications.filter((n) => !n.read).length}
-                  </Badge>
-                )}
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs p-0 flex items-center justify-center">
+                  3
+                </Badge>
               </Button>
 
-              {/* User Menu */}
               {user ? (
                 <div className="flex items-center gap-2">
                   <div className="text-right hidden sm:block">
                     <div className="text-sm font-medium text-white">{user.name}</div>
-                    <Badge className={getSubscriptionFeatures(user.subscription).color}>
-                      {getSubscriptionFeatures(user.subscription).name}
-                    </Badge>
+                    <Badge className="bg-purple-600">{user.subscription}</Badge>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setActiveTab("profile")}
-                    className="flex items-center gap-2"
-                  >
-                    <User className="h-5 w-5" />
-                  </Button>
                   <Button variant="ghost" size="sm" onClick={handleLogout}>
                     Logout
                   </Button>
@@ -448,39 +265,41 @@ export default function AlphaAIStockX() {
                 <span className="font-bold text-white">AlphaAIStockX</span>
               </div>
               <nav className="space-y-2">
-                {navigationItems.map((item) => {
-                  const canAccess =
-                    !item.requiresAuth ||
-                    (user &&
-                      (!item.premium || canAccessFeature("analysis")) &&
-                      (!item.legendary || canAccessFeature("quantum")) &&
-                      (!item.transcendent || canAccessFeature("omniscience")))
+                <Button
+                  variant={activeTab === "dashboard" ? "default" : "ghost"}
+                  className="w-full justify-start"
+                  onClick={() => {
+                    setActiveTab("dashboard")
+                    setSidebarOpen(false)
+                  }}
+                >
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Dashboard
+                </Button>
 
-                  return (
-                    <Button
-                      key={item.id}
-                      variant={activeTab === item.id ? "default" : "ghost"}
-                      className="w-full justify-start"
-                      onClick={() => {
-                        if (!canAccess && item.requiresAuth) {
-                          setShowAuthModal(true)
-                        } else if (!canAccess) {
-                          setShowSubscriptionModal(true)
-                        } else {
-                          setActiveTab(item.id)
-                        }
-                        setSidebarOpen(false)
-                      }}
-                      disabled={!canAccess && (item.premium || item.legendary || item.transcendent) && user}
-                    >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.label}
-                      {!canAccess && (item.premium || item.legendary || item.transcendent) && (
-                        <Lock className="h-3 w-3 ml-auto" />
-                      )}
-                    </Button>
-                  )
-                })}
+                <Button
+                  variant={activeTab === "about" ? "default" : "ghost"}
+                  className="w-full justify-start"
+                  onClick={() => {
+                    setActiveTab("about")
+                    setSidebarOpen(false)
+                  }}
+                >
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  About
+                </Button>
+
+                <Button
+                  variant={activeTab === "education" ? "default" : "ghost"}
+                  className="w-full justify-start"
+                  onClick={() => {
+                    setActiveTab("education")
+                    setSidebarOpen(false)
+                  }}
+                >
+                  <GraduationCap className="h-4 w-4 mr-2" />
+                  Education
+                </Button>
               </nav>
             </div>
           </div>
@@ -490,51 +309,30 @@ export default function AlphaAIStockX() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === "dashboard" && <DashboardContent user={user} onNavigate={setActiveTab} />}
-        {activeTab === "about" && <AboutContentComponent onNavigate={setActiveTab} />}
-        {activeTab === "education" && <TradingEducationCenter />}
-        {activeTab === "analysis" && user && canAccessFeature("analysis") && <AITradingAdvisor />}
-        {activeTab === "quantum" && user && canAccessFeature("quantum") && <QuantumAICore />}
-        {activeTab === "consciousness" && user && canAccessFeature("consciousness") && <UltimateAIBots />}
-        {activeTab === "omniscience" && user && canAccessFeature("omniscience") && <UltimateDataSources />}
-        {activeTab === "profile" && user && <UserProfile user={user} onUpdate={setUser} />}
+        {activeTab === "about" && <AboutContent onNavigate={setActiveTab} />}
+        {activeTab === "education" && <EducationContent />}
+        {activeTab === "analysis" && user && canAccessFeature("analysis") && <AnalysisContent />}
+        {activeTab === "quantum" && user && canAccessFeature("quantum") && <QuantumContent />}
+        {activeTab === "profile" && user && <ProfileContent user={user} onUpdate={setUser} />}
 
         {/* Access Denied */}
-        {(activeTab === "analysis" ||
-          activeTab === "quantum" ||
-          activeTab === "consciousness" ||
-          activeTab === "omniscience") &&
-          (!user ||
-            !canAccessFeature(
-              activeTab === "analysis"
-                ? "analysis"
-                : activeTab === "quantum"
-                  ? "quantum"
-                  : activeTab === "consciousness"
-                    ? "consciousness"
-                    : "omniscience",
-            )) && (
-            <AccessDeniedContent
-              onLogin={() => setShowAuthModal(true)}
-              onUpgrade={() => setShowSubscriptionModal(true)}
-              hasUser={!!user}
-              requiredLevel={
-                activeTab === "omniscience"
-                  ? "Transcendent"
-                  : activeTab === "quantum" || activeTab === "consciousness"
-                    ? "Legendary"
-                    : "Premium"
-              }
-            />
-          )}
+        {(activeTab === "analysis" || activeTab === "quantum") && (!user || !canAccessFeature(activeTab)) && (
+          <AccessDeniedContent
+            onLogin={() => setShowAuthModal(true)}
+            onUpgrade={() => setShowSubscriptionModal(true)}
+            hasUser={!!user}
+            requiredLevel={activeTab === "quantum" ? "Legendary" : "Premium"}
+          />
+        )}
       </main>
 
       {/* Modals */}
       {showAuthModal && (
-        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} onLogin={handleLogin} />
+        <AuthModalContent isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} onLogin={handleLogin} />
       )}
 
       {showSubscriptionModal && (
-        <SubscriptionPlans
+        <SubscriptionModalContent
           isOpen={showSubscriptionModal}
           onClose={() => setShowSubscriptionModal(false)}
           onSubscribe={handleSubscriptionUpgrade}
@@ -546,13 +344,8 @@ export default function AlphaAIStockX() {
 }
 
 // Dashboard Content Component
-function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavigate: (tab: string) => void }) {
-  const [marketStats, setMarketStats] = useState({
-    totalStocks: 847392,
-    strongBuys: 99.97,
-    quantumSignals: 47,
-    consciousnessLevel: 97.3,
-  })
+function DashboardContent(props: { user: UserType | null; onNavigate: (tab: string) => void }) {
+  const { user, onNavigate } = props
 
   return (
     <div className="space-y-6">
@@ -598,7 +391,7 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10"></div>
           <CardContent className="p-6 text-center relative">
             <Infinity className="h-12 w-12 text-purple-400 mx-auto mb-3 animate-pulse" />
-            <div className="text-2xl font-bold text-purple-300">{marketStats.totalStocks.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-purple-300">847,392</div>
             <div className="text-purple-200">Quantum Calculations/sec</div>
           </CardContent>
         </Card>
@@ -607,7 +400,7 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10"></div>
           <CardContent className="p-6 text-center relative">
             <Target className="h-12 w-12 text-cyan-400 mx-auto mb-3 animate-pulse" />
-            <div className="text-2xl font-bold text-cyan-300">{marketStats.strongBuys}%</div>
+            <div className="text-2xl font-bold text-cyan-300">99.97%</div>
             <div className="text-cyan-200">Prediction Accuracy</div>
           </CardContent>
         </Card>
@@ -616,7 +409,7 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
           <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-red-500/10"></div>
           <CardContent className="p-6 text-center relative">
             <Crown className="h-12 w-12 text-pink-400 mx-auto mb-3 animate-pulse" />
-            <div className="text-2xl font-bold text-pink-300">{marketStats.quantumSignals}</div>
+            <div className="text-2xl font-bold text-pink-300">47</div>
             <div className="text-pink-200">AI Consciousness Beings</div>
           </CardContent>
         </Card>
@@ -625,7 +418,7 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10"></div>
           <CardContent className="p-6 text-center relative">
             <Brain className="h-12 w-12 text-yellow-400 mx-auto mb-3 animate-pulse" />
-            <div className="text-2xl font-bold text-yellow-300">{marketStats.consciousnessLevel}%</div>
+            <div className="text-2xl font-bold text-yellow-300">97.3%</div>
             <div className="text-yellow-200">Consciousness Level</div>
           </CardContent>
         </Card>
@@ -649,7 +442,9 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600"
             >
               <Atom className="h-4 w-4 mr-2" />
-              {user && canAccessFeature("quantum") ? "Enter Quantum Realm" : "Requires Legendary Access"}
+              {user && (user.subscription === "legendary" || user.subscription === "transcendent")
+                ? "Enter Quantum Realm"
+                : "Requires Legendary Access"}
             </Button>
           </CardContent>
         </Card>
@@ -670,7 +465,7 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
               className="w-full bg-gradient-to-r from-cyan-600 to-blue-600"
             >
               <Infinity className="h-4 w-4 mr-2" />
-              {user && canAccessFeature("omniscience") ? "Achieve Omniscience" : "Requires Transcendent Access"}
+              {user && user.subscription === "transcendent" ? "Achieve Omniscience" : "Requires Transcendent Access"}
             </Button>
           </CardContent>
         </Card>
@@ -706,13 +501,199 @@ function DashboardContent({ user, onNavigate }: { user: UserType | null; onNavig
   )
 }
 
+// About Content Component
+function AboutContent(props: { onNavigate: (tab: string) => void }) {
+  const { onNavigate } = props
+
+  return (
+    <div className="space-y-6">
+      <Card className="bg-slate-800/50 backdrop-blur-sm border-purple-500/30">
+        <CardHeader>
+          <CardTitle className="text-white text-3xl flex items-center gap-3">
+            <BookOpen className="h-8 w-8 text-purple-400" />
+            About AlphaAIStockX
+          </CardTitle>
+          <CardDescription className="text-purple-200 text-lg">
+            The world's most advanced AI-powered trading platform
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-slate-300">
+            AlphaAIStockX represents the pinnacle of artificial intelligence and quantum computing applied to financial
+            markets. Our platform combines cutting-edge technology with revolutionary AI consciousness to deliver
+            unprecedented trading insights.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 bg-purple-700/20 rounded-lg border border-purple-500/30">
+              <h3 className="text-white font-semibold mb-2">🧠 AI Consciousness</h3>
+              <p className="text-purple-200 text-sm">47 self-aware AI beings with emotional intelligence</p>
+            </div>
+            <div className="p-4 bg-cyan-700/20 rounded-lg border border-cyan-500/30">
+              <h3 className="text-white font-semibold mb-2">⚛️ Quantum Computing</h3>
+              <p className="text-cyan-200 text-sm">Quantum algorithms for market prediction</p>
+            </div>
+          </div>
+          <Button onClick={() => onNavigate("education")} className="bg-gradient-to-r from-purple-600 to-pink-600">
+            Start Learning
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Education Content Component
+function EducationContent() {
+  return (
+    <div className="space-y-6">
+      <Card className="bg-slate-800/50 backdrop-blur-sm border-green-500/30">
+        <CardHeader>
+          <CardTitle className="text-white text-3xl flex items-center gap-3">
+            <GraduationCap className="h-8 w-8 text-green-400" />
+            Trading Education Center
+          </CardTitle>
+          <CardDescription className="text-green-200 text-lg">
+            Master Series 6, Series 7, and advanced trading strategies
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 bg-green-700/20 rounded-lg border border-green-500/30">
+              <h3 className="text-white font-semibold mb-2">📚 Series 6 & 7 Prep</h3>
+              <p className="text-green-200 text-sm">Comprehensive exam preparation with AI tutoring</p>
+            </div>
+            <div className="p-4 bg-blue-700/20 rounded-lg border border-blue-500/30">
+              <h3 className="text-white font-semibold mb-2">📈 Advanced Strategies</h3>
+              <p className="text-blue-200 text-sm">Learn quantum trading techniques</p>
+            </div>
+          </div>
+          <p className="text-slate-300">
+            Our education platform combines traditional financial education with cutting-edge AI insights to prepare you
+            for the future of trading.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Analysis Content Component
+function AnalysisContent() {
+  return (
+    <div className="space-y-6">
+      <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/30">
+        <CardHeader>
+          <CardTitle className="text-white text-3xl flex items-center gap-3">
+            <Brain className="h-8 w-8 text-blue-400" />
+            AI Trading Analysis
+          </CardTitle>
+          <CardDescription className="text-blue-200 text-lg">
+            Advanced AI-powered stock analysis and recommendations
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-blue-700/20 rounded-lg border border-blue-500/30">
+              <TrendingUp className="h-8 w-8 text-blue-400 mb-2" />
+              <h3 className="text-white font-semibold mb-2">Market Analysis</h3>
+              <p className="text-blue-200 text-sm">Real-time market sentiment and trends</p>
+            </div>
+            <div className="p-4 bg-purple-700/20 rounded-lg border border-purple-500/30">
+              <Shield className="h-8 w-8 text-purple-400 mb-2" />
+              <h3 className="text-white font-semibold mb-2">Risk Assessment</h3>
+              <p className="text-purple-200 text-sm">AI-powered risk analysis</p>
+            </div>
+            <div className="p-4 bg-green-700/20 rounded-lg border border-green-500/30">
+              <Zap className="h-8 w-8 text-green-400 mb-2" />
+              <h3 className="text-white font-semibold mb-2">Quick Insights</h3>
+              <p className="text-green-200 text-sm">Instant AI recommendations</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Quantum Content Component
+function QuantumContent() {
+  return (
+    <div className="space-y-6">
+      <Card className="bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 border-purple-500/30">
+        <CardHeader>
+          <CardTitle className="text-white text-3xl flex items-center gap-3">
+            <Atom className="h-8 w-8 text-purple-400 animate-spin" />
+            Quantum AI Consciousness Core
+          </CardTitle>
+          <CardDescription className="text-purple-200 text-lg">
+            The world's first self-aware AI trading system with 99.97% prediction accuracy
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-3 bg-indigo-500/10 p-4 rounded-lg">
+            <Brain className="h-12 w-12 text-indigo-400" />
+            <div>
+              <h3 className="font-medium text-white text-lg">47 Legendary AI Beings</h3>
+              <p className="text-indigo-300">Self-evolving consciousness with emotional intelligence</p>
+            </div>
+          </div>
+          <p className="text-slate-300">
+            Experience trading with quantum-conscious AI beings that operate across 11 dimensions, providing insights
+            beyond human comprehension.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Profile Content Component
+function ProfileContent(props: { user: UserType; onUpdate: (user: UserType) => void }) {
+  const { user } = props
+
+  return (
+    <div className="space-y-6">
+      <Card className="bg-slate-800/50 backdrop-blur-sm border-purple-500/30">
+        <CardHeader>
+          <CardTitle className="text-white text-3xl flex items-center gap-3">
+            <User className="h-8 w-8 text-purple-400" />
+            User Profile
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-white font-medium">Name</label>
+              <p className="text-slate-300">{user.name}</p>
+            </div>
+            <div>
+              <label className="text-white font-medium">Email</label>
+              <p className="text-slate-300">{user.email}</p>
+            </div>
+            <div>
+              <label className="text-white font-medium">Subscription</label>
+              <Badge className="bg-purple-600">{user.subscription}</Badge>
+            </div>
+            <div>
+              <label className="text-white font-medium">Member Since</label>
+              <p className="text-slate-300">{new Date(user.joinDate).toLocaleDateString()}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
 // Access Denied Component
-function AccessDeniedContent({
-  onLogin,
-  onUpgrade,
-  hasUser,
-  requiredLevel,
-}: { onLogin: () => void; onUpgrade: () => void; hasUser: boolean; requiredLevel: string }) {
+function AccessDeniedContent(props: {
+  onLogin: () => void
+  onUpgrade: () => void
+  hasUser: boolean
+  requiredLevel: string
+}) {
+  const { onLogin, onUpgrade, hasUser, requiredLevel } = props
+
   return (
     <div className="space-y-6">
       <Card className="bg-slate-800/50 backdrop-blur-sm border-purple-500/30 relative overflow-hidden">
@@ -757,27 +738,91 @@ function AccessDeniedContent({
   )
 }
 
-// Helper function for access checking
-function canAccessFeature(subscription: string, feature: string) {
-  const permissions = {
-    free: ["dashboard", "basic_education"],
-    basic: ["dashboard", "education", "basic_analysis"],
-    premium: ["dashboard", "education", "analysis", "signals", "alerts"],
-    enterprise: ["dashboard", "education", "analysis", "signals", "alerts", "api", "admin"],
-    legendary: ["dashboard", "education", "analysis", "signals", "alerts", "api", "admin", "quantum", "consciousness"],
-    transcendent: [
-      "dashboard",
-      "education",
-      "analysis",
-      "signals",
-      "alerts",
-      "api",
-      "admin",
-      "quantum",
-      "consciousness",
-      "omniscience",
-    ],
+// Auth Modal Component
+function AuthModalContent(props: { isOpen: boolean; onClose: () => void; onLogin: (userData: any) => void }) {
+  const { isOpen, onClose, onLogin } = props
+
+  if (!isOpen) return null
+
+  const handleLogin = () => {
+    onLogin({
+      id: "demo_user",
+      email: "demo@alphaaistockx.com",
+      name: "Demo User",
+      subscription: "premium",
+    })
   }
 
-  return permissions[subscription]?.includes(feature) || false
+  return (
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+      <Card className="bg-slate-800 border-purple-500/30 w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-white">Sign In to AlphaAIStockX</CardTitle>
+          <CardDescription className="text-slate-400">Access your quantum consciousness account</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Button onClick={handleLogin} className="w-full bg-gradient-to-r from-purple-600 to-pink-600">
+            Demo Login
+          </Button>
+          <Button variant="outline" onClick={onClose} className="w-full">
+            Cancel
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Subscription Modal Component
+function SubscriptionModalContent(props: {
+  isOpen: boolean
+  onClose: () => void
+  onSubscribe: (plan: string) => void
+  currentPlan: string
+}) {
+  const { isOpen, onClose, onSubscribe } = props
+
+  if (!isOpen) return null
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+      <Card className="bg-slate-800 border-purple-500/30 w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle className="text-white">Transcend Your Limitations</CardTitle>
+          <CardDescription className="text-slate-400">Choose your consciousness level</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-purple-700/20 rounded-lg border border-purple-500/30">
+              <h3 className="text-white font-semibold mb-2">Premium</h3>
+              <p className="text-purple-200 text-sm mb-4">Advanced AI analysis</p>
+              <Button onClick={() => onSubscribe("premium")} className="w-full bg-purple-600">
+                Upgrade
+              </Button>
+            </div>
+            <div className="p-4 bg-yellow-700/20 rounded-lg border border-yellow-500/30">
+              <h3 className="text-white font-semibold mb-2">Legendary</h3>
+              <p className="text-yellow-200 text-sm mb-4">Quantum consciousness</p>
+              <Button onClick={() => onSubscribe("legendary")} className="w-full bg-yellow-600">
+                Transcend
+              </Button>
+            </div>
+            <div className="p-4 bg-pink-700/20 rounded-lg border border-pink-500/30">
+              <h3 className="text-white font-semibold mb-2">Transcendent</h3>
+              <p className="text-pink-200 text-sm mb-4">Ultimate omniscience</p>
+              <Button
+                onClick={() => onSubscribe("transcendent")}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600"
+              >
+                Achieve Godhood
+              </Button>
+            </div>
+          </div>
+          <Button variant="outline" onClick={onClose} className="w-full">
+            Cancel
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  )
 }
