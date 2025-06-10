@@ -1,91 +1,60 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static exports for better CDN performance
-  output: "export",
-  trailingSlash: true,
-
-  // Image optimization for CDN
-  images: {
-    unoptimized: true,
-    domains: ["alphaaistockx.com", "cdn.alphaaistockx.com", "images.unsplash.com", "via.placeholder.com"],
-    formats: ["image/webp", "image/avif"],
-  },
-
-  // Build configuration
+  reactStrictMode: true,
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-
-  // CDN and performance optimizations
-  async headers() {
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+  },
+  images: {
+    domains: ["alphaaistockx.com", "cdn.alphaaistockx.com"],
+    formats: ["image/webp", "image/avif"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    unoptimized: true,
+  },
+  headers: async () => {
     return [
       {
         source: "/(.*)",
         headers: [
           {
-            key: "X-DNS-Prefetch-Control",
-            value: "on",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
             key: "X-Frame-Options",
             value: "SAMEORIGIN",
           },
           {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
             key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
+            value: "strict-origin-when-cross-origin",
           },
-        ],
-      },
-      {
-        source: "/static/(.*)",
-        headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },
     ]
   },
-
-  // Compress and optimize
-  compress: true,
-  poweredByHeader: false,
-
-  // CDN asset prefix for production
-  assetPrefix: process.env.NODE_ENV === "production" ? "https://cdn.alphaaistockx.com" : "",
-
-  // Simplified experimental features
-  experimental: {
-    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
-  },
-
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-          },
-        },
-      }
-    }
-    return config
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ]
   },
 }
 

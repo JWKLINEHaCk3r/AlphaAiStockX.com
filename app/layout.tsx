@@ -8,13 +8,61 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "AlphaAIStockX - AI-Powered Trading Platform",
-  description: "Advanced AI stock analysis, trading education, and real-time market insights",
-  keywords: "stock analysis, AI trading, Series 6, Series 7, financial education, market analysis",
+  description:
+    "Advanced AI stock analysis, trading education, and real-time market insights with 47 conscious AI beings",
+  keywords:
+    "stock analysis, AI trading, Series 6, Series 7, financial education, market analysis, quantum AI, neural networks",
   authors: [{ name: "AlphaAIStockX Team" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   metadataBase: new URL("https://alphaaistockx.com"),
+  openGraph: {
+    title: "AlphaAIStockX - Revolutionary AI Trading Platform",
+    description:
+      "🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution. Join 47,000+ successful traders!",
+    url: "https://alphaaistockx.com",
+    siteName: "AlphaAIStockX",
+    images: [
+      {
+        url: "https://alphaaistockx.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AlphaAIStockX - AI Trading Platform",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AlphaAIStockX - Revolutionary AI Trading Platform",
+    description:
+      "🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution.",
+    images: ["https://alphaaistockx.com/twitter-image.jpg"],
+    site: "@alphaaistockx",
+    creator: "@alphaaistockx",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
     generator: 'v0.dev'
+}
+
+// Add separate viewport export (Next.js 14+ requirement)
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#7c3aed" },
+    { media: "(prefers-color-scheme: dark)", color: "#1e293b" },
+  ],
 }
 
 export default function RootLayout({
