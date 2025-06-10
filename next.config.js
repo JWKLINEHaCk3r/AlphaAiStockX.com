@@ -11,6 +11,14 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
   },
 
+  // Build configuration
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // CDN and performance optimizations
   async headers() {
     return [
@@ -78,12 +86,6 @@ const nextConfig = {
       }
     }
     return config
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
 }
 

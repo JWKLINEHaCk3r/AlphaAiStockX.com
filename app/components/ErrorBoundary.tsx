@@ -10,8 +10,8 @@ interface ErrorBoundaryState {
   error?: Error
 }
 
-export class ErrorBoundary extends React.Component<{ children: React.ReactNode }, ErrorBoundaryState> {
-  constructor(props: { children: React.ReactNode }) {
+export class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, ErrorBoundaryState> {
+  constructor(props: React.PropsWithChildren<{}>) {
     super(props)
     this.state = { hasError: false }
   }
@@ -27,24 +27,25 @@ export class ErrorBoundary extends React.Component<{ children: React.ReactNode }
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center p-4">
-          <Card className="w-full max-w-md bg-slate-800/50 backdrop-blur-sm border-red-500/30">
-            <CardHeader className="text-center">
-              <AlertTriangle className="h-16 w-16 text-red-400 mx-auto mb-4" />
-              <CardTitle className="text-white">Something went wrong</CardTitle>
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+          <Card className="bg-slate-800/50 backdrop-blur-sm border-red-500/30 w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <AlertTriangle className="h-6 w-6 text-red-400" />
+                Something went wrong
+              </CardTitle>
               <CardDescription className="text-slate-400">
-                We encountered an unexpected error. Please try refreshing the page.
+                An error occurred while loading the application
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
-                <p className="text-red-400 text-sm font-mono">
-                  {this.state.error?.message || "Unknown error occurred"}
-                </p>
-              </div>
-              <Button onClick={() => window.location.reload()} className="w-full flex items-center gap-2">
-                <RefreshCw className="h-4 w-4" />
-                Refresh Page
+              <p className="text-sm text-slate-300">{this.state.error?.message || "An unexpected error occurred"}</p>
+              <Button
+                onClick={() => window.location.reload()}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Reload Application
               </Button>
             </CardContent>
           </Card>

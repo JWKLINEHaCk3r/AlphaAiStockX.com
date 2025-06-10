@@ -1,37 +1,56 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import IONOSStepByStep from "./IONOSStepByStep"
-import IONOSTroubleshooting from "./IONOSTroubleshooting"
-import IONOSFileStructure from "./IONOSFileStructure"
+"use client"
 
-export default function IONOSMasterDeployment() {
+const IONOSMasterDeployment = () => {
+  const deploy = async () => {
+    try {
+      // Execute deployment commands using npm
+      console.log("Starting deployment process...")
+
+      // Step 1: Install dependencies
+      console.log("Installing dependencies with npm...")
+      const installProcess = await runCommand("npm install")
+      console.log("npm install output:", installProcess)
+
+      // Step 2: Build the application
+      console.log("Building the application with npm...")
+      const buildProcess = await runCommand("npm run build")
+      console.log("npm run build output:", buildProcess)
+
+      // Step 3: Deploy to IONOS (replace with actual deployment logic)
+      console.log("Deploying to IONOS...")
+      // Placeholder for deployment script - replace with your actual deployment commands
+      const deployProcess = await runCommand('echo "Deploying to IONOS - placeholder"')
+      console.log("IONOS deployment output:", deployProcess)
+
+      console.log("Deployment completed successfully!")
+    } catch (error) {
+      console.error("Deployment failed:", error)
+    }
+  }
+
+  const runCommand = async (command: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const { exec } = require("child_process")
+      exec(command, (error: Error | null, stdout: string, stderr: string) => {
+        if (error) {
+          console.error(`Error executing command: ${command}`)
+          console.error(stderr)
+          reject(error)
+          return
+        }
+        console.log(`Command executed: ${command}`)
+        console.log(stdout)
+        resolve(stdout)
+      })
+    })
+  }
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          🚀 Complete IONOS Deployment Guide
-        </h1>
-        <p className="text-xl text-gray-600">Deploy AlphaAIStockX to alphaaistockx.com with confidence</p>
-      </div>
-
-      <Tabs defaultValue="stepbystep" className="w-full">
-        <TabsList className="grid grid-cols-3 mb-8">
-          <TabsTrigger value="stepbystep">Step-by-Step Guide</TabsTrigger>
-          <TabsTrigger value="filestructure">File Structure</TabsTrigger>
-          <TabsTrigger value="troubleshooting">Troubleshooting</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="stepbystep">
-          <IONOSStepByStep />
-        </TabsContent>
-
-        <TabsContent value="filestructure">
-          <IONOSFileStructure />
-        </TabsContent>
-
-        <TabsContent value="troubleshooting">
-          <IONOSTroubleshooting />
-        </TabsContent>
-      </Tabs>
+    <div>
+      <h1>IONOS Master Deployment</h1>
+      <button onClick={deploy}>Deploy to IONOS</button>
     </div>
   )
 }
+
+export default IONOSMasterDeployment
