@@ -1,43 +1,11 @@
-# AlphaAIStockX - Revolutionary AI Trading Platform
+## Post-Quantum Cryptography Security
 
-This is a complete, standalone website for AlphaAIStockX, a revolutionary AI-powered trading platform.
+AlphaAIStockX implements cutting-edge post-quantum cryptography to protect your assets against future quantum computing threats. Our platform uses:
 
-## Files Included
+- **NIST-approved quantum-resistant algorithms** (Crystals-Kyber, Crystals-Dilithium, SPHINCS+)
+- **Hybrid encryption** combining classical and post-quantum methods for maximum security
+- **Quantum threat monitoring** to assess risks from advancing quantum computing technology
+- **Automatic key rotation** based on quantum computing advancement metrics
+- **Crypto-agility framework** to quickly adapt as standards evolve
 
-- `index.html` - Main homepage with all content and styling
-- `404.html` - Custom error page
-- `.htaccess` - Server configuration with security and performance settings
-- `sitemap.xml` - SEO sitemap
-- `robots.txt` - Search engine directives
-- `site.webmanifest` - Progressive Web App manifest
-- `sw.js` - Service Worker for offline functionality
-- `favicon.png` - Vector favicon source
-- Various favicon files (ico, png) for different platforms
-
-## Installation Instructions
-
-1. Upload all files to the root directory of your web hosting
-2. Ensure your hosting has HTTPS enabled
-3. Make sure `.htaccess` file is properly uploaded (it's a hidden file)
-4. Test the website by visiting your domain
-
-## Features
-
-- Fully responsive design that works on all devices
-- Built-in SEO optimization
-- Performance optimizations (caching, compression)
-- Security headers and protections
-- Offline functionality with Service Worker
-- Progressive Web App capabilities
-
-## Customization
-
-The website is designed to be easily customizable:
-
-- All styles are contained within the HTML files
-- No external dependencies or frameworks required
-- Simple JavaScript for basic interactions
-
-## Support
-
-For any issues or questions, please contact support@alphaaistockx.com
+These features ensure your financial data remains secure even as quantum computing advances threaten traditional cryptographic methods.

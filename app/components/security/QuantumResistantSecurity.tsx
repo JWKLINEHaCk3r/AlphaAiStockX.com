@@ -1,0 +1,215 @@
+"use client"
+
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Shield, Lock, Key, AlertTriangle, CheckCircle, Cpu, Database, Atom } from "lucide-react"
+
+// Simple auth mock for demo
+const useAuth = () => ({
+  user: { id: "1", name: "Demo User", email: "demo@example.com" },
+  isAuthenticated: true,
+})
+
+export default function QuantumResistantSecurity() {
+  const { user, isAuthenticated } = useAuth()
+  const [securityScore, setSecurityScore] = useState(98)
+  const [quantumThreatLevel, setQuantumThreatLevel] = useState("LOW")
+  const [protectedAssets, setProtectedAssets] = useState(2847392.5)
+  const [keyRotationStatus, setKeyRotationStatus] = useState("ACTIVE")
+
+  return (
+    <div className="container mx-auto py-10">
+      <Card className="w-full max-w-4xl mx-auto">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Quantum-Resistant Security Dashboard</CardTitle>
+          <CardDescription>
+            Monitor and manage your organization's security posture against quantum threats.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {/* Authentication Status */}
+          {isAuthenticated ? (
+            <Alert variant="default">
+              <CheckCircle className="h-4 w-4 mr-2" />
+              <AlertTitle>Authenticated</AlertTitle>
+              <AlertDescription>Welcome, {user?.name}! Your session is secure.</AlertDescription>
+            </Alert>
+          ) : (
+            <Alert variant="destructive">
+              <AlertTriangle className="h-4 w-4 mr-2" />
+              <AlertTitle>Not Authenticated</AlertTitle>
+              <AlertDescription>Please log in to access the full features.</AlertDescription>
+            </Alert>
+          )}
+
+          {/* Security Score */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Overall Security Score</h3>
+              <Badge variant="secondary">{securityScore}%</Badge>
+            </div>
+            <Progress value={securityScore} />
+          </div>
+
+          {/* Quantum Threat Level */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Quantum Threat Level</h3>
+              <Badge
+                variant={
+                  quantumThreatLevel === "HIGH"
+                    ? "destructive"
+                    : quantumThreatLevel === "MEDIUM"
+                      ? "warning"
+                      : "success"
+                }
+              >
+                {quantumThreatLevel}
+              </Badge>
+            </div>
+          </div>
+
+          {/* Protected Assets */}
+          <div className="space-y-1">
+            <h3 className="text-lg font-semibold">Protected Assets Value</h3>
+            <p className="text-muted-foreground">${protectedAssets.toLocaleString()}</p>
+          </div>
+
+          {/* Key Rotation Status */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Key Rotation Status</h3>
+              <Badge variant={keyRotationStatus === "ACTIVE" ? "success" : "destructive"}>{keyRotationStatus}</Badge>
+            </div>
+          </div>
+
+          {/* Tabs for Detailed Security Information */}
+          <Tabs defaultValue="general" className="w-full">
+            <TabsList>
+              <TabsTrigger value="general">General</TabsTrigger>
+              <TabsTrigger value="quantum">Quantum Specific</TabsTrigger>
+              <TabsTrigger value="infrastructure">Infrastructure</TabsTrigger>
+            </TabsList>
+            <TabsContent value="general">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      {" "}
+                      <Shield className="h-4 w-4 mr-2 inline-block" /> Security Overview
+                    </CardTitle>
+                    <CardDescription>General security metrics and information.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Regular security audits conducted.</li>
+                      <li>Employee security training programs in place.</li>
+                      <li>Incident response plan is up-to-date.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <Lock className="h-4 w-4 mr-2 inline-block" /> Access Control
+                    </CardTitle>
+                    <CardDescription>Manage user access and permissions.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Role-based access control (RBAC) implemented.</li>
+                      <li>Multi-factor authentication (MFA) enabled for all users.</li>
+                      <li>Regular access reviews performed.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+            <TabsContent value="quantum">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <Atom className="h-4 w-4 mr-2 inline-block" /> Quantum Threat Mitigation
+                    </CardTitle>
+                    <CardDescription>Strategies to counter quantum computing threats.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Post-quantum cryptography (PQC) algorithms being evaluated.</li>
+                      <li>Key distribution protocols are quantum-resistant.</li>
+                      <li>Hardware security modules (HSMs) are quantum-safe.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <Key className="h-4 w-4 mr-2 inline-block" /> Key Management
+                    </CardTitle>
+                    <CardDescription>Securely manage cryptographic keys.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Key rotation policies are in place.</li>
+                      <li>Keys are stored in secure enclaves.</li>
+                      <li>Regular key audits are performed.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+            <TabsContent value="infrastructure">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <Cpu className="h-4 w-4 mr-2 inline-block" /> Infrastructure Security
+                    </CardTitle>
+                    <CardDescription>Security measures for your infrastructure.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Network segmentation implemented.</li>
+                      <li>Intrusion detection and prevention systems (IDPS) in place.</li>
+                      <li>Regular vulnerability scans performed.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <Database className="h-4 w-4 mr-2 inline-block" /> Data Protection
+                    </CardTitle>
+                    <CardDescription>Protect sensitive data at rest and in transit.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc list-inside">
+                      <li>Data encryption at rest and in transit.</li>
+                      <li>Data loss prevention (DLP) measures in place.</li>
+                      <li>Regular data backups performed.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
+
+          {/* Action Buttons */}
+          <div className="flex justify-end">
+            <Button variant="outline">Generate Report</Button>
+            <Button>Update Security Settings</Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
