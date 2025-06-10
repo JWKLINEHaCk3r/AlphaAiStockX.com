@@ -1,213 +1,317 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
-import { Check, X, Brain, Bot, Target, Sparkles } from "lucide-react"
+import { X, Check, Star, Zap, Crown, Building } from "lucide-react"
 
-export default function SubscriptionPlans({ currentPlan = null, onSelectPlan }) {
-  const [billingCycle, setBillingCycle] = useState("yearly") // yearly, monthly
+interface SubscriptionPlansProps {
+  isOpen: boolean
+  onClose: () => void
+  onSubscribe: (plan: string) => void
+  currentPlan: string
+}
+
+export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, currentPlan }: SubscriptionPlansProps) {
+  const [selectedPlan, setSelectedPlan] = useState(currentPlan)
+  const [loading, setLoading] = useState(false)
+
+  if (!isOpen) return null
 
   const plans = [
     {
+      id: "free",
+      name: "Free",
+      price: 0,
+      icon: Star,
+      color: "bg-slate-600",
+      description: "Get started with basic features",
+      features: [
+        "Basic education content",
+        "Limited stock analysis (5/day)",
+        "Community access",
+        "Basic market data",
+        "Email support",
+      ],
+      limitations: [
+        "No real-time alerts",
+        "Limited AI recommendations",
+        "No advanced patterns",
+        "No portfolio integration",
+      ],
+    },
+    {
       id: "basic",
       name: "Basic",
-      description: "Essential tools for market analysis",
-      monthlyPrice: 49.99,
-      yearlyPrice: 499.99,
-      features: [
-        { name: "Real-time market data", included: true },
-        { name: "Basic AI insights", included: true },
-        { name: "Technical indicators", included: true },
-        { name: "Portfolio tracking", included: true },
-        { name: "News sentiment analysis", included: false },
-        { name: "AI trading strategies", included: false },
-        { name: "AutoTrade Bot", included: false },
-        { name: "Risk analysis tools", included: false },
-      ],
-      cta: "Get Started",
+      price: 29,
+      icon: Zap,
+      color: "bg-blue-600",
+      description: "Perfect for individual traders",
       popular: false,
-      color: "blue",
-      icon: Target,
+      features: [
+        "Full education access",
+        "Advanced stock analysis (50/day)",
+        "Email alerts",
+        "Technical indicators",
+        "Pattern recognition",
+        "Priority support",
+        "Mobile app access",
+      ],
+      limitations: ["No real-time alerts", "Limited portfolio tools", "No API access"],
     },
     {
-      id: "pro",
-      name: "Pro",
-      description: "Advanced tools for serious traders",
-      monthlyPrice: 100.0,
-      yearlyPrice: 999.99,
-      features: [
-        { name: "Real-time market data", included: true },
-        { name: "Advanced AI insights", included: true },
-        { name: "Technical indicators", included: true },
-        { name: "Portfolio tracking & optimization", included: true },
-        { name: "News sentiment analysis", included: true },
-        { name: "5 AI trading strategies", included: true },
-        { name: "AutoTrade Bot", included: false },
-        { name: "Risk analysis tools", included: true },
-      ],
-      cta: "Upgrade Now",
+      id: "premium",
+      name: "Premium",
+      price: 79,
+      icon: Crown,
+      color: "bg-purple-600",
+      description: "For serious traders and investors",
       popular: true,
-      color: "purple",
-      icon: Brain,
+      features: [
+        "Everything in Basic",
+        "Unlimited AI analysis",
+        "Real-time alerts",
+        "Advanced pattern recognition",
+        "Portfolio optimization",
+        "Risk management tools",
+        "Custom watchlists",
+        "Advanced charting",
+        "Phone support",
+      ],
+      limitations: ["No API access", "No custom models"],
     },
     {
-      id: "ultimate",
-      name: "Ultimate",
-      description: "Full access to all premium features",
-      monthlyPrice: 175.0,
-      yearlyPrice: 1750.0,
-      features: [
-        { name: "Real-time market data", included: true },
-        { name: "Advanced AI insights", included: true },
-        { name: "Technical indicators", included: true },
-        { name: "Portfolio tracking & optimization", included: true },
-        { name: "News sentiment analysis", included: true },
-        { name: "All AI trading strategies", included: true },
-        { name: "AutoTrade Bot", included: true },
-        { name: "Advanced risk analysis tools", included: true },
-      ],
-      cta: "Get Ultimate",
+      id: "enterprise",
+      name: "Enterprise",
+      price: 199,
+      icon: Building,
+      color: "bg-gold-600",
+      description: "For institutions and power users",
       popular: false,
-      color: "pink",
-      icon: Bot,
+      features: [
+        "Everything in Premium",
+        "API access",
+        "Custom AI models",
+        "White-label options",
+        "Dedicated support",
+        "Advanced compliance",
+        "Team management",
+        "Custom integrations",
+        "SLA guarantee",
+      ],
+      limitations: [],
     },
   ]
 
-  const getPrice = (plan) => {
-    return billingCycle === "yearly" ? plan.yearlyPrice : plan.monthlyPrice
-  }
+  const handleSubscribe = async (planId: string) => {
+    setLoading(true)
+    setSelectedPlan(planId)
 
-  const getSavings = (plan) => {
-    const monthly = plan.monthlyPrice * 12
-    const yearly = plan.yearlyPrice
-    const savings = monthly - yearly
-    const percentage = Math.round((savings / monthly) * 100)
-    return { amount: savings.toFixed(2), percentage }
-  }
-
-  const getCardStyles = (plan) => {
-    const isCurrentPlan = currentPlan === plan.id
-    const baseStyles = "relative border transition-all"
-
-    if (isCurrentPlan) {
-      return `${baseStyles} bg-${plan.color}-500/10 border-${plan.color}-500/50`
+    try {
+      // Simulate payment processing
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      onSubscribe(planId)
+    } catch (error) {
+      console.error("Subscription failed:", error)
+    } finally {
+      setLoading(false)
     }
-
-    if (plan.popular) {
-      return `${baseStyles} bg-gradient-to-b from-purple-500/10 to-pink-500/10 border-purple-500/30`
-    }
-
-    return `${baseStyles} bg-black/20 border-white/10 hover:border-white/20`
-  }
-
-  const getButtonStyles = (plan) => {
-    const isCurrentPlan = currentPlan === plan.id
-
-    if (isCurrentPlan) {
-      return "bg-gray-700 text-gray-300 cursor-not-allowed"
-    }
-
-    if (plan.id === "basic") {
-      return "bg-blue-600 hover:bg-blue-700"
-    }
-
-    if (plan.id === "pro") {
-      return "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-    }
-
-    return "bg-pink-600 hover:bg-pink-700"
   }
 
   return (
-    <div className="space-y-8">
-      {/* Billing Toggle */}
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <h2 className="text-2xl font-bold text-white">Choose Your Plan</h2>
-        <div className="flex items-center space-x-4">
-          <span className={`text-sm ${billingCycle === "monthly" ? "text-white" : "text-gray-400"}`}>Monthly</span>
-          <Switch
-            checked={billingCycle === "yearly"}
-            onCheckedChange={(checked) => setBillingCycle(checked ? "yearly" : "monthly")}
-            className="data-[state=checked]:bg-purple-500"
-          />
-          <div className="flex items-center">
-            <span className={`text-sm ${billingCycle === "yearly" ? "text-white" : "text-gray-400"}`}>Yearly</span>
-            <Badge className="ml-2 bg-green-500 text-xs">Save 20%</Badge>
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
+      <div className="w-full max-w-6xl bg-slate-800 rounded-lg border border-blue-500/30 relative my-8">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="absolute top-4 right-4 text-slate-400 hover:text-white z-10"
+          onClick={onClose}
+        >
+          <X className="h-4 w-4" />
+        </Button>
+
+        <div className="p-6">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">Choose Your Plan</h2>
+            <p className="text-slate-400">Unlock the full power of AI-driven trading analysis</p>
           </div>
-        </div>
-      </div>
 
-      {/* Plans */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {plans.map((plan) => {
-          const IconComponent = plan.icon
-          const isCurrentPlan = currentPlan === plan.id
-          const price = getPrice(plan)
-          const savings = billingCycle === "yearly" ? getSavings(plan) : null
-
-          return (
-            <Card key={plan.id} className={getCardStyles(plan)}>
-              {plan.popular && (
-                <div className="absolute -top-3 left-0 right-0 flex justify-center">
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">
-                    <Sparkles className="h-3 w-3 mr-1" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {plans.map((plan) => (
+              <Card
+                key={plan.id}
+                className={`relative bg-slate-700/50 border-2 transition-all ${
+                  plan.popular
+                    ? "border-purple-500 scale-105"
+                    : currentPlan === plan.id
+                      ? "border-blue-500"
+                      : "border-slate-600 hover:border-slate-500"
+                }`}
+              >
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-600">
                     Most Popular
                   </Badge>
-                </div>
-              )}
+                )}
 
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className={`p-2 rounded-full bg-${plan.color}-500/20`}>
-                      <IconComponent className={`h-5 w-5 text-${plan.color}-400`} />
+                {currentPlan === plan.id && (
+                  <Badge className="absolute -top-3 right-4 bg-green-600">Current Plan</Badge>
+                )}
+
+                <CardHeader className="text-center">
+                  <div className={`w-12 h-12 rounded-full ${plan.color} flex items-center justify-center mx-auto mb-3`}>
+                    <plan.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <CardTitle className="text-white text-xl">{plan.name}</CardTitle>
+                  <CardDescription className="text-slate-400">{plan.description}</CardDescription>
+                  <div className="mt-4">
+                    <span className="text-3xl font-bold text-white">${plan.price}</span>
+                    <span className="text-slate-400">/month</span>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <h4 className="text-white font-semibold text-sm">Included:</h4>
+                    {plan.features.map((feature, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {plan.limitations.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="text-slate-400 font-semibold text-sm">Not included:</h4>
+                      {plan.limitations.map((limitation, index) => (
+                        <div key={index} className="flex items-start gap-2">
+                          <X className="h-4 w-4 text-red-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-400 text-sm">{limitation}</span>
+                        </div>
+                      ))}
                     </div>
-                    <CardTitle className="text-white">{plan.name}</CardTitle>
-                  </div>
-                </div>
-                <CardDescription className="text-gray-400">{plan.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center">
-                  <div className="flex items-center justify-center">
-                    <span className="text-3xl font-bold text-white">${price}</span>
-                    <span className="text-gray-400 ml-2">/{billingCycle === "yearly" ? "year" : "month"}</span>
-                  </div>
-                  {billingCycle === "yearly" && (
-                    <p className="text-sm text-green-400 mt-1">
-                      Save ${savings.amount} ({savings.percentage}%)
-                    </p>
                   )}
-                </div>
 
-                <ul className="space-y-2">
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      {feature.included ? (
-                        <Check className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
-                      ) : (
-                        <X className="h-4 w-4 text-gray-500 mr-2 flex-shrink-0" />
-                      )}
-                      <span className={feature.included ? "text-gray-300" : "text-gray-500"}>{feature.name}</span>
-                    </li>
+                  <Button
+                    className={`w-full ${plan.popular ? "bg-purple-600 hover:bg-purple-700" : ""}`}
+                    variant={currentPlan === plan.id ? "outline" : "default"}
+                    onClick={() => handleSubscribe(plan.id)}
+                    disabled={loading || currentPlan === plan.id}
+                  >
+                    {loading && selectedPlan === plan.id
+                      ? "Processing..."
+                      : currentPlan === plan.id
+                        ? "Current Plan"
+                        : plan.price === 0
+                          ? "Get Started"
+                          : "Subscribe"}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Features Comparison */}
+          <div className="mt-12">
+            <h3 className="text-xl font-bold text-white mb-6 text-center">Feature Comparison</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-600">
+                    <th className="text-left text-white font-semibold p-3">Feature</th>
+                    {plans.map((plan) => (
+                      <th key={plan.id} className="text-center text-white font-semibold p-3">
+                        {plan.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      feature: "Stock Analysis per Day",
+                      values: ["5", "50", "Unlimited", "Unlimited"],
+                    },
+                    {
+                      feature: "Real-time Alerts",
+                      values: [false, false, true, true],
+                    },
+                    {
+                      feature: "Advanced Patterns",
+                      values: [false, true, true, true],
+                    },
+                    {
+                      feature: "Portfolio Tools",
+                      values: [false, false, true, true],
+                    },
+                    {
+                      feature: "API Access",
+                      values: [false, false, false, true],
+                    },
+                    {
+                      feature: "Custom AI Models",
+                      values: [false, false, false, true],
+                    },
+                  ].map((row, index) => (
+                    <tr key={index} className="border-b border-slate-700">
+                      <td className="text-slate-300 p-3">{row.feature}</td>
+                      {row.values.map((value, valueIndex) => (
+                        <td key={valueIndex} className="text-center p-3">
+                          {typeof value === "boolean" ? (
+                            value ? (
+                              <Check className="h-4 w-4 text-green-400 mx-auto" />
+                            ) : (
+                              <X className="h-4 w-4 text-red-400 mx-auto" />
+                            )
+                          ) : (
+                            <span className="text-white">{value}</span>
+                          )}
+                        </td>
+                      ))}
+                    </tr>
                   ))}
-                </ul>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  className={`w-full ${getButtonStyles(plan)}`}
-                  onClick={() => onSelectPlan(plan.id)}
-                  disabled={isCurrentPlan}
-                >
-                  {isCurrentPlan ? "Current Plan" : plan.cta}
-                </Button>
-              </CardFooter>
-            </Card>
-          )
-        })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="mt-12">
+            <h3 className="text-xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-white font-semibold mb-2">Can I change plans anytime?</h4>
+                  <p className="text-slate-400 text-sm">
+                    Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-2">Is there a free trial?</h4>
+                  <p className="text-slate-400 text-sm">
+                    Our Free plan gives you access to basic features. Premium plans offer 7-day free trials.
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-white font-semibold mb-2">What payment methods do you accept?</h4>
+                  <p className="text-slate-400 text-sm">
+                    We accept all major credit cards, PayPal, and bank transfers for Enterprise plans.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-2">Is my data secure?</h4>
+                  <p className="text-slate-400 text-sm">
+                    Yes, we use enterprise-grade encryption and comply with all financial data regulations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

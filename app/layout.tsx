@@ -4,12 +4,19 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import SEOOptimizations from "./components/seo/SEOOptimizations"
 import EnhancedVisuals from "./components/graphics/EnhancedVisuals"
+import { ErrorBoundary } from "./components/ErrorBoundary"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://alphaaistockx.com"),
-  title: {
+  title: "AlphaAIStockX - AI-Powered Trading Platform",
+  description: "Advanced AI stock analysis, trading education, and real-time market insights",
+  keywords: "stock analysis, AI trading, Series 6, Series 7, financial education, market analysis",
+  authors: [{ name: "AlphaAIStockX Team" }],
+  viewport: "width=device-width, initial-scale=1",
+  robots: "index, follow",
+  metadataBase: new URL("https://alphaaistockx.com"),,
+  /*title: {
     default:
       "AlphaAIStockX - Revolutionary AI Trading Platform | Automated Stock Trading Bots & Lightning-Fast Execution",
     template: "%s | AlphaAIStockX - AI Trading Platform",
@@ -135,6 +142,7 @@ export const metadata: Metadata = {
       "en-GB": "https://alphaaistockx.com/en-gb",
     },
   },
+    generator: 'v0.dev'*/
     generator: 'v0.dev'
 }
 
@@ -146,6 +154,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#1e293b" />
         <SEOOptimizations />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -155,12 +167,12 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
         {/* Favicon and PWA */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/*<link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.png" color="#7c3aed" />
+        <link rel="mask-icon" href="/safari-pinned-tab.png" color="#7c3aed" />*/}
 
         {/* SEO and verification */}
         <meta name="google-site-verification" content="your-google-verification-code" />
@@ -206,7 +218,9 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <EnhancedVisuals />
-        <div className="relative z-10">{children}</div>
+        <ErrorBoundary>
+          <div className="relative z-10">{children}</div>
+        </ErrorBoundary>
       </body>
     </html>
   )
