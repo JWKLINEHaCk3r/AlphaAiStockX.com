@@ -4,119 +4,119 @@ import type React from "react"
 import { useState, useEffect } from "react"
 
 interface BuildValidatorProps {
-  onValidationComplete: (isValid: boolean) => void
+  onValidationComplete: (success: boolean) => void
 }
 
 const BuildValidator: React.FC<BuildValidatorProps> = ({ onValidationComplete }) => {
-  const [isValid, setIsValid] = useState<boolean | null>(null)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [buildStatus, setBuildStatus] = useState<string>("idle")
+  const [lintStatus, setLintStatus] = useState<string>("idle")
+  const [testStatus, setTestStatus] = useState<string>("idle") // Added test status
 
   useEffect(() => {
-    const validateBuild = async () => {
+    const runBuild = async () => {
+      setBuildStatus("running")
       try {
-        // Check if npm is installed
-        const npmCheck = await runCommand("npm", ["-v"])
-        if (!npmCheck.success) {
-          setErrorMessage("npm is not installed. Please install npm to proceed.")
-          setIsValid(false)
-          return
-        }
+        const process = Deno.run({
+          cmd: ["npm", "run", "build"], // Updated to npm
+          stdout: "piped",
+          stderr: "piped",
+        })
 
-        // Check if node_modules exists
-        if (!(await fileExists("node_modules"))) {
-          setErrorMessage("node_modules folder does not exist. Please run `npm install` to install dependencies.")
-          setIsValid(false)
-          return
-        }
+        const { code } = await process.status()
+        const stdout = new TextDecoder().decode(await process.output())
+        const stderr = new TextDecoder().decode(await process.stderrOutput())
 
-        // Check if package-lock.json exists
-        if (!(await fileExists("package-lock.json"))) {
-          setErrorMessage("package-lock.json does not exist. Please run `npm install` to generate it.")
-          setIsValid(false)
-          return
-        }
+        console.log("Build stdout:", stdout)
+        console.error("Build stderr:", stderr)
 
-        // Validate build command
-        const packageJson = await readPackageJson()
-        if (!packageJson.scripts || !packageJson.scripts.build) {
-          setErrorMessage('Build script is not defined in package.json. Please add a "build" script.')
-          setIsValid(false)
-          return
+        if (code === 0) {
+          setBuildStatus("success")
+        } else {
+          setBuildStatus("failure")
         }
-
-        // Run build command
-        const buildResult = await runCommand("npm", ["run", "build"])
-        if (!buildResult.success) {
-          setErrorMessage(`Build failed. Error: ${buildResult.error}`)
-          setIsValid(false)
-          return
-        }
-
-        setIsValid(true)
-        setErrorMessage(null)
-      } catch (error: any) {
-        setIsValid(false)
-        setErrorMessage(`An unexpected error occurred: ${error.message}`)
+        process.close()
+      } catch (error) {
+        console.error("Build failed:", error)
+        setBuildStatus("failure")
       }
     }
 
-    validateBuild().then(() => {
-      if (isValid !== null) {
-        onValidationComplete(isValid)
+    const runLint = async () => {
+      setLintStatus("running")
+      try {
+        const process = Deno.run({
+          cmd: ["npm", "run", "lint"], // Updated to npm
+          stdout: "piped",
+          stderr: "piped",
+        })
+
+        const { code } = await process.status()
+        const stdout = new TextDecoder().decode(await process.output())
+        const stderr = new TextDecoder().decode(await process.stderrOutput())
+
+        console.log("Lint stdout:", stdout)
+        console.error("Lint stderr:", stderr)
+
+        if (code === 0) {
+          setLintStatus("success")
+        } else {
+          setLintStatus("failure")
+        }
+        process.close()
+      } catch (error) {
+        console.error("Lint failed:", error)
+        setLintStatus("failure")
       }
-    })
-  }, [onValidationComplete, isValid])
-
-  // Helper functions (moved outside useEffect for clarity)
-  const runCommand = async (
-    command: string,
-    args: string[],
-  ): Promise<{ success: boolean; output?: string; error?: string }> => {
-    try {
-      const process = Deno.run({
-        cmd: [command, ...args],
-        stdout: "piped",
-        stderr: "piped",
-      })
-
-      const { code } = await process.status()
-      const rawOutput = await process.output()
-      const rawError = await process.stderrOutput()
-
-      const output = new TextDecoder().decode(rawOutput)
-      const error = new TextDecoder().decode(rawError)
-
-      process.close()
-
-      return { success: code === 0, output, error }
-    } catch (error: any) {
-      return { success: false, error: error.message }
     }
-  }
 
-  const fileExists = async (path: string): Promise<boolean> => {
-    try {
-      await Deno.stat(path)
-      return true
-    } catch (error) {
-      return false
-    }
-  }
+    const runTests = async () => {
+      setTestStatus("running")
+      try {
+        const process = Deno.run({
+          cmd: ["npm", "run", "test"], // Assuming 'test' script exists, update if needed
+          stdout: "piped",
+          stderr: "piped",
+        })
 
-  const readPackageJson = async (): Promise<any> => {
-    try {
-      const file = await Deno.readTextFile("package.json")
-      return JSON.parse(file)
-    } catch (error: any) {
-      throw new Error(`Failed to read package.json: ${error.message}`)
+        const { code } = await process.status()
+        const stdout = new TextDecoder().decode(await process.output())
+        const stderr = new TextDecoder().decode(await process.stderrOutput())
+
+        console.log("Test stdout:", stdout)
+        console.error("Test stderr:", stderr)
+
+        if (code === 0) {
+          setTestStatus("success")
+        } else {
+          setTestStatus("failure")
+        }
+        process.close()
+      } catch (error) {
+        console.error("Test failed:", error)
+        setTestStatus("failure")
+      }
     }
-  }
+
+    const runAllChecks = async () => {
+      await runBuild()
+      await runLint()
+      await runTests() // Run tests as part of the validation
+
+      if (buildStatus === "success" && lintStatus === "success" && testStatus === "success") {
+        onValidationComplete(true)
+      } else {
+        onValidationComplete(false)
+      }
+    }
+
+    runAllChecks()
+  }, [onValidationComplete])
 
   return (
     <div>
-      {isValid === null && <p>Validating build...</p>}
-      {isValid === true && <p style={{ color: "green" }}>Build validation successful!</p>}
-      {isValid === false && <p style={{ color: "red" }}>Build validation failed: {errorMessage}</p>}
+      <p>Build Status: {buildStatus}</p>
+      <p>Lint Status: {lintStatus}</p>
+      <p>Test Status: {testStatus}</p> {/* Display test status */}
     </div>
   )
 }
