@@ -19,6 +19,7 @@ import AIChat from "@/app/components/AIChat"
 import dynamic from "next/dynamic"
 const StockChart3D = dynamic(() => import("@/app/components/StockChart3D"), { ssr: false })
 const AutoTradeBot = dynamic(() => import("@/app/components/AutoTradeBot"), { ssr: false })
+const MarketHeatmap = dynamic(() => import("@/app/components/MarketHeatmap"), { ssr: false })
 
 const features = [
   {
@@ -174,6 +175,23 @@ function FloatingAIMascot() {
   )
 }
 
+// Floating Voice AI Button
+function VoiceAIMic({ onToggle, listening }: { onToggle: () => void; listening: boolean }) {
+  return (
+    <button
+      onClick={onToggle}
+      className={`fixed bottom-28 right-8 z-50 p-4 rounded-full shadow-2xl border-4 border-fuchsia-400/40 bg-black/70 hover:bg-fuchsia-800/80 transition-colors animate-float ${listening ? 'ring-4 ring-fuchsia-400' : ''}`}
+      aria-label={listening ? 'Stop Voice Assistant' : 'Start Voice Assistant'}
+    >
+      {listening ? (
+        <span className="flex items-center gap-2 text-fuchsia-300"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#a78bfa" strokeWidth="2" opacity="0.5"/><rect x="9" y="7" width="6" height="10" rx="3" fill="#a78bfa"/></svg> <span className="font-bold">Listening...</span></span>
+      ) : (
+        <span className="flex items-center gap-2 text-fuchsia-300"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#a78bfa" strokeWidth="2" opacity="0.5"/><rect x="9" y="7" width="6" height="10" rx="3" fill="#a78bfa"/></svg> <span className="font-bold">Voice AI</span></span>
+      )}
+    </button>
+  )
+}
+
 export default function AlphaAIStockX() {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [user, setUser] = useState<UserType | null>(null)
@@ -181,12 +199,38 @@ export default function AlphaAIStockX() {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(true)
+  // --- Voice AI State/Logic ---
+  const [voiceListening, setVoiceListening] = useState(false)
+  const recognitionRef = useRef<any>(null)
 
   useEffect(() => {
     const savedUser = localStorage.getItem("alphaai_user")
     if (savedUser) setUser(JSON.parse(savedUser))
     setLoading(false)
   }, [])
+
+  useEffect(() => {
+    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) return
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    recognitionRef.current = new SpeechRecognition()
+    recognitionRef.current.continuous = true
+    recognitionRef.current.interimResults = true
+    recognitionRef.current.lang = 'en-US'
+    recognitionRef.current.onresult = (event: any) => {
+      let transcript = ''
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        transcript += event.results[i][0].transcript
+      }
+      if (transcript && voiceListening) {
+        // Here you could send transcript to AIChat or handle commands
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance('AI received: ' + transcript))
+      }
+    }
+    recognitionRef.current.onend = () => {
+      if (voiceListening) recognitionRef.current.start()
+    }
+    return () => recognitionRef.current && recognitionRef.current.stop()
+  }, [voiceListening])
 
   const handleLogin = (userData: any) => {
     const newUser: UserType = {
@@ -228,6 +272,14 @@ export default function AlphaAIStockX() {
     return false
   }
 
+  const toggleVoice = () => {
+    setVoiceListening((v) => {
+      if (!v) recognitionRef.current && recognitionRef.current.start()
+      else recognitionRef.current && recognitionRef.current.stop()
+      return !v
+    })
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
@@ -249,6 +301,7 @@ export default function AlphaAIStockX() {
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-violet-950 flex relative overflow-hidden">
       <AnimatedBackground />
       <FloatingAIMascot />
+      <VoiceAIMic onToggle={toggleVoice} listening={voiceListening} />
       {/* Sidebar */}
       <aside aria-label="Sidebar navigation" className="hidden lg:flex flex-col w-72 bg-gradient-to-b from-violet-900/90 to-black/90 border-r border-violet-800/40 p-8 text-white shadow-2xl">
         <div className="flex items-center gap-3 mb-12">
@@ -298,7 +351,7 @@ export default function AlphaAIStockX() {
           <AITicker />
         </section>
         {/* Hero Section */}
-        <section aria-label="Hero section" className="w-full max-w-5xl text-center mb-16">
+        <section aria-label="Hero section" className="w-full max-w-5xl text-center mb-16 glassmorphism-card neon-glow">
           <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
             The Future of AI Stock Trading
           </h1>
@@ -307,18 +360,18 @@ export default function AlphaAIStockX() {
             results.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Badge className="bg-violet-700 text-white text-lg px-4 py-2">Quantum AI</Badge>
-            <Badge className="bg-fuchsia-700 text-white text-lg px-4 py-2">47+ AI Agents</Badge>
-            <Badge className="bg-emerald-700 text-white text-lg px-4 py-2">Real-Time Insights</Badge>
-            <Badge className="bg-cyan-700 text-white text-lg px-4 py-2">Enterprise Security</Badge>
+            <Badge className="bg-violet-700 text-white text-lg px-4 py-2 neon-glow">Quantum AI</Badge>
+            <Badge className="bg-fuchsia-700 text-white text-lg px-4 py-2 neon-glow">47+ AI Agents</Badge>
+            <Badge className="bg-emerald-700 text-white text-lg px-4 py-2 neon-glow">Real-Time Insights</Badge>
+            <Badge className="bg-cyan-700 text-white text-lg px-4 py-2 neon-glow">Enterprise Security</Badge>
           </div>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="text-lg px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold shadow-lg hover:scale-105 transition-transform">
+            <Button className="text-lg px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold shadow-lg hover:scale-105 transition-transform neon-glow">
               Get Started Free
             </Button>
             <Button
               variant="secondary"
-              className="text-lg px-8 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 font-bold shadow-lg hover:scale-105 transition-transform"
+              className="text-lg px-8 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 font-bold shadow-lg hover:scale-105 transition-transform neon-glow"
             >
               See Live Demo
             </Button>
@@ -348,6 +401,10 @@ export default function AlphaAIStockX() {
         {/* AI Auto Trade Bot Section */}
         <section aria-label="AI Auto Trade Bot" className="w-full max-w-4xl mx-auto mb-16">
           <AutoTradeBot />
+        </section>
+        {/* Market Heatmap Section */}
+        <section aria-label="Market Heatmap" className="w-full max-w-4xl mx-auto mb-16">
+          <MarketHeatmap />
         </section>
         {/* Call to Action */}
         <section aria-label="Call to action" className="w-full max-w-3xl text-center mt-12">
