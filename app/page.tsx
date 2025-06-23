@@ -16,6 +16,9 @@ import {
   Sparkles,
 } from "lucide-react"
 import AIChat from "@/app/components/AIChat"
+import dynamic from "next/dynamic"
+const StockChart3D = dynamic(() => import("@/app/components/StockChart3D"), { ssr: false })
+const AutoTradeBot = dynamic(() => import("@/app/components/AutoTradeBot"), { ssr: false })
 
 const features = [
   {
@@ -337,6 +340,14 @@ export default function AlphaAIStockX() {
               </CardContent>
             </Card>
           ))}
+        </section>
+        {/* 3D Stock Chart Section */}
+        <section aria-label="3D Stock Chart" className="w-full max-w-4xl mx-auto mb-16">
+          <StockChart3D data={undefined} />
+        </section>
+        {/* AI Auto Trade Bot Section */}
+        <section aria-label="AI Auto Trade Bot" className="w-full max-w-4xl mx-auto mb-16">
+          <AutoTradeBot />
         </section>
         {/* Call to Action */}
         <section aria-label="Call to action" className="w-full max-w-3xl text-center mt-12">
