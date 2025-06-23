@@ -79,10 +79,31 @@ export default function RootLayout({
         <meta name="theme-color" content="#1e293b" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Google Analytics (replace NEXT_PUBLIC_GA_ID with your real ID in .env) */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          />
+        )}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date()); gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');`,
+            }}
+          />
+        )}
+        {/* Prevent accidental indexing if not ready for production */}
+        {process.env.NEXT_PUBLIC_ALLOW_INDEXING !== 'true' && (
+          <meta name="robots" content="noindex, nofollow" />
+        )}
+        {/* IONOS Site Verification (replace with your real verification code if needed) */}
+        <meta name="ionos-site-verification" content="alphaaistockx.com" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ErrorBoundary>
-          <div className="relative z-10">{children}</div>
+          <main role="main" id="main-content" className="relative z-10">{children}</main>
         </ErrorBoundary>
       </body>
     </html>
