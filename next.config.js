@@ -41,6 +41,39 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.alphaaistockx.com',
+          },
+        ],
+        destination: 'https://alphaaistockx.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: ':host',
+          },
+        ],
+        destination: 'https://alphaaistockx.com/:path*',
+        permanent: true,
+        // Only redirect if not already on alphaaistockx.com
+        missing: [
+          {
+            type: 'host',
+            value: 'alphaaistockx.com',
+          },
+        ],
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
