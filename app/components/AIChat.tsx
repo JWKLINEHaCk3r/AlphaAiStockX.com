@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, Send, Bot, User, Sparkles } from "lucide-react"
+import { aiBrainService } from "../services/ai-brain-service"
 
 export default function AIChat() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,8 +20,9 @@ export default function AIChat() {
     },
   ])
   const [inputMessage, setInputMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!inputMessage.trim()) return
 
     const userMessage = {
@@ -30,29 +32,35 @@ export default function AIChat() {
       timestamp: new Date(),
     }
 
-    setMessages([...messages, userMessage])
+    setMessages((prev) => [...prev, userMessage])
+    setIsLoading(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponses = [
-        "Based on current market conditions, I recommend diversifying your portfolio with a mix of growth and value stocks.",
-        "The technical indicators suggest a bullish trend for tech stocks in the short term.",
-        "Consider adding some defensive stocks to hedge against market volatility.",
-        "The AI analysis shows strong momentum in the semiconductor sector.",
-        "Current market sentiment is positive, but watch for potential resistance levels.",
-      ]
-
+    try {
+      // Try to extract a symbol (e.g. AAPL) from the message, fallback to SPY
+      const symbolMatch = inputMessage.match(/\b[A-Z]{1,5}\b/)
+      const symbol = symbolMatch ? symbolMatch[0] : "SPY"
+      const aiResponse = await aiBrainService.getIntelligentRecommendation(symbol)
       const aiMessage = {
         id: messages.length + 2,
         type: "ai",
-        content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
+        content: `**AI Recommendation for ${symbol}:**\n\nAction: ${aiResponse.action}\nConfidence: ${(aiResponse.confidence * 100).toFixed(1)}%\nReasoning: ${Array.isArray(aiResponse.reasoning) ? aiResponse.reasoning.join("; ") : aiResponse.reasoning}\n\nPrice Targets: $${aiResponse.priceTargets.moderate.toFixed(2)} (mod)`,
         timestamp: new Date(),
       }
-
       setMessages((prev) => [...prev, aiMessage])
-    }, 1000)
-
-    setInputMessage("")
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: messages.length + 2,
+          type: "ai",
+          content: "Sorry, the AI is currently unavailable. Please try again later.",
+          timestamp: new Date(),
+        },
+      ])
+    } finally {
+      setIsLoading(false)
+      setInputMessage("")
+    }
   }
 
   if (!isOpen) {
@@ -111,20 +119,31 @@ export default function AIChat() {
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-3 rounded-lg bg-gray-800/60 text-gray-100 border border-cyan-500/20 animate-pulse">
+                  <div className="flex items-start space-x-2">
+                    <Bot className="h-4 w-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm">AI is thinking...</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Input */}
           <div className="flex space-x-2">
             <Input
               value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputMessage(e.target.value)}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && sendMessage()}
               placeholder="Ask about stocks, analysis, or strategies..."
               className="bg-gray-800/40 border-cyan-500/30 text-white placeholder-gray-400"
             />
             <Button
               onClick={sendMessage}
               className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
+              disabled={isLoading}
             >
               <Send className="h-4 w-4" />
             </Button>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -14,6 +15,7 @@ import {
   Infinity,
   Sparkles,
 } from "lucide-react"
+import AIChat from "@/app/components/AIChat"
 
 const features = [
   {
@@ -278,15 +280,17 @@ export default function AlphaAIStockX() {
             <span className="text-2xl md:text-3xl font-extrabold text-emerald-300 animate-bounce">
               🎉 Welcome to <span className="underline decoration-wavy decoration-fuchsia-400">AlphaAiStockX.com</span>!
             </span>
-            <span className="text-3xl animate-spin-slow">🤖</span>
+            <span className="text-3xl animate-spin-slow" aria-label="AI Mascot">🤖</span>
           </div>
           <p className="mt-2 text-lg text-slate-200 max-w-xl text-center">
             The only stock platform where the AI is so smart, it sometimes trades for pizza. Hosted on IONOS for maximum quantum giggles and uptime. 🍕📈
           </p>
         </div>
+        {/* AI Chat Assistant (live) */}
+        <AIChat />
       </main>
       {/* IONOS Hosting Badge Footer */}
-      <footer className="w-full flex justify-center items-center py-4 bg-black/60 border-t border-violet-900/40">
+      <footer className="w-full flex justify-center items-center py-4 bg-black/60 border-t border-violet-900/40" aria-label="IONOS Hosting Badge Footer">
         <a
           href="https://www.ionos.com/"
           target="_blank"
@@ -294,11 +298,14 @@ export default function AlphaAIStockX() {
           aria-label="Hosted by IONOS"
           className="flex items-center gap-2 text-slate-300 hover:text-blue-400 text-sm font-medium"
         >
-          <img
+          <Image
             src="https://www.ionos.com/favicon.ico"
             alt="IONOS logo"
+            width={24}
+            height={24}
             className="w-6 h-6 rounded"
             style={{ background: '#fff' }}
+            priority
           />
           Hosted by IONOS
         </a>
