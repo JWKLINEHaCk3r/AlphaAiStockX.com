@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -97,6 +97,80 @@ interface UserType {
   preferences: Record<string, any>
 }
 
+function AnimatedBackground() {
+  // Simple animated stars/particles background using canvas
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    let animationId: number
+    const stars = Array.from({ length: 120 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.5 + 0.5,
+      dx: (Math.random() - 0.5) * 0.2,
+      dy: (Math.random() - 0.5) * 0.2,
+      alpha: Math.random() * 0.5 + 0.5,
+    }))
+    function draw() {
+      if (!ctx) return
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      for (const s of stars) {
+        ctx.save()
+        ctx.globalAlpha = s.alpha
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI)
+        ctx.fillStyle = "#a78bfa"
+        ctx.shadowColor = "#a78bfa"
+        ctx.shadowBlur = 8
+        ctx.fill()
+        ctx.restore()
+        s.x += s.dx
+        s.y += s.dy
+        if (s.x < 0) s.x = window.innerWidth
+        if (s.x > window.innerWidth) s.x = 0
+        if (s.y < 0) s.y = window.innerHeight
+        if (s.y > window.innerHeight) s.y = 0
+      }
+      animationId = requestAnimationFrame(draw)
+    }
+    draw()
+    window.addEventListener("resize", resize)
+    function resize() {
+      if (!canvas) return
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resize()
+    return () => {
+      cancelAnimationFrame(animationId)
+      window.removeEventListener("resize", resize)
+    }
+  }, [])
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full z-0 pointer-events-none"
+      style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
+    />
+  )
+}
+
+function FloatingAIMascot() {
+  // Animated floating AI mascot orb
+  return (
+    <div className="fixed bottom-8 right-8 z-50 animate-float">
+      <div className="relative flex flex-col items-center">
+        <div className="w-16 h-16 bg-gradient-to-tr from-fuchsia-500 via-violet-500 to-emerald-400 rounded-full shadow-2xl border-4 border-white/30 flex items-center justify-center animate-pulse">
+          <span className="text-4xl">🤖</span>
+        </div>
+        <span className="mt-2 text-xs text-white bg-black/60 px-2 py-1 rounded shadow-lg animate-bounce">AI Assistant</span>
+      </div>
+    </div>
+  )
+}
+
 export default function AlphaAIStockX() {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [user, setUser] = useState<UserType | null>(null)
@@ -169,7 +243,9 @@ export default function AlphaAIStockX() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-violet-950 flex">
+    <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-violet-950 flex relative overflow-hidden">
+      <AnimatedBackground />
+      <FloatingAIMascot />
       {/* Sidebar */}
       <aside aria-label="Sidebar navigation" className="hidden lg:flex flex-col w-72 bg-gradient-to-b from-violet-900/90 to-black/90 border-r border-violet-800/40 p-8 text-white shadow-2xl">
         <div className="flex items-center gap-3 mb-12">
