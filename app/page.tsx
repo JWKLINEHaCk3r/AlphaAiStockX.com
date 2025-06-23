@@ -192,6 +192,20 @@ function VoiceAIMic({ onToggle, listening }: { onToggle: () => void; listening: 
   )
 }
 
+function FuturisticHoloRings() {
+  // Animated holographic rings for a futuristic effect
+  return (
+    <div className="pointer-events-none fixed inset-0 z-10 flex items-center justify-center">
+      <div className="relative w-[60vw] h-[60vw] max-w-3xl max-h-3xl flex items-center justify-center">
+        <div className="absolute inset-0 animate-spin-slow rounded-full border-4 border-fuchsia-400/30 shadow-2xl" style={{boxShadow:'0 0 80px 10px #a78bfa55, 0 0 200px 40px #0ff2'}}></div>
+        <div className="absolute inset-8 animate-spin-slower rounded-full border-2 border-emerald-400/20" style={{boxShadow:'0 0 60px 5px #34d39933'}}></div>
+        <div className="absolute inset-16 animate-spin-fast rounded-full border border-cyan-400/20" style={{boxShadow:'0 0 40px 2px #22d3ee22'}}></div>
+        <div className="absolute inset-24 animate-pulse rounded-full border border-violet-400/10" style={{boxShadow:'0 0 20px 1px #a78bfa11'}}></div>
+      </div>
+    </div>
+  )
+}
+
 export default function AlphaAIStockX() {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [user, setUser] = useState<UserType | null>(null)
@@ -298,15 +312,17 @@ export default function AlphaAIStockX() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-violet-950 flex relative overflow-hidden">
+    <div className="min-h-screen futuristic-bg flex relative overflow-hidden">
       <AnimatedBackground />
+      <div className="animated-grid" />
+      <FuturisticHoloRings />
       <FloatingAIMascot />
       <VoiceAIMic onToggle={toggleVoice} listening={voiceListening} />
       {/* Sidebar */}
-      <aside aria-label="Sidebar navigation" className="hidden lg:flex flex-col w-72 bg-gradient-to-b from-violet-900/90 to-black/90 border-r border-violet-800/40 p-8 text-white shadow-2xl">
+      <aside aria-label="Sidebar navigation" className="hidden lg:flex flex-col w-72 holo-shimmer bg-gradient-to-b from-violet-900/90 to-black/90 border-r border-violet-800/40 p-8 text-white shadow-2xl">
         <div className="flex items-center gap-3 mb-12">
           <Brain className="w-10 h-10 text-violet-400 animate-pulse" />
-          <span className="text-3xl font-bold tracking-tight">AlphaAIStockX</span>
+          <span className="text-3xl font-bold tracking-tight neon-text">AlphaAIStockX</span>
         </div>
         <nav className="flex flex-col gap-6 mt-8">
           <a className="flex items-center gap-3 text-lg font-medium hover:text-violet-400 transition-colors" href="#">
@@ -329,15 +345,15 @@ export default function AlphaAIStockX() {
           </a>
         </nav>
         <div className="mt-auto pt-12">
-          <Card className="bg-gradient-to-r from-violet-700/80 to-fuchsia-700/80 border-none shadow-xl">
+          <Card className="futuristic-card holo-shimmer border-none shadow-xl">
             <CardHeader>
-              <CardTitle className="text-white">Upgrade to Pro</CardTitle>
+              <CardTitle className="text-white neon-text">Upgrade to Pro</CardTitle>
               <CardDescription className="text-fuchsia-200">
                 Unlock quantum AI, unlimited trades, and more.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold">
+              <Button className="w-full holo-btn font-bold">
                 Upgrade Now
               </Button>
             </CardContent>
@@ -351,8 +367,8 @@ export default function AlphaAIStockX() {
           <AITicker />
         </section>
         {/* Hero Section */}
-        <section aria-label="Hero section" className="w-full max-w-5xl text-center mb-16 glassmorphism-card neon-glow">
-          <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
+        <section aria-label="Hero section" className="w-full max-w-5xl text-center mb-16 futuristic-card holo-shimmer animated-neon-border">
+          <h1 className="text-5xl md:text-6xl font-extrabold neon-text drop-shadow-lg animate-pulse">
             The Future of AI Stock Trading
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-slate-200 max-w-2xl mx-auto">
@@ -360,18 +376,18 @@ export default function AlphaAIStockX() {
             results.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Badge className="bg-violet-700 text-white text-lg px-4 py-2 neon-glow">Quantum AI</Badge>
-            <Badge className="bg-fuchsia-700 text-white text-lg px-4 py-2 neon-glow">47+ AI Agents</Badge>
-            <Badge className="bg-emerald-700 text-white text-lg px-4 py-2 neon-glow">Real-Time Insights</Badge>
-            <Badge className="bg-cyan-700 text-white text-lg px-4 py-2 neon-glow">Enterprise Security</Badge>
+            <Badge className="bg-violet-700 text-white text-lg px-4 py-2 neon-glow animated-neon-border">Quantum AI</Badge>
+            <Badge className="bg-fuchsia-700 text-white text-lg px-4 py-2 neon-glow animated-neon-border">47+ AI Agents</Badge>
+            <Badge className="bg-emerald-700 text-white text-lg px-4 py-2 neon-glow animated-neon-border">Real-Time Insights</Badge>
+            <Badge className="bg-cyan-700 text-white text-lg px-4 py-2 neon-glow animated-neon-border">Enterprise Security</Badge>
           </div>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="text-lg px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold shadow-lg hover:scale-105 transition-transform neon-glow">
+            <Button className="text-lg px-8 py-4 holo-btn font-bold">
               Get Started Free
             </Button>
             <Button
               variant="secondary"
-              className="text-lg px-8 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 font-bold shadow-lg hover:scale-105 transition-transform neon-glow"
+              className="text-lg px-8 py-4 holo-btn font-bold"
             >
               See Live Demo
             </Button>
@@ -382,11 +398,11 @@ export default function AlphaAIStockX() {
           {features.map((f, i) => (
             <Card
               key={i}
-              className="bg-gradient-to-br from-slate-900/80 to-violet-900/80 border-violet-800/40 shadow-xl hover:scale-105 transition-transform"
+              className="futuristic-card holo-shimmer animated-neon-border hover:scale-105 transition-transform"
             >
               <CardHeader className="flex flex-row items-center gap-4">
                 {f.icon}
-                <CardTitle className="text-white text-xl">{f.title}</CardTitle>
+                <CardTitle className="text-white neon-text text-xl">{f.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-slate-300 text-base">{f.desc}</CardDescription>
@@ -395,31 +411,49 @@ export default function AlphaAIStockX() {
           ))}
         </section>
         {/* 3D Stock Chart Section */}
-        <section aria-label="3D Stock Chart" className="w-full max-w-4xl mx-auto mb-16">
+        <section aria-label="3D Stock Chart" className="w-full max-w-4xl mx-auto mb-16 futuristic-card holo-shimmer animated-neon-border">
           <StockChart3D data={undefined} />
         </section>
         {/* AI Auto Trade Bot Section */}
-        <section aria-label="AI Auto Trade Bot" className="w-full max-w-4xl mx-auto mb-16">
+        <section aria-label="AI Auto Trade Bot" className="w-full max-w-4xl mx-auto mb-16 futuristic-card holo-shimmer animated-neon-border">
           <AutoTradeBot />
         </section>
         {/* Market Heatmap Section */}
-        <section aria-label="Market Heatmap" className="w-full max-w-4xl mx-auto mb-16">
+        <section aria-label="Market Heatmap" className="w-full max-w-4xl mx-auto mb-16 futuristic-card holo-shimmer animated-neon-border">
           <MarketHeatmap />
         </section>
+        {/* Next-Level AI Tools Section */}
+        <section aria-label="Next-Level AI Tools" className="w-full max-w-7xl mx-auto mb-20">
+          <h2 className="text-4xl font-extrabold neon-text text-center mb-8">Next-Level AI Stock Tools & Scanners</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {[
+              require("@/app/components/ai-tools/AIStockScreener").default,
+              require("@/app/components/ai-tools/AIPatternRecognition").default,
+              require("@/app/components/ai-tools/AINewsSentiment").default,
+              require("@/app/components/ai-tools/AIInsiderUnusual").default,
+              require("@/app/components/ai-tools/AIPortfolioDoctor").default,
+              require("@/app/components/ai-tools/AITradeCopilot").default,
+              require("@/app/components/ai-tools/AIBacktester").default,
+              require("@/app/components/ai-tools/AIGlobalHeatmap").default,
+              require("@/app/components/ai-tools/AIVoiceCommandCenter").default,
+              require("@/app/components/ai-tools/AIWhiteLabelBranding").default,
+            ].map((Tool, i) => <Tool key={i} />)}
+          </div>
+        </section>
         {/* Call to Action */}
-        <section aria-label="Call to action" className="w-full max-w-3xl text-center mt-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <section aria-label="Call to action" className="w-full max-w-3xl text-center mt-12 futuristic-card holo-shimmer animated-neon-border">
+          <h2 className="text-3xl md:text-4xl font-bold text-white neon-text mb-4">
             Ready to revolutionize your trading?
           </h2>
           <p className="text-lg text-slate-300 mb-8">
             Join 47,000+ traders using AlphaAIStockX to achieve financial freedom with the power of AI.
           </p>
-          <Button className="text-lg px-10 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold shadow-lg hover:scale-105 transition-transform">
+          <Button className="text-lg px-10 py-4 holo-btn font-bold">
             Sign Up Now
           </Button>
         </section>
         {/* Funny Domain Announcement & Mascot */}
-        <div className="w-full flex flex-col items-center justify-center py-6 bg-gradient-to-r from-violet-900/80 to-fuchsia-900/80 border-t border-b border-violet-800/40 mb-8">
+        <div className="w-full flex flex-col items-center justify-center py-6 bg-gradient-to-r from-violet-900/80 to-fuchsia-900/80 border-t border-b border-violet-800/40 mb-8 holo-shimmer">
           <div className="flex items-center gap-4">
             <span className="text-2xl md:text-3xl font-extrabold text-emerald-300 animate-bounce">
               🎉 Welcome to <span className="underline decoration-wavy decoration-fuchsia-400">AlphaAiStockX.com</span>!
@@ -434,7 +468,7 @@ export default function AlphaAIStockX() {
         <AIChat />
       </main>
       {/* IONOS Hosting Badge Footer */}
-      <footer className="w-full flex justify-center items-center py-4 bg-black/60 border-t border-violet-900/40" aria-label="IONOS Hosting Badge Footer">
+      <footer className="w-full flex justify-center items-center py-4 bg-black/60 border-t border-violet-900/40 holo-shimmer" aria-label="IONOS Hosting Badge Footer">
         <a
           href="https://www.ionos.com/"
           target="_blank"
