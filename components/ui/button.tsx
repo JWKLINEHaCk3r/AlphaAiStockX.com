@@ -64,8 +64,11 @@ export default function AIWhiteLabelBranding() {
         Easily customize name, color, and logo for your own brand or clients.
       </p>
       <div className="flex flex-col gap-2 mb-4">
-        <label className="text-slate-200">Platform Name</label>
+        <label className="text-slate-200" htmlFor="platform-name">
+          Platform Name
+        </label>
         <input
+          id="platform-name"
           className="px-4 py-2 rounded bg-black/60 border border-violet-700 text-white"
           value={brand.name}
           onChange={e => setBrand(b => ({ ...b, name: e.target.value }))}

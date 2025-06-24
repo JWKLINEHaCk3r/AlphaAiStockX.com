@@ -4,7 +4,14 @@ import { useState } from 'react';
 
 export default function AITradeCopilot() {
   const [loading, setLoading] = useState(false);
-  const [suggestion, setSuggestion] = useState<any>(null);
+  type Suggestion = {
+    symbol: string;
+    action: string;
+    reason: string;
+    simulation: string;
+  } | null;
+
+  const [suggestion, setSuggestion] = useState<Suggestion>(null);
 
   // Placeholder: Replace with real AI API call
   const getSuggestion = () => {

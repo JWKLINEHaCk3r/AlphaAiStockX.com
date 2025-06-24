@@ -2,9 +2,16 @@
 
 import { useState } from 'react';
 
+type Pattern = {
+  type: string;
+  symbol: string;
+  confidence: number;
+  note: string;
+};
+
 export default function AIPatternRecognition() {
   const [loading, setLoading] = useState(false);
-  const [patterns, setPatterns] = useState<any[]>([]);
+  const [patterns, setPatterns] = useState<Pattern[]>([]);
 
   // Placeholder: Replace with real AI API call
   const detectPatterns = () => {

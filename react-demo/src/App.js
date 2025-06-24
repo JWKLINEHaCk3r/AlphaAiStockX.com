@@ -11,7 +11,16 @@ const App = () => {
         <li>✅ AI-Powered Predictions</li>
         <li>✅ Works on Desktop and Mobile</li>
       </ul>
-      <p style={{ marginTop: '2rem' }}>Visit the original repo on <a href="https://github.com/JWKLINEHaCk3r/AlphaAIStockX" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+      <p style={{ marginTop: '2rem' }}>
+        Visit the original repo on{' '}
+        <a
+          href="https://github.com/JWKLINEHaCk3r/AlphaAIStockX"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </p>
     </div>
   );
 };

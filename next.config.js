@@ -10,14 +10,14 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
   images: {
-    domains: ["alphaaistockx.com", "cdn.alphaaistockx.com"],
-    formats: ["image/webp", "image/avif"],
+    domains: ['alphaaistockx.com', 'cdn.alphaaistockx.com'],
+    formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    unoptimized: true
+    unoptimized: true,
   },
   async headers() {
     return [
@@ -36,8 +36,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
       },
     ];
   },
@@ -72,7 +72,7 @@ const nextConfig = {
           },
         ],
       },
-    ]
+    ];
   },
 };
 

@@ -25,7 +25,7 @@ export default function AIVoiceCommandCenter() {
         (window.SpeechRecognition || window.webkitSpeechRecognition)
       ) {
         const SpeechRecognition =
-          (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+          (window as unknown).SpeechRecognition || (window as any).webkitSpeechRecognition;
         recognitionRef.current = new SpeechRecognition();
         recognitionRef.current.continuous = false;
         recognitionRef.current.interimResults = false;

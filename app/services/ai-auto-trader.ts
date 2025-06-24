@@ -129,3 +129,13 @@ export class AIAutoTrader {
     return this.portfolio;
   }
 }
+
+export async function getIEXCloudPrice(symbol: string): Promise<number> {
+  if (!IEX_CLOUD_API_KEY) throw new Error('Missing IEX_CLOUD_API_KEY');
+  const url = `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX_CLOUD_API_KEY}`;
+  const response = await axios.get(url);
+  if (typeof response.data.latestPrice !== 'number') {
+    throw new Error('Invalid response from IEX Cloud');
+  }
+  return response.data.latestPrice;
+}

@@ -4,7 +4,13 @@ import { useState } from 'react';
 
 export default function AIInsiderUnusual() {
   const [loading, setLoading] = useState(false);
-  const [alerts, setAlerts] = useState<any[]>([]);
+  type Alert = {
+    symbol: string;
+    type: string;
+    amount: string;
+    note: string;
+  };
+  const [alerts, setAlerts] = useState<Alert[]>([]);
 
   // Placeholder: Replace with real AI API call
   const scanUnusual = () => {

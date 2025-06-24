@@ -2,9 +2,18 @@
 
 import { useState } from 'react';
 
+type BacktestResults = {
+  strategy: string;
+  period: string;
+  trades: number;
+  winRate: string;
+  totalReturn: string;
+  aiNote: string;
+};
+
 export default function AIBacktester() {
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<BacktestResults | null>(null);
 
   // Placeholder: Replace with real AI API call
   const runBacktest = () => {
