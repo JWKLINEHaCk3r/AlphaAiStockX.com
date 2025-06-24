@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   TrendingUp,
   TrendingDown,
@@ -17,13 +17,13 @@ import {
   Eye,
   Target,
   BarChart3,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
   const [portfolio] = useState([
     {
-      symbol: "AAPL",
-      name: "Apple Inc.",
+      symbol: 'AAPL',
+      name: 'Apple Inc.',
       shares: 50,
       avgPrice: 150.25,
       currentPrice: 175.43,
@@ -32,8 +32,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       totalReturn: 1259,
     },
     {
-      symbol: "MSFT",
-      name: "Microsoft Corporation",
+      symbol: 'MSFT',
+      name: 'Microsoft Corporation',
       shares: 25,
       avgPrice: 320.5,
       currentPrice: 378.85,
@@ -42,8 +42,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       totalReturn: 1458.75,
     },
     {
-      symbol: "GOOGL",
-      name: "Alphabet Inc.",
+      symbol: 'GOOGL',
+      name: 'Alphabet Inc.',
       shares: 30,
       avgPrice: 125.75,
       currentPrice: 138.21,
@@ -51,43 +51,43 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       dayChange: 4.56,
       totalReturn: 373.8,
     },
-  ])
+  ]);
 
   const [watchlist] = useState([
-    { symbol: "TSLA", name: "Tesla Inc.", price: 248.5, change: -3.21 },
-    { symbol: "NVDA", name: "NVIDIA Corporation", price: 875.28, change: 15.67 },
-    { symbol: "AMZN", name: "Amazon.com Inc.", price: 155.89, change: 1.45 },
-    { symbol: "META", name: "Meta Platforms Inc.", price: 485.32, change: 2.87 },
-  ])
+    { symbol: 'TSLA', name: 'Tesla Inc.', price: 248.5, change: -3.21 },
+    { symbol: 'NVDA', name: 'NVIDIA Corporation', price: 875.28, change: 15.67 },
+    { symbol: 'AMZN', name: 'Amazon.com Inc.', price: 155.89, change: 1.45 },
+    { symbol: 'META', name: 'Meta Platforms Inc.', price: 485.32, change: 2.87 },
+  ]);
 
   const [trending] = useState([
-    { symbol: "PLTR", name: "Palantir Technologies", price: 25.67, change: 8.45 },
-    { symbol: "RIVN", name: "Rivian Automotive", price: 12.34, change: -5.23 },
-    { symbol: "COIN", name: "Coinbase Global", price: 89.45, change: 12.67 },
-    { symbol: "HOOD", name: "Robinhood Markets", price: 15.78, change: 6.89 },
-  ])
+    { symbol: 'PLTR', name: 'Palantir Technologies', price: 25.67, change: 8.45 },
+    { symbol: 'RIVN', name: 'Rivian Automotive', price: 12.34, change: -5.23 },
+    { symbol: 'COIN', name: 'Coinbase Global', price: 89.45, change: 12.67 },
+    { symbol: 'HOOD', name: 'Robinhood Markets', price: 15.78, change: 6.89 },
+  ]);
 
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedStock, setSelectedStock] = useState(null)
-  const [orderType, setOrderType] = useState("buy")
-  const [orderAmount, setOrderAmount] = useState("")
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedStock, setSelectedStock] = useState(null);
+  const [orderType, setOrderType] = useState('buy');
+  const [orderAmount, setOrderAmount] = useState('');
 
-  const totalPortfolioValue = portfolio.reduce((sum, stock) => sum + stock.value, 0)
-  const totalReturn = portfolio.reduce((sum, stock) => sum + stock.totalReturn, 0)
-  const totalReturnPercent = ((totalReturn / (totalPortfolioValue - totalReturn)) * 100).toFixed(2)
+  const totalPortfolioValue = portfolio.reduce((sum, stock) => sum + stock.value, 0);
+  const totalReturn = portfolio.reduce((sum, stock) => sum + stock.totalReturn, 0);
+  const totalReturnPercent = ((totalReturn / (totalPortfolioValue - totalReturn)) * 100).toFixed(2);
 
-  const handleStockSelect = (stock) => {
-    setSelectedStock(stock)
-  }
+  const handleStockSelect = stock => {
+    setSelectedStock(stock);
+  };
 
   const handleOrder = () => {
     if (selectedStock && orderAmount) {
       // Simulate order execution
-      console.log(`${orderType} ${orderAmount} shares of ${selectedStock.symbol}`)
-      setOrderAmount("")
-      setSelectedStock(null)
+      console.log(`${orderType} ${orderAmount} shares of ${selectedStock.symbol}`);
+      setOrderAmount('');
+      setSelectedStock(null);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -98,7 +98,9 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Portfolio Value</p>
-                <p className="text-2xl font-bold text-green-400">${totalPortfolioValue.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-green-400">
+                  ${totalPortfolioValue.toLocaleString()}
+                </p>
               </div>
               <PieChart className="h-8 w-8 text-green-400" />
             </div>
@@ -134,7 +136,9 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Buying Power</p>
-                <p className="text-2xl font-bold text-yellow-400">${user.balance.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-yellow-400">
+                  ${user.balance.toLocaleString()}
+                </p>
               </div>
               <DollarSign className="h-8 w-8 text-yellow-400" />
             </div>
@@ -169,7 +173,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {portfolio.map((stock) => (
+                {portfolio.map(stock => (
                   <div
                     key={stock.symbol}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -189,12 +193,16 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-white">${stock.value.toLocaleString()}</p>
-                      <p className={`text-sm ${stock.dayChange > 0 ? "text-green-400" : "text-red-400"}`}>
-                        {stock.dayChange > 0 ? "+" : ""}
+                      <p
+                        className={`text-sm ${stock.dayChange > 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {stock.dayChange > 0 ? '+' : ''}
                         {stock.dayChange}%
                       </p>
-                      <p className={`text-xs ${stock.totalReturn > 0 ? "text-green-400" : "text-red-400"}`}>
-                        {stock.totalReturn > 0 ? "+" : ""}${stock.totalReturn.toLocaleString()}
+                      <p
+                        className={`text-xs ${stock.totalReturn > 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {stock.totalReturn > 0 ? '+' : ''}${stock.totalReturn.toLocaleString()}
                       </p>
                     </div>
                   </div>
@@ -216,7 +224,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                   <Input
                     placeholder="Search stocks..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                     className="pl-10 bg-black/20 border-purple-500/30 text-white"
                   />
                 </div>
@@ -229,11 +237,13 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                         <p className="text-sm text-gray-400">{selectedStock.name}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium text-white">${selectedStock.price || selectedStock.currentPrice}</p>
+                        <p className="font-medium text-white">
+                          ${selectedStock.price || selectedStock.currentPrice}
+                        </p>
                         <p
-                          className={`text-sm ${(selectedStock.change || selectedStock.dayChange) > 0 ? "text-green-400" : "text-red-400"}`}
+                          className={`text-sm ${(selectedStock.change || selectedStock.dayChange) > 0 ? 'text-green-400' : 'text-red-400'}`}
                         >
-                          {(selectedStock.change || selectedStock.dayChange) > 0 ? "+" : ""}
+                          {(selectedStock.change || selectedStock.dayChange) > 0 ? '+' : ''}
                           {selectedStock.change || selectedStock.dayChange}%
                         </p>
                       </div>
@@ -241,19 +251,23 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
 
                     <div className="flex gap-2 mb-4">
                       <Button
-                        variant={orderType === "buy" ? "default" : "outline"}
-                        onClick={() => setOrderType("buy")}
+                        variant={orderType === 'buy' ? 'default' : 'outline'}
+                        onClick={() => setOrderType('buy')}
                         className={
-                          orderType === "buy" ? "bg-green-500 hover:bg-green-600" : "border-green-500/30 text-green-400"
+                          orderType === 'buy'
+                            ? 'bg-green-500 hover:bg-green-600'
+                            : 'border-green-500/30 text-green-400'
                         }
                       >
                         Buy
                       </Button>
                       <Button
-                        variant={orderType === "sell" ? "default" : "outline"}
-                        onClick={() => setOrderType("sell")}
+                        variant={orderType === 'sell' ? 'default' : 'outline'}
+                        onClick={() => setOrderType('sell')}
                         className={
-                          orderType === "sell" ? "bg-red-500 hover:bg-red-600" : "border-red-500/30 text-red-400"
+                          orderType === 'sell'
+                            ? 'bg-red-500 hover:bg-red-600'
+                            : 'border-red-500/30 text-red-400'
                         }
                       >
                         Sell
@@ -265,12 +279,14 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                         type="number"
                         placeholder="Number of shares"
                         value={orderAmount}
-                        onChange={(e) => setOrderAmount(e.target.value)}
+                        onChange={e => setOrderAmount(e.target.value)}
                         className="bg-black/20 border-purple-500/30 text-white"
                       />
                       <p className="text-sm text-gray-400">
                         Estimated cost: $
-                        {((selectedStock.price || selectedStock.currentPrice) * (orderAmount || 0)).toLocaleString()}
+                        {(
+                          (selectedStock.price || selectedStock.currentPrice) * (orderAmount || 0)
+                        ).toLocaleString()}
                       </p>
                     </div>
 
@@ -278,12 +294,12 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                       onClick={handleOrder}
                       disabled={!orderAmount}
                       className={`w-full ${
-                        orderType === "buy"
-                          ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
-                          : "bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700"
+                        orderType === 'buy'
+                          ? 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700'
+                          : 'bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700'
                       }`}
                     >
-                      {orderType === "buy" ? "Buy" : "Sell"} {orderAmount || 0} shares
+                      {orderType === 'buy' ? 'Buy' : 'Sell'} {orderAmount || 0} shares
                     </Button>
                   </div>
                 )}
@@ -296,7 +312,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {trending.map((stock) => (
+                  {trending.map(stock => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -308,8 +324,10 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                       </div>
                       <div className="text-right">
                         <p className="font-medium text-white">${stock.price}</p>
-                        <p className={`text-sm ${stock.change > 0 ? "text-green-400" : "text-red-400"}`}>
-                          {stock.change > 0 ? "+" : ""}
+                        <p
+                          className={`text-sm ${stock.change > 0 ? 'text-green-400' : 'text-red-400'}`}
+                        >
+                          {stock.change > 0 ? '+' : ''}
                           {stock.change}%
                         </p>
                       </div>
@@ -334,7 +352,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {watchlist.map((stock) => (
+                {watchlist.map(stock => (
                   <div
                     key={stock.symbol}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -351,8 +369,10 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-white">${stock.price}</p>
-                      <p className={`text-sm ${stock.change > 0 ? "text-green-400" : "text-red-400"}`}>
-                        {stock.change > 0 ? "+" : ""}
+                      <p
+                        className={`text-sm ${stock.change > 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {stock.change > 0 ? '+' : ''}
                         {stock.change}%
                       </p>
                     </div>
@@ -371,7 +391,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {trending.map((stock) => (
+                  {trending.map(stock => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -384,14 +404,18 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                       <div className="text-right">
                         <p className="font-medium text-white">${stock.price}</p>
                         <Badge
-                          className={stock.change > 0 ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}
+                          className={
+                            stock.change > 0
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-red-500/20 text-red-400'
+                          }
                         >
                           {stock.change > 0 ? (
                             <TrendingUp className="h-3 w-3 mr-1" />
                           ) : (
                             <TrendingDown className="h-3 w-3 mr-1" />
                           )}
-                          {stock.change > 0 ? "+" : ""}
+                          {stock.change > 0 ? '+' : ''}
                           {stock.change}%
                         </Badge>
                       </div>
@@ -407,7 +431,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {portfolio.slice(0, 3).map((stock) => (
+                  {portfolio.slice(0, 3).map(stock => (
                     <div
                       key={stock.symbol}
                       className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"
@@ -421,7 +445,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                       </div>
                       <p className="text-sm text-gray-400 mb-2">AI Confidence: 87%</p>
                       <p className="text-xs text-gray-500">
-                        Strong technical indicators and positive earnings outlook suggest continued upward momentum.
+                        Strong technical indicators and positive earnings outlook suggest continued
+                        upward momentum.
                       </p>
                     </div>
                   ))}
@@ -432,5 +457,5 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

@@ -1,40 +1,43 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
 export default function PortfolioOptimizer() {
-  const [portfolio, setPortfolio] = useState([])
-  const [newStock, setNewStock] = useState("")
-  const [newWeight, setNewWeight] = useState("")
-  const [optimization, setOptimization] = useState(null)
+  const [portfolio, setPortfolio] = useState([]);
+  const [newStock, setNewStock] = useState('');
+  const [newWeight, setNewWeight] = useState('');
+  const [optimization, setOptimization] = useState(null);
 
   useEffect(() => {
     // Initialize with sample portfolio
     setPortfolio([
-      { symbol: "AAPL", weight: 25, currentPrice: 175.43, expectedReturn: 12.5, risk: 18.2 },
-      { symbol: "MSFT", weight: 20, currentPrice: 378.85, expectedReturn: 11.8, risk: 16.5 },
-      { symbol: "GOOGL", weight: 15, currentPrice: 138.21, expectedReturn: 13.2, risk: 22.1 },
-      { symbol: "TSLA", weight: 10, currentPrice: 248.5, expectedReturn: 15.8, risk: 35.4 },
-      { symbol: "NVDA", weight: 15, currentPrice: 875.28, expectedReturn: 18.5, risk: 28.9 },
-      { symbol: "AMZN", weight: 15, currentPrice: 155.89, expectedReturn: 14.2, risk: 24.7 },
-    ])
-  }, [])
+      { symbol: 'AAPL', weight: 25, currentPrice: 175.43, expectedReturn: 12.5, risk: 18.2 },
+      { symbol: 'MSFT', weight: 20, currentPrice: 378.85, expectedReturn: 11.8, risk: 16.5 },
+      { symbol: 'GOOGL', weight: 15, currentPrice: 138.21, expectedReturn: 13.2, risk: 22.1 },
+      { symbol: 'TSLA', weight: 10, currentPrice: 248.5, expectedReturn: 15.8, risk: 35.4 },
+      { symbol: 'NVDA', weight: 15, currentPrice: 875.28, expectedReturn: 18.5, risk: 28.9 },
+      { symbol: 'AMZN', weight: 15, currentPrice: 155.89, expectedReturn: 14.2, risk: 24.7 },
+    ]);
+  }, []);
 
   useEffect(() => {
     if (portfolio.length > 0) {
       // Calculate portfolio optimization
-      const totalWeight = portfolio.reduce((sum, stock) => sum + stock.weight, 0)
-      const weightedReturn = portfolio.reduce((sum, stock) => sum + (stock.expectedReturn * stock.weight) / 100, 0)
+      const totalWeight = portfolio.reduce((sum, stock) => sum + stock.weight, 0);
+      const weightedReturn = portfolio.reduce(
+        (sum, stock) => sum + (stock.expectedReturn * stock.weight) / 100,
+        0
+      );
       const portfolioRisk = Math.sqrt(
-        portfolio.reduce((sum, stock) => sum + Math.pow((stock.risk * stock.weight) / 100, 2), 0),
-      )
-      const sharpeRatio = weightedReturn / portfolioRisk
+        portfolio.reduce((sum, stock) => sum + Math.pow((stock.risk * stock.weight) / 100, 2), 0)
+      );
+      const sharpeRatio = weightedReturn / portfolioRisk;
 
       setOptimization({
         totalWeight,
@@ -43,17 +46,32 @@ export default function PortfolioOptimizer() {
         sharpeRatio,
         diversificationScore: Math.min(portfolio.length * 15, 100),
         recommendations: [
-          { action: "Reduce", symbol: "TSLA", reason: "High volatility", impact: "Lower risk by 8%" },
-          { action: "Increase", symbol: "MSFT", reason: "Stable growth", impact: "Improve Sharpe ratio" },
-          { action: "Add", symbol: "VTI", reason: "Diversification", impact: "Reduce concentration risk" },
+          {
+            action: 'Reduce',
+            symbol: 'TSLA',
+            reason: 'High volatility',
+            impact: 'Lower risk by 8%',
+          },
+          {
+            action: 'Increase',
+            symbol: 'MSFT',
+            reason: 'Stable growth',
+            impact: 'Improve Sharpe ratio',
+          },
+          {
+            action: 'Add',
+            symbol: 'VTI',
+            reason: 'Diversification',
+            impact: 'Reduce concentration risk',
+          },
         ],
-      })
+      });
     }
-  }, [portfolio])
+  }, [portfolio]);
 
   const addStock = () => {
     if (newStock && newWeight) {
-      const weight = Number.parseFloat(newWeight)
+      const weight = Number.parseFloat(newWeight);
       if (weight > 0 && weight <= 100) {
         setPortfolio([
           ...portfolio,
@@ -64,25 +82,25 @@ export default function PortfolioOptimizer() {
             expectedReturn: 8 + Math.random() * 15,
             risk: 10 + Math.random() * 30,
           },
-        ])
-        setNewStock("")
-        setNewWeight("")
+        ]);
+        setNewStock('');
+        setNewWeight('');
       }
     }
-  }
+  };
 
-  const removeStock = (index) => {
-    setPortfolio(portfolio.filter((_, i) => i !== index))
-  }
+  const removeStock = index => {
+    setPortfolio(portfolio.filter((_, i) => i !== index));
+  };
 
   const optimizePortfolio = () => {
     // Simulate AI optimization
-    const optimized = portfolio.map((stock) => ({
+    const optimized = portfolio.map(stock => ({
       ...stock,
       weight: Math.max(5, Math.min(30, stock.weight + (Math.random() - 0.5) * 10)),
-    }))
-    setPortfolio(optimized)
-  }
+    }));
+    setPortfolio(optimized);
+  };
 
   return (
     <div className="space-y-6">
@@ -93,7 +111,9 @@ export default function PortfolioOptimizer() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Expected Return</p>
-                <p className="text-2xl font-bold text-green-400">{optimization?.expectedReturn.toFixed(1)}%</p>
+                <p className="text-2xl font-bold text-green-400">
+                  {optimization?.expectedReturn.toFixed(1)}%
+                </p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-400" />
             </div>
@@ -117,7 +137,9 @@ export default function PortfolioOptimizer() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Sharpe Ratio</p>
-                <p className="text-2xl font-bold text-blue-400">{optimization?.sharpeRatio.toFixed(2)}</p>
+                <p className="text-2xl font-bold text-blue-400">
+                  {optimization?.sharpeRatio.toFixed(2)}
+                </p>
               </div>
               <PieChart className="h-8 w-8 text-blue-400" />
             </div>
@@ -129,7 +151,9 @@ export default function PortfolioOptimizer() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Diversification</p>
-                <p className="text-2xl font-bold text-purple-400">{optimization?.diversificationScore}%</p>
+                <p className="text-2xl font-bold text-purple-400">
+                  {optimization?.diversificationScore}%
+                </p>
               </div>
               <DollarSign className="h-8 w-8 text-purple-400" />
             </div>
@@ -143,7 +167,10 @@ export default function PortfolioOptimizer() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-white">Current Portfolio</CardTitle>
-              <Button onClick={optimizePortfolio} className="bg-gradient-to-r from-purple-500 to-pink-500">
+              <Button
+                onClick={optimizePortfolio}
+                className="bg-gradient-to-r from-purple-500 to-pink-500"
+              >
                 <Zap className="h-4 w-4 mr-2" />
                 AI Optimize
               </Button>
@@ -190,14 +217,14 @@ export default function PortfolioOptimizer() {
                 <Input
                   placeholder="Stock Symbol"
                   value={newStock}
-                  onChange={(e) => setNewStock(e.target.value)}
+                  onChange={e => setNewStock(e.target.value)}
                   className="bg-black/20 border-gray-600 text-white"
                 />
                 <Input
                   placeholder="Weight %"
                   type="number"
                   value={newWeight}
-                  onChange={(e) => setNewWeight(e.target.value)}
+                  onChange={e => setNewWeight(e.target.value)}
                   className="bg-black/20 border-gray-600 text-white"
                 />
                 <Button onClick={addStock} className="bg-purple-500 hover:bg-purple-600">
@@ -224,7 +251,13 @@ export default function PortfolioOptimizer() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <Badge
-                    variant={rec.action === "Add" ? "default" : rec.action === "Increase" ? "secondary" : "destructive"}
+                    variant={
+                      rec.action === 'Add'
+                        ? 'default'
+                        : rec.action === 'Increase'
+                          ? 'secondary'
+                          : 'destructive'
+                    }
                   >
                     {rec.action} {rec.symbol}
                   </Badge>
@@ -258,5 +291,5 @@ export default function PortfolioOptimizer() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

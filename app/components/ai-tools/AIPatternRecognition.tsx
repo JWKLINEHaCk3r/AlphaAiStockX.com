@@ -1,30 +1,51 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 
 export default function AIPatternRecognition() {
-  const [loading, setLoading] = useState(false)
-  const [patterns, setPatterns] = useState<any[]>([])
+  const [loading, setLoading] = useState(false);
+  const [patterns, setPatterns] = useState<any[]>([]);
 
   // Placeholder: Replace with real AI API call
   const detectPatterns = () => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
       setPatterns([
-        { type: "Cup & Handle", symbol: "MSFT", confidence: 97, note: "AI: Bullish continuation likely." },
-        { type: "Head & Shoulders", symbol: "AMZN", confidence: 92, note: "AI: Possible reversal forming." },
-        { type: "Breakout", symbol: "GOOGL", confidence: 95, note: "AI: High volume breakout detected." },
-      ])
-      setLoading(false)
-    }, 1200)
-  }
+        {
+          type: 'Cup & Handle',
+          symbol: 'MSFT',
+          confidence: 97,
+          note: 'AI: Bullish continuation likely.',
+        },
+        {
+          type: 'Head & Shoulders',
+          symbol: 'AMZN',
+          confidence: 92,
+          note: 'AI: Possible reversal forming.',
+        },
+        {
+          type: 'Breakout',
+          symbol: 'GOOGL',
+          confidence: 95,
+          note: 'AI: High volume breakout detected.',
+        },
+      ]);
+      setLoading(false);
+    }, 1200);
+  };
 
   return (
     <div className="futuristic-card holo-shimmer p-6 mb-8">
       <h2 className="text-2xl font-bold neon-text mb-2">AI Pattern Recognition</h2>
-      <p className="text-slate-300 mb-4">Detects advanced chart patterns and anomalies in real time using deep learning.</p>
-      <button className="holo-btn px-6 py-2 font-bold mb-4" onClick={detectPatterns} disabled={loading}>
-        {loading ? "Analyzing..." : "Detect Patterns"}
+      <p className="text-slate-300 mb-4">
+        Detects advanced chart patterns and anomalies in real time using deep learning.
+      </p>
+      <button
+        className="holo-btn px-6 py-2 font-bold mb-4"
+        onClick={detectPatterns}
+        disabled={loading}
+      >
+        {loading ? 'Analyzing...' : 'Detect Patterns'}
       </button>
       {patterns.length > 0 && (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -39,5 +60,5 @@ export default function AIPatternRecognition() {
         </div>
       )}
     </div>
-  )
+  );
 }

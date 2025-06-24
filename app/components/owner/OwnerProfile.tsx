@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Crown,
   Infinity,
@@ -20,7 +20,7 @@ import {
   Target,
   Award,
   Gem,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function OwnerProfile({ user, onSwitchToAdmin }) {
   const [activeFeatures, setActiveFeatures] = useState({
@@ -32,66 +32,66 @@ export default function OwnerProfile({ user, onSwitchToAdmin }) {
     customStrategies: true,
     whiteLabel: true,
     apiAccess: true,
-  })
+  });
 
   const ownerFeatures = [
     {
       icon: Infinity,
-      title: "Unlimited Everything",
-      description: "No limits on trades, signals, or features",
-      status: "active",
-      color: "text-yellow-400",
+      title: 'Unlimited Everything',
+      description: 'No limits on trades, signals, or features',
+      status: 'active',
+      color: 'text-yellow-400',
     },
     {
       icon: Zap,
-      title: "Lightning Speed (1ms)",
-      description: "Fastest execution speeds available",
-      status: "active",
-      color: "text-blue-400",
+      title: 'Lightning Speed (1ms)',
+      description: 'Fastest execution speeds available',
+      status: 'active',
+      color: 'text-blue-400',
     },
     {
       icon: Brain,
-      title: "AI Autopilot",
-      description: "Fully automated AI trading with custom models",
-      status: "active",
-      color: "text-purple-400",
+      title: 'AI Autopilot',
+      description: 'Fully automated AI trading with custom models',
+      status: 'active',
+      color: 'text-purple-400',
     },
     {
       icon: Bot,
-      title: "Custom Trading Bots",
-      description: "Build and deploy unlimited custom bots",
-      status: "active",
-      color: "text-green-400",
+      title: 'Custom Trading Bots',
+      description: 'Build and deploy unlimited custom bots',
+      status: 'active',
+      color: 'text-green-400',
     },
     {
       icon: Shield,
-      title: "Priority Support",
-      description: "24/7 dedicated support team",
-      status: "active",
-      color: "text-red-400",
+      title: 'Priority Support',
+      description: '24/7 dedicated support team',
+      status: 'active',
+      color: 'text-red-400',
     },
     {
       icon: Star,
-      title: "White Label Access",
-      description: "Brand the platform as your own",
-      status: "active",
-      color: "text-orange-400",
+      title: 'White Label Access',
+      description: 'Brand the platform as your own',
+      status: 'active',
+      color: 'text-orange-400',
     },
     {
       icon: Target,
-      title: "Advanced Analytics",
-      description: "Deep insights and custom reporting",
-      status: "active",
-      color: "text-cyan-400",
+      title: 'Advanced Analytics',
+      description: 'Deep insights and custom reporting',
+      status: 'active',
+      color: 'text-cyan-400',
     },
     {
       icon: Gem,
-      title: "API Access",
-      description: "Full API access for integrations",
-      status: "active",
-      color: "text-pink-400",
+      title: 'API Access',
+      description: 'Full API access for integrations',
+      status: 'active',
+      color: 'text-pink-400',
     },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -121,7 +121,9 @@ export default function OwnerProfile({ user, onSwitchToAdmin }) {
                   </Badge>
                 </div>
                 <p className="text-gray-300">Supreme Alpha Wolf • Platform Owner</p>
-                <p className="text-sm text-yellow-400 font-semibold">Free Forever • All Features Unlocked</p>
+                <p className="text-sm text-yellow-400 font-semibold">
+                  Free Forever • All Features Unlocked
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -196,7 +198,7 @@ export default function OwnerProfile({ user, onSwitchToAdmin }) {
         <TabsContent value="features">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {ownerFeatures.map((feature, index) => {
-              const IconComponent = feature.icon
+              const IconComponent = feature.icon;
               return (
                 <Card
                   key={index}
@@ -220,7 +222,7 @@ export default function OwnerProfile({ user, onSwitchToAdmin }) {
                     </div>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </TabsContent>
@@ -337,5 +339,5 @@ export default function OwnerProfile({ user, onSwitchToAdmin }) {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

@@ -1,26 +1,26 @@
 // Advanced AI Brain Service - Processes all data for intelligent trading decisions
-import { dataAggregationService } from "./data-aggregation-service"
-import { marketDataService } from "./market-data-service"
+import { dataAggregationService } from './data-aggregation-service';
+import { marketDataService } from './market-data-service';
 
 export class AIBrainService {
-  private static instance: AIBrainService
-  private neuralNetwork: Map<string, any> = new Map()
-  private learningHistory: any[] = []
-  private decisionTree: Map<string, any> = new Map()
-  private confidenceThreshold = 0.75
+  private static instance: AIBrainService;
+  private neuralNetwork: Map<string, any> = new Map();
+  private learningHistory: any[] = [];
+  private decisionTree: Map<string, any> = new Map();
+  private confidenceThreshold = 0.75;
 
   static getInstance(): AIBrainService {
     if (!AIBrainService.instance) {
-      AIBrainService.instance = new AIBrainService()
+      AIBrainService.instance = new AIBrainService();
     }
-    return AIBrainService.instance
+    return AIBrainService.instance;
   }
 
   async initialize() {
-    await dataAggregationService.initializeDataSources()
-    this.buildNeuralNetwork()
-    this.initializeDecisionTree()
-    this.startContinuousLearning()
+    await dataAggregationService.initializeDataSources();
+    this.buildNeuralNetwork();
+    this.initializeDecisionTree();
+    this.startContinuousLearning();
   }
 
   // Advanced Neural Network for Trading Decisions
@@ -33,25 +33,25 @@ export class AIBrainService {
       hidden1: {
         nodes: 30,
         weights: this.generateRandomWeights(30),
-        activation: "relu",
+        activation: 'relu',
       },
       hidden2: {
         nodes: 20,
         weights: this.generateRandomWeights(20),
-        activation: "relu",
+        activation: 'relu',
       },
       output: {
         nodes: 3, // BUY, SELL, HOLD
         weights: this.generateRandomWeights(3),
-        activation: "softmax",
+        activation: 'softmax',
       },
-    }
+    };
 
-    this.neuralNetwork.set("trading_network", layers)
+    this.neuralNetwork.set('trading_network', layers);
   }
 
   private generateRandomWeights(size: number) {
-    return Array.from({ length: size }, () => Math.random() * 2 - 1)
+    return Array.from({ length: size }, () => Math.random() * 2 - 1);
   }
 
   private initializeDecisionTree() {
@@ -61,19 +61,19 @@ export class AIBrainService {
           sentiment_threshold: 0.7,
           volume_threshold: 1.2,
           momentum_threshold: 0.6,
-          action: "AGGRESSIVE_BUY",
+          action: 'AGGRESSIVE_BUY',
         },
         bearish: {
           sentiment_threshold: 0.3,
           volume_threshold: 0.8,
           momentum_threshold: 0.4,
-          action: "DEFENSIVE_SELL",
+          action: 'DEFENSIVE_SELL',
         },
         neutral: {
           sentiment_threshold: 0.5,
           volume_threshold: 1.0,
           momentum_threshold: 0.5,
-          action: "SELECTIVE_TRADE",
+          action: 'SELECTIVE_TRADE',
         },
       },
       risk_management: {
@@ -98,38 +98,45 @@ export class AIBrainService {
           position_multiplier: 0.8,
         },
       },
-    }
+    };
 
     Object.entries(decisionRules).forEach(([key, rules]) => {
-      this.decisionTree.set(key, rules)
-    })
+      this.decisionTree.set(key, rules);
+    });
   }
 
   // Comprehensive Analysis Engine
   async analyzeAndDecide(symbol: string) {
     try {
       // Gather all available data
-      const comprehensiveData = await this.gatherComprehensiveData(symbol)
+      const comprehensiveData = await this.gatherComprehensiveData(symbol);
 
       // Process through neural network
-      const neuralPrediction = await this.processNeuralNetwork(comprehensiveData)
+      const neuralPrediction = await this.processNeuralNetwork(comprehensiveData);
 
       // Apply decision tree logic
-      const decisionTreeResult = await this.applyDecisionTree(comprehensiveData)
+      const decisionTreeResult = await this.applyDecisionTree(comprehensiveData);
 
       // Combine multiple AI approaches
-      const combinedDecision = await this.combineDecisions(neuralPrediction, decisionTreeResult, comprehensiveData)
+      const combinedDecision = await this.combineDecisions(
+        neuralPrediction,
+        decisionTreeResult,
+        comprehensiveData
+      );
 
       // Generate final recommendation
-      const finalRecommendation = await this.generateFinalRecommendation(combinedDecision, comprehensiveData)
+      const finalRecommendation = await this.generateFinalRecommendation(
+        combinedDecision,
+        comprehensiveData
+      );
 
       // Learn from decision
-      this.learnFromDecision(comprehensiveData, finalRecommendation)
+      this.learnFromDecision(comprehensiveData, finalRecommendation);
 
-      return finalRecommendation
+      return finalRecommendation;
     } catch (error) {
-      console.error("AI Brain analysis error:", error)
-      return this.generateFallbackRecommendation(symbol)
+      console.error('AI Brain analysis error:', error);
+      return this.generateFallbackRecommendation(symbol);
     }
   }
 
@@ -139,7 +146,7 @@ export class AIBrainService {
       dataAggregationService.getComprehensiveAnalysis(symbol),
       dataAggregationService.getMarketOverview(),
       marketDataService.calculateTradingSignals(symbol, {}),
-    ])
+    ]);
 
     return {
       symbol,
@@ -156,11 +163,11 @@ export class AIBrainService {
         marketOverview,
         tradingSignals,
       }),
-    }
+    };
   }
 
   private extractFeatures(data: any) {
-    const features = []
+    const features = [];
 
     // Market data features (10 features)
     features.push(
@@ -173,8 +180,8 @@ export class AIBrainService {
       data.marketData.technicals?.atr || 0,
       data.marketData.technicals?.adx || 25,
       data.marketData.technicals?.bollinger?.upper || 0,
-      data.marketData.technicals?.bollinger?.lower || 0,
-    )
+      data.marketData.technicals?.bollinger?.lower || 0
+    );
 
     // Sentiment features (5 features)
     features.push(
@@ -182,8 +189,8 @@ export class AIBrainService {
       data.aggregatedAnalysis.sentimentAnalysis?.bullish || 50,
       data.aggregatedAnalysis.sentimentAnalysis?.bearish || 50,
       data.aggregatedAnalysis.newsAnalysis?.sentimentScore || 0.5,
-      data.aggregatedAnalysis.newsAnalysis?.impactScore || 0.5,
-    )
+      data.aggregatedAnalysis.newsAnalysis?.impactScore || 0.5
+    );
 
     // Fundamental features (10 features)
     features.push(
@@ -196,8 +203,8 @@ export class AIBrainService {
       data.aggregatedAnalysis.fundamentalAnalysis?.margins?.gross || 0.3,
       data.aggregatedAnalysis.fundamentalAnalysis?.margins?.net || 0.1,
       data.marketData.fundamentals?.freeCashFlow || 0,
-      data.marketData.fundamentals?.currentRatio || 1.5,
-    )
+      data.marketData.fundamentals?.currentRatio || 1.5
+    );
 
     // Technical features (10 features)
     features.push(
@@ -206,17 +213,21 @@ export class AIBrainService {
       data.aggregatedAnalysis.technicalAnalysis?.macd?.signal || 0,
       data.aggregatedAnalysis.technicalAnalysis?.support || 0,
       data.aggregatedAnalysis.technicalAnalysis?.resistance || 0,
-      data.aggregatedAnalysis.technicalAnalysis?.trend === "bullish" ? 1 : 0,
-      data.aggregatedAnalysis.technicalAnalysis?.momentum === "positive" ? 1 : 0,
+      data.aggregatedAnalysis.technicalAnalysis?.trend === 'bullish' ? 1 : 0,
+      data.aggregatedAnalysis.technicalAnalysis?.momentum === 'positive' ? 1 : 0,
       data.aggregatedAnalysis.patternAnalysis?.confidence || 0,
       data.aggregatedAnalysis.patternAnalysis?.reliability || 0,
-      data.aggregatedAnalysis.correlationAnalysis?.spyCorrelation || 0.5,
-    )
+      data.aggregatedAnalysis.correlationAnalysis?.spyCorrelation || 0.5
+    );
 
     // Market condition features (10 features)
     features.push(
       data.marketOverview.marketSentiment?.score || 50,
-      data.marketOverview.riskLevel === "HIGH" ? 1 : data.marketOverview.riskLevel === "MEDIUM" ? 0.5 : 0,
+      data.marketOverview.riskLevel === 'HIGH'
+        ? 1
+        : data.marketOverview.riskLevel === 'MEDIUM'
+          ? 0.5
+          : 0,
       data.aggregatedAnalysis.optionsAnalysis?.impliedVolatility || 0.3,
       data.aggregatedAnalysis.optionsAnalysis?.putCallRatio || 1,
       data.aggregatedAnalysis.optionsAnalysis?.unusualActivity ? 1 : 0,
@@ -224,8 +235,8 @@ export class AIBrainService {
       data.aggregatedAnalysis.seasonalityAnalysis?.historicalPerformance?.q1 || 0,
       data.aggregatedAnalysis.riskAssessment?.volatility || 0.2,
       data.aggregatedAnalysis.riskAssessment?.beta || 1,
-      data.tradingSignals.confidence || 0.5,
-    )
+      data.tradingSignals.confidence || 0.5
+    );
 
     // Trading signals features (5 features)
     features.push(
@@ -233,31 +244,31 @@ export class AIBrainService {
       data.tradingSignals.strength || 0,
       data.tradingSignals.components?.momentum?.strength || 0,
       data.tradingSignals.components?.breakout?.strength || 0,
-      data.tradingSignals.components?.sentiment?.strength || 0,
-    )
+      data.tradingSignals.components?.sentiment?.strength || 0
+    );
 
     // Ensure we have exactly 50 features
     while (features.length < 50) {
-      features.push(0)
+      features.push(0);
     }
 
-    return features.slice(0, 50)
+    return features.slice(0, 50);
   }
 
   private async processNeuralNetwork(data: any) {
-    const network = this.neuralNetwork.get("trading_network")
-    const features = data.features
+    const network = this.neuralNetwork.get('trading_network');
+    const features = data.features;
 
     // Forward pass through neural network
-    const layer1Output = this.activateLayer(features, network.input.weights, "linear")
-    const layer2Output = this.activateLayer(layer1Output, network.hidden1.weights, "relu")
-    const layer3Output = this.activateLayer(layer2Output, network.hidden2.weights, "relu")
-    const finalOutput = this.activateLayer(layer3Output, network.output.weights, "softmax")
+    const layer1Output = this.activateLayer(features, network.input.weights, 'linear');
+    const layer2Output = this.activateLayer(layer1Output, network.hidden1.weights, 'relu');
+    const layer3Output = this.activateLayer(layer2Output, network.hidden2.weights, 'relu');
+    const finalOutput = this.activateLayer(layer3Output, network.output.weights, 'softmax');
 
     // Interpret output [BUY, SELL, HOLD]
-    const maxIndex = finalOutput.indexOf(Math.max(...finalOutput))
-    const actions = ["BUY", "SELL", "HOLD"]
-    const confidence = Math.max(...finalOutput)
+    const maxIndex = finalOutput.indexOf(Math.max(...finalOutput));
+    const actions = ['BUY', 'SELL', 'HOLD'];
+    const confidence = Math.max(...finalOutput);
 
     return {
       action: actions[maxIndex],
@@ -268,73 +279,73 @@ export class AIBrainService {
         hold: finalOutput[2],
       },
       rawOutput: finalOutput,
-    }
+    };
   }
 
   private activateLayer(inputs: number[], weights: number[], activation: string) {
-    const outputs = []
+    const outputs = [];
 
     for (let i = 0; i < weights.length; i++) {
-      let sum = 0
+      let sum = 0;
       for (let j = 0; j < inputs.length; j++) {
-        sum += inputs[j] * (weights[i] || Math.random() - 0.5)
+        sum += inputs[j] * (weights[i] || Math.random() - 0.5);
       }
 
       // Apply activation function
       switch (activation) {
-        case "relu":
-          outputs.push(Math.max(0, sum))
-          break
-        case "sigmoid":
-          outputs.push(1 / (1 + Math.exp(-sum)))
-          break
-        case "softmax":
-          outputs.push(Math.exp(sum)) // Will normalize later
-          break
+        case 'relu':
+          outputs.push(Math.max(0, sum));
+          break;
+        case 'sigmoid':
+          outputs.push(1 / (1 + Math.exp(-sum)));
+          break;
+        case 'softmax':
+          outputs.push(Math.exp(sum)); // Will normalize later
+          break;
         default:
-          outputs.push(sum)
+          outputs.push(sum);
       }
     }
 
     // Normalize softmax
-    if (activation === "softmax") {
-      const sum = outputs.reduce((a, b) => a + b, 0)
-      return outputs.map((x) => x / sum)
+    if (activation === 'softmax') {
+      const sum = outputs.reduce((a, b) => a + b, 0);
+      return outputs.map(x => x / sum);
     }
 
-    return outputs
+    return outputs;
   }
 
   private async applyDecisionTree(data: any) {
-    const marketConditions = this.decisionTree.get("market_conditions")
-    const riskManagement = this.decisionTree.get("risk_management")
-    const patternRecognition = this.decisionTree.get("pattern_recognition")
+    const marketConditions = this.decisionTree.get('market_conditions');
+    const riskManagement = this.decisionTree.get('risk_management');
+    const patternRecognition = this.decisionTree.get('pattern_recognition');
 
     // Determine market condition
-    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50
-    const volume = data.marketData.volume || 1
-    const avgVolume = data.marketData.avgVolume || 1
-    const volumeRatio = volume / avgVolume
+    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50;
+    const volume = data.marketData.volume || 1;
+    const avgVolume = data.marketData.avgVolume || 1;
+    const volumeRatio = volume / avgVolume;
 
-    let marketCondition = "neutral"
+    let marketCondition = 'neutral';
     if (sentiment > 70 && volumeRatio > 1.2) {
-      marketCondition = "bullish"
+      marketCondition = 'bullish';
     } else if (sentiment < 30 && volumeRatio < 0.8) {
-      marketCondition = "bearish"
+      marketCondition = 'bearish';
     }
 
     // Apply market condition rules
-    const conditionRules = marketConditions[marketCondition]
+    const conditionRules = marketConditions[marketCondition];
 
     // Determine volatility level
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
-    const volatilityLevel = volatility > 0.3 ? "high_volatility" : "low_volatility"
-    const riskRules = riskManagement[volatilityLevel]
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
+    const volatilityLevel = volatility > 0.3 ? 'high_volatility' : 'low_volatility';
+    const riskRules = riskManagement[volatilityLevel];
 
     // Pattern strength
-    const patternConfidence = data.aggregatedAnalysis.patternAnalysis?.confidence || 0
-    const patternStrength = patternConfidence > 0.7 ? "strong_patterns" : "weak_patterns"
-    const patternRules = patternRecognition[patternStrength]
+    const patternConfidence = data.aggregatedAnalysis.patternAnalysis?.confidence || 0;
+    const patternStrength = patternConfidence > 0.7 ? 'strong_patterns' : 'weak_patterns';
+    const patternRules = patternRecognition[patternStrength];
 
     return {
       marketCondition,
@@ -342,60 +353,61 @@ export class AIBrainService {
       riskAdjustment: riskRules,
       patternAdjustment: patternRules,
       confidence: this.calculateDecisionTreeConfidence(data, conditionRules),
-    }
+    };
   }
 
   private calculateDecisionTreeConfidence(data: any, rules: any) {
-    let confidence = 0.5
+    let confidence = 0.5;
 
     // Sentiment alignment
-    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50
+    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50;
     if (sentiment > rules.sentiment_threshold * 100) {
-      confidence += 0.2
+      confidence += 0.2;
     }
 
     // Volume confirmation
-    const volume = data.marketData.volume || 1
-    const avgVolume = data.marketData.avgVolume || 1
-    const volumeRatio = volume / avgVolume
+    const volume = data.marketData.volume || 1;
+    const avgVolume = data.marketData.avgVolume || 1;
+    const volumeRatio = volume / avgVolume;
     if (volumeRatio > rules.volume_threshold) {
-      confidence += 0.15
+      confidence += 0.15;
     }
 
     // Technical momentum
-    const momentum = data.aggregatedAnalysis.technicalAnalysis?.momentum === "positive" ? 0.8 : 0.2
+    const momentum = data.aggregatedAnalysis.technicalAnalysis?.momentum === 'positive' ? 0.8 : 0.2;
     if (momentum > rules.momentum_threshold) {
-      confidence += 0.15
+      confidence += 0.15;
     }
 
-    return Math.min(confidence, 1.0)
+    return Math.min(confidence, 1.0);
   }
 
   private async combineDecisions(neuralPrediction: any, decisionTreeResult: any, data: any) {
     // Weight the different approaches
-    const neuralWeight = 0.6
-    const decisionTreeWeight = 0.4
+    const neuralWeight = 0.6;
+    const decisionTreeWeight = 0.4;
 
     // Combine confidence scores
     const combinedConfidence =
-      neuralPrediction.confidence * neuralWeight + decisionTreeResult.confidence * decisionTreeWeight
+      neuralPrediction.confidence * neuralWeight +
+      decisionTreeResult.confidence * decisionTreeWeight;
 
     // Determine final action
-    let finalAction = "HOLD"
+    let finalAction = 'HOLD';
 
     if (neuralPrediction.action === decisionTreeResult.action) {
       // Both agree - high confidence
-      finalAction = neuralPrediction.action
+      finalAction = neuralPrediction.action;
     } else {
       // Disagreement - use higher confidence
       finalAction =
         neuralPrediction.confidence > decisionTreeResult.confidence
           ? neuralPrediction.action
-          : decisionTreeResult.action
+          : decisionTreeResult.action;
     }
 
     // Apply additional filters
-    const filteredDecision = this.applyAdditionalFilters(finalAction, combinedConfidence, data)
+    const filteredDecision = this.applyAdditionalFilters(finalAction, combinedConfidence, data);
 
     return {
       action: filteredDecision.action,
@@ -403,88 +415,88 @@ export class AIBrainService {
       neuralPrediction,
       decisionTreeResult,
       reasoning: this.generateReasoning(neuralPrediction, decisionTreeResult, data),
-    }
+    };
   }
 
   private applyAdditionalFilters(action: string, confidence: number, data: any) {
-    let filteredAction = action
-    let filteredConfidence = confidence
+    let filteredAction = action;
+    let filteredConfidence = confidence;
 
     // Risk filter - don't trade if confidence too low
     if (confidence < this.confidenceThreshold) {
-      filteredAction = "HOLD"
-      filteredConfidence = confidence * 0.8
+      filteredAction = 'HOLD';
+      filteredConfidence = confidence * 0.8;
     }
 
     // Volatility filter - reduce position in high volatility
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
     if (volatility > 0.4) {
-      filteredConfidence *= 0.8
+      filteredConfidence *= 0.8;
     }
 
     // News filter - check for major news impact
-    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0
+    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0;
     if (newsImpact > 0.8) {
       // Major news - be more cautious
-      filteredConfidence *= 0.9
+      filteredConfidence *= 0.9;
     }
 
     // Market condition filter
-    const marketRisk = data.marketOverview.riskLevel
-    if (marketRisk === "HIGH") {
-      filteredConfidence *= 0.7
+    const marketRisk = data.marketOverview.riskLevel;
+    if (marketRisk === 'HIGH') {
+      filteredConfidence *= 0.7;
     }
 
     return {
       action: filteredAction,
       confidence: filteredConfidence,
-    }
+    };
   }
 
   private generateReasoning(neuralPrediction: any, decisionTreeResult: any, data: any) {
-    const reasons = []
+    const reasons = [];
 
     // Neural network reasoning
     if (neuralPrediction.confidence > 0.7) {
       reasons.push(
-        `AI Neural Network shows ${neuralPrediction.confidence.toFixed(2)} confidence for ${neuralPrediction.action}`,
-      )
+        `AI Neural Network shows ${neuralPrediction.confidence.toFixed(2)} confidence for ${neuralPrediction.action}`
+      );
     }
 
     // Decision tree reasoning
     reasons.push(
-      `Market conditions suggest ${decisionTreeResult.action} based on ${decisionTreeResult.marketCondition} environment`,
-    )
+      `Market conditions suggest ${decisionTreeResult.action} based on ${decisionTreeResult.marketCondition} environment`
+    );
 
     // Technical reasoning
-    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi
+    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi;
     if (rsi < 30) {
-      reasons.push("RSI indicates oversold conditions")
+      reasons.push('RSI indicates oversold conditions');
     } else if (rsi > 70) {
-      reasons.push("RSI indicates overbought conditions")
+      reasons.push('RSI indicates overbought conditions');
     }
 
     // Sentiment reasoning
-    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall
+    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall;
     if (sentiment > 70) {
-      reasons.push("Strong bullish sentiment detected")
+      reasons.push('Strong bullish sentiment detected');
     } else if (sentiment < 30) {
-      reasons.push("Strong bearish sentiment detected")
+      reasons.push('Strong bearish sentiment detected');
     }
 
     // Pattern reasoning
-    const patterns = data.aggregatedAnalysis.patternAnalysis?.activePatterns || []
+    const patterns = data.aggregatedAnalysis.patternAnalysis?.activePatterns || [];
     if (patterns.length > 0) {
-      reasons.push(`Technical patterns detected: ${patterns.map((p) => p.name).join(", ")}`)
+      reasons.push(`Technical patterns detected: ${patterns.map(p => p.name).join(', ')}`);
     }
 
     // News reasoning
-    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore
+    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore;
     if (newsImpact > 0.7) {
-      reasons.push("Significant news impact detected")
+      reasons.push('Significant news impact detected');
     }
 
-    return reasons
+    return reasons;
   }
 
   private async generateFinalRecommendation(decision: any, data: any) {
@@ -531,87 +543,87 @@ export class AIBrainService {
 
       // Execution guidance
       executionGuidance: this.generateExecutionGuidance(decision, data),
-    }
+    };
 
-    return recommendation
+    return recommendation;
   }
 
   private calculateStrength(decision: any, data: any) {
-    let strength = decision.confidence
+    let strength = decision.confidence;
 
     // Boost strength for aligned signals
-    const technicalAlignment = this.checkTechnicalAlignment(data)
-    const fundamentalAlignment = this.checkFundamentalAlignment(data)
-    const sentimentAlignment = this.checkSentimentAlignment(data)
+    const technicalAlignment = this.checkTechnicalAlignment(data);
+    const fundamentalAlignment = this.checkFundamentalAlignment(data);
+    const sentimentAlignment = this.checkSentimentAlignment(data);
 
-    if (technicalAlignment) strength += 0.1
-    if (fundamentalAlignment) strength += 0.1
-    if (sentimentAlignment) strength += 0.1
+    if (technicalAlignment) strength += 0.1;
+    if (fundamentalAlignment) strength += 0.1;
+    if (sentimentAlignment) strength += 0.1;
 
-    return Math.min(strength, 1.0)
+    return Math.min(strength, 1.0);
   }
 
   private checkTechnicalAlignment(data: any) {
-    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi || 50
-    const trend = data.aggregatedAnalysis.technicalAnalysis?.trend
-    const momentum = data.aggregatedAnalysis.technicalAnalysis?.momentum
+    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi || 50;
+    const trend = data.aggregatedAnalysis.technicalAnalysis?.trend;
+    const momentum = data.aggregatedAnalysis.technicalAnalysis?.momentum;
 
     return (
-      (rsi > 50 && trend === "bullish" && momentum === "positive") ||
-      (rsi < 50 && trend === "bearish" && momentum === "negative")
-    )
+      (rsi > 50 && trend === 'bullish' && momentum === 'positive') ||
+      (rsi < 50 && trend === 'bearish' && momentum === 'negative')
+    );
   }
 
   private checkFundamentalAlignment(data: any) {
-    const pe = data.aggregatedAnalysis.fundamentalAnalysis?.pe || 20
-    const growth = data.aggregatedAnalysis.fundamentalAnalysis?.growth || 0
-    const roe = data.aggregatedAnalysis.fundamentalAnalysis?.roe || 0.15
+    const pe = data.aggregatedAnalysis.fundamentalAnalysis?.pe || 20;
+    const growth = data.aggregatedAnalysis.fundamentalAnalysis?.growth || 0;
+    const roe = data.aggregatedAnalysis.fundamentalAnalysis?.roe || 0.15;
 
-    return pe < 25 && growth > 5 && roe > 0.12
+    return pe < 25 && growth > 5 && roe > 0.12;
   }
 
   private checkSentimentAlignment(data: any) {
-    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50
-    const newsScore = data.aggregatedAnalysis.newsAnalysis?.sentimentScore || 0.5
+    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall || 50;
+    const newsScore = data.aggregatedAnalysis.newsAnalysis?.sentimentScore || 0.5;
 
-    return (sentiment > 60 && newsScore > 0.6) || (sentiment < 40 && newsScore < 0.4)
+    return (sentiment > 60 && newsScore > 0.6) || (sentiment < 40 && newsScore < 0.4);
   }
 
   private calculatePriceTargets(data: any, decision: any) {
-    const currentPrice = data.marketData.price || 100
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
-    const confidence = decision.confidence
+    const currentPrice = data.marketData.price || 100;
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
+    const confidence = decision.confidence;
 
-    const baseMove = volatility * confidence * 2
+    const baseMove = volatility * confidence * 2;
 
-    if (decision.action === "BUY") {
+    if (decision.action === 'BUY') {
       return {
         conservative: currentPrice * (1 + baseMove * 0.5),
         moderate: currentPrice * (1 + baseMove),
         aggressive: currentPrice * (1 + baseMove * 1.5),
         stopLoss: currentPrice * (1 - volatility * 0.5),
-      }
-    } else if (decision.action === "SELL") {
+      };
+    } else if (decision.action === 'SELL') {
       return {
         conservative: currentPrice * (1 - baseMove * 0.5),
         moderate: currentPrice * (1 - baseMove),
         aggressive: currentPrice * (1 - baseMove * 1.5),
         stopLoss: currentPrice * (1 + volatility * 0.5),
-      }
+      };
     } else {
       return {
         conservative: currentPrice,
         moderate: currentPrice,
         aggressive: currentPrice,
         stopLoss: currentPrice * 0.95,
-      }
+      };
     }
   }
 
   private calculateRiskManagement(data: any, decision: any) {
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
-    const beta = data.aggregatedAnalysis.riskAssessment?.beta || 1
-    const confidence = decision.confidence
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
+    const beta = data.aggregatedAnalysis.riskAssessment?.beta || 1;
+    const confidence = decision.confidence;
 
     return {
       stopLossPercent: Math.max(volatility * 0.5, 0.05),
@@ -620,259 +632,261 @@ export class AIBrainService {
       riskRewardRatio: 1 / (volatility * 2),
       correlationLimit: 0.7,
       timeStop: this.calculateTimeStop(confidence),
-    }
+    };
   }
 
   private calculateTimeStop(confidence: number) {
-    if (confidence > 0.8) return "2 weeks"
-    if (confidence > 0.6) return "1 week"
-    return "3 days"
+    if (confidence > 0.8) return '2 weeks';
+    if (confidence > 0.6) return '1 week';
+    return '3 days';
   }
 
   private calculatePositionSizing(data: any, decision: any) {
-    const confidence = decision.confidence
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
-    const riskLevel = data.marketOverview.riskLevel
+    const confidence = decision.confidence;
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
+    const riskLevel = data.marketOverview.riskLevel;
 
-    let baseSize = confidence * 0.05 // Base 5% max position
+    let baseSize = confidence * 0.05; // Base 5% max position
 
     // Adjust for volatility
-    if (volatility > 0.3) baseSize *= 0.7
-    if (volatility < 0.15) baseSize *= 1.2
+    if (volatility > 0.3) baseSize *= 0.7;
+    if (volatility < 0.15) baseSize *= 1.2;
 
     // Adjust for market risk
-    if (riskLevel === "HIGH") baseSize *= 0.6
-    if (riskLevel === "LOW") baseSize *= 1.1
+    if (riskLevel === 'HIGH') baseSize *= 0.6;
+    if (riskLevel === 'LOW') baseSize *= 1.1;
 
     return {
       recommendedSize: Math.min(baseSize, 0.1), // Never exceed 10%
       minSize: baseSize * 0.5,
       maxSize: baseSize * 1.5,
       kellySize: this.calculateKellySize(data, decision),
-    }
+    };
   }
 
   private calculateKellySize(data: any, decision: any) {
-    const winRate = 0.6 // Assumed win rate
-    const avgWin = 0.15 // Assumed average win
-    const avgLoss = 0.08 // Assumed average loss
+    const winRate = 0.6; // Assumed win rate
+    const avgWin = 0.15; // Assumed average win
+    const avgLoss = 0.08; // Assumed average loss
 
-    const kellyPercent = (winRate * avgWin - (1 - winRate) * avgLoss) / avgWin
-    return Math.max(0, Math.min(kellyPercent * decision.confidence, 0.25))
+    const kellyPercent = (winRate * avgWin - (1 - winRate) * avgLoss) / avgWin;
+    return Math.max(0, Math.min(kellyPercent * decision.confidence, 0.25));
   }
 
   private determineTimeframe(decision: any, data: any) {
-    const confidence = decision.confidence
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
+    const confidence = decision.confidence;
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
 
-    if (confidence > 0.8 && volatility < 0.2) return "LONG_TERM" // 1-3 months
-    if (confidence > 0.7) return "MEDIUM_TERM" // 2-6 weeks
-    if (confidence > 0.6) return "SHORT_TERM" // 1-2 weeks
-    return "VERY_SHORT_TERM" // 1-5 days
+    if (confidence > 0.8 && volatility < 0.2) return 'LONG_TERM'; // 1-3 months
+    if (confidence > 0.7) return 'MEDIUM_TERM'; // 2-6 weeks
+    if (confidence > 0.6) return 'SHORT_TERM'; // 1-2 weeks
+    return 'VERY_SHORT_TERM'; // 1-5 days
   }
 
   private determineUrgency(decision: any, data: any) {
-    const confidence = decision.confidence
-    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0
-    const patternStrength = data.aggregatedAnalysis.patternAnalysis?.confidence || 0
+    const confidence = decision.confidence;
+    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0;
+    const patternStrength = data.aggregatedAnalysis.patternAnalysis?.confidence || 0;
 
-    if (confidence > 0.85 && (newsImpact > 0.8 || patternStrength > 0.8)) return "IMMEDIATE"
-    if (confidence > 0.75) return "HIGH"
-    if (confidence > 0.65) return "MEDIUM"
-    return "LOW"
+    if (confidence > 0.85 && (newsImpact > 0.8 || patternStrength > 0.8)) return 'IMMEDIATE';
+    if (confidence > 0.75) return 'HIGH';
+    if (confidence > 0.65) return 'MEDIUM';
+    return 'LOW';
   }
 
   private identifySupportingFactors(data: any) {
-    const factors = []
+    const factors = [];
 
     // Technical factors
-    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi
-    if (rsi < 30) factors.push("Oversold RSI conditions")
-    if (rsi > 70) factors.push("Overbought RSI conditions")
+    const rsi = data.aggregatedAnalysis.technicalAnalysis?.rsi;
+    if (rsi < 30) factors.push('Oversold RSI conditions');
+    if (rsi > 70) factors.push('Overbought RSI conditions');
 
     // Fundamental factors
-    const pe = data.aggregatedAnalysis.fundamentalAnalysis?.pe
-    if (pe < 15) factors.push("Attractive valuation (low P/E)")
-    if (pe > 30) factors.push("High valuation concerns")
+    const pe = data.aggregatedAnalysis.fundamentalAnalysis?.pe;
+    if (pe < 15) factors.push('Attractive valuation (low P/E)');
+    if (pe > 30) factors.push('High valuation concerns');
 
     // Sentiment factors
-    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall
-    if (sentiment > 70) factors.push("Strong bullish sentiment")
-    if (sentiment < 30) factors.push("Extreme bearish sentiment (contrarian opportunity)")
+    const sentiment = data.aggregatedAnalysis.sentimentAnalysis?.overall;
+    if (sentiment > 70) factors.push('Strong bullish sentiment');
+    if (sentiment < 30) factors.push('Extreme bearish sentiment (contrarian opportunity)');
 
     // Pattern factors
-    const patterns = data.aggregatedAnalysis.patternAnalysis?.activePatterns || []
-    patterns.forEach((pattern) => {
+    const patterns = data.aggregatedAnalysis.patternAnalysis?.activePatterns || [];
+    patterns.forEach(pattern => {
       if (pattern.confidence > 0.7) {
-        factors.push(`Strong ${pattern.name} pattern detected`)
+        factors.push(`Strong ${pattern.name} pattern detected`);
       }
-    })
+    });
 
     // Volume factors
-    const volume = data.marketData.volume || 1
-    const avgVolume = data.marketData.avgVolume || 1
+    const volume = data.marketData.volume || 1;
+    const avgVolume = data.marketData.avgVolume || 1;
     if (volume > avgVolume * 1.5) {
-      factors.push("High volume confirmation")
+      factors.push('High volume confirmation');
     }
 
-    return factors
+    return factors;
   }
 
   private identifyRiskFactors(data: any) {
-    const risks = []
+    const risks = [];
 
     // Volatility risks
-    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2
-    if (volatility > 0.4) risks.push("High volatility environment")
+    const volatility = data.aggregatedAnalysis.riskAssessment?.volatility || 0.2;
+    if (volatility > 0.4) risks.push('High volatility environment');
 
     // Market risks
-    const marketRisk = data.marketOverview.riskLevel
-    if (marketRisk === "HIGH") risks.push("Elevated market risk conditions")
+    const marketRisk = data.marketOverview.riskLevel;
+    if (marketRisk === 'HIGH') risks.push('Elevated market risk conditions');
 
     // Correlation risks
-    const correlation = data.aggregatedAnalysis.correlationAnalysis?.spyCorrelation || 0.5
-    if (correlation > 0.8) risks.push("High market correlation reduces diversification")
+    const correlation = data.aggregatedAnalysis.correlationAnalysis?.spyCorrelation || 0.5;
+    if (correlation > 0.8) risks.push('High market correlation reduces diversification');
 
     // Economic risks
-    const economicImpact = data.aggregatedAnalysis.economicImpact?.overallImpact || 0
-    if (economicImpact > 0.7) risks.push("Significant economic headwinds")
+    const economicImpact = data.aggregatedAnalysis.economicImpact?.overallImpact || 0;
+    if (economicImpact > 0.7) risks.push('Significant economic headwinds');
 
     // News risks
-    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0
-    if (newsImpact > 0.8) risks.push("Major news events creating uncertainty")
+    const newsImpact = data.aggregatedAnalysis.newsAnalysis?.impactScore || 0;
+    if (newsImpact > 0.8) risks.push('Major news events creating uncertainty');
 
     // Options risks
-    const impliedVol = data.aggregatedAnalysis.optionsAnalysis?.impliedVolatility || 0.3
-    if (impliedVol > 0.5) risks.push("Elevated implied volatility suggests event risk")
+    const impliedVol = data.aggregatedAnalysis.optionsAnalysis?.impliedVolatility || 0.3;
+    if (impliedVol > 0.5) risks.push('Elevated implied volatility suggests event risk');
 
-    return risks
+    return risks;
   }
 
   private assessDataQuality(data: any) {
-    let quality = 1.0
+    let quality = 1.0;
 
     // Check data completeness
-    if (!data.marketData.price) quality -= 0.2
-    if (!data.aggregatedAnalysis.sentimentAnalysis) quality -= 0.1
-    if (!data.aggregatedAnalysis.technicalAnalysis) quality -= 0.1
-    if (!data.aggregatedAnalysis.fundamentalAnalysis) quality -= 0.1
+    if (!data.marketData.price) quality -= 0.2;
+    if (!data.aggregatedAnalysis.sentimentAnalysis) quality -= 0.1;
+    if (!data.aggregatedAnalysis.technicalAnalysis) quality -= 0.1;
+    if (!data.aggregatedAnalysis.fundamentalAnalysis) quality -= 0.1;
 
     // Check data freshness
-    const dataAge = Date.now() - new Date(data.timestamp).getTime()
-    if (dataAge > 300000) quality -= 0.1 // 5 minutes old
+    const dataAge = Date.now() - new Date(data.timestamp).getTime();
+    if (dataAge > 300000) quality -= 0.1; // 5 minutes old
 
-    return Math.max(quality, 0.5)
+    return Math.max(quality, 0.5);
   }
 
   private getSectorContext(data: any) {
     // Simulate sector performance context
     return {
-      sector: "Technology", // Would be determined from symbol
+      sector: 'Technology', // Would be determined from symbol
       performance: (Math.random() - 0.5) * 10,
       ranking: Math.floor(Math.random() * 11) + 1,
-      momentum: Math.random() > 0.5 ? "POSITIVE" : "NEGATIVE",
-    }
+      momentum: Math.random() > 0.5 ? 'POSITIVE' : 'NEGATIVE',
+    };
   }
 
   private generateExecutionGuidance(decision: any, data: any) {
-    const guidance = []
+    const guidance = [];
 
-    if (decision.action === "BUY") {
-      guidance.push("Consider scaling into position over 2-3 transactions")
-      guidance.push("Place stop loss immediately after entry")
-      guidance.push("Monitor volume for confirmation")
-    } else if (decision.action === "SELL") {
-      guidance.push("Consider scaling out of position")
-      guidance.push("Use trailing stops to protect profits")
-      guidance.push("Watch for reversal signals")
+    if (decision.action === 'BUY') {
+      guidance.push('Consider scaling into position over 2-3 transactions');
+      guidance.push('Place stop loss immediately after entry');
+      guidance.push('Monitor volume for confirmation');
+    } else if (decision.action === 'SELL') {
+      guidance.push('Consider scaling out of position');
+      guidance.push('Use trailing stops to protect profits');
+      guidance.push('Watch for reversal signals');
     } else {
-      guidance.push("Wait for clearer signals before entering")
-      guidance.push("Monitor key support/resistance levels")
-      guidance.push("Watch for volume breakouts")
+      guidance.push('Wait for clearer signals before entering');
+      guidance.push('Monitor key support/resistance levels');
+      guidance.push('Watch for volume breakouts');
     }
 
     // Add market timing guidance
-    const marketHours = this.isMarketHours()
+    const marketHours = this.isMarketHours();
     if (!marketHours) {
-      guidance.push("Consider waiting for market open for better liquidity")
+      guidance.push('Consider waiting for market open for better liquidity');
     }
 
-    return guidance
+    return guidance;
   }
 
   private isMarketHours() {
-    const now = new Date()
-    const hour = now.getHours()
-    const day = now.getDay()
+    const now = new Date();
+    const hour = now.getHours();
+    const day = now.getDay();
 
     // Simple market hours check (9:30 AM - 4:00 PM ET, Mon-Fri)
-    return day >= 1 && day <= 5 && hour >= 9 && hour < 16
+    return day >= 1 && day <= 5 && hour >= 9 && hour < 16;
   }
 
   // Continuous Learning System
   private startContinuousLearning() {
     setInterval(() => {
-      this.updateLearningSystem()
-    }, 60000) // Update every minute
+      this.updateLearningSystem();
+    }, 60000); // Update every minute
   }
 
   private updateLearningSystem() {
     // Simulate learning from recent decisions
-    this.analyzeRecentPerformance()
-    this.adjustNeuralWeights()
-    this.updateDecisionThresholds()
+    this.analyzeRecentPerformance();
+    this.adjustNeuralWeights();
+    this.updateDecisionThresholds();
   }
 
   private analyzeRecentPerformance() {
     // Analyze last 100 decisions
-    const recentDecisions = this.learningHistory.slice(-100)
+    const recentDecisions = this.learningHistory.slice(-100);
 
     if (recentDecisions.length > 10) {
-      const accuracy = this.calculateAccuracy(recentDecisions)
-      const profitability = this.calculateProfitability(recentDecisions)
+      const accuracy = this.calculateAccuracy(recentDecisions);
+      const profitability = this.calculateProfitability(recentDecisions);
 
       // Adjust confidence threshold based on performance
       if (accuracy < 0.6) {
-        this.confidenceThreshold = Math.min(this.confidenceThreshold + 0.05, 0.9)
+        this.confidenceThreshold = Math.min(this.confidenceThreshold + 0.05, 0.9);
       } else if (accuracy > 0.8) {
-        this.confidenceThreshold = Math.max(this.confidenceThreshold - 0.02, 0.6)
+        this.confidenceThreshold = Math.max(this.confidenceThreshold - 0.02, 0.6);
       }
     }
   }
 
   private calculateAccuracy(decisions: any[]) {
-    const correct = decisions.filter((d) => d.outcome === "correct").length
-    return correct / decisions.length
+    const correct = decisions.filter(d => d.outcome === 'correct').length;
+    return correct / decisions.length;
   }
 
   private calculateProfitability(decisions: any[]) {
-    return decisions.reduce((sum, d) => sum + (d.profit || 0), 0) / decisions.length
+    return decisions.reduce((sum, d) => sum + (d.profit || 0), 0) / decisions.length;
   }
 
   private adjustNeuralWeights() {
     // Simulate neural network weight adjustment
-    const network = this.neuralNetwork.get("trading_network")
+    const network = this.neuralNetwork.get('trading_network');
 
     // Small random adjustments to simulate learning
-    Object.keys(network).forEach((layer) => {
+    Object.keys(network).forEach(layer => {
       if (network[layer].weights) {
-        network[layer].weights = network[layer].weights.map((weight) => weight + (Math.random() - 0.5) * 0.01)
+        network[layer].weights = network[layer].weights.map(
+          weight => weight + (Math.random() - 0.5) * 0.01
+        );
       }
-    })
+    });
   }
 
   private updateDecisionThresholds() {
     // Update decision tree thresholds based on performance
-    const marketConditions = this.decisionTree.get("market_conditions")
+    const marketConditions = this.decisionTree.get('market_conditions');
 
     // Simulate threshold adjustments
-    Object.keys(marketConditions).forEach((condition) => {
-      const rules = marketConditions[condition]
+    Object.keys(marketConditions).forEach(condition => {
+      const rules = marketConditions[condition];
       if (rules.sentiment_threshold) {
-        rules.sentiment_threshold += (Math.random() - 0.5) * 0.02
-        rules.sentiment_threshold = Math.max(0.1, Math.min(0.9, rules.sentiment_threshold))
+        rules.sentiment_threshold += (Math.random() - 0.5) * 0.02;
+        rules.sentiment_threshold = Math.max(0.1, Math.min(0.9, rules.sentiment_threshold));
       }
-    })
+    });
   }
 
   private learnFromDecision(data: any, recommendation: any) {
@@ -886,11 +900,11 @@ export class AIBrainService {
       // Outcome will be updated later when we know the result
       outcome: null,
       profit: null,
-    })
+    });
 
     // Keep only last 1000 decisions
     if (this.learningHistory.length > 1000) {
-      this.learningHistory.splice(0, this.learningHistory.length - 1000)
+      this.learningHistory.splice(0, this.learningHistory.length - 1000);
     }
   }
 
@@ -898,33 +912,35 @@ export class AIBrainService {
     return {
       symbol,
       timestamp: new Date(),
-      action: "HOLD",
+      action: 'HOLD',
       confidence: 0.5,
       strength: 0.5,
-      reasoning: ["Insufficient data for reliable analysis"],
+      reasoning: ['Insufficient data for reliable analysis'],
       priceTargets: { conservative: 0, moderate: 0, aggressive: 0, stopLoss: 0 },
       riskManagement: { stopLossPercent: 0.08, takeProfitPercent: 0.15 },
       positionSizing: { recommendedSize: 0.02 },
-      timeframe: "SHORT_TERM",
-      urgency: "LOW",
+      timeframe: 'SHORT_TERM',
+      urgency: 'LOW',
       supportingFactors: [],
-      riskFactors: ["Data quality issues"],
+      riskFactors: ['Data quality issues'],
       aiInsights: { modelConfidence: 0.5, dataQuality: 0.3 },
-      marketContext: { overallMarket: "NEUTRAL" },
-      executionGuidance: ["Wait for better data before trading"],
-    }
+      marketContext: { overallMarket: 'NEUTRAL' },
+      executionGuidance: ['Wait for better data before trading'],
+    };
   }
 
   // Public API Methods
   async getIntelligentRecommendation(symbol: string) {
-    return await this.analyzeAndDecide(symbol)
+    return await this.analyzeAndDecide(symbol);
   }
 
   async getMarketIntelligence() {
-    const marketOverview = await dataAggregationService.getMarketOverview()
-    const topSymbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA"]
+    const marketOverview = await dataAggregationService.getMarketOverview();
+    const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'];
 
-    const recommendations = await Promise.all(topSymbols.map((symbol) => this.analyzeAndDecide(symbol)))
+    const recommendations = await Promise.all(
+      topSymbols.map(symbol => this.analyzeAndDecide(symbol))
+    );
 
     return {
       marketOverview,
@@ -933,48 +949,49 @@ export class AIBrainService {
       riskLevel: this.calculateOverallRisk(recommendations),
       opportunities: this.identifyTopOpportunities(recommendations),
       timestamp: new Date(),
-    }
+    };
   }
 
   private calculateOverallSentiment(recommendations: any[]) {
-    const buyCount = recommendations.filter((r) => r.action === "BUY").length
-    const sellCount = recommendations.filter((r) => r.action === "SELL").length
-    const avgConfidence = recommendations.reduce((sum, r) => sum + r.confidence, 0) / recommendations.length
+    const buyCount = recommendations.filter(r => r.action === 'BUY').length;
+    const sellCount = recommendations.filter(r => r.action === 'SELL').length;
+    const avgConfidence =
+      recommendations.reduce((sum, r) => sum + r.confidence, 0) / recommendations.length;
 
     return {
-      direction: buyCount > sellCount ? "BULLISH" : sellCount > buyCount ? "BEARISH" : "NEUTRAL",
+      direction: buyCount > sellCount ? 'BULLISH' : sellCount > buyCount ? 'BEARISH' : 'NEUTRAL',
       strength: avgConfidence,
       buySignals: buyCount,
       sellSignals: sellCount,
       holdSignals: recommendations.length - buyCount - sellCount,
-    }
+    };
   }
 
   private calculateOverallRisk(recommendations: any[]) {
     const avgRisk =
       recommendations.reduce((sum, r) => {
-        const riskScore = r.riskFactors.length / 10 // Normalize risk factors
-        return sum + riskScore
-      }, 0) / recommendations.length
+        const riskScore = r.riskFactors.length / 10; // Normalize risk factors
+        return sum + riskScore;
+      }, 0) / recommendations.length;
 
-    if (avgRisk > 0.7) return "HIGH"
-    if (avgRisk > 0.4) return "MEDIUM"
-    return "LOW"
+    if (avgRisk > 0.7) return 'HIGH';
+    if (avgRisk > 0.4) return 'MEDIUM';
+    return 'LOW';
   }
 
   private identifyTopOpportunities(recommendations: any[]) {
     return recommendations
-      .filter((r) => r.action === "BUY" && r.confidence > 0.7)
+      .filter(r => r.action === 'BUY' && r.confidence > 0.7)
       .sort((a, b) => b.confidence - a.confidence)
       .slice(0, 3)
-      .map((r) => ({
+      .map(r => ({
         symbol: r.symbol,
         confidence: r.confidence,
         reasoning: r.reasoning.slice(0, 2),
         timeframe: r.timeframe,
         priceTarget: r.priceTargets.moderate,
-      }))
+      }));
   }
 }
 
-export const aiBrainService = AIBrainService.getInstance()
+export const aiBrainService = AIBrainService.getInstance();

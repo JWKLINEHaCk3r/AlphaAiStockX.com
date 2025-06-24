@@ -1,11 +1,22 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { BarChart3, Eye, Brain, Zap, Activity, DollarSign, Users, Globe, Clock, Cpu } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  BarChart3,
+  Eye,
+  Brain,
+  Zap,
+  Activity,
+  DollarSign,
+  Users,
+  Globe,
+  Clock,
+  Cpu,
+} from 'lucide-react';
 
 export default function AdvancedAnalytics() {
   const [analyticsData, setAnalyticsData] = useState({
@@ -14,13 +25,13 @@ export default function AdvancedAnalytics() {
     tradingPerformance: {},
     aiInsights: {},
     marketAnalysis: {},
-  })
+  });
 
   useEffect(() => {
-    generateAnalyticsData()
-    const interval = setInterval(generateAnalyticsData, 3000)
-    return () => clearInterval(interval)
-  }, [])
+    generateAnalyticsData();
+    const interval = setInterval(generateAnalyticsData, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const generateAnalyticsData = () => {
     setAnalyticsData({
@@ -60,8 +71,8 @@ export default function AdvancedAnalytics() {
         trendStrength: 78.9 + Math.random() * 15,
         riskLevel: 4.2 + Math.random() * 2,
       },
-    })
-  }
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -69,7 +80,8 @@ export default function AdvancedAnalytics() {
       <Card className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-blue-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Activity className="h-7 w-7 mr-3 text-blue-400" />📊 Real-time Analytics Dashboard
+            <Activity className="h-7 w-7 mr-3 text-blue-400" />
+            📊 Real-time Analytics Dashboard
             <Badge className="ml-3 bg-gradient-to-r from-blue-400 to-cyan-500 animate-pulse">
               <Eye className="h-4 w-4 mr-1" />
               LIVE DATA
@@ -157,7 +169,8 @@ export default function AdvancedAnalytics() {
       <Card className="bg-gradient-to-r from-gray-900/90 to-black/90 border-2 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <BarChart3 className="h-7 w-7 mr-3 text-purple-400" />🔬 Advanced Analytics Suite
+            <BarChart3 className="h-7 w-7 mr-3 text-purple-400" />
+            🔬 Advanced Analytics Suite
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-pink-500">
               <Brain className="h-4 w-4 mr-1" />
               AI POWERED
@@ -220,7 +233,10 @@ export default function AdvancedAnalytics() {
                     <div className="text-4xl font-bold text-purple-400 mb-2">
                       {analyticsData.userBehavior.engagementScore?.toFixed(0)}
                     </div>
-                    <Progress value={analyticsData.userBehavior.engagementScore} className="h-3 mb-2" />
+                    <Progress
+                      value={analyticsData.userBehavior.engagementScore}
+                      className="h-3 mb-2"
+                    />
                     <p className="text-gray-400 text-sm">Exceptional engagement</p>
                   </div>
                 </div>
@@ -235,7 +251,10 @@ export default function AdvancedAnalytics() {
                     <div className="text-4xl font-bold text-green-400 mb-2">
                       {analyticsData.tradingPerformance.winRate?.toFixed(1)}%
                     </div>
-                    <Progress value={analyticsData.tradingPerformance.winRate} className="h-3 mb-2" />
+                    <Progress
+                      value={analyticsData.tradingPerformance.winRate}
+                      className="h-3 mb-2"
+                    />
                     <p className="text-gray-400 text-sm">Above industry average</p>
                   </div>
                 </div>
@@ -273,7 +292,10 @@ export default function AdvancedAnalytics() {
                         {analyticsData.tradingPerformance.maxDrawdown?.toFixed(1)}%
                       </span>
                     </div>
-                    <Progress value={analyticsData.tradingPerformance.maxDrawdown} className="h-3" />
+                    <Progress
+                      value={analyticsData.tradingPerformance.maxDrawdown}
+                      className="h-3"
+                    />
                     <p className="text-gray-400 text-sm">Well within risk limits</p>
                   </div>
                 </div>
@@ -288,7 +310,10 @@ export default function AdvancedAnalytics() {
                     <div className="text-4xl font-bold text-cyan-400 mb-2">
                       {analyticsData.aiInsights.predictionAccuracy?.toFixed(1)}%
                     </div>
-                    <Progress value={analyticsData.aiInsights.predictionAccuracy} className="h-3 mb-2" />
+                    <Progress
+                      value={analyticsData.aiInsights.predictionAccuracy}
+                      className="h-3 mb-2"
+                    />
                     <p className="text-gray-400 text-sm">Industry leading accuracy</p>
                   </div>
                 </div>
@@ -338,7 +363,10 @@ export default function AdvancedAnalytics() {
                     <div className="text-4xl font-bold text-green-400 mb-2">
                       {analyticsData.marketAnalysis.bullishSentiment?.toFixed(0)}%
                     </div>
-                    <Progress value={analyticsData.marketAnalysis.bullishSentiment} className="h-3 mb-2" />
+                    <Progress
+                      value={analyticsData.marketAnalysis.bullishSentiment}
+                      className="h-3 mb-2"
+                    />
                     <p className="text-gray-400 text-sm">Bullish sentiment</p>
                   </div>
                 </div>
@@ -352,7 +380,10 @@ export default function AdvancedAnalytics() {
                         {analyticsData.marketAnalysis.volatilityIndex?.toFixed(1)}
                       </span>
                     </div>
-                    <Progress value={analyticsData.marketAnalysis.volatilityIndex * 2} className="h-3" />
+                    <Progress
+                      value={analyticsData.marketAnalysis.volatilityIndex * 2}
+                      className="h-3"
+                    />
                     <p className="text-gray-400 text-sm">Moderate volatility</p>
                   </div>
                 </div>
@@ -386,5 +417,5 @@ export default function AdvancedAnalytics() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

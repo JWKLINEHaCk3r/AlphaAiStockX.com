@@ -1,177 +1,188 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
-import { Check, X, Crown, Zap, Bot, Brain, CloudLightningIcon as Lightning, Rocket, Star, Diamond } from "lucide-react"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import {
+  Check,
+  X,
+  Crown,
+  Zap,
+  Bot,
+  Brain,
+  CloudLightningIcon as Lightning,
+  Rocket,
+  Star,
+  Diamond,
+} from 'lucide-react';
 
 export default function MembershipTiers({ currentTier, onUpgrade }) {
-  const [billingCycle, setBillingCycle] = useState("monthly")
+  const [billingCycle, setBillingCycle] = useState('monthly');
 
   const tiers = [
     {
-      id: "free",
-      name: "Free Trader",
-      description: "Get started with basic trading",
+      id: 'free',
+      name: 'Free Trader',
+      description: 'Get started with basic trading',
       monthlyPrice: 0,
       yearlyPrice: 0,
       icon: Star,
-      color: "gray",
+      color: 'gray',
       features: {
-        trades: "10 per day",
-        executionSpeed: "Standard (200-700ms)",
-        aiSignals: "3 per day",
+        trades: '10 per day',
+        executionSpeed: 'Standard (200-700ms)',
+        aiSignals: '3 per day',
         autoTrade: false,
         advancedOrders: false,
         realTimeData: false,
-        portfolioValue: "Up to $1,000",
-        support: "Community",
-        research: "Basic",
-        alerts: "5 per day",
+        portfolioValue: 'Up to $1,000',
+        support: 'Community',
+        research: 'Basic',
+        alerts: '5 per day',
         backtesting: false,
         apiAccess: false,
       },
       popular: false,
     },
     {
-      id: "basic",
-      name: "Alpha Trader",
-      description: "Enhanced trading with AI insights",
+      id: 'basic',
+      name: 'Alpha Trader',
+      description: 'Enhanced trading with AI insights',
       monthlyPrice: 29.99,
       yearlyPrice: 299.99,
       icon: Zap,
-      color: "blue",
+      color: 'blue',
       features: {
-        trades: "100 per day",
-        executionSpeed: "Fast (50-150ms)",
-        aiSignals: "10 per day",
+        trades: '100 per day',
+        executionSpeed: 'Fast (50-150ms)',
+        aiSignals: '10 per day',
         autoTrade: false,
         advancedOrders: true,
         realTimeData: true,
-        portfolioValue: "Up to $10,000",
-        support: "Email",
-        research: "Advanced",
-        alerts: "25 per day",
-        backtesting: "Basic",
+        portfolioValue: 'Up to $10,000',
+        support: 'Email',
+        research: 'Advanced',
+        alerts: '25 per day',
+        backtesting: 'Basic',
         apiAccess: false,
       },
       popular: false,
     },
     {
-      id: "pro",
-      name: "Alpha Wolf",
-      description: "Professional trading with automation",
+      id: 'pro',
+      name: 'Alpha Wolf',
+      description: 'Professional trading with automation',
       monthlyPrice: 99.99,
       yearlyPrice: 999.99,
       icon: Bot,
-      color: "purple",
+      color: 'purple',
       features: {
-        trades: "500 per day",
-        executionSpeed: "Ultra-Fast (20-70ms)",
-        aiSignals: "25 per day",
+        trades: '500 per day',
+        executionSpeed: 'Ultra-Fast (20-70ms)',
+        aiSignals: '25 per day',
         autoTrade: true,
         advancedOrders: true,
         realTimeData: true,
-        portfolioValue: "Up to $100,000",
-        support: "Priority",
-        research: "Premium",
-        alerts: "100 per day",
-        backtesting: "Advanced",
-        apiAccess: "Basic",
+        portfolioValue: 'Up to $100,000',
+        support: 'Priority',
+        research: 'Premium',
+        alerts: '100 per day',
+        backtesting: 'Advanced',
+        apiAccess: 'Basic',
       },
       popular: true,
     },
     {
-      id: "ultimate",
-      name: "Alpha Apex",
-      description: "Ultimate trading machine with unlimited power",
+      id: 'ultimate',
+      name: 'Alpha Apex',
+      description: 'Ultimate trading machine with unlimited power',
       monthlyPrice: 299.99,
       yearlyPrice: 2999.99,
       icon: Lightning,
-      color: "gold",
+      color: 'gold',
       features: {
-        trades: "Unlimited",
-        executionSpeed: "Lightning (5-15ms)",
-        aiSignals: "Unlimited",
+        trades: 'Unlimited',
+        executionSpeed: 'Lightning (5-15ms)',
+        aiSignals: 'Unlimited',
         autoTrade: true,
         advancedOrders: true,
         realTimeData: true,
-        portfolioValue: "Unlimited",
-        support: "24/7 Dedicated",
-        research: "Institutional",
-        alerts: "Unlimited",
-        backtesting: "Professional",
-        apiAccess: "Full",
+        portfolioValue: 'Unlimited',
+        support: '24/7 Dedicated',
+        research: 'Institutional',
+        alerts: 'Unlimited',
+        backtesting: 'Professional',
+        apiAccess: 'Full',
       },
       popular: false,
     },
-  ]
+  ];
 
-  const getPrice = (tier) => {
-    return billingCycle === "yearly" ? tier.yearlyPrice : tier.monthlyPrice
-  }
+  const getPrice = tier => {
+    return billingCycle === 'yearly' ? tier.yearlyPrice : tier.monthlyPrice;
+  };
 
-  const getSavings = (tier) => {
-    if (tier.monthlyPrice === 0) return null
-    const monthly = tier.monthlyPrice * 12
-    const yearly = tier.yearlyPrice
-    const savings = monthly - yearly
-    const percentage = Math.round((savings / monthly) * 100)
-    return { amount: savings.toFixed(2), percentage }
-  }
+  const getSavings = tier => {
+    if (tier.monthlyPrice === 0) return null;
+    const monthly = tier.monthlyPrice * 12;
+    const yearly = tier.yearlyPrice;
+    const savings = monthly - yearly;
+    const percentage = Math.round((savings / monthly) * 100);
+    return { amount: savings.toFixed(2), percentage };
+  };
 
-  const getCardStyles = (tier) => {
-    const isCurrentTier = currentTier === tier.id
-    const baseStyles = "relative border-2 transition-all hover:scale-105"
+  const getCardStyles = tier => {
+    const isCurrentTier = currentTier === tier.id;
+    const baseStyles = 'relative border-2 transition-all hover:scale-105';
 
     if (isCurrentTier) {
-      return `${baseStyles} bg-gradient-to-b from-${tier.color}-500/20 to-${tier.color}-600/10 border-${tier.color}-500/50 shadow-lg shadow-${tier.color}-500/25`
+      return `${baseStyles} bg-gradient-to-b from-${tier.color}-500/20 to-${tier.color}-600/10 border-${tier.color}-500/50 shadow-lg shadow-${tier.color}-500/25`;
     }
 
     if (tier.popular) {
-      return `${baseStyles} bg-gradient-to-b from-purple-500/10 to-pink-500/10 border-purple-500/50 shadow-lg shadow-purple-500/25`
+      return `${baseStyles} bg-gradient-to-b from-purple-500/10 to-pink-500/10 border-purple-500/50 shadow-lg shadow-purple-500/25`;
     }
 
-    return `${baseStyles} bg-black/20 border-gray-700/50 hover:border-gray-600/50`
-  }
+    return `${baseStyles} bg-black/20 border-gray-700/50 hover:border-gray-600/50`;
+  };
 
-  const getButtonStyles = (tier) => {
-    const isCurrentTier = currentTier === tier.id
+  const getButtonStyles = tier => {
+    const isCurrentTier = currentTier === tier.id;
 
     if (isCurrentTier) {
-      return "bg-gray-700 text-gray-300 cursor-not-allowed"
+      return 'bg-gray-700 text-gray-300 cursor-not-allowed';
     }
 
     switch (tier.id) {
-      case "free":
-        return "bg-gray-600 hover:bg-gray-700"
-      case "basic":
-        return "bg-blue-600 hover:bg-blue-700"
-      case "pro":
-        return "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-      case "ultimate":
-        return "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
+      case 'free':
+        return 'bg-gray-600 hover:bg-gray-700';
+      case 'basic':
+        return 'bg-blue-600 hover:bg-blue-700';
+      case 'pro':
+        return 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600';
+      case 'ultimate':
+        return 'bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600';
       default:
-        return "bg-gray-600 hover:bg-gray-700"
+        return 'bg-gray-600 hover:bg-gray-700';
     }
-  }
+  };
 
   const featuresList = [
-    { key: "trades", label: "Daily Trades", icon: Zap },
-    { key: "executionSpeed", label: "Execution Speed", icon: Lightning },
-    { key: "aiSignals", label: "AI Signals", icon: Brain },
-    { key: "autoTrade", label: "Auto-Trade Bot", icon: Bot },
-    { key: "advancedOrders", label: "Advanced Orders", icon: Rocket },
-    { key: "realTimeData", label: "Real-time Data", icon: Zap },
-    { key: "portfolioValue", label: "Portfolio Limit", icon: Diamond },
-    { key: "support", label: "Support Level", icon: Star },
-    { key: "research", label: "Research Tools", icon: Brain },
-    { key: "alerts", label: "Price Alerts", icon: Zap },
-    { key: "backtesting", label: "Backtesting", icon: Rocket },
-    { key: "apiAccess", label: "API Access", icon: Lightning },
-  ]
+    { key: 'trades', label: 'Daily Trades', icon: Zap },
+    { key: 'executionSpeed', label: 'Execution Speed', icon: Lightning },
+    { key: 'aiSignals', label: 'AI Signals', icon: Brain },
+    { key: 'autoTrade', label: 'Auto-Trade Bot', icon: Bot },
+    { key: 'advancedOrders', label: 'Advanced Orders', icon: Rocket },
+    { key: 'realTimeData', label: 'Real-time Data', icon: Zap },
+    { key: 'portfolioValue', label: 'Portfolio Limit', icon: Diamond },
+    { key: 'support', label: 'Support Level', icon: Star },
+    { key: 'research', label: 'Research Tools', icon: Brain },
+    { key: 'alerts', label: 'Price Alerts', icon: Zap },
+    { key: 'backtesting', label: 'Backtesting', icon: Rocket },
+    { key: 'apiAccess', label: 'API Access', icon: Lightning },
+  ];
 
   return (
     <div className="space-y-8">
@@ -184,14 +195,22 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
           Unlock the power of AI-driven trading with lightning-fast execution and premium features
         </p>
         <div className="flex items-center space-x-4">
-          <span className={`text-sm ${billingCycle === "monthly" ? "text-white" : "text-gray-400"}`}>Monthly</span>
+          <span
+            className={`text-sm ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-400'}`}
+          >
+            Monthly
+          </span>
           <Switch
-            checked={billingCycle === "yearly"}
-            onCheckedChange={(checked) => setBillingCycle(checked ? "yearly" : "monthly")}
+            checked={billingCycle === 'yearly'}
+            onCheckedChange={checked => setBillingCycle(checked ? 'yearly' : 'monthly')}
             className="data-[state=checked]:bg-purple-500"
           />
           <div className="flex items-center">
-            <span className={`text-sm ${billingCycle === "yearly" ? "text-white" : "text-gray-400"}`}>Yearly</span>
+            <span
+              className={`text-sm ${billingCycle === 'yearly' ? 'text-white' : 'text-gray-400'}`}
+            >
+              Yearly
+            </span>
             <Badge className="ml-2 bg-green-500 text-xs">Save up to 17%</Badge>
           </div>
         </div>
@@ -199,11 +218,11 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
 
       {/* Membership Tiers */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {tiers.map((tier) => {
-          const IconComponent = tier.icon
-          const isCurrentTier = currentTier === tier.id
-          const price = getPrice(tier)
-          const savings = billingCycle === "yearly" ? getSavings(tier) : null
+        {tiers.map(tier => {
+          const IconComponent = tier.icon;
+          const isCurrentTier = currentTier === tier.id;
+          const price = getPrice(tier);
+          const savings = billingCycle === 'yearly' ? getSavings(tier) : null;
 
           return (
             <Card key={tier.id} className={getCardStyles(tier)}>
@@ -227,12 +246,16 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
 
                 <div className="py-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-white">{price === 0 ? "Free" : `$${price}`}</span>
+                    <span className="text-4xl font-bold text-white">
+                      {price === 0 ? 'Free' : `$${price}`}
+                    </span>
                     {price > 0 && (
-                      <span className="text-gray-400 ml-2">/{billingCycle === "yearly" ? "year" : "month"}</span>
+                      <span className="text-gray-400 ml-2">
+                        /{billingCycle === 'yearly' ? 'year' : 'month'}
+                      </span>
                     )}
                   </div>
-                  {billingCycle === "yearly" && savings && (
+                  {billingCycle === 'yearly' && savings && (
                     <p className="text-sm text-green-400 mt-1">
                       Save ${savings.amount} ({savings.percentage}%)
                     </p>
@@ -242,10 +265,10 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
 
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  {featuresList.map((feature) => {
-                    const FeatureIcon = feature.icon
-                    const value = tier.features[feature.key]
-                    const isBoolean = typeof value === "boolean"
+                  {featuresList.map(feature => {
+                    const FeatureIcon = feature.icon;
+                    const value = tier.features[feature.key];
+                    const isBoolean = typeof value === 'boolean';
 
                     return (
                       <div key={feature.key} className="flex items-center justify-between">
@@ -265,7 +288,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
                           )}
                         </div>
                       </div>
-                    )
+                    );
                   })}
                 </div>
 
@@ -274,11 +297,15 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
                   onClick={() => onUpgrade(tier.id)}
                   disabled={isCurrentTier}
                 >
-                  {isCurrentTier ? "Current Plan" : tier.id === "free" ? "Get Started" : "Upgrade Now"}
+                  {isCurrentTier
+                    ? 'Current Plan'
+                    : tier.id === 'free'
+                      ? 'Get Started'
+                      : 'Upgrade Now'}
                 </Button>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
 
@@ -304,7 +331,9 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
                 <Bot className="h-8 w-8 text-purple-400" />
               </div>
               <h3 className="text-white font-bold">AI Automation</h3>
-              <p className="text-gray-400 text-sm">Let our AI bot trade for you 24/7 with advanced algorithms</p>
+              <p className="text-gray-400 text-sm">
+                Let our AI bot trade for you 24/7 with advanced algorithms
+              </p>
             </div>
 
             <div className="text-center space-y-3">
@@ -312,11 +341,13 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
                 <Brain className="h-8 w-8 text-green-400" />
               </div>
               <h3 className="text-white font-bold">Smart Insights</h3>
-              <p className="text-gray-400 text-sm">Get unlimited AI-powered trading signals and market predictions</p>
+              <p className="text-gray-400 text-sm">
+                Get unlimited AI-powered trading signals and market predictions
+              </p>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

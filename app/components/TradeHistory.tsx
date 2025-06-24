@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { BarChart3, TrendingUp, ExternalLink, Filter } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 
 export default function TradeHistory({ recentTrades, botStats }) {
-  const formatTime = (timestamp) => {
-    return new Date(timestamp).toLocaleTimeString()
-  }
+  const formatTime = timestamp => {
+    return new Date(timestamp).toLocaleTimeString();
+  };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+  const formatCurrency = amount => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
       minimumFractionDigits: 2,
-    }).format(amount)
-  }
+    }).format(amount);
+  };
 
   return (
     <div className="space-y-6">
@@ -41,7 +41,9 @@ export default function TradeHistory({ recentTrades, botStats }) {
         <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
           <CardContent className="p-4 text-center">
             <TrendingUp className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-            <p className={`text-2xl font-bold ${botStats.totalPnL >= 0 ? "text-green-400" : "text-red-400"}`}>
+            <p
+              className={`text-2xl font-bold ${botStats.totalPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}
+            >
               {formatCurrency(botStats.totalPnL)}
             </p>
             <p className="text-sm text-gray-400">Total P&L</p>
@@ -75,11 +77,13 @@ export default function TradeHistory({ recentTrades, botStats }) {
           {recentTrades.length === 0 ? (
             <div className="text-center py-8">
               <BarChart3 className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-400">No trades executed yet. Start the bot to begin trading.</p>
+              <p className="text-gray-400">
+                No trades executed yet. Start the bot to begin trading.
+              </p>
             </div>
           ) : (
             <div className="space-y-3">
-              {recentTrades.map((trade) => (
+              {recentTrades.map(trade => (
                 <div
                   key={trade.id}
                   className="p-4 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 transition-all"
@@ -87,7 +91,9 @@ export default function TradeHistory({ recentTrades, botStats }) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-2">
-                        <Badge variant={trade.side === "BUY" ? "default" : "destructive"}>{trade.side}</Badge>
+                        <Badge variant={trade.side === 'BUY' ? 'default' : 'destructive'}>
+                          {trade.side}
+                        </Badge>
                         <span className="text-white font-semibold">{trade.symbol}</span>
                       </div>
 
@@ -104,8 +110,10 @@ export default function TradeHistory({ recentTrades, botStats }) {
 
                     <div className="flex items-center space-x-4">
                       <div className="text-right">
-                        <p className={`font-bold ${trade.pnl >= 0 ? "text-green-400" : "text-red-400"}`}>
-                          {trade.pnl >= 0 ? "+" : ""}
+                        <p
+                          className={`font-bold ${trade.pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                        >
+                          {trade.pnl >= 0 ? '+' : ''}
                           {formatCurrency(trade.pnl)}
                         </p>
                         <p className="text-xs text-gray-400">{formatTime(trade.timestamp)}</p>
@@ -123,5 +131,5 @@ export default function TradeHistory({ recentTrades, botStats }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

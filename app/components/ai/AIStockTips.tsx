@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   TrendingUp,
@@ -17,84 +17,84 @@ import {
   BarChart3,
   CheckCircle,
   Crown,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function AIStockTips({ membershipLevel }) {
-  const [topPicks, setTopPicks] = useState([])
-  const [predictions, setPredictions] = useState([])
-  const [marketInsights, setMarketInsights] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [topPicks, setTopPicks] = useState([]);
+  const [predictions, setPredictions] = useState([]);
+  const [marketInsights, setMarketInsights] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const membershipLimits = {
     free: { tips: 3, predictions: 1, insights: 1 },
     basic: { tips: 10, predictions: 5, insights: 3 },
     pro: { tips: 25, predictions: 15, insights: 10 },
-    ultimate: { tips: "unlimited", predictions: "unlimited", insights: "unlimited" },
-  }
+    ultimate: { tips: 'unlimited', predictions: 'unlimited', insights: 'unlimited' },
+  };
 
-  const currentLimits = membershipLimits[membershipLevel] || membershipLimits.free
+  const currentLimits = membershipLimits[membershipLevel] || membershipLimits.free;
 
   useEffect(() => {
-    generateAITips()
-    generatePredictions()
-    generateMarketInsights()
+    generateAITips();
+    generatePredictions();
+    generateMarketInsights();
 
     const interval = setInterval(() => {
-      generateAITips()
-      generatePredictions()
-      generateMarketInsights()
-    }, 30000) // Update every 30 seconds
+      generateAITips();
+      generatePredictions();
+      generateMarketInsights();
+    }, 30000); // Update every 30 seconds
 
-    return () => clearInterval(interval)
-  }, [membershipLevel])
+    return () => clearInterval(interval);
+  }, [membershipLevel]);
 
   const generateAITips = () => {
-    setLoading(true)
+    setLoading(true);
 
     const stocks = [
-      "AAPL",
-      "MSFT",
-      "GOOGL",
-      "TSLA",
-      "NVDA",
-      "META",
-      "AMZN",
-      "NFLX",
-      "CRM",
-      "PLTR",
-      "COIN",
-      "RBLX",
-      "SNOW",
-      "ZM",
-      "SHOP",
-      "SQ",
-      "PYPL",
-      "ROKU",
-    ]
+      'AAPL',
+      'MSFT',
+      'GOOGL',
+      'TSLA',
+      'NVDA',
+      'META',
+      'AMZN',
+      'NFLX',
+      'CRM',
+      'PLTR',
+      'COIN',
+      'RBLX',
+      'SNOW',
+      'ZM',
+      'SHOP',
+      'SQ',
+      'PYPL',
+      'ROKU',
+    ];
 
     const reasons = [
-      "Strong earnings momentum",
-      "Technical breakout pattern",
-      "Institutional buying surge",
-      "Positive analyst upgrades",
-      "Market leadership position",
-      "Innovation catalyst",
-      "Undervalued fundamentals",
-      "Sector rotation opportunity",
-      "AI adoption tailwind",
-      "Revenue growth acceleration",
-    ]
+      'Strong earnings momentum',
+      'Technical breakout pattern',
+      'Institutional buying surge',
+      'Positive analyst upgrades',
+      'Market leadership position',
+      'Innovation catalyst',
+      'Undervalued fundamentals',
+      'Sector rotation opportunity',
+      'AI adoption tailwind',
+      'Revenue growth acceleration',
+    ];
 
-    const tips = []
-    const maxTips = currentLimits.tips === "unlimited" ? 15 : currentLimits.tips
+    const tips = [];
+    const maxTips = currentLimits.tips === 'unlimited' ? 15 : currentLimits.tips;
 
     for (let i = 0; i < maxTips; i++) {
-      const symbol = stocks[Math.floor(Math.random() * stocks.length)]
-      const direction = Math.random() > 0.3 ? "bullish" : "bearish" // 70% bullish bias
-      const confidence = 70 + Math.random() * 30
-      const targetPrice = 100 + Math.random() * 400
-      const currentPrice = targetPrice * (0.85 + Math.random() * 0.3)
-      const timeframe = ["1 week", "2 weeks", "1 month", "3 months"][Math.floor(Math.random() * 4)]
+      const symbol = stocks[Math.floor(Math.random() * stocks.length)];
+      const direction = Math.random() > 0.3 ? 'bullish' : 'bearish'; // 70% bullish bias
+      const confidence = 70 + Math.random() * 30;
+      const targetPrice = 100 + Math.random() * 400;
+      const currentPrice = targetPrice * (0.85 + Math.random() * 0.3);
+      const timeframe = ['1 week', '2 weeks', '1 month', '3 months'][Math.floor(Math.random() * 4)];
 
       tips.push({
         id: i + 1,
@@ -107,101 +107,104 @@ export default function AIStockTips({ membershipLevel }) {
         timeframe,
         reason: reasons[Math.floor(Math.random() * reasons.length)],
         aiScore: 80 + Math.random() * 20,
-        riskLevel: confidence > 85 ? "Low" : confidence > 75 ? "Medium" : "High",
+        riskLevel: confidence > 85 ? 'Low' : confidence > 75 ? 'Medium' : 'High',
         timestamp: new Date(),
-      })
+      });
     }
 
-    setTopPicks(tips.sort((a, b) => b.confidence - a.confidence))
-    setLoading(false)
-  }
+    setTopPicks(tips.sort((a, b) => b.confidence - a.confidence));
+    setLoading(false);
+  };
 
   const generatePredictions = () => {
-    const predictions = []
-    const maxPredictions = currentLimits.predictions === "unlimited" ? 10 : currentLimits.predictions
+    const predictions = [];
+    const maxPredictions =
+      currentLimits.predictions === 'unlimited' ? 10 : currentLimits.predictions;
 
     for (let i = 0; i < maxPredictions; i++) {
       predictions.push({
         id: i + 1,
         title: [
-          "Market Rally Expected",
-          "Tech Sector Rotation",
-          "Energy Breakout Coming",
-          "Healthcare Momentum",
-          "Financial Strength",
-          "Consumer Resilience",
-          "AI Revolution Continues",
-          "Green Energy Surge",
-          "Biotech Innovation",
-          "Crypto Integration",
+          'Market Rally Expected',
+          'Tech Sector Rotation',
+          'Energy Breakout Coming',
+          'Healthcare Momentum',
+          'Financial Strength',
+          'Consumer Resilience',
+          'AI Revolution Continues',
+          'Green Energy Surge',
+          'Biotech Innovation',
+          'Crypto Integration',
         ][i % 10],
         prediction: [
-          "S&P 500 likely to reach new highs within 2 weeks",
-          "Technology stocks showing strong accumulation patterns",
-          "Energy sector poised for 15%+ gains this quarter",
-          "Healthcare names breaking out of consolidation",
-          "Financial sector benefiting from rate environment",
-          "Consumer discretionary showing resilience",
-          "AI-related stocks continuing momentum",
-          "Clean energy stocks forming base patterns",
-          "Biotech sector due for rotation",
-          "Crypto adoption driving fintech growth",
+          'S&P 500 likely to reach new highs within 2 weeks',
+          'Technology stocks showing strong accumulation patterns',
+          'Energy sector poised for 15%+ gains this quarter',
+          'Healthcare names breaking out of consolidation',
+          'Financial sector benefiting from rate environment',
+          'Consumer discretionary showing resilience',
+          'AI-related stocks continuing momentum',
+          'Clean energy stocks forming base patterns',
+          'Biotech sector due for rotation',
+          'Crypto adoption driving fintech growth',
         ][i % 10],
         probability: 70 + Math.random() * 25,
-        timeframe: ["1-2 weeks", "2-4 weeks", "1-2 months", "2-3 months"][Math.floor(Math.random() * 4)],
-        impact: ["High", "Medium", "Low"][Math.floor(Math.random() * 3)],
-        category: ["Market", "Sector", "Individual"][Math.floor(Math.random() * 3)],
-      })
+        timeframe: ['1-2 weeks', '2-4 weeks', '1-2 months', '2-3 months'][
+          Math.floor(Math.random() * 4)
+        ],
+        impact: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)],
+        category: ['Market', 'Sector', 'Individual'][Math.floor(Math.random() * 3)],
+      });
     }
 
-    setPredictions(predictions)
-  }
+    setPredictions(predictions);
+  };
 
   const generateMarketInsights = () => {
     const insights = {
       marketSentiment: {
         score: 65 + Math.random() * 30,
-        trend: Math.random() > 0.5 ? "improving" : "declining",
-        drivers: ["Fed policy", "Earnings season", "Economic data", "Geopolitical events"],
+        trend: Math.random() > 0.5 ? 'improving' : 'declining',
+        drivers: ['Fed policy', 'Earnings season', 'Economic data', 'Geopolitical events'],
       },
       sectorRotation: {
-        inflow: ["Technology", "Healthcare", "Energy"][Math.floor(Math.random() * 3)],
-        outflow: ["Utilities", "REITs", "Consumer Staples"][Math.floor(Math.random() * 3)],
+        inflow: ['Technology', 'Healthcare', 'Energy'][Math.floor(Math.random() * 3)],
+        outflow: ['Utilities', 'REITs', 'Consumer Staples'][Math.floor(Math.random() * 3)],
         strength: 70 + Math.random() * 30,
       },
       volatilityForecast: {
-        level: ["Low", "Medium", "High"][Math.floor(Math.random() * 3)],
-        direction: Math.random() > 0.5 ? "increasing" : "decreasing",
-        timeframe: "next 2 weeks",
+        level: ['Low', 'Medium', 'High'][Math.floor(Math.random() * 3)],
+        direction: Math.random() > 0.5 ? 'increasing' : 'decreasing',
+        timeframe: 'next 2 weeks',
       },
       keyLevels: {
         support: 4200 + Math.random() * 300,
         resistance: 4600 + Math.random() * 400,
         breakoutTarget: 5000 + Math.random() * 200,
       },
-    }
+    };
 
-    setMarketInsights(insights)
-  }
+    setMarketInsights(insights);
+  };
 
-  const getConfidenceColor = (confidence) => {
-    if (confidence >= 85) return "text-green-400"
-    if (confidence >= 75) return "text-yellow-400"
-    return "text-orange-400"
-  }
+  const getConfidenceColor = confidence => {
+    if (confidence >= 85) return 'text-green-400';
+    if (confidence >= 75) return 'text-yellow-400';
+    return 'text-orange-400';
+  };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = risk => {
     switch (risk) {
-      case "Low":
-        return "text-green-400"
-      case "Medium":
-        return "text-yellow-400"
-      case "High":
-        return "text-red-400"
+      case 'Low':
+        return 'text-green-400';
+      case 'Medium':
+        return 'text-yellow-400';
+      case 'High':
+        return 'text-red-400';
       default:
-        return "text-gray-400"
+        return 'text-gray-400';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -218,7 +221,7 @@ export default function AIStockTips({ membershipLevel }) {
               </Badge>
             </CardTitle>
             <Badge className="bg-cyan-500">
-              {topPicks.length}/{currentLimits.tips === "unlimited" ? "∞" : currentLimits.tips} Tips
+              {topPicks.length}/{currentLimits.tips === 'unlimited' ? '∞' : currentLimits.tips} Tips
             </Badge>
           </div>
         </CardHeader>
@@ -239,8 +242,8 @@ export default function AIStockTips({ membershipLevel }) {
                     <div className="flex items-center space-x-3">
                       <Badge className="bg-purple-500 text-white font-bold">#{index + 1}</Badge>
                       <span className="text-white font-bold text-lg">{tip.symbol}</span>
-                      <Badge variant={tip.direction === "bullish" ? "default" : "destructive"}>
-                        {tip.direction === "bullish" ? (
+                      <Badge variant={tip.direction === 'bullish' ? 'default' : 'destructive'}>
+                        {tip.direction === 'bullish' ? (
                           <TrendingUp className="h-3 w-3 mr-1" />
                         ) : (
                           <TrendingDown className="h-3 w-3 mr-1" />
@@ -266,8 +269,10 @@ export default function AIStockTips({ membershipLevel }) {
                     </div>
                     <div>
                       <p className="text-gray-400 text-sm">Potential Return</p>
-                      <p className={`font-semibold ${tip.potentialReturn >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {tip.potentialReturn >= 0 ? "+" : ""}
+                      <p
+                        className={`font-semibold ${tip.potentialReturn >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {tip.potentialReturn >= 0 ? '+' : ''}
                         {tip.potentialReturn.toFixed(1)}%
                       </p>
                     </div>
@@ -281,7 +286,9 @@ export default function AIStockTips({ membershipLevel }) {
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-2">
                         <Star className="h-4 w-4 text-yellow-400" />
-                        <span className="text-yellow-400 font-semibold">AI Score: {tip.aiScore.toFixed(0)}</span>
+                        <span className="text-yellow-400 font-semibold">
+                          AI Score: {tip.aiScore.toFixed(0)}
+                        </span>
                       </div>
                       <Badge className={getRiskColor(tip.riskLevel)}>{tip.riskLevel} Risk</Badge>
                     </div>
@@ -308,7 +315,7 @@ export default function AIStockTips({ membershipLevel }) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {predictions.map((prediction) => (
+            {predictions.map(prediction => (
               <div
                 key={prediction.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"
@@ -319,7 +326,7 @@ export default function AIStockTips({ membershipLevel }) {
                     <Badge className="bg-cyan-500">{prediction.probability.toFixed(0)}%</Badge>
                     <Badge
                       variant="outline"
-                      className={`border-${prediction.impact === "High" ? "red" : prediction.impact === "Medium" ? "yellow" : "green"}-500/30`}
+                      className={`border-${prediction.impact === 'High' ? 'red' : prediction.impact === 'Medium' ? 'yellow' : 'green'}-500/30`}
                     >
                       {prediction.impact} Impact
                     </Badge>
@@ -358,7 +365,9 @@ export default function AIStockTips({ membershipLevel }) {
                 {marketInsights.marketSentiment?.score.toFixed(0)}
               </div>
               <Progress value={marketInsights.marketSentiment?.score} className="h-3 mb-2" />
-              <p className="text-sm text-gray-400">Sentiment is {marketInsights.marketSentiment?.trend}</p>
+              <p className="text-sm text-gray-400">
+                Sentiment is {marketInsights.marketSentiment?.trend}
+              </p>
             </div>
             <div>
               <h5 className="text-white font-semibold mb-2">Key Drivers</h5>
@@ -407,7 +416,7 @@ export default function AIStockTips({ membershipLevel }) {
       </div>
 
       {/* Upgrade Prompt for Free Users */}
-      {membershipLevel === "free" && (
+      {membershipLevel === 'free' && (
         <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/50 backdrop-blur-xl">
           <CardContent className="p-6 text-center">
             <Crown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
@@ -423,5 +432,5 @@ export default function AIStockTips({ membershipLevel }) {
         </Card>
       )}
     </div>
-  )
+  );
 }

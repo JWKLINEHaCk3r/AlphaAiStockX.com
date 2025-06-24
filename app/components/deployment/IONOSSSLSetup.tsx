@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Shield, AlertTriangle, CheckCircle } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Shield, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export default function IONOSSSLSetup() {
   return (
@@ -11,7 +11,8 @@ export default function IONOSSSLSetup() {
         <Shield className="h-5 w-5 text-green-500" />
         <AlertTitle className="text-green-700">Security First</AlertTitle>
         <AlertDescription className="text-green-600">
-          SSL encryption is essential for financial platforms like AlphaAIStockX to protect user data and build trust.
+          SSL encryption is essential for financial platforms like AlphaAIStockX to protect user
+          data and build trust.
         </AlertDescription>
       </Alert>
 
@@ -23,19 +24,23 @@ export default function IONOSSSLSetup() {
           <CardContent>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <strong>User Trust:</strong> Visitors expect secure connections, especially for financial platforms
+                <strong>User Trust:</strong> Visitors expect secure connections, especially for
+                financial platforms
               </li>
               <li>
-                <strong>Data Protection:</strong> Encrypts sensitive user information and financial data
+                <strong>Data Protection:</strong> Encrypts sensitive user information and financial
+                data
               </li>
               <li>
                 <strong>SEO Benefits:</strong> Google prioritizes secure websites in search rankings
               </li>
               <li>
-                <strong>Browser Compatibility:</strong> Modern browsers warn users about non-secure sites
+                <strong>Browser Compatibility:</strong> Modern browsers warn users about non-secure
+                sites
               </li>
               <li>
-                <strong>Regulatory Compliance:</strong> Helps meet financial industry security requirements
+                <strong>Regulatory Compliance:</strong> Helps meet financial industry security
+                requirements
               </li>
             </ul>
           </CardContent>
@@ -44,7 +49,9 @@ export default function IONOSSSLSetup() {
         <Card>
           <CardHeader>
             <CardTitle>Option 1: Free SSL Certificate from IONOS</CardTitle>
-            <CardDescription>IONOS offers free SSL certificates with most hosting plans</CardDescription>
+            <CardDescription>
+              IONOS offers free SSL certificates with most hosting plans
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ol className="list-decimal pl-5 space-y-2">
@@ -54,7 +61,9 @@ export default function IONOSSSLSetup() {
               <li>Click "Order SSL Certificate" or "Activate Free SSL"</li>
               <li>Choose "DV Certificate" (Domain Validation)</li>
               <li>Follow the verification process (usually automatic with IONOS hosting)</li>
-              <li>Wait for the certificate to be issued (typically a few minutes to a few hours)</li>
+              <li>
+                Wait for the certificate to be issued (typically a few minutes to a few hours)
+              </li>
             </ol>
           </CardContent>
         </Card>
@@ -66,7 +75,8 @@ export default function IONOSSSLSetup() {
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              For a financial platform like AlphaAIStockX, consider upgrading to a premium SSL certificate:
+              For a financial platform like AlphaAIStockX, consider upgrading to a premium SSL
+              certificate:
             </p>
 
             <ul className="list-disc pl-5 space-y-2">
@@ -74,8 +84,8 @@ export default function IONOSSSLSetup() {
                 <strong>Organization Validation (OV) SSL:</strong> Verifies your business identity
               </li>
               <li>
-                <strong>Extended Validation (EV) SSL:</strong> Highest level of validation, shows company name in
-                browser
+                <strong>Extended Validation (EV) SSL:</strong> Highest level of validation, shows
+                company name in browser
               </li>
               <li>
                 <strong>Wildcard SSL:</strong> Covers your main domain and all subdomains
@@ -96,7 +106,8 @@ export default function IONOSSSLSetup() {
             <div className="mt-4 flex items-start gap-2 bg-amber-50 p-3 rounded-md border border-amber-200">
               <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
               <p className="text-amber-700 text-sm">
-                Premium certificates can take 1-5 business days for validation, depending on the type. Plan accordingly.
+                Premium certificates can take 1-5 business days for validation, depending on the
+                type. Plan accordingly.
               </p>
             </div>
           </CardContent>
@@ -109,7 +120,9 @@ export default function IONOSSSLSetup() {
           </CardHeader>
           <CardContent>
             <ol className="list-decimal pl-5 space-y-2">
-              <li>After your SSL certificate is issued, go to "Domains & SSL" → "SSL Certificates"</li>
+              <li>
+                After your SSL certificate is issued, go to "Domains & SSL" → "SSL Certificates"
+              </li>
               <li>Find your domain and click "Assign"</li>
               <li>Select the hosting package where your website is hosted</li>
               <li>Save the changes</li>
@@ -125,8 +138,8 @@ export default function IONOSSSLSetup() {
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              Create or edit the <code className="bg-gray-100 px-1 py-0.5 rounded">.htaccess</code> file in your web
-              root directory and add:
+              Create or edit the <code className="bg-gray-100 px-1 py-0.5 rounded">.htaccess</code>{' '}
+              file in your web root directory and add:
             </p>
 
             <div className="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm mb-4 whitespace-pre-wrap">
@@ -153,22 +166,25 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`}
               <li>Check for the padlock icon in the browser address bar</li>
               <li>Click the padlock to view certificate details</li>
               <li>
-                Use an SSL checker tool like{" "}
-                <a href="https://www.ssllabs.com/ssltest/" className="text-blue-600 hover:underline">
+                Use an SSL checker tool like{' '}
+                <a
+                  href="https://www.ssllabs.com/ssltest/"
+                  className="text-blue-600 hover:underline"
+                >
                   SSL Labs
-                </a>{" "}
+                </a>{' '}
                 to verify proper configuration
               </li>
             </ol>
             <div className="mt-4 p-3 bg-green-50 rounded-md border border-green-200">
               <p className="text-sm text-green-700">
-                <strong>Success:</strong> When properly configured, your site will show a secure padlock icon and all
-                pages will automatically load via HTTPS.
+                <strong>Success:</strong> When properly configured, your site will show a secure
+                padlock icon and all pages will automatically load via HTTPS.
               </p>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }

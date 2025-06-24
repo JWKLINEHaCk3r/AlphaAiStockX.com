@@ -1,12 +1,12 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
-import { Input } from "@/components/ui/input"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Input } from '@/components/ui/input';
 import {
   BookOpen,
   GraduationCap,
@@ -23,63 +23,65 @@ import {
   FileText,
   Users,
   Lightbulb,
-} from "lucide-react"
+} from 'lucide-react';
 
-import { tradingEducationService } from "../../services/trading-education-service"
+import { tradingEducationService } from '../../services/trading-education-service';
 
 interface TradingEducationCenterProps {
-  className?: string
+  className?: string;
 }
 
-export default function TradingEducationCenter({ className = "" }: TradingEducationCenterProps) {
-  const [activeTab, setActiveTab] = useState("overview")
-  const [selectedSeries, setSelectedSeries] = useState("series_7")
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [testQuestions, setTestQuestions] = useState([])
-  const [userAnswers, setUserAnswers] = useState({})
-  const [testResults, setTestResults] = useState(null)
-  const [studyProgress, setStudyProgress] = useState({})
-  const [searchQuery, setSearchQuery] = useState("")
+export default function TradingEducationCenter({ className = '' }: TradingEducationCenterProps) {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [selectedSeries, setSelectedSeries] = useState('series_7');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [testQuestions, setTestQuestions] = useState([]);
+  const [userAnswers, setUserAnswers] = useState({});
+  const [testResults, setTestResults] = useState(null);
+  const [studyProgress, setStudyProgress] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    initializeEducation()
-  }, [])
+    initializeEducation();
+  }, []);
 
   const initializeEducation = async () => {
-    await tradingEducationService.initialize()
-    loadTestQuestions()
-    loadUserProgress()
-  }
+    await tradingEducationService.initialize();
+    loadTestQuestions();
+    loadUserProgress();
+  };
 
   const loadTestQuestions = () => {
-    const questions = tradingEducationService.getTestQuestions(selectedSeries, 10)
-    setTestQuestions(questions)
-    setCurrentQuestion(0)
-    setUserAnswers({})
-    setTestResults(null)
-  }
+    const questions = tradingEducationService.getTestQuestions(selectedSeries, 10);
+    setTestQuestions(questions);
+    setCurrentQuestion(0);
+    setUserAnswers({});
+    setTestResults(null);
+  };
 
   const loadUserProgress = () => {
-    const progress = tradingEducationService.getUserProgress("user123")
-    setStudyProgress(progress)
-  }
+    const progress = tradingEducationService.getUserProgress('user123');
+    setStudyProgress(progress);
+  };
 
   const handleAnswerSubmit = (questionId: string, answer: number) => {
-    const result = tradingEducationService.submitTestAnswer("user123", questionId, answer)
-    setUserAnswers((prev) => ({ ...prev, [questionId]: { answer, result } }))
+    const result = tradingEducationService.submitTestAnswer('user123', questionId, answer);
+    setUserAnswers(prev => ({ ...prev, [questionId]: { answer, result } }));
 
     if (currentQuestion < testQuestions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1)
+      setCurrentQuestion(prev => prev + 1);
     } else {
       // Test completed
-      calculateTestResults()
+      calculateTestResults();
     }
-  }
+  };
 
   const calculateTestResults = () => {
-    const totalQuestions = testQuestions.length
-    const correctAnswers = Object.values(userAnswers).filter((answer: any) => answer.result.correct).length
-    const score = (correctAnswers / totalQuestions) * 100
+    const totalQuestions = testQuestions.length;
+    const correctAnswers = Object.values(userAnswers).filter(
+      (answer: any) => answer.result.correct
+    ).length;
+    const score = (correctAnswers / totalQuestions) * 100;
 
     setTestResults({
       score,
@@ -87,98 +89,98 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
       total: totalQuestions,
       passed: score >= 70,
       recommendations: generateRecommendations(score),
-    })
-  }
+    });
+  };
 
   const generateRecommendations = (score: number) => {
     if (score >= 90) {
       return [
         "Excellent performance! You're ready for the exam.",
-        "Consider taking practice tests to maintain your knowledge.",
-      ]
+        'Consider taking practice tests to maintain your knowledge.',
+      ];
     } else if (score >= 70) {
       return [
-        "Good performance! Review weak areas before the exam.",
-        "Take additional practice tests to improve confidence.",
-      ]
+        'Good performance! Review weak areas before the exam.',
+        'Take additional practice tests to improve confidence.',
+      ];
     } else {
       return [
-        "More study needed. Focus on fundamental concepts.",
-        "Review educational materials and retake practice tests.",
-      ]
+        'More study needed. Focus on fundamental concepts.',
+        'Review educational materials and retake practice tests.',
+      ];
     }
-  }
+  };
 
   const educationalTopics = [
     {
-      id: "securities_basics",
-      title: "Securities Fundamentals",
-      description: "Learn about stocks, bonds, and other securities",
+      id: 'securities_basics',
+      title: 'Securities Fundamentals',
+      description: 'Learn about stocks, bonds, and other securities',
       icon: TrendingUp,
       lessons: 12,
-      duration: "4 hours",
-      difficulty: "Beginner",
+      duration: '4 hours',
+      difficulty: 'Beginner',
     },
     {
-      id: "market_analysis",
-      title: "Market Analysis",
-      description: "Technical and fundamental analysis techniques",
+      id: 'market_analysis',
+      title: 'Market Analysis',
+      description: 'Technical and fundamental analysis techniques',
       icon: BarChart3,
       lessons: 15,
-      duration: "6 hours",
-      difficulty: "Intermediate",
+      duration: '6 hours',
+      difficulty: 'Intermediate',
     },
     {
-      id: "options_trading",
-      title: "Options Trading",
-      description: "Comprehensive options strategies and risk management",
+      id: 'options_trading',
+      title: 'Options Trading',
+      description: 'Comprehensive options strategies and risk management',
       icon: Target,
       lessons: 18,
-      duration: "8 hours",
-      difficulty: "Advanced",
+      duration: '8 hours',
+      difficulty: 'Advanced',
     },
     {
-      id: "risk_management",
-      title: "Risk Management",
-      description: "Portfolio risk assessment and mitigation strategies",
+      id: 'risk_management',
+      title: 'Risk Management',
+      description: 'Portfolio risk assessment and mitigation strategies',
       icon: Brain,
       lessons: 10,
-      duration: "5 hours",
-      difficulty: "Intermediate",
+      duration: '5 hours',
+      difficulty: 'Intermediate',
     },
-  ]
+  ];
 
   const seriesExams = [
     {
-      id: "series_6",
-      title: "Series 6",
-      description: "Investment Company and Variable Contracts Products Representative",
+      id: 'series_6',
+      title: 'Series 6',
+      description: 'Investment Company and Variable Contracts Products Representative',
       questions: 100,
       timeLimit: 135,
       passingScore: 70,
       topics: [
-        "Investment Company Products (50%)",
-        "Securities and Tax Regulations (25%)",
-        "Customer Accounts and Prohibited Activities (25%)",
+        'Investment Company Products (50%)',
+        'Securities and Tax Regulations (25%)',
+        'Customer Accounts and Prohibited Activities (25%)',
       ],
     },
     {
-      id: "series_7",
-      title: "Series 7",
-      description: "General Securities Representative",
+      id: 'series_7',
+      title: 'Series 7',
+      description: 'General Securities Representative',
       questions: 125,
       timeLimit: 225,
       passingScore: 72,
       topics: [
-        "Seeks Business for the Broker-Dealer (9%)",
+        'Seeks Business for the Broker-Dealer (9%)',
         "Opens Accounts After Obtaining and Evaluating Customers' Financial Profile (11%)",
-        "Provides Customers with Information About Investments (31%)",
+        'Provides Customers with Information About Investments (31%)',
         "Obtains and Verifies Customers' Purchase and Sales Instructions (16%)",
-        "Processes Transactions (4%)",
-        "Maintains Customer Accounts (29%)",
+        'Processes Transactions (4%)',
+        'Maintains Customer Accounts (29%)',
       ],
     },
-  ]
+  ];
 
   return (
     <div className={`space-y-6 ${className}`}>
@@ -227,7 +229,7 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {educationalTopics.map((topic) => (
+            {educationalTopics.map(topic => (
               <Card
                 key={topic.id}
                 className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 hover:border-blue-400/40 transition-all cursor-pointer"
@@ -240,7 +242,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                     </Badge>
                   </div>
                   <CardTitle className="text-white text-lg">{topic.title}</CardTitle>
-                  <CardDescription className="text-slate-400 text-sm">{topic.description}</CardDescription>
+                  <CardDescription className="text-slate-400 text-sm">
+                    {topic.description}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2 text-sm">
@@ -267,7 +271,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
             <Card className="bg-slate-800/50 backdrop-blur-sm border-green-500/20">
               <CardContent className="p-6 text-center">
                 <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-green-400">{studyProgress.correct || 0}</div>
+                <div className="text-2xl font-bold text-green-400">
+                  {studyProgress.correct || 0}
+                </div>
                 <div className="text-slate-400">Questions Correct</div>
               </CardContent>
             </Card>
@@ -276,7 +282,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
               <CardContent className="p-6 text-center">
                 <Clock className="h-12 w-12 text-blue-400 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-blue-400">
-                  {Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) || 0}%
+                  {Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) ||
+                    0}
+                  %
                 </div>
                 <div className="text-slate-400">Success Rate</div>
               </CardContent>
@@ -300,7 +308,7 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
               <Input
                 placeholder="Search lessons..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="pl-10 bg-slate-800/30 border-blue-500/30 text-white"
               />
             </div>
@@ -371,7 +379,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                 <div className="space-y-4">
                   <div className="p-4 bg-slate-700/50 rounded-lg">
                     <h4 className="text-white font-semibold mb-2">Equity Securities</h4>
-                    <p className="text-slate-300 text-sm mb-3">Common stock, preferred stock, rights, and warrants.</p>
+                    <p className="text-slate-300 text-sm mb-3">
+                      Common stock, preferred stock, rights, and warrants.
+                    </p>
                     <div className="flex items-center justify-between">
                       <Badge className="bg-purple-600">12 Lessons</Badge>
                       <Button size="sm" variant="outline">
@@ -395,7 +405,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
 
                   <div className="p-4 bg-slate-700/50 rounded-lg">
                     <h4 className="text-white font-semibold mb-2">Options</h4>
-                    <p className="text-slate-300 text-sm mb-3">Options basics, strategies, and risk management.</p>
+                    <p className="text-slate-300 text-sm mb-3">
+                      Options basics, strategies, and risk management.
+                    </p>
                     <div className="flex items-center justify-between">
                       <Badge className="bg-purple-600">15 Lessons</Badge>
                       <Button size="sm" variant="outline">
@@ -420,7 +432,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-slate-700/50 rounded-lg">
                   <h4 className="text-white font-semibold mb-2">Technical Analysis</h4>
-                  <p className="text-slate-300 text-sm mb-3">Chart patterns, indicators, and trend analysis.</p>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Chart patterns, indicators, and trend analysis.
+                  </p>
                   <Progress value={65} className="mb-2" />
                   <div className="text-xs text-slate-400">65% Complete</div>
                 </div>
@@ -436,7 +450,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
 
                 <div className="p-4 bg-slate-700/50 rounded-lg">
                   <h4 className="text-white font-semibold mb-2">Risk Management</h4>
-                  <p className="text-slate-300 text-sm mb-3">Portfolio theory, diversification, and risk measures.</p>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Portfolio theory, diversification, and risk measures.
+                  </p>
                   <Progress value={80} className="mb-2" />
                   <div className="text-xs text-slate-400">80% Complete</div>
                 </div>
@@ -463,19 +479,19 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
             </div>
             <div className="flex gap-2">
               <Button
-                variant={selectedSeries === "series_6" ? "default" : "outline"}
+                variant={selectedSeries === 'series_6' ? 'default' : 'outline'}
                 onClick={() => {
-                  setSelectedSeries("series_6")
-                  loadTestQuestions()
+                  setSelectedSeries('series_6');
+                  loadTestQuestions();
                 }}
               >
                 Series 6
               </Button>
               <Button
-                variant={selectedSeries === "series_7" ? "default" : "outline"}
+                variant={selectedSeries === 'series_7' ? 'default' : 'outline'}
                 onClick={() => {
-                  setSelectedSeries("series_7")
-                  loadTestQuestions()
+                  setSelectedSeries('series_7');
+                  loadTestQuestions();
                 }}
               >
                 Series 7
@@ -494,12 +510,14 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
               <CardContent>
                 <div className="space-y-4">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-green-400 mb-2">{testResults.score.toFixed(0)}%</div>
+                    <div className="text-4xl font-bold text-green-400 mb-2">
+                      {testResults.score.toFixed(0)}%
+                    </div>
                     <div className="text-slate-300">
                       {testResults.correct} out of {testResults.total} correct
                     </div>
-                    <Badge className={testResults.passed ? "bg-green-600" : "bg-red-600"}>
-                      {testResults.passed ? "PASSED" : "NEEDS IMPROVEMENT"}
+                    <Badge className={testResults.passed ? 'bg-green-600' : 'bg-red-600'}>
+                      {testResults.passed ? 'PASSED' : 'NEEDS IMPROVEMENT'}
                     </Badge>
                   </div>
 
@@ -531,13 +549,18 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                   <CardTitle className="text-white">
                     Question {currentQuestion + 1} of {testQuestions.length}
                   </CardTitle>
-                  <Progress value={((currentQuestion + 1) / testQuestions.length) * 100} className="w-32" />
+                  <Progress
+                    value={((currentQuestion + 1) / testQuestions.length) * 100}
+                    className="w-32"
+                  />
                 </div>
               </CardHeader>
               <CardContent>
                 {testQuestions[currentQuestion] && (
                   <div className="space-y-4">
-                    <div className="text-white text-lg font-medium">{testQuestions[currentQuestion].question}</div>
+                    <div className="text-white text-lg font-medium">
+                      {testQuestions[currentQuestion].question}
+                    </div>
 
                     <div className="space-y-2">
                       {testQuestions[currentQuestion].options.map((option, index) => (
@@ -545,9 +568,13 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                           key={index}
                           variant="outline"
                           className="w-full text-left justify-start h-auto p-4 text-wrap"
-                          onClick={() => handleAnswerSubmit(testQuestions[currentQuestion].id, index)}
+                          onClick={() =>
+                            handleAnswerSubmit(testQuestions[currentQuestion].id, index)
+                          }
                         >
-                          <span className="font-semibold mr-3">{String.fromCharCode(65 + index)}.</span>
+                          <span className="font-semibold mr-3">
+                            {String.fromCharCode(65 + index)}.
+                          </span>
                           {option}
                         </Button>
                       ))}
@@ -561,7 +588,9 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
               <CardContent className="p-8 text-center">
                 <Target className="h-16 w-16 text-blue-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">Ready to Practice?</h3>
-                <p className="text-slate-400 mb-4">Select a series exam and start your practice test</p>
+                <p className="text-slate-400 mb-4">
+                  Select a series exam and start your practice test
+                </p>
                 <Button onClick={loadTestQuestions}>Start Practice Test</Button>
               </CardContent>
             </Card>
@@ -571,7 +600,7 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
         {/* Series Exams Tab */}
         <TabsContent value="series" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {seriesExams.map((exam) => (
+            {seriesExams.map(exam => (
               <Card key={exam.id} className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
@@ -605,7 +634,10 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                       <h4 className="text-white font-semibold mb-2">Exam Topics:</h4>
                       <div className="space-y-1">
                         {exam.topics.map((topic, index) => (
-                          <div key={index} className="text-sm text-slate-300 flex items-start gap-2">
+                          <div
+                            key={index}
+                            className="text-sm text-slate-300 flex items-start gap-2"
+                          >
                             <CheckCircle className="h-3 w-3 text-green-400 mt-1 flex-shrink-0" />
                             {topic}
                           </div>
@@ -636,10 +668,15 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                   <BarChart3 className="h-5 w-5 text-blue-400" />
                 </div>
                 <div className="text-3xl font-bold text-blue-400 mb-2">
-                  {Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) || 0}%
+                  {Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) ||
+                    0}
+                  %
                 </div>
                 <Progress
-                  value={Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) || 0}
+                  value={
+                    Math.floor((studyProgress.correct / Math.max(studyProgress.total, 1)) * 100) ||
+                    0
+                  }
                   className="mb-2"
                 />
                 <div className="text-sm text-slate-400">
@@ -682,13 +719,21 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
             <CardContent>
               <div className="space-y-4">
                 {[
-                  { week: 1, topic: "Securities Fundamentals", progress: 100, status: "completed" },
-                  { week: 2, topic: "Market Structure & Regulations", progress: 75, status: "in-progress" },
-                  { week: 3, topic: "Investment Products", progress: 0, status: "upcoming" },
-                  { week: 4, topic: "Options & Derivatives", progress: 0, status: "upcoming" },
-                  { week: 5, topic: "Practice Tests & Review", progress: 0, status: "upcoming" },
-                ].map((item) => (
-                  <div key={item.week} className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg">
+                  { week: 1, topic: 'Securities Fundamentals', progress: 100, status: 'completed' },
+                  {
+                    week: 2,
+                    topic: 'Market Structure & Regulations',
+                    progress: 75,
+                    status: 'in-progress',
+                  },
+                  { week: 3, topic: 'Investment Products', progress: 0, status: 'upcoming' },
+                  { week: 4, topic: 'Options & Derivatives', progress: 0, status: 'upcoming' },
+                  { week: 5, topic: 'Practice Tests & Review', progress: 0, status: 'upcoming' },
+                ].map(item => (
+                  <div
+                    key={item.week}
+                    className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg"
+                  >
                     <div className="text-white font-semibold min-w-[80px]">Week {item.week}</div>
                     <div className="flex-1">
                       <div className="text-white font-medium">{item.topic}</div>
@@ -696,11 +741,11 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
                     </div>
                     <Badge
                       className={
-                        item.status === "completed"
-                          ? "bg-green-600"
-                          : item.status === "in-progress"
-                            ? "bg-blue-600"
-                            : "bg-slate-600"
+                        item.status === 'completed'
+                          ? 'bg-green-600'
+                          : item.status === 'in-progress'
+                            ? 'bg-blue-600'
+                            : 'bg-slate-600'
                       }
                     >
                       {item.status}
@@ -713,5 +758,5 @@ export default function TradingEducationCenter({ className = "" }: TradingEducat
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

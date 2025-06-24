@@ -1,5 +1,5 @@
-"use client"
+'use client';
 
 export default function EnhancedVisuals() {
-  return <>{/* Enhanced visuals are applied through global CSS */}</>
+  return <>{/* Enhanced visuals are applied through global CSS */}</>;
 }

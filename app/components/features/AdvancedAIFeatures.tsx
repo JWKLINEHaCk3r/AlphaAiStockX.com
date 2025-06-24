@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   Cpu,
@@ -20,80 +20,80 @@ import {
   Shield,
   CheckCircle,
   Clock,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function AdvancedAIFeatures() {
-  const [activeFeature, setActiveFeature] = useState("quantum-ai")
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [activeFeature, setActiveFeature] = useState('quantum-ai');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const runFeatureDemo = (feature: string) => {
-    setActiveFeature(feature)
-    setIsProcessing(true)
-    setTimeout(() => setIsProcessing(false), 3000)
-  }
+    setActiveFeature(feature);
+    setIsProcessing(true);
+    setTimeout(() => setIsProcessing(false), 3000);
+  };
 
   const aiFeatures = [
     {
-      id: "quantum-ai",
-      title: "Quantum AI Engine",
-      description: "247M parameter neural network with quantum processing",
+      id: 'quantum-ai',
+      title: 'Quantum AI Engine',
+      description: '247M parameter neural network with quantum processing',
       icon: Brain,
       accuracy: 94.7,
-      speed: "5-15ms",
-      status: "active",
-      color: "blue",
+      speed: '5-15ms',
+      status: 'active',
+      color: 'blue',
     },
     {
-      id: "neural-network",
-      title: "Deep Neural Networks",
-      description: "50-layer deep learning with real-time adaptation",
+      id: 'neural-network',
+      title: 'Deep Neural Networks',
+      description: '50-layer deep learning with real-time adaptation',
       icon: Cpu,
       accuracy: 92.3,
-      speed: "10-25ms",
-      status: "active",
-      color: "purple",
+      speed: '10-25ms',
+      status: 'active',
+      color: 'purple',
     },
     {
-      id: "pattern-recognition",
-      title: "Pattern Recognition",
-      description: "Advanced pattern detection with 96.8% confidence",
+      id: 'pattern-recognition',
+      title: 'Pattern Recognition',
+      description: 'Advanced pattern detection with 96.8% confidence',
       icon: Eye,
       accuracy: 96.8,
-      speed: "8-20ms",
-      status: "active",
-      color: "green",
+      speed: '8-20ms',
+      status: 'active',
+      color: 'green',
     },
     {
-      id: "sentiment-analysis",
-      title: "Market Sentiment AI",
-      description: "Real-time sentiment analysis across 10,000+ sources",
+      id: 'sentiment-analysis',
+      title: 'Market Sentiment AI',
+      description: 'Real-time sentiment analysis across 10,000+ sources',
       icon: Activity,
       accuracy: 89.4,
-      speed: "15-30ms",
-      status: "active",
-      color: "yellow",
+      speed: '15-30ms',
+      status: 'active',
+      color: 'yellow',
     },
     {
-      id: "risk-analyzer",
-      title: "Quantum Risk Analysis",
-      description: "Multi-dimensional risk assessment with quantum tunneling",
+      id: 'risk-analyzer',
+      title: 'Quantum Risk Analysis',
+      description: 'Multi-dimensional risk assessment with quantum tunneling',
       icon: Shield,
       accuracy: 91.7,
-      speed: "12-28ms",
-      status: "active",
-      color: "red",
+      speed: '12-28ms',
+      status: 'active',
+      color: 'red',
     },
     {
-      id: "prediction-engine",
-      title: "Predictive Analytics",
-      description: "Future market prediction with 94.2% accuracy",
+      id: 'prediction-engine',
+      title: 'Predictive Analytics',
+      description: 'Future market prediction with 94.2% accuracy',
       icon: Target,
       accuracy: 94.2,
-      speed: "6-18ms",
-      status: "active",
-      color: "indigo",
+      speed: '6-18ms',
+      status: 'active',
+      color: 'indigo',
     },
-  ]
+  ];
 
   const liveMetrics = {
     totalPredictions: 2847392,
@@ -102,26 +102,29 @@ export default function AdvancedAIFeatures() {
     dataPointsPerSecond: 15847392,
     quantumStates: 1024,
     neuralConnections: 247000000,
-  }
+  };
 
   return (
     <div className="space-y-8">
       {/* AI Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {aiFeatures.map((feature) => {
-          const IconComponent = feature.icon
+        {aiFeatures.map(feature => {
+          const IconComponent = feature.icon;
           return (
             <Card
               key={feature.id}
               className={`bg-black/20 border-${feature.color}-500/30 backdrop-blur-xl hover:border-${feature.color}-400/50 transition-all cursor-pointer ${
-                activeFeature === feature.id ? `ring-2 ring-${feature.color}-400/50` : ""
+                activeFeature === feature.id ? `ring-2 ring-${feature.color}-400/50` : ''
               }`}
               onClick={() => setActiveFeature(feature.id)}
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <IconComponent className={`h-8 w-8 text-${feature.color}-400`} />
-                  <Badge variant="outline" className={`border-${feature.color}-500/30 text-${feature.color}-400`}>
+                  <Badge
+                    variant="outline"
+                    className={`border-${feature.color}-500/30 text-${feature.color}-400`}
+                  >
                     {feature.status.toUpperCase()}
                   </Badge>
                 </div>
@@ -132,7 +135,9 @@ export default function AdvancedAIFeatures() {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-400 text-sm">Accuracy</span>
-                    <span className={`text-${feature.color}-400 font-bold`}>{feature.accuracy}%</span>
+                    <span className={`text-${feature.color}-400 font-bold`}>
+                      {feature.accuracy}%
+                    </span>
                   </div>
                   <Progress value={feature.accuracy} className="h-2" />
 
@@ -142,9 +147,9 @@ export default function AdvancedAIFeatures() {
                   </div>
 
                   <Button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      runFeatureDemo(feature.id)
+                    onClick={e => {
+                      e.stopPropagation();
+                      runFeatureDemo(feature.id);
                     }}
                     className={`w-full bg-gradient-to-r from-${feature.color}-500 to-${feature.color}-600 hover:from-${feature.color}-600 hover:to-${feature.color}-700`}
                     disabled={isProcessing && activeFeature === feature.id}
@@ -164,7 +169,7 @@ export default function AdvancedAIFeatures() {
                 </div>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
 
@@ -180,11 +185,15 @@ export default function AdvancedAIFeatures() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             <div className="text-center">
-              <p className="text-purple-400 text-3xl font-bold">{liveMetrics.totalPredictions.toLocaleString()}</p>
+              <p className="text-purple-400 text-3xl font-bold">
+                {liveMetrics.totalPredictions.toLocaleString()}
+              </p>
               <p className="text-gray-400 text-sm">Total Predictions</p>
             </div>
             <div className="text-center">
-              <p className="text-green-400 text-3xl font-bold">{liveMetrics.successfulTrades.toLocaleString()}</p>
+              <p className="text-green-400 text-3xl font-bold">
+                {liveMetrics.successfulTrades.toLocaleString()}
+              </p>
               <p className="text-gray-400 text-sm">Successful Trades</p>
             </div>
             <div className="text-center">
@@ -217,7 +226,7 @@ export default function AdvancedAIFeatures() {
           <CardHeader>
             <CardTitle className="flex items-center text-white">
               <Radar className="h-6 w-6 mr-3 text-purple-400" />
-              {aiFeatures.find((f) => f.id === activeFeature)?.title} - Live Demo
+              {aiFeatures.find(f => f.id === activeFeature)?.title} - Live Demo
             </CardTitle>
             <CardDescription>Real-time AI processing demonstration</CardDescription>
           </CardHeader>
@@ -229,17 +238,40 @@ export default function AdvancedAIFeatures() {
                   <h4 className="text-white font-semibold">Processing Pipeline</h4>
                   <div className="space-y-3">
                     {[
-                      { step: "Data Ingestion", status: "complete", time: "2ms" },
-                      { step: "Neural Processing", status: isProcessing ? "processing" : "complete", time: "8ms" },
-                      { step: "Quantum Analysis", status: isProcessing ? "processing" : "complete", time: "12ms" },
-                      { step: "Pattern Recognition", status: isProcessing ? "pending" : "complete", time: "15ms" },
-                      { step: "Prediction Output", status: isProcessing ? "pending" : "complete", time: "18ms" },
+                      { step: 'Data Ingestion', status: 'complete', time: '2ms' },
+                      {
+                        step: 'Neural Processing',
+                        status: isProcessing ? 'processing' : 'complete',
+                        time: '8ms',
+                      },
+                      {
+                        step: 'Quantum Analysis',
+                        status: isProcessing ? 'processing' : 'complete',
+                        time: '12ms',
+                      },
+                      {
+                        step: 'Pattern Recognition',
+                        status: isProcessing ? 'pending' : 'complete',
+                        time: '15ms',
+                      },
+                      {
+                        step: 'Prediction Output',
+                        status: isProcessing ? 'pending' : 'complete',
+                        time: '18ms',
+                      },
                     ].map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"
+                      >
                         <div className="flex items-center space-x-3">
-                          {item.status === "complete" && <CheckCircle className="h-5 w-5 text-green-400" />}
-                          {item.status === "processing" && <Clock className="h-5 w-5 text-yellow-400 animate-spin" />}
-                          {item.status === "pending" && <Clock className="h-5 w-5 text-gray-400" />}
+                          {item.status === 'complete' && (
+                            <CheckCircle className="h-5 w-5 text-green-400" />
+                          )}
+                          {item.status === 'processing' && (
+                            <Clock className="h-5 w-5 text-yellow-400 animate-spin" />
+                          )}
+                          {item.status === 'pending' && <Clock className="h-5 w-5 text-gray-400" />}
                           <span className="text-white">{item.step}</span>
                         </div>
                         <span className="text-gray-400 text-sm">{item.time}</span>
@@ -264,7 +296,9 @@ export default function AdvancedAIFeatures() {
                         <span className="text-blue-400 font-semibold">Market Signal</span>
                         <Badge className="bg-green-500 text-white">STRONG BUY</Badge>
                       </div>
-                      <p className="text-gray-400 text-sm mt-2">AI recommends immediate position entry</p>
+                      <p className="text-gray-400 text-sm mt-2">
+                        AI recommends immediate position entry
+                      </p>
                     </div>
 
                     <div className="p-4 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/30">
@@ -272,7 +306,9 @@ export default function AdvancedAIFeatures() {
                         <span className="text-purple-400 font-semibold">Risk Assessment</span>
                         <span className="text-yellow-400 font-bold">LOW</span>
                       </div>
-                      <p className="text-gray-400 text-sm mt-2">Quantum risk analysis: 12% volatility expected</p>
+                      <p className="text-gray-400 text-sm mt-2">
+                        Quantum risk analysis: 12% volatility expected
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -310,10 +346,10 @@ export default function AdvancedAIFeatures() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "Quantum Computing", version: "v2.1", status: "Operational", icon: Cpu },
-              { name: "Neural Networks", version: "v3.7", status: "Optimized", icon: Brain },
-              { name: "Deep Learning", version: "v4.2", status: "Enhanced", icon: Database },
-              { name: "Pattern Recognition", version: "v2.9", status: "Advanced", icon: Eye },
+              { name: 'Quantum Computing', version: 'v2.1', status: 'Operational', icon: Cpu },
+              { name: 'Neural Networks', version: 'v3.7', status: 'Optimized', icon: Brain },
+              { name: 'Deep Learning', version: 'v4.2', status: 'Enhanced', icon: Database },
+              { name: 'Pattern Recognition', version: 'v2.9', status: 'Advanced', icon: Eye },
             ].map((tech, index) => (
               <div key={index} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
                 <div className="flex items-center space-x-3 mb-3">
@@ -332,5 +368,5 @@ export default function AdvancedAIFeatures() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

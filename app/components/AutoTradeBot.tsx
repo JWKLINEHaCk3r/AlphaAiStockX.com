@@ -1,12 +1,12 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Switch } from "@/components/ui/switch"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
 import {
   Bot,
   Play,
@@ -23,15 +23,15 @@ import {
   AlertTriangle,
   BarChart3,
   Brain,
-} from "lucide-react"
-import TradingStrategies from "./TradingStrategies"
-import TradeHistory from "./TradeHistory"
-import RiskControls from "./RiskControls"
-import PerformanceMetrics from "./PerformanceMetrics"
+} from 'lucide-react';
+import TradingStrategies from './TradingStrategies';
+import TradeHistory from './TradeHistory';
+import RiskControls from './RiskControls';
+import PerformanceMetrics from './PerformanceMetrics';
 
 export default function AutoTradeBot() {
-  const [botStatus, setBotStatus] = useState("stopped") // stopped, running, paused
-  const [activeStrategies, setActiveStrategies] = useState([])
+  const [botStatus, setBotStatus] = useState('stopped'); // stopped, running, paused
+  const [activeStrategies, setActiveStrategies] = useState([]);
   const [botStats, setBotStats] = useState({
     totalTrades: 0,
     winRate: 0,
@@ -41,39 +41,41 @@ export default function AutoTradeBot() {
     maxDrawdown: 0,
     activeTrades: 0,
     accountBalance: 100000,
-  })
-  const [recentTrades, setRecentTrades] = useState([])
+  });
+  const [recentTrades, setRecentTrades] = useState([]);
   const [botSettings, setBotSettings] = useState({
     maxPositionSize: 10000,
     maxDailyLoss: 2000,
     maxConcurrentTrades: 5,
     emergencyStop: true,
     riskPerTrade: 2,
-  })
+  });
 
   // Simulate real-time bot activity
   useEffect(() => {
-    if (botStatus === "running") {
+    if (botStatus === 'running') {
       const interval = setInterval(() => {
         // Simulate trading activity
-        const shouldTrade = Math.random() > 0.95 // 5% chance per interval
+        const shouldTrade = Math.random() > 0.95; // 5% chance per interval
 
         if (shouldTrade && botStats.activeTrades < botSettings.maxConcurrentTrades) {
           const newTrade = {
             id: Date.now(),
-            symbol: ["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA"][Math.floor(Math.random() * 5)],
-            side: Math.random() > 0.5 ? "BUY" : "SELL",
+            symbol: ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'][Math.floor(Math.random() * 5)],
+            side: Math.random() > 0.5 ? 'BUY' : 'SELL',
             quantity: Math.floor(Math.random() * 100) + 10,
             price: 100 + Math.random() * 500,
-            strategy: activeStrategies[Math.floor(Math.random() * activeStrategies.length)]?.name || "AI Momentum",
+            strategy:
+              activeStrategies[Math.floor(Math.random() * activeStrategies.length)]?.name ||
+              'AI Momentum',
             timestamp: new Date(),
-            status: "executed",
+            status: 'executed',
             pnl: (Math.random() - 0.4) * 1000, // Slight positive bias
-          }
+          };
 
-          setRecentTrades((prev) => [newTrade, ...prev.slice(0, 19)])
+          setRecentTrades(prev => [newTrade, ...prev.slice(0, 19)]);
 
-          setBotStats((prev) => ({
+          setBotStats(prev => ({
             ...prev,
             totalTrades: prev.totalTrades + 1,
             activeTrades: prev.activeTrades + (Math.random() > 0.7 ? 1 : -1),
@@ -81,39 +83,39 @@ export default function AutoTradeBot() {
             dailyPnL: prev.dailyPnL + newTrade.pnl,
             winRate: Math.random() * 30 + 60, // 60-90% win rate
             accountBalance: prev.accountBalance + newTrade.pnl,
-          }))
+          }));
         }
-      }, 3000)
+      }, 3000);
 
-      return () => clearInterval(interval)
+      return () => clearInterval(interval);
     }
-  }, [botStatus, activeStrategies, botStats.activeTrades, botSettings.maxConcurrentTrades])
+  }, [botStatus, activeStrategies, botStats.activeTrades, botSettings.maxConcurrentTrades]);
 
   const startBot = () => {
-    setBotStatus("running")
+    setBotStatus('running');
     // Initialize with some strategies
     setActiveStrategies([
-      { id: 1, name: "AI Momentum", status: "active", allocation: 30 },
-      { id: 2, name: "Mean Reversion", status: "active", allocation: 25 },
-      { id: 3, name: "Breakout Scanner", status: "active", allocation: 20 },
-    ])
-  }
+      { id: 1, name: 'AI Momentum', status: 'active', allocation: 30 },
+      { id: 2, name: 'Mean Reversion', status: 'active', allocation: 25 },
+      { id: 3, name: 'Breakout Scanner', status: 'active', allocation: 20 },
+    ]);
+  };
 
   const pauseBot = () => {
-    setBotStatus("paused")
-  }
+    setBotStatus('paused');
+  };
 
   const stopBot = () => {
-    setBotStatus("stopped")
-    setActiveStrategies([])
-  }
+    setBotStatus('stopped');
+    setActiveStrategies([]);
+  };
 
   const emergencyStop = () => {
-    setBotStatus("stopped")
-    setActiveStrategies([])
+    setBotStatus('stopped');
+    setActiveStrategies([]);
     // In real implementation, this would close all positions
-    setBotStats((prev) => ({ ...prev, activeTrades: 0 }))
-  }
+    setBotStats(prev => ({ ...prev, activeTrades: 0 }));
+  };
 
   return (
     <div className="space-y-6">
@@ -126,7 +128,11 @@ export default function AutoTradeBot() {
               AutoTrade Bot Control Center
               <Badge
                 className={`ml-3 ${
-                  botStatus === "running" ? "bg-green-500" : botStatus === "paused" ? "bg-yellow-500" : "bg-gray-500"
+                  botStatus === 'running'
+                    ? 'bg-green-500'
+                    : botStatus === 'paused'
+                      ? 'bg-yellow-500'
+                      : 'bg-gray-500'
                 }`}
               >
                 {botStatus.toUpperCase()}
@@ -134,14 +140,14 @@ export default function AutoTradeBot() {
             </CardTitle>
 
             <div className="flex items-center space-x-2">
-              {botStatus === "stopped" && (
+              {botStatus === 'stopped' && (
                 <Button onClick={startBot} className="bg-green-500 hover:bg-green-600">
                   <Play className="h-4 w-4 mr-2" />
                   Start Bot
                 </Button>
               )}
 
-              {botStatus === "running" && (
+              {botStatus === 'running' && (
                 <>
                   <Button onClick={pauseBot} className="bg-yellow-500 hover:bg-yellow-600">
                     <Pause className="h-4 w-4 mr-2" />
@@ -154,9 +160,12 @@ export default function AutoTradeBot() {
                 </>
               )}
 
-              {botStatus === "paused" && (
+              {botStatus === 'paused' && (
                 <>
-                  <Button onClick={() => setBotStatus("running")} className="bg-green-500 hover:bg-green-600">
+                  <Button
+                    onClick={() => setBotStatus('running')}
+                    className="bg-green-500 hover:bg-green-600"
+                  >
                     <Play className="h-4 w-4 mr-2" />
                     Resume
                   </Button>
@@ -167,7 +176,11 @@ export default function AutoTradeBot() {
                 </>
               )}
 
-              <Button onClick={emergencyStop} variant="destructive" className="bg-red-600 hover:bg-red-700">
+              <Button
+                onClick={emergencyStop}
+                variant="destructive"
+                className="bg-red-600 hover:bg-red-700"
+              >
                 <AlertTriangle className="h-4 w-4 mr-2" />
                 Emergency Stop
               </Button>
@@ -181,13 +194,17 @@ export default function AutoTradeBot() {
             <div className="text-center p-3 bg-white/5 rounded-lg">
               <DollarSign className="h-6 w-6 text-green-400 mx-auto mb-1" />
               <p className="text-sm text-gray-400">Account Balance</p>
-              <p className="text-lg font-bold text-white">${botStats.accountBalance.toLocaleString()}</p>
+              <p className="text-lg font-bold text-white">
+                ${botStats.accountBalance.toLocaleString()}
+              </p>
             </div>
 
             <div className="text-center p-3 bg-white/5 rounded-lg">
               <TrendingUp className="h-6 w-6 text-blue-400 mx-auto mb-1" />
               <p className="text-sm text-gray-400">Daily P&L</p>
-              <p className={`text-lg font-bold ${botStats.dailyPnL >= 0 ? "text-green-400" : "text-red-400"}`}>
+              <p
+                className={`text-lg font-bold ${botStats.dailyPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}
+              >
                 ${botStats.dailyPnL.toFixed(2)}
               </p>
             </div>
@@ -273,7 +290,11 @@ export default function AutoTradeBot() {
         </TabsContent>
 
         <TabsContent value="risk">
-          <RiskControls botSettings={botSettings} setBotSettings={setBotSettings} botStats={botStats} />
+          <RiskControls
+            botSettings={botSettings}
+            setBotSettings={setBotSettings}
+            botStats={botStats}
+          />
         </TabsContent>
 
         <TabsContent value="settings">
@@ -289,8 +310,8 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxPositionSize}
-                      onChange={(e) =>
-                        setBotSettings((prev) => ({
+                      onChange={e =>
+                        setBotSettings(prev => ({
                           ...prev,
                           maxPositionSize: Number(e.target.value),
                         }))
@@ -304,8 +325,8 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxDailyLoss}
-                      onChange={(e) =>
-                        setBotSettings((prev) => ({
+                      onChange={e =>
+                        setBotSettings(prev => ({
                           ...prev,
                           maxDailyLoss: Number(e.target.value),
                         }))
@@ -319,8 +340,8 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxConcurrentTrades}
-                      onChange={(e) =>
-                        setBotSettings((prev) => ({
+                      onChange={e =>
+                        setBotSettings(prev => ({
                           ...prev,
                           maxConcurrentTrades: Number(e.target.value),
                         }))
@@ -337,8 +358,8 @@ export default function AutoTradeBot() {
                       type="number"
                       step="0.1"
                       value={botSettings.riskPerTrade}
-                      onChange={(e) =>
-                        setBotSettings((prev) => ({
+                      onChange={e =>
+                        setBotSettings(prev => ({
                           ...prev,
                           riskPerTrade: Number(e.target.value),
                         }))
@@ -350,12 +371,14 @@ export default function AutoTradeBot() {
                   <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
                     <div>
                       <p className="text-white font-medium">Emergency Stop Enabled</p>
-                      <p className="text-sm text-gray-400">Automatically stop bot on major losses</p>
+                      <p className="text-sm text-gray-400">
+                        Automatically stop bot on major losses
+                      </p>
                     </div>
                     <Switch
                       checked={botSettings.emergencyStop}
-                      onCheckedChange={(checked) =>
-                        setBotSettings((prev) => ({
+                      onCheckedChange={checked =>
+                        setBotSettings(prev => ({
                           ...prev,
                           emergencyStop: checked,
                         }))
@@ -369,5 +392,5 @@ export default function AutoTradeBot() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { FolderOpen, File, Info } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { FolderOpen, File, Info } from 'lucide-react';
 
 export default function IONOSFileStructure() {
   return (
@@ -10,8 +10,8 @@ export default function IONOSFileStructure() {
       <Alert className="mb-6 border-blue-500 bg-blue-50">
         <Info className="h-5 w-5 text-blue-500" />
         <AlertDescription className="text-blue-600">
-          After running <code className="bg-white px-2 py-1 rounded">npm run build</code>, upload ALL contents from the{" "}
-          <strong>out/</strong> folder to your IONOS web root directory.
+          After running <code className="bg-white px-2 py-1 rounded">npm run build</code>, upload
+          ALL contents from the <strong>out/</strong> folder to your IONOS web root directory.
         </AlertDescription>
       </Alert>
 
@@ -84,7 +84,8 @@ export default function IONOSFileStructure() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-semibold text-blue-800 mb-2">📂 IONOS File Manager Path:</h4>
                 <div className="bg-white p-2 rounded border font-mono text-sm">
-                  /alphaaistockx.com/ <span className="text-gray-500">← Your web root directory</span>
+                  /alphaaistockx.com/{' '}
+                  <span className="text-gray-500">← Your web root directory</span>
                 </div>
               </div>
 
@@ -171,5 +172,5 @@ export default function IONOSFileStructure() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

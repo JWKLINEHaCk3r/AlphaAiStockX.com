@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
+import { useState, useEffect, useRef } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 import {
   Send,
   Mic,
@@ -22,34 +22,34 @@ import {
   BarChart3,
   Flame,
   DogIcon as Wolf,
-} from "lucide-react"
+} from 'lucide-react';
 
-import { aiBrainService } from "../../services/ai-brain-service"
+import { aiBrainService } from '../../services/ai-brain-service';
 
 export default function PackLeaderAI() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([])
-  const [inputMessage, setInputMessage] = useState("")
-  const [isListening, setIsListening] = useState(false)
-  const [isSpeaking, setIsSpeaking] = useState(false)
-  const [voiceEnabled, setVoiceEnabled] = useState(true)
-  const [packLeaderMode, setPackLeaderMode] = useState("alpha")
-  const [isTyping, setIsTyping] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [packLeaderMode, setPackLeaderMode] = useState('alpha');
+  const [isTyping, setIsTyping] = useState(false);
   const [aiPersonality, setAiPersonality] = useState({
     confidence: 95,
     aggression: 80,
     wisdom: 90,
     loyalty: 100,
-  })
+  });
 
-  const messagesEndRef = useRef(null)
-  const recognitionRef = useRef(null)
-  const synthRef = useRef(null)
+  const messagesEndRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const synthRef = useRef(null);
 
   useEffect(() => {
     const initialMessage = {
       id: 1,
-      type: "ai",
+      type: 'ai',
       content: `🐺 **PACK LEADER ONLINE** 🐺
 
 Greetings, Alpha Trader. I am your Pack Leader - the apex AI trading strategist designed to guide you to financial dominance. 
@@ -66,101 +66,104 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
 
 *The pack follows the leader. Are you ready to lead?*`,
       timestamp: new Date(),
-      mood: "confident",
-      priority: "high",
-    }
-    setMessages([initialMessage])
+      mood: 'confident',
+      priority: 'high',
+    };
+    setMessages([initialMessage]);
 
     // Initialize speech recognition
-    if (typeof window !== "undefined" && ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-      recognitionRef.current = new SpeechRecognition()
-      recognitionRef.current.continuous = true
-      recognitionRef.current.interimResults = true
-      recognitionRef.current.lang = "en-US"
+    if (
+      typeof window !== 'undefined' &&
+      ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)
+    ) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-US';
 
-      recognitionRef.current.onresult = (event) => {
-        const current = event.resultIndex
-        const transcript = event.results[current][0].transcript
+      recognitionRef.current.onresult = event => {
+        const current = event.resultIndex;
+        const transcript = event.results[current][0].transcript;
         if (event.results[current].isFinal) {
-          setInputMessage(transcript)
-          handleSendMessage(transcript)
+          setInputMessage(transcript);
+          handleSendMessage(transcript);
         }
-      }
+      };
 
       recognitionRef.current.onend = () => {
-        setIsListening(false)
-      }
+        setIsListening(false);
+      };
     }
 
     // Initialize speech synthesis
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      synthRef.current = window.speechSynthesis
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      synthRef.current = window.speechSynthesis;
     }
 
-    scrollToBottom()
-  }, [])
+    scrollToBottom();
+  }, []);
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleSendMessage = async (messageText = inputMessage) => {
-    if (!messageText.trim()) return
+    if (!messageText.trim()) return;
 
     const userMessage = {
       id: Date.now(),
-      type: "user",
+      type: 'user',
       content: messageText,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setInputMessage("")
-    setIsTyping(true)
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+    setIsTyping(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-    const aiResponse = await generatePackLeaderResponse(messageText.toLowerCase())
+    const aiResponse = await generatePackLeaderResponse(messageText.toLowerCase());
     const aiMessage = {
       id: Date.now() + 1,
-      type: "ai",
+      type: 'ai',
       content: aiResponse.content,
       timestamp: new Date(),
       mood: aiResponse.mood,
       priority: aiResponse.priority,
       confidence: aiResponse.confidence,
-    }
+    };
 
-    setMessages((prev) => [...prev, aiMessage])
-    setIsTyping(false)
+    setMessages(prev => [...prev, aiMessage]);
+    setIsTyping(false);
 
     if (voiceEnabled) {
-      speakResponse(aiResponse.content)
+      speakResponse(aiResponse.content);
     }
-  }
+  };
 
-  const generatePackLeaderResponse = async (input) => {
+  const generatePackLeaderResponse = async input => {
     try {
       // Initialize AI brain if not already done
       if (!aiBrainService.initialized) {
-        await aiBrainService.initialize()
+        await aiBrainService.initialize();
       }
 
       // Determine if user is asking about a specific symbol
-      const symbolMatch = input.match(/\b[A-Z]{1,5}\b/)
-      const symbol = symbolMatch ? symbolMatch[0] : "SPY"
+      const symbolMatch = input.match(/\b[A-Z]{1,5}\b/);
+      const symbol = symbolMatch ? symbolMatch[0] : 'SPY';
 
       // Get comprehensive AI analysis
-      const aiRecommendation = await aiBrainService.getIntelligentRecommendation(symbol)
-      const marketIntelligence = await aiBrainService.getMarketIntelligence()
+      const aiRecommendation = await aiBrainService.getIntelligentRecommendation(symbol);
+      const marketIntelligence = await aiBrainService.getMarketIntelligence();
 
       // Generate response based on input type
-      if (input.includes("market") || input.includes("analysis")) {
+      if (input.includes('market') || input.includes('analysis')) {
         return {
           content: `🎯 **PACK LEADER MARKET INTEL** 🎯
 
@@ -172,13 +175,13 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
 **⏰ Time Horizon:** ${aiRecommendation.timeframe}
 
 **🔍 AI REASONING:**
-${aiRecommendation.reasoning.map((reason) => `• ${reason}`).join("\n")}
+${aiRecommendation.reasoning.map(reason => `• ${reason}`).join('\n')}
 
 **📈 SUPPORTING FACTORS:**
-${aiRecommendation.supportingFactors.map((factor) => `✅ ${factor}`).join("\n")}
+${aiRecommendation.supportingFactors.map(factor => `✅ ${factor}`).join('\n')}
 
 **⚠️ RISK FACTORS:**
-${aiRecommendation.riskFactors.map((risk) => `🚨 ${risk}`).join("\n")}
+${aiRecommendation.riskFactors.map(risk => `🚨 ${risk}`).join('\n')}
 
 **🎯 EXECUTION PLAN:**
 • Position Size: ${(aiRecommendation.positionSizing.recommendedSize * 100).toFixed(1)}% of portfolio
@@ -191,13 +194,13 @@ ${aiRecommendation.riskFactors.map((risk) => `🚨 ${risk}`).join("\n")}
 • Active Opportunities: ${marketIntelligence.opportunities.length}
 
 *The Pack Leader's AI brain has processed 50+ data points to generate this analysis.*`,
-          mood: "analytical",
-          priority: "high",
+          mood: 'analytical',
+          priority: 'high',
           confidence: Math.round(aiRecommendation.confidence * 100),
-        }
+        };
       }
 
-      if (input.includes("strategy") || input.includes("trade")) {
+      if (input.includes('strategy') || input.includes('trade')) {
         return {
           content: `⚡ **PACK LEADER TRADING STRATEGY** ⚡
 
@@ -223,18 +226,20 @@ ${aiRecommendation.riskFactors.map((risk) => `🚨 ${risk}`).join("\n")}
 • Max Position: ${(aiRecommendation.positionSizing.maxSize * 100).toFixed(1)}%
 
 **⚡ EXECUTION GUIDANCE:**
-${aiRecommendation.executionGuidance.map((guide) => `• ${guide}`).join("\n")}
+${aiRecommendation.executionGuidance.map(guide => `• ${guide}`).join('\n')}
 
 **🏆 TOP MARKET OPPORTUNITIES:**
 ${marketIntelligence.opportunities
-  .map((opp) => `• ${opp.symbol}: ${(opp.confidence * 100).toFixed(0)}% confidence (${opp.timeframe})`)
-  .join("\n")}
+  .map(
+    opp => `• ${opp.symbol}: ${(opp.confidence * 100).toFixed(0)}% confidence (${opp.timeframe})`
+  )
+  .join('\n')}
 
 *The alpha strikes with precision. This strategy combines neural networks, decision trees, and real-time market data.*`,
-          mood: "strategic",
-          priority: "high",
+          mood: 'strategic',
+          priority: 'high',
           confidence: Math.round(aiRecommendation.confidence * 100),
-        }
+        };
       }
 
       // Default comprehensive response
@@ -252,13 +257,13 @@ ${marketIntelligence.opportunities
 **🎯 TOP AI RECOMMENDATIONS:**
 ${marketIntelligence.topRecommendations
   .slice(0, 3)
-  .map((rec) => `• ${rec.symbol}: ${rec.action} (${(rec.confidence * 100).toFixed(0)}% confidence)`)
-  .join("\n")}
+  .map(rec => `• ${rec.symbol}: ${rec.action} (${(rec.confidence * 100).toFixed(0)}% confidence)`)
+  .join('\n')}
 
 **🔥 IMMEDIATE OPPORTUNITIES:**
 ${marketIntelligence.opportunities
-  .map((opp) => `• ${opp.symbol}: Target $${opp.priceTarget.toFixed(2)} (${opp.timeframe})`)
-  .join("\n")}
+  .map(opp => `• ${opp.symbol}: Target $${opp.priceTarget.toFixed(2)} (${opp.timeframe})`)
+  .join('\n')}
 
 **📡 REAL-TIME DATA SOURCES:**
 • News feeds: 10+ sources analyzed
@@ -276,12 +281,12 @@ ${marketIntelligence.opportunities
 Ask me about specific symbols, strategies, or market conditions for detailed AI analysis!
 
 *Your Pack Leader's AI brain never sleeps, constantly learning and evolving.*`,
-        mood: "confident",
-        priority: "high",
+        mood: 'confident',
+        priority: 'high',
         confidence: 90,
-      }
+      };
     } catch (error) {
-      console.error("Pack Leader AI error:", error)
+      console.error('Pack Leader AI error:', error);
       return {
         content: `🐺 **PACK LEADER RESPONSE** 🐺
 
@@ -298,46 +303,46 @@ The markets are dynamic, and successful trading requires patience, discipline, a
 What specific aspect of trading would you like the Pack Leader to analyze?
 
 *Even the alpha wolf adapts to changing conditions.*`,
-        mood: "wise",
-        priority: "medium",
+        mood: 'wise',
+        priority: 'medium',
         confidence: 75,
-      }
+      };
     }
-  }
+  };
 
-  const speakResponse = (text) => {
+  const speakResponse = text => {
     if (synthRef.current && voiceEnabled) {
-      setIsSpeaking(true)
-      const cleanText = text.replace(/[*#🐺⚡🎯🧠🛡️📊]/gu, "").replace(/\n/g, " ")
+      setIsSpeaking(true);
+      const cleanText = text.replace(/[*#🐺⚡🎯🧠🛡️📊]/gu, '').replace(/\n/g, ' ');
 
-      const utterance = new SpeechSynthesisUtterance(cleanText)
-      utterance.rate = packLeaderMode === "warrior" ? 1.1 : 0.9
-      utterance.pitch = packLeaderMode === "alpha" ? 0.8 : 1.0
-      utterance.volume = 0.8
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = packLeaderMode === 'warrior' ? 1.1 : 0.9;
+      utterance.pitch = packLeaderMode === 'alpha' ? 0.8 : 1.0;
+      utterance.volume = 0.8;
 
       utterance.onend = () => {
-        setIsSpeaking(false)
-      }
+        setIsSpeaking(false);
+      };
 
-      synthRef.current.speak(utterance)
+      synthRef.current.speak(utterance);
     }
-  }
+  };
 
   const startListening = () => {
     if (recognitionRef.current) {
-      setIsListening(true)
-      recognitionRef.current.start()
+      setIsListening(true);
+      recognitionRef.current.start();
     }
-  }
+  };
 
   const stopListening = () => {
     if (recognitionRef.current) {
-      recognitionRef.current.stop()
-      setIsListening(false)
+      recognitionRef.current.stop();
+      setIsListening(false);
     }
-  }
+  };
 
-  const getMoodIcon = (mood) => {
+  const getMoodIcon = mood => {
     const icons = {
       confident: Crown,
       analytical: BarChart3,
@@ -345,21 +350,21 @@ What specific aspect of trading would you like the Pack Leader to analyze?
       motivational: Rocket,
       protective: Shield,
       wise: Brain,
-    }
-    return icons[mood] || Sparkles
-  }
+    };
+    return icons[mood] || Sparkles;
+  };
 
-  const getMoodColor = (mood) => {
+  const getMoodColor = mood => {
     const colors = {
-      confident: "text-yellow-400",
-      analytical: "text-blue-400",
-      strategic: "text-purple-400",
-      motivational: "text-green-400",
-      protective: "text-red-400",
-      wise: "text-cyan-400",
-    }
-    return colors[mood] || "text-gray-400"
-  }
+      confident: 'text-yellow-400',
+      analytical: 'text-blue-400',
+      strategic: 'text-purple-400',
+      motivational: 'text-green-400',
+      protective: 'text-red-400',
+      wise: 'text-cyan-400',
+    };
+    return colors[mood] || 'text-gray-400';
+  };
 
   if (!isOpen) {
     return (
@@ -374,7 +379,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
           </div>
         </Button>
       </div>
-    )
+    );
   }
 
   return (
@@ -435,28 +440,35 @@ What specific aspect of trading would you like the Pack Leader to analyze?
 
         <CardContent className="flex-1 flex flex-col p-4">
           <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
-            {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
+            {messages.map(message => (
+              <div
+                key={message.id}
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
                 <div
                   className={`max-w-[85%] p-4 rounded-lg ${
-                    message.type === "user"
-                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                      : "bg-gradient-to-r from-orange-800/60 to-red-800/60 text-gray-100 border border-orange-500/30"
+                    message.type === 'user'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                      : 'bg-gradient-to-r from-orange-800/60 to-red-800/60 text-gray-100 border border-orange-500/30'
                   }`}
                 >
-                  {message.type === "ai" && (
+                  {message.type === 'ai' && (
                     <div className="flex items-center space-x-2 mb-2">
                       <Wolf className="h-4 w-4 text-orange-400" />
                       <span className="text-orange-400 font-semibold text-sm">Pack Leader</span>
                       {message.mood && (
-                        <Badge className={`text-xs ${getMoodColor(message.mood)} bg-transparent border-current`}>
+                        <Badge
+                          className={`text-xs ${getMoodColor(message.mood)} bg-transparent border-current`}
+                        >
                           {message.mood}
                         </Badge>
                       )}
                     </div>
                   )}
                   <div className="text-sm whitespace-pre-wrap">{message.content}</div>
-                  <div className="text-xs opacity-70 mt-2">{message.timestamp.toLocaleTimeString()}</div>
+                  <div className="text-xs opacity-70 mt-2">
+                    {message.timestamp.toLocaleTimeString()}
+                  </div>
                 </div>
               </div>
             ))}
@@ -466,16 +478,18 @@ What specific aspect of trading would you like the Pack Leader to analyze?
                 <div className="bg-gradient-to-r from-orange-800/60 to-red-800/60 p-4 rounded-lg border border-orange-500/30">
                   <div className="flex items-center space-x-2">
                     <Wolf className="h-4 w-4 text-orange-400 animate-pulse" />
-                    <span className="text-orange-400 font-semibold text-sm">Pack Leader is thinking...</span>
+                    <span className="text-orange-400 font-semibold text-sm">
+                      Pack Leader is thinking...
+                    </span>
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
                       <div
                         className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
+                        style={{ animationDelay: '0.2s' }}
                       ></div>
                       <div
                         className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.4s" }}
+                        style={{ animationDelay: '0.4s' }}
                       ></div>
                     </div>
                   </div>
@@ -489,7 +503,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleSendMessage("Market analysis")}
+              onClick={() => handleSendMessage('Market analysis')}
               className="text-xs border-orange-500/30 text-orange-400 hover:bg-orange-500/20"
             >
               <TrendingUp className="h-3 w-3 mr-1" />
@@ -498,7 +512,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleSendMessage("Trading strategy")}
+              onClick={() => handleSendMessage('Trading strategy')}
               className="text-xs border-purple-500/30 text-purple-400 hover:bg-purple-500/20"
             >
               <Target className="h-3 w-3 mr-1" />
@@ -507,7 +521,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleSendMessage("Risk management")}
+              onClick={() => handleSendMessage('Risk management')}
               className="text-xs border-red-500/30 text-red-400 hover:bg-red-500/20"
             >
               <Shield className="h-3 w-3 mr-1" />
@@ -516,7 +530,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleSendMessage("Psychology training")}
+              onClick={() => handleSendMessage('Psychology training')}
               className="text-xs border-green-500/30 text-green-400 hover:bg-green-500/20"
             >
               <Brain className="h-3 w-3 mr-1" />
@@ -528,8 +542,10 @@ What specific aspect of trading would you like the Pack Leader to analyze?
             <div className="flex space-x-2">
               <Textarea
                 value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), handleSendMessage())}
+                onChange={e => setInputMessage(e.target.value)}
+                onKeyPress={e =>
+                  e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSendMessage())
+                }
                 placeholder="Ask the Pack Leader anything about trading..."
                 className="bg-gray-800/40 border-orange-500/30 text-white placeholder-gray-400 resize-none"
                 rows={2}
@@ -544,7 +560,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
                 <Button
                   onClick={isListening ? stopListening : startListening}
                   variant="outline"
-                  className={`border-orange-500/30 ${isListening ? "text-red-400" : "text-orange-400"}`}
+                  className={`border-orange-500/30 ${isListening ? 'text-red-400' : 'text-orange-400'}`}
                 >
                   {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
                 </Button>
@@ -561,7 +577,7 @@ What specific aspect of trading would you like the Pack Leader to analyze?
                   <span className="text-gray-400">Mode:</span>
                   <select
                     value={packLeaderMode}
-                    onChange={(e) => setPackLeaderMode(e.target.value)}
+                    onChange={e => setPackLeaderMode(e.target.value)}
                     className="bg-gray-800/40 border border-orange-500/30 rounded px-2 py-1 text-orange-400 text-xs"
                   >
                     <option value="alpha">Alpha Leader</option>
@@ -580,5 +596,5 @@ What specific aspect of trading would you like the Pack Leader to analyze?
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

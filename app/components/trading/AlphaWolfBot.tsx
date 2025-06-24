@@ -1,100 +1,111 @@
-"use client"
+'use client';
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
-import { ArrowUp, ArrowDown, AlertTriangle, CheckCircle, XCircle, Loader2 } from "lucide-react"
+import type React from 'react';
+import { useState, useEffect } from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import { ArrowUp, ArrowDown, AlertTriangle, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 
 interface StockData {
-  time: string
-  price: number
+  time: string;
+  price: number;
 }
 
 interface AlphaWolfBotProps {
-  stockSymbol: string
+  stockSymbol: string;
 }
 
 const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
-  const [stockData, setStockData] = useState<StockData[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [recommendation, setRecommendation] = useState<"buy" | "sell" | "hold" | null>(null)
-  const [recommendationConfidence, setRecommendationConfidence] = useState<number | null>(null)
+  const [stockData, setStockData] = useState<StockData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [recommendation, setRecommendation] = useState<'buy' | 'sell' | 'hold' | null>(null);
+  const [recommendationConfidence, setRecommendationConfidence] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
       try {
         // Replace with your actual API endpoint
-        const response = await fetch(`/api/trading/analyze?symbol=${stockSymbol}`)
+        const response = await fetch(`/api/trading/analyze?symbol=${stockSymbol}`);
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json()
+        const data = await response.json();
 
         if (data && data.stockData && Array.isArray(data.stockData)) {
-          setStockData(data.stockData)
+          setStockData(data.stockData);
         } else {
-          console.error("Invalid stock data format:", data)
-          setError("Invalid stock data format received.")
-          setStockData([])
+          console.error('Invalid stock data format:', data);
+          setError('Invalid stock data format received.');
+          setStockData([]);
         }
 
         if (data && data.recommendation) {
-          setRecommendation(data.recommendation.action)
-          setRecommendationConfidence(data.recommendation.confidence)
+          setRecommendation(data.recommendation.action);
+          setRecommendationConfidence(data.recommendation.confidence);
         } else {
-          setRecommendation(null)
-          setRecommendationConfidence(null)
+          setRecommendation(null);
+          setRecommendationConfidence(null);
         }
       } catch (e: any) {
-        console.error("Could not fetch stock data:", e)
-        setError(e.message || "Could not fetch stock data.")
-        setStockData([])
-        setRecommendation(null)
-        setRecommendationConfidence(null)
+        console.error('Could not fetch stock data:', e);
+        setError(e.message || 'Could not fetch stock data.');
+        setStockData([]);
+        setRecommendation(null);
+        setRecommendationConfidence(null);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
+    fetchData();
 
     // Refresh data every 60 seconds
-    const intervalId = setInterval(fetchData, 60000)
+    const intervalId = setInterval(fetchData, 60000);
 
-    return () => clearInterval(intervalId) // Cleanup interval on unmount
-  }, [stockSymbol])
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, [stockSymbol]);
 
-  const latestPrice = stockData.length > 0 ? stockData[stockData.length - 1].price : 0
+  const latestPrice = stockData.length > 0 ? stockData[stockData.length - 1].price : 0;
 
-  let recommendationIcon = null
-  let recommendationText = "Analyzing..."
+  let recommendationIcon = null;
+  let recommendationText = 'Analyzing...';
 
   if (loading) {
-    recommendationIcon = <Loader2 size={20} className="animate-spin text-blue-500" />
-    recommendationText = "Analyzing..."
+    recommendationIcon = <Loader2 size={20} className="animate-spin text-blue-500" />;
+    recommendationText = 'Analyzing...';
   } else if (error) {
-    recommendationIcon = <AlertTriangle size={20} className="text-red-500" />
-    recommendationText = `Error: ${error}`
-  } else if (recommendation === "buy") {
-    recommendationIcon = <ArrowUp size={20} className="text-green-500" />
-    recommendationText = `Buy (Confidence: ${recommendationConfidence?.toFixed(2)}%)`
-  } else if (recommendation === "sell") {
-    recommendationIcon = <ArrowDown size={20} className="text-red-500" />
-    recommendationText = `Sell (Confidence: ${recommendationConfidence?.toFixed(2)}%)`
-  } else if (recommendation === "hold") {
-    recommendationIcon = <CheckCircle size={20} className="text-yellow-500" />
-    recommendationText = `Hold (Confidence: ${recommendationConfidence?.toFixed(2)}%)`
+    recommendationIcon = <AlertTriangle size={20} className="text-red-500" />;
+    recommendationText = `Error: ${error}`;
+  } else if (recommendation === 'buy') {
+    recommendationIcon = <ArrowUp size={20} className="text-green-500" />;
+    recommendationText = `Buy (Confidence: ${recommendationConfidence?.toFixed(2)}%)`;
+  } else if (recommendation === 'sell') {
+    recommendationIcon = <ArrowDown size={20} className="text-red-500" />;
+    recommendationText = `Sell (Confidence: ${recommendationConfidence?.toFixed(2)}%)`;
+  } else if (recommendation === 'hold') {
+    recommendationIcon = <CheckCircle size={20} className="text-yellow-500" />;
+    recommendationText = `Hold (Confidence: ${recommendationConfidence?.toFixed(2)}%)`;
   } else {
-    recommendationIcon = <XCircle size={20} className="text-gray-500" />
-    recommendationText = "No recommendation"
+    recommendationIcon = <XCircle size={20} className="text-gray-500" />;
+    recommendationText = 'No recommendation';
   }
 
   return (
     <div className="bg-white shadow rounded-lg p-4">
-      <h3 className="text-lg font-semibold text-gray-800 mb-2">AlphaWolf Bot Analysis for {stockSymbol}</h3>
+      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+        AlphaWolf Bot Analysis for {stockSymbol}
+      </h3>
       <div className="flex items-center mb-2">
         {recommendationIcon}
         <span className="ml-2 text-gray-700">{recommendationText}</span>
@@ -119,7 +130,7 @@ const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
       )}
       <div className="mt-4 text-sm text-gray-600">Latest Price: ${latestPrice.toFixed(2)}</div>
     </div>
-  )
-}
+  );
+};
 
-export default AlphaWolfBot
+export default AlphaWolfBot;

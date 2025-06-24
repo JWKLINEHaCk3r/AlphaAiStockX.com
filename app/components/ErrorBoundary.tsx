@@ -1,27 +1,30 @@
-"use client"
+'use client';
 
-import React from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { AlertTriangle, RefreshCw } from "lucide-react"
+import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 interface ErrorBoundaryState {
-  hasError: boolean
-  error?: Error
+  hasError: boolean;
+  error?: Error;
 }
 
-export class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<{}>,
+  ErrorBoundaryState
+> {
   constructor(props: React.PropsWithChildren<{}>) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("Error caught by boundary:", error, errorInfo)
+    console.error('Error caught by boundary:', error, errorInfo);
   }
 
   render() {
@@ -39,7 +42,9 @@ export class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, 
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-slate-300">{this.state.error?.message || "An unexpected error occurred"}</p>
+              <p className="text-sm text-slate-300">
+                {this.state.error?.message || 'An unexpected error occurred'}
+              </p>
               <Button
                 onClick={() => window.location.reload()}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600"
@@ -50,9 +55,9 @@ export class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, 
             </CardContent>
           </Card>
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }

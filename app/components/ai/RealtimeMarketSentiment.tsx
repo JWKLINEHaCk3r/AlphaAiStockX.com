@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   TrendingUp,
   TrendingDown,
@@ -19,37 +19,37 @@ import {
   ThumbsUp,
   ThumbsDown,
   AlertTriangle,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function RealtimeMarketSentiment() {
-  const [sentimentData, setSentimentData] = useState({})
-  const [socialMedia, setSocialMedia] = useState([])
-  const [newsAnalysis, setNewsAnalysis] = useState([])
-  const [influencerSentiment, setInfluencerSentiment] = useState([])
-  const [marketMood, setMarketMood] = useState({})
+  const [sentimentData, setSentimentData] = useState({});
+  const [socialMedia, setSocialMedia] = useState([]);
+  const [newsAnalysis, setNewsAnalysis] = useState([]);
+  const [influencerSentiment, setInfluencerSentiment] = useState([]);
+  const [marketMood, setMarketMood] = useState({});
 
   useEffect(() => {
-    generateSentimentData()
-    generateSocialMediaData()
-    generateNewsAnalysis()
-    generateInfluencerData()
-    generateMarketMood()
+    generateSentimentData();
+    generateSocialMediaData();
+    generateNewsAnalysis();
+    generateInfluencerData();
+    generateMarketMood();
 
     const interval = setInterval(() => {
-      generateSentimentData()
-      generateSocialMediaData()
-      generateNewsAnalysis()
-      generateMarketMood()
-    }, 5000)
+      generateSentimentData();
+      generateSocialMediaData();
+      generateNewsAnalysis();
+      generateMarketMood();
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const generateSentimentData = () => {
-    const symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA", "META", "AMZN", "SPY"]
-    const data = {}
+    const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY'];
+    const data = {};
 
-    symbols.forEach((symbol) => {
+    symbols.forEach(symbol => {
       data[symbol] = {
         overall: 40 + Math.random() * 60,
         bullish: 30 + Math.random() * 50,
@@ -57,116 +57,118 @@ export default function RealtimeMarketSentiment() {
         neutral: 20 + Math.random() * 40,
         volume: Math.floor(Math.random() * 10000) + 1000,
         change24h: (Math.random() - 0.5) * 20,
-        momentum: Math.random() > 0.5 ? "increasing" : "decreasing",
+        momentum: Math.random() > 0.5 ? 'increasing' : 'decreasing',
         confidence: 70 + Math.random() * 30,
-      }
-    })
+      };
+    });
 
-    setSentimentData(data)
-  }
+    setSentimentData(data);
+  };
 
   const generateSocialMediaData = () => {
     const platforms = [
-      { name: "Twitter", icon: Twitter, color: "text-blue-400" },
-      { name: "Reddit", icon: MessageSquare, color: "text-orange-400" },
-      { name: "Discord", icon: MessageSquare, color: "text-purple-400" },
-      { name: "Telegram", icon: MessageSquare, color: "text-cyan-400" },
-    ]
+      { name: 'Twitter', icon: Twitter, color: 'text-blue-400' },
+      { name: 'Reddit', icon: MessageSquare, color: 'text-orange-400' },
+      { name: 'Discord', icon: MessageSquare, color: 'text-purple-400' },
+      { name: 'Telegram', icon: MessageSquare, color: 'text-cyan-400' },
+    ];
 
-    const data = platforms.map((platform) => ({
+    const data = platforms.map(platform => ({
       ...platform,
       mentions: Math.floor(Math.random() * 50000) + 5000,
       sentiment: 40 + Math.random() * 60,
       engagement: Math.floor(Math.random() * 100000) + 10000,
       trending: Math.random() > 0.7,
       change: (Math.random() - 0.5) * 50,
-      topKeywords: ["bullish", "moon", "buy", "hold", "diamond hands"].slice(0, 3),
-    }))
+      topKeywords: ['bullish', 'moon', 'buy', 'hold', 'diamond hands'].slice(0, 3),
+    }));
 
-    setSocialMedia(data)
-  }
+    setSocialMedia(data);
+  };
 
   const generateNewsAnalysis = () => {
-    const sources = ["Bloomberg", "Reuters", "CNBC", "MarketWatch", "Financial Times"]
-    const sentiments = ["bullish", "bearish", "neutral"]
+    const sources = ['Bloomberg', 'Reuters', 'CNBC', 'MarketWatch', 'Financial Times'];
+    const sentiments = ['bullish', 'bearish', 'neutral'];
 
     const news = Array.from({ length: 8 }, (_, i) => ({
       id: i + 1,
       headline: [
-        "Fed Signals Potential Rate Cuts Ahead",
-        "Tech Stocks Rally on AI Optimism",
-        "Market Volatility Expected to Continue",
-        "Earnings Season Shows Mixed Results",
-        "Crypto Market Sees Institutional Adoption",
-        "Energy Sector Outperforms Expectations",
-        "Consumer Spending Data Beats Estimates",
-        "Geopolitical Tensions Impact Markets",
+        'Fed Signals Potential Rate Cuts Ahead',
+        'Tech Stocks Rally on AI Optimism',
+        'Market Volatility Expected to Continue',
+        'Earnings Season Shows Mixed Results',
+        'Crypto Market Sees Institutional Adoption',
+        'Energy Sector Outperforms Expectations',
+        'Consumer Spending Data Beats Estimates',
+        'Geopolitical Tensions Impact Markets',
       ][i],
       source: sources[Math.floor(Math.random() * sources.length)],
       sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-      impact: Math.random() > 0.6 ? "high" : Math.random() > 0.3 ? "medium" : "low",
+      impact: Math.random() > 0.6 ? 'high' : Math.random() > 0.3 ? 'medium' : 'low',
       confidence: 70 + Math.random() * 30,
       timestamp: new Date(Date.now() - Math.random() * 3600000),
       relevance: 60 + Math.random() * 40,
-    }))
+    }));
 
-    setNewsAnalysis(news)
-  }
+    setNewsAnalysis(news);
+  };
 
   const generateInfluencerData = () => {
     const influencers = [
-      { name: "Elon Musk", followers: "150M", platform: "Twitter" },
-      { name: "Cathie Wood", followers: "1.2M", platform: "Twitter" },
-      { name: "Jim Cramer", followers: "2.1M", platform: "Twitter" },
-      { name: "Michael Saylor", followers: "3.5M", platform: "Twitter" },
-      { name: "Ray Dalio", followers: "800K", platform: "LinkedIn" },
-    ]
+      { name: 'Elon Musk', followers: '150M', platform: 'Twitter' },
+      { name: 'Cathie Wood', followers: '1.2M', platform: 'Twitter' },
+      { name: 'Jim Cramer', followers: '2.1M', platform: 'Twitter' },
+      { name: 'Michael Saylor', followers: '3.5M', platform: 'Twitter' },
+      { name: 'Ray Dalio', followers: '800K', platform: 'LinkedIn' },
+    ];
 
-    const data = influencers.map((influencer) => ({
+    const data = influencers.map(influencer => ({
       ...influencer,
-      sentiment: Math.random() > 0.5 ? "bullish" : "bearish",
+      sentiment: Math.random() > 0.5 ? 'bullish' : 'bearish',
       confidence: 70 + Math.random() * 30,
       lastPost: new Date(Date.now() - Math.random() * 86400000),
       engagement: Math.floor(Math.random() * 100000) + 10000,
-      marketImpact: Math.random() > 0.6 ? "high" : "medium",
-    }))
+      marketImpact: Math.random() > 0.6 ? 'high' : 'medium',
+    }));
 
-    setInfluencerSentiment(data)
-  }
+    setInfluencerSentiment(data);
+  };
 
   const generateMarketMood = () => {
-    const emotions = ["Fear", "Greed", "Optimism", "Pessimism", "Uncertainty", "Confidence"]
-    const dominant = emotions[Math.floor(Math.random() * emotions.length)]
+    const emotions = ['Fear', 'Greed', 'Optimism', 'Pessimism', 'Uncertainty', 'Confidence'];
+    const dominant = emotions[Math.floor(Math.random() * emotions.length)];
 
     setMarketMood({
       dominant,
       fearGreedIndex: Math.floor(Math.random() * 100),
       volatilityIndex: 15 + Math.random() * 35,
-      riskAppetite: Math.random() > 0.5 ? "high" : "low",
-      marketPhase: ["Accumulation", "Markup", "Distribution", "Markdown"][Math.floor(Math.random() * 4)],
+      riskAppetite: Math.random() > 0.5 ? 'high' : 'low',
+      marketPhase: ['Accumulation', 'Markup', 'Distribution', 'Markdown'][
+        Math.floor(Math.random() * 4)
+      ],
       crowdSentiment: 40 + Math.random() * 60,
-      institutionalFlow: Math.random() > 0.5 ? "inflow" : "outflow",
-    })
-  }
+      institutionalFlow: Math.random() > 0.5 ? 'inflow' : 'outflow',
+    });
+  };
 
-  const getSentimentColor = (sentiment) => {
-    if (sentiment >= 70) return "text-green-400"
-    if (sentiment >= 50) return "text-yellow-400"
-    return "text-red-400"
-  }
+  const getSentimentColor = sentiment => {
+    if (sentiment >= 70) return 'text-green-400';
+    if (sentiment >= 50) return 'text-yellow-400';
+    return 'text-red-400';
+  };
 
-  const getImpactColor = (impact) => {
+  const getImpactColor = impact => {
     switch (impact) {
-      case "high":
-        return "text-red-400"
-      case "medium":
-        return "text-yellow-400"
-      case "low":
-        return "text-green-400"
+      case 'high':
+        return 'text-red-400';
+      case 'medium':
+        return 'text-yellow-400';
+      case 'low':
+        return 'text-green-400';
       default:
-        return "text-gray-400"
+        return 'text-gray-400';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -207,7 +209,9 @@ export default function RealtimeMarketSentiment() {
                 <span className="text-blue-400 font-semibold">Volatility Index</span>
                 <Activity className="h-4 w-4 text-blue-400" />
               </div>
-              <p className="text-2xl font-bold text-white">{marketMood.volatilityIndex?.toFixed(1)}</p>
+              <p className="text-2xl font-bold text-white">
+                {marketMood.volatilityIndex?.toFixed(1)}
+              </p>
               <p className="text-sm text-gray-400">Risk: {marketMood.riskAppetite}</p>
             </div>
 
@@ -216,7 +220,9 @@ export default function RealtimeMarketSentiment() {
                 <span className="text-green-400 font-semibold">Crowd Sentiment</span>
                 <Eye className="h-4 w-4 text-green-400" />
               </div>
-              <p className="text-2xl font-bold text-white">{marketMood.crowdSentiment?.toFixed(0)}%</p>
+              <p className="text-2xl font-bold text-white">
+                {marketMood.crowdSentiment?.toFixed(0)}%
+              </p>
               <p className="text-sm text-gray-400">Flow: {marketMood.institutionalFlow}</p>
             </div>
           </div>
@@ -247,15 +253,19 @@ export default function RealtimeMarketSentiment() {
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-white font-bold text-lg">{symbol}</span>
-                        <Badge className={data.momentum === "increasing" ? "bg-green-500" : "bg-red-500"}>
-                          {data.momentum === "increasing" ? (
+                        <Badge
+                          className={data.momentum === 'increasing' ? 'bg-green-500' : 'bg-red-500'}
+                        >
+                          {data.momentum === 'increasing' ? (
                             <TrendingUp className="h-3 w-3" />
                           ) : (
                             <TrendingDown className="h-3 w-3" />
                           )}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-400">{data.volume.toLocaleString()} mentions</p>
+                      <p className="text-sm text-gray-400">
+                        {data.volume.toLocaleString()} mentions
+                      </p>
                     </div>
 
                     <div className="text-center">
@@ -277,8 +287,10 @@ export default function RealtimeMarketSentiment() {
 
                     <div className="text-center">
                       <p className="text-gray-400 text-sm">24h Change</p>
-                      <p className={`font-bold ${data.change24h >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {data.change24h >= 0 ? "+" : ""}
+                      <p
+                        className={`font-bold ${data.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {data.change24h >= 0 ? '+' : ''}
                         {data.change24h.toFixed(1)}%
                       </p>
                     </div>
@@ -318,9 +330,13 @@ export default function RealtimeMarketSentiment() {
                   <div className="flex items-center space-x-2">
                     <platform.icon className={`h-5 w-5 ${platform.color}`} />
                     <span className="text-white font-bold">{platform.name}</span>
-                    {platform.trending && <Badge className="bg-red-500 animate-pulse">TRENDING</Badge>}
+                    {platform.trending && (
+                      <Badge className="bg-red-500 animate-pulse">TRENDING</Badge>
+                    )}
                   </div>
-                  <Badge className={getSentimentColor(platform.sentiment)}>{platform.sentiment.toFixed(0)}%</Badge>
+                  <Badge className={getSentimentColor(platform.sentiment)}>
+                    {platform.sentiment.toFixed(0)}%
+                  </Badge>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -334,8 +350,10 @@ export default function RealtimeMarketSentiment() {
                   </div>
                   <div>
                     <span className="text-gray-400">24h Change:</span>
-                    <p className={`font-bold ${platform.change >= 0 ? "text-green-400" : "text-red-400"}`}>
-                      {platform.change >= 0 ? "+" : ""}
+                    <p
+                      className={`font-bold ${platform.change >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                    >
+                      {platform.change >= 0 ? '+' : ''}
                       {platform.change.toFixed(1)}%
                     </p>
                   </div>
@@ -370,7 +388,7 @@ export default function RealtimeMarketSentiment() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {newsAnalysis.map((news) => (
+            {newsAnalysis.map(news => (
               <div
                 key={news.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"
@@ -380,21 +398,23 @@ export default function RealtimeMarketSentiment() {
                     <div className="flex items-center space-x-2 mb-2">
                       <Badge
                         className={
-                          news.sentiment === "bullish"
-                            ? "bg-green-500"
-                            : news.sentiment === "bearish"
-                              ? "bg-red-500"
-                              : "bg-gray-500"
+                          news.sentiment === 'bullish'
+                            ? 'bg-green-500'
+                            : news.sentiment === 'bearish'
+                              ? 'bg-red-500'
+                              : 'bg-gray-500'
                         }
                       >
-                        {news.sentiment === "bullish" ? (
+                        {news.sentiment === 'bullish' ? (
                           <ThumbsUp className="h-3 w-3 mr-1" />
-                        ) : news.sentiment === "bearish" ? (
+                        ) : news.sentiment === 'bearish' ? (
                           <ThumbsDown className="h-3 w-3 mr-1" />
                         ) : null}
                         {news.sentiment.toUpperCase()}
                       </Badge>
-                      <Badge className={`${getImpactColor(news.impact)}`}>{news.impact.toUpperCase()} IMPACT</Badge>
+                      <Badge className={`${getImpactColor(news.impact)}`}>
+                        {news.impact.toUpperCase()} IMPACT
+                      </Badge>
                     </div>
 
                     <h4 className="text-white font-semibold mb-1">{news.headline}</h4>
@@ -440,14 +460,22 @@ export default function RealtimeMarketSentiment() {
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-white font-bold">{influencer.name}</span>
-                        <Badge className={influencer.sentiment === "bullish" ? "bg-green-500" : "bg-red-500"}>
-                          {influencer.sentiment === "bullish" ? (
+                        <Badge
+                          className={
+                            influencer.sentiment === 'bullish' ? 'bg-green-500' : 'bg-red-500'
+                          }
+                        >
+                          {influencer.sentiment === 'bullish' ? (
                             <TrendingUp className="h-3 w-3" />
                           ) : (
                             <TrendingDown className="h-3 w-3" />
                           )}
                         </Badge>
-                        <Badge className={influencer.marketImpact === "high" ? "bg-red-500" : "bg-yellow-500"}>
+                        <Badge
+                          className={
+                            influencer.marketImpact === 'high' ? 'bg-red-500' : 'bg-yellow-500'
+                          }
+                        >
                           {influencer.marketImpact.toUpperCase()}
                         </Badge>
                       </div>
@@ -459,7 +487,7 @@ export default function RealtimeMarketSentiment() {
                     <div className="text-center">
                       <p className="text-gray-400 text-sm">Sentiment</p>
                       <p
-                        className={`font-bold ${influencer.sentiment === "bullish" ? "text-green-400" : "text-red-400"}`}
+                        className={`font-bold ${influencer.sentiment === 'bullish' ? 'text-green-400' : 'text-red-400'}`}
                       >
                         {influencer.sentiment.toUpperCase()}
                       </p>
@@ -467,17 +495,23 @@ export default function RealtimeMarketSentiment() {
 
                     <div className="text-center">
                       <p className="text-gray-400 text-sm">Confidence</p>
-                      <p className="text-indigo-400 font-bold">{influencer.confidence.toFixed(0)}%</p>
+                      <p className="text-indigo-400 font-bold">
+                        {influencer.confidence.toFixed(0)}%
+                      </p>
                     </div>
 
                     <div className="text-center">
                       <p className="text-gray-400 text-sm">Engagement</p>
-                      <p className="text-purple-400 font-bold">{influencer.engagement.toLocaleString()}</p>
+                      <p className="text-purple-400 font-bold">
+                        {influencer.engagement.toLocaleString()}
+                      </p>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <p className="text-xs text-gray-400">Last post: {influencer.lastPost.toLocaleDateString()}</p>
+                    <p className="text-xs text-gray-400">
+                      Last post: {influencer.lastPost.toLocaleDateString()}
+                    </p>
                     <Badge variant="outline" className="border-indigo-500/30 text-indigo-400 mt-1">
                       Active
                     </Badge>
@@ -489,5 +523,5 @@ export default function RealtimeMarketSentiment() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

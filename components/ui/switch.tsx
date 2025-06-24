@@ -1,8 +1,14 @@
-"use client"
+'use client';
 
-import * as React from "react"
+import * as React from 'react';
 
-export function Switch({ checked, onCheckedChange }: { checked: boolean, onCheckedChange: (checked: boolean) => void }) {
+export function Switch({
+  checked,
+  onCheckedChange,
+}: {
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
+}) {
   return (
     <button
       type="button"
@@ -15,5 +21,5 @@ export function Switch({ checked, onCheckedChange }: { checked: boolean, onCheck
         className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}
       />
     </button>
-  )
+  );
 }

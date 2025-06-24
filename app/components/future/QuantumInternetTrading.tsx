@@ -1,20 +1,32 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Lock, Zap, Globe, Shield, Network, Atom, Key, Radio, Cpu, Eye, Activity } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Lock,
+  Zap,
+  Globe,
+  Shield,
+  Network,
+  Atom,
+  Key,
+  Radio,
+  Cpu,
+  Eye,
+  Activity,
+} from 'lucide-react';
 
 export default function QuantumInternetTrading() {
   const [quantumNetworkData, setQuantumNetworkData] = useState({
-    networkStatus: "Quantum Entangled",
+    networkStatus: 'Quantum Entangled',
     entanglementFidelity: 99.7 + Math.random() * 0.3,
     quantumNodes: 2847 + Math.floor(Math.random() * 100),
     globalLatency: 0.001 + Math.random() * 0.0005,
-    securityLevel: "Quantum Cryptographic",
+    securityLevel: 'Quantum Cryptographic',
     dataTransmissionRate: 847.5 + Math.random() * 50,
     quantumStates: {
       superposition: 94.7 + Math.random() * 3,
@@ -28,191 +40,212 @@ export default function QuantumInternetTrading() {
       simultaneousMarkets: 847 + Math.floor(Math.random() * 50),
       quantumAdvantage: 2847 + Math.random() * 200,
     },
-  })
+  });
 
   const [quantumNodes, setQuantumNodes] = useState([
     {
-      id: "QN-NYC-001",
-      location: "New York",
-      type: "Primary Hub",
+      id: 'QN-NYC-001',
+      location: 'New York',
+      type: 'Primary Hub',
       entanglement: 99.8 + Math.random() * 0.2,
       connections: 247,
-      latency: "0.001ms",
-      status: "Optimal",
+      latency: '0.001ms',
+      status: 'Optimal',
     },
     {
-      id: "QN-LON-002",
-      location: "London",
-      type: "Primary Hub",
+      id: 'QN-LON-002',
+      location: 'London',
+      type: 'Primary Hub',
       entanglement: 99.6 + Math.random() * 0.3,
       connections: 189,
-      latency: "0.001ms",
-      status: "Optimal",
+      latency: '0.001ms',
+      status: 'Optimal',
     },
     {
-      id: "QN-TOK-003",
-      location: "Tokyo",
-      type: "Primary Hub",
+      id: 'QN-TOK-003',
+      location: 'Tokyo',
+      type: 'Primary Hub',
       entanglement: 99.7 + Math.random() * 0.2,
       connections: 156,
-      latency: "0.001ms",
-      status: "Optimal",
+      latency: '0.001ms',
+      status: 'Optimal',
     },
     {
-      id: "QN-SIN-004",
-      location: "Singapore",
-      type: "Regional Hub",
+      id: 'QN-SIN-004',
+      location: 'Singapore',
+      type: 'Regional Hub',
       entanglement: 99.4 + Math.random() * 0.4,
       connections: 134,
-      latency: "0.001ms",
-      status: "Optimal",
+      latency: '0.001ms',
+      status: 'Optimal',
     },
     {
-      id: "QN-FRA-005",
-      location: "Frankfurt",
-      type: "Regional Hub",
+      id: 'QN-FRA-005',
+      location: 'Frankfurt',
+      type: 'Regional Hub',
       entanglement: 99.5 + Math.random() * 0.3,
       connections: 178,
-      latency: "0.001ms",
-      status: "Optimal",
+      latency: '0.001ms',
+      status: 'Optimal',
     },
-  ])
+  ]);
 
   const [quantumTrades, setQuantumTrades] = useState([
     {
-      id: "QT-001",
-      symbol: "AAPL",
-      type: "Quantum Arbitrage",
-      markets: ["NYSE", "NASDAQ", "LSE", "TSE"],
-      execution: "Instantaneous",
+      id: 'QT-001',
+      symbol: 'AAPL',
+      type: 'Quantum Arbitrage',
+      markets: ['NYSE', 'NASDAQ', 'LSE', 'TSE'],
+      execution: 'Instantaneous',
       profit: 12847.5,
-      entanglementUsed: "4-way",
-      timestamp: "0.001ms ago",
+      entanglementUsed: '4-way',
+      timestamp: '0.001ms ago',
     },
     {
-      id: "QT-002",
-      symbol: "MSFT",
-      type: "Multi-dimensional Trade",
-      markets: ["NYSE", "XETRA", "TSE"],
-      execution: "Instantaneous",
+      id: 'QT-002',
+      symbol: 'MSFT',
+      type: 'Multi-dimensional Trade',
+      markets: ['NYSE', 'XETRA', 'TSE'],
+      execution: 'Instantaneous',
       profit: 8947.23,
-      entanglementUsed: "3-way",
-      timestamp: "0.002ms ago",
+      entanglementUsed: '3-way',
+      timestamp: '0.002ms ago',
     },
     {
-      id: "QT-003",
-      symbol: "GOOGL",
-      type: "Quantum Hedge",
-      markets: ["NASDAQ", "LSE"],
-      execution: "Instantaneous",
+      id: 'QT-003',
+      symbol: 'GOOGL',
+      type: 'Quantum Hedge',
+      markets: ['NASDAQ', 'LSE'],
+      execution: 'Instantaneous',
       profit: 15247.89,
-      entanglementUsed: "2-way",
-      timestamp: "0.001ms ago",
+      entanglementUsed: '2-way',
+      timestamp: '0.001ms ago',
     },
-  ])
+  ]);
 
   const [quantumSecurity, setQuantumSecurity] = useState({
-    encryptionLevel: "Quantum Key Distribution",
-    keyDistributionRate: "1M keys/second",
-    eavesdroppingDetection: "100%",
-    quantumRandomness: "True Random",
+    encryptionLevel: 'Quantum Key Distribution',
+    keyDistributionRate: '1M keys/second',
+    eavesdroppingDetection: '100%',
+    quantumRandomness: 'True Random',
     securityBreaches: 0,
-    lastSecurityAudit: "Continuous",
-    quantumSignatures: "Verified",
-    entanglementVerification: "Real-time",
-  })
+    lastSecurityAudit: 'Continuous',
+    quantumSignatures: 'Verified',
+    entanglementVerification: 'Real-time',
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateQuantumNetworkData()
-      simulateQuantumTrades()
-    }, 2000)
+      updateQuantumNetworkData();
+      simulateQuantumTrades();
+    }, 2000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateQuantumNetworkData = () => {
-    setQuantumNetworkData((prev) => ({
+    setQuantumNetworkData(prev => ({
       ...prev,
-      entanglementFidelity: Math.min(100, Math.max(99, prev.entanglementFidelity + (Math.random() - 0.5) * 0.1)),
+      entanglementFidelity: Math.min(
+        100,
+        Math.max(99, prev.entanglementFidelity + (Math.random() - 0.5) * 0.1)
+      ),
       quantumNodes: prev.quantumNodes + Math.floor((Math.random() - 0.3) * 5),
       globalLatency: Math.max(0.0005, prev.globalLatency + (Math.random() - 0.5) * 0.0001),
       dataTransmissionRate: prev.dataTransmissionRate + (Math.random() - 0.5) * 10,
       quantumStates: {
-        superposition: Math.min(100, Math.max(90, prev.quantumStates.superposition + (Math.random() - 0.5) * 1)),
-        entanglement: Math.min(100, Math.max(95, prev.quantumStates.entanglement + (Math.random() - 0.5) * 0.5)),
-        coherence: Math.min(100, Math.max(88, prev.quantumStates.coherence + (Math.random() - 0.5) * 1)),
-        decoherence: Math.min(5, Math.max(1, prev.quantumStates.decoherence + (Math.random() - 0.5) * 0.3)),
+        superposition: Math.min(
+          100,
+          Math.max(90, prev.quantumStates.superposition + (Math.random() - 0.5) * 1)
+        ),
+        entanglement: Math.min(
+          100,
+          Math.max(95, prev.quantumStates.entanglement + (Math.random() - 0.5) * 0.5)
+        ),
+        coherence: Math.min(
+          100,
+          Math.max(88, prev.quantumStates.coherence + (Math.random() - 0.5) * 1)
+        ),
+        decoherence: Math.min(
+          5,
+          Math.max(1, prev.quantumStates.decoherence + (Math.random() - 0.5) * 0.3)
+        ),
       },
       tradingMetrics: {
         ...prev.tradingMetrics,
-        instantaneousExecutions: prev.tradingMetrics.instantaneousExecutions + Math.floor(Math.random() * 100),
+        instantaneousExecutions:
+          prev.tradingMetrics.instantaneousExecutions + Math.floor(Math.random() * 100),
         quantumArbitrage: prev.tradingMetrics.quantumArbitrage + (Math.random() - 0.3) * 10,
       },
-    }))
+    }));
 
-    setQuantumNodes((prev) =>
-      prev.map((node) => ({
+    setQuantumNodes(prev =>
+      prev.map(node => ({
         ...node,
         entanglement: Math.min(100, Math.max(99, node.entanglement + (Math.random() - 0.5) * 0.1)),
         connections: node.connections + Math.floor((Math.random() - 0.5) * 5),
-      })),
-    )
-  }
+      }))
+    );
+  };
 
   const simulateQuantumTrades = () => {
     if (Math.random() > 0.6) {
-      const symbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META"]
-      const tradeTypes = ["Quantum Arbitrage", "Multi-dimensional Trade", "Quantum Hedge", "Entangled Portfolio"]
+      const symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'META'];
+      const tradeTypes = [
+        'Quantum Arbitrage',
+        'Multi-dimensional Trade',
+        'Quantum Hedge',
+        'Entangled Portfolio',
+      ];
       const markets = [
-        ["NYSE", "NASDAQ"],
-        ["NYSE", "LSE", "TSE"],
-        ["NASDAQ", "XETRA"],
-        ["NYSE", "NASDAQ", "LSE", "TSE", "XETRA"],
-      ]
+        ['NYSE', 'NASDAQ'],
+        ['NYSE', 'LSE', 'TSE'],
+        ['NASDAQ', 'XETRA'],
+        ['NYSE', 'NASDAQ', 'LSE', 'TSE', 'XETRA'],
+      ];
 
       const newTrade = {
         id: `QT-${Date.now()}`,
         symbol: symbols[Math.floor(Math.random() * symbols.length)],
         type: tradeTypes[Math.floor(Math.random() * tradeTypes.length)],
         markets: markets[Math.floor(Math.random() * markets.length)],
-        execution: "Instantaneous",
+        execution: 'Instantaneous',
         profit: 5000 + Math.random() * 15000,
         entanglementUsed: `${Math.floor(Math.random() * 4) + 2}-way`,
-        timestamp: "Just now",
-      }
+        timestamp: 'Just now',
+      };
 
-      setQuantumTrades((prev) => [newTrade, ...prev.slice(0, 4)])
+      setQuantumTrades(prev => [newTrade, ...prev.slice(0, 4)]);
     }
-  }
+  };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = status => {
     switch (status.toLowerCase()) {
-      case "optimal":
-        return "text-green-400"
-      case "good":
-        return "text-blue-400"
-      case "warning":
-        return "text-yellow-400"
-      case "critical":
-        return "text-red-400"
+      case 'optimal':
+        return 'text-green-400';
+      case 'good':
+        return 'text-blue-400';
+      case 'warning':
+        return 'text-yellow-400';
+      case 'critical':
+        return 'text-red-400';
       default:
-        return "text-gray-400"
+        return 'text-gray-400';
     }
-  }
+  };
 
-  const getNodeTypeColor = (type) => {
+  const getNodeTypeColor = type => {
     switch (type) {
-      case "Primary Hub":
-        return "bg-purple-500"
-      case "Regional Hub":
-        return "bg-blue-500"
-      case "Local Node":
-        return "bg-green-500"
+      case 'Primary Hub':
+        return 'bg-purple-500';
+      case 'Regional Hub':
+        return 'bg-blue-500';
+      case 'Local Node':
+        return 'bg-green-500';
       default:
-        return "bg-gray-500"
+        return 'bg-gray-500';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -259,7 +292,9 @@ export default function QuantumInternetTrading() {
                 <Zap className="h-8 w-8 text-blue-400" />
                 <Badge className="bg-blue-500">LATENCY</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{quantumNetworkData.globalLatency.toFixed(3)}ms</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {quantumNetworkData.globalLatency.toFixed(3)}ms
+              </div>
               <p className="text-blue-400 font-semibold">Global Latency</p>
               <p className="text-gray-400 text-sm">Instantaneous transmission</p>
             </div>
@@ -298,7 +333,10 @@ export default function QuantumInternetTrading() {
                     {quantumNetworkData.quantumStates.superposition.toFixed(1)}%
                   </span>
                 </div>
-                <Progress value={quantumNetworkData.quantumStates.superposition} className="h-2 mb-2" />
+                <Progress
+                  value={quantumNetworkData.quantumStates.superposition}
+                  className="h-2 mb-2"
+                />
                 <p className="text-gray-400 text-xs">Quantum state overlap</p>
               </div>
 
@@ -309,7 +347,10 @@ export default function QuantumInternetTrading() {
                     {quantumNetworkData.quantumStates.entanglement.toFixed(1)}%
                   </span>
                 </div>
-                <Progress value={quantumNetworkData.quantumStates.entanglement} className="h-2 mb-2" />
+                <Progress
+                  value={quantumNetworkData.quantumStates.entanglement}
+                  className="h-2 mb-2"
+                />
                 <p className="text-gray-400 text-xs">Quantum correlation strength</p>
               </div>
 
@@ -331,7 +372,10 @@ export default function QuantumInternetTrading() {
                     {quantumNetworkData.quantumStates.decoherence.toFixed(1)}%
                   </span>
                 </div>
-                <Progress value={quantumNetworkData.quantumStates.decoherence} className="h-2 mb-2" />
+                <Progress
+                  value={quantumNetworkData.quantumStates.decoherence}
+                  className="h-2 mb-2"
+                />
                 <p className="text-gray-400 text-xs">Quantum state decay</p>
               </div>
             </div>
@@ -364,11 +408,15 @@ export default function QuantumInternetTrading() {
                           {trade.entanglementUsed}
                         </Badge>
                       </div>
-                      <p className="text-gray-400 text-sm mt-1">Markets: {trade.markets.join(", ")}</p>
+                      <p className="text-gray-400 text-sm mt-1">
+                        Markets: {trade.markets.join(', ')}
+                      </p>
                       <p className="text-gray-400 text-xs">{trade.timestamp}</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-green-400 font-bold text-lg">+${trade.profit.toLocaleString()}</div>
+                      <div className="text-green-400 font-bold text-lg">
+                        +${trade.profit.toLocaleString()}
+                      </div>
                       <p className="text-gray-400 text-xs">{trade.execution}</p>
                     </div>
                   </div>
@@ -398,7 +446,8 @@ export default function QuantumInternetTrading() {
         <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-400/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center text-xl">
-              <Globe className="h-6 w-6 mr-2 text-purple-400" />🌐 Global Quantum Nodes
+              <Globe className="h-6 w-6 mr-2 text-purple-400" />
+              🌐 Global Quantum Nodes
               <Badge className="ml-3 bg-purple-500">ENTANGLED</Badge>
             </CardTitle>
           </CardHeader>
@@ -417,7 +466,9 @@ export default function QuantumInternetTrading() {
                       </div>
                       <p className="text-gray-400 text-sm">{node.location}</p>
                       <div className="flex items-center space-x-4 mt-1">
-                        <span className="text-gray-400 text-xs">{node.connections} connections</span>
+                        <span className="text-gray-400 text-xs">
+                          {node.connections} connections
+                        </span>
                         <span className="text-gray-400 text-xs">{node.latency} latency</span>
                       </div>
                     </div>
@@ -440,7 +491,8 @@ export default function QuantumInternetTrading() {
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Shield className="h-7 w-7 mr-3 text-green-400" />🔒 Quantum Cryptographic Security
+            <Shield className="h-7 w-7 mr-3 text-green-400" />
+            🔒 Quantum Cryptographic Security
             <Badge className="ml-3 bg-gradient-to-r from-green-400 to-emerald-500">
               <Lock className="h-4 w-4 mr-1" />
               UNBREAKABLE
@@ -460,28 +512,36 @@ export default function QuantumInternetTrading() {
                 <div className="p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-400/30 text-center">
                   <Key className="h-8 w-8 mx-auto mb-3 text-green-400" />
                   <h3 className="text-white font-bold">Quantum Key Distribution</h3>
-                  <p className="text-green-400 font-semibold mt-2">{quantumSecurity.keyDistributionRate}</p>
+                  <p className="text-green-400 font-semibold mt-2">
+                    {quantumSecurity.keyDistributionRate}
+                  </p>
                   <p className="text-gray-400 text-sm">Key generation rate</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-400/30 text-center">
                   <Eye className="h-8 w-8 mx-auto mb-3 text-blue-400" />
                   <h3 className="text-white font-bold">Eavesdropping Detection</h3>
-                  <p className="text-blue-400 font-semibold mt-2">{quantumSecurity.eavesdroppingDetection}</p>
+                  <p className="text-blue-400 font-semibold mt-2">
+                    {quantumSecurity.eavesdroppingDetection}
+                  </p>
                   <p className="text-gray-400 text-sm">Detection accuracy</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-400/30 text-center">
                   <Cpu className="h-8 w-8 mx-auto mb-3 text-purple-400" />
                   <h3 className="text-white font-bold">Quantum Randomness</h3>
-                  <p className="text-purple-400 font-semibold mt-2">{quantumSecurity.quantumRandomness}</p>
+                  <p className="text-purple-400 font-semibold mt-2">
+                    {quantumSecurity.quantumRandomness}
+                  </p>
                   <p className="text-gray-400 text-sm">Entropy source</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-400/30 text-center">
                   <Shield className="h-8 w-8 mx-auto mb-3 text-yellow-400" />
                   <h3 className="text-white font-bold">Security Breaches</h3>
-                  <p className="text-yellow-400 font-semibold mt-2">{quantumSecurity.securityBreaches}</p>
+                  <p className="text-yellow-400 font-semibold mt-2">
+                    {quantumSecurity.securityBreaches}
+                  </p>
                   <p className="text-gray-400 text-sm">Total incidents</p>
                 </div>
               </div>
@@ -588,5 +648,5 @@ export default function QuantumInternetTrading() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

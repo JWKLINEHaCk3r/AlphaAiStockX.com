@@ -1,123 +1,128 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { X, Check, Star, Zap, Crown, Building } from "lucide-react"
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { X, Check, Star, Zap, Crown, Building } from 'lucide-react';
 
 interface SubscriptionPlansProps {
-  isOpen: boolean
-  onClose: () => void
-  onSubscribe: (plan: string) => void
-  currentPlan: string
+  isOpen: boolean;
+  onClose: () => void;
+  onSubscribe: (plan: string) => void;
+  currentPlan: string;
 }
 
-export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, currentPlan }: SubscriptionPlansProps) {
-  const [selectedPlan, setSelectedPlan] = useState(currentPlan)
-  const [loading, setLoading] = useState(false)
+export default function SubscriptionPlans({
+  isOpen,
+  onClose,
+  onSubscribe,
+  currentPlan,
+}: SubscriptionPlansProps) {
+  const [selectedPlan, setSelectedPlan] = useState(currentPlan);
+  const [loading, setLoading] = useState(false);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const plans = [
     {
-      id: "free",
-      name: "Free",
+      id: 'free',
+      name: 'Free',
       price: 0,
       icon: Star,
-      color: "bg-slate-600",
-      description: "Get started with basic features",
+      color: 'bg-slate-600',
+      description: 'Get started with basic features',
       features: [
-        "Basic education content",
-        "Limited stock analysis (5/day)",
-        "Community access",
-        "Basic market data",
-        "Email support",
+        'Basic education content',
+        'Limited stock analysis (5/day)',
+        'Community access',
+        'Basic market data',
+        'Email support',
       ],
       limitations: [
-        "No real-time alerts",
-        "Limited AI recommendations",
-        "No advanced patterns",
-        "No portfolio integration",
+        'No real-time alerts',
+        'Limited AI recommendations',
+        'No advanced patterns',
+        'No portfolio integration',
       ],
     },
     {
-      id: "basic",
-      name: "Basic",
+      id: 'basic',
+      name: 'Basic',
       price: 29,
       icon: Zap,
-      color: "bg-blue-600",
-      description: "Perfect for individual traders",
+      color: 'bg-blue-600',
+      description: 'Perfect for individual traders',
       popular: false,
       features: [
-        "Full education access",
-        "Advanced stock analysis (50/day)",
-        "Email alerts",
-        "Technical indicators",
-        "Pattern recognition",
-        "Priority support",
-        "Mobile app access",
+        'Full education access',
+        'Advanced stock analysis (50/day)',
+        'Email alerts',
+        'Technical indicators',
+        'Pattern recognition',
+        'Priority support',
+        'Mobile app access',
       ],
-      limitations: ["No real-time alerts", "Limited portfolio tools", "No API access"],
+      limitations: ['No real-time alerts', 'Limited portfolio tools', 'No API access'],
     },
     {
-      id: "premium",
-      name: "Premium",
+      id: 'premium',
+      name: 'Premium',
       price: 79,
       icon: Crown,
-      color: "bg-purple-600",
-      description: "For serious traders and investors",
+      color: 'bg-purple-600',
+      description: 'For serious traders and investors',
       popular: true,
       features: [
-        "Everything in Basic",
-        "Unlimited AI analysis",
-        "Real-time alerts",
-        "Advanced pattern recognition",
-        "Portfolio optimization",
-        "Risk management tools",
-        "Custom watchlists",
-        "Advanced charting",
-        "Phone support",
+        'Everything in Basic',
+        'Unlimited AI analysis',
+        'Real-time alerts',
+        'Advanced pattern recognition',
+        'Portfolio optimization',
+        'Risk management tools',
+        'Custom watchlists',
+        'Advanced charting',
+        'Phone support',
       ],
-      limitations: ["No API access", "No custom models"],
+      limitations: ['No API access', 'No custom models'],
     },
     {
-      id: "enterprise",
-      name: "Enterprise",
+      id: 'enterprise',
+      name: 'Enterprise',
       price: 199,
       icon: Building,
-      color: "bg-gold-600",
-      description: "For institutions and power users",
+      color: 'bg-gold-600',
+      description: 'For institutions and power users',
       popular: false,
       features: [
-        "Everything in Premium",
-        "API access",
-        "Custom AI models",
-        "White-label options",
-        "Dedicated support",
-        "Advanced compliance",
-        "Team management",
-        "Custom integrations",
-        "SLA guarantee",
+        'Everything in Premium',
+        'API access',
+        'Custom AI models',
+        'White-label options',
+        'Dedicated support',
+        'Advanced compliance',
+        'Team management',
+        'Custom integrations',
+        'SLA guarantee',
       ],
       limitations: [],
     },
-  ]
+  ];
 
   const handleSubscribe = async (planId: string) => {
-    setLoading(true)
-    setSelectedPlan(planId)
+    setLoading(true);
+    setSelectedPlan(planId);
 
     try {
       // Simulate payment processing
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      onSubscribe(planId)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      onSubscribe(planId);
     } catch (error) {
-      console.error("Subscription failed:", error)
+      console.error('Subscription failed:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
@@ -138,15 +143,15 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {plans.map((plan) => (
+            {plans.map(plan => (
               <Card
                 key={plan.id}
                 className={`relative bg-slate-700/50 border-2 transition-all ${
                   plan.popular
-                    ? "border-purple-500 scale-105"
+                    ? 'border-purple-500 scale-105'
                     : currentPlan === plan.id
-                      ? "border-blue-500"
-                      : "border-slate-600 hover:border-slate-500"
+                      ? 'border-blue-500'
+                      : 'border-slate-600 hover:border-slate-500'
                 }`}
               >
                 {plan.popular && (
@@ -160,7 +165,9 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
                 )}
 
                 <CardHeader className="text-center">
-                  <div className={`w-12 h-12 rounded-full ${plan.color} flex items-center justify-center mx-auto mb-3`}>
+                  <div
+                    className={`w-12 h-12 rounded-full ${plan.color} flex items-center justify-center mx-auto mb-3`}
+                  >
                     <plan.icon className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-white text-xl">{plan.name}</CardTitle>
@@ -195,18 +202,18 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
                   )}
 
                   <Button
-                    className={`w-full ${plan.popular ? "bg-purple-600 hover:bg-purple-700" : ""}`}
-                    variant={currentPlan === plan.id ? "outline" : "default"}
+                    className={`w-full ${plan.popular ? 'bg-purple-600 hover:bg-purple-700' : ''}`}
+                    variant={currentPlan === plan.id ? 'outline' : 'default'}
                     onClick={() => handleSubscribe(plan.id)}
                     disabled={loading || currentPlan === plan.id}
                   >
                     {loading && selectedPlan === plan.id
-                      ? "Processing..."
+                      ? 'Processing...'
                       : currentPlan === plan.id
-                        ? "Current Plan"
+                        ? 'Current Plan'
                         : plan.price === 0
-                          ? "Get Started"
-                          : "Subscribe"}
+                          ? 'Get Started'
+                          : 'Subscribe'}
                   </Button>
                 </CardContent>
               </Card>
@@ -221,7 +228,7 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
                 <thead>
                   <tr className="border-b border-slate-600">
                     <th className="text-left text-white font-semibold p-3">Feature</th>
-                    {plans.map((plan) => (
+                    {plans.map(plan => (
                       <th key={plan.id} className="text-center text-white font-semibold p-3">
                         {plan.name}
                       </th>
@@ -231,27 +238,27 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
                 <tbody>
                   {[
                     {
-                      feature: "Stock Analysis per Day",
-                      values: ["5", "50", "Unlimited", "Unlimited"],
+                      feature: 'Stock Analysis per Day',
+                      values: ['5', '50', 'Unlimited', 'Unlimited'],
                     },
                     {
-                      feature: "Real-time Alerts",
+                      feature: 'Real-time Alerts',
                       values: [false, false, true, true],
                     },
                     {
-                      feature: "Advanced Patterns",
+                      feature: 'Advanced Patterns',
                       values: [false, true, true, true],
                     },
                     {
-                      feature: "Portfolio Tools",
+                      feature: 'Portfolio Tools',
                       values: [false, false, true, true],
                     },
                     {
-                      feature: "API Access",
+                      feature: 'API Access',
                       values: [false, false, false, true],
                     },
                     {
-                      feature: "Custom AI Models",
+                      feature: 'Custom AI Models',
                       values: [false, false, false, true],
                     },
                   ].map((row, index) => (
@@ -259,7 +266,7 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
                       <td className="text-slate-300 p-3">{row.feature}</td>
                       {row.values.map((value, valueIndex) => (
                         <td key={valueIndex} className="text-center p-3">
-                          {typeof value === "boolean" ? (
+                          {typeof value === 'boolean' ? (
                             value ? (
                               <Check className="h-4 w-4 text-green-400 mx-auto" />
                             ) : (
@@ -279,33 +286,41 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
 
           {/* FAQ */}
           <div className="mt-12">
-            <h3 className="text-xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h3>
+            <h3 className="text-xl font-bold text-white mb-6 text-center">
+              Frequently Asked Questions
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
                   <h4 className="text-white font-semibold mb-2">Can I change plans anytime?</h4>
                   <p className="text-slate-400 text-sm">
-                    Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.
+                    Yes, you can upgrade or downgrade your plan at any time. Changes take effect
+                    immediately.
                   </p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold mb-2">Is there a free trial?</h4>
                   <p className="text-slate-400 text-sm">
-                    Our Free plan gives you access to basic features. Premium plans offer 7-day free trials.
+                    Our Free plan gives you access to basic features. Premium plans offer 7-day free
+                    trials.
                   </p>
                 </div>
               </div>
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-white font-semibold mb-2">What payment methods do you accept?</h4>
+                  <h4 className="text-white font-semibold mb-2">
+                    What payment methods do you accept?
+                  </h4>
                   <p className="text-slate-400 text-sm">
-                    We accept all major credit cards, PayPal, and bank transfers for Enterprise plans.
+                    We accept all major credit cards, PayPal, and bank transfers for Enterprise
+                    plans.
                   </p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold mb-2">Is my data secure?</h4>
                   <p className="text-slate-400 text-sm">
-                    Yes, we use enterprise-grade encryption and comply with all financial data regulations.
+                    Yes, we use enterprise-grade encryption and comply with all financial data
+                    regulations.
                   </p>
                 </div>
               </div>
@@ -314,5 +329,5 @@ export default function SubscriptionPlans({ isOpen, onClose, onSubscribe, curren
         </div>
       </div>
     </div>
-  )
+  );
 }

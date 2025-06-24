@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import {
   Smartphone,
   Tablet,
@@ -20,7 +20,7 @@ import {
   Camera,
   Fingerprint,
   MapPin,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function MobileOptimization() {
   const [deviceMetrics, setDeviceMetrics] = useState({
@@ -28,15 +28,15 @@ export default function MobileOptimization() {
     performanceScore: 0,
     batteryOptimization: 0,
     networkEfficiency: 0,
-  })
+  });
 
-  const [appFeatures, setAppFeatures] = useState([])
+  const [appFeatures, setAppFeatures] = useState([]);
   const [downloadStats, setDownloadStats] = useState({
     ios: 0,
     android: 0,
     rating: 0,
     reviews: 0,
-  })
+  });
 
   useEffect(() => {
     // Simulate mobile metrics
@@ -45,90 +45,90 @@ export default function MobileOptimization() {
       performanceScore: 92 + Math.random() * 8,
       batteryOptimization: 88 + Math.random() * 12,
       networkEfficiency: 94 + Math.random() * 6,
-    })
+    });
 
     setDownloadStats({
       ios: 2847392,
       android: 4521847,
       rating: 4.8,
       reviews: 127483,
-    })
+    });
 
-    initializeAppFeatures()
-  }, [])
+    initializeAppFeatures();
+  }, []);
 
   const initializeAppFeatures = () => {
     const features = [
       {
-        title: "Biometric Authentication",
-        description: "Face ID, Touch ID, and fingerprint login",
+        title: 'Biometric Authentication',
+        description: 'Face ID, Touch ID, and fingerprint login',
         icon: Fingerprint,
-        status: "active",
+        status: 'active',
         usage: 94,
       },
       {
-        title: "Push Notifications",
-        description: "Real-time trading alerts and market updates",
+        title: 'Push Notifications',
+        description: 'Real-time trading alerts and market updates',
         icon: Bell,
-        status: "active",
+        status: 'active',
         usage: 87,
       },
       {
-        title: "Offline Mode",
-        description: "Access portfolio and charts without internet",
+        title: 'Offline Mode',
+        description: 'Access portfolio and charts without internet',
         icon: Download,
-        status: "active",
+        status: 'active',
         usage: 76,
       },
       {
-        title: "Camera Integration",
-        description: "Scan documents and QR codes for quick actions",
+        title: 'Camera Integration',
+        description: 'Scan documents and QR codes for quick actions',
         icon: Camera,
-        status: "active",
+        status: 'active',
         usage: 68,
       },
       {
-        title: "Location Services",
-        description: "Find nearby ATMs and branch locations",
+        title: 'Location Services',
+        description: 'Find nearby ATMs and branch locations',
         icon: MapPin,
-        status: "active",
+        status: 'active',
         usage: 45,
       },
       {
-        title: "Dark Mode",
-        description: "Battery-saving dark theme with OLED optimization",
+        title: 'Dark Mode',
+        description: 'Battery-saving dark theme with OLED optimization',
         icon: Shield,
-        status: "active",
+        status: 'active',
         usage: 89,
       },
-    ]
+    ];
 
-    setAppFeatures(features)
-  }
+    setAppFeatures(features);
+  };
 
   const deviceTypes = [
     {
-      type: "Mobile",
+      type: 'Mobile',
       icon: Smartphone,
-      users: "68%",
+      users: '68%',
       performance: 96,
-      color: "from-green-400 to-emerald-500",
+      color: 'from-green-400 to-emerald-500',
     },
     {
-      type: "Tablet",
+      type: 'Tablet',
       icon: Tablet,
-      users: "22%",
+      users: '22%',
       performance: 94,
-      color: "from-blue-400 to-cyan-500",
+      color: 'from-blue-400 to-cyan-500',
     },
     {
-      type: "Desktop",
+      type: 'Desktop',
       icon: Monitor,
-      users: "10%",
+      users: '10%',
       performance: 98,
-      color: "from-purple-400 to-pink-500",
+      color: 'from-purple-400 to-pink-500',
     },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -136,7 +136,8 @@ export default function MobileOptimization() {
       <Card className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-blue-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Smartphone className="h-7 w-7 mr-3 text-blue-400" />📱 Mobile Performance Dashboard
+            <Smartphone className="h-7 w-7 mr-3 text-blue-400" />
+            📱 Mobile Performance Dashboard
             <Badge className="ml-3 bg-gradient-to-r from-blue-400 to-cyan-500">
               <Zap className="h-4 w-4 mr-1" />
               MOBILE FIRST
@@ -159,7 +160,9 @@ export default function MobileOptimization() {
                 <span className="text-blue-400 font-semibold">Performance</span>
                 <Star className="h-5 w-5 text-blue-400" />
               </div>
-              <p className="text-2xl font-bold text-white">{deviceMetrics.performanceScore.toFixed(0)}/100</p>
+              <p className="text-2xl font-bold text-white">
+                {deviceMetrics.performanceScore.toFixed(0)}/100
+              </p>
               <Progress value={deviceMetrics.performanceScore} className="h-2 mt-2" />
             </div>
 
@@ -168,7 +171,9 @@ export default function MobileOptimization() {
                 <span className="text-yellow-400 font-semibold">Battery Optimized</span>
                 <Battery className="h-5 w-5 text-yellow-400" />
               </div>
-              <p className="text-2xl font-bold text-white">{deviceMetrics.batteryOptimization.toFixed(0)}%</p>
+              <p className="text-2xl font-bold text-white">
+                {deviceMetrics.batteryOptimization.toFixed(0)}%
+              </p>
               <Progress value={deviceMetrics.batteryOptimization} className="h-2 mt-2" />
             </div>
 
@@ -177,7 +182,9 @@ export default function MobileOptimization() {
                 <span className="text-purple-400 font-semibold">Network Efficiency</span>
                 <Wifi className="h-5 w-5 text-purple-400" />
               </div>
-              <p className="text-2xl font-bold text-white">{deviceMetrics.networkEfficiency.toFixed(0)}%</p>
+              <p className="text-2xl font-bold text-white">
+                {deviceMetrics.networkEfficiency.toFixed(0)}%
+              </p>
               <Progress value={deviceMetrics.networkEfficiency} className="h-2 mt-2" />
             </div>
           </div>
@@ -187,7 +194,7 @@ export default function MobileOptimization() {
             <h3 className="text-white font-bold text-xl mb-4">📊 Device Usage Analytics</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {deviceTypes.map((device, index) => {
-                const IconComponent = device.icon
+                const IconComponent = device.icon;
                 return (
                   <div
                     key={index}
@@ -197,13 +204,17 @@ export default function MobileOptimization() {
                       <IconComponent
                         className={`h-8 w-8 text-transparent bg-gradient-to-r ${device.color} bg-clip-text`}
                       />
-                      <Badge className={`bg-gradient-to-r ${device.color} text-black`}>{device.users}</Badge>
+                      <Badge className={`bg-gradient-to-r ${device.color} text-black`}>
+                        {device.users}
+                      </Badge>
                     </div>
                     <h4 className="text-white font-bold text-lg">{device.type}</h4>
-                    <p className="text-gray-300 text-sm mb-3">Performance Score: {device.performance}/100</p>
+                    <p className="text-gray-300 text-sm mb-3">
+                      Performance Score: {device.performance}/100
+                    </p>
                     <Progress value={device.performance} className="h-2" />
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -214,7 +225,8 @@ export default function MobileOptimization() {
       <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Star className="h-7 w-7 mr-3 text-purple-400" />🌟 Native Mobile App Features
+            <Star className="h-7 w-7 mr-3 text-purple-400" />
+            🌟 Native Mobile App Features
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-pink-500">
               <Download className="h-4 w-4 mr-1" />
               NATIVE APPS
@@ -224,7 +236,7 @@ export default function MobileOptimization() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {appFeatures.map((feature, index) => {
-              const IconComponent = feature.icon
+              const IconComponent = feature.icon;
               return (
                 <div
                   key={index}
@@ -246,7 +258,7 @@ export default function MobileOptimization() {
                   </div>
                   <Progress value={feature.usage} className="h-2 mt-2" />
                 </div>
-              )
+              );
             })}
           </div>
         </CardContent>
@@ -256,7 +268,8 @@ export default function MobileOptimization() {
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Download className="h-7 w-7 mr-3 text-green-400" />📈 App Store Performance
+            <Download className="h-7 w-7 mr-3 text-green-400" />
+            📈 App Store Performance
             <Badge className="ml-3 bg-gradient-to-r from-green-400 to-emerald-500">
               <Star className="h-4 w-4 mr-1" />
               TOP RATED
@@ -266,7 +279,9 @@ export default function MobileOptimization() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-400/30">
-              <div className="text-4xl font-bold text-blue-400 mb-2">{(downloadStats.ios / 1000000).toFixed(1)}M</div>
+              <div className="text-4xl font-bold text-blue-400 mb-2">
+                {(downloadStats.ios / 1000000).toFixed(1)}M
+              </div>
               <h3 className="text-white font-bold mb-2">iOS Downloads</h3>
               <p className="text-gray-400 text-sm">App Store</p>
             </div>
@@ -330,5 +345,5 @@ export default function MobileOptimization() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,54 +1,54 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { TrendingUp, TrendingDown, Brain, Zap } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 export default function StockChart({ selectedStock }) {
-  const [timeframe, setTimeframe] = useState("1D")
-  const [chartData, setChartData] = useState([])
-  const [stockInfo, setStockInfo] = useState(null)
-  const [aiPrediction, setAiPrediction] = useState(null)
+  const [timeframe, setTimeframe] = useState('1D');
+  const [chartData, setChartData] = useState([]);
+  const [stockInfo, setStockInfo] = useState(null);
+  const [aiPrediction, setAiPrediction] = useState(null);
 
   useEffect(() => {
     // Simulate real-time stock data
     const generateData = () => {
-      const data = []
-      let price = 150 + Math.random() * 100
+      const data = [];
+      let price = 150 + Math.random() * 100;
 
       for (let i = 0; i < 100; i++) {
-        price += (Math.random() - 0.5) * 5
+        price += (Math.random() - 0.5) * 5;
         data.push({
           time: i,
           price: Math.max(price, 50),
           volume: Math.random() * 1000000,
-        })
+        });
       }
-      return data
-    }
+      return data;
+    };
 
-    setChartData(generateData())
+    setChartData(generateData());
     setStockInfo({
       symbol: selectedStock,
       price: 175.43 + Math.random() * 20,
       change: (Math.random() - 0.5) * 10,
-      volume: "45.2M",
-      marketCap: "2.8T",
+      volume: '45.2M',
+      marketCap: '2.8T',
       pe: 28.5,
       aiScore: 85 + Math.random() * 15,
-    })
+    });
 
     setAiPrediction({
-      direction: Math.random() > 0.5 ? "bullish" : "bearish",
+      direction: Math.random() > 0.5 ? 'bullish' : 'bearish',
       confidence: 75 + Math.random() * 20,
       targetPrice: 180 + Math.random() * 40,
-      timeframe: "30 days",
-    })
-  }, [selectedStock])
+      timeframe: '30 days',
+    });
+  }, [selectedStock]);
 
-  const timeframes = ["1D", "1W", "1M", "3M", "1Y", "5Y"]
+  const timeframes = ['1D', '1W', '1M', '3M', '1Y', '5Y'];
 
   return (
     <Card className="bg-gray-900/60 border-cyan-500/30 backdrop-blur-xl">
@@ -60,7 +60,7 @@ export default function StockChart({ selectedStock }) {
               <span className="text-3xl font-bold text-white">${stockInfo?.price.toFixed(2)}</span>
               <span
                 className={`flex items-center text-lg font-medium ${
-                  stockInfo?.change > 0 ? "text-green-400" : "text-red-400"
+                  stockInfo?.change > 0 ? 'text-green-400' : 'text-red-400'
                 }`}
               >
                 {stockInfo?.change > 0 ? (
@@ -68,7 +68,7 @@ export default function StockChart({ selectedStock }) {
                 ) : (
                   <TrendingDown className="h-4 w-4 mr-1" />
                 )}
-                {stockInfo?.change > 0 ? "+" : ""}
+                {stockInfo?.change > 0 ? '+' : ''}
                 {stockInfo?.change.toFixed(2)}%
               </span>
             </div>
@@ -90,13 +90,17 @@ export default function StockChart({ selectedStock }) {
       <CardContent>
         {/* Timeframe Selector */}
         <div className="flex space-x-2 mb-6">
-          {timeframes.map((tf) => (
+          {timeframes.map(tf => (
             <Button
               key={tf}
-              variant={timeframe === tf ? "default" : "outline"}
+              variant={timeframe === tf ? 'default' : 'outline'}
               size="sm"
               onClick={() => setTimeframe(tf)}
-              className={timeframe === tf ? "bg-cyan-500 hover:bg-cyan-600" : "border-cyan-500/30 text-gray-300"}
+              className={
+                timeframe === tf
+                  ? 'bg-cyan-500 hover:bg-cyan-600'
+                  : 'border-cyan-500/30 text-gray-300'
+              }
             >
               {tf}
             </Button>
@@ -109,7 +113,12 @@ export default function StockChart({ selectedStock }) {
             {/* Chart Grid */}
             <defs>
               <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="rgba(34, 211, 238, 0.1)" strokeWidth="1" />
+                <path
+                  d="M 40 0 L 0 0 0 20"
+                  fill="none"
+                  stroke="rgba(34, 211, 238, 0.1)"
+                  strokeWidth="1"
+                />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
@@ -118,7 +127,7 @@ export default function StockChart({ selectedStock }) {
             <path
               d={`M 0 ${200 - (chartData[0]?.price || 150)} ${chartData
                 .map((point, i) => `L ${(i / chartData.length) * 600} ${200 - point.price}`)
-                .join(" ")}`}
+                .join(' ')}`}
               fill="none"
               stroke="url(#gradient)"
               strokeWidth="3"
@@ -149,10 +158,15 @@ export default function StockChart({ selectedStock }) {
                   </p>
                 </div>
                 <div className="text-right">
-                  <Badge variant={aiPrediction.direction === "bullish" ? "default" : "destructive"} className="mb-1">
+                  <Badge
+                    variant={aiPrediction.direction === 'bullish' ? 'default' : 'destructive'}
+                    className="mb-1"
+                  >
                     {aiPrediction.direction.toUpperCase()}
                   </Badge>
-                  <p className="text-sm text-gray-300">Target: ${aiPrediction.targetPrice.toFixed(2)}</p>
+                  <p className="text-sm text-gray-300">
+                    Target: ${aiPrediction.targetPrice.toFixed(2)}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -160,5 +174,5 @@ export default function StockChart({ selectedStock }) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
 
 export default function PerformanceMetrics({ botStats, recentTrades }) {
   const [performanceData, setPerformanceData] = useState({
@@ -13,49 +13,49 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
     drawdownPeriods: [],
     bestTrade: null,
     worstTrade: null,
-    avgHoldTime: "2.5 hours",
+    avgHoldTime: '2.5 hours',
     profitFactor: 1.85,
     calmarRatio: 2.3,
     sortinoRatio: 1.92,
-  })
+  });
 
   useEffect(() => {
     // Calculate performance metrics from recent trades
     if (recentTrades.length > 0) {
-      const sortedTrades = [...recentTrades].sort((a, b) => b.pnl - a.pnl)
-      const bestTrade = sortedTrades[0]
-      const worstTrade = sortedTrades[sortedTrades.length - 1]
+      const sortedTrades = [...recentTrades].sort((a, b) => b.pnl - a.pnl);
+      const bestTrade = sortedTrades[0];
+      const worstTrade = sortedTrades[sortedTrades.length - 1];
 
       // Generate mock daily returns for chart
       const dailyReturns = Array.from({ length: 30 }, (_, i) => ({
         date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000),
         return: (Math.random() - 0.4) * 5, // Slight positive bias
         cumulative: 0,
-      }))
+      }));
 
       // Calculate cumulative returns
-      let cumulative = 0
-      dailyReturns.forEach((day) => {
-        cumulative += day.return
-        day.cumulative = cumulative
-      })
+      let cumulative = 0;
+      dailyReturns.forEach(day => {
+        cumulative += day.return;
+        day.cumulative = cumulative;
+      });
 
-      setPerformanceData((prev) => ({
+      setPerformanceData(prev => ({
         ...prev,
         dailyReturns,
         bestTrade,
         worstTrade,
-      }))
+      }));
     }
-  }, [recentTrades])
+  }, [recentTrades]);
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+  const formatCurrency = amount => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
       minimumFractionDigits: 2,
-    }).format(amount)
-  }
+    }).format(amount);
+  };
 
   return (
     <div className="space-y-6">
@@ -122,7 +122,12 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
                 {/* Chart Grid */}
                 <defs>
                   <pattern id="perfGrid" width="40" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 20" fill="none" stroke="rgba(139, 92, 246, 0.1)" strokeWidth="1" />
+                    <path
+                      d="M 40 0 L 0 0 0 20"
+                      fill="none"
+                      stroke="rgba(139, 92, 246, 0.1)"
+                      strokeWidth="1"
+                    />
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#perfGrid)" />
@@ -133,9 +138,9 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
                     d={`M 0 ${120 + performanceData.dailyReturns[0]?.cumulative * 2} ${performanceData.dailyReturns
                       .map(
                         (point, i) =>
-                          `L ${(i / performanceData.dailyReturns.length) * 400} ${120 + point.cumulative * 2}`,
+                          `L ${(i / performanceData.dailyReturns.length) * 400} ${120 + point.cumulative * 2}`
                       )
-                      .join(" ")}`}
+                      .join(' ')}`}
                     fill="none"
                     stroke="url(#perfGradient)"
                     strokeWidth="3"
@@ -166,16 +171,21 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
                   <Badge variant="default" className="bg-green-500">
                     Best Trade
                   </Badge>
-                  <span className="text-green-400 font-bold">+{formatCurrency(performanceData.bestTrade.pnl)}</span>
+                  <span className="text-green-400 font-bold">
+                    +{formatCurrency(performanceData.bestTrade.pnl)}
+                  </span>
                 </div>
                 <div className="text-sm text-gray-300">
                   <p>
                     {performanceData.bestTrade.side} {performanceData.bestTrade.symbol}
                   </p>
                   <p>
-                    {performanceData.bestTrade.quantity} shares @ {formatCurrency(performanceData.bestTrade.price)}
+                    {performanceData.bestTrade.quantity} shares @{' '}
+                    {formatCurrency(performanceData.bestTrade.price)}
                   </p>
-                  <p className="text-xs text-gray-400">Strategy: {performanceData.bestTrade.strategy}</p>
+                  <p className="text-xs text-gray-400">
+                    Strategy: {performanceData.bestTrade.strategy}
+                  </p>
                 </div>
               </div>
             )}
@@ -184,16 +194,21 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
               <div className="p-4 bg-red-500/10 rounded-lg border border-red-500/30">
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="destructive">Worst Trade</Badge>
-                  <span className="text-red-400 font-bold">{formatCurrency(performanceData.worstTrade.pnl)}</span>
+                  <span className="text-red-400 font-bold">
+                    {formatCurrency(performanceData.worstTrade.pnl)}
+                  </span>
                 </div>
                 <div className="text-sm text-gray-300">
                   <p>
                     {performanceData.worstTrade.side} {performanceData.worstTrade.symbol}
                   </p>
                   <p>
-                    {performanceData.worstTrade.quantity} shares @ {formatCurrency(performanceData.worstTrade.price)}
+                    {performanceData.worstTrade.quantity} shares @{' '}
+                    {formatCurrency(performanceData.worstTrade.price)}
                   </p>
-                  <p className="text-xs text-gray-400">Strategy: {performanceData.worstTrade.strategy}</p>
+                  <p className="text-xs text-gray-400">
+                    Strategy: {performanceData.worstTrade.strategy}
+                  </p>
                 </div>
               </div>
             )}
@@ -201,25 +216,27 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
             {/* Monthly Performance */}
             <div className="space-y-3">
               <h4 className="text-white font-semibold">Monthly Returns</h4>
-              {["January", "February", "March"].map((month, index) => {
-                const return_ = (Math.random() - 0.3) * 15
+              {['January', 'February', 'March'].map((month, index) => {
+                const return_ = (Math.random() - 0.3) * 15;
                 return (
                   <div key={month} className="flex items-center justify-between">
                     <span className="text-gray-300">{month}</span>
                     <div className="flex items-center space-x-2">
-                      <span className={`font-bold ${return_ >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {return_ >= 0 ? "+" : ""}
+                      <span
+                        className={`font-bold ${return_ >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {return_ >= 0 ? '+' : ''}
                         {return_.toFixed(1)}%
                       </span>
                       <Progress value={Math.abs(return_) * 2} className="w-16 h-2" />
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }

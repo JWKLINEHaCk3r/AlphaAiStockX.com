@@ -1,30 +1,47 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 
 export default function AINewsSentiment() {
-  const [loading, setLoading] = useState(false)
-  const [news, setNews] = useState<any[]>([])
+  const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState<any[]>([]);
 
   // Placeholder: Replace with real AI API call
   const fetchNews = () => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
       setNews([
-        { headline: "Fed Hints at Rate Pause, Markets Surge", impact: "+2.1%", sentiment: "Bullish", aiNote: "AI: Macro event, positive for tech." },
-        { headline: "Major Hack at Oil Giant", impact: "-1.7%", sentiment: "Bearish", aiNote: "AI: Negative for energy sector." },
-        { headline: "AI Startups See Record Funding", impact: "+3.4%", sentiment: "Bullish", aiNote: "AI: Strong for AI/tech stocks." },
-      ])
-      setLoading(false)
-    }, 1200)
-  }
+        {
+          headline: 'Fed Hints at Rate Pause, Markets Surge',
+          impact: '+2.1%',
+          sentiment: 'Bullish',
+          aiNote: 'AI: Macro event, positive for tech.',
+        },
+        {
+          headline: 'Major Hack at Oil Giant',
+          impact: '-1.7%',
+          sentiment: 'Bearish',
+          aiNote: 'AI: Negative for energy sector.',
+        },
+        {
+          headline: 'AI Startups See Record Funding',
+          impact: '+3.4%',
+          sentiment: 'Bullish',
+          aiNote: 'AI: Strong for AI/tech stocks.',
+        },
+      ]);
+      setLoading(false);
+    }, 1200);
+  };
 
   return (
     <div className="futuristic-card holo-shimmer p-6 mb-8">
       <h2 className="text-2xl font-bold neon-text mb-2">AI News & Sentiment Engine</h2>
-      <p className="text-slate-300 mb-4">Live news, social, and global event impact scoring for every stock.</p>
+      <p className="text-slate-300 mb-4">
+        Live news, social, and global event impact scoring for every stock.
+      </p>
       <button className="holo-btn px-6 py-2 font-bold mb-4" onClick={fetchNews} disabled={loading}>
-        {loading ? "Fetching..." : "Get News & Sentiment"}
+        {loading ? 'Fetching...' : 'Get News & Sentiment'}
       </button>
       {news.length > 0 && (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -39,5 +56,5 @@ export default function AINewsSentiment() {
         </div>
       )}
     </div>
-  )
+  );
 }

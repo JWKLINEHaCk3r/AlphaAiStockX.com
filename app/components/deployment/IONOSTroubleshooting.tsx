@@ -1,12 +1,14 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertTriangle, HelpCircle, RefreshCw, Zap } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertTriangle, HelpCircle, RefreshCw, Zap } from 'lucide-react';
 
 export default function IONOSTroubleshooting() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold mb-6">🔧 IONOS Deployment Troubleshooting</h1>
-      <p className="text-lg mb-6 text-gray-600">Common issues and solutions for deploying AlphaAIStockX to IONOS</p>
+      <p className="text-lg mb-6 text-gray-600">
+        Common issues and solutions for deploying AlphaAIStockX to IONOS
+      </p>
 
       <div className="space-y-6">
         <Card className="border-red-500">
@@ -83,7 +85,8 @@ export default function IONOSTroubleshooting() {
                     <strong>Wait for DNS:</strong> Can take 24-48 hours for full propagation
                   </li>
                   <li>
-                    <strong>Check file permissions:</strong> Should be 644 for files, 755 for folders
+                    <strong>Check file permissions:</strong> Should be 644 for files, 755 for
+                    folders
                   </li>
                   <li>
                     <strong>Re-upload files:</strong> Delete all and upload again if needed
@@ -207,5 +210,5 @@ export default function IONOSTroubleshooting() {
         </Alert>
       </div>
     </div>
-  )
+  );
 }

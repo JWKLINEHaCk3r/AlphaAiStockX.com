@@ -1,12 +1,12 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Switch } from "@/components/ui/switch"
-import { Shield, AlertTriangle, TrendingDown, Activity, Target } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Switch } from '@/components/ui/switch';
+import { Shield, AlertTriangle, TrendingDown, Activity, Target } from 'lucide-react';
 
 export default function RiskControls({ botSettings, setBotSettings, botStats }) {
   const riskMetrics = {
@@ -16,15 +16,15 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
     leverageRatio: 1.2,
     varDaily: 2.3,
     stressTestResults: [
-      { scenario: "Market Crash (-10%)", impact: -8500, probability: 5 },
-      { scenario: "Volatility Spike", impact: -3200, probability: 15 },
-      { scenario: "Sector Rotation", impact: -1800, probability: 25 },
+      { scenario: 'Market Crash (-10%)', impact: -8500, probability: 5 },
+      { scenario: 'Volatility Spike', impact: -3200, probability: 15 },
+      { scenario: 'Sector Rotation', impact: -1800, probability: 25 },
     ],
-  }
+  };
 
   const updateSetting = (key, value) => {
-    setBotSettings((prev) => ({ ...prev, [key]: value }))
-  }
+    setBotSettings(prev => ({ ...prev, [key]: value }));
+  };
 
   return (
     <div className="space-y-6">
@@ -33,7 +33,9 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
         <Card className="bg-black/20 border-red-500/30 backdrop-blur-xl">
           <CardContent className="p-4 text-center">
             <TrendingDown className="h-8 w-8 text-red-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-red-400">{riskMetrics.currentDrawdown.toFixed(1)}%</p>
+            <p className="text-2xl font-bold text-red-400">
+              {riskMetrics.currentDrawdown.toFixed(1)}%
+            </p>
             <p className="text-sm text-gray-400">Current Drawdown</p>
           </CardContent>
         </Card>
@@ -57,7 +59,9 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
         <Card className="bg-black/20 border-green-500/30 backdrop-blur-xl">
           <CardContent className="p-4 text-center">
             <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-green-400">{botSettings.emergencyStop ? "ON" : "OFF"}</p>
+            <p className="text-2xl font-bold text-green-400">
+              {botSettings.emergencyStop ? 'ON' : 'OFF'}
+            </p>
             <p className="text-sm text-gray-400">Emergency Stop</p>
           </CardContent>
         </Card>
@@ -77,17 +81,26 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <label className="text-white font-medium">Max Daily Loss</label>
-                <Badge variant={riskMetrics.dailyLossUsed > botSettings.maxDailyLoss * 0.8 ? "destructive" : "default"}>
+                <Badge
+                  variant={
+                    riskMetrics.dailyLossUsed > botSettings.maxDailyLoss * 0.8
+                      ? 'destructive'
+                      : 'default'
+                  }
+                >
                   ${riskMetrics.dailyLossUsed.toFixed(0)} / ${botSettings.maxDailyLoss}
                 </Badge>
               </div>
               <Input
                 type="number"
                 value={botSettings.maxDailyLoss}
-                onChange={(e) => updateSetting("maxDailyLoss", Number(e.target.value))}
+                onChange={e => updateSetting('maxDailyLoss', Number(e.target.value))}
                 className="bg-black/20 border-purple-500/30 text-white"
               />
-              <Progress value={(riskMetrics.dailyLossUsed / botSettings.maxDailyLoss) * 100} className="h-2" />
+              <Progress
+                value={(riskMetrics.dailyLossUsed / botSettings.maxDailyLoss) * 100}
+                className="h-2"
+              />
             </div>
 
             {/* Position Size Limit */}
@@ -95,18 +108,26 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
               <div className="flex items-center justify-between">
                 <label className="text-white font-medium">Max Position Size</label>
                 <Badge
-                  variant={riskMetrics.positionSizeUsed > botSettings.maxPositionSize * 0.8 ? "destructive" : "default"}
+                  variant={
+                    riskMetrics.positionSizeUsed > botSettings.maxPositionSize * 0.8
+                      ? 'destructive'
+                      : 'default'
+                  }
                 >
-                  ${riskMetrics.positionSizeUsed.toLocaleString()} / ${botSettings.maxPositionSize.toLocaleString()}
+                  ${riskMetrics.positionSizeUsed.toLocaleString()} / $
+                  {botSettings.maxPositionSize.toLocaleString()}
                 </Badge>
               </div>
               <Input
                 type="number"
                 value={botSettings.maxPositionSize}
-                onChange={(e) => updateSetting("maxPositionSize", Number(e.target.value))}
+                onChange={e => updateSetting('maxPositionSize', Number(e.target.value))}
                 className="bg-black/20 border-purple-500/30 text-white"
               />
-              <Progress value={(riskMetrics.positionSizeUsed / botSettings.maxPositionSize) * 100} className="h-2" />
+              <Progress
+                value={(riskMetrics.positionSizeUsed / botSettings.maxPositionSize) * 100}
+                className="h-2"
+              />
             </div>
 
             {/* Concurrent Trades */}
@@ -114,7 +135,11 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
               <div className="flex items-center justify-between">
                 <label className="text-white font-medium">Max Concurrent Trades</label>
                 <Badge
-                  variant={botStats.activeTrades > botSettings.maxConcurrentTrades * 0.8 ? "destructive" : "default"}
+                  variant={
+                    botStats.activeTrades > botSettings.maxConcurrentTrades * 0.8
+                      ? 'destructive'
+                      : 'default'
+                  }
                 >
                   {botStats.activeTrades} / {botSettings.maxConcurrentTrades}
                 </Badge>
@@ -122,10 +147,13 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
               <Input
                 type="number"
                 value={botSettings.maxConcurrentTrades}
-                onChange={(e) => updateSetting("maxConcurrentTrades", Number(e.target.value))}
+                onChange={e => updateSetting('maxConcurrentTrades', Number(e.target.value))}
                 className="bg-black/20 border-purple-500/30 text-white"
               />
-              <Progress value={(botStats.activeTrades / botSettings.maxConcurrentTrades) * 100} className="h-2" />
+              <Progress
+                value={(botStats.activeTrades / botSettings.maxConcurrentTrades) * 100}
+                className="h-2"
+              />
             </div>
 
             {/* Risk Per Trade */}
@@ -135,7 +163,7 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
                 type="number"
                 step="0.1"
                 value={botSettings.riskPerTrade}
-                onChange={(e) => updateSetting("riskPerTrade", Number(e.target.value))}
+                onChange={e => updateSetting('riskPerTrade', Number(e.target.value))}
                 className="bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -149,7 +177,7 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
                 </div>
                 <Switch
                   checked={botSettings.emergencyStop}
-                  onCheckedChange={(checked) => updateSetting("emergencyStop", checked)}
+                  onCheckedChange={checked => updateSetting('emergencyStop', checked)}
                 />
               </div>
 
@@ -212,5 +240,5 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }) 
         </Card>
       </div>
     </div>
-  )
+  );
 }

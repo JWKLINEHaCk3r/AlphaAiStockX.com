@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Building2,
   Shield,
@@ -19,120 +19,120 @@ import {
   Rocket,
   Star,
   CheckCircle,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function EnterpriseFeatures() {
-  const [selectedPlan, setSelectedPlan] = useState("enterprise")
+  const [selectedPlan, setSelectedPlan] = useState('enterprise');
   const [customQuote, setCustomQuote] = useState({
     users: 1000,
     volume: 10000000,
     features: [],
-  })
+  });
 
   const enterprisePlans = [
     {
-      id: "startup",
-      name: "Startup Pro",
-      price: "$2,999",
-      period: "/month",
-      description: "Perfect for growing fintech startups",
+      id: 'startup',
+      name: 'Startup Pro',
+      price: '$2,999',
+      period: '/month',
+      description: 'Perfect for growing fintech startups',
       features: [
-        "Up to 1,000 users",
-        "Basic AI trading algorithms",
-        "Standard API access",
-        "Email support",
-        "Basic analytics",
-        "Mobile app access",
+        'Up to 1,000 users',
+        'Basic AI trading algorithms',
+        'Standard API access',
+        'Email support',
+        'Basic analytics',
+        'Mobile app access',
       ],
-      color: "from-blue-400 to-cyan-500",
+      color: 'from-blue-400 to-cyan-500',
       popular: false,
     },
     {
-      id: "enterprise",
-      name: "Enterprise Elite",
-      price: "$9,999",
-      period: "/month",
-      description: "Full-featured enterprise solution",
+      id: 'enterprise',
+      name: 'Enterprise Elite',
+      price: '$9,999',
+      period: '/month',
+      description: 'Full-featured enterprise solution',
       features: [
-        "Up to 10,000 users",
-        "Advanced AI algorithms",
-        "Full API access",
-        "24/7 priority support",
-        "Advanced analytics",
-        "White-label options",
-        "Custom integrations",
-        "Dedicated account manager",
+        'Up to 10,000 users',
+        'Advanced AI algorithms',
+        'Full API access',
+        '24/7 priority support',
+        'Advanced analytics',
+        'White-label options',
+        'Custom integrations',
+        'Dedicated account manager',
       ],
-      color: "from-purple-400 to-pink-500",
+      color: 'from-purple-400 to-pink-500',
       popular: true,
     },
     {
-      id: "institutional",
-      name: "Institutional",
-      price: "$49,999",
-      period: "/month",
-      description: "For banks and large institutions",
+      id: 'institutional',
+      name: 'Institutional',
+      price: '$49,999',
+      period: '/month',
+      description: 'For banks and large institutions',
       features: [
-        "Unlimited users",
-        "Quantum AI algorithms",
-        "Custom API development",
-        "Dedicated support team",
-        "Real-time analytics",
-        "Full white-label",
-        "On-premise deployment",
-        "Regulatory compliance",
-        "Custom neural networks",
+        'Unlimited users',
+        'Quantum AI algorithms',
+        'Custom API development',
+        'Dedicated support team',
+        'Real-time analytics',
+        'Full white-label',
+        'On-premise deployment',
+        'Regulatory compliance',
+        'Custom neural networks',
       ],
-      color: "from-yellow-400 to-orange-500",
+      color: 'from-yellow-400 to-orange-500',
       popular: false,
     },
-  ]
+  ];
 
   const whitelabelFeatures = [
     {
-      title: "Complete Branding",
-      description: "Your logo, colors, and branding throughout",
+      title: 'Complete Branding',
+      description: 'Your logo, colors, and branding throughout',
       icon: Crown,
     },
     {
-      title: "Custom Domain",
-      description: "yourcompany.com with SSL certificate",
+      title: 'Custom Domain',
+      description: 'yourcompany.com with SSL certificate',
       icon: Globe,
     },
     {
-      title: "Mobile Apps",
-      description: "iOS and Android apps with your branding",
+      title: 'Mobile Apps',
+      description: 'iOS and Android apps with your branding',
       icon: Smartphone,
     },
     {
-      title: "API Integration",
-      description: "Seamless integration with your existing systems",
+      title: 'API Integration',
+      description: 'Seamless integration with your existing systems',
       icon: Database,
     },
-  ]
+  ];
 
   const complianceFeatures = [
     {
-      title: "SOC 2 Type II",
-      status: "Certified",
+      title: 'SOC 2 Type II',
+      status: 'Certified',
       icon: Shield,
     },
     {
-      title: "GDPR Compliant",
-      status: "Verified",
+      title: 'GDPR Compliant',
+      status: 'Verified',
       icon: Lock,
     },
     {
-      title: "FINRA Approved",
-      status: "Registered",
+      title: 'FINRA Approved',
+      status: 'Registered',
       icon: Building2,
     },
     {
-      title: "ISO 27001",
-      status: "Certified",
+      title: 'ISO 27001',
+      status: 'Certified',
       icon: CheckCircle,
     },
-  ]
+  ];
 
   return (
     <div className="space-y-8">
@@ -140,23 +140,26 @@ export default function EnterpriseFeatures() {
       <Card className="bg-gradient-to-r from-gray-900/90 to-black/90 border-2 border-cyan-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-3xl">
-            <Building2 className="h-8 w-8 mr-3 text-cyan-400" />🏢 Enterprise Solutions
+            <Building2 className="h-8 w-8 mr-3 text-cyan-400" />
+            🏢 Enterprise Solutions
             <Badge className="ml-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-lg px-4 py-2">
               <Star className="h-4 w-4 mr-2" />
               ENTERPRISE READY
             </Badge>
           </CardTitle>
-          <p className="text-gray-300 text-lg">Scale your business with our enterprise-grade AI trading platform</p>
+          <p className="text-gray-300 text-lg">
+            Scale your business with our enterprise-grade AI trading platform
+          </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {enterprisePlans.map((plan) => (
+            {enterprisePlans.map(plan => (
               <div
                 key={plan.id}
                 className={`relative p-6 rounded-xl border-2 transition-all cursor-pointer ${
                   plan.popular
-                    ? "border-purple-400/50 bg-gradient-to-br from-purple-500/10 to-pink-500/10 scale-105"
-                    : "border-gray-600/30 bg-gradient-to-br from-gray-800/20 to-gray-900/20 hover:scale-102"
+                    ? 'border-purple-400/50 bg-gradient-to-br from-purple-500/10 to-pink-500/10 scale-105'
+                    : 'border-gray-600/30 bg-gradient-to-br from-gray-800/20 to-gray-900/20 hover:scale-102'
                 }`}
                 onClick={() => setSelectedPlan(plan.id)}
               >
@@ -173,7 +176,9 @@ export default function EnterpriseFeatures() {
                   <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
                   <p className="text-gray-400 mb-4">{plan.description}</p>
                   <div className="flex items-baseline justify-center">
-                    <span className={`text-4xl font-bold bg-gradient-to-r ${plan.color} bg-clip-text text-transparent`}>
+                    <span
+                      className={`text-4xl font-bold bg-gradient-to-r ${plan.color} bg-clip-text text-transparent`}
+                    >
                       {plan.price}
                     </span>
                     <span className="text-gray-400 ml-2">{plan.period}</span>
@@ -204,7 +209,8 @@ export default function EnterpriseFeatures() {
       <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Crown className="h-7 w-7 mr-3 text-purple-400" />👑 White Label Solutions
+            <Crown className="h-7 w-7 mr-3 text-purple-400" />
+            👑 White Label Solutions
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-pink-500">
               <Rocket className="h-4 w-4 mr-1" />
               LAUNCH YOUR BRAND
@@ -214,7 +220,7 @@ export default function EnterpriseFeatures() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {whitelabelFeatures.map((feature, index) => {
-              const IconComponent = feature.icon
+              const IconComponent = feature.icon;
               return (
                 <div
                   key={index}
@@ -228,7 +234,7 @@ export default function EnterpriseFeatures() {
                   </div>
                   <p className="text-gray-300">{feature.description}</p>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -272,7 +278,8 @@ export default function EnterpriseFeatures() {
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Shield className="h-7 w-7 mr-3 text-green-400" />🔒 Compliance & Security
+            <Shield className="h-7 w-7 mr-3 text-green-400" />
+            🔒 Compliance & Security
             <Badge className="ml-3 bg-gradient-to-r from-green-400 to-emerald-500">
               <Lock className="h-4 w-4 mr-1" />
               BANK-GRADE SECURITY
@@ -282,7 +289,7 @@ export default function EnterpriseFeatures() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {complianceFeatures.map((feature, index) => {
-              const IconComponent = feature.icon
+              const IconComponent = feature.icon;
               return (
                 <div
                   key={index}
@@ -294,7 +301,7 @@ export default function EnterpriseFeatures() {
                   <h3 className="text-white font-bold mb-2">{feature.title}</h3>
                   <Badge className="bg-green-500">{feature.status}</Badge>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -336,7 +343,8 @@ export default function EnterpriseFeatures() {
       <Card className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border-yellow-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <DollarSign className="h-7 w-7 mr-3 text-yellow-400" />💰 Revenue Sharing Program
+            <DollarSign className="h-7 w-7 mr-3 text-yellow-400" />
+            💰 Revenue Sharing Program
             <Badge className="ml-3 bg-gradient-to-r from-yellow-400 to-orange-500">
               <TrendingUp className="h-4 w-4 mr-1" />
               EARN TOGETHER
@@ -348,19 +356,25 @@ export default function EnterpriseFeatures() {
             <div className="p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-400/30 text-center">
               <div className="text-4xl font-bold text-green-400 mb-2">70%</div>
               <h3 className="text-white font-bold mb-2">Revenue Share</h3>
-              <p className="text-gray-300 text-sm">You keep 70% of all subscription revenue from your platform</p>
+              <p className="text-gray-300 text-sm">
+                You keep 70% of all subscription revenue from your platform
+              </p>
             </div>
 
             <div className="p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-400/30 text-center">
               <div className="text-4xl font-bold text-blue-400 mb-2">$50K+</div>
               <h3 className="text-white font-bold mb-2">Monthly Potential</h3>
-              <p className="text-gray-300 text-sm">Top partners earn $50K+ per month in recurring revenue</p>
+              <p className="text-gray-300 text-sm">
+                Top partners earn $50K+ per month in recurring revenue
+              </p>
             </div>
 
             <div className="p-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-400/30 text-center">
               <div className="text-4xl font-bold text-purple-400 mb-2">24/7</div>
               <h3 className="text-white font-bold mb-2">Support</h3>
-              <p className="text-gray-300 text-sm">Dedicated partner success team to help you grow</p>
+              <p className="text-gray-300 text-sm">
+                Dedicated partner success team to help you grow
+              </p>
             </div>
           </div>
 
@@ -392,7 +406,8 @@ export default function EnterpriseFeatures() {
       <Card className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border-cyan-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Target className="h-7 w-7 mr-3 text-cyan-400" />🎯 Ready to Scale Your Business?
+            <Target className="h-7 w-7 mr-3 text-cyan-400" />
+            🎯 Ready to Scale Your Business?
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -405,16 +420,22 @@ export default function EnterpriseFeatures() {
                   <Input
                     type="number"
                     value={customQuote.users}
-                    onChange={(e) => setCustomQuote({ ...customQuote, users: Number(e.target.value) })}
+                    onChange={e =>
+                      setCustomQuote({ ...customQuote, users: Number(e.target.value) })
+                    }
                     className="bg-black/20 border-cyan-400/30 text-white"
                   />
                 </div>
                 <div>
-                  <label className="text-gray-300 text-sm font-medium">Monthly Trading Volume ($)</label>
+                  <label className="text-gray-300 text-sm font-medium">
+                    Monthly Trading Volume ($)
+                  </label>
                   <Input
                     type="number"
                     value={customQuote.volume}
-                    onChange={(e) => setCustomQuote({ ...customQuote, volume: Number(e.target.value) })}
+                    onChange={e =>
+                      setCustomQuote({ ...customQuote, volume: Number(e.target.value) })
+                    }
                     className="bg-black/20 border-cyan-400/30 text-white"
                   />
                 </div>
@@ -428,18 +449,22 @@ export default function EnterpriseFeatures() {
               <div className="p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-400/30">
                 <h4 className="text-white font-bold mb-3">📞 Enterprise Sales</h4>
                 <p className="text-gray-300 mb-3">Speak with our enterprise team</p>
-                <Button className="bg-green-500 hover:bg-green-600 text-black font-bold">Schedule Demo Call</Button>
+                <Button className="bg-green-500 hover:bg-green-600 text-black font-bold">
+                  Schedule Demo Call
+                </Button>
               </div>
 
               <div className="p-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-400/30">
                 <h4 className="text-white font-bold mb-3">🚀 Fast Track Setup</h4>
                 <p className="text-gray-300 mb-3">Get your platform live in 30 days</p>
-                <Button className="bg-purple-500 hover:bg-purple-600 text-white font-bold">Start Fast Track</Button>
+                <Button className="bg-purple-500 hover:bg-purple-600 text-white font-bold">
+                  Start Fast Track
+                </Button>
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
 
 export default function AIInsights({ selectedStock }) {
-  const [insights, setInsights] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [insights, setInsights] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     // Simulate AI analysis
     setTimeout(() => {
       setInsights({
@@ -23,8 +23,8 @@ export default function AIInsights({ selectedStock }) {
         },
         technicalAnalysis: {
           rsi: 45 + Math.random() * 30,
-          macd: Math.random() > 0.5 ? "bullish" : "bearish",
-          movingAverage: Math.random() > 0.6 ? "above" : "below",
+          macd: Math.random() > 0.5 ? 'bullish' : 'bearish',
+          movingAverage: Math.random() > 0.6 ? 'above' : 'below',
           support: 165.5,
           resistance: 185.75,
         },
@@ -37,38 +37,38 @@ export default function AIInsights({ selectedStock }) {
         },
         aiPredictions: [
           {
-            timeframe: "1 Week",
-            direction: "bullish",
+            timeframe: '1 Week',
+            direction: 'bullish',
             probability: 72,
             priceTarget: 182.5,
           },
           {
-            timeframe: "1 Month",
-            direction: "bullish",
+            timeframe: '1 Month',
+            direction: 'bullish',
             probability: 68,
             priceTarget: 195.0,
           },
           {
-            timeframe: "3 Months",
-            direction: "neutral",
+            timeframe: '3 Months',
+            direction: 'neutral',
             probability: 55,
             priceTarget: 175.0,
           },
         ],
         riskFactors: [
-          { factor: "Market Volatility", level: "Medium", impact: 65 },
-          { factor: "Sector Rotation", level: "Low", impact: 30 },
-          { factor: "Economic Indicators", level: "High", impact: 80 },
+          { factor: 'Market Volatility', level: 'Medium', impact: 65 },
+          { factor: 'Sector Rotation', level: 'Low', impact: 30 },
+          { factor: 'Economic Indicators', level: 'High', impact: 80 },
         ],
         catalysts: [
-          { event: "Earnings Report", date: "2024-01-25", impact: "High" },
-          { event: "Product Launch", date: "2024-02-15", impact: "Medium" },
-          { event: "Fed Meeting", date: "2024-01-31", impact: "High" },
+          { event: 'Earnings Report', date: '2024-01-25', impact: 'High' },
+          { event: 'Product Launch', date: '2024-02-15', impact: 'Medium' },
+          { event: 'Fed Meeting', date: '2024-01-31', impact: 'High' },
         ],
-      })
-      setLoading(false)
-    }, 2000)
-  }, [selectedStock])
+      });
+      setLoading(false);
+    }, 2000);
+  }, [selectedStock]);
 
   if (loading) {
     return (
@@ -83,7 +83,7 @@ export default function AIInsights({ selectedStock }) {
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -98,17 +98,23 @@ export default function AIInsights({ selectedStock }) {
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-4xl font-bold text-white">{insights.overallScore.toFixed(0)}/100</span>
+            <span className="text-4xl font-bold text-white">
+              {insights.overallScore.toFixed(0)}/100
+            </span>
             <Badge
               className={`text-lg px-4 py-2 ${
                 insights.overallScore >= 80
-                  ? "bg-green-500"
+                  ? 'bg-green-500'
                   : insights.overallScore >= 60
-                    ? "bg-yellow-500"
-                    : "bg-red-500"
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
               }`}
             >
-              {insights.overallScore >= 80 ? "Strong Buy" : insights.overallScore >= 60 ? "Hold" : "Sell"}
+              {insights.overallScore >= 80
+                ? 'Strong Buy'
+                : insights.overallScore >= 60
+                  ? 'Hold'
+                  : 'Sell'}
             </Badge>
           </div>
           <Progress value={insights.overallScore} className="h-3" />
@@ -159,21 +165,31 @@ export default function AIInsights({ selectedStock }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-400 text-sm">RSI</p>
-                <p className="text-white font-semibold">{insights.technicalAnalysis.rsi.toFixed(1)}</p>
+                <p className="text-white font-semibold">
+                  {insights.technicalAnalysis.rsi.toFixed(1)}
+                </p>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">MACD</p>
-                <Badge variant={insights.technicalAnalysis.macd === "bullish" ? "default" : "destructive"}>
+                <Badge
+                  variant={
+                    insights.technicalAnalysis.macd === 'bullish' ? 'default' : 'destructive'
+                  }
+                >
                   {insights.technicalAnalysis.macd}
                 </Badge>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Support</p>
-                <p className="text-green-400 font-semibold">${insights.technicalAnalysis.support}</p>
+                <p className="text-green-400 font-semibold">
+                  ${insights.technicalAnalysis.support}
+                </p>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Resistance</p>
-                <p className="text-red-400 font-semibold">${insights.technicalAnalysis.resistance}</p>
+                <p className="text-red-400 font-semibold">
+                  ${insights.technicalAnalysis.resistance}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -189,13 +205,16 @@ export default function AIInsights({ selectedStock }) {
           </CardHeader>
           <CardContent className="space-y-3">
             {insights.aiPredictions.map((prediction, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
+              >
                 <div>
                   <p className="text-white font-medium">{prediction.timeframe}</p>
                   <p className="text-sm text-gray-400">{prediction.probability}% confidence</p>
                 </div>
                 <div className="text-right">
-                  <Badge variant={prediction.direction === "bullish" ? "default" : "secondary"}>
+                  <Badge variant={prediction.direction === 'bullish' ? 'default' : 'secondary'}>
                     {prediction.direction}
                   </Badge>
                   <p className="text-sm text-gray-300 mt-1">${prediction.priceTarget}</p>
@@ -219,7 +238,13 @@ export default function AIInsights({ selectedStock }) {
                 <div className="flex justify-between items-center">
                   <span className="text-white">{risk.factor}</span>
                   <Badge
-                    variant={risk.level === "High" ? "destructive" : risk.level === "Medium" ? "secondary" : "default"}
+                    variant={
+                      risk.level === 'High'
+                        ? 'destructive'
+                        : risk.level === 'Medium'
+                          ? 'secondary'
+                          : 'default'
+                    }
                   >
                     {risk.level}
                   </Badge>
@@ -247,11 +272,11 @@ export default function AIInsights({ selectedStock }) {
                   <h4 className="text-white font-medium">{catalyst.event}</h4>
                   <Badge
                     variant={
-                      catalyst.impact === "High"
-                        ? "destructive"
-                        : catalyst.impact === "Medium"
-                          ? "secondary"
-                          : "default"
+                      catalyst.impact === 'High'
+                        ? 'destructive'
+                        : catalyst.impact === 'Medium'
+                          ? 'secondary'
+                          : 'default'
                     }
                   >
                     {catalyst.impact}
@@ -264,5 +289,5 @@ export default function AIInsights({ selectedStock }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

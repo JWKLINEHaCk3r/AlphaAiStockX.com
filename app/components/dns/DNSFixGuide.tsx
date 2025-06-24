@@ -1,51 +1,51 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from "lucide-react"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from 'lucide-react';
 
 export default function DNSFixGuide() {
-  const [completedSteps, setCompletedSteps] = useState<number[]>([])
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   const toggleStep = (stepNumber: number) => {
-    setCompletedSteps((prev) =>
-      prev.includes(stepNumber) ? prev.filter((n) => n !== stepNumber) : [...prev, stepNumber],
-    )
-  }
+    setCompletedSteps(prev =>
+      prev.includes(stepNumber) ? prev.filter(n => n !== stepNumber) : [...prev, stepNumber]
+    );
+  };
 
   const steps = [
     {
       id: 1,
-      title: "Find Your Domain Registrar",
-      description: "Identify where you purchased alphaaistockx.com",
-      action: "Check your email receipts or use WHOIS lookup",
+      title: 'Find Your Domain Registrar',
+      description: 'Identify where you purchased alphaaistockx.com',
+      action: 'Check your email receipts or use WHOIS lookup',
     },
     {
       id: 2,
-      title: "Login to Domain Registrar",
-      description: "Access your domain management panel",
-      action: "Use your registrar login credentials",
+      title: 'Login to Domain Registrar',
+      description: 'Access your domain management panel',
+      action: 'Use your registrar login credentials',
     },
     {
       id: 3,
-      title: "Update Nameservers",
-      description: "Point your domain to IONOS servers",
-      action: "Change to ns1.ionos.com and ns2.ionos.com",
+      title: 'Update Nameservers',
+      description: 'Point your domain to IONOS servers',
+      action: 'Change to ns1.ionos.com and ns2.ionos.com',
     },
     {
       id: 4,
-      title: "Configure IONOS Hosting",
-      description: "Ensure domain is linked to hosting package",
-      action: "Verify in IONOS Control Panel",
+      title: 'Configure IONOS Hosting',
+      description: 'Ensure domain is linked to hosting package',
+      action: 'Verify in IONOS Control Panel',
     },
     {
       id: 5,
-      title: "Wait for Propagation",
-      description: "DNS changes take 24-48 hours to spread globally",
-      action: "Monitor progress with DNS checker tools",
+      title: 'Wait for Propagation',
+      description: 'DNS changes take 24-48 hours to spread globally',
+      action: 'Monitor progress with DNS checker tools',
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 p-6">
@@ -73,13 +73,13 @@ export default function DNSFixGuide() {
         </Card>
 
         <div className="grid gap-6">
-          {steps.map((step) => (
+          {steps.map(step => (
             <Card
               key={step.id}
               className={`transition-all duration-300 ${
                 completedSteps.includes(step.id)
-                  ? "border-green-500 bg-green-50"
-                  : "border-gray-200 hover:border-blue-500"
+                  ? 'border-green-500 bg-green-50'
+                  : 'border-gray-200 hover:border-blue-500'
               }`}
             >
               <CardHeader>
@@ -87,10 +87,16 @@ export default function DNSFixGuide() {
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        completedSteps.includes(step.id) ? "bg-green-500 text-white" : "bg-blue-500 text-white"
+                        completedSteps.includes(step.id)
+                          ? 'bg-green-500 text-white'
+                          : 'bg-blue-500 text-white'
                       }`}
                     >
-                      {completedSteps.includes(step.id) ? <CheckCircle className="h-5 w-5" /> : step.id}
+                      {completedSteps.includes(step.id) ? (
+                        <CheckCircle className="h-5 w-5" />
+                      ) : (
+                        step.id
+                      )}
                     </div>
                     <span>
                       Step {step.id}: {step.title}
@@ -98,10 +104,10 @@ export default function DNSFixGuide() {
                   </div>
                   <Button
                     onClick={() => toggleStep(step.id)}
-                    variant={completedSteps.includes(step.id) ? "default" : "outline"}
+                    variant={completedSteps.includes(step.id) ? 'default' : 'outline'}
                     size="sm"
                   >
-                    {completedSteps.includes(step.id) ? "Completed" : "Mark Done"}
+                    {completedSteps.includes(step.id) ? 'Completed' : 'Mark Done'}
                   </Button>
                 </CardTitle>
               </CardHeader>
@@ -153,8 +159,8 @@ export default function DNSFixGuide() {
                 </div>
               </div>
               <div className="bg-white p-3 rounded-lg">
-                <strong>Tell them:</strong> "My domain alphaaistockx.com is not resolving to my hosting package. I need
-                help with DNS configuration."
+                <strong>Tell them:</strong> "My domain alphaaistockx.com is not resolving to my
+                hosting package. I need help with DNS configuration."
               </div>
             </div>
           </CardContent>
@@ -193,5 +199,5 @@ export default function DNSFixGuide() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

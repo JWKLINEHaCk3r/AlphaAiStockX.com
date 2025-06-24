@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { AlertTriangle, CheckCircle, Globe, Server, Clock, ExternalLink } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { AlertTriangle, CheckCircle, Globe, Server, Clock, ExternalLink } from 'lucide-react';
 
 export default function IONOSDNSSetup() {
   return (
@@ -184,13 +184,15 @@ export default function IONOSDNSSetup() {
               <div className="bg-white p-4 rounded-lg border">
                 <h4 className="font-semibold mb-2">IONOS Technical Support:</h4>
                 <div className="text-lg font-mono bg-gray-100 p-2 rounded">📞 1-484-254-5555</div>
-                <p className="text-sm text-gray-600 mt-2">Available 24/7 for DNS configuration help</p>
+                <p className="text-sm text-gray-600 mt-2">
+                  Available 24/7 for DNS configuration help
+                </p>
               </div>
               <div className="bg-white p-4 rounded-lg border">
                 <h4 className="font-semibold mb-2">What to Tell Support:</h4>
                 <p className="text-sm bg-gray-50 p-3 rounded italic">
-                  "My domain alphaaistockx.com is not resolving to my IONOS hosting package. I need help configuring DNS
-                  and verifying my nameservers are set correctly."
+                  "My domain alphaaistockx.com is not resolving to my IONOS hosting package. I need
+                  help configuring DNS and verifying my nameservers are set correctly."
                 </p>
               </div>
             </div>
@@ -198,5 +200,5 @@ export default function IONOSDNSSetup() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

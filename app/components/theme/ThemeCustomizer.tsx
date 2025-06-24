@@ -1,20 +1,29 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
-import { Badge } from "@/components/ui/badge"
-import { Palette, Zap, Settings, Eye, Sparkles } from "lucide-react"
-import { useNeonTheme } from "./NeonThemeProvider"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
+import { Palette, Zap, Settings, Eye, Sparkles } from 'lucide-react';
+import { useNeonTheme } from './NeonThemeProvider';
 
 export default function ThemeCustomizer() {
-  const { theme, setTheme, glowIntensity, setGlowIntensity, animationSpeed, setAnimationSpeed, themes } = useNeonTheme()
+  const {
+    theme,
+    setTheme,
+    glowIntensity,
+    setGlowIntensity,
+    animationSpeed,
+    setAnimationSpeed,
+    themes,
+  } = useNeonTheme();
 
   return (
     <Card className="bg-gradient-to-r from-gray-900/90 to-black/90 border-2 border-purple-400/50 backdrop-blur-xl shadow-2xl shadow-purple-500/25">
       <CardHeader>
         <CardTitle className="text-white flex items-center text-2xl">
-          <Palette className="h-8 w-8 mr-3 text-purple-400 animate-pulse" />🎨 NEON THEME CUSTOMIZER
+          <Palette className="h-8 w-8 mr-3 text-purple-400 animate-pulse" />
+          🎨 NEON THEME CUSTOMIZER
           <Badge className="ml-4 bg-gradient-to-r from-purple-400 to-pink-500 text-white animate-pulse">
             <Sparkles className="h-3 w-3 mr-1" />
             PREMIUM
@@ -36,15 +45,25 @@ export default function ThemeCustomizer() {
                 className={`p-6 h-auto flex flex-col items-center space-y-3 transition-all duration-300 ${
                   theme === key
                     ? `bg-gradient-to-r ${themeData.primary} text-black shadow-2xl scale-105`
-                    : "bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:scale-105"
+                    : 'bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:scale-105'
                 }`}
               >
-                <div className={`w-full h-4 bg-gradient-to-r ${themeData.primary} rounded-full`}></div>
+                <div
+                  className={`w-full h-4 bg-gradient-to-r ${themeData.primary} rounded-full`}
+                ></div>
                 <div className="flex space-x-2">
-                  <div className={`w-3 h-3 bg-gradient-to-r ${themeData.secondary} rounded-full`}></div>
-                  <div className={`w-3 h-3 bg-gradient-to-r ${themeData.accent} rounded-full`}></div>
-                  <div className={`w-3 h-3 bg-gradient-to-r ${themeData.warning} rounded-full`}></div>
-                  <div className={`w-3 h-3 bg-gradient-to-r ${themeData.danger} rounded-full`}></div>
+                  <div
+                    className={`w-3 h-3 bg-gradient-to-r ${themeData.secondary} rounded-full`}
+                  ></div>
+                  <div
+                    className={`w-3 h-3 bg-gradient-to-r ${themeData.accent} rounded-full`}
+                  ></div>
+                  <div
+                    className={`w-3 h-3 bg-gradient-to-r ${themeData.warning} rounded-full`}
+                  ></div>
+                  <div
+                    className={`w-3 h-3 bg-gradient-to-r ${themeData.danger} rounded-full`}
+                  ></div>
                 </div>
                 <span className="font-bold">{themeData.name}</span>
                 {theme === key && (
@@ -67,7 +86,7 @@ export default function ThemeCustomizer() {
           <div className="space-y-4">
             <Slider
               value={[glowIntensity]}
-              onValueChange={(value) => setGlowIntensity(value[0])}
+              onValueChange={value => setGlowIntensity(value[0])}
               max={200}
               min={0}
               step={10}
@@ -111,7 +130,7 @@ export default function ThemeCustomizer() {
           <div className="space-y-4">
             <Slider
               value={[animationSpeed]}
-              onValueChange={(value) => setAnimationSpeed(value[0])}
+              onValueChange={value => setAnimationSpeed(value[0])}
               max={300}
               min={25}
               step={25}
@@ -153,24 +172,30 @@ export default function ThemeCustomizer() {
             <div
               className={`p-4 bg-gradient-to-r ${themes[theme].primary}/20 rounded-xl border-2 border-cyan-400/30 shadow-lg shadow-cyan-500/50 animate-pulse`}
             >
-              <div className={`w-8 h-8 bg-gradient-to-r ${themes[theme].primary} rounded-full mx-auto mb-2`}></div>
+              <div
+                className={`w-8 h-8 bg-gradient-to-r ${themes[theme].primary} rounded-full mx-auto mb-2`}
+              ></div>
               <p className="text-center text-white font-bold">Primary</p>
             </div>
             <div
               className={`p-4 bg-gradient-to-r ${themes[theme].secondary}/20 rounded-xl border-2 border-purple-400/30 shadow-lg shadow-purple-500/50 animate-pulse`}
             >
-              <div className={`w-8 h-8 bg-gradient-to-r ${themes[theme].secondary} rounded-full mx-auto mb-2`}></div>
+              <div
+                className={`w-8 h-8 bg-gradient-to-r ${themes[theme].secondary} rounded-full mx-auto mb-2`}
+              ></div>
               <p className="text-center text-white font-bold">Secondary</p>
             </div>
             <div
               className={`p-4 bg-gradient-to-r ${themes[theme].accent}/20 rounded-xl border-2 border-green-400/30 shadow-lg shadow-green-500/50 animate-pulse`}
             >
-              <div className={`w-8 h-8 bg-gradient-to-r ${themes[theme].accent} rounded-full mx-auto mb-2`}></div>
+              <div
+                className={`w-8 h-8 bg-gradient-to-r ${themes[theme].accent} rounded-full mx-auto mb-2`}
+              ></div>
               <p className="text-center text-white font-bold">Accent</p>
             </div>
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

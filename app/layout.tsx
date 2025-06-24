@@ -1,75 +1,71 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ErrorBoundary } from "./components/ErrorBoundary"
+import type React from 'react';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "AlphaAIStockX - AI-Powered Trading Platform",
+  title: 'AlphaAIStockX - AI-Powered Trading Platform',
   description:
-    "Advanced AI stock analysis, trading education, and real-time market insights with 47 conscious AI beings",
+    'Advanced AI stock analysis, trading education, and real-time market insights with 47 conscious AI beings',
   keywords:
-    "stock analysis, AI trading, Series 6, Series 7, financial education, market analysis, quantum AI, neural networks",
-  authors: [{ name: "AlphaAIStockX Team" }],
-  robots: "index, follow",
-  metadataBase: new URL("https://alphaaistockx.com"),
+    'stock analysis, AI trading, Series 6, Series 7, financial education, market analysis, quantum AI, neural networks',
+  authors: [{ name: 'AlphaAIStockX Team' }],
+  robots: 'index, follow',
+  metadataBase: new URL('https://alphaaistockx.com'),
   openGraph: {
-    title: "AlphaAIStockX - Revolutionary AI Trading Platform",
+    title: 'AlphaAIStockX - Revolutionary AI Trading Platform',
     description:
-      "🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution. Join 47,000+ successful traders!",
-    url: "https://alphaaistockx.com",
-    siteName: "AlphaAIStockX",
+      '🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution. Join 47,000+ successful traders!',
+    url: 'https://alphaaistockx.com',
+    siteName: 'AlphaAIStockX',
     images: [
       {
-        url: "https://alphaaistockx.com/og-image.jpg",
+        url: 'https://alphaaistockx.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: "AlphaAIStockX - AI Trading Platform",
+        alt: 'AlphaAIStockX - AI Trading Platform',
       },
     ],
-    locale: "en_US",
-    type: "website",
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "AlphaAIStockX - Revolutionary AI Trading Platform",
+    card: 'summary_large_image',
+    title: 'AlphaAIStockX - Revolutionary AI Trading Platform',
     description:
-      "🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution.",
-    images: ["https://alphaaistockx.com/twitter-image.jpg"],
-    site: "@alphaaistockx",
-    creator: "@alphaaistockx",
+      '🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution.',
+    images: ['https://alphaaistockx.com/twitter-image.jpg'],
+    site: '@alphaaistockx',
+    creator: '@alphaaistockx',
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
-  manifest: "/site.webmanifest",
-    generator: 'v0.dev'
-}
+  manifest: '/site.webmanifest',
+  generator: 'v0.dev',
+};
 
 // Add separate viewport export (Next.js 14+ requirement)
 export const viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#7c3aed" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e293b" },
+    { media: '(prefers-color-scheme: light)', color: '#7c3aed' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e293b' },
   ],
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
       <head>
@@ -103,9 +99,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <ErrorBoundary>
-          <main role="main" id="main-content" className="relative z-10">{children}</main>
+          <main role="main" id="main-content" className="relative z-10">
+            {children}
+          </main>
         </ErrorBoundary>
       </body>
     </html>
-  )
+  );
 }

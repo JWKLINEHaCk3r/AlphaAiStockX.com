@@ -1,12 +1,24 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Rocket, Satellite, Globe, Star, Orbit, Factory, Gem, Fuel, Radio, MapPin, TrendingUp } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Rocket,
+  Satellite,
+  Globe,
+  Star,
+  Orbit,
+  Factory,
+  Gem,
+  Fuel,
+  Radio,
+  MapPin,
+  TrendingUp,
+} from 'lucide-react';
 
 export default function SpaceEconomyTrading() {
   const [spaceData, setSpaceData] = useState({
@@ -17,208 +29,208 @@ export default function SpaceEconomyTrading() {
     asteroidMines: 124 + Math.floor(Math.random() * 20),
     lunarBases: 8 + Math.floor(Math.random() * 3),
     marsColonies: 3 + Math.floor(Math.random() * 2),
-  })
+  });
 
   const [spaceAssets, setSpaceAssets] = useState([
     {
-      symbol: "LUNA-H3",
-      name: "Lunar Helium-3 Mining",
-      type: "Resource Extraction",
-      location: "Moon - Mare Imbrium",
+      symbol: 'LUNA-H3',
+      name: 'Lunar Helium-3 Mining',
+      type: 'Resource Extraction',
+      location: 'Moon - Mare Imbrium',
       price: 2847.5 + Math.random() * 200,
       change: 12.7 + Math.random() * 5,
-      volume: "847M tons",
-      operator: "Luna Mining Corp",
-      yield: "24.7%",
-      risk: "Medium",
+      volume: '847M tons',
+      operator: 'Luna Mining Corp',
+      yield: '24.7%',
+      risk: 'Medium',
     },
     {
-      symbol: "AST-PLT",
-      name: "Asteroid Platinum Mining",
-      type: "Precious Metals",
-      location: "Asteroid Belt - 16 Psyche",
+      symbol: 'AST-PLT',
+      name: 'Asteroid Platinum Mining',
+      type: 'Precious Metals',
+      location: 'Asteroid Belt - 16 Psyche',
       price: 15247.89 + Math.random() * 1000,
       change: 8.9 + Math.random() * 4,
-      volume: "124K tons",
-      operator: "Deep Space Mining Inc",
-      yield: "47.8%",
-      risk: "High",
+      volume: '124K tons',
+      operator: 'Deep Space Mining Inc',
+      yield: '47.8%',
+      risk: 'High',
     },
     {
-      symbol: "MARS-AG",
-      name: "Mars Agricultural Domes",
-      type: "Food Production",
-      location: "Mars - Chryse Planitia",
+      symbol: 'MARS-AG',
+      name: 'Mars Agricultural Domes',
+      type: 'Food Production',
+      location: 'Mars - Chryse Planitia',
       price: 4578.23 + Math.random() * 300,
       change: 15.4 + Math.random() * 6,
-      volume: "2.4M units",
-      operator: "Red Planet Farms",
-      yield: "18.9%",
-      risk: "Medium",
+      volume: '2.4M units',
+      operator: 'Red Planet Farms',
+      yield: '18.9%',
+      risk: 'Medium',
     },
     {
-      symbol: "ORB-PWR",
-      name: "Orbital Solar Arrays",
-      type: "Energy Generation",
-      location: "Earth Orbit - L1 Lagrange",
+      symbol: 'ORB-PWR',
+      name: 'Orbital Solar Arrays',
+      type: 'Energy Generation',
+      location: 'Earth Orbit - L1 Lagrange',
       price: 8947.12 + Math.random() * 500,
       change: 6.8 + Math.random() * 3,
-      volume: "15.7 TWh",
-      operator: "Orbital Energy Systems",
-      yield: "12.4%",
-      risk: "Low",
+      volume: '15.7 TWh',
+      operator: 'Orbital Energy Systems',
+      yield: '12.4%',
+      risk: 'Low',
     },
     {
-      symbol: "TIT-ICE",
-      name: "Titan Water Ice Harvesting",
-      type: "Water Resources",
-      location: "Titan - Kraken Mare",
+      symbol: 'TIT-ICE',
+      name: 'Titan Water Ice Harvesting',
+      type: 'Water Resources',
+      location: 'Titan - Kraken Mare',
       price: 1247.67 + Math.random() * 100,
       change: 22.3 + Math.random() * 8,
-      volume: "847M liters",
-      operator: "Outer System Resources",
-      yield: "34.7%",
-      risk: "Very High",
+      volume: '847M liters',
+      operator: 'Outer System Resources',
+      yield: '34.7%',
+      risk: 'Very High',
     },
-  ])
+  ]);
 
   const [spaceInfrastructure, setSpaceInfrastructure] = useState([
     {
-      name: "Alpha Station One",
-      type: "Manufacturing Hub",
-      location: "Earth-Moon L4",
-      capacity: "2.4M units/year",
+      name: 'Alpha Station One',
+      type: 'Manufacturing Hub',
+      location: 'Earth-Moon L4',
+      capacity: '2.4M units/year',
       utilization: 87 + Math.random() * 10,
-      revenue: "$847M/year",
-      status: "Operational",
+      revenue: '$847M/year',
+      status: 'Operational',
     },
     {
-      name: "Ceres Mining Base",
-      type: "Resource Processing",
-      location: "Ceres - Occator Crater",
-      capacity: "124K tons/month",
+      name: 'Ceres Mining Base',
+      type: 'Resource Processing',
+      location: 'Ceres - Occator Crater',
+      capacity: '124K tons/month',
       utilization: 92 + Math.random() * 5,
-      revenue: "$1.2B/year",
-      status: "Operational",
+      revenue: '$1.2B/year',
+      status: 'Operational',
     },
     {
-      name: "Europa Research Station",
-      type: "Scientific Research",
-      location: "Europa - Subsurface Ocean",
-      capacity: "50 researchers",
+      name: 'Europa Research Station',
+      type: 'Scientific Research',
+      location: 'Europa - Subsurface Ocean',
+      capacity: '50 researchers',
       utilization: 78 + Math.random() * 15,
-      revenue: "$247M/year",
-      status: "Under Construction",
+      revenue: '$247M/year',
+      status: 'Under Construction',
     },
     {
-      name: "Phobos Fuel Depot",
-      type: "Refueling Station",
-      location: "Phobos - Stickney Crater",
-      capacity: "10M liters",
+      name: 'Phobos Fuel Depot',
+      type: 'Refueling Station',
+      location: 'Phobos - Stickney Crater',
+      capacity: '10M liters',
       utilization: 65 + Math.random() * 20,
-      revenue: "$578M/year",
-      status: "Operational",
+      revenue: '$578M/year',
+      status: 'Operational',
     },
-  ])
+  ]);
 
   const [spaceMarkets, setSpaceMarkets] = useState([
     {
-      market: "Lunar Resources Exchange",
-      location: "Moon - Shackleton Crater",
-      tradingVolume: "$2.4B",
-      activeTraders: "1,247",
-      topCommodity: "Helium-3",
-      marketHours: "24/7",
+      market: 'Lunar Resources Exchange',
+      location: 'Moon - Shackleton Crater',
+      tradingVolume: '$2.4B',
+      activeTraders: '1,247',
+      topCommodity: 'Helium-3',
+      marketHours: '24/7',
     },
     {
-      market: "Asteroid Belt Commodities",
-      location: "Ceres Station",
-      tradingVolume: "$8.7B",
-      activeTraders: "3,456",
-      topCommodity: "Platinum",
-      marketHours: "24/7",
+      market: 'Asteroid Belt Commodities',
+      location: 'Ceres Station',
+      tradingVolume: '$8.7B',
+      activeTraders: '3,456',
+      topCommodity: 'Platinum',
+      marketHours: '24/7',
     },
     {
-      market: "Mars Colonial Exchange",
-      location: "New Olympia, Mars",
-      tradingVolume: "$1.8B",
-      activeTraders: "892",
-      topCommodity: "Food Supplies",
-      marketHours: "Sol-based",
+      market: 'Mars Colonial Exchange',
+      location: 'New Olympia, Mars',
+      tradingVolume: '$1.8B',
+      activeTraders: '892',
+      topCommodity: 'Food Supplies',
+      marketHours: 'Sol-based',
     },
     {
-      market: "Orbital Manufacturing Hub",
-      location: "L5 Lagrange Point",
-      tradingVolume: "$4.2B",
-      activeTraders: "2,134",
-      topCommodity: "Zero-G Products",
-      marketHours: "24/7",
+      market: 'Orbital Manufacturing Hub',
+      location: 'L5 Lagrange Point',
+      tradingVolume: '$4.2B',
+      activeTraders: '2,134',
+      topCommodity: 'Zero-G Products',
+      marketHours: '24/7',
     },
-  ])
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateSpaceData()
-    }, 4000)
+      updateSpaceData();
+    }, 4000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateSpaceData = () => {
-    setSpaceData((prev) => ({
+    setSpaceData(prev => ({
       ...prev,
       marketCap: prev.marketCap * (1 + (Math.random() - 0.4) * 0.01),
       dailyVolume: prev.dailyVolume * (1 + (Math.random() - 0.4) * 0.02),
       activeAssets: prev.activeAssets + Math.floor((Math.random() - 0.3) * 5),
-    }))
+    }));
 
-    setSpaceAssets((prev) =>
-      prev.map((asset) => ({
+    setSpaceAssets(prev =>
+      prev.map(asset => ({
         ...asset,
         price: asset.price * (1 + (Math.random() - 0.45) * 0.02),
         change: asset.change * (1 + (Math.random() - 0.45) * 0.1),
-      })),
-    )
+      }))
+    );
 
-    setSpaceInfrastructure((prev) =>
-      prev.map((infra) => ({
+    setSpaceInfrastructure(prev =>
+      prev.map(infra => ({
         ...infra,
         utilization: Math.min(100, Math.max(50, infra.utilization + (Math.random() - 0.5) * 3)),
-      })),
-    )
-  }
+      }))
+    );
+  };
 
-  const getChangeColor = (change) => {
-    return change >= 0 ? "text-green-400" : "text-red-400"
-  }
+  const getChangeColor = change => {
+    return change >= 0 ? 'text-green-400' : 'text-red-400';
+  };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = risk => {
     switch (risk.toLowerCase()) {
-      case "low":
-        return "bg-green-500"
-      case "medium":
-        return "bg-yellow-500"
-      case "high":
-        return "bg-orange-500"
-      case "very high":
-        return "bg-red-500"
+      case 'low':
+        return 'bg-green-500';
+      case 'medium':
+        return 'bg-yellow-500';
+      case 'high':
+        return 'bg-orange-500';
+      case 'very high':
+        return 'bg-red-500';
       default:
-        return "bg-gray-500"
+        return 'bg-gray-500';
     }
-  }
+  };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = status => {
     switch (status.toLowerCase()) {
-      case "operational":
-        return "bg-green-500"
-      case "under construction":
-        return "bg-yellow-500"
-      case "maintenance":
-        return "bg-orange-500"
+      case 'operational':
+        return 'bg-green-500';
+      case 'under construction':
+        return 'bg-yellow-500';
+      case 'maintenance':
+        return 'bg-orange-500';
       default:
-        return "bg-gray-500"
+        return 'bg-gray-500';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -226,7 +238,8 @@ export default function SpaceEconomyTrading() {
       <Card className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border-indigo-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Rocket className="h-7 w-7 mr-3 text-indigo-400" />🚀 Space Economy Trading
+            <Rocket className="h-7 w-7 mr-3 text-indigo-400" />
+            🚀 Space Economy Trading
             <Badge className="ml-3 bg-gradient-to-r from-indigo-400 to-purple-500">
               <Star className="h-4 w-4 mr-1" />
               INTERPLANETARY
@@ -264,7 +277,9 @@ export default function SpaceEconomyTrading() {
                 <Satellite className="h-8 w-8 text-blue-400" />
                 <Badge className="bg-blue-500">ASSETS</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{spaceData.activeAssets.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {spaceData.activeAssets.toLocaleString()}
+              </div>
               <p className="text-blue-400 font-semibold">Active Assets</p>
               <p className="text-gray-400 text-sm">Tradeable space assets</p>
             </div>
@@ -351,7 +366,10 @@ export default function SpaceEconomyTrading() {
                 </div>
 
                 {spaceAssets.map((asset, index) => (
-                  <div key={index} className="grid grid-cols-7 items-center py-4 border-b border-gray-800/50">
+                  <div
+                    key={index}
+                    className="grid grid-cols-7 items-center py-4 border-b border-gray-800/50"
+                  >
                     <div className="font-bold text-white">{asset.symbol}</div>
                     <div className="col-span-2">
                       <div className="text-white font-medium">{asset.name}</div>
@@ -360,7 +378,7 @@ export default function SpaceEconomyTrading() {
                     <div className="text-gray-300 text-sm">{asset.location}</div>
                     <div className="text-white">${asset.price.toLocaleString()}</div>
                     <div className={getChangeColor(asset.change)}>
-                      {asset.change > 0 ? "+" : ""}
+                      {asset.change > 0 ? '+' : ''}
                       {asset.change.toFixed(2)}%
                     </div>
                     <div className="text-green-400 font-bold">{asset.yield}</div>
@@ -395,7 +413,9 @@ export default function SpaceEconomyTrading() {
                         <p className="text-gray-400 text-sm mt-2">{infra.location}</p>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-blue-400">{infra.utilization.toFixed(1)}%</div>
+                        <div className="text-2xl font-bold text-blue-400">
+                          {infra.utilization.toFixed(1)}%
+                        </div>
                         <p className="text-gray-400 text-sm">Utilization</p>
                         <div className="mt-2">
                           <p className="text-white font-bold">{infra.revenue}</p>
@@ -406,7 +426,9 @@ export default function SpaceEconomyTrading() {
                     <div className="mt-4">
                       <div className="flex justify-between mb-2">
                         <span className="text-gray-400 text-sm">Capacity: {infra.capacity}</span>
-                        <span className="text-blue-400 text-sm">{infra.utilization.toFixed(1)}% utilized</span>
+                        <span className="text-blue-400 text-sm">
+                          {infra.utilization.toFixed(1)}% utilized
+                        </span>
                       </div>
                       <Progress value={infra.utilization} className="h-2" />
                     </div>
@@ -454,7 +476,10 @@ export default function SpaceEconomyTrading() {
                       <Button className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                         Trade Now
                       </Button>
-                      <Button variant="outline" className="flex-1 border-purple-400/30 text-purple-400">
+                      <Button
+                        variant="outline"
+                        className="flex-1 border-purple-400/30 text-purple-400"
+                      >
                         View Market
                       </Button>
                     </div>
@@ -466,5 +491,5 @@ export default function SpaceEconomyTrading() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

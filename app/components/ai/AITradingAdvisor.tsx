@@ -1,12 +1,12 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   TrendingUp,
@@ -25,104 +25,104 @@ import {
   Calendar,
   DollarSign,
   Volume2,
-} from "lucide-react"
+} from 'lucide-react';
 
-import { advancedStockAnalysisService } from "../../services/advanced-stock-analysis-service"
-import { legalComplianceService } from "../../services/legal-compliance-service"
+import { advancedStockAnalysisService } from '../../services/advanced-stock-analysis-service';
+import { legalComplianceService } from '../../services/legal-compliance-service';
 
 interface AITradingAdvisorProps {
-  className?: string
+  className?: string;
 }
 
-export default function AITradingAdvisor({ className = "" }: AITradingAdvisorProps) {
-  const [activeTab, setActiveTab] = useState("dashboard")
-  const [selectedStock, setSelectedStock] = useState("AAPL")
-  const [stockAnalysis, setStockAnalysis] = useState(null)
-  const [allStocks, setAllStocks] = useState([])
-  const [searchQuery, setSearchQuery] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false)
+export default function AITradingAdvisor({ className = '' }: AITradingAdvisorProps) {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [selectedStock, setSelectedStock] = useState('AAPL');
+  const [stockAnalysis, setStockAnalysis] = useState(null);
+  const [allStocks, setAllStocks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
 
   useEffect(() => {
-    initializeServices()
-    loadStockData()
-  }, [])
+    initializeServices();
+    loadStockData();
+  }, []);
 
   useEffect(() => {
     if (selectedStock) {
-      loadStockAnalysis(selectedStock)
+      loadStockAnalysis(selectedStock);
     }
-  }, [selectedStock])
+  }, [selectedStock]);
 
   const initializeServices = async () => {
-    await advancedStockAnalysisService.initialize()
-    await legalComplianceService.initialize()
-  }
+    await advancedStockAnalysisService.initialize();
+    await legalComplianceService.initialize();
+  };
 
   const loadStockData = async () => {
     try {
-      const stocks = await advancedStockAnalysisService.getAllStocksWithScores()
-      setAllStocks(stocks)
+      const stocks = await advancedStockAnalysisService.getAllStocksWithScores();
+      setAllStocks(stocks);
     } catch (error) {
-      console.error("Error loading stock data:", error)
+      console.error('Error loading stock data:', error);
     }
-  }
+  };
 
   const loadStockAnalysis = async (symbol: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const analysis = await advancedStockAnalysisService.getComprehensiveStockAnalysis(symbol)
-      setStockAnalysis(analysis)
+      const analysis = await advancedStockAnalysisService.getComprehensiveStockAnalysis(symbol);
+      setStockAnalysis(analysis);
     } catch (error) {
-      console.error("Error loading stock analysis:", error)
+      console.error('Error loading stock analysis:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-green-400"
-    if (score >= 65) return "text-blue-400"
-    if (score >= 45) return "text-yellow-400"
-    if (score >= 30) return "text-orange-400"
-    return "text-red-400"
-  }
+    if (score >= 80) return 'text-green-400';
+    if (score >= 65) return 'text-blue-400';
+    if (score >= 45) return 'text-yellow-400';
+    if (score >= 30) return 'text-orange-400';
+    return 'text-red-400';
+  };
 
   const getScoreBadgeColor = (score: number) => {
-    if (score >= 80) return "bg-green-600"
-    if (score >= 65) return "bg-blue-600"
-    if (score >= 45) return "bg-yellow-600"
-    if (score >= 30) return "bg-orange-600"
-    return "bg-red-600"
-  }
+    if (score >= 80) return 'bg-green-600';
+    if (score >= 65) return 'bg-blue-600';
+    if (score >= 45) return 'bg-yellow-600';
+    if (score >= 30) return 'bg-orange-600';
+    return 'bg-red-600';
+  };
 
   const getMarketIcon = (classification: string) => {
-    if (classification.includes("BULL")) return <TrendingUp className="h-5 w-5 text-green-400" />
-    if (classification.includes("BEAR")) return <TrendingDown className="h-5 w-5 text-red-400" />
-    return <Minus className="h-5 w-5 text-yellow-400" />
-  }
+    if (classification.includes('BULL')) return <TrendingUp className="h-5 w-5 text-green-400" />;
+    if (classification.includes('BEAR')) return <TrendingDown className="h-5 w-5 text-red-400" />;
+    return <Minus className="h-5 w-5 text-yellow-400" />;
+  };
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }).format(value)
-  }
+    }).format(value);
+  };
 
   const formatVolume = (volume: number) => {
     if (volume >= 1000000) {
-      return `${(volume / 1000000).toFixed(1)}M`
+      return `${(volume / 1000000).toFixed(1)}M`;
     } else if (volume >= 1000) {
-      return `${(volume / 1000).toFixed(1)}K`
+      return `${(volume / 1000).toFixed(1)}K`;
     }
-    return volume.toString()
-  }
+    return volume.toString();
+  };
 
   // Show disclaimer first
   if (!disclaimerAccepted) {
-    const disclaimers = legalComplianceService.getRequiredDisclaimer("ai_analysis")
+    const disclaimers = legalComplianceService.getRequiredDisclaimer('ai_analysis');
 
     return (
       <div className={`space-y-6 ${className}`}>
@@ -144,15 +144,20 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
             ))}
 
             <div className="flex items-center gap-4 pt-4 border-t border-slate-600">
-              <Button onClick={() => setDisclaimerAccepted(true)} className="bg-blue-600 hover:bg-blue-700">
+              <Button
+                onClick={() => setDisclaimerAccepted(true)}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
                 <CheckCircle className="h-4 w-4 mr-2" />I Understand and Accept
               </Button>
-              <p className="text-slate-400 text-sm">You must accept these disclaimers to continue</p>
+              <p className="text-slate-400 text-sm">
+                You must accept these disclaimers to continue
+              </p>
             </div>
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -222,10 +227,14 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className={`text-lg font-bold ${getScoreColor(stock.buyScore.overall)}`}>
+                        <div
+                          className={`text-lg font-bold ${getScoreColor(stock.buyScore.overall)}`}
+                        >
                           {stock.buyScore.overall}
                         </div>
-                        <Badge className={getScoreBadgeColor(stock.buyScore.overall)}>{stock.buyScore.rating}</Badge>
+                        <Badge className={getScoreBadgeColor(stock.buyScore.overall)}>
+                          {stock.buyScore.rating}
+                        </Badge>
                       </div>
                     </div>
                   ))}
@@ -242,7 +251,7 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {allStocks.slice(0, 5).map((stock) => (
+                  {allStocks.slice(0, 5).map(stock => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
@@ -251,13 +260,19 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         {getMarketIcon(stock.marketClassification.classification)}
                         <div>
                           <div className="text-white font-medium">{stock.symbol}</div>
-                          <div className="text-slate-400 text-sm">{stock.marketClassification.classification}</div>
+                          <div className="text-slate-400 text-sm">
+                            {stock.marketClassification.classification}
+                          </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-white font-semibold">{formatCurrency(stock.currentPrice)}</div>
-                        <div className={`text-sm ${stock.performance?.day > 0 ? "text-green-400" : "text-red-400"}`}>
-                          {stock.performance?.day > 0 ? "+" : ""}
+                        <div className="text-white font-semibold">
+                          {formatCurrency(stock.currentPrice)}
+                        </div>
+                        <div
+                          className={`text-sm ${stock.performance?.day > 0 ? 'text-green-400' : 'text-red-400'}`}
+                        >
+                          {stock.performance?.day > 0 ? '+' : ''}
                           {stock.performance?.day?.toFixed(2)}%
                         </div>
                       </div>
@@ -274,7 +289,7 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               <CardContent className="p-6 text-center">
                 <TrendingUp className="h-12 w-12 text-green-400 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-green-400">
-                  {allStocks.filter((s) => s.buyScore.overall >= 70).length}
+                  {allStocks.filter(s => s.buyScore.overall >= 70).length}
                 </div>
                 <div className="text-slate-400">Strong Buys</div>
               </CardContent>
@@ -284,7 +299,10 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               <CardContent className="p-6 text-center">
                 <Target className="h-12 w-12 text-blue-400 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-blue-400">
-                  {allStocks.filter((s) => s.buyScore.overall >= 50 && s.buyScore.overall < 70).length}
+                  {
+                    allStocks.filter(s => s.buyScore.overall >= 50 && s.buyScore.overall < 70)
+                      .length
+                  }
                 </div>
                 <div className="text-slate-400">Moderate Buys</div>
               </CardContent>
@@ -294,7 +312,10 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               <CardContent className="p-6 text-center">
                 <Minus className="h-12 w-12 text-yellow-400 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-yellow-400">
-                  {allStocks.filter((s) => s.buyScore.overall >= 40 && s.buyScore.overall < 50).length}
+                  {
+                    allStocks.filter(s => s.buyScore.overall >= 40 && s.buyScore.overall < 50)
+                      .length
+                  }
                 </div>
                 <div className="text-slate-400">Holds</div>
               </CardContent>
@@ -304,7 +325,7 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               <CardContent className="p-6 text-center">
                 <TrendingDown className="h-12 w-12 text-red-400 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-red-400">
-                  {allStocks.filter((s) => s.buyScore.overall < 40).length}
+                  {allStocks.filter(s => s.buyScore.overall < 40).length}
                 </div>
                 <div className="text-slate-400">Sells</div>
               </CardContent>
@@ -323,15 +344,15 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                   <Input
                     placeholder="Search stocks..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                     className="pl-10 bg-slate-700/30 border-blue-500/30 text-white"
                   />
                 </div>
                 <div className="flex gap-2">
-                  {["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA"].map((symbol) => (
+                  {['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'].map(symbol => (
                     <Button
                       key={symbol}
-                      variant={selectedStock === symbol ? "default" : "outline"}
+                      variant={selectedStock === symbol ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedStock(symbol)}
                     >
@@ -348,7 +369,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
               <CardContent className="p-8 text-center">
                 <Brain className="h-16 w-16 text-blue-400 mx-auto mb-4 animate-pulse" />
                 <h3 className="text-xl font-bold text-white mb-2">AI Analysis in Progress</h3>
-                <p className="text-slate-400">Analyzing {selectedStock} with advanced AI algorithms...</p>
+                <p className="text-slate-400">
+                  Analyzing {selectedStock} with advanced AI algorithms...
+                </p>
               </CardContent>
             </Card>
           ) : stockAnalysis ? (
@@ -358,16 +381,20 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">{stockAnalysis.stock.symbol}</h2>
+                      <h2 className="text-2xl font-bold text-white">
+                        {stockAnalysis.stock.symbol}
+                      </h2>
                       <p className="text-slate-400">{stockAnalysis.stock.name}</p>
                       <Badge className="mt-2">{stockAnalysis.stock.sector}</Badge>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-white">{formatCurrency(stockAnalysis.currentPrice)}</div>
+                      <div className="text-3xl font-bold text-white">
+                        {formatCurrency(stockAnalysis.currentPrice)}
+                      </div>
                       <div
-                        className={`text-lg ${stockAnalysis.metrics.performance?.day > 0 ? "text-green-400" : "text-red-400"}`}
+                        className={`text-lg ${stockAnalysis.metrics.performance?.day > 0 ? 'text-green-400' : 'text-red-400'}`}
                       >
-                        {stockAnalysis.metrics.performance?.day > 0 ? "+" : ""}
+                        {stockAnalysis.metrics.performance?.day > 0 ? '+' : ''}
                         {stockAnalysis.metrics.performance?.day?.toFixed(2)}% Today
                       </div>
                     </div>
@@ -413,10 +440,14 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                 <CardContent>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="text-center">
-                      <div className={`text-6xl font-bold mb-2 ${getScoreColor(stockAnalysis.buyScore.overall)}`}>
+                      <div
+                        className={`text-6xl font-bold mb-2 ${getScoreColor(stockAnalysis.buyScore.overall)}`}
+                      >
                         {stockAnalysis.buyScore.overall}
                       </div>
-                      <Badge className={`text-lg px-4 py-2 ${getScoreBadgeColor(stockAnalysis.buyScore.overall)}`}>
+                      <Badge
+                        className={`text-lg px-4 py-2 ${getScoreBadgeColor(stockAnalysis.buyScore.overall)}`}
+                      >
                         {stockAnalysis.buyScore.rating}
                       </Badge>
                       <div className="mt-4">
@@ -428,7 +459,7 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                       <h4 className="text-white font-semibold">Score Components:</h4>
                       {Object.entries(stockAnalysis.buyScore.components).map(([key, value]) => (
                         <div key={key} className="flex items-center justify-between">
-                          <span className="text-slate-300 capitalize">{key.replace("_", " ")}</span>
+                          <span className="text-slate-300 capitalize">{key.replace('_', ' ')}</span>
                           <div className="flex items-center gap-2">
                             <Progress value={(value / 30) * 100} className="w-20 h-2" />
                             <span className="text-white font-medium w-8">{Math.round(value)}</span>
@@ -456,18 +487,23 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                           {stockAnalysis.marketClassification.classification}
                         </div>
                         <div className="text-slate-400">
-                          Confidence: {(stockAnalysis.marketClassification.confidence * 100).toFixed(0)}%
+                          Confidence:{' '}
+                          {(stockAnalysis.marketClassification.confidence * 100).toFixed(0)}%
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <div className="flex justify-between">
                           <span className="text-slate-400">Bullish Factors:</span>
-                          <span className="text-green-400">{stockAnalysis.marketClassification.bullishFactors}</span>
+                          <span className="text-green-400">
+                            {stockAnalysis.marketClassification.bullishFactors}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-400">Bearish Factors:</span>
-                          <span className="text-red-400">{stockAnalysis.marketClassification.bearishFactors}</span>
+                          <span className="text-red-400">
+                            {stockAnalysis.marketClassification.bearishFactors}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -478,16 +514,16 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         <div className="flex items-center justify-between">
                           <span className="text-slate-400">Short Term:</span>
                           <div className="flex items-center gap-2">
-                            {stockAnalysis.marketClassification.trends.short === "UP" ? (
+                            {stockAnalysis.marketClassification.trends.short === 'UP' ? (
                               <ArrowUp className="h-4 w-4 text-green-400" />
                             ) : (
                               <ArrowDown className="h-4 w-4 text-red-400" />
                             )}
                             <span
                               className={
-                                stockAnalysis.marketClassification.trends.short === "UP"
-                                  ? "text-green-400"
-                                  : "text-red-400"
+                                stockAnalysis.marketClassification.trends.short === 'UP'
+                                  ? 'text-green-400'
+                                  : 'text-red-400'
                               }
                             >
                               {stockAnalysis.marketClassification.trends.short}
@@ -497,16 +533,16 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         <div className="flex items-center justify-between">
                           <span className="text-slate-400">Medium Term:</span>
                           <div className="flex items-center gap-2">
-                            {stockAnalysis.marketClassification.trends.medium === "UP" ? (
+                            {stockAnalysis.marketClassification.trends.medium === 'UP' ? (
                               <ArrowUp className="h-4 w-4 text-green-400" />
                             ) : (
                               <ArrowDown className="h-4 w-4 text-red-400" />
                             )}
                             <span
                               className={
-                                stockAnalysis.marketClassification.trends.medium === "UP"
-                                  ? "text-green-400"
-                                  : "text-red-400"
+                                stockAnalysis.marketClassification.trends.medium === 'UP'
+                                  ? 'text-green-400'
+                                  : 'text-red-400'
                               }
                             >
                               {stockAnalysis.marketClassification.trends.medium}
@@ -516,16 +552,16 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         <div className="flex items-center justify-between">
                           <span className="text-slate-400">Long Term:</span>
                           <div className="flex items-center gap-2">
-                            {stockAnalysis.marketClassification.trends.long === "UP" ? (
+                            {stockAnalysis.marketClassification.trends.long === 'UP' ? (
                               <ArrowUp className="h-4 w-4 text-green-400" />
                             ) : (
                               <ArrowDown className="h-4 w-4 text-red-400" />
                             )}
                             <span
                               className={
-                                stockAnalysis.marketClassification.trends.long === "UP"
-                                  ? "text-green-400"
-                                  : "text-red-400"
+                                stockAnalysis.marketClassification.trends.long === 'UP'
+                                  ? 'text-green-400'
+                                  : 'text-red-400'
                               }
                             >
                               {stockAnalysis.marketClassification.trends.long}
@@ -537,7 +573,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                   </div>
 
                   <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
-                    <p className="text-slate-300 text-sm">{stockAnalysis.marketClassification.description}</p>
+                    <p className="text-slate-300 text-sm">
+                      {stockAnalysis.marketClassification.description}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -553,20 +591,29 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                 <CardContent>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-white mb-2">{stockAnalysis.recommendation.action}</div>
+                      <div className="text-3xl font-bold text-white mb-2">
+                        {stockAnalysis.recommendation.action}
+                      </div>
                       <div className="text-slate-400 mb-4">
                         Confidence: {(stockAnalysis.recommendation.confidence * 100).toFixed(0)}%
                       </div>
-                      <Progress value={stockAnalysis.recommendation.confidence * 100} className="mb-4" />
+                      <Progress
+                        value={stockAnalysis.recommendation.confidence * 100}
+                        className="mb-4"
+                      />
 
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span className="text-slate-400">Position Size:</span>
-                          <span className="text-white">{stockAnalysis.recommendation.positionSize}</span>
+                          <span className="text-white">
+                            {stockAnalysis.recommendation.positionSize}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-400">Stop Loss:</span>
-                          <span className="text-red-400">{formatCurrency(stockAnalysis.recommendation.stopLoss)}</span>
+                          <span className="text-red-400">
+                            {formatCurrency(stockAnalysis.recommendation.stopLoss)}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-400">Take Profit:</span>
@@ -576,7 +623,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-400">Timeframe:</span>
-                          <span className="text-white">{stockAnalysis.recommendation.timeframe}</span>
+                          <span className="text-white">
+                            {stockAnalysis.recommendation.timeframe}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -599,11 +648,11 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         </div>
                         <Badge
                           className={
-                            stockAnalysis.recommendation.riskLevel === "HIGH"
-                              ? "bg-red-600"
-                              : stockAnalysis.recommendation.riskLevel === "MEDIUM"
-                                ? "bg-yellow-600"
-                                : "bg-green-600"
+                            stockAnalysis.recommendation.riskLevel === 'HIGH'
+                              ? 'bg-red-600'
+                              : stockAnalysis.recommendation.riskLevel === 'MEDIUM'
+                                ? 'bg-yellow-600'
+                                : 'bg-green-600'
                           }
                         >
                           {stockAnalysis.recommendation.riskLevel}
@@ -627,7 +676,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="text-center p-4 bg-slate-700/30 rounded-lg">
                         <div className="text-slate-400 text-sm">IPO Date</div>
-                        <div className="text-white font-semibold">{stockAnalysis.stock.ipoDate}</div>
+                        <div className="text-white font-semibold">
+                          {stockAnalysis.stock.ipoDate}
+                        </div>
                       </div>
                       <div className="text-center p-4 bg-slate-700/30 rounded-lg">
                         <div className="text-slate-400 text-sm">IPO Price</div>
@@ -673,23 +724,29 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                       <div
                         key={index}
                         className={`p-4 rounded-lg border-l-4 ${
-                          signal.type === "BUY" ? "bg-green-900/20 border-green-500" : "bg-red-900/20 border-red-500"
+                          signal.type === 'BUY'
+                            ? 'bg-green-900/20 border-green-500'
+                            : 'bg-red-900/20 border-red-500'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
-                            {signal.type === "BUY" ? (
+                            {signal.type === 'BUY' ? (
                               <TrendingUp className="h-5 w-5 text-green-400" />
                             ) : (
                               <TrendingDown className="h-5 w-5 text-red-400" />
                             )}
                             <span
-                              className={`font-semibold ${signal.type === "BUY" ? "text-green-400" : "text-red-400"}`}
+                              className={`font-semibold ${signal.type === 'BUY' ? 'text-green-400' : 'text-red-400'}`}
                             >
                               {signal.type} SIGNAL
                             </span>
                           </div>
-                          <Badge className={signal.strength === "STRONG" ? "bg-red-600" : "bg-yellow-600"}>
+                          <Badge
+                            className={
+                              signal.strength === 'STRONG' ? 'bg-red-600' : 'bg-yellow-600'
+                            }
+                          >
                             {signal.strength}
                           </Badge>
                         </div>
@@ -698,7 +755,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                         <div className="flex items-center gap-2">
                           <span className="text-slate-400 text-sm">Confidence:</span>
                           <Progress value={signal.confidence * 100} className="w-24 h-2" />
-                          <span className="text-white text-sm">{(signal.confidence * 100).toFixed(0)}%</span>
+                          <span className="text-white text-sm">
+                            {(signal.confidence * 100).toFixed(0)}%
+                          </span>
                         </div>
                       </div>
                     ))}
@@ -723,16 +782,23 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                       </h4>
                       <div className="space-y-3">
                         {stockAnalysis.entryExitPoints.entry.map((point, index) => (
-                          <div key={index} className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg">
+                          <div
+                            key={index}
+                            className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
+                          >
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-white font-medium">{point.type}</span>
-                              <span className="text-green-400 font-semibold">{formatCurrency(point.price)}</span>
+                              <span className="text-green-400 font-semibold">
+                                {formatCurrency(point.price)}
+                              </span>
                             </div>
                             <div className="text-slate-300 text-sm mb-2">{point.description}</div>
                             <div className="flex items-center gap-2">
                               <span className="text-slate-400 text-xs">Confidence:</span>
                               <Progress value={point.confidence * 100} className="w-16 h-1" />
-                              <span className="text-white text-xs">{(point.confidence * 100).toFixed(0)}%</span>
+                              <span className="text-white text-xs">
+                                {(point.confidence * 100).toFixed(0)}%
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -746,16 +812,23 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                       </h4>
                       <div className="space-y-3">
                         {stockAnalysis.entryExitPoints.exit.map((point, index) => (
-                          <div key={index} className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
+                          <div
+                            key={index}
+                            className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"
+                          >
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-white font-medium">{point.type}</span>
-                              <span className="text-red-400 font-semibold">{formatCurrency(point.price)}</span>
+                              <span className="text-red-400 font-semibold">
+                                {formatCurrency(point.price)}
+                              </span>
                             </div>
                             <div className="text-slate-300 text-sm mb-2">{point.description}</div>
                             <div className="flex items-center gap-2">
                               <span className="text-slate-400 text-xs">Confidence:</span>
                               <Progress value={point.confidence * 100} className="w-16 h-1" />
-                              <span className="text-white text-xs">{(point.confidence * 100).toFixed(0)}%</span>
+                              <span className="text-white text-xs">
+                                {(point.confidence * 100).toFixed(0)}%
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -765,7 +838,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
 
                   <div className="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
                     <h4 className="text-white font-semibold mb-2">AI Recommendation:</h4>
-                    <p className="text-slate-300 text-sm">{stockAnalysis.entryExitPoints.recommendation}</p>
+                    <p className="text-slate-300 text-sm">
+                      {stockAnalysis.entryExitPoints.recommendation}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -842,7 +917,9 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
                   </div>
 
                   <div className="mt-4 text-center">
-                    <div className="text-slate-400 text-sm">Timeframe: {stockAnalysis.priceTargets.timeframe}</div>
+                    <div className="text-slate-400 text-sm">
+                      Timeframe: {stockAnalysis.priceTargets.timeframe}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -864,13 +941,13 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {allStocks.map((stock) => (
+                {allStocks.map(stock => (
                   <div
                     key={stock.symbol}
                     className="p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer"
                     onClick={() => {
-                      setSelectedStock(stock.symbol)
-                      setActiveTab("analysis")
+                      setSelectedStock(stock.symbol);
+                      setActiveTab('analysis');
                     }}
                   >
                     <div className="flex items-center justify-between">
@@ -884,30 +961,40 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
 
                       <div className="flex items-center gap-6">
                         <div className="text-right">
-                          <div className="text-white font-semibold">{formatCurrency(stock.currentPrice)}</div>
-                          <div className={`text-sm ${stock.performance?.day > 0 ? "text-green-400" : "text-red-400"}`}>
-                            {stock.performance?.day > 0 ? "+" : ""}
+                          <div className="text-white font-semibold">
+                            {formatCurrency(stock.currentPrice)}
+                          </div>
+                          <div
+                            className={`text-sm ${stock.performance?.day > 0 ? 'text-green-400' : 'text-red-400'}`}
+                          >
+                            {stock.performance?.day > 0 ? '+' : ''}
                             {stock.performance?.day?.toFixed(2)}%
                           </div>
                         </div>
 
                         <div className="text-center">
-                          <div className={`text-2xl font-bold ${getScoreColor(stock.buyScore.overall)}`}>
+                          <div
+                            className={`text-2xl font-bold ${getScoreColor(stock.buyScore.overall)}`}
+                          >
                             {stock.buyScore.overall}
                           </div>
-                          <Badge className={getScoreBadgeColor(stock.buyScore.overall)}>{stock.buyScore.rating}</Badge>
+                          <Badge className={getScoreBadgeColor(stock.buyScore.overall)}>
+                            {stock.buyScore.rating}
+                          </Badge>
                         </div>
 
                         <div className="text-center">
                           {getMarketIcon(stock.marketClassification.classification)}
                           <div className="text-slate-400 text-xs mt-1">
-                            {stock.marketClassification.classification.split(" ")[0]}
+                            {stock.marketClassification.classification.split(' ')[0]}
                           </div>
                         </div>
 
                         <div className="text-center">
                           <Volume2 className="h-5 w-5 text-blue-400 mx-auto" />
-                          <div className="text-white text-sm">{formatVolume(stock.volume?.currentVolume || 0)}</div>
+                          <div className="text-white text-sm">
+                            {formatVolume(stock.volume?.currentVolume || 0)}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -919,5 +1006,5 @@ export default function AITradingAdvisor({ className = "" }: AITradingAdvisorPro
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
