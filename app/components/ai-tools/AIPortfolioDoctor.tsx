@@ -2,9 +2,16 @@
 
 import { useState } from 'react';
 
+interface Diagnosis {
+  risk: string;
+  diversification: string;
+  aiNote: string;
+  suggestions: string[];
+}
+
 export default function AIPortfolioDoctor() {
   const [loading, setLoading] = useState(false);
-  const [diagnosis, setDiagnosis] = useState<any>(null);
+  const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
 
   // Placeholder: Replace with real AI API call
   const runDoctor = () => {

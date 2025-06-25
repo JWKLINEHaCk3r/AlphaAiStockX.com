@@ -1,10 +1,5 @@
 'use client';
-import {
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card } from '@/components/ui/button';
 import { Card } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

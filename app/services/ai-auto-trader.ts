@@ -3,6 +3,9 @@
 // Replace mock logic with real API calls and trading logic for production.
 
 import axios from 'axios'; // Uncomment and configure for real API use
+// import { AITradeBot, AITradeBotConfig } from './ai-trading-engine';
+import { AITradingEngine } from './ai-trading-engine';
+import type { MarketData, TradeResult } from '../services/types';
 
 // Add support for real data providers (Alpha Vantage, IEX Cloud, Polygon.io)
 // You can set your API key here for future upgrades
@@ -138,4 +141,25 @@ export async function getIEXCloudPrice({ symbol }: { symbol: string }): Promise<
     throw new Error('Invalid response from IEX Cloud');
   }
   return response.data.latestPrice;
+}
+
+export class AutoTraderService {
+  private bot: AITradingEngine;
+
+  constructor() {
+    this.bot = new AITradingEngine();
+  }
+
+  async run(_marketData: MarketData): Promise<TradeResult[]> {
+    // Implement your trading logic here using AITradingEngine methods
+    // For now, just return an empty array as a placeholder
+    return [];
+  }
+
+  getPerformance() {
+    // Implement performance tracking logic if needed
+    return {};
+  }
+
+  // Future: add multi-bot, user session, and advanced analytics support
 }

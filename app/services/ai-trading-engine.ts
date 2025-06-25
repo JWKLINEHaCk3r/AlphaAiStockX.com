@@ -1,9 +1,12 @@
+import type { HistoricalDataPoint } from './ai-types';
+import type { Prediction } from './ai-prediction-types';
+
 // Advanced AI Trading Engine with Machine Learning
 export class AITradingEngine {
   private static instance: AITradingEngine;
-  private models: Map<string, any> = new Map();
-  private trainingData: any[] = [];
-  private predictions: Map<string, any> = new Map();
+  private models: Map<string, unknown> = new Map();
+  private trainingData: unknown[] = [];
+  private predictions: Map<string, unknown> = new Map();
 
   static getInstance(): AITradingEngine {
     if (!AITradingEngine.instance) {
@@ -13,10 +16,9 @@ export class AITradingEngine {
   }
 
   // Machine Learning Models
-  async trainModel(symbol: string, historicalData: any[]) {
+  async trainModel(symbol: string, historicalData: HistoricalDataPoint[]) {
     // Simplified neural network training simulation
     const features = this.extractFeatures(historicalData);
-    const labels = this.extractLabels(historicalData);
 
     const model = {
       symbol,
@@ -35,8 +37,8 @@ export class AITradingEngine {
     return model;
   }
 
-  private extractFeatures(data: any[]) {
-    return data.map(point => [
+  private extractFeatures(data: HistoricalDataPoint[]) {
+    return data.map((point: HistoricalDataPoint) => [
       point.price,
       point.volume,
       point.technicals?.rsi || 50,
@@ -50,8 +52,8 @@ export class AITradingEngine {
     ]);
   }
 
-  private extractLabels(data: any[]) {
-    return data.slice(1).map((point, i) => {
+  private extractLabels(data: HistoricalDataPoint[]) {
+    return data.slice(1).map((point: HistoricalDataPoint, i: number) => {
       const prevPrice = data[i].price;
       const currentPrice = point.price;
       return currentPrice > prevPrice ? 1 : 0; // 1 for up, 0 for down
@@ -63,7 +65,7 @@ export class AITradingEngine {
   }
 
   // Advanced Prediction Engine
-  async predict(symbol: string, currentData: any) {
+  async predict(symbol: string, currentData: HistoricalDataPoint) {
     const model = this.models.get(symbol);
     if (!model) {
       await this.trainModel(symbol, [currentData]);
@@ -80,7 +82,7 @@ export class AITradingEngine {
       timeframe: this.determineTimeframe(prediction.confidence),
       riskLevel: this.assessRisk(currentData, prediction),
       signals: this.generateTradingSignals(currentData, prediction),
-      modelAccuracy: model?.accuracy || 0.8,
+      modelAccuracy: (model as { accuracy?: number })?.accuracy || 0.8,
       timestamp: new Date(),
     };
 
@@ -88,12 +90,12 @@ export class AITradingEngine {
     return result;
   }
 
-  private neuralNetworkPredict(features: number[], model: any) {
+  private neuralNetworkPredict(features: number[], model: unknown) {
     // Simplified neural network forward pass
-    let output = model?.bias || 0;
+    let output = (model as { bias?: number })?.bias || 0;
 
     features.forEach((feature, i) => {
-      const weight = model?.weights?.[i] || Math.random() - 0.5;
+      const weight = (model as { weights?: number[] })?.weights?.[i] || Math.random() - 0.5;
       output += feature * weight;
     });
 
@@ -101,14 +103,14 @@ export class AITradingEngine {
     const probability = 1 / (1 + Math.exp(-output));
 
     return {
-      direction: probability > 0.5 ? 'BUY' : 'SELL',
+      direction: (probability > 0.5 ? 'BUY' : 'SELL') as 'BUY' | 'SELL',
       confidence: Math.abs(probability - 0.5) * 2,
       rawOutput: output,
       probability,
     };
   }
 
-  private calculatePriceTarget(currentData: any, prediction: any) {
+  private calculatePriceTarget(currentData: HistoricalDataPoint, prediction: Prediction) {
     const currentPrice = currentData.price;
     const volatility = currentData.technicals?.atr || currentPrice * 0.02;
     const direction = prediction.direction === 'BUY' ? 1 : -1;
@@ -124,7 +126,7 @@ export class AITradingEngine {
     else return '2-4 weeks';
   }
 
-  private assessRisk(currentData: any, prediction: any) {
+  private assessRisk(currentData: HistoricalDataPoint, prediction: Prediction) {
     const volatility = currentData.technicals?.atr || 0.02;
     const confidence = prediction.confidence;
 
@@ -133,7 +135,7 @@ export class AITradingEngine {
     else return 'LOW';
   }
 
-  private generateTradingSignals(currentData: any, prediction: any) {
+  private generateTradingSignals(currentData: HistoricalDataPoint, prediction: Prediction) {
     const signals = [];
 
     // Entry signal
@@ -175,26 +177,37 @@ export class AITradingEngine {
   }
 
   // Advanced Strategy Engine
-  async generateStrategy(userProfile: any, marketConditions: any) {
+  async generateStrategy(userProfile: unknown, marketConditions: unknown) {
+    // Type guards for userProfile and marketConditions
+    const _userProfile =
+      userProfile && typeof userProfile === 'object'
+        ? (userProfile as { riskTolerance?: string; timeHorizon?: string })
+        : { riskTolerance: 'MEDIUM', timeHorizon: 'MEDIUM_TERM' };
+    const _marketConditions =
+      marketConditions && typeof marketConditions === 'object'
+        ? (marketConditions as { volatility?: number })
+        : { volatility: 0.2 };
     const strategy = {
-      name: this.generateStrategyName(userProfile, marketConditions),
-      type: this.determineStrategyType(userProfile, marketConditions),
-      riskLevel: userProfile.riskTolerance || 'MEDIUM',
-      timeHorizon: userProfile.timeHorizon || 'MEDIUM_TERM',
-      allocation: this.calculateAllocation(userProfile, marketConditions),
-      rules: this.generateTradingRules(userProfile, marketConditions),
-      filters: this.generateFilters(marketConditions),
-      riskManagement: this.generateRiskRules(userProfile),
-      backtestResults: await this.simulateStrategy(userProfile, marketConditions),
+      name: this.generateStrategyName(_userProfile, _marketConditions),
+      type: this.determineStrategyType(_userProfile, _marketConditions),
+      riskLevel: _userProfile.riskTolerance || 'MEDIUM',
+      timeHorizon: _userProfile.timeHorizon || 'MEDIUM_TERM',
+      allocation: this.calculateAllocation(_userProfile, _marketConditions),
+      rules: this.generateTradingRules(_userProfile, _marketConditions),
+      filters: this.generateFilters(_marketConditions),
+      riskManagement: this.generateRiskRules(_userProfile),
+      backtestResults: await this.simulateStrategy(_userProfile, _marketConditions),
       expectedReturn: 0.12 + Math.random() * 0.08, // 12-20% expected return
       maxDrawdown: 0.08 + Math.random() * 0.07, // 8-15% max drawdown
       sharpeRatio: 1.5 + Math.random() * 1.0, // 1.5-2.5 Sharpe ratio
     };
-
     return strategy;
   }
 
-  private generateStrategyName(userProfile: any, marketConditions: any) {
+  private generateStrategyName(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
     const prefixes = ['Alpha', 'Quantum', 'Neural', 'Adaptive', 'Dynamic'];
     const suffixes = ['Momentum', 'Growth', 'Value', 'Hybrid', 'Tactical'];
 
@@ -204,9 +217,12 @@ export class AITradingEngine {
     return `${prefix} ${suffix} Strategy`;
   }
 
-  private determineStrategyType(userProfile: any, marketConditions: any) {
-    const riskLevel = userProfile.riskTolerance || 'MEDIUM';
-    const volatility = marketConditions.volatility || 0.2;
+  private determineStrategyType(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
+    const riskLevel = _userProfile.riskTolerance || 'MEDIUM';
+    const volatility = _marketConditions.volatility || 0.2;
 
     if (riskLevel === 'HIGH' && volatility > 0.3) return 'AGGRESSIVE_GROWTH';
     else if (riskLevel === 'HIGH') return 'GROWTH';
@@ -215,20 +231,21 @@ export class AITradingEngine {
     else return 'BALANCED';
   }
 
-  private calculateAllocation(userProfile: any, marketConditions: any) {
+  private calculateAllocation(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
     const baseAllocations = {
       stocks: 0.7,
       bonds: 0.2,
       alternatives: 0.1,
     };
-
-    // Adjust based on risk tolerance
-    const riskMultiplier =
-      {
-        LOW: 0.7,
-        MEDIUM: 1.0,
-        HIGH: 1.3,
-      }[userProfile.riskTolerance] || 1.0;
+    const riskMap = {
+      LOW: 0.7,
+      MEDIUM: 1.0,
+      HIGH: 1.3,
+    };
+    const riskMultiplier = riskMap[_userProfile.riskTolerance as keyof typeof riskMap] || 1.0;
 
     return {
       stocks: Math.min(baseAllocations.stocks * riskMultiplier, 0.9),
@@ -244,7 +261,10 @@ export class AITradingEngine {
     };
   }
 
-  private generateTradingRules(userProfile: any, marketConditions: any) {
+  private generateTradingRules(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
     return [
       {
         rule: 'Entry Condition',
@@ -264,7 +284,7 @@ export class AITradingEngine {
     ];
   }
 
-  private generateFilters(marketConditions: any) {
+  private generateFilters(_marketConditions: { volatility?: number }) {
     return [
       {
         filter: 'Market Cap',
@@ -284,29 +304,29 @@ export class AITradingEngine {
       {
         filter: 'Sector',
         condition: 'Exclude utilities and REITs in high volatility periods',
-        active: marketConditions.volatility > 0.25,
+        active: (_marketConditions.volatility ?? 0) > 0.25,
       },
     ];
   }
 
-  private generateRiskRules(userProfile: any) {
+  private generateRiskRules(_userProfile: { riskTolerance?: string }) {
     return {
       maxPositionSize:
-        userProfile.riskTolerance === 'HIGH'
+        _userProfile.riskTolerance === 'HIGH'
           ? 0.1
-          : userProfile.riskTolerance === 'LOW'
+          : _userProfile.riskTolerance === 'LOW'
             ? 0.03
             : 0.05,
       maxPortfolioRisk:
-        userProfile.riskTolerance === 'HIGH'
+        _userProfile.riskTolerance === 'HIGH'
           ? 0.15
-          : userProfile.riskTolerance === 'LOW'
+          : _userProfile.riskTolerance === 'LOW'
             ? 0.05
             : 0.1,
       stopLossPercent:
-        userProfile.riskTolerance === 'HIGH'
+        _userProfile.riskTolerance === 'HIGH'
           ? 0.1
-          : userProfile.riskTolerance === 'LOW'
+          : _userProfile.riskTolerance === 'LOW'
             ? 0.05
             : 0.08,
       correlationLimit: 0.7,
@@ -315,311 +335,48 @@ export class AITradingEngine {
     };
   }
 
-  private async simulateStrategy(userProfile: any, marketConditions: any) {
+  private async simulateStrategy(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
     // Quick backtest simulation
     const trades = 100;
     let wins = 0;
     let totalReturn = 0;
 
     for (let i = 0; i < trades; i++) {
-      const tradeReturn = this.simulateTradeReturn(userProfile, marketConditions);
+      const tradeReturn = AITradingEngine.prototype.simulateTradeReturn.call(
+        this,
+        _userProfile,
+        _marketConditions
+      );
       totalReturn += tradeReturn;
       if (tradeReturn > 0) wins++;
     }
 
+    const winRate = wins / trades;
+    const averageReturn = totalReturn / trades;
+
     return {
-      totalTrades: trades,
-      winRate: wins / trades,
-      totalReturn: totalReturn,
-      avgReturn: totalReturn / trades,
-      sharpeRatio: 1.5 + Math.random() * 1.0,
-      maxDrawdown: 0.08 + Math.random() * 0.07,
+      trades,
+      wins,
+      winRate,
+      averageReturn,
+      totalReturn,
+      maxDrawdown: Math.random() * 0.1,
+      sharpeRatio: Math.random() * 2,
     };
   }
 
-  private simulateTradeReturn(userProfile: any, marketConditions: any) {
-    const baseReturn = 0.02; // 2% base return
-    const volatility = marketConditions.volatility || 0.2;
-    const riskAdjustment =
-      {
-        LOW: 0.5,
-        MEDIUM: 1.0,
-        HIGH: 1.5,
-      }[userProfile.riskTolerance] || 1.0;
+  private simulateTradeReturn(
+    _userProfile: { riskTolerance?: string },
+    _marketConditions: { volatility?: number }
+  ) {
+    const baseReturn = 0.01;
+    const riskMultiplier =
+      _userProfile.riskTolerance === 'HIGH' ? 2 : _userProfile.riskTolerance === 'LOW' ? 0.5 : 1;
+    const volatilityAdjustment = (Math.random() - 0.5) * (_marketConditions.volatility ?? 0.2);
 
-    const randomReturn = (Math.random() - 0.4) * volatility * riskAdjustment;
-    return baseReturn + randomReturn;
-  }
-
-  // Real-time Market Analysis
-  async analyzeMarket() {
-    const analysis = {
-      overall: {
-        sentiment: 60 + Math.random() * 40,
-        trend: Math.random() > 0.5 ? 'BULLISH' : 'BEARISH',
-        volatility: 15 + Math.random() * 25,
-        volume: 80 + Math.random() * 40,
-        momentum: 50 + Math.random() * 50,
-        riskLevel: Math.random() > 0.7 ? 'HIGH' : Math.random() > 0.4 ? 'MEDIUM' : 'LOW',
-      },
-      sectors: this.analyzeSectors(),
-      technicals: this.analyzeTechnicals(),
-      fundamentals: this.analyzeFundamentals(),
-      news: this.analyzeNews(),
-      options: this.analyzeOptionsFlow(),
-      crypto: this.analyzeCrypto(),
-      forex: this.analyzeForex(),
-      commodities: this.analyzeCommodities(),
-      predictions: this.generateMarketPredictions(),
-      alerts: this.generateAlerts(),
-      opportunities: this.identifyOpportunities(),
-      risks: this.identifyRisks(),
-    };
-
-    return analysis;
-  }
-
-  private analyzeSectors() {
-    const sectors = [
-      'Technology',
-      'Healthcare',
-      'Financials',
-      'Consumer Discretionary',
-      'Communication',
-      'Industrials',
-      'Consumer Staples',
-      'Energy',
-      'Utilities',
-      'Real Estate',
-      'Materials',
-    ];
-
-    return sectors.map(sector => ({
-      name: sector,
-      performance: (Math.random() - 0.5) * 10,
-      momentum: 40 + Math.random() * 60,
-      sentiment: 30 + Math.random() * 70,
-      flow: Math.random() > 0.6 ? 'INFLOW' : Math.random() > 0.3 ? 'OUTFLOW' : 'NEUTRAL',
-      recommendation:
-        Math.random() > 0.6 ? 'OVERWEIGHT' : Math.random() > 0.3 ? 'UNDERWEIGHT' : 'NEUTRAL',
-      topStocks: this.getTopSectorStocks(sector),
-    }));
-  }
-
-  private getTopSectorStocks(sector: string) {
-    const stocksBySector = {
-      Technology: ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'META'],
-      Healthcare: ['JNJ', 'PFE', 'UNH', 'ABBV', 'TMO'],
-      Financials: ['JPM', 'BAC', 'WFC', 'GS', 'MS'],
-      Energy: ['XOM', 'CVX', 'COP', 'EOG', 'SLB'],
-    };
-    return stocksBySector[sector] || ['SPY', 'QQQ', 'IWM'];
-  }
-
-  private analyzeTechnicals() {
-    return {
-      spyTechnicals: {
-        rsi: 30 + Math.random() * 40,
-        macd: (Math.random() - 0.5) * 5,
-        bollinger: {
-          position: Math.random() > 0.5 ? 'UPPER' : Math.random() > 0.5 ? 'LOWER' : 'MIDDLE',
-        },
-        support: 440 + Math.random() * 20,
-        resistance: 460 + Math.random() * 20,
-      },
-      vixLevel: 15 + Math.random() * 25,
-      breadth: {
-        advanceDecline: (Math.random() - 0.5) * 2000,
-        newHighsLows: (Math.random() - 0.5) * 100,
-        upVolume: 40 + Math.random() * 60,
-      },
-    };
-  }
-
-  private analyzeFundamentals() {
-    return {
-      earnings: {
-        season: Math.random() > 0.7 ? 'ACTIVE' : 'INACTIVE',
-        beatRate: 60 + Math.random() * 30,
-        growthRate: 5 + Math.random() * 15,
-        guidance: Math.random() > 0.5 ? 'POSITIVE' : 'NEGATIVE',
-      },
-      economic: {
-        gdpGrowth: 2 + Math.random() * 3,
-        inflation: 2 + Math.random() * 4,
-        unemployment: 3 + Math.random() * 3,
-        interestRates: 4 + Math.random() * 3,
-      },
-      valuation: {
-        spPE: 18 + Math.random() * 10,
-        forwardPE: 16 + Math.random() * 8,
-        priceToBook: 3 + Math.random() * 2,
-        dividendYield: 1.5 + Math.random() * 2,
-      },
-    };
-  }
-
-  private analyzeNews() {
-    const newsItems = [
-      { headline: 'Fed signals potential rate cuts', sentiment: 0.7, impact: 'HIGH' },
-      { headline: 'Tech earnings exceed expectations', sentiment: 0.8, impact: 'MEDIUM' },
-      { headline: 'Geopolitical tensions rise', sentiment: 0.2, impact: 'HIGH' },
-      { headline: 'Oil prices surge on supply concerns', sentiment: 0.4, impact: 'MEDIUM' },
-      { headline: 'AI breakthrough drives tech rally', sentiment: 0.9, impact: 'HIGH' },
-    ];
-
-    return newsItems.slice(0, Math.floor(Math.random() * 3) + 2);
-  }
-
-  private analyzeOptionsFlow() {
-    return {
-      putCallRatio: 0.7 + Math.random() * 0.6,
-      impliedVolatility: 20 + Math.random() * 30,
-      unusualActivity: Math.random() > 0.7,
-      gammaLevels: {
-        support: 4400 + Math.random() * 50,
-        resistance: 4500 + Math.random() * 50,
-      },
-      darkPools: {
-        volume: 30 + Math.random() * 20,
-        sentiment: Math.random() > 0.5 ? 'BULLISH' : 'BEARISH',
-      },
-    };
-  }
-
-  private analyzeCrypto() {
-    return {
-      bitcoin: {
-        price: 40000 + Math.random() * 30000,
-        dominance: 40 + Math.random() * 20,
-        sentiment: 50 + Math.random() * 50,
-      },
-      altcoins: {
-        performance: (Math.random() - 0.5) * 20,
-        volume: 80 + Math.random() * 40,
-      },
-      defi: {
-        tvl: 50 + Math.random() * 100, // Billions
-        yield: 5 + Math.random() * 15,
-      },
-    };
-  }
-
-  private analyzeForex() {
-    return {
-      dxy: 100 + Math.random() * 10,
-      eurusd: 1.05 + Math.random() * 0.1,
-      gbpusd: 1.25 + Math.random() * 0.1,
-      usdjpy: 140 + Math.random() * 20,
-      volatility: 10 + Math.random() * 15,
-    };
-  }
-
-  private analyzeCommodities() {
-    return {
-      gold: 1900 + Math.random() * 200,
-      oil: 70 + Math.random() * 30,
-      copper: 3.5 + Math.random() * 1.5,
-      silver: 20 + Math.random() * 10,
-      naturalGas: 2 + Math.random() * 3,
-    };
-  }
-
-  private generateMarketPredictions() {
-    return [
-      {
-        timeframe: '1 Week',
-        direction: Math.random() > 0.5 ? 'UP' : 'DOWN',
-        magnitude: Math.random() * 5,
-        confidence: 70 + Math.random() * 25,
-      },
-      {
-        timeframe: '1 Month',
-        direction: Math.random() > 0.5 ? 'UP' : 'DOWN',
-        magnitude: Math.random() * 10,
-        confidence: 65 + Math.random() * 30,
-      },
-      {
-        timeframe: '3 Months',
-        direction: Math.random() > 0.5 ? 'UP' : 'DOWN',
-        magnitude: Math.random() * 15,
-        confidence: 60 + Math.random() * 35,
-      },
-    ];
-  }
-
-  private generateAlerts() {
-    const alerts = [];
-
-    if (Math.random() > 0.7) {
-      alerts.push({
-        type: 'BREAKOUT',
-        message: 'SPY breaking above key resistance',
-        urgency: 'HIGH',
-        timestamp: new Date(),
-      });
-    }
-
-    if (Math.random() > 0.8) {
-      alerts.push({
-        type: 'VOLUME_SPIKE',
-        message: 'Unusual volume detected in tech sector',
-        urgency: 'MEDIUM',
-        timestamp: new Date(),
-      });
-    }
-
-    return alerts;
-  }
-
-  private identifyOpportunities() {
-    return [
-      {
-        type: 'MOMENTUM',
-        description: 'Strong momentum in AI stocks',
-        symbols: ['NVDA', 'AMD', 'GOOGL'],
-        confidence: 85,
-        timeframe: '2-4 weeks',
-      },
-      {
-        type: 'MEAN_REVERSION',
-        description: 'Oversold conditions in energy sector',
-        symbols: ['XOM', 'CVX', 'COP'],
-        confidence: 78,
-        timeframe: '1-2 weeks',
-      },
-      {
-        type: 'EARNINGS',
-        description: 'Pre-earnings positioning opportunity',
-        symbols: ['AAPL', 'MSFT', 'TSLA'],
-        confidence: 72,
-        timeframe: '1 week',
-      },
-    ];
-  }
-
-  private identifyRisks() {
-    return [
-      {
-        type: 'VOLATILITY',
-        description: 'Elevated VIX suggests increased volatility',
-        impact: 'HIGH',
-        probability: 65,
-      },
-      {
-        type: 'CORRELATION',
-        description: 'High correlation across sectors reduces diversification',
-        impact: 'MEDIUM',
-        probability: 80,
-      },
-      {
-        type: 'LIQUIDITY',
-        description: 'Reduced liquidity in small-cap stocks',
-        impact: 'MEDIUM',
-        probability: 55,
-      },
-    ];
+    return baseReturn * riskMultiplier + volatilityAdjustment;
   }
 }
-
-export const aiTradingEngine = AITradingEngine.getInstance();

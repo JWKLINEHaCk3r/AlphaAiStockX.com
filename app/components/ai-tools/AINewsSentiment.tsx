@@ -2,9 +2,16 @@
 
 import { useState } from 'react';
 
+interface NewsItem {
+  headline: string;
+  impact: string;
+  sentiment: string;
+  aiNote: string;
+}
+
 export default function AINewsSentiment() {
   const [loading, setLoading] = useState(false);
-  const [news, setNews] = useState<any[]>([]);
+  const [news, setNews] = useState<NewsItem[]>([]);
 
   // Placeholder: Replace with real AI API call
   const fetchNews = () => {
@@ -45,7 +52,7 @@ export default function AINewsSentiment() {
       </button>
       {news.length > 0 && (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {news.map((n, i) => (
+          {news.map((n: NewsItem, i) => (
             <div key={i} className="futuristic-card p-4 animated-neon-border">
               <div className="text-lg font-bold neon-text mb-1">{n.headline}</div>
               <div className="text-emerald-300 font-bold">Impact: {n.impact}</div>

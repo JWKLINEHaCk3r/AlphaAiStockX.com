@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import { Brain, BarChart3, Zap, TrendingUp, Shield, Atom, Infinity, Sparkles } from 'lucide-react';
 
@@ -341,11 +341,11 @@ export default function AlphaAIStockX() {
                     </div>
                   </div>
                 </CardContent>
-                <CardContent className="p-4 sm:p-6">
+                <CardFooter className="p-4 sm:p-6">
                   <Button variant="outline" className="w-full">
                     Learn More
                   </Button>
-                </CardContent>
+                </CardFooter>
               </Card>
             ))}
           </div>

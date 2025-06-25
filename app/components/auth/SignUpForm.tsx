@@ -1,12 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card } from '@/components/ui/button';
 import { Card } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';

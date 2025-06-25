@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
-    "check-format": "prettier --check .",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\" --ignore-path .gitignore",
+    "check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\" --ignore-path .gitignore",
     "check-lint": "eslint .",
     "check-types": "tsc --noEmit",
-    "check-all": "npm run check-format && npm run check-lint && npm run check-types"
+    "check-all": "npm run check-format && npm run check-lint && npm run check-types",
+    "docker:up": "export ALPACA_API_KEY=your_key && export ALPACA_SECRET_KEY=your_secret && docker-compose up --build"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",

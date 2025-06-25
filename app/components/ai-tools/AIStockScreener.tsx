@@ -2,9 +2,16 @@
 
 import { useState } from 'react';
 
+interface StockResult {
+  symbol: string;
+  name: string;
+  score: number;
+  aiNote: string;
+}
+
 export default function AIStockScreener() {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<StockResult[]>([]);
   const [loading, setLoading] = useState(false);
 
   // Placeholder: Replace with real AI API call
@@ -39,7 +46,8 @@ export default function AIStockScreener() {
     <div className="futuristic-card holo-shimmer p-6 mb-8">
       <h2 className="text-2xl font-bold neon-text mb-2">AI Stock Screener</h2>
       <p className="text-slate-300 mb-4">
-        Describe what you want (e.g. "AI, show me tech stocks with bullish momentum and low risk")
+        Describe what you want (e.g. &quot;AI, show me tech stocks with bullish momentum and low
+        risk&quot;)
       </p>
       <div className="flex gap-2 mb-4">
         <input
@@ -54,7 +62,7 @@ export default function AIStockScreener() {
       </div>
       {results.length > 0 && (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {results.map((r, i) => (
+          {results.map((r: StockResult, i) => (
             <div key={i} className="futuristic-card p-4 animated-neon-border">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-xl font-bold neon-text">{r.symbol}</span>

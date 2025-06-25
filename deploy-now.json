@@ -8,10 +8,6 @@
       "NEXT_PUBLIC_ALLOW_INDEXING": "true"
     },
     "node": "22.x",
-    "commands": [
-      "npm install --global pnpm",
-      "pnpm install",
-      "pnpm build"
-    ]
+    "commands": ["npm install --global pnpm", "pnpm install", "pnpm build"]
   }
 }

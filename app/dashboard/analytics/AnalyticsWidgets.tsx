@@ -4,7 +4,7 @@ import { Account } from '@/app/components/ai-tools/AIWhiteLabelBranding';
 import { getAccount } from '../../services/alpaca-service';
 import React from 'react';
 
-export default function AnalyticsWidgets() {
+export default function AnalyticsWidgets(): React.JSX.Element {
   const [account, setAccount] = React.useState<Account | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -16,8 +16,12 @@ export default function AnalyticsWidgets() {
       try {
         const acct = await getAccount();
         setAccount(acct);
-      } catch (e: any) {
-        setError(e?.message || 'Failed to load analytics');
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError('Failed to load analytics');
+        }
       } finally {
         setLoading(false);
       }

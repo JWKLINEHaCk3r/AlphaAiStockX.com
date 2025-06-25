@@ -1,88 +1,88 @@
-import { cva, type VariantProps } from "class-variance-authority"
-import * as React from "react";
-import type { Config } from "tailwindcss"
-import { dataAggregationService } from "./app/services/data-aggregation-service";
-import { marketDataService } from "./app/services/market-data-service";
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import type { Config } from 'tailwindcss';
+import { dataAggregationService } from './app/services/data-aggregation-service';
+import { marketDataService } from './app/services/market-data-service';
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+    '*.{js,ts,jsx,tsx,mdx}',
   ],
-  prefix: "",
+  prefix: '',
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [require('tailwindcss-animate')],
+} satisfies Config;
 
-export default config
+export default config;
 export const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
@@ -107,7 +107,8 @@ export const buttonVariants = cva(
       size: 'default',
     },
   }
-);declare global {
+);
+declare global {
   interface Window {
     SpeechRecognition: any;
     webkitSpeechRecognition: any;
@@ -116,9 +117,10 @@ export const buttonVariants = cva(
 
 export { Button, buttonVariants };
 export interface ButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-    asChild?: boolean;
-  }
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 export class AIBrainService {
   /**
    * Holds the singleton instance of the {@link AIBrainService}.
@@ -511,7 +513,8 @@ export class AIBrainService {
     const decisionTreeWeight = 0.4;
 
     // Combine confidence scores
-    const combinedConfidence = neuralPrediction.confidence * neuralWeight +
+    const combinedConfidence =
+      neuralPrediction.confidence * neuralWeight +
       decisionTreeResult.confidence * decisionTreeWeight;
 
     // Determine final action
@@ -769,7 +772,6 @@ export class AIBrainService {
     const riskLevel = data.marketOverview.riskLevel;
 
     let baseSize = confidence * 0.05; // Base 5% max position
-
 
     // Adjust for volatility
     if (volatility > 0.3) baseSize *= 0.7;
@@ -1078,7 +1080,8 @@ export class AIBrainService {
   private calculateOverallSentiment(recommendations: any[]) {
     const buyCount = recommendations.filter(r => r.action === 'BUY').length;
     const sellCount = recommendations.filter(r => r.action === 'SELL').length;
-    const avgConfidence = recommendations.reduce((sum, r) => sum + r.confidence, 0) / recommendations.length;
+    const avgConfidence =
+      recommendations.reduce((sum, r) => sum + r.confidence, 0) / recommendations.length;
 
     return {
       direction: buyCount > sellCount ? 'BULLISH' : sellCount > buyCount ? 'BEARISH' : 'NEUTRAL',
@@ -1090,10 +1093,11 @@ export class AIBrainService {
   }
 
   private calculateOverallRisk(recommendations: any[]) {
-    const avgRisk = recommendations.reduce((sum, r) => {
-      const riskScore = r.riskFactors.length / 10; // Normalize risk factors
-      return sum + riskScore;
-    }, 0) / recommendations.length;
+    const avgRisk =
+      recommendations.reduce((sum, r) => {
+        const riskScore = r.riskFactors.length / 10; // Normalize risk factors
+        return sum + riskScore;
+      }, 0) / recommendations.length;
 
     if (avgRisk > 0.7) return 'HIGH';
     if (avgRisk > 0.4) return 'MEDIUM';
@@ -1114,4 +1118,3 @@ export class AIBrainService {
       }));
   }
 }
-

@@ -955,7 +955,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: string;
   size?: string;
   asChild?: boolean;
-}// Removed unused MarketHeatmap import (not used in JSX)
+} // Removed unused MarketHeatmap import (not used in JSX)
 // const MarketHeatmap = dynamic(() => import('@/app/components/MarketHeatmap'), { ssr: false });
 export const AIWhiteLabelBranding = dynamic(
   () => import('@/app/components/ai-tools/AIWhiteLabelBranding'),
@@ -963,4 +963,3 @@ export const AIWhiteLabelBranding = dynamic(
     ssr: false,
   }
 );
-

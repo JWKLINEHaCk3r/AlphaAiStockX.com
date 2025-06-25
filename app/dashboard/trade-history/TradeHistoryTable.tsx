@@ -3,9 +3,17 @@
 import { getPositions } from '../../services/alpaca-service';
 import React from 'react';
 
+type Position = {
+  symbol: string;
+  qty: number;
+  avg_entry_price: number;
+  market_value: number;
+  unrealized_pl: number;
+};
+
 export default function TradeHistoryTable() {
-  const [positions, setPositions] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  const [positions, setPositions] = React.useState<Position[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -15,8 +23,12 @@ export default function TradeHistoryTable() {
       try {
         const pos = await getPositions();
         setPositions(pos);
-      } catch (e: any) {
-        setError(e?.message || 'Failed to load trade history');
+      } catch (e: unknown) {
+        if (e && typeof e === 'object' && 'message' in e) {
+          setError((e as { message?: string }).message || 'Failed to load trade history');
+        } else {
+          setError('Failed to load trade history');
+        }
       } finally {
         setLoading(false);
       }

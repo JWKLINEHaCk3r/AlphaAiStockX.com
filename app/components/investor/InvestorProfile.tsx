@@ -1,11 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -27,6 +23,7 @@ import {
 } from 'lucide-react';
 import AdvancedAIFeatures from '../features/AdvancedAIFeatures';
 import ComplianceCenter from '../compliance/ComplianceCenter';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 interface InvestorProfileProps {
   onSwitchToOwner?: () => void;
@@ -37,15 +34,6 @@ export default function InvestorProfile({
   onSwitchToOwner,
   onSwitchToAdmin,
 }: InvestorProfileProps) {
-  const [activeDemo, setActiveDemo] = useState('quantum-ai');
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const runDemo = (demoType: string) => {
-    setActiveDemo(demoType);
-    setIsProcessing(true);
-    setTimeout(() => setIsProcessing(false), 3000);
-  };
-
   const aiMetrics = {
     accuracy: 94.7,
     processing: 2847392,
@@ -185,13 +173,13 @@ export default function InvestorProfile({
         <TabsContent value="portfolio">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <PieChart className="h-5 w-5 mr-2 text-purple-400" />
                   AI-Optimized Portfolio
                 </CardTitle>
                 <CardDescription>Real-time AI analysis and optimization</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-4">
                   {portfolioData.map(stock => (
@@ -231,13 +219,13 @@ export default function InvestorProfile({
             </Card>
 
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <BarChart3 className="h-5 w-5 mr-2 text-green-400" />
                   Performance Analytics
                 </CardTitle>
                 <CardDescription>AI-driven performance insights</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-6">
                   <div>
@@ -283,13 +271,13 @@ export default function InvestorProfile({
         <TabsContent value="trading">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card className="lg:col-span-2 bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <Zap className="h-5 w-5 mr-2 text-yellow-400" />
                   Ultra-Fast Trading Engine
                 </CardTitle>
                 <CardDescription>Quantum-speed execution with AI optimization</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-6">
                   <div className="grid grid-cols-3 gap-4">
@@ -312,21 +300,11 @@ export default function InvestorProfile({
 
                   <div className="space-y-3">
                     <Button
-                      onClick={() => runDemo('quantum-trading')}
+                      onClick={void 0}
                       className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
-                      disabled={isProcessing}
                     >
-                      {isProcessing ? (
-                        <>
-                          <Cpu className="h-4 w-4 mr-2 animate-spin" />
-                          Processing Quantum Trade...
-                        </>
-                      ) : (
-                        <>
-                          <Zap className="h-4 w-4 mr-2" />
-                          Execute Quantum Trade Demo
-                        </>
-                      )}
+                      <Zap className="h-4 w-4 mr-2" />
+                      Execute Quantum Trade Demo
                     </Button>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -345,13 +323,13 @@ export default function InvestorProfile({
             </Card>
 
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <Activity className="h-5 w-5 mr-2 text-green-400" />
                   Live Market Feed
                 </CardTitle>
                 <CardDescription>Real-time AI market analysis</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-4">
                   {[
