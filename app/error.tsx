@@ -1,10 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import Button from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { RefreshCw, AlertTriangle } from 'lucide-react';
 
 export default function Error({
@@ -29,7 +27,7 @@ export default function Error({
             Oops! Something went wrong
           </CardTitle>
           <CardDescription className="text-gray-300">
-            Our AI encountered an unexpected error. Don't worry, we're on it!
+            Our AI encountered an unexpected error. Don&apos;t worry, we&apos;re on it!
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

@@ -1,8 +1,7 @@
-import type React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { ErrorBoundary } from './components/ErrorBoundary';
+import React, { PropsWithChildren } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -106,4 +105,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
+}
+
+export function ErrorBoundary({ children }: PropsWithChildren<object>) {
+  // Simple passthrough error boundary (replace with real error handling as needed)
+  return <>{children}</>;
 }

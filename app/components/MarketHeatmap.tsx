@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardTitle, CardContent } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, BarChart3 } from 'lucide-react';
 
 export default function MarketHeatmap() {
@@ -52,12 +50,12 @@ export default function MarketHeatmap() {
 
   return (
     <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-      <CardHeader>
+      <div>
         <CardTitle className="text-white flex items-center">
           <BarChart3 className="h-6 w-6 mr-2 text-purple-400" />
           Market Heatmap
         </CardTitle>
-      </CardHeader>
+      </div>
       <CardContent>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
           {sectors.map((sector, index) => (

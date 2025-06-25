@@ -1,7 +1,11 @@
 'use client';
 
 import React from 'react';
-import { getAccount, getPositions, getLatestQuote } from '../../services/alpaca-service';
+import { getAccount, getPositions } from '../../services/alpaca-service';
+
+interface Position {
+  symbol: string;
+}
 
 export default function AITradeCopilot() {
   const [running, setRunning] = React.useState(false);
@@ -19,15 +23,16 @@ export default function AITradeCopilot() {
         // Example: fetch account and positions, simulate a trade decision
         try {
           const account = await getAccount();
-          const positions: any[] = await getPositions();
+          const positions: Position[] = await getPositions();
           setPnl(Number(account?.equity) - Number(account?.last_equity || account?.equity));
           setLog(l => [`Checked positions: ${positions.map(p => p.symbol).join(', ')}`, ...l]);
           // Simulate a trade action
           if (Math.random() > 0.7) {
             setLog(l => ['AI Bot: Simulated trade executed.', ...l]);
           }
-        } catch (e: any) {
-          setLog(l => ['Error: ' + (e?.message || e), ...l]);
+        } catch (e: unknown) {
+          const errorMsg = e instanceof Error ? e.message : String(e);
+          setLog(l => ['Error: ' + errorMsg, ...l]);
         }
       }, 5000);
     } else {

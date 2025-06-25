@@ -1,10 +1,11 @@
 'use client';
 
+import { Account } from '@/app/components/ai-tools/AIWhiteLabelBranding';
 import { getAccount } from '../../services/alpaca-service';
 import React from 'react';
 
 export default function AnalyticsWidgets() {
-  const [account, setAccount] = React.useState<any>(null);
+  const [account, setAccount] = React.useState<Account | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 

@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Button } from '@/components/ui/button';
+import { Card, CardTitle, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Send, Bot, User, Sparkles } from 'lucide-react';
@@ -81,7 +79,7 @@ export default function AIChat() {
   return (
     <div className="fixed bottom-6 right-6 z-50 w-96">
       <Card className="bg-gray-900/95 border-cyan-500/30 backdrop-blur-xl shadow-2xl">
-        <CardHeader className="pb-3">
+        <div className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-white flex items-center">
               <Bot className="h-5 w-5 mr-2 text-cyan-400" />
@@ -100,7 +98,7 @@ export default function AIChat() {
               ×
             </Button>
           </div>
-        </CardHeader>
+        </div>
         <CardContent className="space-y-4">
           {/* Messages */}
           <div className="h-64 overflow-y-auto space-y-3 pr-2">
