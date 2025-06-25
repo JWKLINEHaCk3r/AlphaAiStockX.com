@@ -130,7 +130,7 @@ export class AIAutoTrader {
   }
 }
 
-export async function getIEXCloudPrice(symbol: string): Promise<number> {
+export async function getIEXCloudPrice({ symbol }: { symbol: string }): Promise<number> {
   if (!IEX_CLOUD_API_KEY) throw new Error('Missing IEX_CLOUD_API_KEY');
   const url = `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX_CLOUD_API_KEY}`;
   const response = await axios.get(url);

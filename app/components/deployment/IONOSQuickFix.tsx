@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, AlertTriangle, Globe, Upload, Settings, Shield } from 'lucide-react';
 

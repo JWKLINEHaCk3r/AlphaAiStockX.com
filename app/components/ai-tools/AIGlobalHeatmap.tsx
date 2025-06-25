@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function AIGlobalHeatmap() {
   const [loading, setLoading] = useState(false);
-  const [heatmap, setHeatmap] = useState<any[]>([]);
+  const [heatmap, setHeatmap] = useState<{ region: string; trend: string; aiNote: string }[]>([]);
 
   // Placeholder: Replace with real AI API call
   const fetchHeatmap = () => {

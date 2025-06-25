@@ -1,3 +1,6 @@
+import dynamic from 'next/dynamic';
+import * as React from 'react';
+
 // Comprehensive Data Aggregation Service - The AI Brain
 export class DataAggregationService {
   private static instance: DataAggregationService;
@@ -946,3 +949,18 @@ export class DataAggregationService {
 }
 
 export const dataAggregationService = DataAggregationService.getInstance();
+// You may need to define ButtonProps and buttonVariants here or import from the correct file
+// Example placeholder definitions:
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: string;
+  size?: string;
+  asChild?: boolean;
+}// Removed unused MarketHeatmap import (not used in JSX)
+// const MarketHeatmap = dynamic(() => import('@/app/components/MarketHeatmap'), { ssr: false });
+export const AIWhiteLabelBranding = dynamic(
+  () => import('@/app/components/ai-tools/AIWhiteLabelBranding'),
+  {
+    ssr: false,
+  }
+);
+
