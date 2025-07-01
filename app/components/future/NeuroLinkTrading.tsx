@@ -1,15 +1,30 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Switch } from "@/components/ui/switch"
-import { Brain, Zap, Activity, Waves, Eye, Cpu, Heart, Target, Lightbulb, Sparkles, Gauge, Radio } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Switch } from '@/components/ui/switch';
+import {
+  Brain,
+  Zap,
+  Activity,
+  Waves,
+  Eye,
+  Cpu,
+  Heart,
+  Target,
+  Lightbulb,
+  Sparkles,
+  Gauge,
+  Radio,
+} from 'lucide-react';
 
 export default function NeuroLinkTrading() {
   const [neuroData, setNeuroData] = useState({
-    connectionStatus: "Connected",
+    connectionStatus: 'Connected',
     signalStrength: 94.7 + Math.random() * 5,
     brainwaveActivity: {
       alpha: 67 + Math.random() * 10,
@@ -32,35 +47,35 @@ export default function NeuroLinkTrading() {
     },
     neuralPatterns: [
       {
-        pattern: "Bull Market Recognition",
+        pattern: 'Bull Market Recognition',
         strength: 89 + Math.random() * 8,
-        frequency: "12.5 Hz",
-        location: "Prefrontal Cortex",
+        frequency: '12.5 Hz',
+        location: 'Prefrontal Cortex',
         confidence: 94 + Math.random() * 4,
       },
       {
-        pattern: "Risk Assessment",
+        pattern: 'Risk Assessment',
         strength: 76 + Math.random() * 10,
-        frequency: "8.3 Hz",
-        location: "Anterior Cingulate",
+        frequency: '8.3 Hz',
+        location: 'Anterior Cingulate',
         confidence: 87 + Math.random() * 6,
       },
       {
-        pattern: "Pattern Recognition",
+        pattern: 'Pattern Recognition',
         strength: 92 + Math.random() * 5,
-        frequency: "40.2 Hz",
-        location: "Visual Cortex",
+        frequency: '40.2 Hz',
+        location: 'Visual Cortex',
         confidence: 96 + Math.random() * 3,
       },
       {
-        pattern: "Emotional Regulation",
+        pattern: 'Emotional Regulation',
         strength: 68 + Math.random() * 12,
-        frequency: "6.7 Hz",
-        location: "Limbic System",
+        frequency: '6.7 Hz',
+        location: 'Limbic System',
         confidence: 82 + Math.random() * 8,
       },
     ],
-  })
+  });
 
   const [neuroSettings, setNeuroSettings] = useState({
     thoughtTrading: true,
@@ -69,117 +84,134 @@ export default function NeuroLinkTrading() {
     focusEnhancement: true,
     biofeedback: true,
     neuralOptimization: true,
-  })
+  });
 
   const [thoughtCommands, setThoughtCommands] = useState([
     {
-      thought: "Buy AAPL 100 shares",
+      thought: 'Buy AAPL 100 shares',
       confidence: 94.7,
-      timestamp: "2 seconds ago",
-      status: "Executed",
-      executionTime: "0.12s",
+      timestamp: '2 seconds ago',
+      status: 'Executed',
+      executionTime: '0.12s',
     },
     {
-      thought: "Set stop loss at $245",
+      thought: 'Set stop loss at $245',
       confidence: 89.3,
-      timestamp: "15 seconds ago",
-      status: "Executed",
-      executionTime: "0.08s",
+      timestamp: '15 seconds ago',
+      status: 'Executed',
+      executionTime: '0.08s',
     },
     {
-      thought: "Check NVDA sentiment",
+      thought: 'Check NVDA sentiment',
       confidence: 92.1,
-      timestamp: "1 minute ago",
-      status: "Completed",
-      executionTime: "0.05s",
+      timestamp: '1 minute ago',
+      status: 'Completed',
+      executionTime: '0.05s',
     },
     {
-      thought: "Analyze market volatility",
+      thought: 'Analyze market volatility',
       confidence: 87.8,
-      timestamp: "2 minutes ago",
-      status: "Completed",
-      executionTime: "0.15s",
+      timestamp: '2 minutes ago',
+      status: 'Completed',
+      executionTime: '0.15s',
     },
-  ])
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateNeuroData()
-      simulateThoughtCommands()
-    }, 3000)
+      updateNeuroData();
+      simulateThoughtCommands();
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateNeuroData = () => {
-    setNeuroData((prev) => ({
+    setNeuroData(prev => ({
       ...prev,
       signalStrength: Math.min(100, Math.max(85, prev.signalStrength + (Math.random() - 0.5) * 2)),
       brainwaveActivity: {
-        alpha: Math.min(100, Math.max(50, prev.brainwaveActivity.alpha + (Math.random() - 0.5) * 5)),
+        alpha: Math.min(
+          100,
+          Math.max(50, prev.brainwaveActivity.alpha + (Math.random() - 0.5) * 5)
+        ),
         beta: Math.min(100, Math.max(60, prev.brainwaveActivity.beta + (Math.random() - 0.5) * 8)),
-        gamma: Math.min(100, Math.max(30, prev.brainwaveActivity.gamma + (Math.random() - 0.5) * 10)),
-        theta: Math.min(100, Math.max(20, prev.brainwaveActivity.theta + (Math.random() - 0.5) * 6)),
+        gamma: Math.min(
+          100,
+          Math.max(30, prev.brainwaveActivity.gamma + (Math.random() - 0.5) * 10)
+        ),
+        theta: Math.min(
+          100,
+          Math.max(20, prev.brainwaveActivity.theta + (Math.random() - 0.5) * 6)
+        ),
       },
       cognitiveLoad: Math.min(100, Math.max(10, prev.cognitiveLoad + (Math.random() - 0.5) * 3)),
       emotionalState: {
-        confidence: Math.min(100, Math.max(70, prev.emotionalState.confidence + (Math.random() - 0.5) * 2)),
+        confidence: Math.min(
+          100,
+          Math.max(70, prev.emotionalState.confidence + (Math.random() - 0.5) * 2)
+        ),
         stress: Math.min(100, Math.max(5, prev.emotionalState.stress + (Math.random() - 0.5) * 3)),
         focus: Math.min(100, Math.max(80, prev.emotionalState.focus + (Math.random() - 0.5) * 2)),
-        excitement: Math.min(100, Math.max(20, prev.emotionalState.excitement + (Math.random() - 0.5) * 8)),
+        excitement: Math.min(
+          100,
+          Math.max(20, prev.emotionalState.excitement + (Math.random() - 0.5) * 8)
+        ),
       },
-    }))
-  }
+    }));
+  };
 
   const simulateThoughtCommands = () => {
     if (Math.random() > 0.7) {
       const newCommands = [
-        "Sell TSLA 50 shares",
-        "Buy SPY calls",
-        "Check portfolio balance",
-        "Analyze MSFT earnings",
-        "Set alert for GOOGL",
-        "Review risk metrics",
-      ]
+        'Sell TSLA 50 shares',
+        'Buy SPY calls',
+        'Check portfolio balance',
+        'Analyze MSFT earnings',
+        'Set alert for GOOGL',
+        'Review risk metrics',
+      ];
 
       const newCommand = {
         thought: newCommands[Math.floor(Math.random() * newCommands.length)],
         confidence: 85 + Math.random() * 15,
-        timestamp: "Just now",
-        status: "Processing",
-        executionTime: "0." + Math.floor(Math.random() * 20 + 5) + "s",
-      }
+        timestamp: 'Just now',
+        status: 'Processing',
+        executionTime: '0.' + Math.floor(Math.random() * 20 + 5) + 's',
+      };
 
-      setThoughtCommands((prev) => [newCommand, ...prev.slice(0, 3)])
+      setThoughtCommands(prev => [newCommand, ...prev.slice(0, 3)]);
 
       // Update status after a delay
       setTimeout(() => {
-        setThoughtCommands((prev) =>
-          prev.map((cmd, index) => (index === 0 ? { ...cmd, status: "Executed", timestamp: "Few seconds ago" } : cmd)),
-        )
-      }, 2000)
+        setThoughtCommands(prev =>
+          prev.map((cmd, index) =>
+            index === 0 ? { ...cmd, status: 'Executed', timestamp: 'Few seconds ago' } : cmd
+          )
+        );
+      }, 2000);
     }
-  }
+  };
 
-  const getSignalColor = (strength) => {
-    if (strength >= 90) return "text-green-400"
-    if (strength >= 80) return "text-blue-400"
-    if (strength >= 70) return "text-yellow-400"
-    return "text-red-400"
-  }
+  const getSignalColor = strength => {
+    if (strength >= 90) return 'text-green-400';
+    if (strength >= 80) return 'text-blue-400';
+    if (strength >= 70) return 'text-yellow-400';
+    return 'text-red-400';
+  };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = status => {
     switch (status) {
-      case "Executed":
-        return "bg-green-500"
-      case "Processing":
-        return "bg-yellow-500"
-      case "Completed":
-        return "bg-blue-500"
+      case 'Executed':
+        return 'bg-green-500';
+      case 'Processing':
+        return 'bg-yellow-500';
+      case 'Completed':
+        return 'bg-blue-500';
       default:
-        return "bg-gray-500"
+        return 'bg-gray-500';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -187,7 +219,8 @@ export default function NeuroLinkTrading() {
       <Card className="bg-gradient-to-r from-purple-900/20 to-indigo-900/20 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Brain className="h-7 w-7 mr-3 text-purple-400" />🧠 NeuroLink Trading Interface
+            <Brain className="h-7 w-7 mr-3 text-purple-400" />
+            🧠 NeuroLink Trading Interface
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-indigo-500">
               <Radio className="h-4 w-4 mr-1" />
               NEURAL CONNECTED
@@ -201,7 +234,9 @@ export default function NeuroLinkTrading() {
                 <Radio className="h-8 w-8 text-purple-400" />
                 <Badge className="bg-purple-500">SIGNAL</Badge>
               </div>
-              <div className={`text-3xl font-bold ${getSignalColor(neuroData.signalStrength)} mb-2`}>
+              <div
+                className={`text-3xl font-bold ${getSignalColor(neuroData.signalStrength)} mb-2`}
+              >
                 {neuroData.signalStrength.toFixed(1)}%
               </div>
               <p className="text-purple-400 font-semibold">Signal Strength</p>
@@ -213,7 +248,9 @@ export default function NeuroLinkTrading() {
                 <Gauge className="h-8 w-8 text-indigo-400" />
                 <Badge className="bg-indigo-500">LOAD</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{neuroData.cognitiveLoad.toFixed(1)}%</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {neuroData.cognitiveLoad.toFixed(1)}%
+              </div>
               <p className="text-indigo-400 font-semibold">Cognitive Load</p>
               <p className="text-gray-400 text-sm">Mental processing usage</p>
             </div>
@@ -263,7 +300,9 @@ export default function NeuroLinkTrading() {
               <div className="p-4 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-lg border border-red-400/30">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-white font-medium">Alpha Waves</span>
-                  <span className="text-red-400 font-bold">{neuroData.brainwaveActivity.alpha.toFixed(1)}%</span>
+                  <span className="text-red-400 font-bold">
+                    {neuroData.brainwaveActivity.alpha.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.brainwaveActivity.alpha} className="h-2 mb-2" />
                 <p className="text-gray-400 text-xs">8-12 Hz • Relaxed awareness</p>
@@ -272,7 +311,9 @@ export default function NeuroLinkTrading() {
               <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-400/30">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-white font-medium">Beta Waves</span>
-                  <span className="text-blue-400 font-bold">{neuroData.brainwaveActivity.beta.toFixed(1)}%</span>
+                  <span className="text-blue-400 font-bold">
+                    {neuroData.brainwaveActivity.beta.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.brainwaveActivity.beta} className="h-2 mb-2" />
                 <p className="text-gray-400 text-xs">13-30 Hz • Active thinking</p>
@@ -281,7 +322,9 @@ export default function NeuroLinkTrading() {
               <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-400/30">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-white font-medium">Gamma Waves</span>
-                  <span className="text-green-400 font-bold">{neuroData.brainwaveActivity.gamma.toFixed(1)}%</span>
+                  <span className="text-green-400 font-bold">
+                    {neuroData.brainwaveActivity.gamma.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.brainwaveActivity.gamma} className="h-2 mb-2" />
                 <p className="text-gray-400 text-xs">30-100 Hz • High-level processing</p>
@@ -290,7 +333,9 @@ export default function NeuroLinkTrading() {
               <div className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-400/30">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-white font-medium">Theta Waves</span>
-                  <span className="text-purple-400 font-bold">{neuroData.brainwaveActivity.theta.toFixed(1)}%</span>
+                  <span className="text-purple-400 font-bold">
+                    {neuroData.brainwaveActivity.theta.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.brainwaveActivity.theta} className="h-2 mb-2" />
                 <p className="text-gray-400 text-xs">4-7 Hz • Deep meditation</p>
@@ -305,7 +350,8 @@ export default function NeuroLinkTrading() {
         <Card className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border-cyan-400/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center text-xl">
-              <Lightbulb className="h-6 w-6 mr-2 text-cyan-400" />💭 Thought Commands
+              <Lightbulb className="h-6 w-6 mr-2 text-cyan-400" />
+              💭 Thought Commands
               <Badge className="ml-3 bg-cyan-500">LIVE</Badge>
             </CardTitle>
           </CardHeader>
@@ -325,7 +371,9 @@ export default function NeuroLinkTrading() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-cyan-400 font-bold">{command.confidence.toFixed(1)}%</div>
+                      <div className="text-cyan-400 font-bold">
+                        {command.confidence.toFixed(1)}%
+                      </div>
                       <p className="text-gray-400 text-xs">{command.executionTime}</p>
                     </div>
                   </div>
@@ -338,7 +386,8 @@ export default function NeuroLinkTrading() {
         <Card className="bg-gradient-to-r from-pink-900/20 to-purple-900/20 border-pink-400/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center text-xl">
-              <Heart className="h-6 w-6 mr-2 text-pink-400" />😊 Emotional State Monitoring
+              <Heart className="h-6 w-6 mr-2 text-pink-400" />
+              😊 Emotional State Monitoring
               <Badge className="ml-3 bg-pink-500">BIOMETRIC</Badge>
             </CardTitle>
           </CardHeader>
@@ -347,7 +396,9 @@ export default function NeuroLinkTrading() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-white font-medium">Confidence Level</span>
-                  <span className="text-green-400 font-bold">{neuroData.emotionalState.confidence.toFixed(1)}%</span>
+                  <span className="text-green-400 font-bold">
+                    {neuroData.emotionalState.confidence.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.emotionalState.confidence} className="h-3" />
               </div>
@@ -355,7 +406,9 @@ export default function NeuroLinkTrading() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-white font-medium">Stress Level</span>
-                  <span className="text-red-400 font-bold">{neuroData.emotionalState.stress.toFixed(1)}%</span>
+                  <span className="text-red-400 font-bold">
+                    {neuroData.emotionalState.stress.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.emotionalState.stress} className="h-3" />
               </div>
@@ -363,7 +416,9 @@ export default function NeuroLinkTrading() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-white font-medium">Focus Intensity</span>
-                  <span className="text-blue-400 font-bold">{neuroData.emotionalState.focus.toFixed(1)}%</span>
+                  <span className="text-blue-400 font-bold">
+                    {neuroData.emotionalState.focus.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.emotionalState.focus} className="h-3" />
               </div>
@@ -371,7 +426,9 @@ export default function NeuroLinkTrading() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-white font-medium">Market Excitement</span>
-                  <span className="text-yellow-400 font-bold">{neuroData.emotionalState.excitement.toFixed(1)}%</span>
+                  <span className="text-yellow-400 font-bold">
+                    {neuroData.emotionalState.excitement.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={neuroData.emotionalState.excitement} className="h-3" />
               </div>
@@ -384,7 +441,8 @@ export default function NeuroLinkTrading() {
       <Card className="bg-gradient-to-r from-violet-900/20 to-fuchsia-900/20 border-violet-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Sparkles className="h-7 w-7 mr-3 text-violet-400" />🔬 Neural Pattern Recognition
+            <Sparkles className="h-7 w-7 mr-3 text-violet-400" />
+            🔬 Neural Pattern Recognition
             <Badge className="ml-3 bg-gradient-to-r from-violet-400 to-fuchsia-500">
               <Activity className="h-4 w-4 mr-1" />
               REAL-TIME ANALYSIS
@@ -413,9 +471,13 @@ export default function NeuroLinkTrading() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-violet-400">{pattern.strength.toFixed(1)}%</div>
+                    <div className="text-2xl font-bold text-violet-400">
+                      {pattern.strength.toFixed(1)}%
+                    </div>
                     <p className="text-gray-400 text-sm">Pattern Strength</p>
-                    <Badge className="mt-2 bg-violet-500">{pattern.confidence.toFixed(0)}% Confidence</Badge>
+                    <Badge className="mt-2 bg-violet-500">
+                      {pattern.confidence.toFixed(0)}% Confidence
+                    </Badge>
                   </div>
                 </div>
                 <div className="mt-4">
@@ -443,7 +505,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Thought Trading</span>
                 <Switch
                   checked={neuroSettings.thoughtTrading}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, thoughtTrading: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, thoughtTrading: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">Execute trades via neural commands</p>
@@ -454,7 +518,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Emotion Filtering</span>
                 <Switch
                   checked={neuroSettings.emotionFiltering}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, emotionFiltering: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, emotionFiltering: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">Filter emotional trading decisions</p>
@@ -465,7 +531,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Stress Monitoring</span>
                 <Switch
                   checked={neuroSettings.stressMonitoring}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, stressMonitoring: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, stressMonitoring: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">Monitor stress levels during trading</p>
@@ -476,7 +544,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Focus Enhancement</span>
                 <Switch
                   checked={neuroSettings.focusEnhancement}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, focusEnhancement: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, focusEnhancement: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">AI-powered focus optimization</p>
@@ -487,7 +557,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Biofeedback</span>
                 <Switch
                   checked={neuroSettings.biofeedback}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, biofeedback: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, biofeedback: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">Real-time neural feedback loops</p>
@@ -498,7 +570,9 @@ export default function NeuroLinkTrading() {
                 <span className="text-white font-medium">Neural Optimization</span>
                 <Switch
                   checked={neuroSettings.neuralOptimization}
-                  onCheckedChange={(checked) => setNeuroSettings((prev) => ({ ...prev, neuralOptimization: checked }))}
+                  onCheckedChange={checked =>
+                    setNeuroSettings(prev => ({ ...prev, neuralOptimization: checked }))
+                  }
                 />
               </div>
               <p className="text-gray-400 text-sm">Adaptive neural pathway optimization</p>
@@ -507,5 +581,5 @@ export default function NeuroLinkTrading() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

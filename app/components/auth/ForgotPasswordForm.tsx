@@ -1,53 +1,57 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Mail, ArrowLeft, AlertCircle, CheckCircle } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useState } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Mail, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ForgotPasswordForm({ onBack }) {
-  const [email, setEmail] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setSuccess(false)
-    setIsLoading(true)
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+    setIsLoading(true);
 
     try {
       // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Simple validation
       if (!email) {
-        throw new Error("Please enter your email address")
+        throw new Error('Please enter your email address');
       }
 
-      if (!email.includes("@")) {
-        throw new Error("Please enter a valid email address")
+      if (!email.includes('@')) {
+        throw new Error('Please enter a valid email address');
       }
 
       // In a real app, you would call an API to send a password reset email
       // For demo purposes, we'll just show a success message
-      setSuccess(true)
+      setSuccess(true);
     } catch (err) {
-      setError(err.message || "Failed to send reset link. Please try again.")
+      setError(err.message || 'Failed to send reset link. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="w-full max-w-md bg-black/40 border-purple-500/30 backdrop-blur-xl">
       <CardHeader>
         <CardTitle className="text-white text-2xl">Reset Password</CardTitle>
-        <CardDescription className="text-gray-400">Enter your email to receive a password reset link</CardDescription>
+        <CardDescription className="text-gray-400">
+          Enter your email to receive a password reset link
+        </CardDescription>
       </CardHeader>
       <CardContent>
         {success ? (
@@ -86,7 +90,7 @@ export default function ForgotPasswordForm({ onBack }) {
                   type="email"
                   placeholder="you@example.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                   className="pl-10 bg-black/20 border-purple-500/30 text-white"
                 />
               </div>
@@ -123,10 +127,14 @@ export default function ForgotPasswordForm({ onBack }) {
                     Sending...
                   </span>
                 ) : (
-                  "Send Reset Link"
+                  'Send Reset Link'
                 )}
               </Button>
-              <Button variant="outline" className="border-purple-500/30 text-white" onClick={onBack}>
+              <Button
+                variant="outline"
+                className="border-purple-500/30 text-white"
+                onClick={onBack}
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Sign In
               </Button>
@@ -135,5 +143,5 @@ export default function ForgotPasswordForm({ onBack }) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

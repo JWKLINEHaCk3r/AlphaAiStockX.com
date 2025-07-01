@@ -1,102 +1,108 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } from 'lucide-react';
 
 export default function SiteDiagnostics() {
   const [diagnostics, setDiagnostics] = useState({
-    dns: "checking",
-    hosting: "checking",
-    files: "checking",
-    ssl: "checking",
-  })
+    dns: 'checking',
+    hosting: 'checking',
+    files: 'checking',
+    ssl: 'checking',
+  });
 
-  const [solutions, setSolutions] = useState([])
+  const [solutions, setSolutions] = useState([]);
 
   useEffect(() => {
-    runDiagnostics()
-  }, [])
+    runDiagnostics();
+  }, []);
 
   const runDiagnostics = async () => {
     // Simulate diagnostic checks
     setTimeout(() => {
       setDiagnostics({
-        dns: "error",
-        hosting: "warning",
-        files: "error",
-        ssl: "error",
-      })
+        dns: 'error',
+        hosting: 'warning',
+        files: 'error',
+        ssl: 'error',
+      });
 
       setSolutions([
         {
-          issue: "DNS Not Pointing to IONOS",
-          priority: "HIGH",
+          issue: 'DNS Not Pointing to IONOS',
+          priority: 'HIGH',
           steps: [
-            "Login to your domain registrar (where you bought alphaaistockx.com)",
-            "Update nameservers to IONOS nameservers",
-            "Or update A record to point to IONOS IP address",
-            "Wait 24-48 hours for DNS propagation",
+            'Login to your domain registrar (where you bought alphaaistockx.com)',
+            'Update nameservers to IONOS nameservers',
+            'Or update A record to point to IONOS IP address',
+            'Wait 24-48 hours for DNS propagation',
           ],
         },
         {
-          issue: "Files Not Uploaded to Correct Directory",
-          priority: "HIGH",
+          issue: 'Files Not Uploaded to Correct Directory',
+          priority: 'HIGH',
           steps: [
-            "Login to IONOS Control Panel",
-            "Go to Hosting → File Manager",
-            "Navigate to the ROOT directory (not a subfolder)",
-            "Upload index.html and all files to the main directory",
-            "Ensure .htaccess file is uploaded (it may be hidden)",
+            'Login to IONOS Control Panel',
+            'Go to Hosting → File Manager',
+            'Navigate to the ROOT directory (not a subfolder)',
+            'Upload index.html and all files to the main directory',
+            'Ensure .htaccess file is uploaded (it may be hidden)',
           ],
         },
         {
-          issue: "SSL Certificate Not Active",
-          priority: "MEDIUM",
+          issue: 'SSL Certificate Not Active',
+          priority: 'MEDIUM',
           steps: [
-            "In IONOS Control Panel, go to SSL Certificates",
-            "Activate SSL for alphaaistockx.com",
-            "Wait for certificate to be issued (can take up to 24 hours)",
-            "Force HTTPS redirect in .htaccess",
+            'In IONOS Control Panel, go to SSL Certificates',
+            'Activate SSL for alphaaistockx.com',
+            'Wait for certificate to be issued (can take up to 24 hours)',
+            'Force HTTPS redirect in .htaccess',
           ],
         },
-      ])
-    }, 2000)
-  }
+      ]);
+    }, 2000);
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "success":
-        return <CheckCircle className="w-5 h-5 text-green-500" />
-      case "error":
-        return <XCircle className="w-5 h-5 text-red-500" />
-      case "warning":
-        return <AlertCircle className="w-5 h-5 text-yellow-500" />
+      case 'success':
+        return <CheckCircle className="w-5 h-5 text-green-500" />;
+      case 'error':
+        return <XCircle className="w-5 h-5 text-red-500" />;
+      case 'warning':
+        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
       default:
-        return <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        return (
+          <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        );
     }
-  }
+  };
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case "success":
-        return "Working"
-      case "error":
-        return "Failed"
-      case "warning":
-        return "Issues Found"
+      case 'success':
+        return 'Working';
+      case 'error':
+        return 'Failed';
+      case 'warning':
+        return 'Issues Found';
       default:
-        return "Checking..."
+        return 'Checking...';
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 p-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">🔍 AlphaAIStockX Site Diagnostics</h1>
-          <p className="text-gray-300 text-lg">Diagnosing why https://alphaaistockx.com/ is not accessible</p>
+          <p className="text-gray-300 text-lg">
+            Diagnosing why https://alphaaistockx.com/ is not accessible
+          </p>
         </div>
 
         {/* Diagnostic Status */}
@@ -172,21 +178,21 @@ export default function SiteDiagnostics() {
                 <CardTitle className="flex items-center gap-2 text-white">
                   <div
                     className={`w-3 h-3 rounded-full ${
-                      solution.priority === "HIGH"
-                        ? "bg-red-500"
-                        : solution.priority === "MEDIUM"
-                          ? "bg-yellow-500"
-                          : "bg-green-500"
+                      solution.priority === 'HIGH'
+                        ? 'bg-red-500'
+                        : solution.priority === 'MEDIUM'
+                          ? 'bg-yellow-500'
+                          : 'bg-green-500'
                     }`}
                   />
                   {solution.issue}
                   <span
                     className={`text-xs px-2 py-1 rounded ${
-                      solution.priority === "HIGH"
-                        ? "bg-red-500/20 text-red-300"
-                        : solution.priority === "MEDIUM"
-                          ? "bg-yellow-500/20 text-yellow-300"
-                          : "bg-green-500/20 text-green-300"
+                      solution.priority === 'HIGH'
+                        ? 'bg-red-500/20 text-red-300'
+                        : solution.priority === 'MEDIUM'
+                          ? 'bg-yellow-500/20 text-yellow-300'
+                          : 'bg-green-500/20 text-green-300'
                     }`}
                   >
                     {solution.priority} PRIORITY
@@ -218,13 +224,15 @@ export default function SiteDiagnostics() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                onClick={() => window.open("https://www.whatsmydns.net/#A/alphaaistockx.com", "_blank")}
+                onClick={() =>
+                  window.open('https://www.whatsmydns.net/#A/alphaaistockx.com', '_blank')
+                }
               >
                 Check DNS Propagation
               </Button>
               <Button
                 className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                onClick={() => alert("Login to IONOS Control Panel → Hosting → File Manager")}
+                onClick={() => alert('Login to IONOS Control Panel → Hosting → File Manager')}
               >
                 Open IONOS File Manager
               </Button>
@@ -248,7 +256,8 @@ export default function SiteDiagnostics() {
           </CardHeader>
           <CardContent>
             <p className="text-red-200 mb-4">
-              If your site is still not working after following these steps, contact IONOS support immediately:
+              If your site is still not working after following these steps, contact IONOS support
+              immediately:
             </p>
             <div className="space-y-2 text-red-200">
               <p>
@@ -265,5 +274,5 @@ export default function SiteDiagnostics() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

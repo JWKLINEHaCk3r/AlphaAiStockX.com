@@ -1,33 +1,33 @@
 // Comprehensive Trading Education Service - Series 6 & 7 Test Prep
 export class TradingEducationService {
-  private static instance: TradingEducationService
-  private educationalContent: Map<string, any> = new Map()
-  private testQuestions: Map<string, any> = new Map()
-  private userProgress: Map<string, any> = new Map()
+  private static instance: TradingEducationService;
+  private educationalContent: Map<string, any> = new Map();
+  private testQuestions: Map<string, any> = new Map();
+  private userProgress: Map<string, any> = new Map();
 
   static getInstance(): TradingEducationService {
     if (!TradingEducationService.instance) {
-      TradingEducationService.instance = new TradingEducationService()
+      TradingEducationService.instance = new TradingEducationService();
     }
-    return TradingEducationService.instance
+    return TradingEducationService.instance;
   }
 
   async initialize() {
-    this.loadSeries6Content()
-    this.loadSeries7Content()
-    this.loadAdvancedTradingConcepts()
-    this.loadMarketAnalysisEducation()
-    this.loadRiskManagementEducation()
-    this.loadTestQuestions()
+    this.loadSeries6Content();
+    this.loadSeries7Content();
+    this.loadAdvancedTradingConcepts();
+    this.loadMarketAnalysisEducation();
+    this.loadRiskManagementEducation();
+    this.loadTestQuestions();
   }
 
   private loadSeries6Content() {
     const series6Content = {
       investment_company_products: {
-        title: "Investment Company Products",
+        title: 'Investment Company Products',
         sections: {
           mutual_funds: {
-            title: "Mutual Funds",
+            title: 'Mutual Funds',
             content: `
               Mutual funds are investment vehicles that pool money from many investors to purchase securities.
               
@@ -50,14 +50,14 @@ export class TradingEducationService {
             `,
             examples: [
               {
-                scenario: "Client wants to invest $10,000 in a diversified portfolio",
-                solution: "Recommend a balanced mutual fund with low expense ratio",
-                reasoning: "Provides instant diversification and professional management",
+                scenario: 'Client wants to invest $10,000 in a diversified portfolio',
+                solution: 'Recommend a balanced mutual fund with low expense ratio',
+                reasoning: 'Provides instant diversification and professional management',
               },
             ],
           },
           variable_annuities: {
-            title: "Variable Annuities",
+            title: 'Variable Annuities',
             content: `
               Variable annuities combine insurance and investment features.
               
@@ -79,19 +79,19 @@ export class TradingEducationService {
             `,
             examples: [
               {
-                scenario: "Retirement planning for high-income earner",
-                solution: "Variable annuity after maxing out 401(k) and IRA",
-                reasoning: "Tax-deferred growth and guaranteed death benefit",
+                scenario: 'Retirement planning for high-income earner',
+                solution: 'Variable annuity after maxing out 401(k) and IRA',
+                reasoning: 'Tax-deferred growth and guaranteed death benefit',
               },
             ],
           },
         },
       },
       securities_regulations: {
-        title: "Securities Regulations",
+        title: 'Securities Regulations',
         sections: {
           investment_company_act_1940: {
-            title: "Investment Company Act of 1940",
+            title: 'Investment Company Act of 1940',
             content: `
               Regulates investment companies and their operations.
               
@@ -109,7 +109,7 @@ export class TradingEducationService {
             `,
           },
           investment_advisers_act_1940: {
-            title: "Investment Advisers Act of 1940",
+            title: 'Investment Advisers Act of 1940',
             content: `
               Regulates investment advisers and their fiduciary duties.
               
@@ -128,18 +128,18 @@ export class TradingEducationService {
           },
         },
       },
-    }
+    };
 
-    this.educationalContent.set("series_6", series6Content)
+    this.educationalContent.set('series_6', series6Content);
   }
 
   private loadSeries7Content() {
     const series7Content = {
       equity_securities: {
-        title: "Equity Securities",
+        title: 'Equity Securities',
         sections: {
           common_stock: {
-            title: "Common Stock",
+            title: 'Common Stock',
             content: `
               Common stock represents ownership in a corporation.
               
@@ -165,14 +165,14 @@ export class TradingEducationService {
             `,
             examples: [
               {
-                scenario: "Client seeks long-term growth",
-                solution: "Recommend growth stocks in technology sector",
-                reasoning: "Higher potential returns over long time horizon",
+                scenario: 'Client seeks long-term growth',
+                solution: 'Recommend growth stocks in technology sector',
+                reasoning: 'Higher potential returns over long time horizon',
               },
             ],
           },
           preferred_stock: {
-            title: "Preferred Stock",
+            title: 'Preferred Stock',
             content: `
               Preferred stock has characteristics of both stocks and bonds.
               
@@ -193,10 +193,10 @@ export class TradingEducationService {
         },
       },
       debt_securities: {
-        title: "Debt Securities",
+        title: 'Debt Securities',
         sections: {
           corporate_bonds: {
-            title: "Corporate Bonds",
+            title: 'Corporate Bonds',
             content: `
               Corporate bonds are debt obligations issued by corporations.
               
@@ -221,7 +221,7 @@ export class TradingEducationService {
             `,
           },
           government_securities: {
-            title: "Government Securities",
+            title: 'Government Securities',
             content: `
               Government securities are debt obligations of federal, state, and local governments.
               
@@ -245,10 +245,10 @@ export class TradingEducationService {
         },
       },
       options: {
-        title: "Options",
+        title: 'Options',
         sections: {
           basic_options: {
-            title: "Basic Options Concepts",
+            title: 'Basic Options Concepts',
             content: `
               Options give the holder the right, but not obligation, to buy or sell an underlying asset.
               
@@ -279,7 +279,7 @@ export class TradingEducationService {
             `,
           },
           option_strategies: {
-            title: "Option Strategies",
+            title: 'Option Strategies',
             content: `
               Basic Strategies:
               • Covered call: Long stock + short call
@@ -299,18 +299,18 @@ export class TradingEducationService {
           },
         },
       },
-    }
+    };
 
-    this.educationalContent.set("series_7", series7Content)
+    this.educationalContent.set('series_7', series7Content);
   }
 
   private loadAdvancedTradingConcepts() {
     const advancedConcepts = {
       technical_analysis: {
-        title: "Technical Analysis",
+        title: 'Technical Analysis',
         sections: {
           chart_patterns: {
-            title: "Chart Patterns",
+            title: 'Chart Patterns',
             content: `
               Technical analysis uses price and volume data to predict future price movements.
               
@@ -333,15 +333,15 @@ export class TradingEducationService {
             `,
             examples: [
               {
-                pattern: "Head and Shoulders",
-                description: "Three peaks with middle peak highest",
-                signal: "Bearish reversal",
-                target: "Distance from head to neckline subtracted from neckline",
+                pattern: 'Head and Shoulders',
+                description: 'Three peaks with middle peak highest',
+                signal: 'Bearish reversal',
+                target: 'Distance from head to neckline subtracted from neckline',
               },
             ],
           },
           technical_indicators: {
-            title: "Technical Indicators",
+            title: 'Technical Indicators',
             content: `
               Moving Averages:
               • Simple Moving Average (SMA): Average price over period
@@ -368,10 +368,10 @@ export class TradingEducationService {
         },
       },
       fundamental_analysis: {
-        title: "Fundamental Analysis",
+        title: 'Fundamental Analysis',
         sections: {
           financial_ratios: {
-            title: "Financial Ratios",
+            title: 'Financial Ratios',
             content: `
               Profitability Ratios:
               • Return on Equity (ROE): Net Income / Shareholders' Equity
@@ -397,7 +397,7 @@ export class TradingEducationService {
             `,
           },
           economic_indicators: {
-            title: "Economic Indicators",
+            title: 'Economic Indicators',
             content: `
               Leading Indicators:
               • Stock market performance
@@ -427,15 +427,15 @@ export class TradingEducationService {
           },
         },
       },
-    }
+    };
 
-    this.educationalContent.set("advanced_concepts", advancedConcepts)
+    this.educationalContent.set('advanced_concepts', advancedConcepts);
   }
 
   private loadMarketAnalysisEducation() {
     const marketAnalysis = {
       market_cycles: {
-        title: "Market Cycles and Sentiment",
+        title: 'Market Cycles and Sentiment',
         content: `
           Bull Markets:
           • Sustained upward price movement (typically 20%+ gain from recent low)
@@ -465,7 +465,7 @@ export class TradingEducationService {
         `,
       },
       sector_analysis: {
-        title: "Sector Analysis",
+        title: 'Sector Analysis',
         content: `
           Economic Sectors:
           • Technology: Growth-oriented, high volatility
@@ -489,15 +489,15 @@ export class TradingEducationService {
           • Late Expansion: Healthcare, Consumer Staples
         `,
       },
-    }
+    };
 
-    this.educationalContent.set("market_analysis", marketAnalysis)
+    this.educationalContent.set('market_analysis', marketAnalysis);
   }
 
   private loadRiskManagementEducation() {
     const riskManagement = {
       types_of_risk: {
-        title: "Types of Investment Risk",
+        title: 'Types of Investment Risk',
         content: `
           Systematic Risk (Market Risk):
           • Cannot be diversified away
@@ -526,7 +526,7 @@ export class TradingEducationService {
         `,
       },
       portfolio_management: {
-        title: "Portfolio Management",
+        title: 'Portfolio Management',
         content: `
           Modern Portfolio Theory:
           • Diversification reduces risk without reducing expected return
@@ -551,111 +551,118 @@ export class TradingEducationService {
           • Combination approach: Both time and threshold triggers
         `,
       },
-    }
+    };
 
-    this.educationalContent.set("risk_management", riskManagement)
+    this.educationalContent.set('risk_management', riskManagement);
   }
 
   private loadTestQuestions() {
     const series6Questions = [
       {
-        id: "s6_q1",
-        question: "Which of the following is NOT a characteristic of mutual funds?",
-        options: ["Professional management", "Daily liquidity", "Guaranteed returns", "Diversification"],
+        id: 's6_q1',
+        question: 'Which of the following is NOT a characteristic of mutual funds?',
+        options: [
+          'Professional management',
+          'Daily liquidity',
+          'Guaranteed returns',
+          'Diversification',
+        ],
         correct: 2,
         explanation:
-          "Mutual funds do not guarantee returns. They offer professional management, daily liquidity, and diversification, but returns depend on market performance.",
+          'Mutual funds do not guarantee returns. They offer professional management, daily liquidity, and diversification, but returns depend on market performance.',
       },
       {
-        id: "s6_q2",
-        question: "A Class A mutual fund share typically has:",
-        options: ["A back-end load", "A front-end load", "No sales charge", "A level load"],
+        id: 's6_q2',
+        question: 'A Class A mutual fund share typically has:',
+        options: ['A back-end load', 'A front-end load', 'No sales charge', 'A level load'],
         correct: 1,
-        explanation: "Class A shares typically have a front-end load (sales charge paid when purchasing shares).",
+        explanation:
+          'Class A shares typically have a front-end load (sales charge paid when purchasing shares).',
       },
-    ]
+    ];
 
     const series7Questions = [
       {
-        id: "s7_q1",
-        question: "If XYZ stock is trading at $50 and has a P/E ratio of 20, what are the earnings per share?",
-        options: ["$1.00", "$2.50", "$4.00", "$10.00"],
+        id: 's7_q1',
+        question:
+          'If XYZ stock is trading at $50 and has a P/E ratio of 20, what are the earnings per share?',
+        options: ['$1.00', '$2.50', '$4.00', '$10.00'],
         correct: 1,
-        explanation: "EPS = Stock Price / P/E Ratio = $50 / 20 = $2.50",
+        explanation: 'EPS = Stock Price / P/E Ratio = $50 / 20 = $2.50',
       },
       {
-        id: "s7_q2",
+        id: 's7_q2',
         question:
-          "Which option strategy would be most appropriate for an investor who is bullish on a stock but wants to generate income?",
-        options: ["Buy a call", "Buy a put", "Sell a covered call", "Sell a naked put"],
+          'Which option strategy would be most appropriate for an investor who is bullish on a stock but wants to generate income?',
+        options: ['Buy a call', 'Buy a put', 'Sell a covered call', 'Sell a naked put'],
         correct: 2,
         explanation:
-          "A covered call (owning stock and selling a call) generates income from the premium while maintaining upside potential to the strike price.",
+          'A covered call (owning stock and selling a call) generates income from the premium while maintaining upside potential to the strike price.',
       },
-    ]
+    ];
 
-    this.testQuestions.set("series_6", series6Questions)
-    this.testQuestions.set("series_7", series7Questions)
+    this.testQuestions.set('series_6', series6Questions);
+    this.testQuestions.set('series_7', series7Questions);
   }
 
   // Public API Methods
   getEducationalContent(series: string, topic?: string) {
-    const content = this.educationalContent.get(series)
+    const content = this.educationalContent.get(series);
     if (topic && content) {
-      return content[topic] || null
+      return content[topic] || null;
     }
-    return content
+    return content;
   }
 
   getTestQuestions(series: string, count = 10) {
-    const questions = this.testQuestions.get(series) || []
-    return questions.slice(0, count)
+    const questions = this.testQuestions.get(series) || [];
+    return questions.slice(0, count);
   }
 
   submitTestAnswer(userId: string, questionId: string, answer: number) {
     // Track user progress
     if (!this.userProgress.has(userId)) {
-      this.userProgress.set(userId, { correct: 0, total: 0, questions: [] })
+      this.userProgress.set(userId, { correct: 0, total: 0, questions: [] });
     }
 
-    const progress = this.userProgress.get(userId)
-    const question = this.findQuestionById(questionId)
+    const progress = this.userProgress.get(userId);
+    const question = this.findQuestionById(questionId);
 
     if (question) {
-      const isCorrect = answer === question.correct
-      progress.total++
-      if (isCorrect) progress.correct++
+      const isCorrect = answer === question.correct;
+      progress.total++;
+      if (isCorrect) progress.correct++;
 
       progress.questions.push({
         questionId,
         answer,
         correct: isCorrect,
         timestamp: new Date(),
-      })
+      });
     }
 
     return {
       correct: question?.correct === answer,
       explanation: question?.explanation,
       score: (progress.correct / progress.total) * 100,
-    }
+    };
   }
 
   private findQuestionById(questionId: string) {
     for (const [series, questions] of this.testQuestions) {
-      const question = questions.find((q) => q.id === questionId)
-      if (question) return question
+      const question = questions.find(q => q.id === questionId);
+      if (question) return question;
     }
-    return null
+    return null;
   }
 
   getUserProgress(userId: string) {
-    return this.userProgress.get(userId) || { correct: 0, total: 0, questions: [] }
+    return this.userProgress.get(userId) || { correct: 0, total: 0, questions: [] };
   }
 
   generateStudyPlan(userId: string, targetExam: string) {
-    const progress = this.getUserProgress(userId)
-    const weakAreas = this.identifyWeakAreas(progress, targetExam)
+    const progress = this.getUserProgress(userId);
+    const weakAreas = this.identifyWeakAreas(progress, targetExam);
 
     return {
       targetExam,
@@ -663,70 +670,70 @@ export class TradingEducationService {
       weeklyPlan: this.createWeeklyPlan(weakAreas, targetExam),
       practiceTests: this.recommendPracticeTests(targetExam),
       keyTopics: this.getKeyTopics(targetExam),
-    }
+    };
   }
 
   private identifyWeakAreas(progress: any, targetExam: string) {
     // Analyze incorrect answers to identify weak areas
-    const weakAreas = []
+    const weakAreas = [];
 
     if (progress.questions.length > 0) {
-      const incorrectQuestions = progress.questions.filter((q) => !q.correct)
+      const incorrectQuestions = progress.questions.filter(q => !q.correct);
       // Group by topic and identify patterns
       // This would be more sophisticated in a real implementation
     }
 
-    return weakAreas
+    return weakAreas;
   }
 
   private calculateStudyTime(progress: any, targetExam: string) {
-    const baseHours = targetExam === "series_7" ? 80 : 40
-    const currentScore = progress.total > 0 ? (progress.correct / progress.total) * 100 : 0
+    const baseHours = targetExam === 'series_7' ? 80 : 40;
+    const currentScore = progress.total > 0 ? (progress.correct / progress.total) * 100 : 0;
 
-    if (currentScore >= 80) return Math.max(baseHours * 0.5, 20)
-    if (currentScore >= 60) return baseHours * 0.75
-    return baseHours
+    if (currentScore >= 80) return Math.max(baseHours * 0.5, 20);
+    if (currentScore >= 60) return baseHours * 0.75;
+    return baseHours;
   }
 
   private createWeeklyPlan(weakAreas: string[], targetExam: string) {
     // Create a structured weekly study plan
     return [
-      { week: 1, topics: ["Securities Basics", "Market Structure"], hours: 10 },
-      { week: 2, topics: ["Equity Securities", "Debt Securities"], hours: 12 },
-      { week: 3, topics: ["Options", "Investment Companies"], hours: 12 },
-      { week: 4, topics: ["Regulations", "Ethics"], hours: 10 },
-      { week: 5, topics: ["Practice Tests", "Review"], hours: 8 },
-    ]
+      { week: 1, topics: ['Securities Basics', 'Market Structure'], hours: 10 },
+      { week: 2, topics: ['Equity Securities', 'Debt Securities'], hours: 12 },
+      { week: 3, topics: ['Options', 'Investment Companies'], hours: 12 },
+      { week: 4, topics: ['Regulations', 'Ethics'], hours: 10 },
+      { week: 5, topics: ['Practice Tests', 'Review'], hours: 8 },
+    ];
   }
 
   private recommendPracticeTests(targetExam: string) {
     return [
-      { name: "Diagnostic Test", questions: 50, timeLimit: 90 },
-      { name: "Mid-term Practice", questions: 100, timeLimit: 180 },
-      { name: "Final Practice", questions: 125, timeLimit: 225 },
-      { name: "Simulated Exam", questions: 125, timeLimit: 225 },
-    ]
+      { name: 'Diagnostic Test', questions: 50, timeLimit: 90 },
+      { name: 'Mid-term Practice', questions: 100, timeLimit: 180 },
+      { name: 'Final Practice', questions: 125, timeLimit: 225 },
+      { name: 'Simulated Exam', questions: 125, timeLimit: 225 },
+    ];
   }
 
   private getKeyTopics(targetExam: string) {
     const topics = {
       series_6: [
-        "Investment Company Products (50%)",
-        "Securities and Tax Regulations (25%)",
-        "Customer Accounts and Prohibited Activities (25%)",
+        'Investment Company Products (50%)',
+        'Securities and Tax Regulations (25%)',
+        'Customer Accounts and Prohibited Activities (25%)',
       ],
       series_7: [
-        "Seeks Business for the Broker-Dealer (9%)",
+        'Seeks Business for the Broker-Dealer (9%)',
         "Opens Accounts After Obtaining and Evaluating Customers' Financial Profile (11%)",
-        "Provides Customers with Information About Investments (31%)",
+        'Provides Customers with Information About Investments (31%)',
         "Obtains and Verifies Customers' Purchase and Sales Instructions (16%)",
-        "Processes Transactions (4%)",
-        "Maintains Customer Accounts (29%)",
+        'Processes Transactions (4%)',
+        'Maintains Customer Accounts (29%)',
       ],
-    }
+    };
 
-    return topics[targetExam] || []
+    return topics[targetExam] || [];
   }
 }
 
-export const tradingEducationService = TradingEducationService.getInstance()
+export const tradingEducationService = TradingEducationService.getInstance();

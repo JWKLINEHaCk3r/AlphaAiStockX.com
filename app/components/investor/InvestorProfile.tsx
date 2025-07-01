@@ -1,11 +1,9 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   TrendingUp,
@@ -22,25 +20,20 @@ import {
   CheckCircle,
   Clock,
   Wifi,
-} from "lucide-react"
-import AdvancedAIFeatures from "../features/AdvancedAIFeatures"
-import ComplianceCenter from "../compliance/ComplianceCenter"
+} from 'lucide-react';
+import AdvancedAIFeatures from '../features/AdvancedAIFeatures';
+import ComplianceCenter from '../compliance/ComplianceCenter';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 interface InvestorProfileProps {
-  onSwitchToOwner?: () => void
-  onSwitchToAdmin?: () => void
+  onSwitchToOwner?: () => void;
+  onSwitchToAdmin?: () => void;
 }
 
-export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: InvestorProfileProps) {
-  const [activeDemo, setActiveDemo] = useState("quantum-ai")
-  const [isProcessing, setIsProcessing] = useState(false)
-
-  const runDemo = (demoType: string) => {
-    setActiveDemo(demoType)
-    setIsProcessing(true)
-    setTimeout(() => setIsProcessing(false), 3000)
-  }
-
+export default function InvestorProfile({
+  onSwitchToOwner,
+  onSwitchToAdmin,
+}: InvestorProfileProps) {
   const aiMetrics = {
     accuracy: 94.7,
     processing: 2847392,
@@ -48,15 +41,15 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
     confidence: 96.8,
     uptime: 99.97,
     trades: 847392,
-  }
+  };
 
   const portfolioData = [
-    { symbol: "AAPL", position: 1250, value: 234750, change: 2.4, ai_score: 94 },
-    { symbol: "TSLA", position: 500, value: 127500, change: -1.2, ai_score: 87 },
-    { symbol: "NVDA", position: 300, value: 89400, change: 5.7, ai_score: 98 },
-    { symbol: "MSFT", position: 800, value: 267200, change: 1.8, ai_score: 91 },
-    { symbol: "GOOGL", position: 200, value: 54600, change: 0.9, ai_score: 89 },
-  ]
+    { symbol: 'AAPL', position: 1250, value: 234750, change: 2.4, ai_score: 94 },
+    { symbol: 'TSLA', position: 500, value: 127500, change: -1.2, ai_score: 87 },
+    { symbol: 'NVDA', position: 300, value: 89400, change: 5.7, ai_score: 98 },
+    { symbol: 'MSFT', position: 800, value: 267200, change: 1.8, ai_score: 91 },
+    { symbol: 'GOOGL', position: 200, value: 54600, change: 0.9, ai_score: 89 },
+  ];
 
   return (
     <div className="space-y-8">
@@ -104,7 +97,9 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-green-400 text-sm font-medium">Data Points/sec</p>
-                <p className="text-3xl font-bold text-white">{aiMetrics.processing.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-white">
+                  {aiMetrics.processing.toLocaleString()}
+                </p>
               </div>
               <Database className="h-8 w-8 text-green-400" />
             </div>
@@ -120,7 +115,9 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-purple-400 text-sm font-medium">AI Predictions</p>
-                <p className="text-3xl font-bold text-white">{aiMetrics.predictions.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-white">
+                  {aiMetrics.predictions.toLocaleString()}
+                </p>
               </div>
               <Target className="h-8 w-8 text-purple-400" />
             </div>
@@ -176,20 +173,25 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
         <TabsContent value="portfolio">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <PieChart className="h-5 w-5 mr-2 text-purple-400" />
                   AI-Optimized Portfolio
                 </CardTitle>
                 <CardDescription>Real-time AI analysis and optimization</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-4">
-                  {portfolioData.map((stock) => (
-                    <div key={stock.symbol} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                  {portfolioData.map(stock => (
+                    <div
+                      key={stock.symbol}
+                      className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">{stock.symbol.slice(0, 2)}</span>
+                          <span className="text-white font-bold text-sm">
+                            {stock.symbol.slice(0, 2)}
+                          </span>
                         </div>
                         <div>
                           <p className="text-white font-semibold">{stock.symbol}</p>
@@ -199,8 +201,10 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
                       <div className="text-right">
                         <p className="text-white font-semibold">${stock.value.toLocaleString()}</p>
                         <div className="flex items-center space-x-2">
-                          <span className={`text-sm ${stock.change >= 0 ? "text-green-400" : "text-red-400"}`}>
-                            {stock.change >= 0 ? "+" : ""}
+                          <span
+                            className={`text-sm ${stock.change >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                          >
+                            {stock.change >= 0 ? '+' : ''}
                             {stock.change}%
                           </span>
                           <Badge variant="outline" className="text-xs">
@@ -215,13 +219,13 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
             </Card>
 
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <BarChart3 className="h-5 w-5 mr-2 text-green-400" />
                   Performance Analytics
                 </CardTitle>
                 <CardDescription>AI-driven performance insights</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-6">
                   <div>
@@ -267,13 +271,13 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
         <TabsContent value="trading">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card className="lg:col-span-2 bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <Zap className="h-5 w-5 mr-2 text-yellow-400" />
                   Ultra-Fast Trading Engine
                 </CardTitle>
                 <CardDescription>Quantum-speed execution with AI optimization</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-6">
                   <div className="grid grid-cols-3 gap-4">
@@ -296,21 +300,11 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
 
                   <div className="space-y-3">
                     <Button
-                      onClick={() => runDemo("quantum-trading")}
+                      onClick={void 0}
                       className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
-                      disabled={isProcessing}
                     >
-                      {isProcessing ? (
-                        <>
-                          <Cpu className="h-4 w-4 mr-2 animate-spin" />
-                          Processing Quantum Trade...
-                        </>
-                      ) : (
-                        <>
-                          <Zap className="h-4 w-4 mr-2" />
-                          Execute Quantum Trade Demo
-                        </>
-                      )}
+                      <Zap className="h-4 w-4 mr-2" />
+                      Execute Quantum Trade Demo
                     </Button>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -329,39 +323,44 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
             </Card>
 
             <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-              <CardHeader>
+              <div>
                 <CardTitle className="flex items-center text-white">
                   <Activity className="h-5 w-5 mr-2 text-green-400" />
                   Live Market Feed
                 </CardTitle>
                 <CardDescription>Real-time AI market analysis</CardDescription>
-              </CardHeader>
+              </div>
               <CardContent>
                 <div className="space-y-4">
                   {[
-                    { symbol: "SPY", price: 445.67, change: 1.23, signal: "BUY" },
-                    { symbol: "QQQ", price: 378.45, change: -0.87, signal: "HOLD" },
-                    { symbol: "IWM", price: 198.23, change: 2.14, signal: "BUY" },
-                    { symbol: "VIX", price: 16.78, change: -3.45, signal: "SELL" },
-                  ].map((item) => (
-                    <div key={item.symbol} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                    { symbol: 'SPY', price: 445.67, change: 1.23, signal: 'BUY' },
+                    { symbol: 'QQQ', price: 378.45, change: -0.87, signal: 'HOLD' },
+                    { symbol: 'IWM', price: 198.23, change: 2.14, signal: 'BUY' },
+                    { symbol: 'VIX', price: 16.78, change: -3.45, signal: 'SELL' },
+                  ].map(item => (
+                    <div
+                      key={item.symbol}
+                      className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"
+                    >
                       <div>
                         <p className="text-white font-semibold">{item.symbol}</p>
                         <p className="text-gray-400 text-sm">${item.price}</p>
                       </div>
                       <div className="text-right">
-                        <p className={`text-sm ${item.change >= 0 ? "text-green-400" : "text-red-400"}`}>
-                          {item.change >= 0 ? "+" : ""}
+                        <p
+                          className={`text-sm ${item.change >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                        >
+                          {item.change >= 0 ? '+' : ''}
                           {item.change}%
                         </p>
                         <Badge
                           variant="outline"
                           className={`text-xs ${
-                            item.signal === "BUY"
-                              ? "border-green-500/30 text-green-400"
-                              : item.signal === "SELL"
-                                ? "border-red-500/30 text-red-400"
-                                : "border-yellow-500/30 text-yellow-400"
+                            item.signal === 'BUY'
+                              ? 'border-green-500/30 text-green-400'
+                              : item.signal === 'SELL'
+                                ? 'border-red-500/30 text-red-400'
+                                : 'border-yellow-500/30 text-yellow-400'
                           }`}
                         >
                           {item.signal}
@@ -390,7 +389,9 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
               </div>
               <div>
                 <h3 className="text-white font-bold text-lg">Platform Status: OPERATIONAL</h3>
-                <p className="text-green-400">All systems running optimally • 47,892 active traders</p>
+                <p className="text-green-400">
+                  All systems running optimally • 47,892 active traders
+                </p>
               </div>
             </div>
             <div className="text-right">
@@ -401,5 +402,5 @@ export default function InvestorProfile({ onSwitchToOwner, onSwitchToAdmin }: In
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

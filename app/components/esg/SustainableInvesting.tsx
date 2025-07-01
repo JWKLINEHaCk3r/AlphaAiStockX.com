@@ -1,11 +1,13 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Leaf,
   BarChart3,
@@ -22,7 +24,7 @@ import {
   ThumbsUp,
   Users,
   Building2,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function SustainableInvesting() {
   const [esgData, setEsgData] = useState({
@@ -46,146 +48,152 @@ export default function SustainableInvesting() {
     },
     sustainableAUM: 478000000 + Math.random() * 10000000,
     impactInvestments: 124000000 + Math.random() * 5000000,
-  })
+  });
 
   const [esgStocks, setEsgStocks] = useState([
     {
-      ticker: "ENRG",
-      name: "CleanEnergy Solutions",
-      sector: "Renewable Energy",
-      esgRating: "AAA",
+      ticker: 'ENRG',
+      name: 'CleanEnergy Solutions',
+      sector: 'Renewable Energy',
+      esgRating: 'AAA',
       price: 87.45 + Math.random() * 5,
       change: 3.7 + Math.random() * 2,
-      marketCap: "47.8B",
-      recommendation: "Strong Buy",
+      marketCap: '47.8B',
+      recommendation: 'Strong Buy',
     },
     {
-      ticker: "WATR",
-      name: "AquaPure Technologies",
-      sector: "Water Treatment",
-      esgRating: "AA",
+      ticker: 'WATR',
+      name: 'AquaPure Technologies',
+      sector: 'Water Treatment',
+      esgRating: 'AA',
       price: 124.78 + Math.random() * 8,
       change: 2.4 + Math.random() * 2,
-      marketCap: "28.5B",
-      recommendation: "Buy",
+      marketCap: '28.5B',
+      recommendation: 'Buy',
     },
     {
-      ticker: "SOLR",
-      name: "SolarMax Industries",
-      sector: "Solar Energy",
-      esgRating: "AAA",
+      ticker: 'SOLR',
+      name: 'SolarMax Industries',
+      sector: 'Solar Energy',
+      esgRating: 'AAA',
       price: 215.92 + Math.random() * 10,
       change: 4.8 + Math.random() * 2,
-      marketCap: "65.2B",
-      recommendation: "Strong Buy",
+      marketCap: '65.2B',
+      recommendation: 'Strong Buy',
     },
     {
-      ticker: "GRFM",
-      name: "GreenFarm Organics",
-      sector: "Sustainable Agriculture",
-      esgRating: "AA",
+      ticker: 'GRFM',
+      name: 'GreenFarm Organics',
+      sector: 'Sustainable Agriculture',
+      esgRating: 'AA',
       price: 78.34 + Math.random() * 5,
       change: 1.9 + Math.random() * 2,
-      marketCap: "12.7B",
-      recommendation: "Buy",
+      marketCap: '12.7B',
+      recommendation: 'Buy',
     },
-  ])
+  ]);
 
   const [impactFunds, setImpactFunds] = useState([
     {
-      ticker: "CLMT",
-      name: "Climate Action ETF",
-      focus: "Carbon Reduction",
-      aum: "$2.4B",
-      expense: "0.45%",
+      ticker: 'CLMT',
+      name: 'Climate Action ETF',
+      focus: 'Carbon Reduction',
+      aum: '$2.4B',
+      expense: '0.45%',
       ytdReturn: 18.7 + Math.random() * 5,
       rating: 5,
     },
     {
-      ticker: "SDGX",
-      name: "Sustainable Development Fund",
-      focus: "UN SDG Alignment",
-      aum: "$1.8B",
-      expense: "0.52%",
+      ticker: 'SDGX',
+      name: 'Sustainable Development Fund',
+      focus: 'UN SDG Alignment',
+      aum: '$1.8B',
+      expense: '0.52%',
       ytdReturn: 15.4 + Math.random() * 5,
       rating: 4,
     },
     {
-      ticker: "OCNX",
-      name: "Ocean Conservation Fund",
-      focus: "Marine Ecosystems",
-      aum: "$780M",
-      expense: "0.58%",
+      ticker: 'OCNX',
+      name: 'Ocean Conservation Fund',
+      focus: 'Marine Ecosystems',
+      aum: '$780M',
+      expense: '0.58%',
       ytdReturn: 12.9 + Math.random() * 5,
       rating: 5,
     },
     {
-      ticker: "EQTX",
-      name: "Social Equity Portfolio",
-      focus: "Diversity & Inclusion",
-      aum: "$1.2B",
-      expense: "0.49%",
+      ticker: 'EQTX',
+      name: 'Social Equity Portfolio',
+      focus: 'Diversity & Inclusion',
+      aum: '$1.2B',
+      expense: '0.49%',
       ytdReturn: 14.2 + Math.random() * 5,
       rating: 4,
     },
-  ])
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateESGData()
-    }, 5000)
+      updateESGData();
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateESGData = () => {
-    setEsgData((prev) => ({
+    setEsgData(prev => ({
       ...prev,
       portfolioScore: {
         ...prev.portfolioScore,
         overall: Math.min(100, prev.portfolioScore.overall + (Math.random() - 0.3) * 0.5),
-        environmental: Math.min(100, prev.portfolioScore.environmental + (Math.random() - 0.3) * 0.5),
+        environmental: Math.min(
+          100,
+          prev.portfolioScore.environmental + (Math.random() - 0.3) * 0.5
+        ),
         social: Math.min(100, prev.portfolioScore.social + (Math.random() - 0.3) * 0.5),
         governance: Math.min(100, prev.portfolioScore.governance + (Math.random() - 0.3) * 0.5),
       },
       impactMetrics: {
         ...prev.impactMetrics,
         carbonOffset: prev.impactMetrics.carbonOffset + (Math.random() - 0.3) * 5,
-        renewableEnergy: Math.min(100, prev.impactMetrics.renewableEnergy + (Math.random() - 0.3) * 0.5),
+        renewableEnergy: Math.min(
+          100,
+          prev.impactMetrics.renewableEnergy + (Math.random() - 0.3) * 0.5
+        ),
       },
-    }))
+    }));
 
-    setEsgStocks((prev) =>
-      prev.map((stock) => ({
+    setEsgStocks(prev =>
+      prev.map(stock => ({
         ...stock,
         price: stock.price * (1 + (Math.random() - 0.45) * 0.01),
         change: stock.change * (1 + (Math.random() - 0.45) * 0.05),
-      })),
-    )
+      }))
+    );
 
-    setImpactFunds((prev) =>
-      prev.map((fund) => ({
+    setImpactFunds(prev =>
+      prev.map(fund => ({
         ...fund,
         ytdReturn: fund.ytdReturn * (1 + (Math.random() - 0.45) * 0.01),
-      })),
-    )
-  }
+      }))
+    );
+  };
 
-  const getScoreColor = (score) => {
-    if (score >= 90) return "text-green-400"
-    if (score >= 80) return "text-emerald-400"
-    if (score >= 70) return "text-blue-400"
-    if (score >= 60) return "text-yellow-400"
-    return "text-red-400"
-  }
+  const getScoreColor = score => {
+    if (score >= 90) return 'text-green-400';
+    if (score >= 80) return 'text-emerald-400';
+    if (score >= 70) return 'text-blue-400';
+    if (score >= 60) return 'text-yellow-400';
+    return 'text-red-400';
+  };
 
-  const getChangeColor = (change) => {
-    return change >= 0 ? "text-green-400" : "text-red-400"
-  }
+  const getChangeColor = change => {
+    return change >= 0 ? 'text-green-400' : 'text-red-400';
+  };
 
-  const getRatingStars = (rating) => {
-    return "★".repeat(rating) + "☆".repeat(5 - rating)
-  }
+  const getRatingStars = rating => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  };
 
   return (
     <div className="space-y-6">
@@ -193,7 +201,8 @@ export default function SustainableInvesting() {
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Leaf className="h-7 w-7 mr-3 text-green-400" />🌱 ESG & Sustainable Investing
+            <Leaf className="h-7 w-7 mr-3 text-green-400" />
+            🌱 ESG & Sustainable Investing
             <Badge className="ml-3 bg-gradient-to-r from-green-400 to-emerald-500">
               <Globe className="h-4 w-4 mr-1" />
               CLIMATE POSITIVE
@@ -207,7 +216,9 @@ export default function SustainableInvesting() {
                 <Leaf className="h-8 w-8 text-green-400" />
                 <Badge className="bg-green-500">ESG SCORE</Badge>
               </div>
-              <div className={`text-3xl font-bold ${getScoreColor(esgData.portfolioScore.overall)} mb-2`}>
+              <div
+                className={`text-3xl font-bold ${getScoreColor(esgData.portfolioScore.overall)} mb-2`}
+              >
                 {esgData.portfolioScore.overall.toFixed(1)}
               </div>
               <p className="text-green-400 font-semibold">Portfolio ESG Rating</p>
@@ -231,7 +242,9 @@ export default function SustainableInvesting() {
                 <TrendingUp className="h-8 w-8 text-emerald-400" />
                 <Badge className="bg-emerald-500">RETURNS</Badge>
               </div>
-              <div className="text-3xl font-bold text-emerald-400 mb-2">+{esgData.performance.ytd.toFixed(1)}%</div>
+              <div className="text-3xl font-bold text-emerald-400 mb-2">
+                +{esgData.performance.ytd.toFixed(1)}%
+              </div>
               <p className="text-emerald-400 font-semibold">YTD Performance</p>
               <p className="text-gray-400 text-sm">Sustainable investments</p>
             </div>
@@ -269,7 +282,9 @@ export default function SustainableInvesting() {
                     <TreePine className="h-5 w-5 mr-2 text-green-400" />
                     <span className="text-white font-medium">Environmental</span>
                   </div>
-                  <span className={`font-bold ${getScoreColor(esgData.portfolioScore.environmental)}`}>
+                  <span
+                    className={`font-bold ${getScoreColor(esgData.portfolioScore.environmental)}`}
+                  >
                     {esgData.portfolioScore.environmental.toFixed(1)}
                   </span>
                 </div>
@@ -379,7 +394,8 @@ export default function SustainableInvesting() {
       <Card className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-blue-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Sprout className="h-7 w-7 mr-3 text-blue-400" />💰 Sustainable Investment Opportunities
+            <Sprout className="h-7 w-7 mr-3 text-blue-400" />
+            💰 Sustainable Investment Opportunities
             <Badge className="ml-3 bg-gradient-to-r from-blue-400 to-cyan-500">
               <TrendingUp className="h-4 w-4 mr-1" />
               AI CURATED
@@ -405,7 +421,10 @@ export default function SustainableInvesting() {
                 </div>
 
                 {esgStocks.map((stock, index) => (
-                  <div key={index} className="grid grid-cols-6 items-center py-3 border-b border-gray-800/50">
+                  <div
+                    key={index}
+                    className="grid grid-cols-6 items-center py-3 border-b border-gray-800/50"
+                  >
                     <div className="font-bold text-white">{stock.ticker}</div>
                     <div className="col-span-2">
                       <div className="text-white">{stock.name}</div>
@@ -414,11 +433,11 @@ export default function SustainableInvesting() {
                     <div>
                       <Badge
                         className={
-                          stock.esgRating === "AAA"
-                            ? "bg-green-500"
-                            : stock.esgRating === "AA"
-                              ? "bg-emerald-500"
-                              : "bg-blue-500"
+                          stock.esgRating === 'AAA'
+                            ? 'bg-green-500'
+                            : stock.esgRating === 'AA'
+                              ? 'bg-emerald-500'
+                              : 'bg-blue-500'
                         }
                       >
                         {stock.esgRating}
@@ -426,7 +445,7 @@ export default function SustainableInvesting() {
                     </div>
                     <div className="text-white">${stock.price.toFixed(2)}</div>
                     <div className={getChangeColor(stock.change)}>
-                      {stock.change > 0 ? "+" : ""}
+                      {stock.change > 0 ? '+' : ''}
                       {stock.change.toFixed(2)}%
                     </div>
                   </div>
@@ -452,7 +471,9 @@ export default function SustainableInvesting() {
                       <div>
                         <div className="flex items-center">
                           <h4 className="text-white font-bold text-lg">{fund.ticker}</h4>
-                          <span className="text-yellow-400 ml-2">{getRatingStars(fund.rating)}</span>
+                          <span className="text-yellow-400 ml-2">
+                            {getRatingStars(fund.rating)}
+                          </span>
                         </div>
                         <p className="text-gray-300">{fund.name}</p>
                         <div className="flex items-center space-x-2 mt-1">
@@ -462,7 +483,9 @@ export default function SustainableInvesting() {
                         </div>
                       </div>
                       <div className="mt-4 md:mt-0 text-right">
-                        <div className="text-2xl font-bold text-green-400">+{fund.ytdReturn.toFixed(1)}%</div>
+                        <div className="text-2xl font-bold text-green-400">
+                          +{fund.ytdReturn.toFixed(1)}%
+                        </div>
                         <p className="text-gray-400 text-sm">YTD Return</p>
                         <div className="flex items-center justify-end space-x-4 mt-1">
                           <div>
@@ -495,19 +518,27 @@ export default function SustainableInvesting() {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-gray-400">YTD Return</span>
-                      <span className="text-green-400 font-bold">+{esgData.performance.ytd.toFixed(1)}%</span>
+                      <span className="text-green-400 font-bold">
+                        +{esgData.performance.ytd.toFixed(1)}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">1 Year</span>
-                      <span className="text-green-400 font-bold">+{esgData.performance.oneYear.toFixed(1)}%</span>
+                      <span className="text-green-400 font-bold">
+                        +{esgData.performance.oneYear.toFixed(1)}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">3 Year</span>
-                      <span className="text-green-400 font-bold">+{esgData.performance.threeYear.toFixed(1)}%</span>
+                      <span className="text-green-400 font-bold">
+                        +{esgData.performance.threeYear.toFixed(1)}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">5 Year</span>
-                      <span className="text-green-400 font-bold">+{esgData.performance.fiveYear.toFixed(1)}%</span>
+                      <span className="text-green-400 font-bold">
+                        +{esgData.performance.fiveYear.toFixed(1)}%
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -549,7 +580,10 @@ export default function SustainableInvesting() {
                           {esgData.impactMetrics.sustainableMaterials.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress value={esgData.impactMetrics.sustainableMaterials} className="h-2" />
+                      <Progress
+                        value={esgData.impactMetrics.sustainableMaterials}
+                        className="h-2"
+                      />
                     </div>
                   </div>
                 </div>
@@ -558,7 +592,9 @@ export default function SustainableInvesting() {
               {/* Placeholder for chart */}
               <div className="mt-6 h-64 bg-gradient-to-r from-green-500/5 to-blue-500/5 rounded-lg border border-green-400/10 relative overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-green-400 text-lg">ESG vs. Traditional Portfolio Performance Chart</p>
+                  <p className="text-green-400 text-lg">
+                    ESG vs. Traditional Portfolio Performance Chart
+                  </p>
                 </div>
                 <svg
                   className="absolute bottom-0 w-full"
@@ -598,7 +634,8 @@ export default function SustainableInvesting() {
       <Card className="bg-gradient-to-r from-emerald-900/20 to-teal-900/20 border-emerald-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Globe className="h-7 w-7 mr-3 text-emerald-400" />🌍 Impact Investing Dashboard
+            <Globe className="h-7 w-7 mr-3 text-emerald-400" />
+            🌍 Impact Investing Dashboard
             <Badge className="ml-3 bg-gradient-to-r from-emerald-400 to-teal-500">
               <Sprout className="h-4 w-4 mr-1" />
               UN SDG ALIGNED
@@ -615,7 +652,8 @@ export default function SustainableInvesting() {
                 <h3 className="text-white font-bold text-lg">Clean Energy</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Investments in renewable energy projects including solar, wind, and hydroelectric power generation.
+                Investments in renewable energy projects including solar, wind, and hydroelectric
+                power generation.
               </p>
               <div className="flex items-center justify-between">
                 <Badge className="bg-emerald-500">$47.8M INVESTED</Badge>
@@ -631,7 +669,8 @@ export default function SustainableInvesting() {
                 <h3 className="text-white font-bold text-lg">Water Solutions</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Investments in clean water access, conservation technologies, and ocean preservation initiatives.
+                Investments in clean water access, conservation technologies, and ocean preservation
+                initiatives.
               </p>
               <div className="flex items-center justify-between">
                 <Badge className="bg-blue-500">$28.5M INVESTED</Badge>
@@ -647,7 +686,8 @@ export default function SustainableInvesting() {
                 <h3 className="text-white font-bold text-lg">Sustainable Agriculture</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Investments in organic farming, regenerative agriculture, and sustainable food production systems.
+                Investments in organic farming, regenerative agriculture, and sustainable food
+                production systems.
               </p>
               <div className="flex items-center justify-between">
                 <Badge className="bg-green-500">$15.4M INVESTED</Badge>
@@ -710,5 +750,5 @@ export default function SustainableInvesting() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

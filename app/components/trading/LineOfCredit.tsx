@@ -1,44 +1,46 @@
-"use client"
+'use client';
 
-import type React from "react"
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { CheckCheck, CreditCard, Wallet } from "lucide-react"
+import type React from 'react';
+import { useState } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+import { CheckCheck, CreditCard, Wallet } from 'lucide-react';
 
 interface LineOfCreditProps {
-  availableCredit: number
-  interestRate: number
-  onBorrow: (amount: number) => void
+  availableCredit: number;
+  interestRate: number;
+  onBorrow: (amount: number) => void;
 }
 
 const LineOfCredit: React.FC<LineOfCreditProps> = ({ availableCredit, interestRate, onBorrow }) => {
-  const [borrowAmount, setBorrowAmount] = useState<number>(0)
-  const [sliderValue, setSliderValue] = useState<number[]>([0])
+  const [borrowAmount, setBorrowAmount] = useState<number>(0);
+  const [sliderValue, setSliderValue] = useState<number[]>([0]);
 
   const handleBorrowAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number.parseFloat(event.target.value)
-    setBorrowAmount(value)
-    setSliderValue([value])
-  }
+    const value = Number.parseFloat(event.target.value);
+    setBorrowAmount(value);
+    setSliderValue([value]);
+  };
 
   const handleSliderChange = (value: number[]) => {
-    setSliderValue(value)
-    setBorrowAmount(value[0])
-  }
+    setSliderValue(value);
+    setBorrowAmount(value[0]);
+  };
 
   const handleBorrow = () => {
     if (borrowAmount > 0 && borrowAmount <= availableCredit) {
-      onBorrow(borrowAmount)
-      setBorrowAmount(0)
-      setSliderValue([0])
+      onBorrow(borrowAmount);
+      setBorrowAmount(0);
+      setSliderValue([0]);
     } else {
-      alert("Invalid borrow amount.")
+      alert('Invalid borrow amount.');
     }
-  }
+  };
 
   return (
     <Card className="w-full">
@@ -83,7 +85,7 @@ const LineOfCredit: React.FC<LineOfCreditProps> = ({ availableCredit, interestRa
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default LineOfCredit
+export default LineOfCredit;

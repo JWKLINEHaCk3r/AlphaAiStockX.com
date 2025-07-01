@@ -1,9 +1,11 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   Cpu,
   Database,
@@ -17,7 +19,7 @@ import {
   Rocket,
   Brain,
   Activity,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function PerformanceOptimizer() {
   const [systemMetrics, setSystemMetrics] = useState({
@@ -29,21 +31,21 @@ export default function PerformanceOptimizer() {
     apiResponseTime: 0,
     activeConnections: 0,
     dataProcessingRate: 0,
-  })
+  });
 
-  const [optimizations, setOptimizations] = useState([])
-  const [performanceScore, setPerformanceScore] = useState(0)
+  const [optimizations, setOptimizations] = useState([]);
+  const [performanceScore, setPerformanceScore] = useState(0);
 
   useEffect(() => {
     // Simulate real-time performance monitoring
     const interval = setInterval(() => {
-      updateSystemMetrics()
-      runOptimizations()
-      calculatePerformanceScore()
-    }, 1000)
+      updateSystemMetrics();
+      runOptimizations();
+      calculatePerformanceScore();
+    }, 1000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateSystemMetrics = () => {
     setSystemMetrics({
@@ -55,50 +57,50 @@ export default function PerformanceOptimizer() {
       apiResponseTime: Math.max(10, Math.min(200, 25 + Math.random() * 30)),
       activeConnections: Math.floor(50000 + Math.random() * 100000),
       dataProcessingRate: Math.floor(8000000 + Math.random() * 2000000),
-    })
-  }
+    });
+  };
 
   const runOptimizations = () => {
     const optimizationTypes = [
       {
-        type: "Memory Optimization",
-        description: "Garbage collection and memory defragmentation",
-        impact: "15% performance boost",
-        status: "active",
+        type: 'Memory Optimization',
+        description: 'Garbage collection and memory defragmentation',
+        impact: '15% performance boost',
+        status: 'active',
         icon: MemoryStick,
       },
       {
-        type: "Cache Warming",
-        description: "Preloading frequently accessed data",
-        impact: "25% faster response times",
-        status: "active",
+        type: 'Cache Warming',
+        description: 'Preloading frequently accessed data',
+        impact: '25% faster response times',
+        status: 'active',
         icon: Database,
       },
       {
-        type: "Connection Pooling",
-        description: "Optimizing database connections",
-        impact: "30% reduced latency",
-        status: "active",
+        type: 'Connection Pooling',
+        description: 'Optimizing database connections',
+        impact: '30% reduced latency',
+        status: 'active',
         icon: Server,
       },
       {
-        type: "CDN Acceleration",
-        description: "Global content delivery optimization",
-        impact: "40% faster load times",
-        status: "active",
+        type: 'CDN Acceleration',
+        description: 'Global content delivery optimization',
+        impact: '40% faster load times',
+        status: 'active',
         icon: CloudLightning,
       },
       {
-        type: "AI Model Caching",
-        description: "Caching neural network predictions",
-        impact: "60% faster AI responses",
-        status: "active",
+        type: 'AI Model Caching',
+        description: 'Caching neural network predictions',
+        impact: '60% faster AI responses',
+        status: 'active',
         icon: Brain,
       },
-    ]
+    ];
 
-    setOptimizations(optimizationTypes)
-  }
+    setOptimizations(optimizationTypes);
+  };
 
   const calculatePerformanceScore = () => {
     const score =
@@ -106,16 +108,16 @@ export default function PerformanceOptimizer() {
         (100 - systemMetrics.cpuUsage) +
         (100 - systemMetrics.memoryUsage) +
         (100 - systemMetrics.networkLatency * 2)) /
-      4
-    setPerformanceScore(Math.max(85, Math.min(99, score)))
-  }
+      4;
+    setPerformanceScore(Math.max(85, Math.min(99, score)));
+  };
 
   const getStatusColor = (value, isReverse = false) => {
     if (isReverse) {
-      return value > 90 ? "text-green-400" : value > 70 ? "text-yellow-400" : "text-red-400"
+      return value > 90 ? 'text-green-400' : value > 70 ? 'text-yellow-400' : 'text-red-400';
     }
-    return value < 30 ? "text-green-400" : value < 70 ? "text-yellow-400" : "text-red-400"
-  }
+    return value < 30 ? 'text-green-400' : value < 70 ? 'text-yellow-400' : 'text-red-400';
+  };
 
   return (
     <div className="space-y-6">
@@ -138,13 +140,17 @@ export default function PerformanceOptimizer() {
               <div className="flex items-center justify-center mb-4">
                 <div className="relative">
                   <div className="w-24 h-24 rounded-full border-4 border-green-400/30 flex items-center justify-center">
-                    <span className="text-3xl font-bold text-green-400">{performanceScore.toFixed(0)}</span>
+                    <span className="text-3xl font-bold text-green-400">
+                      {performanceScore.toFixed(0)}
+                    </span>
                   </div>
                   <div className="absolute inset-0 rounded-full border-4 border-green-400 animate-pulse"></div>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Performance Score</h3>
-              <p className="text-green-400 font-semibold">EXCELLENT - System Running at Peak Performance</p>
+              <p className="text-green-400 font-semibold">
+                EXCELLENT - System Running at Peak Performance
+              </p>
             </div>
 
             {/* CPU Usage */}
@@ -191,7 +197,9 @@ export default function PerformanceOptimizer() {
                 <span className="text-yellow-400 font-semibold">Cache Hit Rate</span>
                 <Database className="h-5 w-5 text-yellow-400" />
               </div>
-              <p className={`text-2xl font-bold ${getStatusColor(systemMetrics.cacheHitRate, true)}`}>
+              <p
+                className={`text-2xl font-bold ${getStatusColor(systemMetrics.cacheHitRate, true)}`}
+              >
                 {systemMetrics.cacheHitRate.toFixed(1)}%
               </p>
               <Progress value={systemMetrics.cacheHitRate} className="h-2 mt-2" />
@@ -205,7 +213,9 @@ export default function PerformanceOptimizer() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-cyan-400 font-semibold">Active Connections</p>
-                  <p className="text-2xl font-bold text-white">{systemMetrics.activeConnections.toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-white">
+                    {systemMetrics.activeConnections.toLocaleString()}
+                  </p>
                 </div>
                 <Activity className="h-8 w-8 text-cyan-400" />
               </div>
@@ -215,7 +225,9 @@ export default function PerformanceOptimizer() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-400 font-semibold">API Response Time</p>
-                  <p className="text-2xl font-bold text-white">{systemMetrics.apiResponseTime.toFixed(0)}ms</p>
+                  <p className="text-2xl font-bold text-white">
+                    {systemMetrics.apiResponseTime.toFixed(0)}ms
+                  </p>
                 </div>
                 <Zap className="h-8 w-8 text-purple-400" />
               </div>
@@ -251,7 +263,7 @@ export default function PerformanceOptimizer() {
         <CardContent>
           <div className="space-y-4">
             {optimizations.map((optimization, index) => {
-              const IconComponent = optimization.icon
+              const IconComponent = optimization.icon;
               return (
                 <div
                   key={index}
@@ -268,12 +280,14 @@ export default function PerformanceOptimizer() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <Badge className="bg-green-500 mb-2">{optimization.status.toUpperCase()}</Badge>
+                      <Badge className="bg-green-500 mb-2">
+                        {optimization.status.toUpperCase()}
+                      </Badge>
                       <p className="text-green-400 font-semibold text-sm">{optimization.impact}</p>
                     </div>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -301,5 +315,5 @@ export default function PerformanceOptimizer() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

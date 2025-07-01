@@ -1,12 +1,12 @@
-import type React from "react"
+import type React from 'react';
 
 interface ChecklistItem {
-  label: string
-  completed: boolean
+  label: string;
+  completed: boolean;
 }
 
 interface IONOSDeploymentChecklistProps {
-  items: ChecklistItem[]
+  items: ChecklistItem[];
 }
 
 const IONOSDeploymentChecklist: React.FC<IONOSDeploymentChecklistProps> = ({ items }) => {
@@ -35,7 +35,7 @@ const IONOSDeploymentChecklist: React.FC<IONOSDeploymentChecklistProps> = ({ ite
         </ol>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default IONOSDeploymentChecklist
+export default IONOSDeploymentChecklist;

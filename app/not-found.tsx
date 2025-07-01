@@ -1,7 +1,9 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Home, TrendingUp, AlertCircle } from "lucide-react"
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Home, TrendingUp, AlertCircle } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -41,9 +43,11 @@ export default function NotFound() {
               </Link>
             </Button>
           </div>
-          <div className="text-center text-xs text-gray-500 mt-6">AlphaAIStockX - Your AI Trading Companion</div>
+          <div className="text-center text-xs text-gray-500 mt-6">
+            AlphaAIStockX - Your AI Trading Companion
+          </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

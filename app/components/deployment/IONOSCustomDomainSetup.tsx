@@ -1,6 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Info, AlertTriangle } from "lucide-react"
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Info, AlertTriangle } from 'lucide-react';
 
 export default function IONOSCustomDomainSetup() {
   return (
@@ -11,7 +13,8 @@ export default function IONOSCustomDomainSetup() {
         <Info className="h-5 w-5 text-blue-500" />
         <AlertTitle className="text-blue-700">Professional Branding</AlertTitle>
         <AlertDescription className="text-blue-600">
-          A custom domain like alphaaistockx.com enhances your platform's credibility and brand recognition.
+          A custom domain like alphaaistockx.com enhances your platform's credibility and brand
+          recognition.
         </AlertDescription>
       </Alert>
 
@@ -19,7 +22,9 @@ export default function IONOSCustomDomainSetup() {
         <Card>
           <CardHeader>
             <CardTitle>Option 1: Register a New Domain with IONOS</CardTitle>
-            <CardDescription>Purchase and configure a new domain directly through IONOS</CardDescription>
+            <CardDescription>
+              Purchase and configure a new domain directly through IONOS
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ol className="list-decimal pl-5 space-y-2">
@@ -50,7 +55,8 @@ export default function IONOSCustomDomainSetup() {
             <div className="mt-4 flex items-start gap-2 bg-amber-50 p-3 rounded-md border border-amber-200">
               <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
               <p className="text-amber-700 text-sm">
-                Domain transfers can take several days to complete. Plan accordingly to avoid downtime.
+                Domain transfers can take several days to complete. Plan accordingly to avoid
+                downtime.
               </p>
             </div>
           </CardContent>
@@ -59,7 +65,9 @@ export default function IONOSCustomDomainSetup() {
         <Card>
           <CardHeader>
             <CardTitle>Option 3: Use an External Domain with IONOS Hosting</CardTitle>
-            <CardDescription>Keep your domain at another registrar but use IONOS hosting</CardDescription>
+            <CardDescription>
+              Keep your domain at another registrar but use IONOS hosting
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ol className="list-decimal pl-5 space-y-2">
@@ -130,8 +138,9 @@ export default function IONOSCustomDomainSetup() {
 
             <div className="mt-4 p-3 bg-gray-50 rounded-md border border-gray-200">
               <p className="text-sm text-gray-700">
-                <strong>Note:</strong> IONOS often configures these records automatically when you register a domain
-                through them. You may only need to adjust them for specific requirements.
+                <strong>Note:</strong> IONOS often configures these records automatically when you
+                register a domain through them. You may only need to adjust them for specific
+                requirements.
               </p>
             </div>
           </CardContent>
@@ -144,7 +153,8 @@ export default function IONOSCustomDomainSetup() {
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              You might want to set up subdomains for different parts of your AlphaAIStockX platform:
+              You might want to set up subdomains for different parts of your AlphaAIStockX
+              platform:
             </p>
 
             <ul className="list-disc pl-5 space-y-2">
@@ -175,5 +185,5 @@ export default function IONOSCustomDomainSetup() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

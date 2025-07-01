@@ -1,145 +1,148 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 export default function SectorRotationAI() {
-  const [sectorData, setSectorData] = useState([])
-  const [rotationSignals, setRotationSignals] = useState([])
-  const [economicCycle, setEconomicCycle] = useState({})
+  const [sectorData, setSectorData] = useState([]);
+  const [rotationSignals, setRotationSignals] = useState([]);
+  const [economicCycle, setEconomicCycle] = useState({});
 
   useEffect(() => {
-    generateSectorData()
-    generateRotationSignals()
-    generateEconomicCycle()
+    generateSectorData();
+    generateRotationSignals();
+    generateEconomicCycle();
 
     const interval = setInterval(() => {
-      generateSectorData()
-      generateRotationSignals()
-    }, 10000)
+      generateSectorData();
+      generateRotationSignals();
+    }, 10000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const generateSectorData = () => {
     const sectors = [
-      { name: "Technology", symbol: "XLK", weight: 28.5 },
-      { name: "Healthcare", symbol: "XLV", weight: 13.2 },
-      { name: "Financials", symbol: "XLF", weight: 11.8 },
-      { name: "Consumer Discretionary", symbol: "XLY", weight: 10.9 },
-      { name: "Communication", symbol: "XLC", weight: 8.7 },
-      { name: "Industrials", symbol: "XLI", weight: 8.4 },
-      { name: "Consumer Staples", symbol: "XLP", weight: 6.1 },
-      { name: "Energy", symbol: "XLE", weight: 4.2 },
-      { name: "Utilities", symbol: "XLU", weight: 2.8 },
-      { name: "Real Estate", symbol: "XLRE", weight: 2.5 },
-      { name: "Materials", symbol: "XLB", weight: 2.9 },
-    ]
+      { name: 'Technology', symbol: 'XLK', weight: 28.5 },
+      { name: 'Healthcare', symbol: 'XLV', weight: 13.2 },
+      { name: 'Financials', symbol: 'XLF', weight: 11.8 },
+      { name: 'Consumer Discretionary', symbol: 'XLY', weight: 10.9 },
+      { name: 'Communication', symbol: 'XLC', weight: 8.7 },
+      { name: 'Industrials', symbol: 'XLI', weight: 8.4 },
+      { name: 'Consumer Staples', symbol: 'XLP', weight: 6.1 },
+      { name: 'Energy', symbol: 'XLE', weight: 4.2 },
+      { name: 'Utilities', symbol: 'XLU', weight: 2.8 },
+      { name: 'Real Estate', symbol: 'XLRE', weight: 2.5 },
+      { name: 'Materials', symbol: 'XLB', weight: 2.9 },
+    ];
 
-    const data = sectors.map((sector) => ({
+    const data = sectors.map(sector => ({
       ...sector,
       performance1D: (Math.random() - 0.5) * 4,
       performance1W: (Math.random() - 0.5) * 8,
       performance1M: (Math.random() - 0.5) * 15,
       momentum: 40 + Math.random() * 60,
       relativeStrength: 30 + Math.random() * 70,
-      flowRating: Math.random() > 0.6 ? "inflow" : Math.random() > 0.3 ? "outflow" : "neutral",
+      flowRating: Math.random() > 0.6 ? 'inflow' : Math.random() > 0.3 ? 'outflow' : 'neutral',
       aiScore: 50 + Math.random() * 50,
       volatility: 10 + Math.random() * 20,
-      recommendation: Math.random() > 0.6 ? "overweight" : Math.random() > 0.3 ? "underweight" : "neutral",
-    }))
+      recommendation:
+        Math.random() > 0.6 ? 'overweight' : Math.random() > 0.3 ? 'underweight' : 'neutral',
+    }));
 
-    setSectorData(data.sort((a, b) => b.aiScore - a.aiScore))
-  }
+    setSectorData(data.sort((a, b) => b.aiScore - a.aiScore));
+  };
 
   const generateRotationSignals = () => {
     const signals = [
       {
-        from: "Technology",
-        to: "Energy",
+        from: 'Technology',
+        to: 'Energy',
         strength: 85,
-        timeframe: "2-4 weeks",
-        catalyst: "Rising oil prices & rate cuts",
+        timeframe: '2-4 weeks',
+        catalyst: 'Rising oil prices & rate cuts',
         confidence: 78,
         historicalSuccess: 72,
       },
       {
-        from: "Growth",
-        to: "Value",
+        from: 'Growth',
+        to: 'Value',
         strength: 72,
-        timeframe: "1-3 months",
-        catalyst: "Economic cycle transition",
+        timeframe: '1-3 months',
+        catalyst: 'Economic cycle transition',
         confidence: 84,
         historicalSuccess: 68,
       },
       {
-        from: "Consumer Discretionary",
-        to: "Healthcare",
+        from: 'Consumer Discretionary',
+        to: 'Healthcare',
         strength: 68,
-        timeframe: "3-6 weeks",
-        catalyst: "Defensive positioning",
+        timeframe: '3-6 weeks',
+        catalyst: 'Defensive positioning',
         confidence: 71,
         historicalSuccess: 75,
       },
       {
-        from: "Small Cap",
-        to: "Large Cap",
+        from: 'Small Cap',
+        to: 'Large Cap',
         strength: 91,
-        timeframe: "1-2 weeks",
-        catalyst: "Risk-off sentiment",
+        timeframe: '1-2 weeks',
+        catalyst: 'Risk-off sentiment',
         confidence: 89,
         historicalSuccess: 81,
       },
-    ]
+    ];
 
-    setRotationSignals(signals)
-  }
+    setRotationSignals(signals);
+  };
 
   const generateEconomicCycle = () => {
     setEconomicCycle({
-      currentPhase: "Late Cycle",
-      nextPhase: "Recession",
+      currentPhase: 'Late Cycle',
+      nextPhase: 'Recession',
       transitionProbability: 65,
-      timeToTransition: "3-6 months",
+      timeToTransition: '3-6 months',
       keyIndicators: [
-        { name: "Yield Curve", status: "Inverted", impact: "Negative" },
-        { name: "Employment", status: "Strong", impact: "Positive" },
-        { name: "Inflation", status: "Moderating", impact: "Positive" },
-        { name: "Fed Policy", status: "Restrictive", impact: "Negative" },
+        { name: 'Yield Curve', status: 'Inverted', impact: 'Negative' },
+        { name: 'Employment', status: 'Strong', impact: 'Positive' },
+        { name: 'Inflation', status: 'Moderating', impact: 'Positive' },
+        { name: 'Fed Policy', status: 'Restrictive', impact: 'Negative' },
       ],
-      recommendedSectors: ["Healthcare", "Utilities", "Consumer Staples"],
-      avoidSectors: ["Technology", "Consumer Discretionary", "Real Estate"],
-    })
-  }
+      recommendedSectors: ['Healthcare', 'Utilities', 'Consumer Staples'],
+      avoidSectors: ['Technology', 'Consumer Discretionary', 'Real Estate'],
+    });
+  };
 
-  const getFlowColor = (flow) => {
+  const getFlowColor = flow => {
     switch (flow) {
-      case "inflow":
-        return "text-emerald-400"
-      case "outflow":
-        return "text-red-400"
+      case 'inflow':
+        return 'text-emerald-400';
+      case 'outflow':
+        return 'text-red-400';
       default:
-        return "text-amber-400"
+        return 'text-amber-400';
     }
-  }
+  };
 
-  const getRecommendationColor = (rec) => {
+  const getRecommendationColor = rec => {
     switch (rec) {
-      case "overweight":
-        return "text-emerald-400"
-      case "underweight":
-        return "text-red-400"
+      case 'overweight':
+        return 'text-emerald-400';
+      case 'underweight':
+        return 'text-red-400';
       default:
-        return "text-amber-400"
+        return 'text-amber-400';
     }
-  }
+  };
 
-  const getPerformanceColor = (perf) => {
-    return perf >= 0 ? "text-emerald-400" : "text-red-400"
-  }
+  const getPerformanceColor = perf => {
+    return perf >= 0 ? 'text-emerald-400' : 'text-red-400';
+  };
 
   return (
     <div className="space-y-6">
@@ -166,7 +169,9 @@ export default function SectorRotationAI() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-stone-400 text-sm">Transition Probability:</span>
-                    <span className="text-amber-400 font-semibold">{economicCycle.transitionProbability}%</span>
+                    <span className="text-amber-400 font-semibold">
+                      {economicCycle.transitionProbability}%
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-stone-400 text-sm">Time to Transition:</span>
@@ -178,13 +183,20 @@ export default function SectorRotationAI() {
               <div className="space-y-3">
                 <h4 className="text-stone-200 font-semibold">Key Economic Indicators</h4>
                 {economicCycle.keyIndicators?.map((indicator, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-stone-800/30 rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-stone-800/30 rounded-lg"
+                  >
                     <span className="text-stone-300">{indicator.name}</span>
                     <div className="flex items-center space-x-2">
                       <Badge variant="outline" className="border-stone-600/30 text-stone-300">
                         {indicator.status}
                       </Badge>
-                      <Badge className={indicator.impact === "Positive" ? "bg-emerald-500" : "bg-red-500"}>
+                      <Badge
+                        className={
+                          indicator.impact === 'Positive' ? 'bg-emerald-500' : 'bg-red-500'
+                        }
+                      >
                         {indicator.impact}
                       </Badge>
                     </div>
@@ -303,7 +315,9 @@ export default function SectorRotationAI() {
                         <Badge variant="outline" className="border-stone-600/30 text-stone-400">
                           {sector.symbol}
                         </Badge>
-                        <Badge className={getRecommendationColor(sector.recommendation)}>{sector.recommendation}</Badge>
+                        <Badge className={getRecommendationColor(sector.recommendation)}>
+                          {sector.recommendation}
+                        </Badge>
                       </div>
                       <p className="text-sm text-stone-400">Weight: {sector.weight}%</p>
                     </div>
@@ -311,22 +325,28 @@ export default function SectorRotationAI() {
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
                         <p className="text-stone-400 text-xs">1D</p>
-                        <p className={`text-sm font-semibold ${getPerformanceColor(sector.performance1D)}`}>
-                          {sector.performance1D >= 0 ? "+" : ""}
+                        <p
+                          className={`text-sm font-semibold ${getPerformanceColor(sector.performance1D)}`}
+                        >
+                          {sector.performance1D >= 0 ? '+' : ''}
                           {sector.performance1D.toFixed(2)}%
                         </p>
                       </div>
                       <div>
                         <p className="text-stone-400 text-xs">1W</p>
-                        <p className={`text-sm font-semibold ${getPerformanceColor(sector.performance1W)}`}>
-                          {sector.performance1W >= 0 ? "+" : ""}
+                        <p
+                          className={`text-sm font-semibold ${getPerformanceColor(sector.performance1W)}`}
+                        >
+                          {sector.performance1W >= 0 ? '+' : ''}
                           {sector.performance1W.toFixed(2)}%
                         </p>
                       </div>
                       <div>
                         <p className="text-stone-400 text-xs">1M</p>
-                        <p className={`text-sm font-semibold ${getPerformanceColor(sector.performance1M)}`}>
-                          {sector.performance1M >= 0 ? "+" : ""}
+                        <p
+                          className={`text-sm font-semibold ${getPerformanceColor(sector.performance1M)}`}
+                        >
+                          {sector.performance1M >= 0 ? '+' : ''}
                           {sector.performance1M.toFixed(2)}%
                         </p>
                       </div>
@@ -346,8 +366,12 @@ export default function SectorRotationAI() {
 
                   <div className="text-right">
                     <Badge className={getFlowColor(sector.flowRating)}>{sector.flowRating}</Badge>
-                    <p className="text-xs text-stone-400 mt-1">Vol: {sector.volatility.toFixed(1)}%</p>
-                    <p className="text-xs text-stone-400">RS: {sector.relativeStrength.toFixed(0)}</p>
+                    <p className="text-xs text-stone-400 mt-1">
+                      Vol: {sector.volatility.toFixed(1)}%
+                    </p>
+                    <p className="text-xs text-stone-400">
+                      RS: {sector.relativeStrength.toFixed(0)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -356,5 +380,5 @@ export default function SectorRotationAI() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

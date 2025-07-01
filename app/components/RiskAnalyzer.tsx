@@ -1,83 +1,89 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { AlertTriangle, Shield, TrendingDown, Activity, Target, BarChart3 } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { AlertTriangle, Shield, TrendingDown, Activity, Target, BarChart3 } from 'lucide-react';
 
 export default function RiskAnalyzer() {
-  const [riskMetrics, setRiskMetrics] = useState(null)
+  const [riskMetrics, setRiskMetrics] = useState(null);
 
   useEffect(() => {
     // Simulate risk analysis data
     setRiskMetrics({
       overallRisk: 68,
-      riskLevel: "Medium-High",
+      riskLevel: 'Medium-High',
       valueAtRisk: {
         oneDay: 2.3,
         oneWeek: 5.8,
         oneMonth: 12.4,
       },
       stressTests: [
-        { scenario: "Market Crash (-20%)", portfolioImpact: -18.5, probability: 5 },
-        { scenario: "Interest Rate Spike", portfolioImpact: -12.3, probability: 15 },
-        { scenario: "Sector Rotation", portfolioImpact: -8.7, probability: 25 },
-        { scenario: "Inflation Surge", portfolioImpact: -6.2, probability: 20 },
+        { scenario: 'Market Crash (-20%)', portfolioImpact: -18.5, probability: 5 },
+        { scenario: 'Interest Rate Spike', portfolioImpact: -12.3, probability: 15 },
+        { scenario: 'Sector Rotation', portfolioImpact: -8.7, probability: 25 },
+        { scenario: 'Inflation Surge', portfolioImpact: -6.2, probability: 20 },
       ],
       correlationRisks: [
-        { asset1: "AAPL", asset2: "MSFT", correlation: 0.78, risk: "High" },
-        { asset1: "TSLA", asset2: "NVDA", correlation: 0.65, risk: "Medium" },
-        { asset1: "GOOGL", asset2: "AMZN", correlation: 0.72, risk: "High" },
+        { asset1: 'AAPL', asset2: 'MSFT', correlation: 0.78, risk: 'High' },
+        { asset1: 'TSLA', asset2: 'NVDA', correlation: 0.65, risk: 'Medium' },
+        { asset1: 'GOOGL', asset2: 'AMZN', correlation: 0.72, risk: 'High' },
       ],
       riskFactors: [
-        { factor: "Concentration Risk", score: 75, description: "Portfolio concentrated in tech sector" },
-        { factor: "Volatility Risk", score: 68, description: "High individual stock volatilities" },
-        { factor: "Market Risk", score: 55, description: "Exposure to market downturns" },
-        { factor: "Liquidity Risk", score: 25, description: "All holdings are highly liquid" },
-        { factor: "Currency Risk", score: 15, description: "Minimal foreign exposure" },
+        {
+          factor: 'Concentration Risk',
+          score: 75,
+          description: 'Portfolio concentrated in tech sector',
+        },
+        { factor: 'Volatility Risk', score: 68, description: 'High individual stock volatilities' },
+        { factor: 'Market Risk', score: 55, description: 'Exposure to market downturns' },
+        { factor: 'Liquidity Risk', score: 25, description: 'All holdings are highly liquid' },
+        { factor: 'Currency Risk', score: 15, description: 'Minimal foreign exposure' },
       ],
       hedgingStrategies: [
         {
-          strategy: "Put Options on QQQ",
-          cost: "1.2% of portfolio",
-          protection: "15-20% downside",
+          strategy: 'Put Options on QQQ',
+          cost: '1.2% of portfolio',
+          protection: '15-20% downside',
           effectiveness: 85,
         },
         {
-          strategy: "VIX Calls",
-          cost: "0.8% of portfolio",
-          protection: "Volatility spikes",
+          strategy: 'VIX Calls',
+          cost: '0.8% of portfolio',
+          protection: 'Volatility spikes',
           effectiveness: 70,
         },
         {
-          strategy: "Treasury Bonds",
-          cost: "Opportunity cost",
-          protection: "Market correlation",
+          strategy: 'Treasury Bonds',
+          cost: 'Opportunity cost',
+          protection: 'Market correlation',
           effectiveness: 60,
         },
       ],
-    })
-  }, [])
+    });
+  }, []);
 
-  const getRiskColor = (score) => {
-    if (score >= 70) return "text-red-400"
-    if (score >= 40) return "text-yellow-400"
-    return "text-green-400"
-  }
+  const getRiskColor = score => {
+    if (score >= 70) return 'text-red-400';
+    if (score >= 40) return 'text-yellow-400';
+    return 'text-green-400';
+  };
 
-  const getRiskBadgeVariant = (level) => {
+  const getRiskBadgeVariant = level => {
     switch (level) {
-      case "High":
-        return "destructive"
-      case "Medium":
-        return "secondary"
-      case "Low":
-        return "default"
+      case 'High':
+        return 'destructive';
+      case 'Medium':
+        return 'secondary';
+      case 'Low':
+        return 'default';
       default:
-        return "outline"
+        return 'outline';
     }
-  }
+  };
 
   if (!riskMetrics) {
     return (
@@ -87,7 +93,7 @@ export default function RiskAnalyzer() {
           <p className="text-white">Analyzing portfolio risks...</p>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -108,7 +114,9 @@ export default function RiskAnalyzer() {
         <Card className="bg-black/20 border-yellow-500/30 backdrop-blur-xl">
           <CardContent className="p-6 text-center">
             <TrendingDown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-            <p className="text-3xl font-bold text-yellow-400 mb-2">{riskMetrics.valueAtRisk.oneDay}%</p>
+            <p className="text-3xl font-bold text-yellow-400 mb-2">
+              {riskMetrics.valueAtRisk.oneDay}%
+            </p>
             <p className="text-gray-300">1-Day VaR (95%)</p>
             <p className="text-xs text-gray-400 mt-2">Maximum expected loss</p>
           </CardContent>
@@ -260,5 +268,5 @@ export default function RiskAnalyzer() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

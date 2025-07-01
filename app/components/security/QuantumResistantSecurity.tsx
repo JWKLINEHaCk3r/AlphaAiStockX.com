@@ -1,26 +1,28 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Shield, Lock, Key, AlertTriangle, CheckCircle, Cpu, Database, Atom } from "lucide-react"
+import { useState } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Shield, Lock, Key, AlertTriangle, CheckCircle, Cpu, Database, Atom } from 'lucide-react';
 
 // Simple auth mock for demo
 const useAuth = () => ({
-  user: { id: "1", name: "Demo User", email: "demo@example.com" },
+  user: { id: '1', name: 'Demo User', email: 'demo@example.com' },
   isAuthenticated: true,
-})
+});
 
 export default function QuantumResistantSecurity() {
-  const { user, isAuthenticated } = useAuth()
-  const [securityScore, setSecurityScore] = useState(98)
-  const [quantumThreatLevel, setQuantumThreatLevel] = useState("LOW")
-  const [protectedAssets, setProtectedAssets] = useState(2847392.5)
-  const [keyRotationStatus, setKeyRotationStatus] = useState("ACTIVE")
+  const { user, isAuthenticated } = useAuth();
+  const [securityScore, setSecurityScore] = useState(98);
+  const [quantumThreatLevel, setQuantumThreatLevel] = useState('LOW');
+  const [protectedAssets, setProtectedAssets] = useState(2847392.5);
+  const [keyRotationStatus, setKeyRotationStatus] = useState('ACTIVE');
 
   return (
     <div className="container mx-auto py-10">
@@ -62,11 +64,11 @@ export default function QuantumResistantSecurity() {
               <h3 className="text-lg font-semibold">Quantum Threat Level</h3>
               <Badge
                 variant={
-                  quantumThreatLevel === "HIGH"
-                    ? "destructive"
-                    : quantumThreatLevel === "MEDIUM"
-                      ? "warning"
-                      : "success"
+                  quantumThreatLevel === 'HIGH'
+                    ? 'destructive'
+                    : quantumThreatLevel === 'MEDIUM'
+                      ? 'warning'
+                      : 'success'
                 }
               >
                 {quantumThreatLevel}
@@ -84,7 +86,9 @@ export default function QuantumResistantSecurity() {
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">Key Rotation Status</h3>
-              <Badge variant={keyRotationStatus === "ACTIVE" ? "success" : "destructive"}>{keyRotationStatus}</Badge>
+              <Badge variant={keyRotationStatus === 'ACTIVE' ? 'success' : 'destructive'}>
+                {keyRotationStatus}
+              </Badge>
             </div>
           </div>
 
@@ -100,7 +104,7 @@ export default function QuantumResistantSecurity() {
                 <Card>
                   <CardHeader>
                     <CardTitle>
-                      {" "}
+                      {' '}
                       <Shield className="h-4 w-4 mr-2 inline-block" /> Security Overview
                     </CardTitle>
                     <CardDescription>General security metrics and information.</CardDescription>
@@ -138,7 +142,9 @@ export default function QuantumResistantSecurity() {
                     <CardTitle>
                       <Atom className="h-4 w-4 mr-2 inline-block" /> Quantum Threat Mitigation
                     </CardTitle>
-                    <CardDescription>Strategies to counter quantum computing threats.</CardDescription>
+                    <CardDescription>
+                      Strategies to counter quantum computing threats.
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ul className="list-disc list-inside">
@@ -189,7 +195,9 @@ export default function QuantumResistantSecurity() {
                     <CardTitle>
                       <Database className="h-4 w-4 mr-2 inline-block" /> Data Protection
                     </CardTitle>
-                    <CardDescription>Protect sensitive data at rest and in transit.</CardDescription>
+                    <CardDescription>
+                      Protect sensitive data at rest and in transit.
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ul className="list-disc list-inside">
@@ -211,5 +219,5 @@ export default function QuantumResistantSecurity() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

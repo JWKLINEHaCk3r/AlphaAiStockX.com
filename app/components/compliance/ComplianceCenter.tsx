@@ -1,8 +1,10 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Shield,
   Lock,
@@ -16,78 +18,106 @@ import {
   Award,
   BookOpen,
   Info,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function ComplianceCenter() {
   const complianceItems = [
     {
-      category: "SEC Regulations",
+      category: 'SEC Regulations',
       items: [
-        { name: "Regulation Best Interest (Reg BI)", status: "compliant", description: "Investment advice standards" },
-        { name: "Rule 15c3-5 Market Access", status: "compliant", description: "Risk management controls" },
-        { name: "Regulation SHO", status: "compliant", description: "Short sale regulations" },
-        { name: "Rule 606 Order Routing", status: "compliant", description: "Order execution disclosure" },
+        {
+          name: 'Regulation Best Interest (Reg BI)',
+          status: 'compliant',
+          description: 'Investment advice standards',
+        },
+        {
+          name: 'Rule 15c3-5 Market Access',
+          status: 'compliant',
+          description: 'Risk management controls',
+        },
+        { name: 'Regulation SHO', status: 'compliant', description: 'Short sale regulations' },
+        {
+          name: 'Rule 606 Order Routing',
+          status: 'compliant',
+          description: 'Order execution disclosure',
+        },
       ],
     },
     {
-      category: "FINRA Rules",
+      category: 'FINRA Rules',
       items: [
-        { name: "Rule 3110 Supervision", status: "compliant", description: "Supervisory procedures" },
-        { name: "Rule 2111 Suitability", status: "compliant", description: "Investment suitability" },
-        { name: "Rule 4512 Customer Account", status: "compliant", description: "Account information" },
-        { name: "Rule 3240 Borrowing", status: "compliant", description: "Borrowing arrangements" },
+        {
+          name: 'Rule 3110 Supervision',
+          status: 'compliant',
+          description: 'Supervisory procedures',
+        },
+        {
+          name: 'Rule 2111 Suitability',
+          status: 'compliant',
+          description: 'Investment suitability',
+        },
+        {
+          name: 'Rule 4512 Customer Account',
+          status: 'compliant',
+          description: 'Account information',
+        },
+        { name: 'Rule 3240 Borrowing', status: 'compliant', description: 'Borrowing arrangements' },
       ],
     },
     {
-      category: "Data Protection",
+      category: 'Data Protection',
       items: [
-        { name: "GDPR Compliance", status: "compliant", description: "EU data protection" },
-        { name: "CCPA Compliance", status: "compliant", description: "California privacy rights" },
-        { name: "SOC 2 Type II", status: "certified", description: "Security controls audit" },
-        { name: "ISO 27001", status: "certified", description: "Information security management" },
+        { name: 'GDPR Compliance', status: 'compliant', description: 'EU data protection' },
+        { name: 'CCPA Compliance', status: 'compliant', description: 'California privacy rights' },
+        { name: 'SOC 2 Type II', status: 'certified', description: 'Security controls audit' },
+        { name: 'ISO 27001', status: 'certified', description: 'Information security management' },
       ],
     },
     {
-      category: "Risk Management",
+      category: 'Risk Management',
       items: [
-        { name: "Position Limits", status: "active", description: "Automated position monitoring" },
-        { name: "Circuit Breakers", status: "active", description: "Market volatility protection" },
-        { name: "Daily Loss Limits", status: "active", description: "Risk exposure controls" },
-        { name: "Emergency Procedures", status: "active", description: "Crisis management protocols" },
+        { name: 'Position Limits', status: 'active', description: 'Automated position monitoring' },
+        { name: 'Circuit Breakers', status: 'active', description: 'Market volatility protection' },
+        { name: 'Daily Loss Limits', status: 'active', description: 'Risk exposure controls' },
+        {
+          name: 'Emergency Procedures',
+          status: 'active',
+          description: 'Crisis management protocols',
+        },
       ],
     },
-  ]
+  ];
 
   const disclaimers = [
     {
-      title: "Investment Risk Disclosure",
+      title: 'Investment Risk Disclosure',
       content:
-        "All investments involve risk, including potential loss of principal. Past performance does not guarantee future results. AI predictions are based on historical data and market analysis but cannot guarantee accuracy.",
+        'All investments involve risk, including potential loss of principal. Past performance does not guarantee future results. AI predictions are based on historical data and market analysis but cannot guarantee accuracy.',
       icon: AlertTriangle,
-      type: "warning",
+      type: 'warning',
     },
     {
-      title: "AI Technology Limitations",
+      title: 'AI Technology Limitations',
       content:
-        "Our AI systems provide analysis and recommendations based on available data. Market conditions can change rapidly, and AI predictions should be considered alongside other factors when making investment decisions.",
+        'Our AI systems provide analysis and recommendations based on available data. Market conditions can change rapidly, and AI predictions should be considered alongside other factors when making investment decisions.',
       icon: Info,
-      type: "info",
+      type: 'info',
     },
     {
-      title: "Not Licensed Investment Advice",
+      title: 'Not Licensed Investment Advice',
       content:
-        "AlphaAIStockX provides educational tools and analysis. This platform does not provide personalized investment advice. Users should consult with licensed financial advisors for investment guidance.",
+        'AlphaAIStockX provides educational tools and analysis. This platform does not provide personalized investment advice. Users should consult with licensed financial advisors for investment guidance.',
       icon: BookOpen,
-      type: "educational",
+      type: 'educational',
     },
     {
-      title: "Data Security & Privacy",
+      title: 'Data Security & Privacy',
       content:
-        "We employ bank-level security measures including 256-bit AES encryption, multi-factor authentication, and regular security audits to protect your personal and financial information.",
+        'We employ bank-level security measures including 256-bit AES encryption, multi-factor authentication, and regular security audits to protect your personal and financial information.',
       icon: Lock,
-      type: "security",
+      type: 'security',
     },
-  ]
+  ];
 
   return (
     <div className="space-y-8">
@@ -98,7 +128,9 @@ export default function ComplianceCenter() {
             <Shield className="h-6 w-6 mr-3 text-green-400" />
             2025 Compliance Status
           </CardTitle>
-          <CardDescription>Full regulatory compliance and risk management framework</CardDescription>
+          <CardDescription>
+            Full regulatory compliance and risk management framework
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -147,7 +179,10 @@ export default function ComplianceCenter() {
             <CardContent>
               <div className="space-y-3">
                 {category.items.map((item, itemIndex) => (
-                  <div key={itemIndex} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                  <div
+                    key={itemIndex}
+                    className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"
+                  >
                     <div className="flex-1">
                       <p className="text-white font-medium">{item.name}</p>
                       <p className="text-gray-400 text-sm">{item.description}</p>
@@ -155,11 +190,11 @@ export default function ComplianceCenter() {
                     <Badge
                       variant="outline"
                       className={`ml-3 ${
-                        item.status === "compliant"
-                          ? "border-green-500/30 text-green-400"
-                          : item.status === "certified"
-                            ? "border-blue-500/30 text-blue-400"
-                            : "border-yellow-500/30 text-yellow-400"
+                        item.status === 'compliant'
+                          ? 'border-green-500/30 text-green-400'
+                          : item.status === 'certified'
+                            ? 'border-blue-500/30 text-blue-400'
+                            : 'border-yellow-500/30 text-yellow-400'
                       }`}
                     >
                       {item.status.toUpperCase()}
@@ -187,25 +222,25 @@ export default function ComplianceCenter() {
               <div
                 key={index}
                 className={`p-4 rounded-lg border ${
-                  disclaimer.type === "warning"
-                    ? "bg-red-900/20 border-red-500/30"
-                    : disclaimer.type === "info"
-                      ? "bg-blue-900/20 border-blue-500/30"
-                      : disclaimer.type === "educational"
-                        ? "bg-purple-900/20 border-purple-500/30"
-                        : "bg-green-900/20 border-green-500/30"
+                  disclaimer.type === 'warning'
+                    ? 'bg-red-900/20 border-red-500/30'
+                    : disclaimer.type === 'info'
+                      ? 'bg-blue-900/20 border-blue-500/30'
+                      : disclaimer.type === 'educational'
+                        ? 'bg-purple-900/20 border-purple-500/30'
+                        : 'bg-green-900/20 border-green-500/30'
                 }`}
               >
                 <div className="flex items-start space-x-3">
                   <disclaimer.icon
                     className={`h-6 w-6 mt-1 ${
-                      disclaimer.type === "warning"
-                        ? "text-red-400"
-                        : disclaimer.type === "info"
-                          ? "text-blue-400"
-                          : disclaimer.type === "educational"
-                            ? "text-purple-400"
-                            : "text-green-400"
+                      disclaimer.type === 'warning'
+                        ? 'text-red-400'
+                        : disclaimer.type === 'info'
+                          ? 'text-blue-400'
+                          : disclaimer.type === 'educational'
+                            ? 'text-purple-400'
+                            : 'text-green-400'
                     }`}
                   />
                   <div>
@@ -231,10 +266,10 @@ export default function ComplianceCenter() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Position Limits", value: "$500K", status: "Active", icon: Users },
-              { name: "Daily Loss Limit", value: "5%", status: "Monitoring", icon: AlertTriangle },
-              { name: "Circuit Breakers", value: "10%", status: "Armed", icon: Shield },
-              { name: "Emergency Stop", value: "Instant", status: "Ready", icon: Clock },
+              { name: 'Position Limits', value: '$500K', status: 'Active', icon: Users },
+              { name: 'Daily Loss Limit', value: '5%', status: 'Monitoring', icon: AlertTriangle },
+              { name: 'Circuit Breakers', value: '10%', status: 'Armed', icon: Shield },
+              { name: 'Emergency Stop', value: 'Instant', status: 'Ready', icon: Clock },
             ].map((control, index) => (
               <div key={index} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
@@ -257,7 +292,8 @@ export default function ComplianceCenter() {
           <div className="text-center">
             <h3 className="text-white font-bold text-xl mb-2">Need Compliance Support?</h3>
             <p className="text-gray-400 mb-4">
-              Our compliance team is available 24/7 to assist with regulatory questions and requirements.
+              Our compliance team is available 24/7 to assist with regulatory questions and
+              requirements.
             </p>
             <div className="flex justify-center space-x-4">
               <Button className="bg-blue-500 hover:bg-blue-600">
@@ -273,5 +309,5 @@ export default function ComplianceCenter() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

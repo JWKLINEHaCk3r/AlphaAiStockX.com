@@ -1,10 +1,12 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Wallet,
   ArrowRightLeft,
@@ -19,7 +21,7 @@ import {
   Zap,
   RefreshCw,
   Boxes,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function DeFiIntegration() {
   const [blockchainData, setBlockchainData] = useState({
@@ -51,96 +53,96 @@ export default function DeFiIntegration() {
       gasEfficiency: 94 + Math.random() * 5,
       averageExecutionTime: 1.2 + Math.random() * 0.5,
     },
-  })
+  });
 
   const [defiProtocols, setDefiProtocols] = useState([
     {
-      name: "Alpha Yield Optimizer",
-      type: "Yield Farming",
+      name: 'Alpha Yield Optimizer',
+      type: 'Yield Farming',
       apy: 12.4 + Math.random() * 5,
-      tvl: "$47.8M",
-      risk: "Low",
-      chain: "Ethereum",
-      status: "Active",
+      tvl: '$47.8M',
+      risk: 'Low',
+      chain: 'Ethereum',
+      status: 'Active',
     },
     {
-      name: "Alpha Liquidity Protocol",
-      type: "AMM",
+      name: 'Alpha Liquidity Protocol',
+      type: 'AMM',
       apy: 18.7 + Math.random() * 8,
-      tvl: "$124.5M",
-      risk: "Medium",
-      chain: "Multichain",
-      status: "Active",
+      tvl: '$124.5M',
+      risk: 'Medium',
+      chain: 'Multichain',
+      status: 'Active',
     },
     {
-      name: "Alpha Lending Market",
-      type: "Lending",
+      name: 'Alpha Lending Market',
+      type: 'Lending',
       apy: 8.9 + Math.random() * 3,
-      tvl: "$215.2M",
-      risk: "Low",
-      chain: "Solana",
-      status: "Active",
+      tvl: '$215.2M',
+      risk: 'Low',
+      chain: 'Solana',
+      status: 'Active',
     },
     {
-      name: "Alpha Perpetual DEX",
-      type: "Derivatives",
+      name: 'Alpha Perpetual DEX',
+      type: 'Derivatives',
       apy: 22.5 + Math.random() * 10,
-      tvl: "$78.3M",
-      risk: "High",
-      chain: "Arbitrum",
-      status: "Active",
+      tvl: '$78.3M',
+      risk: 'High',
+      chain: 'Arbitrum',
+      status: 'Active',
     },
-  ])
+  ]);
 
   const [tokenizedAssets, setTokenizedAssets] = useState([
     {
-      name: "Alpha Real Estate Fund",
-      type: "Real Estate",
-      tokens: "AREF",
-      marketCap: "$147.8M",
-      holders: "12,478",
-      returns: "14.7%",
-      status: "Trading",
+      name: 'Alpha Real Estate Fund',
+      type: 'Real Estate',
+      tokens: 'AREF',
+      marketCap: '$147.8M',
+      holders: '12,478',
+      returns: '14.7%',
+      status: 'Trading',
     },
     {
-      name: "Alpha Commodity Index",
-      type: "Commodities",
-      tokens: "ACIX",
-      marketCap: "$89.5M",
-      holders: "8,932",
-      returns: "21.3%",
-      status: "Trading",
+      name: 'Alpha Commodity Index',
+      type: 'Commodities',
+      tokens: 'ACIX',
+      marketCap: '$89.5M',
+      holders: '8,932',
+      returns: '21.3%',
+      status: 'Trading',
     },
     {
-      name: "Alpha Private Equity",
-      type: "Private Equity",
-      tokens: "APEX",
-      marketCap: "$215.2M",
-      holders: "5,478",
-      returns: "32.8%",
-      status: "Trading",
+      name: 'Alpha Private Equity',
+      type: 'Private Equity',
+      tokens: 'APEX',
+      marketCap: '$215.2M',
+      holders: '5,478',
+      returns: '32.8%',
+      status: 'Trading',
     },
     {
-      name: "Alpha Art Collection",
-      type: "NFT Art",
-      tokens: "AART",
-      marketCap: "$24.7M",
-      holders: "3,245",
-      returns: "47.5%",
-      status: "Trading",
+      name: 'Alpha Art Collection',
+      type: 'NFT Art',
+      tokens: 'AART',
+      marketCap: '$24.7M',
+      holders: '3,245',
+      returns: '47.5%',
+      status: 'Trading',
     },
-  ])
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateBlockchainData()
-    }, 5000)
+      updateBlockchainData();
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateBlockchainData = () => {
-    setBlockchainData((prev) => ({
+    setBlockchainData(prev => ({
       ...prev,
       marketPrices: {
         BTC: prev.marketPrices.BTC * (1 + (Math.random() - 0.5) * 0.01),
@@ -155,39 +157,39 @@ export default function DeFiIntegration() {
         totalYield: prev.defiStats.totalYield * (1 + (Math.random() - 0.5) * 0.01),
         totalTransactions: prev.defiStats.totalTransactions + Math.floor(Math.random() * 10),
       },
-    }))
+    }));
 
-    setDefiProtocols((prev) =>
-      prev.map((protocol) => ({
+    setDefiProtocols(prev =>
+      prev.map(protocol => ({
         ...protocol,
         apy: protocol.apy * (1 + (Math.random() - 0.5) * 0.02),
-      })),
-    )
-  }
+      }))
+    );
+  };
 
   const calculateTotalPortfolioValue = () => {
-    const { walletBalance, marketPrices } = blockchainData
-    let total = 0
-    total += walletBalance.BTC * marketPrices.BTC
-    total += walletBalance.ETH * marketPrices.ETH
-    total += walletBalance.SOL * marketPrices.SOL
-    total += walletBalance.USDC * marketPrices.USDC
-    total += walletBalance.USDT * marketPrices.USDT
-    return total
-  }
+    const { walletBalance, marketPrices } = blockchainData;
+    let total = 0;
+    total += walletBalance.BTC * marketPrices.BTC;
+    total += walletBalance.ETH * marketPrices.ETH;
+    total += walletBalance.SOL * marketPrices.SOL;
+    total += walletBalance.USDC * marketPrices.USDC;
+    total += walletBalance.USDT * marketPrices.USDT;
+    return total;
+  };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = risk => {
     switch (risk.toLowerCase()) {
-      case "low":
-        return "bg-green-500"
-      case "medium":
-        return "bg-yellow-500"
-      case "high":
-        return "bg-red-500"
+      case 'low':
+        return 'bg-green-500';
+      case 'medium':
+        return 'bg-yellow-500';
+      case 'high':
+        return 'bg-red-500';
       default:
-        return "bg-blue-500"
+        return 'bg-blue-500';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -211,7 +213,10 @@ export default function DeFiIntegration() {
                 <Badge className="bg-indigo-500">PORTFOLIO</Badge>
               </div>
               <div className="text-3xl font-bold text-white mb-2">
-                ${calculateTotalPortfolioValue().toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                $
+                {calculateTotalPortfolioValue().toLocaleString(undefined, {
+                  maximumFractionDigits: 0,
+                })}
               </div>
               <p className="text-indigo-400 font-semibold">Crypto Portfolio Value</p>
               <p className="text-gray-400 text-sm">Across 5 cryptocurrencies</p>
@@ -285,11 +290,16 @@ export default function DeFiIntegration() {
                 </div>
                 <div className="text-white">{blockchainData.walletBalance.BTC.toFixed(4)} BTC</div>
                 <div className="text-white">
-                  ${blockchainData.marketPrices.BTC.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  $
+                  {blockchainData.marketPrices.BTC.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })}
                 </div>
                 <div className="text-white">
                   $
-                  {(blockchainData.walletBalance.BTC * blockchainData.marketPrices.BTC).toLocaleString(undefined, {
+                  {(
+                    blockchainData.walletBalance.BTC * blockchainData.marketPrices.BTC
+                  ).toLocaleString(undefined, {
                     maximumFractionDigits: 0,
                   })}
                 </div>
@@ -305,11 +315,16 @@ export default function DeFiIntegration() {
                 </div>
                 <div className="text-white">{blockchainData.walletBalance.ETH.toFixed(4)} ETH</div>
                 <div className="text-white">
-                  ${blockchainData.marketPrices.ETH.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  $
+                  {blockchainData.marketPrices.ETH.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })}
                 </div>
                 <div className="text-white">
                   $
-                  {(blockchainData.walletBalance.ETH * blockchainData.marketPrices.ETH).toLocaleString(undefined, {
+                  {(
+                    blockchainData.walletBalance.ETH * blockchainData.marketPrices.ETH
+                  ).toLocaleString(undefined, {
                     maximumFractionDigits: 0,
                   })}
                 </div>
@@ -325,11 +340,16 @@ export default function DeFiIntegration() {
                 </div>
                 <div className="text-white">{blockchainData.walletBalance.SOL.toFixed(2)} SOL</div>
                 <div className="text-white">
-                  ${blockchainData.marketPrices.SOL.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  $
+                  {blockchainData.marketPrices.SOL.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}
                 </div>
                 <div className="text-white">
                   $
-                  {(blockchainData.walletBalance.SOL * blockchainData.marketPrices.SOL).toLocaleString(undefined, {
+                  {(
+                    blockchainData.walletBalance.SOL * blockchainData.marketPrices.SOL
+                  ).toLocaleString(undefined, {
                     maximumFractionDigits: 0,
                   })}
                 </div>
@@ -343,9 +363,13 @@ export default function DeFiIntegration() {
                   </div>
                   <span className="text-white font-medium">USDC</span>
                 </div>
-                <div className="text-white">{blockchainData.walletBalance.USDC.toLocaleString()} USDC</div>
+                <div className="text-white">
+                  {blockchainData.walletBalance.USDC.toLocaleString()} USDC
+                </div>
                 <div className="text-white">$1.00</div>
-                <div className="text-white">${blockchainData.walletBalance.USDC.toLocaleString()}</div>
+                <div className="text-white">
+                  ${blockchainData.walletBalance.USDC.toLocaleString()}
+                </div>
                 <div className="text-gray-400">0.0%</div>
               </div>
 
@@ -356,9 +380,13 @@ export default function DeFiIntegration() {
                   </div>
                   <span className="text-white font-medium">USDT</span>
                 </div>
-                <div className="text-white">{blockchainData.walletBalance.USDT.toLocaleString()} USDT</div>
+                <div className="text-white">
+                  {blockchainData.walletBalance.USDT.toLocaleString()} USDT
+                </div>
                 <div className="text-white">$1.00</div>
-                <div className="text-white">${blockchainData.walletBalance.USDT.toLocaleString()}</div>
+                <div className="text-white">
+                  ${blockchainData.walletBalance.USDT.toLocaleString()}
+                </div>
                 <div className="text-gray-400">0.0%</div>
               </div>
             </div>
@@ -370,7 +398,8 @@ export default function DeFiIntegration() {
       <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Coins className="h-7 w-7 mr-3 text-purple-400" />💰 DeFi Protocols & Tokenized Assets
+            <Coins className="h-7 w-7 mr-3 text-purple-400" />
+            💰 DeFi Protocols & Tokenized Assets
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-pink-500">
               <Landmark className="h-4 w-4 mr-1" />
               INSTITUTIONAL GRADE
@@ -402,11 +431,15 @@ export default function DeFiIntegration() {
                           <Badge variant="outline" className="border-blue-400/30 text-blue-400">
                             {protocol.chain}
                           </Badge>
-                          <Badge className={getRiskColor(protocol.risk)}>{protocol.risk} Risk</Badge>
+                          <Badge className={getRiskColor(protocol.risk)}>
+                            {protocol.risk} Risk
+                          </Badge>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-400">{protocol.apy.toFixed(2)}% APY</div>
+                        <div className="text-2xl font-bold text-green-400">
+                          {protocol.apy.toFixed(2)}% APY
+                        </div>
                         <p className="text-gray-400 text-sm">TVL: {protocol.tvl}</p>
                       </div>
                     </div>
@@ -441,12 +474,16 @@ export default function DeFiIntegration() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-400">{asset.returns} Returns</div>
+                        <div className="text-2xl font-bold text-green-400">
+                          {asset.returns} Returns
+                        </div>
                         <p className="text-gray-400 text-sm">Market Cap: {asset.marketCap}</p>
                       </div>
                     </div>
                     <div className="mt-4 flex justify-between">
-                      <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">Buy Tokens</Button>
+                      <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+                        Buy Tokens
+                      </Button>
                       <Button variant="outline" className="border-blue-400/30 text-blue-400">
                         View Details
                       </Button>
@@ -466,7 +503,9 @@ export default function DeFiIntegration() {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Total Contracts</span>
-                      <span className="text-white font-bold">{blockchainData.smartContractMetrics.totalDeployed}</span>
+                      <span className="text-white font-bold">
+                        {blockchainData.smartContractMetrics.totalDeployed}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Audited</span>
@@ -561,7 +600,8 @@ export default function DeFiIntegration() {
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Shield className="h-7 w-7 mr-3 text-green-400" />🔒 Blockchain Security & Compliance
+            <Shield className="h-7 w-7 mr-3 text-green-400" />
+            🔒 Blockchain Security & Compliance
             <Badge className="ml-3 bg-gradient-to-r from-green-400 to-emerald-500">
               <Key className="h-4 w-4 mr-1" />
               INSTITUTIONAL GRADE
@@ -578,7 +618,8 @@ export default function DeFiIntegration() {
                 <h3 className="text-white font-bold text-lg">Multi-Signature Security</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Enterprise-grade multi-signature wallet security requiring multiple approvals for transactions.
+                Enterprise-grade multi-signature wallet security requiring multiple approvals for
+                transactions.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-green-500">ACTIVE</Badge>
@@ -594,7 +635,8 @@ export default function DeFiIntegration() {
                 <h3 className="text-white font-bold text-lg">Cold Storage Custody</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                95% of assets stored in air-gapped cold storage with military-grade encryption and physical security.
+                95% of assets stored in air-gapped cold storage with military-grade encryption and
+                physical security.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-blue-500">SECURED</Badge>
@@ -610,7 +652,8 @@ export default function DeFiIntegration() {
                 <h3 className="text-white font-bold text-lg">Real-time Monitoring</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                24/7 blockchain transaction monitoring with AI-powered anomaly detection and fraud prevention.
+                24/7 blockchain transaction monitoring with AI-powered anomaly detection and fraud
+                prevention.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-purple-500">MONITORING</Badge>
@@ -669,5 +712,5 @@ export default function DeFiIntegration() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

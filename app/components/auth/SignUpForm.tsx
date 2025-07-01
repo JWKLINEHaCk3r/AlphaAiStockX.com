@@ -1,68 +1,72 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { UserPlus, Mail, Lock, User, AlertCircle } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useState } from 'react';
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { UserPlus, Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [agreeTerms, setAgreeTerms] = useState(false)
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
 
     try {
       // Simulate authentication delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Simple validation
       if (!name || !email || !password || !confirmPassword) {
-        throw new Error("Please fill in all fields")
+        throw new Error('Please fill in all fields');
       }
 
-      if (!email.includes("@")) {
-        throw new Error("Please enter a valid email address")
+      if (!email.includes('@')) {
+        throw new Error('Please enter a valid email address');
       }
 
       if (password.length < 8) {
-        throw new Error("Password must be at least 8 characters long")
+        throw new Error('Password must be at least 8 characters long');
       }
 
       if (password !== confirmPassword) {
-        throw new Error("Passwords do not match")
+        throw new Error('Passwords do not match');
       }
 
       if (!agreeTerms) {
-        throw new Error("You must agree to the terms and conditions")
+        throw new Error('You must agree to the terms and conditions');
       }
 
       // In a real app, you would call an API to create the user here
       // For demo purposes, we'll accept any valid-looking input
-      onSignUp({ name, email })
+      onSignUp({ name, email });
     } catch (err) {
-      setError(err.message || "Failed to sign up. Please try again.")
+      setError(err.message || 'Failed to sign up. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="w-full max-w-md bg-black/40 border-purple-500/30 backdrop-blur-xl">
       <CardHeader>
         <CardTitle className="text-white text-2xl">Create Account</CardTitle>
-        <CardDescription className="text-gray-400">Join AlphaAI StockX and start trading</CardDescription>
+        <CardDescription className="text-gray-400">
+          Join AlphaAI StockX and start trading
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -83,7 +87,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
                 id="name"
                 placeholder="John Doe"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={e => setName(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -100,7 +104,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
                 type="email"
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -117,7 +121,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
                 type="password"
                 placeholder="••••••••"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -134,7 +138,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
                 type="password"
                 placeholder="••••••••"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={e => setConfirmPassword(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -144,15 +148,15 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
             <Checkbox
               id="terms"
               checked={agreeTerms}
-              onCheckedChange={(checked) => setAgreeTerms(!!checked)}
+              onCheckedChange={checked => setAgreeTerms(!!checked)}
               className="data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
             />
             <label htmlFor="terms" className="text-sm text-gray-300 cursor-pointer">
-              I agree to the{" "}
+              I agree to the{' '}
               <a href="#" className="text-purple-400 hover:text-purple-300">
                 Terms of Service
-              </a>{" "}
-              and{" "}
+              </a>{' '}
+              and{' '}
               <a href="#" className="text-purple-400 hover:text-purple-300">
                 Privacy Policy
               </a>
@@ -172,7 +176,14 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
                   fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
                   <path
                     className="opacity-75"
                     fill="currentColor"
@@ -192,7 +203,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
       </CardContent>
       <CardFooter className="flex justify-center border-t border-purple-500/20 pt-4">
         <p className="text-sm text-gray-400">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <Button
             variant="link"
             className="text-purple-400 hover:text-purple-300 p-0 h-auto"
@@ -203,5 +214,5 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
         </p>
       </CardFooter>
     </Card>
-  )
+  );
 }

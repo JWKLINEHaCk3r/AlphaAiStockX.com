@@ -1,11 +1,19 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 import {
   Search,
   Filter,
@@ -18,73 +26,73 @@ import {
   Activity,
   Volume2,
   Star,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function AIStockScanner() {
-  const [scanResults, setScanResults] = useState([])
-  const [isScanning, setIsScanning] = useState(false)
+  const [scanResults, setScanResults] = useState([]);
+  const [isScanning, setIsScanning] = useState(false);
   const [filters, setFilters] = useState({
     marketCap: [1000, 100000], // Million
     volume: [1, 100], // Million
     priceRange: [1, 1000],
     rsiRange: [30, 70],
-    sector: "all",
-    pattern: "all",
+    sector: 'all',
+    pattern: 'all',
     aiScore: [70, 100],
-  })
+  });
 
   const scanTypes = [
-    { id: "momentum", name: "Momentum Breakouts", icon: TrendingUp },
-    { id: "reversal", name: "Reversal Patterns", icon: TrendingDown },
-    { id: "volume", name: "Volume Anomalies", icon: Volume2 },
-    { id: "earnings", name: "Earnings Plays", icon: Target },
-    { id: "technical", name: "Technical Setups", icon: BarChart3 },
-    { id: "ai-signals", name: "AI Signals", icon: Brain },
-  ]
+    { id: 'momentum', name: 'Momentum Breakouts', icon: TrendingUp },
+    { id: 'reversal', name: 'Reversal Patterns', icon: TrendingDown },
+    { id: 'volume', name: 'Volume Anomalies', icon: Volume2 },
+    { id: 'earnings', name: 'Earnings Plays', icon: Target },
+    { id: 'technical', name: 'Technical Setups', icon: BarChart3 },
+    { id: 'ai-signals', name: 'AI Signals', icon: Brain },
+  ];
 
-  const [activeScans, setActiveScans] = useState(["momentum", "ai-signals"])
+  const [activeScans, setActiveScans] = useState(['momentum', 'ai-signals']);
 
   useEffect(() => {
     // Simulate real-time scanning
     const interval = setInterval(() => {
       if (activeScans.length > 0) {
-        generateScanResults()
+        generateScanResults();
       }
-    }, 5000)
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [activeScans, filters])
+    return () => clearInterval(interval);
+  }, [activeScans, filters]);
 
   const generateScanResults = () => {
     const symbols = [
-      "AAPL",
-      "MSFT",
-      "GOOGL",
-      "TSLA",
-      "NVDA",
-      "AMD",
-      "META",
-      "NFLX",
-      "AMZN",
-      "CRM",
-      "PLTR",
-      "COIN",
-      "RBLX",
-      "SNOW",
-      "ZM",
-    ]
+      'AAPL',
+      'MSFT',
+      'GOOGL',
+      'TSLA',
+      'NVDA',
+      'AMD',
+      'META',
+      'NFLX',
+      'AMZN',
+      'CRM',
+      'PLTR',
+      'COIN',
+      'RBLX',
+      'SNOW',
+      'ZM',
+    ];
     const patterns = [
-      "Cup & Handle",
-      "Bull Flag",
-      "Ascending Triangle",
-      "Breakout",
-      "Support Bounce",
-      "Golden Cross",
-      "MACD Bullish",
-      "RSI Oversold",
-    ]
+      'Cup & Handle',
+      'Bull Flag',
+      'Ascending Triangle',
+      'Breakout',
+      'Support Bounce',
+      'Golden Cross',
+      'MACD Bullish',
+      'RSI Oversold',
+    ];
 
-    const results = symbols.slice(0, 8).map((symbol) => ({
+    const results = symbols.slice(0, 8).map(symbol => ({
       symbol,
       price: 50 + Math.random() * 500,
       change: (Math.random() - 0.5) * 10,
@@ -92,34 +100,36 @@ export default function AIStockScanner() {
       pattern: patterns[Math.floor(Math.random() * patterns.length)],
       aiScore: 60 + Math.random() * 40,
       rsi: 20 + Math.random() * 60,
-      timeframe: ["5m", "15m", "1h", "4h", "1d"][Math.floor(Math.random() * 5)],
+      timeframe: ['5m', '15m', '1h', '4h', '1d'][Math.floor(Math.random() * 5)],
       confidence: 70 + Math.random() * 30,
       scanType: activeScans[Math.floor(Math.random() * activeScans.length)],
       marketCap: Math.random() * 50000 + 1000,
-      sector: ["Technology", "Healthcare", "Finance", "Energy", "Consumer"][Math.floor(Math.random() * 5)],
-    }))
+      sector: ['Technology', 'Healthcare', 'Finance', 'Energy', 'Consumer'][
+        Math.floor(Math.random() * 5)
+      ],
+    }));
 
-    setScanResults(results)
-  }
+    setScanResults(results);
+  };
 
   const runScan = async () => {
-    setIsScanning(true)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    generateScanResults()
-    setIsScanning(false)
-  }
+    setIsScanning(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    generateScanResults();
+    setIsScanning(false);
+  };
 
-  const getScanTypeColor = (type) => {
+  const getScanTypeColor = type => {
     const colors = {
-      momentum: "text-emerald-400",
-      reversal: "text-amber-400",
-      volume: "text-blue-400",
-      earnings: "text-purple-400",
-      technical: "text-orange-400",
-      "ai-signals": "text-green-400",
-    }
-    return colors[type] || "text-gray-400"
-  }
+      momentum: 'text-emerald-400',
+      reversal: 'text-amber-400',
+      volume: 'text-blue-400',
+      earnings: 'text-purple-400',
+      technical: 'text-orange-400',
+      'ai-signals': 'text-green-400',
+    };
+    return colors[type] || 'text-gray-400';
+  };
 
   return (
     <div className="space-y-6">
@@ -140,34 +150,38 @@ export default function AIStockScanner() {
           <div>
             <h4 className="text-stone-200 font-semibold mb-3">Active Scans</h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {scanTypes.map((scan) => {
-                const IconComponent = scan.icon
-                const isActive = activeScans.includes(scan.id)
+              {scanTypes.map(scan => {
+                const IconComponent = scan.icon;
+                const isActive = activeScans.includes(scan.id);
 
                 return (
                   <div
                     key={scan.id}
                     className={`p-3 rounded-lg border cursor-pointer transition-all ${
                       isActive
-                        ? "bg-emerald-500/20 border-emerald-500/50"
-                        : "bg-stone-800/30 border-stone-600/30 hover:border-stone-500/50"
+                        ? 'bg-emerald-500/20 border-emerald-500/50'
+                        : 'bg-stone-800/30 border-stone-600/30 hover:border-stone-500/50'
                     }`}
                     onClick={() => {
                       if (isActive) {
-                        setActiveScans((prev) => prev.filter((id) => id !== scan.id))
+                        setActiveScans(prev => prev.filter(id => id !== scan.id));
                       } else {
-                        setActiveScans((prev) => [...prev, scan.id])
+                        setActiveScans(prev => [...prev, scan.id]);
                       }
                     }}
                   >
                     <div className="flex items-center space-x-2">
-                      <IconComponent className={`h-4 w-4 ${isActive ? "text-emerald-400" : "text-stone-400"}`} />
-                      <span className={`text-sm font-medium ${isActive ? "text-stone-100" : "text-stone-300"}`}>
+                      <IconComponent
+                        className={`h-4 w-4 ${isActive ? 'text-emerald-400' : 'text-stone-400'}`}
+                      />
+                      <span
+                        className={`text-sm font-medium ${isActive ? 'text-stone-100' : 'text-stone-300'}`}
+                      >
                         {scan.name}
                       </span>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -178,7 +192,7 @@ export default function AIStockScanner() {
               <label className="text-stone-200 text-sm font-medium">Market Cap (M)</label>
               <Slider
                 value={filters.marketCap}
-                onValueChange={(value) => setFilters((prev) => ({ ...prev, marketCap: value }))}
+                onValueChange={value => setFilters(prev => ({ ...prev, marketCap: value }))}
                 max={100000}
                 min={100}
                 step={100}
@@ -194,7 +208,7 @@ export default function AIStockScanner() {
               <label className="text-stone-200 text-sm font-medium">AI Score</label>
               <Slider
                 value={filters.aiScore}
-                onValueChange={(value) => setFilters((prev) => ({ ...prev, aiScore: value }))}
+                onValueChange={value => setFilters(prev => ({ ...prev, aiScore: value }))}
                 max={100}
                 min={0}
                 step={5}
@@ -210,7 +224,7 @@ export default function AIStockScanner() {
               <label className="text-stone-200 text-sm font-medium">Sector</label>
               <Select
                 value={filters.sector}
-                onValueChange={(value) => setFilters((prev) => ({ ...prev, sector: value }))}
+                onValueChange={value => setFilters(prev => ({ ...prev, sector: value }))}
               >
                 <SelectTrigger className="bg-stone-800/30 border-stone-600/30 text-stone-200">
                   <SelectValue />
@@ -270,7 +284,9 @@ export default function AIStockScanner() {
           {scanResults.length === 0 ? (
             <div className="text-center py-8">
               <Search className="h-12 w-12 text-stone-400 mx-auto mb-4" />
-              <p className="text-stone-400">No scan results yet. Run a scan to find opportunities.</p>
+              <p className="text-stone-400">
+                No scan results yet. Run a scan to find opportunities.
+              </p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -284,15 +300,19 @@ export default function AIStockScanner() {
                       <div>
                         <div className="flex items-center space-x-2">
                           <span className="text-stone-100 font-bold text-lg">{result.symbol}</span>
-                          <Badge className={getScanTypeColor(result.scanType)}>{result.scanType}</Badge>
+                          <Badge className={getScanTypeColor(result.scanType)}>
+                            {result.scanType}
+                          </Badge>
                         </div>
                         <p className="text-sm text-stone-400">{result.sector}</p>
                       </div>
 
                       <div className="text-center">
                         <p className="text-stone-100 font-semibold">${result.price.toFixed(2)}</p>
-                        <p className={`text-sm ${result.change >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                          {result.change >= 0 ? "+" : ""}
+                        <p
+                          className={`text-sm ${result.change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}
+                        >
+                          {result.change >= 0 ? '+' : ''}
                           {result.change.toFixed(2)}%
                         </p>
                       </div>
@@ -305,7 +325,9 @@ export default function AIStockScanner() {
                       <div className="text-center">
                         <p className="text-stone-400 text-sm">AI Score</p>
                         <div className="flex items-center">
-                          <span className="text-emerald-400 font-bold">{result.aiScore.toFixed(0)}</span>
+                          <span className="text-emerald-400 font-bold">
+                            {result.aiScore.toFixed(0)}
+                          </span>
                           <Star className="h-3 w-3 text-amber-400 ml-1" />
                         </div>
                       </div>
@@ -333,5 +355,5 @@ export default function AIStockScanner() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

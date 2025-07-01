@@ -1,134 +1,136 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Switch } from "@/components/ui/switch"
-import { Brain, Activity, Plus, Settings, Play } from "lucide-react"
+import { useState } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Switch } from '@/components/ui/switch';
+import { Brain, Activity, Plus, Settings, Play } from 'lucide-react';
 
 export default function TradingStrategies({ activeStrategies, setActiveStrategies, botStatus }) {
   const [availableStrategies] = useState([
     {
       id: 1,
-      name: "AI Momentum",
-      description: "Uses machine learning to identify momentum patterns",
+      name: 'AI Momentum',
+      description: 'Uses machine learning to identify momentum patterns',
       winRate: 72.5,
       avgReturn: 2.3,
       maxDrawdown: 8.5,
-      riskLevel: "Medium",
-      timeframe: "1-4 hours",
+      riskLevel: 'Medium',
+      timeframe: '1-4 hours',
       allocation: 30,
-      status: "active",
+      status: 'active',
     },
     {
       id: 2,
-      name: "Mean Reversion",
-      description: "Identifies oversold/overbought conditions for reversal trades",
+      name: 'Mean Reversion',
+      description: 'Identifies oversold/overbought conditions for reversal trades',
       winRate: 68.2,
       avgReturn: 1.8,
       maxDrawdown: 5.2,
-      riskLevel: "Low",
-      timeframe: "30min-2h",
+      riskLevel: 'Low',
+      timeframe: '30min-2h',
       allocation: 25,
-      status: "active",
+      status: 'active',
     },
     {
       id: 3,
-      name: "Breakout Scanner",
-      description: "Detects price breakouts from key support/resistance levels",
+      name: 'Breakout Scanner',
+      description: 'Detects price breakouts from key support/resistance levels',
       winRate: 65.8,
       avgReturn: 3.1,
       maxDrawdown: 12.3,
-      riskLevel: "High",
-      timeframe: "15min-1h",
+      riskLevel: 'High',
+      timeframe: '15min-1h',
       allocation: 20,
-      status: "active",
+      status: 'active',
     },
     {
       id: 4,
-      name: "News Sentiment",
-      description: "Trades based on AI analysis of market news and sentiment",
+      name: 'News Sentiment',
+      description: 'Trades based on AI analysis of market news and sentiment',
       winRate: 58.9,
       avgReturn: 2.7,
       maxDrawdown: 15.8,
-      riskLevel: "High",
-      timeframe: "Immediate",
+      riskLevel: 'High',
+      timeframe: 'Immediate',
       allocation: 0,
-      status: "inactive",
+      status: 'inactive',
     },
     {
       id: 5,
-      name: "Pairs Trading",
-      description: "Statistical arbitrage between correlated assets",
+      name: 'Pairs Trading',
+      description: 'Statistical arbitrage between correlated assets',
       winRate: 75.3,
       avgReturn: 1.2,
       maxDrawdown: 3.8,
-      riskLevel: "Low",
-      timeframe: "1-8 hours",
+      riskLevel: 'Low',
+      timeframe: '1-8 hours',
       allocation: 0,
-      status: "inactive",
+      status: 'inactive',
     },
     {
       id: 6,
-      name: "Options Flow",
-      description: "Follows unusual options activity for directional trades",
+      name: 'Options Flow',
+      description: 'Follows unusual options activity for directional trades',
       winRate: 62.1,
       avgReturn: 4.2,
       maxDrawdown: 18.7,
-      riskLevel: "Very High",
-      timeframe: "Minutes-Hours",
+      riskLevel: 'Very High',
+      timeframe: 'Minutes-Hours',
       allocation: 0,
-      status: "inactive",
+      status: 'inactive',
     },
-  ])
+  ]);
 
-  const toggleStrategy = (strategyId) => {
-    setActiveStrategies((prev) => {
-      const existing = prev.find((s) => s.id === strategyId)
+  const toggleStrategy = strategyId => {
+    setActiveStrategies(prev => {
+      const existing = prev.find(s => s.id === strategyId);
       if (existing) {
-        return prev.filter((s) => s.id !== strategyId)
+        return prev.filter(s => s.id !== strategyId);
       } else {
-        const strategy = availableStrategies.find((s) => s.id === strategyId)
-        return [...prev, { ...strategy, status: "active" }]
+        const strategy = availableStrategies.find(s => s.id === strategyId);
+        return [...prev, { ...strategy, status: 'active' }];
       }
-    })
-  }
+    });
+  };
 
   const updateAllocation = (strategyId, allocation) => {
-    setActiveStrategies((prev) => prev.map((s) => (s.id === strategyId ? { ...s, allocation } : s)))
-  }
+    setActiveStrategies(prev => prev.map(s => (s.id === strategyId ? { ...s, allocation } : s)));
+  };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = risk => {
     switch (risk) {
-      case "Low":
-        return "text-green-400"
-      case "Medium":
-        return "text-yellow-400"
-      case "High":
-        return "text-orange-400"
-      case "Very High":
-        return "text-red-400"
+      case 'Low':
+        return 'text-green-400';
+      case 'Medium':
+        return 'text-yellow-400';
+      case 'High':
+        return 'text-orange-400';
+      case 'Very High':
+        return 'text-red-400';
       default:
-        return "text-gray-400"
+        return 'text-gray-400';
     }
-  }
+  };
 
-  const getRiskBadge = (risk) => {
+  const getRiskBadge = risk => {
     switch (risk) {
-      case "Low":
-        return "default"
-      case "Medium":
-        return "secondary"
-      case "High":
-        return "destructive"
-      case "Very High":
-        return "destructive"
+      case 'Low':
+        return 'default';
+      case 'Medium':
+        return 'secondary';
+      case 'High':
+        return 'destructive';
+      case 'Very High':
+        return 'destructive';
       default:
-        return "outline"
+        return 'outline';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -144,12 +146,17 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
           {activeStrategies.length === 0 ? (
             <div className="text-center py-8">
               <Brain className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-400">No active strategies. Select strategies below to start trading.</p>
+              <p className="text-gray-400">
+                No active strategies. Select strategies below to start trading.
+              </p>
             </div>
           ) : (
             <div className="space-y-4">
-              {activeStrategies.map((strategy) => (
-                <div key={strategy.id} className="p-4 bg-white/5 rounded-lg border border-green-500/30">
+              {activeStrategies.map(strategy => (
+                <div
+                  key={strategy.id}
+                  className="p-4 bg-white/5 rounded-lg border border-green-500/30"
+                >
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
                       <h3 className="text-white font-semibold">{strategy.name}</h3>
@@ -157,7 +164,9 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
                         <Play className="h-3 w-3 mr-1" />
                         Running
                       </Badge>
-                      <Badge variant={getRiskBadge(strategy.riskLevel)}>{strategy.riskLevel} Risk</Badge>
+                      <Badge variant={getRiskBadge(strategy.riskLevel)}>
+                        {strategy.riskLevel} Risk
+                      </Badge>
                     </div>
                     <div className="text-right">
                       <p className="text-white font-bold">{strategy.allocation}%</p>
@@ -203,16 +212,16 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {availableStrategies.map((strategy) => {
-              const isActive = activeStrategies.some((s) => s.id === strategy.id)
+            {availableStrategies.map(strategy => {
+              const isActive = activeStrategies.some(s => s.id === strategy.id);
 
               return (
                 <div
                   key={strategy.id}
                   className={`p-4 rounded-lg border transition-all ${
                     isActive
-                      ? "bg-green-500/10 border-green-500/30"
-                      : "bg-white/5 border-white/10 hover:border-white/20"
+                      ? 'bg-green-500/10 border-green-500/30'
+                      : 'bg-white/5 border-white/10 hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-3">
@@ -225,7 +234,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
                     <Switch
                       checked={isActive}
                       onCheckedChange={() => toggleStrategy(strategy.id)}
-                      disabled={botStatus === "running"}
+                      disabled={botStatus === 'running'}
                     />
                   </div>
 
@@ -251,7 +260,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
                     {isActive && <span className="text-green-400">● Active</span>}
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
         </CardContent>
@@ -279,5 +288,5 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
