@@ -21,3 +21,9 @@
   "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": true
 }
+npm install react react-dom
+
+npm install --save-dev @types/react @types/react-dom
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: 
+  
