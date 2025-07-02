@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
