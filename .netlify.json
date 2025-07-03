@@ -1,5 +1,0 @@
-{
-  "plugins": [
-    "@netlify/plugin-nextjs"
-  ]
-}
