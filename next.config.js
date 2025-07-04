@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-<<<<<<< HEAD
   swcMinify: true,
   output: 'export',
   trailingSlash: true,
   distDir: 'out',
-=======
->>>>>>> a7ce907002b3961a20dd4c9f233835cb81bdbd2b
   eslint: {
     ignoreDuringBuilds: true,
   },
