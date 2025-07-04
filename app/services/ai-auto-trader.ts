@@ -49,11 +49,16 @@ interface SimpleStrategy {
   parameters: { [key: string]: any };
 }
 
+interface TradingStrategy extends SimpleStrategy {
+  description?: string;
+  risk?: 'LOW' | 'MEDIUM' | 'HIGH';
+}
+
 interface AIAnalysisResult {
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   riskAssessment: RiskAnalysis;
-  portfolioAnalysis: PortfolioData & { performance: PortfolioMetrics };
+  portfolioAnalysis: PortfolioAnalysis;
   recommendations: string[];
 }
 
@@ -434,12 +439,15 @@ export class AdvancedAIAutoTrader {
   private async assessPortfolioRisk(): Promise<RiskAnalysis> {
     // Implement comprehensive risk analysis
     return {
-      overallRisk: 'MEDIUM',
+      symbol: 'PORTFOLIO',
+      riskScore: 65,
       volatility: 0.15,
+      beta: 1.2,
       var95: 0.03,
       maxDrawdown: 0.08,
-      concentrationRisk: 'LOW',
+      concentrationRisk: 0.2,
       recommendations: ['Consider diversification across sectors'],
+      timestamp: new Date(),
     };
   }
 

@@ -1,15 +1,11 @@
 // Advanced AI Brain Service - Processes all data for intelligent trading decisions
-import { MarketData, TradingSignal, RiskAnalysis, PortfolioMetrics } from './ai-types';
-
-interface AIModelPrediction {
-  symbol: string;
-  action: 'BUY' | 'SELL' | 'HOLD';
-  confidence: number;
-  timeframe: '1m' | '5m' | '15m' | '1h' | '4h' | '1d';
-  targetPrice: number;
-  stopLoss: number;
-  reasoning: string[];
-}
+import {
+  MarketData,
+  TradingSignal,
+  RiskAnalysis,
+  PortfolioMetrics,
+  AIModelPrediction,
+} from './ai-types';
 
 interface MarketSentiment {
   overall: number; // -1 to 1
@@ -365,18 +361,35 @@ class AIBrainService {
     if (totalScore > 0.3) action = 'BUY';
     else if (totalScore < -0.3) action = 'SELL';
 
-    const currentPrice = marketData[marketData.length - 1].close;
+    const currentPrice = marketData[marketData.length - 1]?.price || 100;
     const targetPrice = action === 'BUY' ? currentPrice * 1.05 : currentPrice * 0.95;
     const stopLoss = action === 'BUY' ? currentPrice * 0.98 : currentPrice * 1.02;
+
+    const now = new Date();
 
     return {
       symbol,
       action,
       confidence,
-      timeframe: '1h',
+      timeframe: '1h' as const,
       targetPrice,
       stopLoss,
+      takeProfit: targetPrice,
       reasoning: this.generateReasoning(analysis, totalScore),
+      modelVersion: 'v1.0.0',
+      features: {
+        technical: technical.rsi || 50,
+        fundamental: 0.5,
+        sentiment: sentiment.overall,
+        macro: 0.5,
+      },
+      probability: {
+        up: action === 'BUY' ? confidence : 1 - confidence,
+        down: action === 'SELL' ? confidence : 1 - confidence,
+        sideways: action === 'HOLD' ? confidence : 1 - confidence,
+      },
+      timestamp: now,
+      expiresAt: new Date(now.getTime() + 3600000), // 1 hour from now
     };
   }
 

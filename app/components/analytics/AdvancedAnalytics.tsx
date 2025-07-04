@@ -20,11 +20,42 @@ import {
 
 export default function AdvancedAnalytics() {
   const [analyticsData, setAnalyticsData] = useState({
-    realTimeMetrics: {},
-    userBehavior: {},
-    tradingPerformance: {},
-    aiInsights: {},
-    marketAnalysis: {},
+    realTimeMetrics: {
+      activeUsers: 0,
+      tradesPerSecond: 0,
+      totalVolume: 0,
+      systemLoad: 0,
+      responseTime: 0,
+      uptime: 0,
+    },
+    userBehavior: {
+      avgSessionTime: 0,
+      bounceRate: 0,
+      conversionRate: 0,
+      retentionRate: 0,
+      engagementScore: 0,
+    },
+    tradingPerformance: {
+      winRate: 0,
+      avgReturn: 0,
+      sharpeRatio: 0,
+      maxDrawdown: 0,
+      profitFactor: 0,
+    },
+    aiInsights: {
+      predictionAccuracy: 0,
+      modelConfidence: 0,
+      dataProcessingRate: 0,
+      neuralNetworkEfficiency: 0,
+      quantumAdvantage: 0,
+    },
+    marketAnalysis: {
+      bullishSentiment: 0,
+      volatilityIndex: 0,
+      correlationStrength: 0,
+      trendStrength: 0,
+      riskLevel: 0,
+    },
   });
 
   useEffect(() => {

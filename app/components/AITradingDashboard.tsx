@@ -1,21 +1,45 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AdvancedAIAutoTrader } from '../services/ai-auto-trader-enhanced';
 
+interface TradingSignal {
+  symbol: string;
+  action: string;
+  confidence: number;
+  reasoning?: string[];
+}
+
+interface Trade {
+  symbol: string;
+  action: 'buy' | 'sell';
+  price: number;
+  shares: number;
+  time: string;
+  reason: string;
+}
+
 interface Portfolio {
   totalValue: number;
-  positions: Array<{
-    symbol: string;
-    quantity: number;
-    value: number;
-    pnl: number;
-  }>;
   cash: number;
+  holdings: Record<string, { shares: number; avgPrice: number }>;
+  trades: Trade[];
+  totalReturn?: number;
+  dailyPnL?: number;
+  performance?: {
+    totalReturn: number;
+    dailyReturn: number;
+    weeklyReturn: number;
+    monthlyReturn: number;
+    sharpeRatio: number;
+    maxDrawdown?: number;
+    winRate: number;
+    lastUpdated: Date;
+  };
 }
 
 interface Performance {
@@ -26,13 +50,20 @@ interface Performance {
 }
 
 interface Analysis {
-  signals: Array<{
-    symbol: string;
-    direction: string;
-    confidence: number;
-  }>;
-  marketCondition: string;
-  volatility: number;
+  signals?: TradingSignal[];
+  marketCondition?: string;
+  volatility?: number;
+  lastTradeResult?: {
+    success: boolean;
+    message: string;
+    trades?: any[];
+  };
+  recommendations?: string[];
+  riskAnalysis?: {
+    riskScore: number;
+    volatility: number;
+    beta?: number;
+  };
 }
 
 interface DashboardState {
@@ -59,11 +90,7 @@ export default function AITradingDashboard() {
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
   const [riskLevel, setRiskLevel] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
 
-  useEffect(() => {
-    initializeTrader();
-  }, [initializeTrader]);
-
-  const initializeTrader = async () => {
+  const initializeTrader = useCallback(async () => {
     try {
       const trader = new AdvancedAIAutoTrader(50000, riskLevel);
       const portfolio = trader.getPortfolio();
@@ -81,7 +108,11 @@ export default function AITradingDashboard() {
         loading: false,
       }));
     }
-  };
+  }, [riskLevel]);
+
+  useEffect(() => {
+    initializeTrader();
+  }, [initializeTrader]);
 
   const runAIAnalysis = async () => {
     if (!state.trader) return;
@@ -300,9 +331,9 @@ export default function AITradingDashboard() {
               {/* AI Signals */}
               <Card className="p-6 bg-gray-900/50 border-gray-700">
                 <h3 className="text-xl font-semibold mb-4">AI Trading Signals</h3>
-                {state.analysis?.signals?.length > 0 ? (
+                {state.analysis?.signals?.length ? (
                   <div className="space-y-3">
-                    {state.analysis.signals.map((signal: any, index: number) => (
+                    {state.analysis?.signals?.map((signal: TradingSignal, index: number) => (
                       <div key={index} className="p-3 bg-gray-800 rounded">
                         <div className="flex justify-between items-start mb-2">
                           <span className="font-semibold">{signal.symbol}</span>
@@ -332,9 +363,9 @@ export default function AITradingDashboard() {
               {/* AI Recommendations */}
               <Card className="p-6 bg-gray-900/50 border-gray-700">
                 <h3 className="text-xl font-semibold mb-4">AI Recommendations</h3>
-                {state.analysis?.recommendations?.length > 0 ? (
+                {state.analysis?.recommendations?.length ? (
                   <div className="space-y-2">
-                    {state.analysis.recommendations.map((rec: string, index: number) => (
+                    {state.analysis?.recommendations?.map((rec: string, index: number) => (
                       <div
                         key={index}
                         className="p-3 bg-blue-900/30 border border-blue-700 rounded"
@@ -354,7 +385,7 @@ export default function AITradingDashboard() {
           <TabsContent value="trades">
             <Card className="p-6 bg-gray-900/50 border-gray-700">
               <h3 className="text-xl font-semibold mb-4">Recent Trades</h3>
-              {state.portfolio?.trades?.length > 0 ? (
+              {state.portfolio?.trades?.length ? (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -368,10 +399,10 @@ export default function AITradingDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {state.portfolio.trades
-                        .slice(-10)
+                      {state.portfolio?.trades
+                        ?.slice(-10)
                         .reverse()
-                        .map((trade: any, index: number) => (
+                        .map((trade: Trade, index: number) => (
                           <tr key={index} className="border-b border-gray-800">
                             <td className="p-2 font-semibold">{trade.symbol}</td>
                             <td className="p-2">
@@ -425,7 +456,9 @@ export default function AITradingDashboard() {
                       <div>
                         <p className="text-sm text-gray-400">Max Drawdown</p>
                         <p className="text-xl font-semibold text-red-400">
-                          {(state.portfolio.performance.maxDrawdown * 100)?.toFixed(2)}%
+                          {state.portfolio?.performance?.maxDrawdown
+                            ? (state.portfolio.performance.maxDrawdown * 100).toFixed(2) + '%'
+                            : 'N/A'}
                         </p>
                       </div>
                       <div>

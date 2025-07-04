@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Select,
   SelectContent,
@@ -54,16 +56,30 @@ interface BacktestResult {
   grossProfit: number;
   grossLoss: number;
   equityCurve: number[];
+  largestWin: number;
+  largestLoss: number;
+  consecutiveWins: number;
+  consecutiveLosses: number;
+  tradingDays: number;
+  avgHoldingPeriod: number;
 }
 
 interface BacktestSettings {
-  symbol: string;
+  symbol?: string;
   strategy: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   initialCapital: number;
-  commissionPerTrade: number;
-  slippagePercent: number;
+  commissionPerTrade?: number;
+  slippagePercent?: number;
+  symbols?: string[];
+  timeframe?: string;
+  commission?: number;
+  slippage?: number;
+  maxPositionSize?: number;
+  riskPerTrade?: number;
+  stopLoss?: number;
+  takeProfit?: number;
 }
 
 export default function BacktestingEngine() {
@@ -72,8 +88,8 @@ export default function BacktestingEngine() {
   const [progress, setProgress] = useState(0);
   const [backtestConfig, setBacktestConfig] = useState<BacktestSettings>({
     strategy: 'ai-pattern-recognition',
-    startDate: new Date('2023-01-01'),
-    endDate: new Date('2024-01-01'),
+    startDate: '2023-01-01',
+    endDate: '2024-01-01',
     initialCapital: 100000,
     symbols: ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'],
     timeframe: '1D',
@@ -122,6 +138,8 @@ export default function BacktestingEngine() {
 
   const generateBacktestResults = () => {
     const strategy = strategies.find(s => s.id === backtestConfig.strategy);
+    if (!strategy) return;
+
     const totalTrades = Math.floor(Math.random() * 500) + 200;
     const winningTrades = Math.floor(totalTrades * (strategy.winRate / 100));
     const losingTrades = totalTrades - winningTrades;
@@ -152,13 +170,19 @@ export default function BacktestingEngine() {
       volatility: 15 + Math.random() * 25,
       beta: 0.7 + Math.random() * 0.8,
       alpha: -2 + Math.random() * 8,
+      maxConsecutiveWins: Math.floor(Math.random() * 8) + 3,
+      maxConsecutiveLosses: Math.floor(Math.random() * 5) + 2,
+      avgDaysInTrade: 3 + Math.random() * 12,
+      totalCommissions: totalTrades * 1.25,
+      netProfit: finalCapital - backtestConfig.initialCapital,
+      grossProfit: winningTrades * avgWin * backtestConfig.initialCapital,
+      grossLoss: losingTrades * Math.abs(avgLoss) * backtestConfig.initialCapital,
       tradingDays: 252,
       avgHoldingPeriod: 3 + Math.random() * 12,
       largestWin: 15 + Math.random() * 25,
       largestLoss: -(8 + Math.random() * 12),
       consecutiveWins: Math.floor(Math.random() * 8) + 3,
       consecutiveLosses: Math.floor(Math.random() * 5) + 2,
-      monthlyReturns: Array.from({ length: 12 }, () => -10 + Math.random() * 25),
       equityCurve: Array.from({ length: 252 }, (_, i) => {
         const baseReturn = totalReturn / 252;
         const dailyReturn = baseReturn + (Math.random() - 0.5) * 0.02;
@@ -282,7 +306,9 @@ export default function BacktestingEngine() {
                     <Calendar
                       mode="single"
                       selected={backtestConfig.startDate}
-                      onSelect={date => setBacktestConfig(prev => ({ ...prev, startDate: date }))}
+                      onSelect={(date: Date | undefined) =>
+                        setBacktestConfig(prev => ({ ...prev, startDate: date || new Date() }))
+                      }
                       initialFocus
                     />
                   </PopoverContent>
@@ -305,7 +331,9 @@ export default function BacktestingEngine() {
                     <Calendar
                       mode="single"
                       selected={backtestConfig.endDate}
-                      onSelect={date => setBacktestConfig(prev => ({ ...prev, endDate: date }))}
+                      onSelect={(date: Date | undefined) =>
+                        setBacktestConfig(prev => ({ ...prev, endDate: date || new Date() }))
+                      }
                       initialFocus
                     />
                   </PopoverContent>
@@ -355,7 +383,7 @@ export default function BacktestingEngine() {
                 <Input
                   type="number"
                   step="0.01"
-                  value={backtestConfig.maxPositionSize * 100}
+                  value={(backtestConfig.maxPositionSize || 0.1) * 100}
                   onChange={e =>
                     setBacktestConfig(prev => ({
                       ...prev,
@@ -371,7 +399,7 @@ export default function BacktestingEngine() {
                 <Input
                   type="number"
                   step="0.01"
-                  value={backtestConfig.riskPerTrade * 100}
+                  value={(backtestConfig.riskPerTrade || 0.02) * 100}
                   onChange={e =>
                     setBacktestConfig(prev => ({
                       ...prev,
@@ -388,7 +416,7 @@ export default function BacktestingEngine() {
                   <Input
                     type="number"
                     step="0.01"
-                    value={backtestConfig.stopLoss * 100}
+                    value={(backtestConfig.stopLoss || 0.02) * 100}
                     onChange={e =>
                       setBacktestConfig(prev => ({
                         ...prev,
@@ -403,7 +431,7 @@ export default function BacktestingEngine() {
                   <Input
                     type="number"
                     step="0.01"
-                    value={backtestConfig.takeProfit * 100}
+                    value={(backtestConfig.takeProfit || 0.05) * 100}
                     onChange={e =>
                       setBacktestConfig(prev => ({
                         ...prev,

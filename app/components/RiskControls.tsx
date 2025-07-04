@@ -14,6 +14,7 @@ interface BotSettings {
   maxPositionSize: number;
   riskPerTrade: number;
   emergencyStop: boolean;
+  maxConcurrentTrades: number;
 }
 
 interface BotStats {

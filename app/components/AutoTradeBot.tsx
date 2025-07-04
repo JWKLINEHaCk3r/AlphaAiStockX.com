@@ -49,6 +49,7 @@ export default function AutoTradeBot() {
     maxConcurrentTrades: 5,
     emergencyStop: true,
     riskPerTrade: 2,
+    maxDrawdown: 0.15,
   });
 
   // Simulate real-time bot activity

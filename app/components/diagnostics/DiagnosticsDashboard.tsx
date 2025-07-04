@@ -27,7 +27,11 @@ export default function DiagnosticsDashboard() {
         </TabsContent>
 
         <TabsContent value="build">
-          <BuildValidator />
+          <BuildValidator
+            onValidationComplete={success => {
+              console.log('Build validation completed:', success);
+            }}
+          />
         </TabsContent>
 
         <TabsContent value="checklist">

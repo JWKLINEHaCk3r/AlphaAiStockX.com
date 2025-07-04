@@ -44,9 +44,16 @@ interface Agent {
   id: string;
   name: string;
   status: string;
-  performance: number;
+  performance: {
+    totalReturn: number;
+    sharpeRatio: number;
+    maxDrawdown: number;
+    winRate: number;
+  };
   trades: number;
   profit: number;
+  currentEpisode: number;
+  trainingEpisodes: number;
 }
 
 interface Capability {
@@ -104,6 +111,7 @@ interface Model {
   performance?: {
     winRate?: number;
     avgReturn?: number;
+    sharpeRatio?: number;
   };
 }
 
@@ -113,6 +121,9 @@ interface Environment {
   status: string;
   performance: number;
   assets?: string[];
+  episodeLength?: number;
+  lookbackWindow?: number;
+  transactionCosts?: number;
 }
 
 interface QuantumData {
@@ -145,9 +156,37 @@ interface UltimateAIDashboardProps {
 // Mock services for TypeScript compatibility
 const quantumComputingService = {
   initialize: async () => Promise.resolve(),
-  getRecentResults: (_limit: number) => [],
-  getQuantumCapabilities: () => [],
-  getQuantumProcessors: () => [],
+  getRecentResults: (_limit: number) => [
+    {
+      type: 'portfolio_optimization',
+      accuracy: 0.94,
+      speed: '2.3ms',
+      confidence: 0.92,
+      expectedReturn: 0.18,
+      risk: 0.12,
+      sharpeRatio: 1.5,
+      diversificationScore: 85,
+    },
+  ],
+  getQuantumCapabilities: () => [
+    {
+      name: 'Portfolio Optimization',
+      accuracy: 0.95,
+      speed: '1.2ms',
+      description: 'Quantum-enhanced portfolio allocation',
+    },
+  ],
+  getQuantumProcessors: () => [
+    {
+      name: 'IBM Quantum Eagle',
+      qubits: 127,
+      coherenceTime: '100μs',
+      errorRate: 0.001,
+      status: 'operational',
+      gateSpeed: '100ns',
+      type: 'superconducting',
+    },
+  ],
   runQuantumPortfolioOptimization: async (_assets: string[], _options: Record<string, unknown>) =>
     Promise.resolve({}),
 };
@@ -155,22 +194,109 @@ const quantumComputingService = {
 const highFrequencyTradingService = {
   initialize: async () => Promise.resolve(),
   startHFTSystem: async () => Promise.resolve(),
-  getExecutionStats: () => ({}),
-  getActiveAlgorithms: () => [],
-  getAvailableStrategies: () => [],
+  getExecutionStats: () => ({
+    avgExecutionTime: 0.45,
+    successRate: 0.987,
+    dailyVolume: 15000000,
+    totalPnL: 125000,
+  }),
+  getActiveAlgorithms: () => [
+    {
+      name: 'Lightning Arbitrage',
+      type: 'arbitrage',
+      performance: 94.2,
+      accuracy: 0.96,
+      ordersPlaced: 1250,
+      ordersFilled: 1198,
+      currentPnl: 15420,
+    },
+  ],
+  getAvailableStrategies: () => [
+    {
+      name: 'Market Making',
+      type: 'market_making',
+      performance: 87.5,
+      winRate: 0.78,
+      description: 'Provides liquidity across multiple exchanges',
+      sharpeRatio: 2.1,
+      capacity: 5000000,
+    },
+  ],
 };
 
 const alternativeDataService = {
   initialize: async () => Promise.resolve(),
-  getDataSources: () => [],
+  getDataSources: () => [
+    {
+      name: 'Satellite Imagery',
+      type: 'geospatial',
+      status: 'active',
+      latency: '15min',
+      accuracy: 0.88,
+    },
+  ],
   getComprehensiveAlternativeData: async (_symbol: string) => Promise.resolve({}),
 };
 
 const reinforcementLearningService = {
   initialize: async () => Promise.resolve(),
-  getAgents: () => [],
-  getModels: () => [],
-  getEnvironments: () => [],
+  getAgents: () => [
+    {
+      id: 'alpha_trader',
+      name: 'Alpha Trader',
+      status: 'trained',
+      performance: {
+        totalReturn: 0.85,
+        sharpeRatio: 2.9,
+        maxDrawdown: 0.25,
+        winRate: 0.63,
+      },
+      trades: 156,
+      profit: 127.5,
+      currentEpisode: 750,
+      trainingEpisodes: 1000,
+    },
+    {
+      id: 'gamma_learner',
+      name: 'Gamma Learner',
+      status: 'training',
+      performance: {
+        totalReturn: 0.42,
+        sharpeRatio: 1.8,
+        maxDrawdown: 0.18,
+        winRate: 0.58,
+      },
+      trades: 89,
+      profit: 68.2,
+      currentEpisode: 320,
+      trainingEpisodes: 500,
+    },
+  ],
+  getModels: () => [
+    {
+      name: 'Deep Q-Network',
+      type: 'DQN',
+      accuracy: 0.87,
+      status: 'deployed',
+      performance: {
+        winRate: 0.72,
+        avgReturn: 0.15,
+        sharpeRatio: 2.1,
+      },
+    },
+  ],
+  getEnvironments: () => [
+    {
+      name: 'Multi-Asset Trading',
+      type: 'continuous',
+      status: 'active',
+      performance: 92.5,
+      assets: ['AAPL', 'MSFT', 'GOOGL'],
+      episodeLength: 252,
+      lookbackWindow: 30,
+      transactionCosts: 0.001,
+    },
+  ],
   getAgentPrediction: async (_agentName: string, _options: Record<string, unknown>) =>
     Promise.resolve({}),
 };
@@ -534,7 +660,9 @@ export default function UltimateAIDashboard({ className = '' }: UltimateAIDashbo
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-400">Performance</span>
-                        <span className="text-green-400">{agent.performance.toFixed(1)}%</span>
+                        <span className="text-green-400">
+                          {(agent.performance.totalReturn * 100).toFixed(1)}%
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Trades</span>
@@ -863,7 +991,7 @@ export default function UltimateAIDashboard({ className = '' }: UltimateAIDashbo
                         <div>
                           <span className="text-slate-400">Accuracy:</span>
                           <span className="text-green-400 ml-1">
-                            {(source.accuracy * 100).toFixed(0)}%
+                            {((source.accuracy || 0) * 100).toFixed(0)}%
                           </span>
                         </div>
                       </div>
@@ -1067,13 +1195,15 @@ export default function UltimateAIDashboard({ className = '' }: UltimateAIDashbo
                         <div>
                           <span className="text-slate-400">Sharpe:</span>
                           <span className="text-purple-400 ml-1">
-                            {model.performance.sharpeRatio}
+                            {model.performance?.sharpeRatio || 'N/A'}
                           </span>
                         </div>
                         <div>
                           <span className="text-slate-400">Win Rate:</span>
                           <span className="text-yellow-400 ml-1">
-                            {(model.performance.winRate * 100).toFixed(0)}%
+                            {model.performance?.winRate
+                              ? (model.performance.winRate * 100).toFixed(0) + '%'
+                              : 'N/A'}
                           </span>
                         </div>
                       </div>
@@ -1119,7 +1249,9 @@ export default function UltimateAIDashboard({ className = '' }: UltimateAIDashbo
                         <div>
                           <span className="text-slate-400">Costs:</span>
                           <span className="text-yellow-400 ml-1">
-                            {(env.transactionCosts * 100).toFixed(2)}%
+                            {env.transactionCosts
+                              ? (env.transactionCosts * 100).toFixed(2) + '%'
+                              : 'N/A'}
                           </span>
                         </div>
                       </div>

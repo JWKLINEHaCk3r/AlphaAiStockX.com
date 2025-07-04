@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } from 'lucide-react';
 
@@ -201,7 +200,7 @@ export default function SiteDiagnostics() {
               </CardHeader>
               <CardContent>
                 <ol className="space-y-2">
-                  {solution.steps.map((step, stepIndex) => (
+                  {solution.steps.map((step: string, stepIndex: number) => (
                     <li key={stepIndex} className="flex items-start gap-3 text-gray-300">
                       <span className="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                         {stepIndex + 1}

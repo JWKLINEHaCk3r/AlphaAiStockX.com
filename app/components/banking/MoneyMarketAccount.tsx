@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +20,23 @@ import {
   Activity,
 } from 'lucide-react';
 
-export default function MoneyMarketAccount({ user, balance, onUpdateBalance }) {
+interface User {
+  id: string | number;
+  name: string;
+  email: string;
+}
+
+interface MoneyMarketAccountProps {
+  user: User;
+  balance: number;
+  onUpdateBalance: (newBalance: number) => void;
+}
+
+export default function MoneyMarketAccount({
+  user,
+  balance,
+  onUpdateBalance,
+}: MoneyMarketAccountProps) {
   const [moneyMarketBalance, setMoneyMarketBalance] = useState(25000);
   const [dailyInterest, setDailyInterest] = useState(0);
   const [totalInterestEarned, setTotalInterestEarned] = useState(1250.75);

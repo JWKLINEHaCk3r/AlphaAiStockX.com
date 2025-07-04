@@ -16,7 +16,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { UserPlus, Mail, Lock, User, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
+interface SignUpFormProps {
+  onSignUp: (data: { name: string; email: string; password: string }) => void;
+  onSwitchToSignIn: () => void;
+}
+
+export default function SignUpForm({ onSignUp, onSwitchToSignIn }: SignUpFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +30,7 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -57,9 +62,11 @@ export default function SignUpForm({ onSignUp, onSwitchToSignIn }) {
 
       // In a real app, you would call an API to create the user here
       // For demo purposes, we'll accept any valid-looking input
-      onSignUp({ name, email });
+      onSignUp({ name, email, password });
     } catch (err) {
-      setError(err.message || 'Failed to sign up. Please try again.');
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to sign up. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

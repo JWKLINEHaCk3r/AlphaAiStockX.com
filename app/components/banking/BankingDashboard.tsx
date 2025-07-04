@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -29,7 +28,19 @@ import {
   Trash2,
 } from 'lucide-react';
 
-export default function BankingDashboard({ user, onUpdateBalance }) {
+interface User {
+  id: string | number;
+  name: string;
+  email: string;
+  balance?: number;
+}
+
+interface BankingDashboardProps {
+  user: User;
+  onUpdateBalance: (newBalance: number) => void;
+}
+
+export default function BankingDashboard({ user, onUpdateBalance }: BankingDashboardProps) {
   const [bankAccounts, setBankAccounts] = useState([
     {
       id: 1,
@@ -96,7 +107,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
 
       // Simulate instant deposit for demo
       setTimeout(() => {
-        onUpdateBalance(user.balance + Number.parseFloat(depositAmount));
+        onUpdateBalance((user.balance || 0) + Number.parseFloat(depositAmount));
         setTransactions(prev =>
           prev.map((t: any) => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
         );
@@ -110,7 +121,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
     if (
       withdrawAmount &&
       Number.parseFloat(withdrawAmount) > 0 &&
-      Number.parseFloat(withdrawAmount) <= user.balance
+      Number.parseFloat(withdrawAmount) <= (user.balance || 0)
     ) {
       const newTransaction = {
         id: Date.now(),
@@ -124,7 +135,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
 
       // Simulate withdrawal processing
       setTimeout(() => {
-        onUpdateBalance(user.balance - Number.parseFloat(withdrawAmount));
+        onUpdateBalance((user.balance || 0) - Number.parseFloat(withdrawAmount));
         setTransactions(prev =>
           prev.map((t: any) => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
         );
@@ -134,7 +145,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
     }
   };
 
-  const buyingPower = user.balance * 4; // 4x margin
+  const buyingPower = (user.balance || 0) * 4; // 4x margin
 
   return (
     <div className="space-y-6">
