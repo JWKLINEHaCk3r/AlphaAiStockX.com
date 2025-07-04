@@ -1,7 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
-import { FolderOpen, Upload, ArrowRight, CheckCircle, AlertTriangle, Info } from "lucide-react"
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { FolderOpen, Upload, ArrowRight, CheckCircle, AlertTriangle, Info } from 'lucide-react';
 
 export default function IONOSUploadLocation() {
   return (
@@ -10,7 +12,9 @@ export default function IONOSUploadLocation() {
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           📂 IONOS Upload Location Guide
         </h1>
-        <p className="text-xl text-gray-600">Exact steps to find where to upload your AlphaAIStockX files</p>
+        <p className="text-xl text-gray-600">
+          Exact steps to find where to upload your AlphaAIStockX files
+        </p>
         <Badge variant="outline" className="mt-2">
           Domain: alphaaistockx.com
         </Badge>
@@ -161,8 +165,8 @@ export default function IONOSUploadLocation() {
               <Alert className="border-blue-500 bg-blue-50">
                 <Info className="h-5 w-5 text-blue-500" />
                 <AlertDescription className="text-blue-600">
-                  <strong>Can't find File Manager?</strong> Look for "Website Builder", "Content Management", or contact
-                  IONOS support.
+                  <strong>Can't find File Manager?</strong> Look for "Website Builder", "Content
+                  Management", or contact IONOS support.
                 </AlertDescription>
               </Alert>
             </div>
@@ -242,8 +246,8 @@ export default function IONOSUploadLocation() {
               <Alert className="border-yellow-500 bg-yellow-50">
                 <AlertTriangle className="h-5 w-5 text-yellow-500" />
                 <AlertDescription className="text-yellow-600">
-                  <strong>Alternative Paths:</strong> Some IONOS setups use <code>/htdocs/alphaaistockx.com/</code> or{" "}
-                  <code>/public_html/</code>
+                  <strong>Alternative Paths:</strong> Some IONOS setups use{' '}
+                  <code>/htdocs/alphaaistockx.com/</code> or <code>/public_html/</code>
                 </AlertDescription>
               </Alert>
             </div>
@@ -268,7 +272,8 @@ export default function IONOSUploadLocation() {
                 <h4 className="font-semibold text-indigo-800 mb-2">📤 Upload Steps:</h4>
                 <ol className="list-decimal pl-5 space-y-2 text-sm">
                   <li>
-                    <strong>Double-click</strong> the <code>alphaaistockx.com</code> folder to open it
+                    <strong>Double-click</strong> the <code>alphaaistockx.com</code> folder to open
+                    it
                   </li>
                   <li>
                     <strong>Delete any existing files</strong> (IONOS placeholder content)
@@ -289,7 +294,9 @@ export default function IONOSUploadLocation() {
               </div>
 
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">✅ What You Should See After Upload:</h4>
+                <h4 className="font-semibold text-green-800 mb-2">
+                  ✅ What You Should See After Upload:
+                </h4>
                 <div className="bg-white p-3 rounded border font-mono text-sm">
                   <div className="space-y-1">
                     <div>📄 index.html</div>
@@ -306,7 +313,8 @@ export default function IONOSUploadLocation() {
               <Alert className="border-green-500 bg-green-50">
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 <AlertDescription className="text-green-600">
-                  <strong>Success!</strong> Once uploaded, visit https://alphaaistockx.com to see your live platform!
+                  <strong>Success!</strong> Once uploaded, visit https://alphaaistockx.com to see
+                  your live platform!
                 </AlertDescription>
               </Alert>
             </div>
@@ -340,11 +348,13 @@ export default function IONOSUploadLocation() {
                 </div>
               </div>
 
-              <p className="text-gray-600">Upload ALL contents from your 'out' folder to this directory!</p>
+              <p className="text-gray-600">
+                Upload ALL contents from your 'out' folder to this directory!
+              </p>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }

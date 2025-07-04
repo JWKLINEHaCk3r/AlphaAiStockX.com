@@ -1,59 +1,67 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { MessageCircle, Send, Bot, User, Sparkles } from "lucide-react"
+import { useState } from 'react';
+import { Card, CardTitle, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { MessageCircle, Send, Bot, User, Sparkles } from 'lucide-react';
+import { aiBrainService } from '../services/ai-brain-service';
 
 export default function AIChat() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
-      type: "ai",
+      type: 'ai',
       content:
         "Hello! I'm your AI trading assistant. Ask me anything about market analysis, stock recommendations, or trading strategies.",
       timestamp: new Date(),
     },
-  ])
-  const [inputMessage, setInputMessage] = useState("")
+  ]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = () => {
-    if (!inputMessage.trim()) return
+  const sendMessage = async () => {
+    if (!inputMessage.trim()) return;
 
     const userMessage = {
       id: messages.length + 1,
-      type: "user",
+      type: 'user',
       content: inputMessage,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages([...messages, userMessage])
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponses = [
-        "Based on current market conditions, I recommend diversifying your portfolio with a mix of growth and value stocks.",
-        "The technical indicators suggest a bullish trend for tech stocks in the short term.",
-        "Consider adding some defensive stocks to hedge against market volatility.",
-        "The AI analysis shows strong momentum in the semiconductor sector.",
-        "Current market sentiment is positive, but watch for potential resistance levels.",
-      ]
-
+    try {
+      // Try to extract a symbol (e.g. AAPL) from the message, fallback to SPY
+      const symbolMatch = inputMessage.match(/\b[A-Z]{1,5}\b/);
+      const symbol = symbolMatch ? symbolMatch[0] : 'SPY';
+      const aiResponse = await aiBrainService.getIntelligentRecommendation(symbol);
       const aiMessage = {
         id: messages.length + 2,
-        type: "ai",
-        content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
+        type: 'ai',
+        content: `**AI Recommendation for ${symbol}:**\n\nAction: ${aiResponse.action}\nConfidence: ${(aiResponse.confidence * 100).toFixed(1)}%\nReasoning: ${Array.isArray(aiResponse.reasoning) ? aiResponse.reasoning.join('; ') : aiResponse.reasoning}\n\nPrice Targets: $${aiResponse.priceTargets.moderate.toFixed(2)} (mod)`,
         timestamp: new Date(),
-      }
-
-      setMessages((prev) => [...prev, aiMessage])
-    }, 1000)
-
-    setInputMessage("")
-  }
+      };
+      setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      setMessages(prev => [
+        ...prev,
+        {
+          id: messages.length + 2,
+          type: 'ai',
+          content: 'Sorry, the AI is currently unavailable. Please try again later.',
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+      setInputMessage('');
+    }
+  };
 
   if (!isOpen) {
     return (
@@ -65,13 +73,13 @@ export default function AIChat() {
           <MessageCircle className="h-8 w-8" />
         </Button>
       </div>
-    )
+    );
   }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 w-96">
       <Card className="bg-gray-900/95 border-cyan-500/30 backdrop-blur-xl shadow-2xl">
-        <CardHeader className="pb-3">
+        <div className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-white flex items-center">
               <Bot className="h-5 w-5 mr-2 text-cyan-400" />
@@ -90,41 +98,61 @@ export default function AIChat() {
               ×
             </Button>
           </div>
-        </CardHeader>
+        </div>
         <CardContent className="space-y-4">
           {/* Messages */}
           <div className="h-64 overflow-y-auto space-y-3 pr-2">
-            {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
+            {messages.map(message => (
+              <div
+                key={message.id}
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
-                    message.type === "user"
-                      ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
-                      : "bg-gray-800/60 text-gray-100 border border-cyan-500/20"
+                    message.type === 'user'
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
+                      : 'bg-gray-800/60 text-gray-100 border border-cyan-500/20'
                   }`}
                 >
                   <div className="flex items-start space-x-2">
-                    {message.type === "ai" && <Bot className="h-4 w-4 text-cyan-400 mt-0.5 flex-shrink-0" />}
-                    {message.type === "user" && <User className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />}
+                    {message.type === 'ai' && (
+                      <Bot className="h-4 w-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    )}
+                    {message.type === 'user' && (
+                      <User className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
+                    )}
                     <p className="text-sm">{message.content}</p>
                   </div>
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-3 rounded-lg bg-gray-800/60 text-gray-100 border border-cyan-500/20 animate-pulse">
+                  <div className="flex items-start space-x-2">
+                    <Bot className="h-4 w-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm">AI is thinking...</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Input */}
           <div className="flex space-x-2">
             <Input
               value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputMessage(e.target.value)}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                e.key === 'Enter' && sendMessage()
+              }
               placeholder="Ask about stocks, analysis, or strategies..."
               className="bg-gray-800/40 border-cyan-500/30 text-white placeholder-gray-400"
             />
             <Button
               onClick={sendMessage}
               className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
+              disabled={isLoading}
             >
               <Send className="h-4 w-4" />
             </Button>
@@ -135,7 +163,7 @@ export default function AIChat() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setInputMessage("Analyze AAPL")}
+              onClick={() => setInputMessage('Analyze AAPL')}
               className="text-xs border-cyan-500/30 text-gray-300 hover:text-white"
             >
               Analyze AAPL
@@ -143,7 +171,7 @@ export default function AIChat() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setInputMessage("Market outlook")}
+              onClick={() => setInputMessage('Market outlook')}
               className="text-xs border-cyan-500/30 text-gray-300 hover:text-white"
             >
               Market Outlook
@@ -151,7 +179,7 @@ export default function AIChat() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setInputMessage("Portfolio tips")}
+              onClick={() => setInputMessage('Portfolio tips')}
               className="text-xs border-cyan-500/30 text-gray-300 hover:text-white"
             >
               Portfolio Tips
@@ -160,5 +188,5 @@ export default function AIChat() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,165 +1,110 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Info } from "lucide-react"
-
-export default function IONOSFTPGuide() {
+const IONOSFTPGuide = () => {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">Using FileZilla with IONOS</h1>
+    <div className="container mx-auto py-8">
+      <h1 className="text-2xl font-bold mb-4">IONOS FTP Deployment Guide</h1>
 
-      <Alert className="mb-6 border-blue-500 bg-blue-50">
-        <Info className="h-5 w-5 text-blue-500" />
-        <AlertTitle className="text-blue-700">FTP Recommended</AlertTitle>
-        <AlertDescription className="text-blue-600">
-          For large applications like AlphaAIStockX, using an FTP client is much more efficient than the web interface.
-        </AlertDescription>
-      </Alert>
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">Prerequisites</h2>
+        <ul className="list-disc list-inside">
+          <li>An IONOS account with a domain and webspace package.</li>
+          <li>An FTP client (e.g., FileZilla).</li>
+          <li>Node.js and npm installed locally.</li>
+        </ul>
+      </section>
 
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Step 1: Get Your FTP Credentials</CardTitle>
-          <CardDescription>Find your FTP login details from IONOS Control Panel</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>Log in to your IONOS Control Panel</li>
-            <li>Go to "Hosting" → select your hosting package</li>
-            <li>Look for "FTP Access" or "FTP Accounts"</li>
-            <li>
-              Note down the following information:
-              <ul className="list-disc pl-5 mt-2">
-                <li>FTP Server/Host: Usually ftp.yourdomain.com</li>
-                <li>Username: Your FTP username</li>
-                <li>Password: Your FTP password</li>
-                <li>Port: Usually 21 (standard FTP port)</li>
-              </ul>
-            </li>
-          </ol>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Step 2: Download and Install FileZilla</CardTitle>
-          <CardDescription>FileZilla is a free, open-source FTP client</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>
-              Go to{" "}
-              <a href="https://filezilla-project.org/" className="text-blue-600 hover:underline">
-                https://filezilla-project.org/
-              </a>
-            </li>
-            <li>Download the appropriate version for your operating system</li>
-            <li>Install FileZilla following the installation wizard</li>
-          </ol>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Step 3: Connect to IONOS via FileZilla</CardTitle>
-          <CardDescription>Establish a connection to your hosting account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>Open FileZilla</li>
-            <li>
-              Enter your FTP credentials in the quickconnect bar at the top:
-              <ul className="list-disc pl-5 mt-2">
-                <li>Host: Your FTP server address</li>
-                <li>Username: Your FTP username</li>
-                <li>Password: Your FTP password</li>
-                <li>Port: 21 (or as specified by IONOS)</li>
-              </ul>
-            </li>
-            <li>Click "Quickconnect" to establish the connection</li>
-          </ol>
-          <div className="mt-4 p-3 bg-gray-50 rounded-md border border-gray-200">
-            <p className="text-sm text-gray-700">
-              <strong>Tip:</strong> For a more secure connection, you can use FTPS (FTP over SSL/TLS) if supported by
-              IONOS. In FileZilla, go to File → Site Manager → New Site, then set "Encryption" to "Require explicit FTP
-              over TLS".
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">Deployment Steps</h2>
+        <ol className="list-decimal list-inside">
+          <li>
+            <p className="mb-2">
+              <strong>Step 1: Build your application.</strong>
             </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Step 4: Navigate to the Web Root Directory</CardTitle>
-          <CardDescription>Find the correct folder to upload your files</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-4">
-            After connecting, the right panel shows your remote server files. Navigate to the web root directory:
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              Common web root directories on IONOS:
-              <ul className="list-disc pl-5 mt-2">
-                <li>
-                  <code className="bg-gray-100 px-1 py-0.5 rounded">htdocs</code>
-                </li>
-                <li>
-                  <code className="bg-gray-100 px-1 py-0.5 rounded">public_html</code>
-                </li>
-                <li>
-                  <code className="bg-gray-100 px-1 py-0.5 rounded">www</code>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Step 5: Upload Your Next.js Build Files</CardTitle>
-          <CardDescription>Transfer your static export files to the server</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>
-              In the left panel (local files), navigate to your Next.js project's{" "}
-              <code className="bg-gray-100 px-1 py-0.5 rounded">out</code> directory
-            </li>
-            <li>
-              Select all files and folders in the <code className="bg-gray-100 px-1 py-0.5 rounded">out</code> directory
-            </li>
-            <li>Right-click and select "Upload" or drag the files to the right panel</li>
-            <li>Wait for the upload to complete (this may take several minutes for large applications)</li>
-          </ol>
-          <div className="mt-4 p-3 bg-amber-50 rounded-md border border-amber-200">
-            <p className="text-sm text-amber-700">
-              <strong>Important:</strong> Make sure to upload the contents of the{" "}
-              <code className="bg-gray-100 px-1 py-0.5 rounded">out</code> directory, not the directory itself. Your
-              index.html file should be directly in the web root.
+            <p className="mb-2">
+              Run the following command in your project directory to build your application:
             </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Step 6: Verify Your Upload</CardTitle>
-          <CardDescription>Ensure all files transferred correctly</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>Check that all files and folders have been uploaded successfully</li>
-            <li>Visit your website URL to confirm everything is working</li>
-            <li>Test navigation between pages and functionality</li>
-          </ol>
-          <div className="mt-4 p-3 bg-green-50 rounded-md border border-green-200">
-            <p className="text-sm text-green-700">
-              <strong>Success:</strong> If you see your AlphaAIStockX platform loading correctly, congratulations! Your
-              deployment to IONOS is complete.
+            <pre className="bg-gray-100 p-2 rounded">
+              <code>npm run build</code>
+            </pre>
+            <p className="mb-2">
+              This will create a <code>dist</code> or <code>build</code> folder (depending on your
+              project setup) containing the production-ready files.
             </p>
-          </div>
-        </CardContent>
-      </Card>
+          </li>
+          <li>
+            <p className="mb-2">
+              <strong>Step 2: Install dependencies.</strong>
+            </p>
+            <p className="mb-2">
+              Run the following command in your project directory to install dependencies:
+            </p>
+            <pre className="bg-gray-100 p-2 rounded">
+              <code>npm install</code>
+            </pre>
+          </li>
+          <li>
+            <p className="mb-2">
+              <strong>Step 3: Connect to your IONOS webspace via FTP.</strong>
+            </p>
+            <p className="mb-2">Open your FTP client and enter the following details:</p>
+            <ul className="list-disc list-inside">
+              <li>
+                <strong>Host:</strong> Your IONOS FTP server address (usually your domain name or a
+                specific FTP server address provided by IONOS).
+              </li>
+              <li>
+                <strong>Username:</strong> Your IONOS FTP username.
+              </li>
+              <li>
+                <strong>Password:</strong> Your IONOS FTP password.
+              </li>
+              <li>
+                <strong>Port:</strong> 21 (usually).
+              </li>
+            </ul>
+            <p className="mb-2">Click "Connect" to establish the FTP connection.</p>
+          </li>
+          <li>
+            <p className="mb-2">
+              <strong>Step 4: Upload your application files.</strong>
+            </p>
+            <p className="mb-2">
+              Navigate to the root directory of your webspace (usually <code>/</code> or{' '}
+              <code>/htdocs</code>).
+            </p>
+            <p className="mb-2">
+              Upload the contents of your <code>dist</code> or <code>build</code> folder to this
+              directory. Make sure to upload the *contents* of the folder, not the folder itself.
+            </p>
+          </li>
+          <li>
+            <p className="mb-2">
+              <strong>Step 5: Verify your deployment.</strong>
+            </p>
+            <p className="mb-2">
+              Open your website in a web browser to verify that your application is deployed
+              correctly.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">Troubleshooting</h2>
+        <ul className="list-disc list-inside">
+          <li>
+            <strong>"Website not found" error:</strong> Double-check that you have uploaded the
+            files to the correct directory and that your domain is correctly configured to point to
+            your webspace.
+          </li>
+          <li>
+            <strong>"Internal Server Error":</strong> Check your server logs for more information
+            about the error. This could be due to incorrect file permissions or missing
+            dependencies.
+          </li>
+        </ul>
+      </section>
     </div>
-  )
-}
+  );
+};
+
+export default IONOSFTPGuide;

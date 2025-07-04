@@ -1,15 +1,20 @@
-"use client"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Globe, Database, Satellite, Waves, Lock } from "lucide-react"
+'use client';
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Globe, Database, Satellite, Waves, Lock } from 'lucide-react';
 
 export default function UltimateDataSources() {
   return (
     <Card className="w-full overflow-hidden border-0 bg-gradient-to-br from-blue-950 via-cyan-900 to-blue-950">
       <CardHeader className="pb-2 pt-6 px-6">
         <div className="flex items-center justify-between">
-          <Badge variant="outline" className="bg-blue-500/10 text-blue-300 border-blue-500/20 px-3 py-1">
+          <Badge
+            variant="outline"
+            className="bg-blue-500/10 text-blue-300 border-blue-500/20 px-3 py-1"
+          >
             INTERDIMENSIONAL DATA
           </Badge>
           <div className="flex items-center gap-1">
@@ -28,21 +33,27 @@ export default function UltimateDataSources() {
             <Globe className="h-8 w-8 text-blue-400" />
             <div>
               <h3 className="font-medium text-white">11-Dimensional Market Analysis</h3>
-              <p className="text-xs text-blue-300">Data from parallel universes and alternate timelines</p>
+              <p className="text-xs text-blue-300">
+                Data from parallel universes and alternate timelines
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-cyan-500/10 p-3 rounded-lg">
             <Satellite className="h-8 w-8 text-cyan-400" />
             <div>
               <h3 className="font-medium text-white">Quantum Satellite Constellation</h3>
-              <p className="text-xs text-cyan-300">Real-time monitoring of every market-relevant photon on Earth</p>
+              <p className="text-xs text-cyan-300">
+                Real-time monitoring of every market-relevant photon on Earth
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-teal-500/10 p-3 rounded-lg">
             <Waves className="h-8 w-8 text-teal-400" />
             <div>
               <h3 className="font-medium text-white">Gravitational Wave Market Correlation</h3>
-              <p className="text-xs text-teal-300">Detect market shifts through spacetime distortions</p>
+              <p className="text-xs text-teal-300">
+                Detect market shifts through spacetime distortions
+              </p>
             </div>
           </div>
         </div>
@@ -54,5 +65,5 @@ export default function UltimateDataSources() {
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

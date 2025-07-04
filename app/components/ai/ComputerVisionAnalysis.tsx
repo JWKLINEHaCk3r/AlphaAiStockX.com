@@ -1,226 +1,240 @@
-"use client"
+'use client';
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Eye, Camera, Scan, Target, Zap, Brain, BarChart3, Activity, Layers, ImageIcon, Search } from "lucide-react"
+import { useState, useEffect, useRef } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import {
+  Eye,
+  Camera,
+  Scan,
+  Target,
+  Zap,
+  Brain,
+  BarChart3,
+  Activity,
+  Layers,
+  ImageIcon,
+  Search,
+} from 'lucide-react';
 
 export default function ComputerVisionAnalysis() {
-  const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [analysisResults, setAnalysisResults] = useState([])
-  const [chartPatterns, setChartPatterns] = useState([])
-  const [visionModels, setVisionModels] = useState([])
-  const [processingProgress, setProcessingProgress] = useState(0)
-  const [selectedImage, setSelectedImage] = useState(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResults, setAnalysisResults] = useState([]);
+  const [chartPatterns, setChartPatterns] = useState([]);
+  const [visionModels, setVisionModels] = useState([]);
+  const [processingProgress, setProcessingProgress] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const fileInputRef = useRef(null)
-  const canvasRef = useRef(null)
+  const fileInputRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    initializeVisionModels()
-    generateMockAnalysis()
-  }, [])
+    initializeVisionModels();
+    generateMockAnalysis();
+  }, []);
 
   const initializeVisionModels = () => {
     const models = [
       {
         id: 1,
-        name: "Chart Pattern CNN",
-        type: "Convolutional Neural Network",
+        name: 'Chart Pattern CNN',
+        type: 'Convolutional Neural Network',
         accuracy: 96.8,
-        specialty: "Technical Pattern Recognition",
-        status: "active",
+        specialty: 'Technical Pattern Recognition',
+        status: 'active',
         confidence: 94.2,
-        processing: "Real-time Chart Analysis",
+        processing: 'Real-time Chart Analysis',
       },
       {
         id: 2,
-        name: "Candlestick Vision AI",
-        type: "Deep Learning Classifier",
+        name: 'Candlestick Vision AI',
+        type: 'Deep Learning Classifier',
         accuracy: 93.5,
-        specialty: "Candlestick Pattern Detection",
-        status: "active",
+        specialty: 'Candlestick Pattern Detection',
+        status: 'active',
         confidence: 91.7,
-        processing: "Price Action Analysis",
+        processing: 'Price Action Analysis',
       },
       {
         id: 3,
-        name: "Support/Resistance Detector",
-        type: "Object Detection Model",
+        name: 'Support/Resistance Detector',
+        type: 'Object Detection Model',
         accuracy: 95.1,
-        specialty: "Key Level Identification",
-        status: "active",
+        specialty: 'Key Level Identification',
+        status: 'active',
         confidence: 89.3,
-        processing: "Level Detection",
+        processing: 'Level Detection',
       },
       {
         id: 4,
-        name: "Volume Profile Analyzer",
-        type: "Semantic Segmentation",
+        name: 'Volume Profile Analyzer',
+        type: 'Semantic Segmentation',
         accuracy: 92.7,
-        specialty: "Volume Analysis",
-        status: "training",
+        specialty: 'Volume Analysis',
+        status: 'training',
         confidence: 87.9,
-        processing: "Volume Pattern Recognition",
+        processing: 'Volume Pattern Recognition',
       },
-    ]
+    ];
 
-    setVisionModels(models)
-  }
+    setVisionModels(models);
+  };
 
   const generateMockAnalysis = () => {
     const patterns = [
       {
         id: 1,
-        pattern: "Head and Shoulders",
+        pattern: 'Head and Shoulders',
         confidence: 94.2,
         coordinates: { x: 150, y: 200, width: 300, height: 150 },
-        direction: "bearish",
+        direction: 'bearish',
         target: 165.5,
         probability: 87,
-        timeframe: "4H",
+        timeframe: '4H',
       },
       {
         id: 2,
-        pattern: "Ascending Triangle",
+        pattern: 'Ascending Triangle',
         confidence: 91.8,
         coordinates: { x: 500, y: 180, width: 250, height: 120 },
-        direction: "bullish",
+        direction: 'bullish',
         target: 285.75,
         probability: 83,
-        timeframe: "1D",
+        timeframe: '1D',
       },
       {
         id: 3,
-        pattern: "Double Bottom",
+        pattern: 'Double Bottom',
         confidence: 88.5,
         coordinates: { x: 800, y: 250, width: 200, height: 100 },
-        direction: "bullish",
+        direction: 'bullish',
         target: 195.25,
         probability: 79,
-        timeframe: "1H",
+        timeframe: '1H',
       },
-    ]
+    ];
 
-    setChartPatterns(patterns)
+    setChartPatterns(patterns);
 
     const results = [
       {
         id: 1,
-        type: "Support Level",
+        type: 'Support Level',
         value: 175.5,
         strength: 92,
         touches: 5,
         confidence: 96.3,
-        color: "green",
+        color: 'green',
       },
       {
         id: 2,
-        type: "Resistance Level",
+        type: 'Resistance Level',
         value: 185.75,
         strength: 88,
         touches: 3,
         confidence: 91.7,
-        color: "red",
+        color: 'red',
       },
       {
         id: 3,
-        type: "Trend Line",
-        slope: "ascending",
+        type: 'Trend Line',
+        slope: 'ascending',
         strength: 85,
         points: 4,
         confidence: 89.2,
-        color: "blue",
+        color: 'blue',
       },
       {
         id: 4,
-        type: "Volume Spike",
-        location: "breakout zone",
+        type: 'Volume Spike',
+        location: 'breakout zone',
         magnitude: 340,
         significance: 94,
         confidence: 93.8,
-        color: "purple",
+        color: 'purple',
       },
-    ]
+    ];
 
-    setAnalysisResults(results)
-  }
+    setAnalysisResults(results);
+  };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0]
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result)
-        analyzeChart(e.target.result)
-      }
-      reader.readAsDataURL(file)
+      const reader = new FileReader();
+      reader.onload = e => {
+        setSelectedImage(e.target.result);
+        analyzeChart(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
-  const analyzeChart = async (imageData) => {
-    setIsAnalyzing(true)
-    setProcessingProgress(0)
+  const analyzeChart = async imageData => {
+    setIsAnalyzing(true);
+    setProcessingProgress(0);
 
     // Simulate AI processing with progress updates
     const progressInterval = setInterval(() => {
-      setProcessingProgress((prev) => {
+      setProcessingProgress(prev => {
         if (prev >= 100) {
-          clearInterval(progressInterval)
-          setIsAnalyzing(false)
-          return 100
+          clearInterval(progressInterval);
+          setIsAnalyzing(false);
+          return 100;
         }
-        return prev + Math.random() * 15
-      })
-    }, 200)
+        return prev + Math.random() * 15;
+      });
+    }, 200);
 
     // Simulate analysis completion
     setTimeout(() => {
-      generateMockAnalysis()
-      setIsAnalyzing(false)
-      setProcessingProgress(100)
-    }, 3000)
-  }
+      generateMockAnalysis();
+      setIsAnalyzing(false);
+      setProcessingProgress(100);
+    }, 3000);
+  };
 
   const drawAnalysisOverlay = () => {
-    if (!canvasRef.current || !selectedImage) return
+    if (!canvasRef.current || !selectedImage) return;
 
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext("2d")
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
 
     // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw detected patterns
-    chartPatterns.forEach((pattern) => {
-      ctx.strokeStyle = pattern.direction === "bullish" ? "#10B981" : "#EF4444"
-      ctx.lineWidth = 3
-      ctx.setLineDash([5, 5])
+    chartPatterns.forEach(pattern => {
+      ctx.strokeStyle = pattern.direction === 'bullish' ? '#10B981' : '#EF4444';
+      ctx.lineWidth = 3;
+      ctx.setLineDash([5, 5]);
       ctx.strokeRect(
         pattern.coordinates.x,
         pattern.coordinates.y,
         pattern.coordinates.width,
-        pattern.coordinates.height,
-      )
+        pattern.coordinates.height
+      );
 
       // Add label
-      ctx.fillStyle = pattern.direction === "bullish" ? "#10B981" : "#EF4444"
-      ctx.font = "14px Arial"
+      ctx.fillStyle = pattern.direction === 'bullish' ? '#10B981' : '#EF4444';
+      ctx.font = '14px Arial';
       ctx.fillText(
         `${pattern.pattern} (${pattern.confidence.toFixed(1)}%)`,
         pattern.coordinates.x,
-        pattern.coordinates.y - 10,
-      )
-    })
-  }
+        pattern.coordinates.y - 10
+      );
+    });
+  };
 
   useEffect(() => {
     if (selectedImage && chartPatterns.length > 0) {
-      drawAnalysisOverlay()
+      drawAnalysisOverlay();
     }
-  }, [selectedImage, chartPatterns])
+  }, [selectedImage, chartPatterns]);
 
   return (
     <div className="space-y-6">
@@ -283,11 +297,16 @@ export default function ComputerVisionAnalysis() {
               <h4 className="text-white font-semibold">Active Vision Models</h4>
 
               <div className="space-y-2">
-                {visionModels.slice(0, 3).map((model) => (
-                  <div key={model.id} className="p-3 bg-indigo-500/10 rounded-lg border border-indigo-500/30">
+                {visionModels.slice(0, 3).map(model => (
+                  <div
+                    key={model.id}
+                    className="p-3 bg-indigo-500/10 rounded-lg border border-indigo-500/30"
+                  >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-indigo-400 text-sm font-medium">{model.name}</span>
-                      <Badge className={model.status === "active" ? "bg-green-500" : "bg-yellow-500"}>
+                      <Badge
+                        className={model.status === 'active' ? 'bg-green-500' : 'bg-yellow-500'}
+                      >
                         {model.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -322,7 +341,10 @@ export default function ComputerVisionAnalysis() {
                   <p className="text-sm text-gray-400">Avg Confidence</p>
                   <p className="text-lg font-bold text-yellow-400">
                     {chartPatterns.length > 0
-                      ? (chartPatterns.reduce((sum, p) => sum + p.confidence, 0) / chartPatterns.length).toFixed(1)
+                      ? (
+                          chartPatterns.reduce((sum, p) => sum + p.confidence, 0) /
+                          chartPatterns.length
+                        ).toFixed(1)
                       : 0}
                     %
                   </p>
@@ -355,7 +377,7 @@ export default function ComputerVisionAnalysis() {
           <CardContent>
             <div className="relative">
               <img
-                src={selectedImage || "/placeholder.svg"}
+                src={selectedImage || '/placeholder.svg'}
                 alt="Chart Analysis"
                 className="w-full max-h-96 object-contain rounded-lg"
               />
@@ -384,7 +406,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {chartPatterns.map((pattern) => (
+            {chartPatterns.map(pattern => (
               <div
                 key={pattern.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"
@@ -394,7 +416,11 @@ export default function ComputerVisionAnalysis() {
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-white font-bold">{pattern.pattern}</span>
-                        <Badge className={pattern.direction === "bullish" ? "bg-green-500" : "bg-red-500"}>
+                        <Badge
+                          className={
+                            pattern.direction === 'bullish' ? 'bg-green-500' : 'bg-red-500'
+                          }
+                        >
                           {pattern.direction.toUpperCase()}
                         </Badge>
                         <Badge variant="outline" className="border-green-500/30 text-green-400">
@@ -447,7 +473,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {analysisResults.map((result) => (
+            {analysisResults.map(result => (
               <div
                 key={result.id}
                 className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"
@@ -455,7 +481,10 @@ export default function ComputerVisionAnalysis() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
                     <span className="text-white font-bold">{result.type}</span>
-                    <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: result.color }} />
+                    <div
+                      className={`w-3 h-3 rounded-full`}
+                      style={{ backgroundColor: result.color }}
+                    />
                   </div>
                   <Badge className="bg-purple-500">{result.confidence.toFixed(1)}%</Badge>
                 </div>
@@ -516,7 +545,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {visionModels.map((model) => (
+            {visionModels.map(model => (
               <div
                 key={model.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"
@@ -526,7 +555,9 @@ export default function ComputerVisionAnalysis() {
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-white font-bold">{model.name}</span>
-                        <Badge className={model.status === "active" ? "bg-green-500" : "bg-yellow-500"}>
+                        <Badge
+                          className={model.status === 'active' ? 'bg-green-500' : 'bg-yellow-500'}
+                        >
                           {model.status.toUpperCase()}
                         </Badge>
                       </div>
@@ -551,7 +582,11 @@ export default function ComputerVisionAnalysis() {
 
                   <div className="text-right">
                     <p className="text-xs text-gray-400">{model.processing}</p>
-                    <Button variant="outline" size="sm" className="border-cyan-500/30 text-cyan-400 mt-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-cyan-500/30 text-cyan-400 mt-2"
+                    >
                       Configure
                     </Button>
                   </div>
@@ -562,5 +597,5 @@ export default function ComputerVisionAnalysis() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

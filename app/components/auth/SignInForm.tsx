@@ -1,54 +1,58 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { LogIn, Mail, Lock, AlertCircle } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useState } from 'react';
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPassword }) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [rememberMe, setRememberMe] = useState(false)
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
 
     try {
       // Simulate authentication delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Simple validation
       if (!email || !password) {
-        throw new Error("Please enter both email and password")
+        throw new Error('Please enter both email and password');
       }
 
-      if (!email.includes("@")) {
-        throw new Error("Please enter a valid email address")
+      if (!email.includes('@')) {
+        throw new Error('Please enter a valid email address');
       }
 
       // In a real app, you would call an authentication API here
       // For demo purposes, we'll accept any valid-looking input
-      onSignIn({ email, name: email.split("@")[0] })
+      onSignIn({ email, name: email.split('@')[0] });
     } catch (err) {
-      setError(err.message || "Failed to sign in. Please try again.")
+      setError(err.message || 'Failed to sign in. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="w-full max-w-md bg-black/40 border-purple-500/30 backdrop-blur-xl">
       <CardHeader>
         <CardTitle className="text-white text-2xl">Sign In</CardTitle>
-        <CardDescription className="text-gray-400">Access your AlphaAI StockX account</CardDescription>
+        <CardDescription className="text-gray-400">
+          Access your AlphaAI StockX account
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,7 +74,7 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
                 type="email"
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -97,7 +101,7 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
                 type="password"
                 placeholder="••••••••"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 className="pl-10 bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -107,7 +111,7 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
             <Checkbox
               id="remember"
               checked={rememberMe}
-              onCheckedChange={(checked) => setRememberMe(!!checked)}
+              onCheckedChange={checked => setRememberMe(!!checked)}
               className="data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
             />
             <label htmlFor="remember" className="text-sm text-gray-300 cursor-pointer">
@@ -128,7 +132,14 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
                   fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
                   <path
                     className="opacity-75"
                     fill="currentColor"
@@ -148,7 +159,7 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
       </CardContent>
       <CardFooter className="flex justify-center border-t border-purple-500/20 pt-4">
         <p className="text-sm text-gray-400">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Button
             variant="link"
             className="text-purple-400 hover:text-purple-300 p-0 h-auto"
@@ -159,5 +170,5 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
         </p>
       </CardFooter>
     </Card>
-  )
+  );
 }

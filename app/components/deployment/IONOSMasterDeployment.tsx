@@ -1,56 +1,87 @@
-"use client"
+'use client';
+
+import { useState } from 'react';
 
 const IONOSMasterDeployment = () => {
-  const deploy = async () => {
+  const [deploymentStatus, setDeploymentStatus] = useState<string>('Not Deployed');
+  const [logs, setLogs] = useState<string[]>([]);
+
+  const handleDeploy = async () => {
+    setDeploymentStatus('Deploying...');
+    setLogs([]);
+
     try {
-      // Execute deployment commands using npm
-      console.log("Starting deployment process...")
+      // Simulate deployment steps with commands
+      await executeCommand('npm install', setLogs);
+      await executeCommand('npm run build', setLogs);
+      await executeCommand('npm start', setLogs);
 
-      // Step 1: Install dependencies
-      console.log("Installing dependencies with npm...")
-      const installProcess = await runCommand("npm install")
-      console.log("npm install output:", installProcess)
-
-      // Step 2: Build the application
-      console.log("Building the application with npm...")
-      const buildProcess = await runCommand("npm run build")
-      console.log("npm run build output:", buildProcess)
-
-      // Step 3: Deploy to IONOS (replace with actual deployment logic)
-      console.log("Deploying to IONOS...")
-      // Placeholder for deployment script - replace with your actual deployment commands
-      const deployProcess = await runCommand('echo "Deploying to IONOS - placeholder"')
-      console.log("IONOS deployment output:", deployProcess)
-
-      console.log("Deployment completed successfully!")
-    } catch (error) {
-      console.error("Deployment failed:", error)
+      setDeploymentStatus('Deployed Successfully!');
+    } catch (error: any) {
+      setDeploymentStatus(`Deployment Failed: ${error.message}`);
     }
-  }
+  };
 
-  const runCommand = async (command: string): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const { exec } = require("child_process")
-      exec(command, (error: Error | null, stdout: string, stderr: string) => {
-        if (error) {
-          console.error(`Error executing command: ${command}`)
-          console.error(stderr)
-          reject(error)
-          return
+  const executeCommand = async (command: string, setLogs: (logs: string[]) => void) => {
+    return new Promise<void>((resolve, reject) => {
+      // Simulate command execution (replace with actual command execution logic)
+      setLogs(prevLogs => [...prevLogs, `Executing: ${command}`]);
+
+      setTimeout(() => {
+        const success = Math.random() > 0.1; // Simulate occasional failures
+
+        if (success) {
+          setLogs(prevLogs => [...prevLogs, `Command "${command}" completed successfully.`]);
+          resolve();
+        } else {
+          setLogs(prevLogs => [...prevLogs, `Command "${command}" failed.`]);
+          reject(new Error(`Command "${command}" failed to execute.`));
         }
-        console.log(`Command executed: ${command}`)
-        console.log(stdout)
-        resolve(stdout)
-      })
-    })
-  }
+      }, 1500); // Simulate execution time
+    });
+  };
 
   return (
-    <div>
+    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
       <h1>IONOS Master Deployment</h1>
-      <button onClick={deploy}>Deploy to IONOS</button>
-    </div>
-  )
-}
+      <p>Status: {deploymentStatus}</p>
 
-export default IONOSMasterDeployment
+      <button
+        onClick={handleDeploy}
+        style={{
+          backgroundColor: '#4CAF50',
+          border: 'none',
+          color: 'white',
+          padding: '10px 20px',
+          textAlign: 'center',
+          textDecoration: 'none',
+          display: 'inline-block',
+          fontSize: '16px',
+          margin: '4px 2px',
+          cursor: 'pointer',
+          borderRadius: '5px',
+        }}
+      >
+        Deploy
+      </button>
+
+      <h2>Logs:</h2>
+      <div
+        style={{
+          border: '1px solid #ccc',
+          padding: '10px',
+          marginTop: '10px',
+          backgroundColor: '#f9f9f9',
+        }}
+      >
+        {logs.map((log, index) => (
+          <p key={index} style={{ margin: '5px 0' }}>
+            {log}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default IONOSMasterDeployment;

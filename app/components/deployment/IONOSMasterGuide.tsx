@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import IONOSDeploymentGuide from "./IONOSDeploymentGuide"
-import IONOSFTPGuide from "./IONOSFTPGuide"
-import IONOSCustomDomainSetup from "./IONOSCustomDomainSetup"
-import IONOSSSLSetup from "./IONOSSSLSetup"
-import IONOSDeploymentChecklist from "./IONOSDeploymentChecklist"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import IONOSDeploymentGuide from './IONOSDeploymentGuide';
+import IONOSFTPGuide from './IONOSFTPGuide';
+import IONOSCustomDomainSetup from './IONOSCustomDomainSetup';
+import IONOSSSLSetup from './IONOSSSLSetup';
+import IONOSDeploymentChecklist from './IONOSDeploymentChecklist';
 
 export default function IONOSMasterGuide() {
   return (
@@ -38,5 +38,5 @@ export default function IONOSMasterGuide() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

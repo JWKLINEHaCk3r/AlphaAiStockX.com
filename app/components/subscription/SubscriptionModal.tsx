@@ -1,38 +1,38 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import SubscriptionPlans from "./SubscriptionPlans"
-import PaymentForm from "./PaymentForm"
+import { useState } from 'react';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import SubscriptionPlans from './SubscriptionPlans';
+import PaymentForm from './PaymentForm';
 
 export default function SubscriptionModal({ isOpen, onClose, currentPlan, onSubscribe }) {
-  const [view, setView] = useState("plans") // plans, payment
-  const [selectedPlan, setSelectedPlan] = useState(null)
-  const [billingCycle, setBillingCycle] = useState("yearly")
+  const [view, setView] = useState('plans'); // plans, payment
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [billingCycle, setBillingCycle] = useState('yearly');
 
-  const handleSelectPlan = (planId) => {
-    setSelectedPlan(planId)
-    setView("payment")
-  }
+  const handleSelectPlan = planId => {
+    setSelectedPlan(planId);
+    setView('payment');
+  };
 
-  const handlePaymentSuccess = (planId) => {
-    onSubscribe(planId)
-    onClose()
-  }
+  const handlePaymentSuccess = planId => {
+    onSubscribe(planId);
+    onClose();
+  };
 
   const handleBack = () => {
-    setView("plans")
-  }
+    setView('plans');
+  };
 
   const handleClose = () => {
-    setView("plans")
-    onClose()
-  }
+    setView('plans');
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-4xl p-6 bg-black/80 border-purple-500/30 backdrop-blur-xl">
-        {view === "plans" ? (
+        {view === 'plans' ? (
           <SubscriptionPlans currentPlan={currentPlan} onSelectPlan={handleSelectPlan} />
         ) : (
           <div className="flex justify-center">
@@ -46,5 +46,5 @@ export default function SubscriptionModal({ isOpen, onClose, currentPlan, onSubs
         )}
       </DialogContent>
     </Dialog>
-  )
+  );
 }

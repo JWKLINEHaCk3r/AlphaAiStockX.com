@@ -1,7 +1,7 @@
-import Header from "./components/Header"
-import StockSearch from "./components/StockSearch"
-import FeatureList from "./components/FeatureList"
-import "./styles.css"
+import Header from './components/Header';
+import StockSearch from './components/StockSearch';
+import FeatureList from './components/FeatureList';
+import './styles.css';
 
 const App = () => {
   return (
@@ -10,7 +10,10 @@ const App = () => {
       <main className="app-content">
         <section className="section">
           <h2>🚀 Welcome to AlphaAIStockX</h2>
-          <p>Your AI-powered stock research assistant with quantum consciousness and transcendent intelligence.</p>
+          <p>
+            Your AI-powered stock research assistant with quantum consciousness and transcendent
+            intelligence.
+          </p>
           <StockSearch />
         </section>
 
@@ -99,16 +102,22 @@ const App = () => {
       </main>
 
       <footer className="app-footer">
-        <p>&copy; 2024 AlphaAIStockX. Transcending human limitations through quantum consciousness.</p>
         <p>
-          Visit the original repo on{" "}
-          <a href="https://github.com/JWKLINEHaCk3r/AlphaAIStockX" target="_blank" rel="noopener noreferrer">
+          &copy; 2024 AlphaAIStockX. Transcending human limitations through quantum consciousness.
+        </p>
+        <p>
+          Visit the original repo on{' '}
+          <a
+            href="https://github.com/JWKLINEHaCk3r/AlphaAIStockX"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
           </a>
         </p>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

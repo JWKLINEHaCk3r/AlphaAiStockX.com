@@ -1,13 +1,15 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Switch } from "@/components/ui/switch"
+import { useState } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
 import {
   User,
   Settings,
@@ -23,23 +25,23 @@ import {
   Edit,
   Download,
   Trash2,
-} from "lucide-react"
+} from 'lucide-react';
 
 interface UserProfileProps {
-  user: any
-  onUpdate: (user: any) => void
+  user: any;
+  onUpdate: (user: any) => void;
 }
 
 export default function UserProfile({ user, onUpdate }: UserProfileProps) {
-  const [activeTab, setActiveTab] = useState("profile")
-  const [editing, setEditing] = useState(false)
+  const [activeTab, setActiveTab] = useState('profile');
+  const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
-    name: user.name || "",
-    email: user.email || "",
-    phone: user.phone || "",
-    location: user.location || "",
-    bio: user.bio || "",
-  })
+    name: user.name || '',
+    email: user.email || '',
+    phone: user.phone || '',
+    location: user.location || '',
+    bio: user.bio || '',
+  });
   const [preferences, setPreferences] = useState({
     emailNotifications: true,
     pushNotifications: true,
@@ -49,35 +51,35 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
     darkMode: true,
     autoSave: true,
     ...user.preferences,
-  })
+  });
 
   const handleSave = () => {
     const updatedUser = {
       ...user,
       ...formData,
       preferences,
-    }
-    onUpdate(updatedUser)
-    setEditing(false)
-  }
+    };
+    onUpdate(updatedUser);
+    setEditing(false);
+  };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   const handlePreferenceChange = (preference: string, value: boolean) => {
-    setPreferences((prev) => ({ ...prev, [preference]: value }))
-  }
+    setPreferences(prev => ({ ...prev, [preference]: value }));
+  };
 
   const getSubscriptionColor = (subscription: string) => {
     const colors = {
-      free: "bg-slate-600",
-      basic: "bg-blue-600",
-      premium: "bg-purple-600",
-      enterprise: "bg-yellow-600",
-    }
-    return colors[subscription] || colors.free
-  }
+      free: 'bg-slate-600',
+      basic: 'bg-blue-600',
+      premium: 'bg-purple-600',
+      enterprise: 'bg-yellow-600',
+    };
+    return colors[subscription] || colors.free;
+  };
 
   return (
     <div className="space-y-6">
@@ -104,12 +106,12 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
               </div>
             </div>
             <Button
-              variant={editing ? "default" : "outline"}
+              variant={editing ? 'default' : 'outline'}
               onClick={() => setEditing(!editing)}
               className="flex items-center gap-2"
             >
               {editing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
-              {editing ? "Save Changes" : "Edit Profile"}
+              {editing ? 'Save Changes' : 'Edit Profile'}
             </Button>
           </div>
         </CardContent>
@@ -160,7 +162,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                     <Input
                       id="name"
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={e => handleInputChange('name', e.target.value)}
                       disabled={!editing}
                       className="pl-10 bg-slate-700 border-slate-600 text-white disabled:opacity-50"
                     />
@@ -177,7 +179,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={e => handleInputChange('email', e.target.value)}
                       disabled={!editing}
                       className="pl-10 bg-slate-700 border-slate-600 text-white disabled:opacity-50"
                     />
@@ -193,7 +195,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                     <Input
                       id="phone"
                       value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      onChange={e => handleInputChange('phone', e.target.value)}
                       disabled={!editing}
                       placeholder="Enter phone number"
                       className="pl-10 bg-slate-700 border-slate-600 text-white disabled:opacity-50"
@@ -210,7 +212,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                     <Input
                       id="location"
                       value={formData.location}
-                      onChange={(e) => handleInputChange("location", e.target.value)}
+                      onChange={e => handleInputChange('location', e.target.value)}
                       disabled={!editing}
                       placeholder="Enter your location"
                       className="pl-10 bg-slate-700 border-slate-600 text-white disabled:opacity-50"
@@ -226,7 +228,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                 <textarea
                   id="bio"
                   value={formData.bio}
-                  onChange={(e) => handleInputChange("bio", e.target.value)}
+                  onChange={e => handleInputChange('bio', e.target.value)}
                   disabled={!editing}
                   placeholder="Tell us about yourself..."
                   rows={4}
@@ -284,51 +286,61 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
           <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20">
             <CardHeader>
               <CardTitle className="text-white">Application Preferences</CardTitle>
-              <CardDescription className="text-slate-400">Customize your experience with AlphaAIStockX</CardDescription>
+              <CardDescription className="text-slate-400">
+                Customize your experience with AlphaAIStockX
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Dark Mode</div>
-                    <div className="text-slate-400 text-sm">Use dark theme throughout the application</div>
+                    <div className="text-slate-400 text-sm">
+                      Use dark theme throughout the application
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.darkMode}
-                    onCheckedChange={(checked) => handlePreferenceChange("darkMode", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('darkMode', checked)}
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Auto-save</div>
-                    <div className="text-slate-400 text-sm">Automatically save your work and preferences</div>
+                    <div className="text-slate-400 text-sm">
+                      Automatically save your work and preferences
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.autoSave}
-                    onCheckedChange={(checked) => handlePreferenceChange("autoSave", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('autoSave', checked)}
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Advanced Charts</div>
-                    <div className="text-slate-400 text-sm">Show advanced technical analysis charts</div>
+                    <div className="text-slate-400 text-sm">
+                      Show advanced technical analysis charts
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.advancedCharts}
-                    onCheckedChange={(checked) => handlePreferenceChange("advancedCharts", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('advancedCharts', checked)}
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Real-time Data</div>
-                    <div className="text-slate-400 text-sm">Enable real-time market data updates</div>
+                    <div className="text-slate-400 text-sm">
+                      Enable real-time market data updates
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.realTimeData}
-                    onCheckedChange={(checked) => handlePreferenceChange("realTimeData", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('realTimeData', checked)}
                   />
                 </div>
               </div>
@@ -358,7 +370,9 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                   </div>
                   <Switch
                     checked={preferences.emailNotifications}
-                    onCheckedChange={(checked) => handlePreferenceChange("emailNotifications", checked)}
+                    onCheckedChange={checked =>
+                      handlePreferenceChange('emailNotifications', checked)
+                    }
                   />
                 </div>
 
@@ -369,40 +383,48 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                   </div>
                   <Switch
                     checked={preferences.pushNotifications}
-                    onCheckedChange={(checked) => handlePreferenceChange("pushNotifications", checked)}
+                    onCheckedChange={checked =>
+                      handlePreferenceChange('pushNotifications', checked)
+                    }
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Market Alerts</div>
-                    <div className="text-slate-400 text-sm">Get notified about important market movements</div>
+                    <div className="text-slate-400 text-sm">
+                      Get notified about important market movements
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.marketAlerts}
-                    onCheckedChange={(checked) => handlePreferenceChange("marketAlerts", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('marketAlerts', checked)}
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Education Updates</div>
-                    <div className="text-slate-400 text-sm">Notifications about new courses and content</div>
+                    <div className="text-slate-400 text-sm">
+                      Notifications about new courses and content
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.educationUpdates}
-                    onCheckedChange={(checked) => handlePreferenceChange("educationUpdates", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('educationUpdates', checked)}
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-white font-medium">Weekly Reports</div>
-                    <div className="text-slate-400 text-sm">Receive weekly performance summaries</div>
+                    <div className="text-slate-400 text-sm">
+                      Receive weekly performance summaries
+                    </div>
                   </div>
                   <Switch
                     checked={preferences.weeklyReports}
-                    onCheckedChange={(checked) => handlePreferenceChange("weeklyReports", checked)}
+                    onCheckedChange={checked => handlePreferenceChange('weeklyReports', checked)}
                   />
                 </div>
               </div>
@@ -422,7 +444,9 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                 <Shield className="h-5 w-5 text-red-400" />
                 Security Settings
               </CardTitle>
-              <CardDescription className="text-slate-400">Manage your account security and privacy</CardDescription>
+              <CardDescription className="text-slate-400">
+                Manage your account security and privacy
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -436,7 +460,9 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
 
                 <div className="p-4 bg-slate-700/30 rounded-lg">
                   <h4 className="text-white font-semibold mb-2">Two-Factor Authentication</h4>
-                  <p className="text-slate-400 text-sm mb-3">Add an extra layer of security to your account</p>
+                  <p className="text-slate-400 text-sm mb-3">
+                    Add an extra layer of security to your account
+                  </p>
                   <Button variant="outline" size="sm">
                     Enable 2FA
                   </Button>
@@ -444,7 +470,9 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
 
                 <div className="p-4 bg-slate-700/30 rounded-lg">
                   <h4 className="text-white font-semibold mb-2">Active Sessions</h4>
-                  <p className="text-slate-400 text-sm mb-3">Manage devices that are signed into your account</p>
+                  <p className="text-slate-400 text-sm mb-3">
+                    Manage devices that are signed into your account
+                  </p>
                   <Button variant="outline" size="sm">
                     View Sessions
                   </Button>
@@ -461,7 +489,9 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
 
                 <div className="p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
                   <h4 className="text-red-400 font-semibold mb-2">Danger Zone</h4>
-                  <p className="text-slate-400 text-sm mb-3">Permanently delete your account and all data</p>
+                  <p className="text-slate-400 text-sm mb-3">
+                    Permanently delete your account and all data
+                  </p>
                   <Button variant="destructive" size="sm" className="flex items-center gap-2">
                     <Trash2 className="h-4 w-4" />
                     Delete Account
@@ -507,7 +537,7 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
                 </div>
               </div>
 
-              {user.subscription !== "free" && (
+              {user.subscription !== 'free' && (
                 <div className="p-4 bg-slate-700/30 rounded-lg">
                   <h4 className="text-white font-semibold mb-2">Payment Method</h4>
                   <div className="flex items-center gap-3 mb-3">
@@ -548,5 +578,5 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

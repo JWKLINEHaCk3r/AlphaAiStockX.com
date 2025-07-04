@@ -1,15 +1,28 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Input } from "@/components/ui/input"
-import { Bell, AlertTriangle, TrendingUp, Volume2, Target, Brain, Zap, Settings, X, Plus } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import {
+  Bell,
+  AlertTriangle,
+  TrendingUp,
+  Volume2,
+  Target,
+  Brain,
+  Zap,
+  Settings,
+  X,
+  Plus,
+} from 'lucide-react';
 
 export default function RealTimeAlerts() {
-  const [alerts, setAlerts] = useState([])
+  const [alerts, setAlerts] = useState([]);
   const [alertSettings, setAlertSettings] = useState({
     priceAlerts: true,
     volumeAlerts: true,
@@ -17,63 +30,63 @@ export default function RealTimeAlerts() {
     aiSignals: true,
     optionsFlow: true,
     earnings: true,
-  })
-  const [customAlerts, setCustomAlerts] = useState([])
+  });
+  const [customAlerts, setCustomAlerts] = useState([]);
 
   useEffect(() => {
     // Simulate real-time alerts
     const interval = setInterval(() => {
-      generateNewAlert()
-    }, 3000)
+      generateNewAlert();
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [alertSettings])
+    return () => clearInterval(interval);
+  }, [alertSettings]);
 
   const generateNewAlert = () => {
     const alertTypes = [
       {
-        type: "price_breakout",
+        type: 'price_breakout',
         icon: TrendingUp,
-        color: "text-emerald-400",
-        title: "Price Breakout",
+        color: 'text-emerald-400',
+        title: 'Price Breakout',
         enabled: alertSettings.priceAlerts,
       },
       {
-        type: "volume_spike",
+        type: 'volume_spike',
         icon: Volume2,
-        color: "text-blue-400",
-        title: "Volume Spike",
+        color: 'text-blue-400',
+        title: 'Volume Spike',
         enabled: alertSettings.volumeAlerts,
       },
       {
-        type: "ai_signal",
+        type: 'ai_signal',
         icon: Brain,
-        color: "text-purple-400",
-        title: "AI Signal",
+        color: 'text-purple-400',
+        title: 'AI Signal',
         enabled: alertSettings.aiSignals,
       },
       {
-        type: "news_impact",
+        type: 'news_impact',
         icon: AlertTriangle,
-        color: "text-amber-400",
-        title: "News Impact",
+        color: 'text-amber-400',
+        title: 'News Impact',
         enabled: alertSettings.newsAlerts,
       },
       {
-        type: "options_flow",
+        type: 'options_flow',
         icon: Target,
-        color: "text-orange-400",
-        title: "Options Flow",
+        color: 'text-orange-400',
+        title: 'Options Flow',
         enabled: alertSettings.optionsFlow,
       },
-    ]
+    ];
 
-    const enabledAlerts = alertTypes.filter((alert) => alert.enabled)
-    if (enabledAlerts.length === 0) return
+    const enabledAlerts = alertTypes.filter(alert => alert.enabled);
+    if (enabledAlerts.length === 0) return;
 
-    const alertType = enabledAlerts[Math.floor(Math.random() * enabledAlerts.length)]
-    const symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA", "META", "AMZN", "NFLX"]
-    const symbol = symbols[Math.floor(Math.random() * symbols.length)]
+    const alertType = enabledAlerts[Math.floor(Math.random() * enabledAlerts.length)];
+    const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'NFLX'];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
 
     const messages = {
       price_breakout: [
@@ -101,7 +114,7 @@ export default function RealTimeAlerts() {
         `${symbol} unusual options activity - bullish flow`,
         `Whale options trade in ${symbol}: $${(Math.random() * 10 + 1).toFixed(1)}M`,
       ],
-    }
+    };
 
     const newAlert = {
       id: Date.now(),
@@ -110,35 +123,36 @@ export default function RealTimeAlerts() {
       color: alertType.color,
       title: alertType.title,
       symbol,
-      message: messages[alertType.type][Math.floor(Math.random() * messages[alertType.type].length)],
+      message:
+        messages[alertType.type][Math.floor(Math.random() * messages[alertType.type].length)],
       timestamp: new Date(),
-      priority: Math.random() > 0.7 ? "high" : Math.random() > 0.4 ? "medium" : "low",
+      priority: Math.random() > 0.7 ? 'high' : Math.random() > 0.4 ? 'medium' : 'low',
       read: false,
-    }
+    };
 
-    setAlerts((prev) => [newAlert, ...prev.slice(0, 19)]) // Keep last 20 alerts
-  }
+    setAlerts(prev => [newAlert, ...prev.slice(0, 19)]); // Keep last 20 alerts
+  };
 
-  const dismissAlert = (alertId) => {
-    setAlerts((prev) => prev.filter((alert) => alert.id !== alertId))
-  }
+  const dismissAlert = alertId => {
+    setAlerts(prev => prev.filter(alert => alert.id !== alertId));
+  };
 
-  const markAsRead = (alertId) => {
-    setAlerts((prev) => prev.map((alert) => (alert.id === alertId ? { ...alert, read: true } : alert)))
-  }
+  const markAsRead = alertId => {
+    setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
+  };
 
-  const getPriorityColor = (priority) => {
+  const getPriorityColor = priority => {
     switch (priority) {
-      case "high":
-        return "border-red-500/50 bg-red-500/10"
-      case "medium":
-        return "border-amber-500/50 bg-amber-500/10"
+      case 'high':
+        return 'border-red-500/50 bg-red-500/10';
+      case 'medium':
+        return 'border-amber-500/50 bg-amber-500/10';
       default:
-        return "border-emerald-500/50 bg-emerald-500/10"
+        return 'border-emerald-500/50 bg-emerald-500/10';
     }
-  }
+  };
 
-  const unreadCount = alerts.filter((alert) => !alert.read).length
+  const unreadCount = alerts.filter(alert => !alert.read).length;
 
   return (
     <div className="space-y-6">
@@ -154,11 +168,18 @@ export default function RealTimeAlerts() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {Object.entries(alertSettings).map(([key, enabled]) => (
-              <div key={key} className="flex items-center justify-between p-3 bg-stone-800/30 rounded-lg">
-                <span className="text-stone-200 capitalize">{key.replace(/([A-Z])/g, " $1").trim()}</span>
+              <div
+                key={key}
+                className="flex items-center justify-between p-3 bg-stone-800/30 rounded-lg"
+              >
+                <span className="text-stone-200 capitalize">
+                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                </span>
                 <Switch
                   checked={enabled}
-                  onCheckedChange={(checked) => setAlertSettings((prev) => ({ ...prev, [key]: checked }))}
+                  onCheckedChange={checked =>
+                    setAlertSettings(prev => ({ ...prev, [key]: checked }))
+                  }
                   className="data-[state=checked]:bg-emerald-500"
                 />
               </div>
@@ -193,17 +214,21 @@ export default function RealTimeAlerts() {
           {alerts.length === 0 ? (
             <div className="text-center py-8">
               <Bell className="h-12 w-12 text-stone-400 mx-auto mb-4" />
-              <p className="text-stone-400">No alerts yet. Configure your settings above to start receiving alerts.</p>
+              <p className="text-stone-400">
+                No alerts yet. Configure your settings above to start receiving alerts.
+              </p>
             </div>
           ) : (
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {alerts.map((alert) => {
-                const IconComponent = alert.icon
+              {alerts.map(alert => {
+                const IconComponent = alert.icon;
                 return (
                   <div
                     key={alert.id}
                     className={`p-4 rounded-lg border transition-all cursor-pointer ${
-                      alert.read ? "bg-stone-800/20 border-stone-600/30" : getPriorityColor(alert.priority)
+                      alert.read
+                        ? 'bg-stone-800/20 border-stone-600/30'
+                        : getPriorityColor(alert.priority)
                     }`}
                     onClick={() => markAsRead(alert.id)}
                   >
@@ -220,26 +245,28 @@ export default function RealTimeAlerts() {
                             </Badge>
                             <Badge
                               className={
-                                alert.priority === "high"
-                                  ? "bg-red-500"
-                                  : alert.priority === "medium"
-                                    ? "bg-amber-500"
-                                    : "bg-emerald-500"
+                                alert.priority === 'high'
+                                  ? 'bg-red-500'
+                                  : alert.priority === 'medium'
+                                    ? 'bg-amber-500'
+                                    : 'bg-emerald-500'
                               }
                             >
                               {alert.priority}
                             </Badge>
                           </div>
                           <p className="text-stone-300 text-sm">{alert.message}</p>
-                          <p className="text-stone-500 text-xs mt-1">{alert.timestamp.toLocaleTimeString()}</p>
+                          <p className="text-stone-500 text-xs mt-1">
+                            {alert.timestamp.toLocaleTimeString()}
+                          </p>
                         </div>
                       </div>
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          dismissAlert(alert.id)
+                        onClick={e => {
+                          e.stopPropagation();
+                          dismissAlert(alert.id);
                         }}
                         className="text-stone-400 hover:text-stone-200"
                       >
@@ -247,7 +274,7 @@ export default function RealTimeAlerts() {
                       </Button>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           )}
@@ -264,7 +291,10 @@ export default function RealTimeAlerts() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Input placeholder="Symbol (e.g., AAPL)" className="bg-stone-800/30 border-stone-600/30 text-stone-200" />
+            <Input
+              placeholder="Symbol (e.g., AAPL)"
+              className="bg-stone-800/30 border-stone-600/30 text-stone-200"
+            />
             <Input
               placeholder="Price Target"
               type="number"
@@ -285,5 +315,5 @@ export default function RealTimeAlerts() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

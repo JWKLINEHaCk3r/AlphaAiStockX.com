@@ -1,5 +1,5 @@
-"use client"
+'use client';
 
 export default function SEOOptimizations() {
-  return <>{/* SEO Optimizations - These are handled in the head section */}</>
+  return <>{/* SEO Optimizations - These are handled in the head section */}</>;
 }

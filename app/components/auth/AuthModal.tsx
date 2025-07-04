@@ -1,130 +1,132 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Checkbox } from "@/components/ui/checkbox"
-import { X, Mail, Lock, User, Eye, EyeOff, Shield } from "lucide-react"
+import { useState } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Checkbox } from '@/components/ui/checkbox';
+import { X, Mail, Lock, User, Eye, EyeOff, Shield } from 'lucide-react';
 
 interface AuthModalProps {
-  isOpen: boolean
-  onClose: () => void
-  onLogin: (userData: any) => void
+  isOpen: boolean;
+  onClose: () => void;
+  onLogin: (userData: any) => void;
 }
 
 export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) {
-  const [activeTab, setActiveTab] = useState("signin")
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('signin');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    name: '',
+    confirmPassword: '',
     agreeToTerms: false,
-  })
-  const [errors, setErrors] = useState({})
+  });
+  const [errors, setErrors] = useState({});
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }))
+      setErrors(prev => ({ ...prev, [field]: '' }));
     }
-  }
+  };
 
   const validateForm = () => {
-    const newErrors = {}
+    const newErrors = {};
 
     if (!formData.email) {
-      newErrors.email = "Email is required"
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid"
+      newErrors.email = 'Email is invalid';
     }
 
     if (!formData.password) {
-      newErrors.password = "Password is required"
+      newErrors.password = 'Password is required';
     } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters"
+      newErrors.password = 'Password must be at least 8 characters';
     }
 
-    if (activeTab === "signup") {
+    if (activeTab === 'signup') {
       if (!formData.name) {
-        newErrors.name = "Name is required"
+        newErrors.name = 'Name is required';
       }
 
       if (!formData.confirmPassword) {
-        newErrors.confirmPassword = "Please confirm your password"
+        newErrors.confirmPassword = 'Please confirm your password';
       } else if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = "Passwords do not match"
+        newErrors.confirmPassword = 'Passwords do not match';
       }
 
       if (!formData.agreeToTerms) {
-        newErrors.agreeToTerms = "You must agree to the terms and conditions"
+        newErrors.agreeToTerms = 'You must agree to the terms and conditions';
       }
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validateForm()) return
+    if (!validateForm()) return;
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
       // Mock successful authentication
       const userData = {
-        id: "user_" + Date.now(),
+        id: 'user_' + Date.now(),
         email: formData.email,
-        name: formData.name || formData.email.split("@")[0],
-        subscription: "free",
+        name: formData.name || formData.email.split('@')[0],
+        subscription: 'free',
         preferences: {},
-      }
+      };
 
-      onLogin(userData)
+      onLogin(userData);
     } catch (error) {
-      setErrors({ general: "Authentication failed. Please try again." })
+      setErrors({ general: 'Authentication failed. Please try again.' });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleSocialLogin = async (provider: string) => {
-    setLoading(true)
+    setLoading(true);
 
     try {
       // Simulate social login
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const userData = {
-        id: "user_" + Date.now(),
+        id: 'user_' + Date.now(),
         email: `user@${provider}.com`,
         name: `${provider} User`,
-        subscription: "free",
+        subscription: 'free',
         preferences: {},
-      }
+      };
 
-      onLogin(userData)
+      onLogin(userData);
     } catch (error) {
-      setErrors({ general: `${provider} login failed. Please try again.` })
+      setErrors({ general: `${provider} login failed. Please try again.` });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
@@ -140,7 +142,9 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
 
         <CardHeader className="text-center">
           <CardTitle className="text-white text-2xl">Welcome to AlphaAIStockX</CardTitle>
-          <CardDescription className="text-slate-400">Sign in to access AI-powered trading analysis</CardDescription>
+          <CardDescription className="text-slate-400">
+            Sign in to access AI-powered trading analysis
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -163,7 +167,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                       type="email"
                       placeholder="Enter your email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={e => handleInputChange('email', e.target.value)}
                       className="pl-10 bg-slate-700 border-slate-600 text-white"
                     />
                   </div>
@@ -178,10 +182,10 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                     <Input
                       id="password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       placeholder="Enter your password"
                       value={formData.password}
-                      onChange={(e) => handleInputChange("password", e.target.value)}
+                      onChange={e => handleInputChange('password', e.target.value)}
                       className="pl-10 pr-10 bg-slate-700 border-slate-600 text-white"
                     />
                     <Button
@@ -197,10 +201,12 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                   {errors.password && <p className="text-red-400 text-sm">{errors.password}</p>}
                 </div>
 
-                {errors.general && <p className="text-red-400 text-sm text-center">{errors.general}</p>}
+                {errors.general && (
+                  <p className="text-red-400 text-sm text-center">{errors.general}</p>
+                )}
 
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Signing In..." : "Sign In"}
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </Button>
               </form>
             </TabsContent>
@@ -218,7 +224,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                       type="text"
                       placeholder="Enter your full name"
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={e => handleInputChange('name', e.target.value)}
                       className="pl-10 bg-slate-700 border-slate-600 text-white"
                     />
                   </div>
@@ -236,7 +242,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                       type="email"
                       placeholder="Enter your email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={e => handleInputChange('email', e.target.value)}
                       className="pl-10 bg-slate-700 border-slate-600 text-white"
                     />
                   </div>
@@ -251,10 +257,10 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                     <Input
                       id="signup-password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       placeholder="Create a password"
                       value={formData.password}
-                      onChange={(e) => handleInputChange("password", e.target.value)}
+                      onChange={e => handleInputChange('password', e.target.value)}
                       className="pl-10 pr-10 bg-slate-700 border-slate-600 text-white"
                     />
                     <Button
@@ -281,36 +287,42 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                       type="password"
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
-                      onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                      onChange={e => handleInputChange('confirmPassword', e.target.value)}
                       className="pl-10 bg-slate-700 border-slate-600 text-white"
                     />
                   </div>
-                  {errors.confirmPassword && <p className="text-red-400 text-sm">{errors.confirmPassword}</p>}
+                  {errors.confirmPassword && (
+                    <p className="text-red-400 text-sm">{errors.confirmPassword}</p>
+                  )}
                 </div>
 
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="terms"
                     checked={formData.agreeToTerms}
-                    onCheckedChange={(checked) => handleInputChange("agreeToTerms", checked)}
+                    onCheckedChange={checked => handleInputChange('agreeToTerms', checked)}
                   />
                   <Label htmlFor="terms" className="text-sm text-slate-300">
-                    I agree to the{" "}
+                    I agree to the{' '}
                     <a href="#" className="text-blue-400 hover:underline">
                       Terms of Service
-                    </a>{" "}
-                    and{" "}
+                    </a>{' '}
+                    and{' '}
                     <a href="#" className="text-blue-400 hover:underline">
                       Privacy Policy
                     </a>
                   </Label>
                 </div>
-                {errors.agreeToTerms && <p className="text-red-400 text-sm">{errors.agreeToTerms}</p>}
+                {errors.agreeToTerms && (
+                  <p className="text-red-400 text-sm">{errors.agreeToTerms}</p>
+                )}
 
-                {errors.general && <p className="text-red-400 text-sm text-center">{errors.general}</p>}
+                {errors.general && (
+                  <p className="text-red-400 text-sm text-center">{errors.general}</p>
+                )}
 
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Creating Account..." : "Create Account"}
+                  {loading ? 'Creating Account...' : 'Create Account'}
                 </Button>
               </form>
             </TabsContent>
@@ -330,7 +342,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                onClick={() => handleSocialLogin("Google")}
+                onClick={() => handleSocialLogin('Google')}
                 disabled={loading}
                 className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
               >
@@ -338,7 +350,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
               </Button>
               <Button
                 variant="outline"
-                onClick={() => handleSocialLogin("GitHub")}
+                onClick={() => handleSocialLogin('GitHub')}
                 disabled={loading}
                 className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
               >
@@ -352,12 +364,13 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
             <div className="flex items-start gap-2">
               <Shield className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
               <div className="text-xs text-slate-300">
-                Your data is protected with enterprise-grade security. We never share your personal information.
+                Your data is protected with enterprise-grade security. We never share your personal
+                information.
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

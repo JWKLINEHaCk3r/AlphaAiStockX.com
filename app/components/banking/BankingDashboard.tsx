@@ -1,13 +1,21 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import {
   Building2,
   DollarSign,
@@ -19,106 +27,114 @@ import {
   AlertCircle,
   Plus,
   Trash2,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function BankingDashboard({ user, onUpdateBalance }) {
   const [bankAccounts, setBankAccounts] = useState([
     {
       id: 1,
-      bankName: "Chase Bank",
-      accountType: "Checking",
-      accountNumber: "****1234",
-      routingNumber: "021000021",
+      bankName: 'Chase Bank',
+      accountType: 'Checking',
+      accountNumber: '****1234',
+      routingNumber: '021000021',
       verified: true,
       isDefault: true,
     },
     {
       id: 2,
-      bankName: "Bank of America",
-      accountType: "Savings",
-      accountNumber: "****5678",
-      routingNumber: "026009593",
+      bankName: 'Bank of America',
+      accountType: 'Savings',
+      accountNumber: '****5678',
+      routingNumber: '026009593',
       verified: false,
       isDefault: false,
     },
-  ])
+  ]);
 
   const [transactions, setTransactions] = useState([
     {
       id: 1,
-      type: "deposit",
+      type: 'deposit',
       amount: 5000,
-      status: "completed",
-      date: "2024-01-15",
-      description: "Bank Transfer - Chase",
+      status: 'completed',
+      date: '2024-01-15',
+      description: 'Bank Transfer - Chase',
     },
     {
       id: 2,
-      type: "withdrawal",
+      type: 'withdrawal',
       amount: 1500,
-      status: "pending",
-      date: "2024-01-14",
-      description: "Withdrawal to Chase",
+      status: 'pending',
+      date: '2024-01-14',
+      description: 'Withdrawal to Chase',
     },
     {
       id: 3,
-      type: "deposit",
+      type: 'deposit',
       amount: 2500,
-      status: "completed",
-      date: "2024-01-12",
-      description: "Bank Transfer - Chase",
+      status: 'completed',
+      date: '2024-01-12',
+      description: 'Bank Transfer - Chase',
     },
-  ])
+  ]);
 
-  const [depositAmount, setDepositAmount] = useState("")
-  const [withdrawAmount, setWithdrawAmount] = useState("")
-  const [selectedAccount, setSelectedAccount] = useState("1")
+  const [depositAmount, setDepositAmount] = useState('');
+  const [withdrawAmount, setWithdrawAmount] = useState('');
+  const [selectedAccount, setSelectedAccount] = useState('1');
 
   const handleDeposit = () => {
     if (depositAmount && Number.parseFloat(depositAmount) > 0) {
       const newTransaction = {
         id: Date.now(),
-        type: "deposit",
+        type: 'deposit',
         amount: Number.parseFloat(depositAmount),
-        status: "pending",
-        date: new Date().toISOString().split("T")[0],
-        description: `Deposit from ${bankAccounts.find((acc) => acc.id.toString() === selectedAccount)?.bankName}`,
-      }
-      setTransactions([newTransaction, ...transactions])
+        status: 'pending',
+        date: new Date().toISOString().split('T')[0],
+        description: `Deposit from ${bankAccounts.find(acc => acc.id.toString() === selectedAccount)?.bankName}`,
+      };
+      setTransactions([newTransaction, ...transactions]);
 
       // Simulate instant deposit for demo
       setTimeout(() => {
-        onUpdateBalance(user.balance + Number.parseFloat(depositAmount))
-        setTransactions((prev) => prev.map((t) => (t.id === newTransaction.id ? { ...t, status: "completed" } : t)))
-      }, 2000)
+        onUpdateBalance(user.balance + Number.parseFloat(depositAmount));
+        setTransactions(prev =>
+          prev.map(t => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
+        );
+      }, 2000);
 
-      setDepositAmount("")
+      setDepositAmount('');
     }
-  }
+  };
 
   const handleWithdraw = () => {
-    if (withdrawAmount && Number.parseFloat(withdrawAmount) > 0 && Number.parseFloat(withdrawAmount) <= user.balance) {
+    if (
+      withdrawAmount &&
+      Number.parseFloat(withdrawAmount) > 0 &&
+      Number.parseFloat(withdrawAmount) <= user.balance
+    ) {
       const newTransaction = {
         id: Date.now(),
-        type: "withdrawal",
+        type: 'withdrawal',
         amount: Number.parseFloat(withdrawAmount),
-        status: "pending",
-        date: new Date().toISOString().split("T")[0],
-        description: `Withdrawal to ${bankAccounts.find((acc) => acc.id.toString() === selectedAccount)?.bankName}`,
-      }
-      setTransactions([newTransaction, ...transactions])
+        status: 'pending',
+        date: new Date().toISOString().split('T')[0],
+        description: `Withdrawal to ${bankAccounts.find(acc => acc.id.toString() === selectedAccount)?.bankName}`,
+      };
+      setTransactions([newTransaction, ...transactions]);
 
       // Simulate withdrawal processing
       setTimeout(() => {
-        onUpdateBalance(user.balance - Number.parseFloat(withdrawAmount))
-        setTransactions((prev) => prev.map((t) => (t.id === newTransaction.id ? { ...t, status: "completed" } : t)))
-      }, 2000)
+        onUpdateBalance(user.balance - Number.parseFloat(withdrawAmount));
+        setTransactions(prev =>
+          prev.map(t => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
+        );
+      }, 2000);
 
-      setWithdrawAmount("")
+      setWithdrawAmount('');
     }
-  }
+  };
 
-  const buyingPower = user.balance * 4 // 4x margin
+  const buyingPower = user.balance * 4; // 4x margin
 
   return (
     <div className="space-y-6">
@@ -129,7 +145,9 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Account Balance</p>
-                <p className="text-3xl font-bold text-green-400">${user.balance.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-green-400">
+                  ${user.balance.toLocaleString()}
+                </p>
               </div>
               <DollarSign className="h-8 w-8 text-green-400" />
             </div>
@@ -153,7 +171,9 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Available to Withdraw</p>
-                <p className="text-3xl font-bold text-purple-400">${user.balance.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-purple-400">
+                  ${user.balance.toLocaleString()}
+                </p>
               </div>
               <ArrowDownLeft className="h-8 w-8 text-purple-400" />
             </div>
@@ -196,8 +216,8 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     </SelectTrigger>
                     <SelectContent>
                       {bankAccounts
-                        .filter((acc) => acc.verified)
-                        .map((account) => (
+                        .filter(acc => acc.verified)
+                        .map(account => (
                           <SelectItem key={account.id} value={account.id.toString()}>
                             {account.bankName} - {account.accountNumber}
                           </SelectItem>
@@ -212,13 +232,13 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     type="number"
                     placeholder="0.00"
                     value={depositAmount}
-                    onChange={(e) => setDepositAmount(e.target.value)}
+                    onChange={e => setDepositAmount(e.target.value)}
                     className="bg-black/20 border-purple-500/30 text-white"
                   />
                 </div>
 
                 <div className="flex gap-2">
-                  {[500, 1000, 2500, 5000].map((amount) => (
+                  {[500, 1000, 2500, 5000].map(amount => (
                     <Button
                       key={amount}
                       variant="outline"
@@ -236,7 +256,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                   disabled={!depositAmount || Number.parseFloat(depositAmount) <= 0}
                   className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
                 >
-                  Deposit ${depositAmount || "0.00"}
+                  Deposit ${depositAmount || '0.00'}
                 </Button>
 
                 <p className="text-xs text-gray-400">
@@ -262,8 +282,8 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     </SelectTrigger>
                     <SelectContent>
                       {bankAccounts
-                        .filter((acc) => acc.verified)
-                        .map((account) => (
+                        .filter(acc => acc.verified)
+                        .map(account => (
                           <SelectItem key={account.id} value={account.id.toString()}>
                             {account.bankName} - {account.accountNumber}
                           </SelectItem>
@@ -278,14 +298,14 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     type="number"
                     placeholder="0.00"
                     value={withdrawAmount}
-                    onChange={(e) => setWithdrawAmount(e.target.value)}
+                    onChange={e => setWithdrawAmount(e.target.value)}
                     className="bg-black/20 border-purple-500/30 text-white"
                     max={user.balance}
                   />
                 </div>
 
                 <div className="flex gap-2">
-                  {[500, 1000, 2500].map((amount) => (
+                  {[500, 1000, 2500].map(amount => (
                     <Button
                       key={amount}
                       variant="outline"
@@ -316,10 +336,12 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                   }
                   className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700"
                 >
-                  Withdraw ${withdrawAmount || "0.00"}
+                  Withdraw ${withdrawAmount || '0.00'}
                 </Button>
 
-                <p className="text-xs text-gray-400">Withdrawals typically take 1-3 business days to process.</p>
+                <p className="text-xs text-gray-400">
+                  Withdrawals typically take 1-3 business days to process.
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -341,7 +363,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {bankAccounts.map((account) => (
+                {bankAccounts.map(account => (
                   <div
                     key={account.id}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30"
@@ -368,12 +390,18 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                             </Badge>
                           )}
                           {account.isDefault && (
-                            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Default</Badge>
+                            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                              Default
+                            </Badge>
                           )}
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" className="border-red-500/30 text-red-400 hover:bg-red-500/20">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-red-500/30 text-red-400 hover:bg-red-500/20"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -393,7 +421,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {transactions.map((transaction) => (
+                {transactions.map(transaction => (
                   <div
                     key={transaction.id}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30"
@@ -401,10 +429,10 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     <div className="flex items-center space-x-4">
                       <div
                         className={`p-3 rounded-full ${
-                          transaction.type === "deposit" ? "bg-green-500/20" : "bg-red-500/20"
+                          transaction.type === 'deposit' ? 'bg-green-500/20' : 'bg-red-500/20'
                         }`}
                       >
-                        {transaction.type === "deposit" ? (
+                        {transaction.type === 'deposit' ? (
                           <ArrowUpRight className="h-5 w-5 text-green-400" />
                         ) : (
                           <ArrowDownLeft className="h-5 w-5 text-red-400" />
@@ -417,22 +445,27 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     </div>
                     <div className="text-right">
                       <p
-                        className={`font-medium ${transaction.type === "deposit" ? "text-green-400" : "text-red-400"}`}
+                        className={`font-medium ${transaction.type === 'deposit' ? 'text-green-400' : 'text-red-400'}`}
                       >
-                        {transaction.type === "deposit" ? "+" : "-"}${transaction.amount.toLocaleString()}
+                        {transaction.type === 'deposit' ? '+' : '-'}$
+                        {transaction.amount.toLocaleString()}
                       </p>
                       <Badge
                         className={
-                          transaction.status === "completed"
-                            ? "bg-green-500/20 text-green-400 border-green-500/30"
-                            : transaction.status === "pending"
-                              ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                              : "bg-red-500/20 text-red-400 border-red-500/30"
+                          transaction.status === 'completed'
+                            ? 'bg-green-500/20 text-green-400 border-green-500/30'
+                            : transaction.status === 'pending'
+                              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                              : 'bg-red-500/20 text-red-400 border-red-500/30'
                         }
                       >
-                        {transaction.status === "completed" && <CheckCircle className="h-3 w-3 mr-1" />}
-                        {transaction.status === "pending" && <Clock className="h-3 w-3 mr-1" />}
-                        {transaction.status === "failed" && <AlertCircle className="h-3 w-3 mr-1" />}
+                        {transaction.status === 'completed' && (
+                          <CheckCircle className="h-3 w-3 mr-1" />
+                        )}
+                        {transaction.status === 'pending' && <Clock className="h-3 w-3 mr-1" />}
+                        {transaction.status === 'failed' && (
+                          <AlertCircle className="h-3 w-3 mr-1" />
+                        )}
                         {transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}
                       </Badge>
                     </div>
@@ -444,5 +477,5 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

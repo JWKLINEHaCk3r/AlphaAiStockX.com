@@ -1,10 +1,12 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import {
   CuboidIcon as Cube,
   Glasses,
@@ -19,7 +21,7 @@ import {
   Maximize2,
   BarChart3,
   Wallet,
-} from "lucide-react"
+} from 'lucide-react';
 
 export default function MetaverseTrading() {
   const [metaverseData, setMetaverseData] = useState({
@@ -37,7 +39,7 @@ export default function MetaverseTrading() {
       totalNFTs: 124,
       totalValue: 1780000 + Math.random() * 200000,
       floorPrice: 3.7 + Math.random() * 1,
-      topCollection: "Alpha Traders Club",
+      topCollection: 'Alpha Traders Club',
     },
     metaverseIndex: {
       value: 1247.89 + Math.random() * 50,
@@ -51,75 +53,75 @@ export default function MetaverseTrading() {
         Others: 28.2 + Math.random() * 5,
       },
     },
-  })
+  });
 
   const [virtualProperties, setVirtualProperties] = useState([
     {
-      name: "Alpha Tower",
-      location: "Decentraland",
-      size: "16x16",
-      value: "$478,000",
-      rental: "$4,780/month",
-      appreciation: "+47.8%",
-      image: "/placeholder.svg?height=100&width=100",
+      name: 'Alpha Tower',
+      location: 'Decentraland',
+      size: '16x16',
+      value: '$478,000',
+      rental: '$4,780/month',
+      appreciation: '+47.8%',
+      image: '/placeholder.svg?height=100&width=100',
     },
     {
-      name: "Trading Plaza",
-      location: "Sandbox",
-      size: "24x24",
-      value: "$687,500",
-      rental: "$6,875/month",
-      appreciation: "+52.3%",
-      image: "/placeholder.svg?height=100&width=100",
+      name: 'Trading Plaza',
+      location: 'Sandbox',
+      size: '24x24',
+      value: '$687,500',
+      rental: '$6,875/month',
+      appreciation: '+52.3%',
+      image: '/placeholder.svg?height=100&width=100',
     },
     {
-      name: "Financial District",
-      location: "Otherside",
-      size: "32x32",
-      value: "$1,245,000",
-      rental: "$12,450/month",
-      appreciation: "+68.7%",
-      image: "/placeholder.svg?height=100&width=100",
+      name: 'Financial District',
+      location: 'Otherside',
+      size: '32x32',
+      value: '$1,245,000',
+      rental: '$12,450/month',
+      appreciation: '+68.7%',
+      image: '/placeholder.svg?height=100&width=100',
     },
-  ])
+  ]);
 
   const [metaverseEvents, setMetaverseEvents] = useState([
     {
-      name: "Virtual Trading Summit",
-      date: "June 15, 2025",
-      location: "Alpha Financial District",
-      attendees: "5,000+",
-      speakers: "25 Industry Leaders",
-      status: "Upcoming",
+      name: 'Virtual Trading Summit',
+      date: 'June 15, 2025',
+      location: 'Alpha Financial District',
+      attendees: '5,000+',
+      speakers: '25 Industry Leaders',
+      status: 'Upcoming',
     },
     {
-      name: "NFT Market Analysis",
-      date: "June 22, 2025",
-      location: "Trading Plaza",
-      attendees: "3,500+",
-      speakers: "12 NFT Experts",
-      status: "Upcoming",
+      name: 'NFT Market Analysis',
+      date: 'June 22, 2025',
+      location: 'Trading Plaza',
+      attendees: '3,500+',
+      speakers: '12 NFT Experts',
+      status: 'Upcoming',
     },
     {
-      name: "Metaverse Investment Workshop",
-      date: "July 5, 2025",
-      location: "Alpha Tower",
-      attendees: "2,000+",
-      speakers: "8 Investment Gurus",
-      status: "Registration Open",
+      name: 'Metaverse Investment Workshop',
+      date: 'July 5, 2025',
+      location: 'Alpha Tower',
+      attendees: '2,000+',
+      speakers: '8 Investment Gurus',
+      status: 'Registration Open',
     },
-  ])
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateMetaverseData()
-    }, 5000)
+      updateMetaverseData();
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const updateMetaverseData = () => {
-    setMetaverseData((prev) => ({
+    setMetaverseData(prev => ({
       ...prev,
       activeUsers: prev.activeUsers + Math.floor((Math.random() - 0.3) * 50),
       tradingVolume: prev.tradingVolume + Math.floor((Math.random() - 0.3) * 50000),
@@ -128,8 +130,8 @@ export default function MetaverseTrading() {
         value: prev.metaverseIndex.value * (1 + (Math.random() - 0.45) * 0.01),
         change: prev.metaverseIndex.change * (1 + (Math.random() - 0.45) * 0.05),
       },
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="space-y-6">
@@ -137,7 +139,8 @@ export default function MetaverseTrading() {
       <Card className="bg-gradient-to-r from-violet-900/20 to-indigo-900/20 border-violet-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Cube className="h-7 w-7 mr-3 text-violet-400" />🌐 Metaverse Trading Hub
+            <Cube className="h-7 w-7 mr-3 text-violet-400" />
+            🌐 Metaverse Trading Hub
             <Badge className="ml-3 bg-gradient-to-r from-violet-400 to-indigo-500">
               <Glasses className="h-4 w-4 mr-1" />
               WEB3 ENABLED
@@ -151,7 +154,9 @@ export default function MetaverseTrading() {
                 <Users className="h-8 w-8 text-violet-400" />
                 <Badge className="bg-violet-500">LIVE</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{metaverseData.activeUsers.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {metaverseData.activeUsers.toLocaleString()}
+              </div>
               <p className="text-violet-400 font-semibold">Active Traders</p>
               <p className="text-gray-400 text-sm">In virtual trading floors</p>
             </div>
@@ -161,7 +166,9 @@ export default function MetaverseTrading() {
                 <Building2 className="h-8 w-8 text-indigo-400" />
                 <Badge className="bg-indigo-500">ASSETS</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{metaverseData.virtualAssets.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {metaverseData.virtualAssets.toLocaleString()}
+              </div>
               <p className="text-indigo-400 font-semibold">Virtual Assets</p>
               <p className="text-gray-400 text-sm">Land, buildings & NFTs</p>
             </div>
@@ -183,7 +190,9 @@ export default function MetaverseTrading() {
                 <Wallet className="h-8 w-8 text-cyan-400" />
                 <Badge className="bg-cyan-500">RETURNS</Badge>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{metaverseData.averageROI.toFixed(1)}%</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {metaverseData.averageROI.toFixed(1)}%
+              </div>
               <p className="text-cyan-400 font-semibold">Average ROI</p>
               <p className="text-gray-400 text-sm">Virtual asset returns</p>
             </div>
@@ -199,10 +208,10 @@ export default function MetaverseTrading() {
               <div className="flex items-center">
                 <span
                   className={`text-2xl font-bold ${
-                    metaverseData.metaverseIndex.change > 0 ? "text-green-400" : "text-red-400"
+                    metaverseData.metaverseIndex.change > 0 ? 'text-green-400' : 'text-red-400'
                   }`}
                 >
-                  {metaverseData.metaverseIndex.change > 0 ? "+" : ""}
+                  {metaverseData.metaverseIndex.change > 0 ? '+' : ''}
                   {metaverseData.metaverseIndex.change.toFixed(2)}%
                 </span>
               </div>
@@ -210,7 +219,9 @@ export default function MetaverseTrading() {
 
             <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="text-3xl font-bold text-white">{metaverseData.metaverseIndex.value.toFixed(2)}</div>
+                <div className="text-3xl font-bold text-white">
+                  {metaverseData.metaverseIndex.value.toFixed(2)}
+                </div>
                 <p className="text-gray-400 text-sm">
                   Market Cap: ${(metaverseData.metaverseIndex.marketCap / 1000000000).toFixed(2)}B
                 </p>
@@ -260,13 +271,15 @@ export default function MetaverseTrading() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {Object.entries(metaverseData.metaverseIndex.dominance).map(([platform, percentage], index) => (
-                <div key={index} className="text-center">
-                  <p className="text-gray-400 text-sm">{platform}</p>
-                  <p className="text-white font-bold">{percentage.toFixed(1)}%</p>
-                  <Progress value={percentage} className="h-1 mt-1" />
-                </div>
-              ))}
+              {Object.entries(metaverseData.metaverseIndex.dominance).map(
+                ([platform, percentage], index) => (
+                  <div key={index} className="text-center">
+                    <p className="text-gray-400 text-sm">{platform}</p>
+                    <p className="text-white font-bold">{percentage.toFixed(1)}%</p>
+                    <Progress value={percentage} className="h-1 mt-1" />
+                  </div>
+                )
+              )}
             </div>
           </div>
         </CardContent>
@@ -307,7 +320,9 @@ export default function MetaverseTrading() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Rental Yield</span>
-                  <span className="text-blue-400 font-bold">{metaverseData.virtualLand.rentalYield.toFixed(1)}%</span>
+                  <span className="text-blue-400 font-bold">
+                    {metaverseData.virtualLand.rentalYield.toFixed(1)}%
+                  </span>
                 </div>
               </div>
             </div>
@@ -317,14 +332,20 @@ export default function MetaverseTrading() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="w-full h-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500" style={{ width: "35%" }}></div>
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-500 to-cyan-500"
+                      style={{ width: '35%' }}
+                    ></div>
                   </div>
                   <p className="text-white font-bold mt-2">35%</p>
                   <p className="text-gray-400 text-sm">Decentraland</p>
                 </div>
                 <div className="text-center">
                   <div className="w-full h-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500" style={{ width: "28%" }}></div>
+                    <div
+                      className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
+                      style={{ width: '28%' }}
+                    ></div>
                   </div>
                   <p className="text-white font-bold mt-2">28%</p>
                   <p className="text-gray-400 text-sm">Sandbox</p>
@@ -333,7 +354,7 @@ export default function MetaverseTrading() {
                   <div className="w-full h-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-green-500 to-emerald-500"
-                      style={{ width: "22%" }}
+                      style={{ width: '22%' }}
                     ></div>
                   </div>
                   <p className="text-white font-bold mt-2">22%</p>
@@ -343,7 +364,7 @@ export default function MetaverseTrading() {
                   <div className="w-full h-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-yellow-500 to-orange-500"
-                      style={{ width: "15%" }}
+                      style={{ width: '15%' }}
                     ></div>
                   </div>
                   <p className="text-white font-bold mt-2">15%</p>
@@ -363,7 +384,7 @@ export default function MetaverseTrading() {
                 >
                   <div className="aspect-video rounded-lg overflow-hidden mb-4 bg-gradient-to-r from-blue-500/10 to-violet-500/10">
                     <img
-                      src={property.image || "/placeholder.svg"}
+                      src={property.image || '/placeholder.svg'}
                       alt={property.name}
                       className="w-full h-full object-cover"
                     />
@@ -392,7 +413,9 @@ export default function MetaverseTrading() {
                     </div>
                   </div>
                   <div className="mt-4 flex space-x-2">
-                    <Button className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">Visit</Button>
+                    <Button className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+                      Visit
+                    </Button>
                     <Button variant="outline" className="flex-1 border-blue-400/30 text-blue-400">
                       Manage
                     </Button>
@@ -408,7 +431,8 @@ export default function MetaverseTrading() {
       <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center text-2xl">
-            <Headphones className="h-7 w-7 mr-3 text-purple-400" />🎮 Immersive Trading Experience
+            <Headphones className="h-7 w-7 mr-3 text-purple-400" />
+            🎮 Immersive Trading Experience
             <Badge className="ml-3 bg-gradient-to-r from-purple-400 to-pink-500">
               <Zap className="h-4 w-4 mr-1" />
               VR/AR ENABLED
@@ -425,7 +449,8 @@ export default function MetaverseTrading() {
                 <h3 className="text-white font-bold text-lg">VR Trading Floor</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Trade in our immersive VR environment with real-time market data and 3D visualizations.
+                Trade in our immersive VR environment with real-time market data and 3D
+                visualizations.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-purple-500">ACTIVE</Badge>
@@ -441,7 +466,8 @@ export default function MetaverseTrading() {
                 <h3 className="text-white font-bold text-lg">Gesture Controls</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Execute trades with intuitive hand gestures and voice commands in our immersive environment.
+                Execute trades with intuitive hand gestures and voice commands in our immersive
+                environment.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-blue-500">ENABLED</Badge>
@@ -457,7 +483,8 @@ export default function MetaverseTrading() {
                 <h3 className="text-white font-bold text-lg">3D Data Visualization</h3>
               </div>
               <p className="text-gray-300 mb-4">
-                Explore market data in three dimensions with interactive holographic charts and patterns.
+                Explore market data in three dimensions with interactive holographic charts and
+                patterns.
               </p>
               <div className="flex items-center">
                 <Badge className="bg-green-500">REAL-TIME</Badge>
@@ -514,5 +541,5 @@ export default function MetaverseTrading() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

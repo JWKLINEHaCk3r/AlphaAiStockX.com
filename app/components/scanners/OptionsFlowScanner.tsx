@@ -1,123 +1,125 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Activity, AlertTriangle, Zap, BarChart3 } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Activity, AlertTriangle, Zap, BarChart3 } from 'lucide-react';
 
 export default function OptionsFlowScanner() {
-  const [optionsFlow, setOptionsFlow] = useState([])
-  const [unusualActivity, setUnusualActivity] = useState([])
-  const [darkPools, setDarkPools] = useState([])
+  const [optionsFlow, setOptionsFlow] = useState([]);
+  const [unusualActivity, setUnusualActivity] = useState([]);
+  const [darkPools, setDarkPools] = useState([]);
 
   useEffect(() => {
     // Simulate real-time options flow data
     const interval = setInterval(() => {
-      generateOptionsFlow()
-      generateUnusualActivity()
-      generateDarkPoolData()
-    }, 3000)
+      generateOptionsFlow();
+      generateUnusualActivity();
+      generateDarkPoolData();
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const generateOptionsFlow = () => {
-    const symbols = ["AAPL", "MSFT", "TSLA", "NVDA", "SPY", "QQQ", "AMZN", "GOOGL"]
-    const flow = symbols.map((symbol) => ({
+    const symbols = ['AAPL', 'MSFT', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'AMZN', 'GOOGL'];
+    const flow = symbols.map(symbol => ({
       symbol,
-      type: Math.random() > 0.5 ? "CALL" : "PUT",
+      type: Math.random() > 0.5 ? 'CALL' : 'PUT',
       strike: Math.round((100 + Math.random() * 400) / 5) * 5,
-      expiry: ["1DTE", "2DTE", "1W", "2W", "1M", "2M"][Math.floor(Math.random() * 6)],
+      expiry: ['1DTE', '2DTE', '1W', '2W', '1M', '2M'][Math.floor(Math.random() * 6)],
       premium: Math.random() * 10 + 0.5,
       volume: Math.floor(Math.random() * 5000) + 100,
       openInterest: Math.floor(Math.random() * 10000) + 500,
-      sentiment: Math.random() > 0.6 ? "bullish" : Math.random() > 0.3 ? "bearish" : "neutral",
-      size: Math.random() > 0.8 ? "whale" : Math.random() > 0.5 ? "large" : "medium",
+      sentiment: Math.random() > 0.6 ? 'bullish' : Math.random() > 0.3 ? 'bearish' : 'neutral',
+      size: Math.random() > 0.8 ? 'whale' : Math.random() > 0.5 ? 'large' : 'medium',
       timestamp: new Date(),
       notionalValue: 0,
-    }))
+    }));
 
-    flow.forEach((trade) => {
-      trade.notionalValue = trade.premium * trade.volume * 100
-    })
+    flow.forEach(trade => {
+      trade.notionalValue = trade.premium * trade.volume * 100;
+    });
 
-    setOptionsFlow(flow.sort((a, b) => b.notionalValue - a.notionalValue))
-  }
+    setOptionsFlow(flow.sort((a, b) => b.notionalValue - a.notionalValue));
+  };
 
   const generateUnusualActivity = () => {
     const activities = [
       {
-        symbol: "AAPL",
-        activity: "Massive Call Buying",
-        description: "10,000+ calls bought at $180 strike",
-        impact: "Bullish",
+        symbol: 'AAPL',
+        activity: 'Massive Call Buying',
+        description: '10,000+ calls bought at $180 strike',
+        impact: 'Bullish',
         confidence: 92,
-        timeDetected: "2 minutes ago",
+        timeDetected: '2 minutes ago',
       },
       {
-        symbol: "TSLA",
-        activity: "Put Wall Building",
-        description: "Heavy put volume at $240 strike",
-        impact: "Support Level",
+        symbol: 'TSLA',
+        activity: 'Put Wall Building',
+        description: 'Heavy put volume at $240 strike',
+        impact: 'Support Level',
         confidence: 87,
-        timeDetected: "5 minutes ago",
+        timeDetected: '5 minutes ago',
       },
       {
-        symbol: "NVDA",
-        activity: "Gamma Squeeze Setup",
-        description: "High call OI near current price",
-        impact: "Bullish",
+        symbol: 'NVDA',
+        activity: 'Gamma Squeeze Setup',
+        description: 'High call OI near current price',
+        impact: 'Bullish',
         confidence: 78,
-        timeDetected: "8 minutes ago",
+        timeDetected: '8 minutes ago',
       },
-    ]
-    setUnusualActivity(activities)
-  }
+    ];
+    setUnusualActivity(activities);
+  };
 
   const generateDarkPoolData = () => {
     const pools = [
       {
-        symbol: "SPY",
+        symbol: 'SPY',
         volume: 2.5,
-        sentiment: "Accumulation",
+        sentiment: 'Accumulation',
         price: 445.67,
-        size: "Institutional",
-        timeframe: "Last Hour",
+        size: 'Institutional',
+        timeframe: 'Last Hour',
       },
       {
-        symbol: "QQQ",
+        symbol: 'QQQ',
         volume: 1.8,
-        sentiment: "Distribution",
+        sentiment: 'Distribution',
         price: 378.23,
-        size: "Whale",
-        timeframe: "Last 30min",
+        size: 'Whale',
+        timeframe: 'Last 30min',
       },
-    ]
-    setDarkPools(pools)
-  }
+    ];
+    setDarkPools(pools);
+  };
 
-  const getSentimentColor = (sentiment) => {
+  const getSentimentColor = sentiment => {
     switch (sentiment) {
-      case "bullish":
-        return "text-emerald-400"
-      case "bearish":
-        return "text-red-400"
+      case 'bullish':
+        return 'text-emerald-400';
+      case 'bearish':
+        return 'text-red-400';
       default:
-        return "text-amber-400"
+        return 'text-amber-400';
     }
-  }
+  };
 
-  const getSizeColor = (size) => {
+  const getSizeColor = size => {
     switch (size) {
-      case "whale":
-        return "text-purple-400"
-      case "large":
-        return "text-blue-400"
+      case 'whale':
+        return 'text-purple-400';
+      case 'large':
+        return 'text-blue-400';
       default:
-        return "text-stone-400"
+        return 'text-stone-400';
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -161,7 +163,9 @@ export default function OptionsFlowScanner() {
                         <div>
                           <div className="flex items-center space-x-2">
                             <span className="text-stone-100 font-bold">{trade.symbol}</span>
-                            <Badge variant={trade.type === "CALL" ? "default" : "destructive"}>{trade.type}</Badge>
+                            <Badge variant={trade.type === 'CALL' ? 'default' : 'destructive'}>
+                              {trade.type}
+                            </Badge>
                             <Badge className={getSizeColor(trade.size)}>{trade.size}</Badge>
                           </div>
                           <p className="text-sm text-stone-400">
@@ -171,12 +175,16 @@ export default function OptionsFlowScanner() {
 
                         <div className="text-center">
                           <p className="text-stone-400 text-sm">Premium</p>
-                          <p className="text-stone-100 font-semibold">${trade.premium.toFixed(2)}</p>
+                          <p className="text-stone-100 font-semibold">
+                            ${trade.premium.toFixed(2)}
+                          </p>
                         </div>
 
                         <div className="text-center">
                           <p className="text-stone-400 text-sm">Volume</p>
-                          <p className="text-stone-100 font-semibold">{trade.volume.toLocaleString()}</p>
+                          <p className="text-stone-100 font-semibold">
+                            {trade.volume.toLocaleString()}
+                          </p>
                         </div>
 
                         <div className="text-center">
@@ -188,8 +196,12 @@ export default function OptionsFlowScanner() {
                       </div>
 
                       <div className="text-right">
-                        <Badge className={getSentimentColor(trade.sentiment)}>{trade.sentiment}</Badge>
-                        <p className="text-xs text-stone-400 mt-1">OI: {trade.openInterest.toLocaleString()}</p>
+                        <Badge className={getSentimentColor(trade.sentiment)}>
+                          {trade.sentiment}
+                        </Badge>
+                        <p className="text-xs text-stone-400 mt-1">
+                          OI: {trade.openInterest.toLocaleString()}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -222,7 +234,11 @@ export default function OptionsFlowScanner() {
                         </Badge>
                       </div>
                       <div className="text-right">
-                        <Badge className={activity.impact === "Bullish" ? "bg-emerald-500" : "bg-blue-500"}>
+                        <Badge
+                          className={
+                            activity.impact === 'Bullish' ? 'bg-emerald-500' : 'bg-blue-500'
+                          }
+                        >
                           {activity.impact}
                         </Badge>
                         <p className="text-xs text-stone-400 mt-1">{activity.timeDetected}</p>
@@ -274,7 +290,9 @@ export default function OptionsFlowScanner() {
                           <p className="text-stone-400 text-sm">Sentiment</p>
                           <p
                             className={`font-semibold ${
-                              pool.sentiment === "Accumulation" ? "text-emerald-400" : "text-red-400"
+                              pool.sentiment === 'Accumulation'
+                                ? 'text-emerald-400'
+                                : 'text-red-400'
                             }`}
                           >
                             {pool.sentiment}
@@ -294,5 +312,5 @@ export default function OptionsFlowScanner() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

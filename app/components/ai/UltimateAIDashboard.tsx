@@ -1,11 +1,13 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   Zap,
@@ -27,36 +29,36 @@ import {
   Sparkles,
   Atom,
   Gauge,
-} from "lucide-react"
+} from 'lucide-react';
 
 // Import our advanced services
-import { quantumComputingService } from "../../services/quantum-computing-service"
-import { highFrequencyTradingService } from "../../services/high-frequency-trading-service"
-import { alternativeDataService } from "../../services/alternative-data-service"
-import { reinforcementLearningService } from "../../services/reinforcement-learning-service"
+import { quantumComputingService } from '../../services/quantum-computing-service';
+import { highFrequencyTradingService } from '../../services/high-frequency-trading-service';
+import { alternativeDataService } from '../../services/alternative-data-service';
+import { reinforcementLearningService } from '../../services/reinforcement-learning-service';
 
 interface UltimateAIDashboardProps {
-  className?: string
+  className?: string;
 }
 
-export default function UltimateAIDashboard({ className = "" }: UltimateAIDashboardProps) {
-  const [activeTab, setActiveTab] = useState("overview")
-  const [quantumData, setQuantumData] = useState<any>(null)
-  const [hftData, setHftData] = useState<any>(null)
-  const [altData, setAltData] = useState<any>(null)
-  const [rlData, setRlData] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [systemStatus, setSystemStatus] = useState("initializing")
+export default function UltimateAIDashboard({ className = '' }: UltimateAIDashboardProps) {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [quantumData, setQuantumData] = useState<any>(null);
+  const [hftData, setHftData] = useState<any>(null);
+  const [altData, setAltData] = useState<any>(null);
+  const [rlData, setRlData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [systemStatus, setSystemStatus] = useState('initializing');
 
   useEffect(() => {
-    initializeServices()
-    const interval = setInterval(updateDashboard, 5000) // Update every 5 seconds
-    return () => clearInterval(interval)
-  }, [])
+    initializeServices();
+    const interval = setInterval(updateDashboard, 5000); // Update every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   const initializeServices = async () => {
     try {
-      setSystemStatus("initializing")
+      setSystemStatus('initializing');
 
       // Initialize all advanced services
       await Promise.all([
@@ -64,107 +66,114 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
         highFrequencyTradingService.initialize(),
         alternativeDataService.initialize(),
         reinforcementLearningService.initialize(),
-      ])
+      ]);
 
       // Start HFT system
-      await highFrequencyTradingService.startHFTSystem()
+      await highFrequencyTradingService.startHFTSystem();
 
-      setSystemStatus("operational")
-      setIsLoading(false)
+      setSystemStatus('operational');
+      setIsLoading(false);
 
       // Initial data load
-      updateDashboard()
+      updateDashboard();
     } catch (error) {
-      console.error("Failed to initialize services:", error)
-      setSystemStatus("error")
-      setIsLoading(false)
+      console.error('Failed to initialize services:', error);
+      setSystemStatus('error');
+      setIsLoading(false);
     }
-  }
+  };
 
   const updateDashboard = async () => {
     try {
       // Get quantum computing data
-      const quantumResults = quantumComputingService.getRecentResults(5)
-      const quantumCapabilities = quantumComputingService.getQuantumCapabilities()
-      const quantumProcessors = quantumComputingService.getQuantumProcessors()
+      const quantumResults = quantumComputingService.getRecentResults(5);
+      const quantumCapabilities = quantumComputingService.getQuantumCapabilities();
+      const quantumProcessors = quantumComputingService.getQuantumProcessors();
 
       setQuantumData({
         results: quantumResults,
         capabilities: quantumCapabilities,
         processors: quantumProcessors,
-      })
+      });
 
       // Get HFT data
-      const hftStats = highFrequencyTradingService.getExecutionStats()
-      const activeAlgorithms = highFrequencyTradingService.getActiveAlgorithms()
-      const availableStrategies = highFrequencyTradingService.getAvailableStrategies()
+      const hftStats = highFrequencyTradingService.getExecutionStats();
+      const activeAlgorithms = highFrequencyTradingService.getActiveAlgorithms();
+      const availableStrategies = highFrequencyTradingService.getAvailableStrategies();
 
       setHftData({
         stats: hftStats,
         algorithms: activeAlgorithms,
         strategies: availableStrategies,
-      })
+      });
 
       // Get alternative data
-      const dataSources = alternativeDataService.getDataSources()
-      const comprehensiveData = await alternativeDataService.getComprehensiveAlternativeData("AAPL")
+      const dataSources = alternativeDataService.getDataSources();
+      const comprehensiveData =
+        await alternativeDataService.getComprehensiveAlternativeData('AAPL');
 
       setAltData({
         sources: dataSources,
         sampleData: comprehensiveData,
-      })
+      });
 
       // Get RL data
-      const agents = reinforcementLearningService.getAgents()
-      const models = reinforcementLearningService.getModels()
-      const environments = reinforcementLearningService.getEnvironments()
+      const agents = reinforcementLearningService.getAgents();
+      const models = reinforcementLearningService.getModels();
+      const environments = reinforcementLearningService.getEnvironments();
 
       setRlData({
         agents,
         models,
         environments,
-      })
+      });
     } catch (error) {
-      console.error("Failed to update dashboard:", error)
+      console.error('Failed to update dashboard:', error);
     }
-  }
+  };
 
   const runQuantumOptimization = async () => {
     try {
-      const assets = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
-      const result = await quantumComputingService.runQuantumPortfolioOptimization(assets, {})
-      console.log("Quantum optimization result:", result)
-      updateDashboard()
+      const assets = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA'];
+      const result = await quantumComputingService.runQuantumPortfolioOptimization(assets, {});
+      console.log('Quantum optimization result:', result);
+      updateDashboard();
     } catch (error) {
-      console.error("Quantum optimization failed:", error)
+      console.error('Quantum optimization failed:', error);
     }
-  }
+  };
 
   const runRLPrediction = async () => {
     try {
-      const prediction = await reinforcementLearningService.getAgentPrediction("alpha_trader", {})
-      console.log("RL prediction:", prediction)
+      const prediction = await reinforcementLearningService.getAgentPrediction('alpha_trader', {});
+      console.log('RL prediction:', prediction);
     } catch (error) {
-      console.error("RL prediction failed:", error)
+      console.error('RL prediction failed:', error);
     }
-  }
+  };
 
   if (isLoading) {
     return (
-      <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 ${className}`}>
+      <div
+        className={`min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 ${className}`}
+      >
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-400 mx-auto mb-4"></div>
             <h2 className="text-2xl font-bold text-white mb-2">Initializing Ultimate AI System</h2>
-            <p className="text-purple-300">Loading quantum processors, neural networks, and advanced algorithms...</p>
+            <p className="text-purple-300">
+              Loading quantum processors, neural networks, and advanced algorithms...
+            </p>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 ${className}`}>
+    <div
+      className={`min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 ${className}`}
+    >
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -173,22 +182,28 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
               <Atom className="h-10 w-10 text-purple-400" />
               AlphaAI Ultimate Trading System
             </h1>
-            <p className="text-purple-300 text-lg">Quantum-Enhanced AI Trading with Alternative Data Intelligence</p>
+            <p className="text-purple-300 text-lg">
+              Quantum-Enhanced AI Trading with Alternative Data Intelligence
+            </p>
           </div>
           <div className="flex items-center gap-4">
             <Badge
               variant={
-                systemStatus === "operational" ? "default" : systemStatus === "error" ? "destructive" : "secondary"
+                systemStatus === 'operational'
+                  ? 'default'
+                  : systemStatus === 'error'
+                    ? 'destructive'
+                    : 'secondary'
               }
               className="text-sm px-3 py-1"
             >
               <div
                 className={`w-2 h-2 rounded-full mr-2 ${
-                  systemStatus === "operational"
-                    ? "bg-green-400"
-                    : systemStatus === "error"
-                      ? "bg-red-400"
-                      : "bg-yellow-400"
+                  systemStatus === 'operational'
+                    ? 'bg-green-400'
+                    : systemStatus === 'error'
+                      ? 'bg-red-400'
+                      : 'bg-yellow-400'
                 }`}
               ></div>
               {systemStatus.toUpperCase()}
@@ -275,7 +290,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-slate-300">Processors</span>
-                    <span className="text-purple-400 font-bold">{quantumData?.processors?.length || 0}</span>
+                    <span className="text-purple-400 font-bold">
+                      {quantumData?.processors?.length || 0}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-300">Qubits</span>
@@ -317,7 +334,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-300">Active Algos</span>
-                    <span className="text-blue-400 font-bold">{hftData?.algorithms?.length || 0}</span>
+                    <span className="text-blue-400 font-bold">
+                      {hftData?.algorithms?.length || 0}
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -371,22 +390,31 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                   <div key={agent.id} className="bg-slate-700/50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-white font-semibold">{agent.name}</h4>
-                      <Badge variant={agent.status === "trained" ? "default" : "secondary"} className="text-xs">
+                      <Badge
+                        variant={agent.status === 'trained' ? 'default' : 'secondary'}
+                        className="text-xs"
+                      >
                         {agent.status}
                       </Badge>
                     </div>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-400">Sharpe Ratio</span>
-                        <span className="text-green-400">{agent.performance?.sharpeRatio?.toFixed(1)}</span>
+                        <span className="text-green-400">
+                          {agent.performance?.sharpeRatio?.toFixed(1)}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Win Rate</span>
-                        <span className="text-blue-400">{(agent.performance?.winRate * 100)?.toFixed(1)}%</span>
+                        <span className="text-blue-400">
+                          {(agent.performance?.winRate * 100)?.toFixed(1)}%
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Max DD</span>
-                        <span className="text-yellow-400">{(agent.performance?.maxDrawdown * 100)?.toFixed(1)}%</span>
+                        <span className="text-yellow-400">
+                          {(agent.performance?.maxDrawdown * 100)?.toFixed(1)}%
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -405,11 +433,17 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button onClick={runQuantumOptimization} className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button
+                  onClick={runQuantumOptimization}
+                  className="bg-purple-600 hover:bg-purple-700 text-white"
+                >
                   <Atom className="h-4 w-4 mr-2" />
                   Quantum Optimize
                 </Button>
-                <Button onClick={runRLPrediction} className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Button
+                  onClick={runRLPrediction}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
                   <Brain className="h-4 w-4 mr-2" />
                   AI Predict
                 </Button>
@@ -448,7 +482,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <span className="text-slate-400">Error Rate:</span>
-                          <span className="text-green-400 ml-2">{(processor.errorRate * 100).toFixed(3)}%</span>
+                          <span className="text-green-400 ml-2">
+                            {(processor.errorRate * 100).toFixed(3)}%
+                          </span>
                         </div>
                         <div>
                           <span className="text-slate-400">Coherence:</span>
@@ -482,7 +518,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                   {quantumData?.capabilities?.map((capability, index) => (
                     <div key={capability} className="bg-slate-700/50 rounded-lg p-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-white capitalize">{capability.replace(/_/g, " ")}</span>
+                        <span className="text-white capitalize">
+                          {capability.replace(/_/g, ' ')}
+                        </span>
                         <Badge variant="outline" className="text-purple-400 border-purple-400">
                           Active
                         </Badge>
@@ -513,19 +551,27 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
                         <span className="text-slate-400">Expected Return:</span>
-                        <span className="text-green-400 ml-2">{(result.expectedReturn * 100)?.toFixed(1)}%</span>
+                        <span className="text-green-400 ml-2">
+                          {(result.expectedReturn * 100)?.toFixed(1)}%
+                        </span>
                       </div>
                       <div>
                         <span className="text-slate-400">Risk:</span>
-                        <span className="text-yellow-400 ml-2">{(result.risk * 100)?.toFixed(1)}%</span>
+                        <span className="text-yellow-400 ml-2">
+                          {(result.risk * 100)?.toFixed(1)}%
+                        </span>
                       </div>
                       <div>
                         <span className="text-slate-400">Sharpe Ratio:</span>
-                        <span className="text-purple-400 ml-2">{result.sharpeRatio?.toFixed(2)}</span>
+                        <span className="text-purple-400 ml-2">
+                          {result.sharpeRatio?.toFixed(2)}
+                        </span>
                       </div>
                       <div>
                         <span className="text-slate-400">Diversification:</span>
-                        <span className="text-blue-400 ml-2">{(result.diversificationScore * 100)?.toFixed(0)}%</span>
+                        <span className="text-blue-400 ml-2">
+                          {(result.diversificationScore * 100)?.toFixed(0)}%
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -551,25 +597,25 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-slate-700/50 rounded-lg p-3">
                       <div className="text-2xl font-bold text-yellow-400">
-                        {hftData?.stats?.ordersPlaced?.toLocaleString() || "0"}
+                        {hftData?.stats?.ordersPlaced?.toLocaleString() || '0'}
                       </div>
                       <div className="text-slate-400 text-sm">Orders Placed</div>
                     </div>
                     <div className="bg-slate-700/50 rounded-lg p-3">
                       <div className="text-2xl font-bold text-green-400">
-                        {hftData?.stats?.ordersFilled?.toLocaleString() || "0"}
+                        {hftData?.stats?.ordersFilled?.toLocaleString() || '0'}
                       </div>
                       <div className="text-slate-400 text-sm">Orders Filled</div>
                     </div>
                     <div className="bg-slate-700/50 rounded-lg p-3">
                       <div className="text-2xl font-bold text-purple-400">
-                        {hftData?.stats?.averageLatency?.toFixed(2) || "0.00"}ms
+                        {hftData?.stats?.averageLatency?.toFixed(2) || '0.00'}ms
                       </div>
                       <div className="text-slate-400 text-sm">Avg Latency</div>
                     </div>
                     <div className="bg-slate-700/50 rounded-lg p-3">
                       <div className="text-2xl font-bold text-blue-400">
-                        ${hftData?.stats?.pnl?.toLocaleString() || "0"}
+                        ${hftData?.stats?.pnl?.toLocaleString() || '0'}
                       </div>
                       <div className="text-slate-400 text-sm">P&L</div>
                     </div>
@@ -605,7 +651,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         </div>
                         <div>
                           <span className="text-slate-400">P&L:</span>
-                          <span className={`ml-1 ${algo.currentPnl >= 0 ? "text-green-400" : "text-red-400"}`}>
+                          <span
+                            className={`ml-1 ${algo.currentPnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                          >
                             ${algo.currentPnl?.toFixed(0)}
                           </span>
                         </div>
@@ -643,7 +691,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Win Rate:</span>
-                        <span className="text-green-400">{(strategy.winRate * 100).toFixed(0)}%</span>
+                        <span className="text-green-400">
+                          {(strategy.winRate * 100).toFixed(0)}%
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Capacity:</span>
@@ -684,7 +734,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         </div>
                         <div>
                           <span className="text-slate-400">Accuracy:</span>
-                          <span className="text-green-400 ml-1">{(source.accuracy * 100).toFixed(0)}%</span>
+                          <span className="text-green-400 ml-1">
+                            {(source.accuracy * 100).toFixed(0)}%
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -707,20 +759,22 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                     <div className="text-center">
                       <div
                         className={`text-3xl font-bold mb-2 ${
-                          altData.sampleData.alternativeSignal.direction === "BULLISH"
-                            ? "text-green-400"
-                            : altData.sampleData.alternativeSignal.direction === "BEARISH"
-                              ? "text-red-400"
-                              : "text-yellow-400"
+                          altData.sampleData.alternativeSignal.direction === 'BULLISH'
+                            ? 'text-green-400'
+                            : altData.sampleData.alternativeSignal.direction === 'BEARISH'
+                              ? 'text-red-400'
+                              : 'text-yellow-400'
                         }`}
                       >
                         {altData.sampleData.alternativeSignal.direction}
                       </div>
                       <div className="text-slate-400">
-                        Signal Strength: {(altData.sampleData.alternativeSignal.strength * 100).toFixed(1)}%
+                        Signal Strength:{' '}
+                        {(altData.sampleData.alternativeSignal.strength * 100).toFixed(1)}%
                       </div>
                       <div className="text-slate-400">
-                        Confidence: {(altData.sampleData.alternativeSignal.confidence * 100).toFixed(1)}%
+                        Confidence:{' '}
+                        {(altData.sampleData.alternativeSignal.confidence * 100).toFixed(1)}%
                       </div>
                     </div>
 
@@ -778,7 +832,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         <span className="text-slate-400">YoY Change:</span>
                         <span
                           className={
-                            altData.sampleData.satellite.yearOverYearChange >= 0 ? "text-green-400" : "text-red-400"
+                            altData.sampleData.satellite.yearOverYearChange >= 0
+                              ? 'text-green-400'
+                              : 'text-red-400'
                           }
                         >
                           {(altData.sampleData.satellite.yearOverYearChange * 100).toFixed(1)}%
@@ -801,8 +857,8 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         <span
                           className={
                             altData.sampleData.socialSentiment.overallSentiment >= 0.5
-                              ? "text-green-400"
-                              : "text-red-400"
+                              ? 'text-green-400'
+                              : 'text-red-400'
                           }
                         >
                           {(altData.sampleData.socialSentiment.overallSentiment * 100).toFixed(1)}%
@@ -836,7 +892,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         <span className="text-slate-400">YoY Change:</span>
                         <span
                           className={
-                            altData.sampleData.webTraffic.yearOverYearChange >= 0 ? "text-green-400" : "text-red-400"
+                            altData.sampleData.webTraffic.yearOverYearChange >= 0
+                              ? 'text-green-400'
+                              : 'text-red-400'
                           }
                         >
                           {(altData.sampleData.webTraffic.yearOverYearChange * 100).toFixed(1)}%
@@ -880,11 +938,15 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         </div>
                         <div>
                           <span className="text-slate-400">Sharpe:</span>
-                          <span className="text-purple-400 ml-1">{model.performance.sharpeRatio}</span>
+                          <span className="text-purple-400 ml-1">
+                            {model.performance.sharpeRatio}
+                          </span>
                         </div>
                         <div>
                           <span className="text-slate-400">Win Rate:</span>
-                          <span className="text-yellow-400 ml-1">{(model.performance.winRate * 100).toFixed(0)}%</span>
+                          <span className="text-yellow-400 ml-1">
+                            {(model.performance.winRate * 100).toFixed(0)}%
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -928,7 +990,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                         </div>
                         <div>
                           <span className="text-slate-400">Costs:</span>
-                          <span className="text-yellow-400 ml-1">{(env.transactionCosts * 100).toFixed(2)}%</span>
+                          <span className="text-yellow-400 ml-1">
+                            {(env.transactionCosts * 100).toFixed(2)}%
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -954,14 +1018,18 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                       <h4 className="text-white font-semibold">{agent.name}</h4>
                       <Badge
                         variant={
-                          agent.status === "trained" ? "default" : agent.status === "training" ? "secondary" : "outline"
+                          agent.status === 'trained'
+                            ? 'default'
+                            : agent.status === 'training'
+                              ? 'secondary'
+                              : 'outline'
                         }
                         className={
-                          agent.status === "trained"
-                            ? "bg-green-600"
-                            : agent.status === "training"
-                              ? "bg-yellow-600"
-                              : ""
+                          agent.status === 'trained'
+                            ? 'bg-green-600'
+                            : agent.status === 'training'
+                              ? 'bg-yellow-600'
+                              : ''
                         }
                       >
                         {agent.status}
@@ -978,7 +1046,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
 
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-400">Sharpe Ratio:</span>
-                        <span className="text-purple-400 font-bold">{agent.performance.sharpeRatio.toFixed(2)}</span>
+                        <span className="text-purple-400 font-bold">
+                          {agent.performance.sharpeRatio.toFixed(2)}
+                        </span>
                       </div>
 
                       <div className="flex justify-between text-sm">
@@ -990,15 +1060,19 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
 
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-400">Win Rate:</span>
-                        <span className="text-blue-400 font-bold">{(agent.performance.winRate * 100).toFixed(1)}%</span>
+                        <span className="text-blue-400 font-bold">
+                          {(agent.performance.winRate * 100).toFixed(1)}%
+                        </span>
                       </div>
 
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-400">Episodes:</span>
-                        <span className="text-slate-300">{agent.currentEpisode.toLocaleString()}</span>
+                        <span className="text-slate-300">
+                          {agent.currentEpisode.toLocaleString()}
+                        </span>
                       </div>
 
-                      {agent.status === "training" && (
+                      {agent.status === 'training' && (
                         <div className="mt-3">
                           <div className="flex justify-between text-xs mb-1">
                             <span className="text-slate-400">Training Progress</span>
@@ -1006,7 +1080,10 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                               {((agent.currentEpisode / agent.trainingEpisodes) * 100).toFixed(0)}%
                             </span>
                           </div>
-                          <Progress value={(agent.currentEpisode / agent.trainingEpisodes) * 100} className="h-2" />
+                          <Progress
+                            value={(agent.currentEpisode / agent.trainingEpisodes) * 100}
+                            className="h-2"
+                          />
                         </div>
                       )}
                     </div>
@@ -1109,7 +1186,9 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
                     Quantum Computing
                   </h4>
                   <div className="text-2xl font-bold text-purple-400 mb-1">+42.3%</div>
-                  <div className="text-slate-400 text-sm">Portfolio optimization and risk analysis</div>
+                  <div className="text-slate-400 text-sm">
+                    Portfolio optimization and risk analysis
+                  </div>
                 </div>
 
                 <div className="bg-slate-700/50 rounded-lg p-4">
@@ -1144,5 +1223,5 @@ export default function UltimateAIDashboard({ className = "" }: UltimateAIDashbo
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

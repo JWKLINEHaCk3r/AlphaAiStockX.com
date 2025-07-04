@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import UserProfile from "./UserProfile"
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import UserProfile from './UserProfile';
 
 export default function ProfileModal({ isOpen, onClose, user, onLogout, onOpenSubscription }) {
   return (
@@ -10,5 +10,5 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout, onOpenSu
         <UserProfile user={user} onLogout={onLogout} onOpenSubscription={onOpenSubscription} />
       </DialogContent>
     </Dialog>
-  )
+  );
 }

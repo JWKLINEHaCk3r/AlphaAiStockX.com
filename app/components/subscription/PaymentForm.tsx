@@ -1,98 +1,106 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useState } from 'react';
+import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/button';
+import { Card } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
-  const [cardNumber, setCardNumber] = useState("")
-  const [cardName, setCardName] = useState("")
-  const [expiryMonth, setExpiryMonth] = useState("")
-  const [expiryYear, setExpiryYear] = useState("")
-  const [cvv, setCvv] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [expiryMonth, setExpiryMonth] = useState('');
+  const [expiryYear, setExpiryYear] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = value => {
     // Remove all non-digits
-    const digits = value.replace(/\D/g, "")
+    const digits = value.replace(/\D/g, '');
     // Add space after every 4 digits
-    const formatted = digits.replace(/(\d{4})(?=\d)/g, "$1 ")
+    const formatted = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
     // Limit to 19 characters (16 digits + 3 spaces)
-    return formatted.slice(0, 19)
-  }
+    return formatted.slice(0, 19);
+  };
 
-  const handleCardNumberChange = (e) => {
-    setCardNumber(formatCardNumber(e.target.value))
-  }
+  const handleCardNumberChange = e => {
+    setCardNumber(formatCardNumber(e.target.value));
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
 
     try {
       // Simulate payment processing delay
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Simple validation
       if (!cardNumber || !cardName || !expiryMonth || !expiryYear || !cvv) {
-        throw new Error("Please fill in all payment details")
+        throw new Error('Please fill in all payment details');
       }
 
-      if (cardNumber.replace(/\s/g, "").length !== 16) {
-        throw new Error("Please enter a valid 16-digit card number")
+      if (cardNumber.replace(/\s/g, '').length !== 16) {
+        throw new Error('Please enter a valid 16-digit card number');
       }
 
       if (cvv.length < 3) {
-        throw new Error("Please enter a valid CVV code")
+        throw new Error('Please enter a valid CVV code');
       }
 
       // In a real app, you would call a payment processing API here
       // For demo purposes, we'll just show a success message
-      setSuccess(true)
+      setSuccess(true);
       setTimeout(() => {
-        onSuccess(plan)
-      }, 2000)
+        onSuccess(plan);
+      }, 2000);
     } catch (err) {
-      setError(err.message || "Payment processing failed. Please try again.")
+      setError(err.message || 'Payment processing failed. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const getPlanDetails = () => {
     switch (plan) {
-      case "basic":
+      case 'basic':
         return {
-          name: "Basic Plan",
-          price: billingCycle === "yearly" ? "$199.99/year" : "$19.99/month",
-        }
-      case "pro":
+          name: 'Basic Plan',
+          price: billingCycle === 'yearly' ? '$199.99/year' : '$19.99/month',
+        };
+      case 'pro':
         return {
-          name: "Pro Plan",
-          price: billingCycle === "yearly" ? "$499.99/year" : "$49.99/month",
-        }
-      case "ultimate":
+          name: 'Pro Plan',
+          price: billingCycle === 'yearly' ? '$499.99/year' : '$49.99/month',
+        };
+      case 'ultimate':
         return {
-          name: "Ultimate Plan",
-          price: billingCycle === "yearly" ? "$999.99/year" : "$99.99/month",
-        }
+          name: 'Ultimate Plan',
+          price: billingCycle === 'yearly' ? '$999.99/year' : '$99.99/month',
+        };
       default:
         return {
-          name: "Unknown Plan",
-          price: "Unknown",
-        }
+          name: 'Unknown Plan',
+          price: 'Unknown',
+        };
     }
-  }
+  };
 
-  const planDetails = getPlanDetails()
+  const planDetails = getPlanDetails();
 
   return (
     <Card className="w-full max-w-md bg-black/40 border-purple-500/30 backdrop-blur-xl">
@@ -128,7 +136,7 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
                 id="cardName"
                 placeholder="John Doe"
                 value={cardName}
-                onChange={(e) => setCardName(e.target.value)}
+                onChange={e => setCardName(e.target.value)}
                 className="bg-black/20 border-purple-500/30 text-white"
               />
             </div>
@@ -161,12 +169,12 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
                   </SelectTrigger>
                   <SelectContent className="bg-gray-900 border-purple-500/30">
                     {Array.from({ length: 12 }, (_, i) => {
-                      const month = (i + 1).toString().padStart(2, "0")
+                      const month = (i + 1).toString().padStart(2, '0');
                       return (
                         <SelectItem key={month} value={month}>
                           {month}
                         </SelectItem>
-                      )
+                      );
                     })}
                   </SelectContent>
                 </Select>
@@ -182,12 +190,12 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
                   </SelectTrigger>
                   <SelectContent className="bg-gray-900 border-purple-500/30">
                     {Array.from({ length: 10 }, (_, i) => {
-                      const year = (new Date().getFullYear() + i).toString().slice(-2)
+                      const year = (new Date().getFullYear() + i).toString().slice(-2);
                       return (
                         <SelectItem key={year} value={year}>
                           {year}
                         </SelectItem>
-                      )
+                      );
                     })}
                   </SelectContent>
                 </Select>
@@ -201,7 +209,7 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
                   id="cvv"
                   placeholder="123"
                   value={cvv}
-                  onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
                   className="bg-black/20 border-purple-500/30 text-white"
                   maxLength={4}
                 />
@@ -248,7 +256,11 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
                     `Pay ${planDetails.price}`
                   )}
                 </Button>
-                <Button variant="outline" className="border-purple-500/30 text-white" onClick={onBack}>
+                <Button
+                  variant="outline"
+                  className="border-purple-500/30 text-white"
+                  onClick={onBack}
+                >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Plans
                 </Button>
@@ -258,5 +270,5 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
