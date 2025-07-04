@@ -265,11 +265,11 @@ export default function NeuralMarketAnalysis() {
     setNeuralPredictions(predictions);
   };
 
-  const getDirectionColor = direction => {
+  const getDirectionColor = (direction: string): string => {
     return direction === 'bullish' ? 'text-green-400' : 'text-red-400';
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: string): string => {
     switch (risk) {
       case 'low':
         return 'text-green-400';

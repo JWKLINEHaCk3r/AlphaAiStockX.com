@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -185,7 +183,7 @@ export default function QuantumAIEngine() {
     );
   };
 
-  const getPredictionColor = prediction => {
+  const getPredictionColor = (prediction: string): string => {
     switch (prediction.toLowerCase()) {
       case 'strong buy':
         return 'text-green-400';
@@ -202,7 +200,7 @@ export default function QuantumAIEngine() {
     }
   };
 
-  const getConfidenceColor = confidence => {
+  const getConfidenceColor = (confidence: number): string => {
     if (confidence >= 95) return 'text-green-400';
     if (confidence >= 85) return 'text-emerald-400';
     if (confidence >= 75) return 'text-blue-400';

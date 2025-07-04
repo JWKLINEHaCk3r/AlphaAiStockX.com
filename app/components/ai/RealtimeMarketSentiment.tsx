@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -23,12 +21,78 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
+// Type definitions
+interface SentimentData {
+  [symbol: string]: {
+    overall: number;
+    bullish: number;
+    bearish: number;
+    neutral: number;
+    volume: number;
+    change24h: number;
+    momentum: 'increasing' | 'decreasing';
+    confidence: number;
+  };
+}
+
+interface SocialMediaPlatform {
+  name: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  color: string;
+  mentions: number;
+  sentiment: number;
+  engagement: number;
+  trending: boolean;
+  change: number;
+  topKeywords: string[];
+}
+
+interface NewsItem {
+  id: number;
+  headline: string;
+  source: string;
+  sentiment: string;
+  impact: string;
+  confidence: number;
+  timestamp: Date;
+  relevance: number;
+}
+
+interface InfluencerData {
+  name: string;
+  followers: string;
+  platform: string;
+  sentiment: string;
+  confidence: number;
+  lastPost: Date;
+  engagement: number;
+  marketImpact: string;
+}
+
+interface MarketMood {
+  dominant: string;
+  marketPhase: string;
+  fearGreedIndex: number;
+  volatilityIndex: number;
+  crowdSentiment: number;
+  riskAppetite: string;
+  institutionalFlow: string;
+}
+
 export default function RealtimeMarketSentiment() {
-  const [sentimentData, setSentimentData] = useState({});
-  const [socialMedia, setSocialMedia] = useState([]);
-  const [newsAnalysis, setNewsAnalysis] = useState([]);
-  const [influencerSentiment, setInfluencerSentiment] = useState([]);
-  const [marketMood, setMarketMood] = useState({});
+  const [sentimentData, setSentimentData] = useState<SentimentData>({});
+  const [socialMedia, setSocialMedia] = useState<SocialMediaPlatform[]>([]);
+  const [newsAnalysis, setNewsAnalysis] = useState<NewsItem[]>([]);
+  const [influencerSentiment, setInfluencerSentiment] = useState<InfluencerData[]>([]);
+  const [marketMood, setMarketMood] = useState<MarketMood>({
+    dominant: 'bullish',
+    marketPhase: 'accumulation',
+    fearGreedIndex: 65,
+    volatilityIndex: 25,
+    crowdSentiment: 70,
+    riskAppetite: 'moderate',
+    institutionalFlow: 'buying',
+  });
 
   useEffect(() => {
     generateSentimentData();
@@ -153,13 +217,13 @@ export default function RealtimeMarketSentiment() {
     });
   };
 
-  const getSentimentColor = sentiment => {
+  const getSentimentColor = (sentiment: number): string => {
     if (sentiment >= 70) return 'text-green-400';
     if (sentiment >= 50) return 'text-yellow-400';
     return 'text-red-400';
   };
 
-  const getImpactColor = impact => {
+  const getImpactColor = (impact: string): string => {
     switch (impact) {
       case 'high':
         return 'text-red-400';

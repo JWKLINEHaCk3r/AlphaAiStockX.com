@@ -193,13 +193,13 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
 **💪 Confidence:** ${(aiRecommendation.confidence * 100).toFixed(0)}%
 
 **📈 TECHNICAL SIGNALS:**
-${aiRecommendation.reasoning.map((reason: string) => `• ${reason}`).join('\n')}
+${aiRecommendation.reasoning.map((reason: any) => `• ${reason}`).join('\n')}
 
 **🧠 MARKET PSYCHOLOGY:**
-${aiRecommendation.marketFactors.map((factor: string) => `• ${factor}`).join('\n')}
+${aiRecommendation.marketFactors.map((factor: any) => `• ${factor}`).join('\n')}
 
 **⚡ RISK MANAGEMENT:**
-${aiRecommendation.riskFactors.map((risk: string) => `• ${risk}`).join('\n')}
+${aiRecommendation.riskFactors.map((risk: any) => `• ${risk}`).join('\n')}
 
 **🎯 EXECUTION PLAN:**
 • Entry: Market/Limit order
@@ -251,7 +251,7 @@ Based on my neural network analysis of current market conditions, here's what th
 ${
   marketIntelligence.supportingFactors
     ?.slice(0, 4)
-    .map((guide: string) => `• ${guide}`)
+    .map((guide: any) => `• ${guide}`)
     .join('\n') ||
   `• Institutional flow showing accumulation patterns
 • Technical indicators aligned for momentum
