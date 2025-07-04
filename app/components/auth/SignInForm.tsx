@@ -1,7 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,7 +22,11 @@ interface SignInFormProps {
   onForgotPassword: () => void;
 }
 
-export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPassword }: SignInFormProps) {
+export default function SignInForm({
+  onSignIn,
+  onSwitchToSignUp,
+  onForgotPassword,
+}: SignInFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -44,7 +55,8 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
       // For demo purposes, we'll accept any valid-looking input
       onSignIn({ email, name: email.split('@')[0] });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to sign in. Please try again.';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to sign in. Please try again.';
       setError(errorMessage);
     } finally {
       setIsLoading(false);

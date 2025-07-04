@@ -41,7 +41,8 @@ export default function ForgotPasswordForm({ onBack }: ForgotPasswordFormProps) 
       // For demo purposes, we'll just show a success message
       setSuccess(true);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to send reset link. Please try again.';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to send reset link. Please try again.';
       setError(errorMessage);
     } finally {
       setIsLoading(false);

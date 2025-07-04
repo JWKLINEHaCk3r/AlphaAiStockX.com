@@ -97,7 +97,9 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
   };
 
   const updateAllocation = (strategyId, allocation) => {
-    setActiveStrategies(prev => prev.map((s: any) => (s.id === strategyId ? { ...s, allocation } : s)));
+    setActiveStrategies(prev =>
+      prev.map((s: any) => (s.id === strategyId ? { ...s, allocation } : s))
+    );
   };
 
   const getRiskColor = (risk: any) => {
