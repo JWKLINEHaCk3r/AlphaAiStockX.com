@@ -1,0 +1,28 @@
+# Netlify Ignore File - Frontend Build Only
+# Ignore Python backend components during frontend build
+
+# Python backend directory
+ai_trader/
+
+# Python files
+*.py
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python dependencies
+requirements.txt
+runtime.txt
+Pipfile
+Pipfile.lock
+
+# Docker files (not needed for frontend)
+Dockerfile*
+docker-compose.yml
+
+# Other backend artifacts
+*.log
+.env.local
+.env.development
+.env.production

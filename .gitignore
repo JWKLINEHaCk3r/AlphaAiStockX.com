@@ -33,3 +33,5 @@ requirements.txt
 runtime.txt
 Pipfile*
 __pycache__/
+# Local Netlify folder
+.netlify
