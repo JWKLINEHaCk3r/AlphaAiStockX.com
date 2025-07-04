@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
 import {
   Users,
   TrendingUp,
@@ -257,7 +257,7 @@ export default function SocialTradingNetwork() {
     }
   };
 
-  const formatTimeAgo = timestamp => {
+  const formatTimeAgo = (timestamp: any) => {
     const now = new Date();
     const diff = now - timestamp;
     const minutes = Math.floor(diff / 60000);
@@ -340,7 +340,7 @@ export default function SocialTradingNetwork() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {topTraders.map(trader => (
+            {topTraders.map((trader: any) => (
               <div
                 key={trader.id}
                 className="p-6 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-400/30"
@@ -421,7 +421,7 @@ export default function SocialTradingNetwork() {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {socialFeed.map(post => (
+            {socialFeed.map((post: any) => (
               <div
                 key={post.id}
                 className="p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-400/30"
@@ -545,7 +545,7 @@ export default function SocialTradingNetwork() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {leaderboard.map(leader => (
+            {leaderboard.map((leader: any) => (
               <div
                 key={leader.rank}
                 className="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-400/30"

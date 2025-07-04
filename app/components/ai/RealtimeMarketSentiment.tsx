@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -139,7 +139,7 @@ export default function RealtimeMarketSentiment() {
       { name: 'Telegram', icon: MessageSquare, color: 'text-cyan-400' },
     ];
 
-    const data = platforms.map(platform => ({
+    const data = platforms.map((platform: any) => ({
       ...platform,
       mentions: Math.floor(Math.random() * 50000) + 5000,
       sentiment: 40 + Math.random() * 60,
@@ -188,7 +188,7 @@ export default function RealtimeMarketSentiment() {
       { name: 'Ray Dalio', followers: '800K', platform: 'LinkedIn' },
     ];
 
-    const data = influencers.map(influencer => ({
+    const data = influencers.map((influencer: any) => ({
       ...influencer,
       sentiment: Math.random() > 0.5 ? 'bullish' : 'bearish',
       confidence: 70 + Math.random() * 30,
@@ -454,7 +454,7 @@ export default function RealtimeMarketSentiment() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {newsAnalysis.map(news => (
+            {newsAnalysis.map((news: any) => (
               <div
                 key={news.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -27,7 +27,7 @@ export default function MoneyMarketAccount({ user, balance, onUpdateBalance }) {
   const [totalInterestEarned, setTotalInterestEarned] = useState(1250.75);
   const [depositAmount, setDepositAmount] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
-  const [interestHistory, setInterestHistory] = useState([]);
+  const [interestHistory, setInterestHistory] = useState<any[]>([]);
   const [compoundingEffect, setCompoundingEffect] = useState(0);
 
   const annualRate = 1.5; // 1.5% APY
@@ -177,7 +177,7 @@ export default function MoneyMarketAccount({ user, balance, onUpdateBalance }) {
             </div>
 
             <div className="flex gap-2">
-              {[1000, 5000, 10000, 25000].map(amount => (
+              {[1000, 5000, 10000, 25000].map((amount: any) => (
                 <Button
                   key={amount}
                   variant="outline"
@@ -238,7 +238,7 @@ export default function MoneyMarketAccount({ user, balance, onUpdateBalance }) {
             </div>
 
             <div className="flex gap-2">
-              {[1000, 5000, 10000].map(amount => (
+              {[1000, 5000, 10000].map((amount: any) => (
                 <Button
                   key={amount}
                   variant="outline"
@@ -339,7 +339,7 @@ export default function MoneyMarketAccount({ user, balance, onUpdateBalance }) {
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {interestHistory.map(transaction => (
+              {interestHistory.map((transaction: any) => (
                 <div
                   key={transaction.id}
                   className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30"

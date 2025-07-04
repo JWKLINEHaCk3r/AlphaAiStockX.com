@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
@@ -21,8 +21,8 @@ import {
 } from 'lucide-react';
 
 export default function AdvancedTradingStrategies() {
-  const [activeStrategies, setActiveStrategies] = useState([]);
-  const [strategyPerformance, setStrategyPerformance] = useState({});
+  const [activeStrategies, setActiveStrategies] = useState<any[]>([]);
+  const [strategyPerformance, setStrategyPerformance] = useState<Record<string, any>>({});
 
   const provenStrategies = [
     {
@@ -210,7 +210,7 @@ export default function AdvancedTradingStrategies() {
     setStrategyPerformance(performance);
   };
 
-  const toggleStrategy = strategy => {
+  const toggleStrategy = (strategy: any) => {
     setActiveStrategies(prev => {
       const exists = prev.find(s => s.id === strategy.id);
       if (exists) {
@@ -221,7 +221,7 @@ export default function AdvancedTradingStrategies() {
     });
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: any) => {
     switch (risk) {
       case 'Very Low':
       case 'Low':

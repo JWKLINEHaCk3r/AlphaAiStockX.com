@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -86,7 +86,7 @@ export default function CryptoAnalyzer() {
       { symbol: 'LINK', name: 'Chainlink', price: 12 + Math.random() * 8 },
     ];
 
-    const data = cryptos.map(crypto => ({
+    const data = cryptos.map((crypto: any) => ({
       ...crypto,
       change24h: (Math.random() - 0.5) * 20,
       volume24h: Math.random() * 10 + 1,
@@ -111,7 +111,7 @@ export default function CryptoAnalyzer() {
     ];
 
     setDefiMetrics(
-      protocols.map(protocol => ({
+      protocols.map((protocol: any) => ({
         ...protocol,
         change24h: (Math.random() - 0.5) * 10,
         users24h: Math.floor(Math.random() * 50000) + 10000,
@@ -129,7 +129,7 @@ export default function CryptoAnalyzer() {
     ];
 
     setNftData(
-      collections.map(collection => ({
+      collections.map((collection: any) => ({
         ...collection,
         change24h: (Math.random() - 0.5) * 30,
         sales24h: Math.floor(Math.random() * 500) + 50,

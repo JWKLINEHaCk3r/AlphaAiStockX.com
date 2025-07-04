@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Globe, TrendingUp, TrendingDown, Clock, ExternalLink, Brain } from 'lucide-react';
 
 interface NewsArticle {
@@ -178,7 +178,7 @@ export default function NewsAnalysis() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {news.map(article => (
+          {news.map((article: any) => (
             <div
               key={article.id}
               className="p-4 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 transition-all"
@@ -222,7 +222,7 @@ export default function NewsAnalysis() {
                     {article.source} • {article.time}
                   </p>
                   <div className="flex space-x-1 mt-1">
-                    {article.relevantStocks.slice(0, 3).map(stock => (
+                    {article.relevantStocks.slice(0, 3).map((stock: any) => (
                       <Badge key={stock} variant="outline" className="text-xs">
                         {stock}
                       </Badge>

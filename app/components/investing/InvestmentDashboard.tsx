@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -76,7 +76,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
   const totalReturn = portfolio.reduce((sum, stock) => sum + stock.totalReturn, 0);
   const totalReturnPercent = ((totalReturn / (totalPortfolioValue - totalReturn)) * 100).toFixed(2);
 
-  const handleStockSelect = stock => {
+  const handleStockSelect = (stock: any) => {
     setSelectedStock(stock);
   };
 
@@ -173,7 +173,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {portfolio.map(stock => (
+                {portfolio.map((stock: any) => (
                   <div
                     key={stock.symbol}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -312,7 +312,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {trending.map(stock => (
+                  {trending.map((stock: any) => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -352,7 +352,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {watchlist.map(stock => (
+                {watchlist.map((stock: any) => (
                   <div
                     key={stock.symbol}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -391,7 +391,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {trending.map(stock => (
+                  {trending.map((stock: any) => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -431,7 +431,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {portfolio.slice(0, 3).map(stock => (
+                  {portfolio.slice(0, 3).map((stock: any) => (
                     <div
                       key={stock.symbol}
                       className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"

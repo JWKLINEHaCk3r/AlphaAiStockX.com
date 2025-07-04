@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -33,7 +33,7 @@ export default function PerformanceOptimizer() {
     dataProcessingRate: 0,
   });
 
-  const [optimizations, setOptimizations] = useState([]);
+  const [optimizations, setOptimizations] = useState<any[]>([]);
   const [performanceScore, setPerformanceScore] = useState(0);
 
   useEffect(() => {

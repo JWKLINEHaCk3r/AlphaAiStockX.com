@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Brain,
   TrendingUp,
@@ -274,7 +274,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {allStocks.slice(0, 5).map(stock => (
+                  {allStocks.slice(0, 5).map((stock: any) => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
@@ -372,7 +372,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                   />
                 </div>
                 <div className="flex gap-2">
-                  {['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'].map(symbol => (
+                  {['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'].map((symbol: any) => (
                     <Button
                       key={symbol}
                       variant={selectedStock === symbol ? 'default' : 'outline'}
@@ -972,7 +972,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {allStocks.map(stock => (
+                {allStocks.map((stock: any) => (
                   <div
                     key={stock.symbol}
                     className="p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer"

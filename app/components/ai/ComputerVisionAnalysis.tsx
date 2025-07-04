@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import {
   Eye,
@@ -341,7 +341,7 @@ export default function ComputerVisionAnalysis() {
               <h4 className="text-white font-semibold">Active Vision Models</h4>
 
               <div className="space-y-2">
-                {visionModels.slice(0, 3).map(model => (
+                {visionModels.slice(0, 3).map((model: any) => (
                   <div
                     key={model.id}
                     className="p-3 bg-indigo-500/10 rounded-lg border border-indigo-500/30"
@@ -450,7 +450,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {chartPatterns.map(pattern => (
+            {chartPatterns.map((pattern: any) => (
               <div
                 key={pattern.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"
@@ -517,7 +517,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {analysisResults.map(result => (
+            {analysisResults.map((result: any) => (
               <div
                 key={result.id}
                 className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"
@@ -589,7 +589,7 @@ export default function ComputerVisionAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {visionModels.map(model => (
+            {visionModels.map((model: any) => (
               <div
                 key={model.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"

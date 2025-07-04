@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
+
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import {
   Leaf,
   BarChart3,
@@ -164,7 +164,7 @@ export default function SustainableInvesting() {
     }));
 
     setEsgStocks(prev =>
-      prev.map(stock => ({
+      prev.map((stock: any) => ({
         ...stock,
         price: stock.price * (1 + (Math.random() - 0.45) * 0.01),
         change: stock.change * (1 + (Math.random() - 0.45) * 0.05),
@@ -172,14 +172,14 @@ export default function SustainableInvesting() {
     );
 
     setImpactFunds(prev =>
-      prev.map(fund => ({
+      prev.map((fund: any) => ({
         ...fund,
         ytdReturn: fund.ytdReturn * (1 + (Math.random() - 0.45) * 0.01),
       }))
     );
   };
 
-  const getScoreColor = score => {
+  const getScoreColor = (score: any) => {
     if (score >= 90) return 'text-green-400';
     if (score >= 80) return 'text-emerald-400';
     if (score >= 70) return 'text-blue-400';
@@ -187,11 +187,11 @@ export default function SustainableInvesting() {
     return 'text-red-400';
   };
 
-  const getChangeColor = change => {
+  const getChangeColor = (change: any) => {
     return change >= 0 ? 'text-green-400' : 'text-red-400';
   };
 
-  const getRatingStars = rating => {
+  const getRatingStars = (rating: any) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   };
 

@@ -1434,7 +1434,7 @@ export class AdvancedStockAnalysisService {
 
     return {
       sector: stock.sector,
-      competitors: relevantCompetitors.map(comp => ({
+      competitors: relevantCompetitors.map((comp: any) => ({
         symbol: comp,
         name: this.stockDatabase.get(comp)?.name || comp,
         marketCap: this.stockDatabase.get(comp)?.marketCap || 1000000000,

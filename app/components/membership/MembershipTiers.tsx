@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import {
   Check,
@@ -120,11 +120,11 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     },
   ];
 
-  const getPrice = tier => {
+  const getPrice = (tier: any) => {
     return billingCycle === 'yearly' ? tier.yearlyPrice : tier.monthlyPrice;
   };
 
-  const getSavings = tier => {
+  const getSavings = (tier: any) => {
     if (tier.monthlyPrice === 0) return null;
     const monthly = tier.monthlyPrice * 12;
     const yearly = tier.yearlyPrice;
@@ -133,7 +133,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     return { amount: savings.toFixed(2), percentage };
   };
 
-  const getCardStyles = tier => {
+  const getCardStyles = (tier: any) => {
     const isCurrentTier = currentTier === tier.id;
     const baseStyles = 'relative border-2 transition-all hover:scale-105';
 
@@ -148,7 +148,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     return `${baseStyles} bg-black/20 border-gray-700/50 hover:border-gray-600/50`;
   };
 
-  const getButtonStyles = tier => {
+  const getButtonStyles = (tier: any) => {
     const isCurrentTier = currentTier === tier.id;
 
     if (isCurrentTier) {

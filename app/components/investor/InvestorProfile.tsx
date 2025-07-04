@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -182,7 +182,7 @@ export default function InvestorProfile({
               </div>
               <CardContent>
                 <div className="space-y-4">
-                  {portfolioData.map(stock => (
+                  {portfolioData.map((stock: any) => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"
@@ -337,7 +337,7 @@ export default function InvestorProfile({
                     { symbol: 'QQQ', price: 378.45, change: -0.87, signal: 'HOLD' },
                     { symbol: 'IWM', price: 198.23, change: 2.14, signal: 'BUY' },
                     { symbol: 'VIX', price: 16.78, change: -3.45, signal: 'SELL' },
-                  ].map(item => (
+                  ].map((item: any) => (
                     <div
                       key={item.symbol}
                       className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg"

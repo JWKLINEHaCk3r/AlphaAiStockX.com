@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import {
   Select,
@@ -66,8 +66,8 @@ export default function PatternRecognitionScanner() {
   const [patternMatches, setPatternMatches] = useState<PatternMatch[]>([]);
   const [signals, setSignals] = useState<SignalData[]>([]);
   const [patternStats, setPatternStats] = useState<PatternStats>({});
-  const [historicalAccuracy, setHistoricalAccuracy] = useState({});
-  const [tradingSignals, setTradingSignals] = useState([]);
+  const [historicalAccuracy, setHistoricalAccuracy] = useState<Record<string, any>>({});
+  const [tradingSignals, setTradingSignals] = useState<any[]>([]);
   const [scanSettings, setScanSettings] = useState({
     timeframe: '1D',
     lookbackPeriod: 252, // 1 year
@@ -447,7 +447,7 @@ export default function PatternRecognitionScanner() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {signals.map(signal => (
+            {signals.map((signal: any) => (
               <div
                 key={signal.id}
                 className="p-4 bg-gray-800/50 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all"

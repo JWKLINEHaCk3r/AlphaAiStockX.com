@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -98,7 +98,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
       setTimeout(() => {
         onUpdateBalance(user.balance + Number.parseFloat(depositAmount));
         setTransactions(prev =>
-          prev.map(t => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
+          prev.map((t: any) => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
         );
       }, 2000);
 
@@ -126,7 +126,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
       setTimeout(() => {
         onUpdateBalance(user.balance - Number.parseFloat(withdrawAmount));
         setTransactions(prev =>
-          prev.map(t => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
+          prev.map((t: any) => (t.id === newTransaction.id ? { ...t, status: 'completed' } : t))
         );
       }, 2000);
 
@@ -217,7 +217,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     <SelectContent>
                       {bankAccounts
                         .filter(acc => acc.verified)
-                        .map(account => (
+                        .map((account: any) => (
                           <SelectItem key={account.id} value={account.id.toString()}>
                             {account.bankName} - {account.accountNumber}
                           </SelectItem>
@@ -238,7 +238,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                 </div>
 
                 <div className="flex gap-2">
-                  {[500, 1000, 2500, 5000].map(amount => (
+                  {[500, 1000, 2500, 5000].map((amount: any) => (
                     <Button
                       key={amount}
                       variant="outline"
@@ -283,7 +283,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                     <SelectContent>
                       {bankAccounts
                         .filter(acc => acc.verified)
-                        .map(account => (
+                        .map((account: any) => (
                           <SelectItem key={account.id} value={account.id.toString()}>
                             {account.bankName} - {account.accountNumber}
                           </SelectItem>
@@ -305,7 +305,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
                 </div>
 
                 <div className="flex gap-2">
-                  {[500, 1000, 2500].map(amount => (
+                  {[500, 1000, 2500].map((amount: any) => (
                     <Button
                       key={amount}
                       variant="outline"
@@ -363,7 +363,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {bankAccounts.map(account => (
+                {bankAccounts.map((account: any) => (
                   <div
                     key={account.id}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30"
@@ -421,7 +421,7 @@ export default function BankingDashboard({ user, onUpdateBalance }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {transactions.map(transaction => (
+                {transactions.map((transaction: any) => (
                   <div
                     key={transaction.id}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30"

@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
 export default function PortfolioOptimizer() {
-  const [portfolio, setPortfolio] = useState([]);
+  const [portfolio, setPortfolio] = useState<any[]>([]);
   const [newStock, setNewStock] = useState('');
   const [newWeight, setNewWeight] = useState('');
   const [optimization, setOptimization] = useState(null);
@@ -89,13 +89,13 @@ export default function PortfolioOptimizer() {
     }
   };
 
-  const removeStock = index => {
+  const removeStock = (index: any) => {
     setPortfolio(portfolio.filter((_, i) => i !== index));
   };
 
   const optimizePortfolio = () => {
     // Simulate AI optimization
-    const optimized = portfolio.map(stock => ({
+    const optimized = portfolio.map((stock: any) => ({
       ...stock,
       weight: Math.max(5, Math.min(30, stock.weight + (Math.random() - 0.5) * 10)),
     }));

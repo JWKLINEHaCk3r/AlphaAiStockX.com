@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import {
@@ -376,7 +376,7 @@ My AI brain is currently analyzing market data. While I process the latest intel
 
         <CardContent className="flex flex-col h-full p-0">
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map(message => (
+            {messages.map((message: any) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}

@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
+
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import {
   Wallet,
   ArrowRightLeft,
@@ -160,7 +160,7 @@ export default function DeFiIntegration() {
     }));
 
     setDefiProtocols(prev =>
-      prev.map(protocol => ({
+      prev.map((protocol: any) => ({
         ...protocol,
         apy: protocol.apy * (1 + (Math.random() - 0.5) * 0.02),
       }))
@@ -178,7 +178,7 @@ export default function DeFiIntegration() {
     return total;
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: any) => {
     switch (risk.toLowerCase()) {
       case 'low':
         return 'bg-green-500';

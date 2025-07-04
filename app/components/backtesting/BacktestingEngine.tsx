@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -175,7 +175,7 @@ export default function BacktestingEngine() {
     setBacktestResults(null);
   };
 
-  const getReturnColor = value => {
+  const getReturnColor = (value: any) => {
     return value >= 0 ? 'text-green-400' : 'text-red-400';
   };
 
@@ -209,7 +209,7 @@ export default function BacktestingEngine() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-600">
-                    {strategies.map(strategy => (
+                    {strategies.map((strategy: any) => (
                       <SelectItem key={strategy.id} value={strategy.id}>
                         <div>
                           <div className="font-medium">{strategy.name}</div>

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
@@ -193,14 +193,14 @@ export default function NeuroLinkTrading() {
     }
   };
 
-  const getSignalColor = strength => {
+  const getSignalColor = (strength: any) => {
     if (strength >= 90) return 'text-green-400';
     if (strength >= 80) return 'text-blue-400';
     if (strength >= 70) return 'text-yellow-400';
     return 'text-red-400';
   };
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case 'Executed':
         return 'bg-green-500';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
@@ -73,7 +73,7 @@ export default function PerformanceMetrics({ botStats, recentTrades }: Performan
     }
   }, [recentTrades]);
 
-  const formatCurrency = amount => {
+  const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

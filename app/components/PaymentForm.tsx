@@ -31,11 +31,11 @@ const PaymentForm = () => {
     }
   };
 
-  const handlePlanChange = event => {
+  const handlePlanChange = (event: any) => {
     setPlan(event.target.value);
   };
 
-  const handleBillingCycleChange = event => {
+  const handleBillingCycleChange = (event: any) => {
     setBillingCycle(event.target.value);
   };
 

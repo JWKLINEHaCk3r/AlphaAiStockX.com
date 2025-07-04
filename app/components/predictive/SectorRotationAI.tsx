@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
@@ -39,7 +39,7 @@ export default function SectorRotationAI() {
       { name: 'Materials', symbol: 'XLB', weight: 2.9 },
     ];
 
-    const data = sectors.map(sector => ({
+    const data = sectors.map((sector: any) => ({
       ...sector,
       performance1D: (Math.random() - 0.5) * 4,
       performance1W: (Math.random() - 0.5) * 8,
@@ -116,7 +116,7 @@ export default function SectorRotationAI() {
     });
   };
 
-  const getFlowColor = flow => {
+  const getFlowColor = (flow: any) => {
     switch (flow) {
       case 'inflow':
         return 'text-emerald-400';
@@ -127,7 +127,7 @@ export default function SectorRotationAI() {
     }
   };
 
-  const getRecommendationColor = rec => {
+  const getRecommendationColor = (rec: any) => {
     switch (rec) {
       case 'overweight':
         return 'text-emerald-400';
@@ -138,7 +138,7 @@ export default function SectorRotationAI() {
     }
   };
 
-  const getPerformanceColor = perf => {
+  const getPerformanceColor = (perf: any) => {
     return perf >= 0 ? 'text-emerald-400' : 'text-red-400';
   };
 

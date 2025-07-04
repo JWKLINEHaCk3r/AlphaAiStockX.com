@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { X, Check, Star, Zap, Crown, Building } from 'lucide-react';
@@ -145,7 +145,7 @@ export default function SubscriptionPlans({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {plans.map(plan => (
+            {plans.map((plan: any) => (
               <Card
                 key={plan.id}
                 className={`relative bg-slate-700/50 border-2 transition-all ${
@@ -230,7 +230,7 @@ export default function SubscriptionPlans({
                 <thead>
                   <tr className="border-b border-slate-600">
                     <th className="text-left text-white font-semibold p-3">Feature</th>
-                    {plans.map(plan => (
+                    {plans.map((plan: any) => (
                       <th key={plan.id} className="text-center text-white font-semibold p-3">
                         {plan.name}
                       </th>

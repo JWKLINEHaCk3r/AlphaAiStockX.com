@@ -82,6 +82,9 @@ interface Strategy {
   type: string;
   performance: number;
   winRate: number;
+  description?: string;
+  sharpeRatio?: number;
+  capacity?: number;
 }
 
 interface DataSource {
@@ -89,6 +92,7 @@ interface DataSource {
   type: string;
   status: string;
   latency: string;
+  accuracy?: number;
 }
 
 interface Model {
@@ -96,6 +100,11 @@ interface Model {
   type: string;
   accuracy: number;
   status: string;
+  actionSpace?: string;
+  performance?: {
+    winRate?: number;
+    avgReturn?: number;
+  };
 }
 
 interface Environment {
@@ -103,6 +112,7 @@ interface Environment {
   type: string;
   status: string;
   performance: number;
+  assets?: string[];
 }
 
 interface QuantumData {

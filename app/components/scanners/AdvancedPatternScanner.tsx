@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -1377,7 +1377,7 @@ export default function AdvancedPatternScanner() {
     }
   };
 
-  const getCategoryColor = category => {
+  const getCategoryColor = (category: any) => {
     const colors = {
       classic: 'bg-red-500/20 text-red-300 border-red-500/30',
       flag: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
@@ -1547,7 +1547,7 @@ export default function AdvancedPatternScanner() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {tradingSignals.map(signal => (
+            {tradingSignals.map((signal: any) => (
               <div
                 key={signal.id}
                 className="p-4 bg-gray-800/50 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all"

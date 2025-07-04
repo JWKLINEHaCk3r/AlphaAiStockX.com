@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import {
   Bell,
   AlertTriangle,
@@ -160,7 +160,7 @@ export default function RealTimeAlerts() {
   };
 
   const markAsRead = (alertId: number) => {
-    setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
+    setAlerts(prev => prev.map((alert: any) => (alert.id === alertId ? { ...alert, read: true } : alert)));
   };
 
   const getPriorityColor = (priority: string) => {

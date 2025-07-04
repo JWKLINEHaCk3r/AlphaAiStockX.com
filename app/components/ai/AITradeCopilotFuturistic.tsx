@@ -68,7 +68,7 @@ export default function AITradeCopilotFuturistic() {
             if (strat) setSelectedStrategy(strat);
           }}
         >
-          {strategies.map(s => (
+          {strategies.map((s: any) => (
             <option key={s.name} value={s.name}>
               {s.name}
             </option>

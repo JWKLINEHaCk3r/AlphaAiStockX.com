@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
   SelectContent,
@@ -309,7 +309,7 @@ export default function OptionsLiveTradingBot() {
     }
   };
 
-  const closeOptionsTrade = tradeId => {
+  const closeOptionsTrade = (tradeId: any) => {
     const trade = activeOptionsTrades.find(t => t.id === tradeId);
     if (!trade) return;
 
@@ -334,7 +334,7 @@ export default function OptionsLiveTradingBot() {
   const updateOptionsData = () => {
     // Update options prices and Greeks
     setOptionsChain(prev =>
-      prev.map(option => ({
+      prev.map((option: any) => ({
         ...option,
         bid: Math.max(option.bid + (Math.random() - 0.5) * 0.5, 0.01),
         ask: Math.max(option.ask + (Math.random() - 0.5) * 0.5, 0.02),
@@ -459,7 +459,7 @@ export default function OptionsLiveTradingBot() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-600">
-                  {optionsStrategies.map(strategy => (
+                  {optionsStrategies.map((strategy: any) => (
                     <SelectItem key={strategy.id} value={strategy.id}>
                       <div>
                         <div className="font-medium">{strategy.name}</div>
@@ -621,7 +621,7 @@ export default function OptionsLiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-3">
-              {activeOptionsTrades.map(trade => (
+              {activeOptionsTrades.map((trade: any) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-gray-800/50 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all"

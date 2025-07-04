@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
@@ -121,7 +121,7 @@ export default function StockChart({ selectedStock }: StockChartProps) {
       <CardContent>
         {/* Timeframe Selector */}
         <div className="flex space-x-2 mb-6">
-          {timeframes.map(tf => (
+          {timeframes.map((tf: any) => (
             <Button
               key={tf}
               variant={timeframe === tf ? 'default' : 'outline'}

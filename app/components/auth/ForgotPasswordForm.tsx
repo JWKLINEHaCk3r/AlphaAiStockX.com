@@ -1,20 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Mail, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function ForgotPasswordForm({ onBack }) {
+interface ForgotPasswordFormProps {
+  onBack: () => void;
+}
+
+export default function ForgotPasswordForm({ onBack }: ForgotPasswordFormProps) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSuccess(false);
@@ -37,7 +41,8 @@ export default function ForgotPasswordForm({ onBack }) {
       // For demo purposes, we'll just show a success message
       setSuccess(true);
     } catch (err) {
-      setError(err.message || 'Failed to send reset link. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send reset link. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

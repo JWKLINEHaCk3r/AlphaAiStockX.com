@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mic, MicOff, Volume2, VolumeX, Brain, MessageCircle, Zap, Settings } from 'lucide-react';
 
 interface ConversationItem {
@@ -272,7 +272,7 @@ export default function AIVoiceAssistant() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {conversation.map(message => (
+            {conversation.map((message: any) => (
               <div
                 key={message.id}
                 className={`p-3 rounded-lg ${

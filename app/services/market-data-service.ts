@@ -248,7 +248,7 @@ export class MarketDataService {
       { headline: `${symbol} insider trading activity detected`, sentiment: 0.4, impact: 'medium' },
     ];
 
-    return newsItems.slice(0, Math.floor(Math.random() * 3) + 1).map(item => ({
+    return newsItems.slice(0, Math.floor(Math.random() * 3) + 1).map((item: any) => ({
       ...item,
       timestamp: Date.now() - Math.random() * 86400000, // Last 24 hours
       source: ['Reuters', 'Bloomberg', 'CNBC', 'MarketWatch'][Math.floor(Math.random() * 4)],
@@ -510,7 +510,7 @@ export class MarketDataService {
     const numAssets = holdings.length;
     const baseWeight = 1 / numAssets;
 
-    return holdings.map(holding => ({
+    return holdings.map((holding: any) => ({
       symbol: holding.symbol,
       currentWeight: holding.weight,
       optimalWeight: baseWeight,
@@ -542,7 +542,7 @@ export class MarketDataService {
   }
 
   private generateRebalanceRecommendations(holdings: any[], optimalWeights: any[]) {
-    return optimalWeights.map(weight => ({
+    return optimalWeights.map((weight: any) => ({
       symbol: weight.symbol,
       action: weight.adjustment > 0.05 ? 'BUY' : weight.adjustment < -0.05 ? 'SELL' : 'HOLD',
       adjustmentPercent: weight.adjustment * 100,

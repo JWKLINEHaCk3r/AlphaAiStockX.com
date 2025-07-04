@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import {
   Building2,
   Shield,
@@ -153,7 +153,7 @@ export default function EnterpriseFeatures() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {enterprisePlans.map(plan => (
+            {enterprisePlans.map((plan: any) => (
               <div
                 key={plan.id}
                 className={`relative p-6 rounded-xl border-2 transition-all cursor-pointer ${

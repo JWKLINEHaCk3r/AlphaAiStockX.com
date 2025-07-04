@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 // Types
 interface EarningData {
@@ -63,7 +63,7 @@ export default function EarningsPredictor() {
       { symbol: 'NFLX', name: 'Netflix Inc.', date: '2024-01-23', time: 'AMC' },
     ];
 
-    const earnings: EarningData[] = companies.map(company => ({
+    const earnings: EarningData[] = companies.map((company: any) => ({
       ...company,
       currentPrice: 100 + Math.random() * 400,
       estimatedEPS: (Math.random() * 5 + 0.5).toFixed(2),

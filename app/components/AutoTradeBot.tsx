@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -31,7 +31,7 @@ import PerformanceMetrics from './PerformanceMetrics';
 
 export default function AutoTradeBot() {
   const [botStatus, setBotStatus] = useState('stopped'); // stopped, running, paused
-  const [activeStrategies, setActiveStrategies] = useState([]);
+  const [activeStrategies, setActiveStrategies] = useState<any[]>([]);
   const [botStats, setBotStats] = useState({
     totalTrades: 0,
     winRate: 0,
@@ -42,7 +42,7 @@ export default function AutoTradeBot() {
     activeTrades: 0,
     accountBalance: 100000,
   });
-  const [recentTrades, setRecentTrades] = useState([]);
+  const [recentTrades, setRecentTrades] = useState<any[]>([]);
   const [botSettings, setBotSettings] = useState({
     maxPositionSize: 10000,
     maxDailyLoss: 2000,

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,7 +27,7 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const formatCardNumber = value => {
+  const formatCardNumber = (value: any) => {
     // Remove all non-digits
     const digits = value.replace(/\D/g, '');
     // Add space after every 4 digits
@@ -36,7 +36,7 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
     return formatted.slice(0, 19);
   };
 
-  const handleCardNumberChange = e => {
+  const handleCardNumberChange = (e: any) => {
     setCardNumber(formatCardNumber(e.target.value));
   };
 

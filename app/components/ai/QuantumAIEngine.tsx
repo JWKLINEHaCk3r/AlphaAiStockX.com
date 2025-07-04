@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -176,7 +176,7 @@ export default function QuantumAIEngine() {
     }));
 
     setAiInsights(prev =>
-      prev.map(insight => ({
+      prev.map((insight: any) => ({
         ...insight,
         confidence: Math.min(100, insight.confidence + (Math.random() - 0.45) * 0.5),
       }))

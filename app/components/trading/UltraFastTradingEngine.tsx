@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -355,7 +355,7 @@ export default function UltraFastTradingEngine({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {Object.keys(marketData).map(symbol => (
+                      {Object.keys(marketData).map((symbol: any) => (
                         <SelectItem key={symbol} value={symbol}>
                           {symbol} - ${marketData[symbol]?.price?.toFixed(2)}
                         </SelectItem>
@@ -574,7 +574,7 @@ export default function UltraFastTradingEngine({
                     ? aiSignals.length
                     : currentFeatures.aiSignals
                 )
-                .map(signal => (
+                .map((signal: any) => (
                   <div
                     key={signal.id}
                     className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"
@@ -617,7 +617,7 @@ export default function UltraFastTradingEngine({
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {recentTrades.slice(0, 10).map(trade => (
+              {recentTrades.slice(0, 10).map((trade: any) => (
                 <div
                   key={trade.id}
                   className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30"

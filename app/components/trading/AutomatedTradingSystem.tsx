@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
@@ -201,7 +201,7 @@ export default function AutomatedTradingSystem({
     };
   };
 
-  const executeTrade = conditions => {
+  const executeTrade = (conditions: any) => {
     const price = 100 + Math.random() * 400;
     const positionSize = Math.min(
       (tradingCapital * systemSettings.maxRiskPerTrade) / 100,
@@ -272,7 +272,7 @@ export default function AutomatedTradingSystem({
     });
   };
 
-  const closeTrade = trade => {
+  const closeTrade = (trade: any) => {
     const profit = trade.pnl;
     const isWin = profit > 0;
 
@@ -304,7 +304,7 @@ export default function AutomatedTradingSystem({
     }
   };
 
-  const transferToMoneyMarket = amount => {
+  const transferToMoneyMarket = (amount: any) => {
     setMoneyMarketBalance(prev => prev + amount);
     setTradingCapital(prev => prev - amount);
   };
@@ -683,7 +683,7 @@ export default function AutomatedTradingSystem({
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {activeTrades.map(trade => (
+                  {activeTrades.map((trade: any) => (
                     <div
                       key={trade.id}
                       className="p-4 bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-lg border border-cyan-400/30 hover:border-cyan-400/50 transition-all"

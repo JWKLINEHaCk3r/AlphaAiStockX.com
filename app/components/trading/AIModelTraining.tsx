@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import {
   Select,
@@ -251,7 +251,7 @@ export default function AIModelTraining() {
     }
   };
 
-  const getModelTypeColor = type => {
+  const getModelTypeColor = (type: any) => {
     const colors = {
       'neural-network': 'bg-red-500/20 text-red-300 border-red-500/30',
       lstm: 'bg-blue-500/20 text-blue-300 border-blue-500/30',

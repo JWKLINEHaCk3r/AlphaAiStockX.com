@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -286,7 +286,7 @@ export default function SportsAlphaTrader() {
     }, 5000);
   };
 
-  const toggleSection = section => {
+  const toggleSection = (section: any) => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section],
@@ -660,7 +660,7 @@ export default function SportsAlphaTrader() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {activeEvents.map(event => (
+              {activeEvents.map((event: any) => (
                 <div
                   key={event.id}
                   className="p-3 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
@@ -741,7 +741,7 @@ export default function SportsAlphaTrader() {
                   <p className="text-gray-400">Hunting for spread opportunities...</p>
                 </div>
               ) : (
-                opportunities.map(opportunity => (
+                opportunities.map((opportunity: any) => (
                   <div
                     key={opportunity.id}
                     className="p-3 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
@@ -840,7 +840,7 @@ export default function SportsAlphaTrader() {
             <div className="space-y-3">
               {activeTrades
                 .filter(t => t.status === 'active')
-                .map(trade => (
+                .map((trade: any) => (
                   <div
                     key={trade.id}
                     className="p-3 bg-gradient-to-r from-red-800/30 to-orange-800/30 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"

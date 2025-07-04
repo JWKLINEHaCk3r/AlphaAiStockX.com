@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
+
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import {
   Lock,
   Zap,
@@ -182,7 +182,7 @@ export default function QuantumInternetTrading() {
     }));
 
     setQuantumNodes(prev =>
-      prev.map(node => ({
+      prev.map((node: any) => ({
         ...node,
         entanglement: Math.min(100, Math.max(99, node.entanglement + (Math.random() - 0.5) * 0.1)),
         connections: node.connections + Math.floor((Math.random() - 0.5) * 5),
@@ -221,7 +221,7 @@ export default function QuantumInternetTrading() {
     }
   };
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: any) => {
     switch (status.toLowerCase()) {
       case 'optimal':
         return 'text-green-400';
@@ -236,7 +236,7 @@ export default function QuantumInternetTrading() {
     }
   };
 
-  const getNodeTypeColor = type => {
+  const getNodeTypeColor = (type: any) => {
     switch (type) {
       case 'Primary Hub':
         return 'bg-purple-500';

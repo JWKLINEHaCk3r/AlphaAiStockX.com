@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from 'lucide-react';
 
 export default function DNSFixGuide() {
@@ -73,7 +73,7 @@ export default function DNSFixGuide() {
         </Card>
 
         <div className="grid gap-6">
-          {steps.map(step => (
+          {steps.map((step: any) => (
             <Card
               key={step.id}
               className={`transition-all duration-300 ${

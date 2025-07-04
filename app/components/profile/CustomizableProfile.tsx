@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -290,7 +290,7 @@ export default function CustomizableProfile({ user, onUpdateProfile }) {
               <div className="space-y-4">
                 <Label className="text-white text-lg">Theme</Label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {themeOptions.map(theme => (
+                  {themeOptions.map((theme: any) => (
                     <div
                       key={theme.value}
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
@@ -310,7 +310,7 @@ export default function CustomizableProfile({ user, onUpdateProfile }) {
               <div className="space-y-4">
                 <Label className="text-white text-lg">Accent Color</Label>
                 <div className="flex flex-wrap gap-3">
-                  {accentColors.map(color => (
+                  {accentColors.map((color: any) => (
                     <div
                       key={color.value}
                       className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${

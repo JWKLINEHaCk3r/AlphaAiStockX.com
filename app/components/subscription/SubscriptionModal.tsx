@@ -10,12 +10,12 @@ export default function SubscriptionModal({ isOpen, onClose, currentPlan, onSubs
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [billingCycle, setBillingCycle] = useState('yearly');
 
-  const handleSelectPlan = planId => {
+  const handleSelectPlan = (planId: any) => {
     setSelectedPlan(planId);
     setView('payment');
   };
 
-  const handlePaymentSuccess = planId => {
+  const handlePaymentSuccess = (planId: any) => {
     onSubscribe(planId);
     onClose();
   };

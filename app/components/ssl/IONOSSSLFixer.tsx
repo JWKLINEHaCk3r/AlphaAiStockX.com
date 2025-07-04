@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertTriangle, Shield, Settings, RefreshCw, FileCode } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
@@ -128,7 +128,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`,
 
         {/* Steps */}
         <div className="space-y-6">
-          {steps.map(step => (
+          {steps.map((step: any) => (
             <Card key={step.id} className="bg-gray-800/50 border-gray-700">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">

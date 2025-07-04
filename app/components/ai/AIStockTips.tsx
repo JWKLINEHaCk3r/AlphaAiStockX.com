@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import {
   Brain,
   TrendingUp,
@@ -370,7 +370,7 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {predictions.map(prediction => (
+            {predictions.map((prediction: any) => (
               <div
                 key={prediction.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"

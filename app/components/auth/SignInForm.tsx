@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,14 +9,20 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPassword }) {
+interface SignInFormProps {
+  onSignIn: (data: { email: string; name: string }) => void;
+  onSwitchToSignUp: () => void;
+  onForgotPassword: () => void;
+}
+
+export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPassword }: SignInFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -40,7 +44,8 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
       // For demo purposes, we'll accept any valid-looking input
       onSignIn({ email, name: email.split('@')[0] });
     } catch (err) {
-      setError(err.message || 'Failed to sign in. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to sign in. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -111,7 +116,7 @@ export default function SignInForm({ onSignIn, onSwitchToSignUp, onForgotPasswor
             <Checkbox
               id="remember"
               checked={rememberMe}
-              onCheckedChange={checked => setRememberMe(!!checked)}
+              onCheckedChange={(checked: boolean) => setRememberMe(!!checked)}
               className="data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
             />
             <label htmlFor="remember" className="text-sm text-gray-300 cursor-pointer">

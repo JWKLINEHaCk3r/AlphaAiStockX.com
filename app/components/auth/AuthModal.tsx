@@ -3,9 +3,8 @@
 import type React from 'react';
 
 import { useState } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,7 +15,7 @@ import { X, Mail, Lock, User, Eye, EyeOff, Shield } from 'lucide-react';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: (userData: any) => void;
+  onLogin: (userData: { email: string; name?: string }) => void;
 }
 
 export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) {
@@ -30,7 +29,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
     confirmPassword: '',
     agreeToTerms: false,
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!isOpen) return null;
 
@@ -43,7 +42,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: Record<string, string> = {};
 
     if (!formData.email) {
       newErrors.email = 'Email is required';
@@ -300,7 +299,9 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
                   <Checkbox
                     id="terms"
                     checked={formData.agreeToTerms}
-                    onCheckedChange={checked => handleInputChange('agreeToTerms', checked)}
+                    onCheckedChange={(checked: boolean) =>
+                      handleInputChange('agreeToTerms', checked)
+                    }
                   />
                   <Label htmlFor="terms" className="text-sm text-slate-300">
                     I agree to the{' '}

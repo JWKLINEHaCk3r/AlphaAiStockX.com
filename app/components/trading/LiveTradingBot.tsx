@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import {
   Bot,
@@ -71,7 +71,7 @@ export default function LiveTradingBot() {
     profitFactor: 0,
     tradingDays: 0,
   });
-  const [marketAnalysis, setMarketAnalysis] = useState({});
+  const [marketAnalysis, setMarketAnalysis] = useState<Record<string, any>>({});
   const [botSettings, setBotSettings] = useState({
     maxPositionSize: 5000,
     maxDailyLoss: 1000,
@@ -492,7 +492,7 @@ export default function LiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-3">
-              {activeTrades.map(trade => (
+              {activeTrades.map((trade: any) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-gray-800/50 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all"
@@ -583,7 +583,7 @@ export default function LiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {tradeHistory.slice(0, 10).map(trade => (
+              {tradeHistory.slice(0, 10).map((trade: any) => (
                 <div
                   key={trade.id}
                   className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30"

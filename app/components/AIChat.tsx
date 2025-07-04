@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardTitle, CardContent } from '@/components/ui/card';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Send, Bot, User, Sparkles } from 'lucide-react';
@@ -102,7 +102,7 @@ export default function AIChat() {
         <CardContent className="space-y-4">
           {/* Messages */}
           <div className="h-64 overflow-y-auto space-y-3 pr-2">
-            {messages.map(message => (
+            {messages.map((message: any) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}

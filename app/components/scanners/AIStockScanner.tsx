@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 
 export default function AIStockScanner() {
-  const [scanResults, setScanResults] = useState([]);
+  const [scanResults, setScanResults] = useState<any[]>([]);
   const [isScanning, setIsScanning] = useState(false);
   const [filters, setFilters] = useState({
     marketCap: [1000, 100000], // Million
@@ -92,7 +92,7 @@ export default function AIStockScanner() {
       'RSI Oversold',
     ];
 
-    const results = symbols.slice(0, 8).map(symbol => ({
+    const results = symbols.slice(0, 8).map((symbol: any) => ({
       symbol,
       price: 50 + Math.random() * 500,
       change: (Math.random() - 0.5) * 10,
@@ -119,7 +119,7 @@ export default function AIStockScanner() {
     setIsScanning(false);
   };
 
-  const getScanTypeColor = type => {
+  const getScanTypeColor = (type: any) => {
     const colors = {
       momentum: 'text-emerald-400',
       reversal: 'text-amber-400',

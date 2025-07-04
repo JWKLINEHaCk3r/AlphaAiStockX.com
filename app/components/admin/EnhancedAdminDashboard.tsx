@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
   SelectContent,
@@ -139,7 +139,9 @@ export default function EnhancedAdminDashboard({ onSwitchToOwner }: EnhancedAdmi
   };
 
   const updateUser = (userId: number, updates: Partial<User>) => {
-    setUsers(prev => prev.map(user => (user.id === userId ? { ...user, ...updates } : user)));
+    setUsers(prev =>
+      prev.map((user: any) => (user.id === userId ? { ...user, ...updates } : user))
+    );
     if (selectedUser && selectedUser.id === userId) {
       setSelectedUser({ ...selectedUser, ...updates });
     }

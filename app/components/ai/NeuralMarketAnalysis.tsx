@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import {
   Brain,
@@ -250,7 +250,7 @@ export default function NeuralMarketAnalysis() {
 
   const generateNeuralPredictions = () => {
     const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META'];
-    const predictions = symbols.map(symbol => ({
+    const predictions = symbols.map((symbol: any) => ({
       symbol,
       neuralScore: 75 + Math.random() * 25,
       priceTarget: 100 + Math.random() * 400,
@@ -375,7 +375,7 @@ export default function NeuralMarketAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {deepLearningModels.map(model => (
+            {deepLearningModels.map((model: any) => (
               <div
                 key={model.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"
@@ -443,7 +443,7 @@ export default function NeuralMarketAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {marketPatterns.map(pattern => (
+            {marketPatterns.map((pattern: any) => (
               <div
                 key={pattern.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"

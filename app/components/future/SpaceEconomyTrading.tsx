@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
+
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import {
   Rocket,
   Satellite,
@@ -187,7 +187,7 @@ export default function SpaceEconomyTrading() {
     }));
 
     setSpaceAssets(prev =>
-      prev.map(asset => ({
+      prev.map((asset: any) => ({
         ...asset,
         price: asset.price * (1 + (Math.random() - 0.45) * 0.02),
         change: asset.change * (1 + (Math.random() - 0.45) * 0.1),
@@ -195,18 +195,18 @@ export default function SpaceEconomyTrading() {
     );
 
     setSpaceInfrastructure(prev =>
-      prev.map(infra => ({
+      prev.map((infra: any) => ({
         ...infra,
         utilization: Math.min(100, Math.max(50, infra.utilization + (Math.random() - 0.5) * 3)),
       }))
     );
   };
 
-  const getChangeColor = change => {
+  const getChangeColor = (change: any) => {
     return change >= 0 ? 'text-green-400' : 'text-red-400';
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: any) => {
     switch (risk.toLowerCase()) {
       case 'low':
         return 'bg-green-500';
@@ -221,7 +221,7 @@ export default function SpaceEconomyTrading() {
     }
   };
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: any) => {
     switch (status.toLowerCase()) {
       case 'operational':
         return 'bg-green-500';

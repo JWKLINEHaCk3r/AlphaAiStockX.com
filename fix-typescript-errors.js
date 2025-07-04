@@ -6,16 +6,35 @@ const path = require('path');
 // Common malformed imports to fix
 const importFixes = [
   {
+    search: /import { Card, CardCoCard, CardContent, ([^}]+) } from '@\/components\/ui\/card';/g,
+    replace: "import { Card, CardContent, $1 } from '@/components/ui/card';",
+  },
+  {
+    search: /import { Card, CardCoCard, CardContent } from '@\/components\/ui\/card';/g,
+    replace: "import { Card, CardContent } from '@/components/ui/card';",
+  },
+  {
+    search: /import { CardCoCard, ([^}]+) } from '@\/components\/ui\/card';/g,
+    replace: "import { CardContent, $1 } from '@/components/ui/card';",
+  },
+  {
+    search: /import { CardCoCard } from '@\/components\/ui\/card';/g,
+    replace: "import { CardContent } from '@/components/ui/card';",
+  },
+  {
+    search: /import { Wolf } from 'lucide-react'/g,
+    replace: "import { Zap } from 'lucide-react'",
+  },
+  {
+    search: /<Wolf /g,
+    replace: '<Zap ',
+  },
+  {
     search: /import { ntent, ([^}]+) } from '@\/components\/ui\/card';/g,
     replace: "import { Card, CardContent, $1 } from '@/components/ui/card';",
   },
   {
     search: /import { Card } from '@\/components\/ui\/button';/g,
-    replace: '',
-  },
-  {
-    search:
-      /import { Card } from '@\/components\/ui\/button';\s*import { Card } from '@\/components\/ui\/button';/g,
     replace: '',
   },
 ];

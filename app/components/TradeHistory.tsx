@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 
 interface Trade {
@@ -105,7 +105,7 @@ export default function TradeHistory({ recentTrades, botStats }: TradeHistoryPro
             </div>
           ) : (
             <div className="space-y-3">
-              {recentTrades.map(trade => (
+              {recentTrades.map((trade: any) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 transition-all"

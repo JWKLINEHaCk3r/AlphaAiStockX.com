@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+
+
 import { Button } from '@/components/ui/button';
 import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } from 'lucide-react';
 
@@ -15,7 +15,7 @@ export default function SiteDiagnostics() {
     ssl: 'checking',
   });
 
-  const [solutions, setSolutions] = useState([]);
+  const [solutions, setSolutions] = useState<any[]>([]);
 
   useEffect(() => {
     runDiagnostics();

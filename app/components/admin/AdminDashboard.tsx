@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Shield,
   Users,
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
     ];
 
     // Add random variations
-    const updatedProfiles = profiles.map(profile => ({
+    const updatedProfiles = profiles.map((profile: any) => ({
       ...profile,
       profitLoss: profile.profitLoss + (Math.random() - 0.5) * 1000,
       accountValue: profile.accountValue + (Math.random() - 0.5) * 5000,
@@ -261,13 +261,13 @@ export default function AdminDashboard() {
 
   const suspendUser = (userId: number) => {
     setUserProfiles(prev =>
-      prev.map(user => (user.id === userId ? { ...user, status: 'suspended' } : user))
+      prev.map((user: any) => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
   const activateUser = (userId: number) => {
     setUserProfiles(prev =>
-      prev.map(user => (user.id === userId ? { ...user, status: 'active' } : user))
+      prev.map((user: any) => (user.id === userId ? { ...user, status: 'active' } : user))
     );
   };
 
@@ -454,7 +454,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {filteredUsers.map(user => (
+                {filteredUsers.map((user: any) => (
                   <div
                     key={user.id}
                     className="p-4 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
@@ -640,7 +640,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {liveData.systemAlerts.map(alert => (
+                  {liveData.systemAlerts.map((alert: any) => (
                     <div
                       key={alert.id}
                       className={`p-3 rounded-lg border ${

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
@@ -84,7 +84,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
     },
   ]);
 
-  const toggleStrategy = strategyId => {
+  const toggleStrategy = (strategyId: any) => {
     setActiveStrategies(prev => {
       const existing = prev.find(s => s.id === strategyId);
       if (existing) {
@@ -97,10 +97,10 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
   };
 
   const updateAllocation = (strategyId, allocation) => {
-    setActiveStrategies(prev => prev.map(s => (s.id === strategyId ? { ...s, allocation } : s)));
+    setActiveStrategies(prev => prev.map((s: any) => (s.id === strategyId ? { ...s, allocation } : s)));
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: any) => {
     switch (risk) {
       case 'Low':
         return 'text-green-400';
@@ -115,7 +115,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
     }
   };
 
-  const getRiskBadge = risk => {
+  const getRiskBadge = (risk: any) => {
     switch (risk) {
       case 'Low':
         return 'default';
@@ -150,7 +150,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
             </div>
           ) : (
             <div className="space-y-4">
-              {activeStrategies.map(strategy => (
+              {activeStrategies.map((strategy: any) => (
                 <div
                   key={strategy.id}
                   className="p-4 bg-white/5 rounded-lg border border-green-500/30"
