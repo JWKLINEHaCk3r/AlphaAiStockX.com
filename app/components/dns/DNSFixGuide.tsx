@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from 'lucide-react';
 
@@ -32,14 +30,14 @@ export default function DNSFixGuide() {
     {
       id: 3,
       title: 'Update Nameservers',
-      description: 'Point your domain to IONOS servers',
-      action: 'Change to ns1.ionos.com and ns2.ionos.com',
+      description: 'Point your domain to hosting provider servers',
+      action: 'Update nameservers in domain registrar control panel',
     },
     {
       id: 4,
-      title: 'Configure IONOS Hosting',
+      title: 'Configure Hosting',
       description: 'Ensure domain is linked to hosting package',
-      action: 'Verify in IONOS Control Panel',
+      action: 'Verify in hosting control panel',
     },
     {
       id: 5,
@@ -62,7 +60,7 @@ export default function DNSFixGuide() {
           <CardContent>
             <div className="text-red-600 space-y-2">
               <p>
-                <strong>Problem:</strong> Domain not resolving to IONOS hosting
+                <strong>Problem:</strong> Domain not resolving to hosting provider
               </p>
               <p>
                 <strong>Status:</strong> DNS not pointing to correct nameservers
@@ -127,18 +125,18 @@ export default function DNSFixGuide() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-700">
               <Globe className="h-6 w-6" />
-              IONOS NAMESERVERS (CRITICAL)
+              HOSTING NAMESERVERS (CRITICAL)
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="bg-white p-4 rounded-lg border">
                 <h4 className="font-semibold mb-2">Primary Nameserver:</h4>
-                <code className="bg-gray-100 px-3 py-1 rounded text-lg">ns1.ionos.com</code>
+                <code className="bg-gray-100 px-3 py-1 rounded text-lg">ns1.yourhost.com</code>
               </div>
               <div className="bg-white p-4 rounded-lg border">
                 <h4 className="font-semibold mb-2">Secondary Nameserver:</h4>
-                <code className="bg-gray-100 px-3 py-1 rounded text-lg">ns2.ionos.com</code>
+                <code className="bg-gray-100 px-3 py-1 rounded text-lg">ns2.yourhost.com</code>
               </div>
             </div>
           </CardContent>

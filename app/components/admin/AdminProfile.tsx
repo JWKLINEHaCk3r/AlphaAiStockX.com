@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -25,7 +23,21 @@ import {
   Save,
 } from 'lucide-react';
 
-export default function AdminProfile({ admin, onUpdateAdmin }) {
+interface Admin {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  permissions: any;
+  settings: any;
+}
+
+interface AdminProfileProps {
+  admin: Admin;
+  onUpdateAdmin: (admin: Admin) => void;
+}
+
+export default function AdminProfile({ admin, onUpdateAdmin }: AdminProfileProps) {
   const [adminSettings, setAdminSettings] = useState({
     notifications: {
       systemAlerts: true,
@@ -57,21 +69,21 @@ export default function AdminProfile({ admin, onUpdateAdmin }) {
     loginAttempts: 3,
   });
 
-  const handleNotificationChange = (key, value) => {
+  const handleNotificationChange = (key: string, value: boolean) => {
     setAdminSettings(prev => ({
       ...prev,
       notifications: { ...prev.notifications, [key]: value },
     }));
   };
 
-  const handlePermissionChange = (key, value) => {
+  const handlePermissionChange = (key: string, value: boolean) => {
     setAdminSettings(prev => ({
       ...prev,
       permissions: { ...prev.permissions, [key]: value },
     }));
   };
 
-  const handlePreferenceChange = (key, value) => {
+  const handlePreferenceChange = (key: string, value: boolean) => {
     setAdminSettings(prev => ({
       ...prev,
       preferences: { ...prev.preferences, [key]: value },

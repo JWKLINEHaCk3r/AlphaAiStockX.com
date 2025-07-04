@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -27,14 +25,44 @@ import {
   DollarSign,
 } from 'lucide-react';
 
+interface OptionsTrade {
+  id: number;
+  symbol: string;
+  strategy: string;
+  legs: any[];
+  confidence: number;
+  timestamp: Date;
+  pnl: number;
+  status: string;
+  dte: number;
+  maxProfit: string | number;
+  maxLoss: number;
+  breakeven: number;
+}
+
+interface OptionsChainItem {
+  symbol: string;
+  expiry: string;
+  strike: number;
+  type: string;
+  bid: number;
+  ask: number;
+  dte: number;
+  iv: number;
+  delta: number;
+  gamma: number;
+  theta: number;
+  vega: number;
+}
+
 export default function OptionsLiveTradingBot() {
   const [botStatus, setBotStatus] = useState('stopped');
   const [accountBalance, setAccountBalance] = useState(50000);
   const [totalPnL, setTotalPnL] = useState(0);
   const [dailyPnL, setDailyPnL] = useState(0);
-  const [activeOptionsTrades, setActiveOptionsTrades] = useState([]);
-  const [optionsHistory, setOptionsHistory] = useState([]);
-  const [optionsChain, setOptionsChain] = useState([]);
+  const [activeOptionsTrades, setActiveOptionsTrades] = useState<OptionsTrade[]>([]);
+  const [optionsHistory, setOptionsHistory] = useState<OptionsTrade[]>([]);
+  const [optionsChain, setOptionsChain] = useState<OptionsChainItem[]>([]);
   const [botSettings, setBotSettings] = useState({
     maxPositionSize: 5000,
     maxDailyLoss: 1000,
@@ -151,7 +179,7 @@ export default function OptionsLiveTradingBot() {
     });
   };
 
-  const executeOptionsStrategy = (strategy, confidence) => {
+  const executeOptionsStrategy = (strategy: string, confidence: number) => {
     const availableOptions = optionsChain.filter(
       opt => opt.dte >= botSettings.dteRange[0] && opt.dte <= botSettings.dteRange[1]
     );

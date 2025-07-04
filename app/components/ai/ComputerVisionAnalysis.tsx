@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import React, { useState, useEffect, useRef } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -21,16 +19,59 @@ import {
   Search,
 } from 'lucide-react';
 
+interface VisionModel {
+  id: number;
+  name: string;
+  type: string;
+  accuracy: number;
+  specialty: string;
+  status: string;
+  confidence: number;
+  processing: string;
+}
+
+interface ChartPattern {
+  id: number;
+  pattern: string;
+  confidence: number;
+  coordinates: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+  direction: string;
+  target: number;
+  probability: number;
+  timeframe: string;
+}
+
+interface AnalysisResult {
+  id: number;
+  type: string;
+  value?: number;
+  strength?: number;
+  touches?: number;
+  confidence: number;
+  color: string;
+  slope?: number | string;
+  points?: Array<{ x: number; y: number }> | number;
+  location?: string;
+  magnitude?: number;
+  significance?: number;
+  direction?: string;
+}
+
 export default function ComputerVisionAnalysis() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisResults, setAnalysisResults] = useState([]);
-  const [chartPatterns, setChartPatterns] = useState([]);
-  const [visionModels, setVisionModels] = useState([]);
+  const [analysisResults, setAnalysisResults] = useState<AnalysisResult[]>([]);
+  const [chartPatterns, setChartPatterns] = useState<ChartPattern[]>([]);
+  const [visionModels, setVisionModels] = useState<VisionModel[]>([]);
   const [processingProgress, setProcessingProgress] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const fileInputRef = useRef(null);
-  const canvasRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     initializeVisionModels();
@@ -162,19 +203,21 @@ export default function ComputerVisionAnalysis() {
     setAnalysisResults(results);
   };
 
-  const handleImageUpload = event => {
-    const file = event.target.files[0];
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = e => {
-        setSelectedImage(e.target.result);
-        analyzeChart(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target?.result) {
+          setSelectedImage(e.target.result as string);
+          analyzeChart(e.target.result as string);
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const analyzeChart = async imageData => {
+  const analyzeChart = async (imageData: string) => {
     setIsAnalyzing(true);
     setProcessingProgress(0);
 
@@ -203,6 +246,7 @@ export default function ComputerVisionAnalysis() {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -1,17 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 export default function SectorRotationAI() {
-  const [sectorData, setSectorData] = useState([]);
-  const [rotationSignals, setRotationSignals] = useState([]);
-  const [economicCycle, setEconomicCycle] = useState({});
+  const [sectorData, setSectorData] = useState<any[]>([]);
+  const [rotationSignals, setRotationSignals] = useState<any[]>([]);
+  const [economicCycle, setEconomicCycle] = useState<any>({});
 
   useEffect(() => {
     generateSectorData();

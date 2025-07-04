@@ -11,7 +11,7 @@ export default function ContactPage() {
     email: '',
     company: '',
     message: '',
-    subject: 'General Inquiry'
+    subject: 'General Inquiry',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -19,18 +19,20 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     setSubmitted(true);
     setIsSubmitting(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -41,19 +43,27 @@ export default function ContactPage() {
           <div className="max-w-2xl mx-auto text-center">
             <div className="mb-8">
               <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
               <h1 className="text-4xl font-bold mb-4">Message Sent!</h1>
               <p className="text-xl text-gray-300">
-                Thank you for contacting AlphaAI StockX. Our team will get back to you within 24 hours.
+                Thank you for contacting AlphaAI StockX. Our team will get back to you within 24
+                hours.
               </p>
             </div>
-            <Button 
-              onClick={() => setSubmitted(false)}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={() => setSubmitted(false)} className="bg-blue-600 hover:bg-blue-700">
               Send Another Message
             </Button>
           </div>
@@ -163,7 +173,8 @@ export default function ContactPage() {
               <Card className="p-6 bg-gray-900/50 border-gray-700">
                 <h3 className="text-xl font-semibold mb-4">Get Started Today</h3>
                 <p className="text-gray-300 mb-4">
-                  Join thousands of traders who have transformed their portfolios with our AI-powered trading platform.
+                  Join thousands of traders who have transformed their portfolios with our
+                  AI-powered trading platform.
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-center">

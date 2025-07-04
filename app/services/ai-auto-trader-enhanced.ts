@@ -2,13 +2,13 @@
 // This service provides a sophisticated AI-driven auto-trader with advanced algorithms
 
 import { aiBrainService } from './ai-brain-service';
-import { 
-  MarketData, 
-  TradingSignal, 
-  PortfolioMetrics, 
+import {
+  MarketData,
+  TradingSignal,
+  PortfolioMetrics,
   TradingStrategy,
   RiskAnalysis,
-  AIModelPrediction 
+  AIModelPrediction,
 } from './ai-types';
 
 // Environment variables for production (client-side safe)
@@ -74,7 +74,7 @@ export class AdvancedAIAutoTrader {
       trades: [],
       totalValue: startingCash,
       dailyPnL: 0,
-      totalReturn: 0
+      totalReturn: 0,
     };
 
     this.riskSettings = this.getRiskSettings(riskLevel);
@@ -86,7 +86,7 @@ export class AdvancedAIAutoTrader {
     const settings = {
       LOW: { maxPositionSize: 0.05, stopLoss: 0.02, takeProfit: 0.03, maxDailyLoss: 0.01 },
       MEDIUM: { maxPositionSize: 0.1, stopLoss: 0.03, takeProfit: 0.05, maxDailyLoss: 0.02 },
-      HIGH: { maxPositionSize: 0.2, stopLoss: 0.05, takeProfit: 0.08, maxDailyLoss: 0.03 }
+      HIGH: { maxPositionSize: 0.2, stopLoss: 0.05, takeProfit: 0.08, maxDailyLoss: 0.03 },
     };
     return settings[level];
   }
@@ -100,7 +100,7 @@ export class AdvancedAIAutoTrader {
       sharpeRatio: 0,
       maxDrawdown: 0,
       winRate: 0,
-      lastUpdated: new Date()
+      lastUpdated: new Date(),
     };
   }
 
@@ -119,21 +119,21 @@ export class AdvancedAIAutoTrader {
           maxDrawdown: 0.08,
           winRate: 65,
           profitFactor: 1.4,
-          avgTrade: 2.1
+          avgTrade: 2.1,
         },
         risk: {
           maxPosition: 0.1,
           stopLoss: 0.03,
           takeProfit: 0.06,
-          maxDailyLoss: 0.02
+          maxDailyLoss: 0.02,
         },
         filters: {
           minVolume: 1000000,
           minPrice: 10,
-          maxPrice: 500
+          maxPrice: 500,
         },
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         id: 'mean-reversion-ai',
@@ -148,21 +148,21 @@ export class AdvancedAIAutoTrader {
           maxDrawdown: 0.06,
           winRate: 58,
           profitFactor: 1.3,
-          avgTrade: 1.8
+          avgTrade: 1.8,
         },
         risk: {
           maxPosition: 0.08,
           stopLoss: 0.025,
           takeProfit: 0.05,
-          maxDailyLoss: 0.015
+          maxDailyLoss: 0.015,
         },
         filters: {
           minVolume: 500000,
-          minPrice: 5
+          minPrice: 5,
         },
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     ];
   }
 
@@ -170,20 +170,20 @@ export class AdvancedAIAutoTrader {
     // Enhanced price simulation with market behavior
     const time = Date.now();
     const seed = symbol.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    
+
     // Base price varies by symbol
     const basePrice = 50 + (seed % 200);
-    
+
     // Market hours simulation
     const hour = new Date().getHours();
     const marketMultiplier = hour >= 9 && hour <= 16 ? 1.0 : 0.95;
-    
+
     // Volatility and trend
     const volatility = 0.02;
     const trend = Math.sin((time + seed * 1000) / 1000000) * 0.005;
     const randomWalk = (Math.random() - 0.5) * volatility;
-    
-    return (basePrice + (basePrice * (trend + randomWalk))) * marketMultiplier;
+
+    return (basePrice + basePrice * (trend + randomWalk)) * marketMultiplier;
   }
 
   async runAIAnalysis(symbols: string[]): Promise<AIAnalysisResult> {
@@ -191,10 +191,10 @@ export class AdvancedAIAutoTrader {
       // Get AI predictions from brain service
       const predictions = await aiBrainService.analyzeMarket(symbols);
       const signals = await aiBrainService.generateTradingSignals(symbols);
-      
+
       // Analyze current portfolio
       const portfolioAnalysis = await this.analyzePortfolio();
-      
+
       // Risk assessment
       const riskAnalysis = await this.assessPortfolioRisk();
 
@@ -203,7 +203,7 @@ export class AdvancedAIAutoTrader {
         signals: signals.filter(s => s.confidence > 0.7),
         portfolioAnalysis,
         riskAnalysis,
-        recommendations: await this.generateRecommendations(predictions, portfolioAnalysis)
+        recommendations: await this.generateRecommendations(predictions, portfolioAnalysis),
       };
     } catch (error) {
       console.error('AI Analysis failed:', error);
@@ -220,7 +220,7 @@ export class AdvancedAIAutoTrader {
         totalPnL: 0,
         positions: [],
         diversification: { sectors: {}, risk: 'MEDIUM' },
-        recommendations: ['System in fallback mode - limited analysis available']
+        recommendations: ['System in fallback mode - limited analysis available'],
       },
       riskAnalysis: {
         symbol: 'PORTFOLIO',
@@ -228,9 +228,9 @@ export class AdvancedAIAutoTrader {
         volatility: 0.15,
         beta: 1.0,
         recommendations: ['Monitor system status'],
-        timestamp: new Date()
+        timestamp: new Date(),
       },
-      recommendations: ['AI system unavailable - using conservative approach']
+      recommendations: ['AI system unavailable - using conservative approach'],
     };
   }
 
@@ -263,7 +263,7 @@ export class AdvancedAIAutoTrader {
       success: true,
       trades,
       portfolioValue: this.portfolio.totalValue,
-      message: `Executed ${trades.length} trades based on AI signals`
+      message: `Executed ${trades.length} trades based on AI signals`,
     };
   }
 
@@ -271,7 +271,7 @@ export class AdvancedAIAutoTrader {
     try {
       const currentPrice = await this.fetchPrice(signal.symbol);
       const positionSize = this.calculatePositionSize(signal, currentPrice);
-      
+
       if (positionSize === 0) return null;
 
       const trade: TradeRecord = {
@@ -284,7 +284,7 @@ export class AdvancedAIAutoTrader {
         confidence: signal.confidence,
         strategy: 'AI_COMBINED',
         stopLoss: signal.stopLoss,
-        takeProfit: signal.takeProfit
+        takeProfit: signal.takeProfit,
       };
 
       // Execute the trade
@@ -302,7 +302,7 @@ export class AdvancedAIAutoTrader {
   private calculatePositionSize(signal: TradingSignal, price: number): number {
     const maxPositionValue = this.portfolio.totalValue * this.riskSettings.maxPositionSize;
     const baseShares = Math.floor(maxPositionValue / price);
-    
+
     // Adjust based on confidence
     const confidenceMultiplier = Math.min(signal.confidence, 1.0);
     const adjustedShares = Math.floor(baseShares * confidenceMultiplier);
@@ -316,7 +316,7 @@ export class AdvancedAIAutoTrader {
     // For sell orders, check current holdings
     const currentHolding = this.portfolio.holdings[signal.symbol];
     if (!currentHolding) return 0;
-    
+
     return Math.min(adjustedShares, currentHolding.shares);
   }
 
@@ -326,19 +326,19 @@ export class AdvancedAIAutoTrader {
         const totalCost = trade.shares * trade.price;
         if (this.portfolio.cash >= totalCost) {
           this.portfolio.cash -= totalCost;
-          
+
           if (this.portfolio.holdings[trade.symbol]) {
             // Update existing position
             const holding = this.portfolio.holdings[trade.symbol];
             const totalShares = holding.shares + trade.shares;
-            const totalCostBasis = (holding.avgPrice * holding.shares) + (trade.price * trade.shares);
+            const totalCostBasis = holding.avgPrice * holding.shares + trade.price * trade.shares;
             holding.avgPrice = totalCostBasis / totalShares;
             holding.shares = totalShares;
           } else {
             // New position
             this.portfolio.holdings[trade.symbol] = {
               shares: trade.shares,
-              avgPrice: trade.price
+              avgPrice: trade.price,
             };
           }
           return true;
@@ -348,7 +348,7 @@ export class AdvancedAIAutoTrader {
         if (holding && holding.shares >= trade.shares) {
           this.portfolio.cash += trade.shares * trade.price;
           holding.shares -= trade.shares;
-          
+
           if (holding.shares === 0) {
             delete this.portfolio.holdings[trade.symbol];
           }
@@ -369,14 +369,14 @@ export class AdvancedAIAutoTrader {
       totalPnL: 0,
       positions: [],
       diversification: { sectors: {}, risk: 'MEDIUM' },
-      recommendations: []
+      recommendations: [],
     };
 
     for (const [symbol, holding] of holdingsEntries) {
       const currentPrice = await this.fetchPrice(symbol);
       const currentValue = holding.shares * currentPrice;
-      const pnl = currentValue - (holding.shares * holding.avgPrice);
-      
+      const pnl = currentValue - holding.shares * holding.avgPrice;
+
       analysis.positions.push({
         symbol,
         shares: holding.shares,
@@ -384,7 +384,7 @@ export class AdvancedAIAutoTrader {
         currentPrice,
         currentValue,
         pnl,
-        pnlPercent: (pnl / (holding.shares * holding.avgPrice)) * 100
+        pnlPercent: (pnl / (holding.shares * holding.avgPrice)) * 100,
       });
 
       analysis.totalValue += currentValue;
@@ -411,12 +411,12 @@ export class AdvancedAIAutoTrader {
       liquidityRisk: 0.1,
       sectorRisk: 0.2,
       recommendations: ['Consider diversification across sectors', 'Monitor position sizes'],
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 
   async generateRecommendations(
-    predictions: AIModelPrediction[], 
+    predictions: AIModelPrediction[],
     portfolioAnalysis: PortfolioAnalysis
   ): Promise<string[]> {
     const recommendations: string[] = [];
@@ -429,11 +429,14 @@ export class AdvancedAIAutoTrader {
     // High confidence opportunities
     const highConfidencePredictions = predictions.filter(p => p.confidence > 0.8);
     if (highConfidencePredictions.length > 0) {
-      recommendations.push(`High confidence opportunities found in: ${highConfidencePredictions.map(p => p.symbol).join(', ')}`);
+      recommendations.push(
+        `High confidence opportunities found in: ${highConfidencePredictions.map(p => p.symbol).join(', ')}`
+      );
     }
 
     // Risk management
-    if (portfolioAnalysis.totalValue < 8000) { // Started with 10000
+    if (portfolioAnalysis.totalValue < 8000) {
+      // Started with 10000
       recommendations.push('Portfolio has declined significantly - consider risk review');
     }
 
@@ -451,7 +454,7 @@ export class AdvancedAIAutoTrader {
   getPortfolio(): PortfolioData & { performance: PerformanceMetrics } {
     return {
       ...this.portfolio,
-      performance: this.performanceMetrics
+      performance: this.performanceMetrics,
     };
   }
 
@@ -473,20 +476,23 @@ export class AdvancedAIAutoTrader {
     const currentPositions = Object.entries(this.portfolio.holdings).map(([symbol, holding]) => ({
       symbol,
       shares: holding.shares,
-      avgPrice: holding.avgPrice
+      avgPrice: holding.avgPrice,
     }));
 
-    const optimization = await aiBrainService.optimizePortfolio(currentPositions, this.portfolio.cash);
-    
+    const optimization = await aiBrainService.optimizePortfolio(
+      currentPositions,
+      this.portfolio.cash
+    );
+
     return {
       currentAllocation: this.calculateCurrentAllocation(),
       suggestedAllocation: optimization.suggestedAllocations,
       rebalanceActions: optimization.rebalanceActions,
       expectedImprovement: {
         returnIncrease: 0.023, // 2.3% expected return increase
-        riskReduction: 0.015,  // 1.5% risk reduction
-        sharpeImprovement: 0.18
-      }
+        riskReduction: 0.015, // 1.5% risk reduction
+        sharpeImprovement: 0.18,
+      },
     };
   }
 
@@ -506,7 +512,7 @@ export class AdvancedAIAutoTrader {
   // Advanced risk management
   async assessRealTimeRisk(symbol: string): Promise<RealTimeRiskAssessment> {
     const analysis = await aiBrainService.performRealTimeAnalysis(symbol);
-    
+
     return {
       symbol,
       currentRisk: analysis.risk.riskScore,
@@ -514,7 +520,7 @@ export class AdvancedAIAutoTrader {
       sentimentRisk: analysis.sentiment.overall < -0.5,
       technicalRisk: this.assessTechnicalRisk(analysis.technicals),
       recommendation: this.getRiskRecommendation(analysis),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 

@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -36,11 +34,34 @@ interface AITradingAdvisorProps {
   className?: string;
 }
 
+interface StockData {
+  symbol: string;
+  name: any;
+  sector: any;
+  currentPrice: any;
+  volume?: any;
+  buyScore: {
+    overall: number;
+    rating: string;
+    components: {
+      technical: number;
+      performance: number;
+      volume: number;
+      ai: number;
+      patterns: number;
+      levels: number;
+    };
+  };
+  marketClassification: any;
+  recommendation: any;
+  performance: any;
+}
+
 export default function AITradingAdvisor({ className = '' }: AITradingAdvisorProps) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedStock, setSelectedStock] = useState('AAPL');
-  const [stockAnalysis, setStockAnalysis] = useState(null);
-  const [allStocks, setAllStocks] = useState([]);
+  const [stockAnalysis, setStockAnalysis] = useState<any>(null);
+  const [allStocks, setAllStocks] = useState<StockData[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
@@ -459,15 +480,21 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
 
                     <div className="space-y-3">
                       <h4 className="text-white font-semibold">Score Components:</h4>
-                      {Object.entries(stockAnalysis.buyScore.components).map(([key, value]) => (
-                        <div key={key} className="flex items-center justify-between">
-                          <span className="text-slate-300 capitalize">{key.replace('_', ' ')}</span>
-                          <div className="flex items-center gap-2">
-                            <Progress value={(value / 30) * 100} className="w-20 h-2" />
-                            <span className="text-white font-medium w-8">{Math.round(value)}</span>
+                      {Object.entries(stockAnalysis.buyScore.components).map(
+                        ([key, value]: [string, unknown]) => (
+                          <div key={key} className="flex items-center justify-between">
+                            <span className="text-slate-300 capitalize">
+                              {key.replace('_', ' ')}
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <Progress value={(Number(value) / 30) * 100} className="w-20 h-2" />
+                              <span className="text-white font-medium w-8">
+                                {Math.round(Number(value))}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   </div>
                 </CardContent>
@@ -635,12 +662,14 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                     <div>
                       <h4 className="text-white font-semibold mb-3">Key Factors:</h4>
                       <div className="space-y-2">
-                        {stockAnalysis.recommendation.keyFactors.map((factor, index) => (
-                          <div key={index} className="flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span className="text-slate-300 text-sm">{factor}</span>
-                          </div>
-                        ))}
+                        {stockAnalysis.recommendation.keyFactors.map(
+                          (factor: string, index: number) => (
+                            <div key={index} className="flex items-start gap-2">
+                              <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
+                              <span className="text-slate-300 text-sm">{factor}</span>
+                            </div>
+                          )
+                        )}
                       </div>
 
                       <div className="mt-4 p-3 bg-slate-700/30 rounded-lg">
@@ -722,7 +751,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {stockAnalysis.tradingSignals.map((signal, index) => (
+                    {stockAnalysis.tradingSignals.map((signal: any, index: number) => (
                       <div
                         key={index}
                         className={`p-4 rounded-lg border-l-4 ${
@@ -783,7 +812,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Entry Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints.entry.map((point, index) => (
+                        {stockAnalysis.entryExitPoints.entry.map((point: any, index: number) => (
                           <div
                             key={index}
                             className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
@@ -813,7 +842,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Exit Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints.exit.map((point, index) => (
+                        {stockAnalysis.entryExitPoints.exit.map((point: any, index: number) => (
                           <div
                             key={index}
                             className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"

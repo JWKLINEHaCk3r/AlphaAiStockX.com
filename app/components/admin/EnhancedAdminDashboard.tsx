@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -33,9 +31,31 @@ import {
   RefreshCw,
 } from 'lucide-react';
 
-export default function EnhancedAdminDashboard({ onSwitchToOwner }) {
-  const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  membership: string;
+  status: string;
+  balance: number;
+  totalTrades: number;
+  profitLoss: number;
+  winRate: number;
+  riskScore: number;
+  joinDate: string;
+  lastActive: string;
+  location: string;
+  phone: string;
+  verified: boolean;
+}
+
+interface EnhancedAdminDashboardProps {
+  onSwitchToOwner: () => void;
+}
+
+export default function EnhancedAdminDashboard({ onSwitchToOwner }: EnhancedAdminDashboardProps) {
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [editMode, setEditMode] = useState(false);
@@ -118,45 +138,39 @@ export default function EnhancedAdminDashboard({ onSwitchToOwner }) {
     setUsers(sampleUsers);
   };
 
-  const updateUser = (userId, updates) => {
+  const updateUser = (userId: number, updates: Partial<User>) => {
     setUsers(prev => prev.map(user => (user.id === userId ? { ...user, ...updates } : user)));
     if (selectedUser && selectedUser.id === userId) {
       setSelectedUser({ ...selectedUser, ...updates });
     }
   };
 
-  const suspendUser = userId => {
+  const suspendUser = (userId: number) => {
     updateUser(userId, { status: 'suspended' });
   };
 
-  const activateUser = userId => {
+  const activateUser = (userId: number) => {
     updateUser(userId, { status: 'active' });
   };
 
-  const deleteUser = userId => {
+  const deleteUser = (userId: number) => {
     setUsers(prev => prev.filter(user => user.id !== userId));
     if (selectedUser && selectedUser.id === userId) {
       setSelectedUser(null);
     }
   };
 
-  const changeMembership = (userId, newMembership) => {
+  const changeMembership = (userId: number, newMembership: string) => {
     updateUser(userId, { membership: newMembership });
   };
 
-  const adjustBalance = (userId, newBalance) => {
+  const adjustBalance = (userId: number, newBalance: string) => {
     updateUser(userId, { balance: Number.parseFloat(newBalance) });
   };
 
-  const filteredUsers = users.filter(user => {
-    const matchesSearch =
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = filterStatus === 'all' || user.status === filterStatus;
-    return matchesSearch && matchesFilter;
-  });
+  // ...existing code...
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
         return 'text-green-400';
@@ -169,7 +183,7 @@ export default function EnhancedAdminDashboard({ onSwitchToOwner }) {
     }
   };
 
-  const getMembershipColor = membership => {
+  const getMembershipColor = (membership: string) => {
     switch (membership) {
       case 'ultimate':
         return 'bg-gradient-to-r from-red-500 to-orange-600';
@@ -279,136 +293,144 @@ export default function EnhancedAdminDashboard({ onSwitchToOwner }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {filteredUsers.map(user => (
-                  <div
-                    key={user.id}
-                    className="p-4 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="relative">
-                          <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-600 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold">{user.name.charAt(0)}</span>
+                {users
+                  .filter(user => {
+                    const matchesSearch =
+                      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      user.email.toLowerCase().includes(searchQuery.toLowerCase());
+                    const matchesStatus = filterStatus === 'all' || user.status === filterStatus;
+                    return matchesSearch && matchesStatus;
+                  })
+                  .map((user: User) => (
+                    <div
+                      key={user.id}
+                      className="p-4 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="relative">
+                            <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-600 rounded-full flex items-center justify-center">
+                              <span className="text-white font-bold">{user.name.charAt(0)}</span>
+                            </div>
+                            <div
+                              className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-gray-900 ${
+                                user.status === 'active' ? 'bg-green-400' : 'bg-red-400'
+                              }`}
+                            ></div>
                           </div>
-                          <div
-                            className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-gray-900 ${
-                              user.status === 'active' ? 'bg-green-400' : 'bg-red-400'
-                            }`}
-                          ></div>
-                        </div>
 
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-1">
-                            <span className="text-gray-100 font-bold text-lg">{user.name}</span>
-                            <Badge className={getMembershipColor(user.membership)}>
-                              {user.membership.toUpperCase()}
-                            </Badge>
-                            <Badge
-                              className={`${getStatusColor(user.status)} border border-current`}
-                              variant="outline"
-                            >
-                              {user.status.toUpperCase()}
-                            </Badge>
-                            {user.verified && (
-                              <Badge className="bg-green-500">
-                                <CheckCircle size={12} className="mr-1" />
-                                VERIFIED
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <span className="text-gray-100 font-bold text-lg">{user.name}</span>
+                              <Badge className={getMembershipColor(user.membership)}>
+                                {user.membership.toUpperCase()}
                               </Badge>
-                            )}
+                              <Badge
+                                className={`${getStatusColor(user.status)} border border-current`}
+                                variant="outline"
+                              >
+                                {user.status.toUpperCase()}
+                              </Badge>
+                              {user.verified && (
+                                <Badge className="bg-green-500">
+                                  <CheckCircle size={12} className="mr-1" />
+                                  VERIFIED
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-400">{user.email}</p>
+                            <p className="text-xs text-gray-500">
+                              {user.location} • Joined {user.joinDate} • {user.lastActive}
+                            </p>
                           </div>
-                          <p className="text-sm text-gray-400">{user.email}</p>
-                          <p className="text-xs text-gray-500">
-                            {user.location} • Joined {user.joinDate} • {user.lastActive}
-                          </p>
+
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div>
+                              <p className="text-xs text-gray-400">Balance</p>
+                              <p className="text-sm font-bold text-green-400">
+                                ${user.balance.toLocaleString()}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-400">Trades</p>
+                              <p className="text-sm font-bold text-blue-400">
+                                {user.totalTrades.toLocaleString()}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-400">P&L</p>
+                              <p
+                                className={`text-sm font-bold ${user.profitLoss >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                              >
+                                {user.profitLoss >= 0 ? '+' : ''}${user.profitLoss.toFixed(2)}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-400">Win Rate</p>
+                              <p className="text-sm font-bold text-purple-400">
+                                {user.winRate.toFixed(1)}%
+                              </p>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                          <div>
-                            <p className="text-xs text-gray-400">Balance</p>
-                            <p className="text-sm font-bold text-green-400">
-                              ${user.balance.toLocaleString()}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400">Trades</p>
-                            <p className="text-sm font-bold text-blue-400">
-                              {user.totalTrades.toLocaleString()}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400">P&L</p>
-                            <p
-                              className={`text-sm font-bold ${user.profitLoss >= 0 ? 'text-green-400' : 'text-red-400'}`}
-                            >
-                              {user.profitLoss >= 0 ? '+' : ''}${user.profitLoss.toFixed(2)}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400">Win Rate</p>
-                            <p className="text-sm font-bold text-purple-400">
-                              {user.winRate.toFixed(1)}%
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col space-y-2">
-                        <div className="flex space-x-2">
-                          <Button
-                            onClick={() => setSelectedUser(user)}
-                            size="sm"
-                            variant="outline"
-                            className="border-blue-500/30 text-blue-400 hover:bg-blue-500/20"
-                          >
-                            <Edit size={12} className="mr-1" />
-                            Edit
-                          </Button>
-                          <Button
-                            onClick={() => setSelectedUser(user)}
-                            size="sm"
-                            variant="outline"
-                            className="border-green-500/30 text-green-400 hover:bg-green-500/20"
-                          >
-                            <Eye size={12} className="mr-1" />
-                            View
-                          </Button>
-                        </div>
-                        <div className="flex space-x-2">
-                          {user.status === 'active' ? (
+                        <div className="flex flex-col space-y-2">
+                          <div className="flex space-x-2">
                             <Button
-                              onClick={() => suspendUser(user.id)}
+                              onClick={() => setSelectedUser(user)}
                               size="sm"
                               variant="outline"
-                              className="border-red-500/30 text-red-400 hover:bg-red-500/20"
+                              className="border-blue-500/30 text-blue-400 hover:bg-blue-500/20"
                             >
-                              <Ban size={12} className="mr-1" />
-                              Suspend
+                              <Edit size={12} className="mr-1" />
+                              Edit
                             </Button>
-                          ) : (
                             <Button
-                              onClick={() => activateUser(user.id)}
+                              onClick={() => setSelectedUser(user)}
                               size="sm"
                               variant="outline"
                               className="border-green-500/30 text-green-400 hover:bg-green-500/20"
                             >
-                              <CheckCircle size={12} className="mr-1" />
-                              Activate
+                              <Eye size={12} className="mr-1" />
+                              View
                             </Button>
-                          )}
-                          <Button
-                            onClick={() => deleteUser(user.id)}
-                            size="sm"
-                            variant="outline"
-                            className="border-red-500/30 text-red-400 hover:bg-red-500/20"
-                          >
-                            <Trash2 size={12} className="mr-1" />
-                            Delete
-                          </Button>
+                          </div>
+                          <div className="flex space-x-2">
+                            {user.status === 'active' ? (
+                              <Button
+                                onClick={() => suspendUser(user.id)}
+                                size="sm"
+                                variant="outline"
+                                className="border-red-500/30 text-red-400 hover:bg-red-500/20"
+                              >
+                                <Ban size={12} className="mr-1" />
+                                Suspend
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={() => activateUser(user.id)}
+                                size="sm"
+                                variant="outline"
+                                className="border-green-500/30 text-green-400 hover:bg-green-500/20"
+                              >
+                                <CheckCircle size={12} className="mr-1" />
+                                Activate
+                              </Button>
+                            )}
+                            <Button
+                              onClick={() => deleteUser(user.id)}
+                              size="sm"
+                              variant="outline"
+                              className="border-red-500/30 text-red-400 hover:bg-red-500/20"
+                            >
+                              <Trash2 size={12} className="mr-1" />
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </CardContent>
           </Card>

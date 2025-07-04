@@ -3,11 +3,54 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { AlertTriangle, Shield, TrendingDown, Activity, Target, BarChart3 } from 'lucide-react';
+
+// Types
+interface ValueAtRisk {
+  oneDay: number;
+  oneWeek: number;
+  oneMonth: number;
+}
+
+interface StressTest {
+  scenario: string;
+  portfolioImpact: number;
+  probability: number;
+}
+
+interface CorrelationRisk {
+  asset1: string;
+  asset2: string;
+  correlation: number;
+  risk: 'High' | 'Medium' | 'Low';
+}
+
+interface RiskFactor {
+  factor: string;
+  score: number;
+  description: string;
+}
+
+interface HedgingStrategy {
+  strategy: string;
+  cost: string;
+  protection: string;
+  effectiveness: number;
+}
+
+interface RiskMetrics {
+  overallRisk: number;
+  riskLevel: string;
+  valueAtRisk: ValueAtRisk;
+  stressTests: StressTest[];
+  correlationRisks: CorrelationRisk[];
+  riskFactors: RiskFactor[];
+  hedgingStrategies: HedgingStrategy[];
+}
 
 export default function RiskAnalyzer() {
-  const [riskMetrics, setRiskMetrics] = useState(null);
+  const [riskMetrics, setRiskMetrics] = useState<RiskMetrics | null>(null);
 
   useEffect(() => {
     // Simulate risk analysis data
@@ -64,22 +107,22 @@ export default function RiskAnalyzer() {
     });
   }, []);
 
-  const getRiskColor = score => {
+  const getRiskColor = (score: number): string => {
     if (score >= 70) return 'text-red-400';
     if (score >= 40) return 'text-yellow-400';
     return 'text-green-400';
   };
 
-  const getRiskBadgeVariant = level => {
+  const getRiskBadgeVariant = (level: string): string => {
     switch (level) {
       case 'High':
-        return 'destructive';
+        return 'bg-red-500/20 text-red-400';
       case 'Medium':
-        return 'secondary';
+        return 'bg-yellow-500/20 text-yellow-400';
       case 'Low':
-        return 'default';
+        return 'bg-green-500/20 text-green-400';
       default:
-        return 'outline';
+        return 'bg-gray-500/20 text-gray-400';
     }
   };
 
@@ -87,7 +130,7 @@ export default function RiskAnalyzer() {
     return (
       <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
         <CardContent className="p-8 text-center">
-          <AlertTriangle className="h-12 w-12 text-orange-400 mx-auto mb-4 animate-pulse" />
+          <span className="text-6xl text-orange-400 mb-4 block animate-pulse">⚠️</span>
           <p className="text-white">Analyzing portfolio risks...</p>
         </CardContent>
       </Card>
@@ -100,18 +143,16 @@ export default function RiskAnalyzer() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="bg-black/20 border-red-500/30 backdrop-blur-xl">
           <CardContent className="p-6 text-center">
-            <AlertTriangle className="h-12 w-12 text-red-400 mx-auto mb-4" />
+            <span className="text-6xl text-red-400 mb-4 block">⚠️</span>
             <p className="text-3xl font-bold text-red-400 mb-2">{riskMetrics.overallRisk}</p>
             <p className="text-gray-300">Overall Risk Score</p>
-            <Badge variant="destructive" className="mt-2">
-              {riskMetrics.riskLevel}
-            </Badge>
+            <Badge className="mt-2 bg-red-500/20 text-red-400">{riskMetrics.riskLevel}</Badge>
           </CardContent>
         </Card>
 
         <Card className="bg-black/20 border-yellow-500/30 backdrop-blur-xl">
           <CardContent className="p-6 text-center">
-            <TrendingDown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
+            <span className="text-6xl text-yellow-400 mb-4 block">📉</span>
             <p className="text-3xl font-bold text-yellow-400 mb-2">
               {riskMetrics.valueAtRisk.oneDay}%
             </p>
@@ -122,7 +163,7 @@ export default function RiskAnalyzer() {
 
         <Card className="bg-black/20 border-blue-500/30 backdrop-blur-xl">
           <CardContent className="p-6 text-center">
-            <Shield className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+            <span className="text-6xl text-blue-400 mb-4 block">🛡️</span>
             <p className="text-3xl font-bold text-blue-400 mb-2">3</p>
             <p className="text-gray-300">Hedge Strategies</p>
             <p className="text-xs text-gray-400 mt-2">Available options</p>
@@ -135,7 +176,7 @@ export default function RiskAnalyzer() {
         <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center">
-              <Activity className="h-5 w-5 mr-2 text-orange-400" />
+              <span className="text-xl mr-2 text-orange-400">📊</span>
               Value at Risk Analysis
             </CardTitle>
           </CardHeader>
@@ -166,7 +207,7 @@ export default function RiskAnalyzer() {
         <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center">
-              <Target className="h-5 w-5 mr-2 text-purple-400" />
+              <span className="text-xl mr-2 text-purple-400">🎯</span>
               Risk Factor Breakdown
             </CardTitle>
           </CardHeader>
@@ -188,7 +229,7 @@ export default function RiskAnalyzer() {
         <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center">
-              <BarChart3 className="h-5 w-5 mr-2 text-red-400" />
+              <span className="text-xl mr-2 text-red-400">📈</span>
               Stress Test Scenarios
             </CardTitle>
           </CardHeader>
@@ -197,7 +238,7 @@ export default function RiskAnalyzer() {
               <div key={index} className="p-3 bg-white/5 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-white font-medium">{test.scenario}</span>
-                  <Badge variant="outline" className="text-xs">
+                  <Badge className="text-xs bg-gray-500/20 text-gray-400">
                     {test.probability}% chance
                   </Badge>
                 </div>
@@ -214,7 +255,7 @@ export default function RiskAnalyzer() {
         <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-white flex items-center">
-              <Shield className="h-5 w-5 mr-2 text-green-400" />
+              <span className="text-xl mr-2 text-green-400">🛡️</span>
               Recommended Hedges
             </CardTitle>
           </CardHeader>
@@ -226,7 +267,7 @@ export default function RiskAnalyzer() {
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-white font-medium">{hedge.strategy}</span>
-                  <Badge variant="default" className="bg-green-500">
+                  <Badge className="bg-green-500/20 text-green-400">
                     {hedge.effectiveness}% effective
                   </Badge>
                 </div>
@@ -253,7 +294,7 @@ export default function RiskAnalyzer() {
                   <span className="text-white font-medium">
                     {corr.asset1} - {corr.asset2}
                   </span>
-                  <Badge variant={getRiskBadgeVariant(corr.risk)}>{corr.risk}</Badge>
+                  <Badge className={getRiskBadgeVariant(corr.risk)}>{corr.risk}</Badge>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-300 text-sm">Correlation:</span>

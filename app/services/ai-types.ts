@@ -6,7 +6,7 @@ export interface HistoricalDataPoint {
   timestamp: string | Date;
   technicals?: {
     rsi?: number;
-    macd?: { 
+    macd?: {
       line?: number;
       signal?: number;
       histogram?: number;

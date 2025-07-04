@@ -93,8 +93,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {process.env.NEXT_PUBLIC_ALLOW_INDEXING !== 'true' && (
           <meta name="robots" content="noindex, nofollow" />
         )}
-        {/* IONOS Site Verification (replace with your real verification code if needed) */}
-        <meta name="ionos-site-verification" content="alphaaistockx.com" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ErrorBoundary>

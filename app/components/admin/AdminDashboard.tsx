@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -32,6 +30,41 @@ import {
   Sword,
 } from 'lucide-react';
 
+interface UserProfile {
+  id: number;
+  name: string;
+  email: string;
+  subscription: string;
+  status: string;
+  totalTrades: number;
+  profitLoss: number;
+  riskScore: number;
+  lastActive: string;
+  location: string;
+  accountValue: number;
+  winRate: number;
+}
+
+interface SystemAlert {
+  id: number;
+  type: string;
+  message: string;
+  timestamp: Date;
+  severity: string;
+}
+
+interface LiveData {
+  realtimeUsers: number;
+  tradesPerSecond: number;
+  systemAlerts: SystemAlert[];
+  performanceMetrics: {
+    apiResponseTime?: number;
+    databaseConnections?: number;
+    memoryUsage?: number;
+    cpuUsage?: number;
+  };
+}
+
 export default function AdminDashboard() {
   const [adminStats, setAdminStats] = useState({
     totalUsers: 0,
@@ -44,8 +77,8 @@ export default function AdminDashboard() {
     serverLoad: 0,
   });
 
-  const [userProfiles, setUserProfiles] = useState([]);
-  const [liveData, setLiveData] = useState({
+  const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
+  const [liveData, setLiveData] = useState<LiveData>({
     realtimeUsers: 0,
     tradesPerSecond: 0,
     systemAlerts: [],
@@ -200,7 +233,7 @@ export default function AdminDashboard() {
     });
   };
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
         return 'text-green-400';
@@ -213,7 +246,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const getSubscriptionColor = subscription => {
+  const getSubscriptionColor = (subscription: string) => {
     switch (subscription) {
       case 'ultimate':
         return 'bg-gradient-to-r from-red-500 to-orange-600';
@@ -226,13 +259,13 @@ export default function AdminDashboard() {
     }
   };
 
-  const suspendUser = userId => {
+  const suspendUser = (userId: number) => {
     setUserProfiles(prev =>
       prev.map(user => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
-  const activateUser = userId => {
+  const activateUser = (userId: number) => {
     setUserProfiles(prev =>
       prev.map(user => (user.id === userId ? { ...user, status: 'active' } : user))
     );

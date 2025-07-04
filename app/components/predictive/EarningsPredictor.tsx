@@ -4,12 +4,46 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Brain, AlertTriangle, Star } from 'lucide-react';
+
+// Types
+interface EarningData {
+  symbol: string;
+  name: string;
+  date: string;
+  time: string;
+  currentPrice: number;
+  estimatedEPS: string;
+  estimatedRevenue: string;
+  aiPrediction: 'beat' | 'miss';
+  confidenceScore: number;
+  priceTarget: number;
+  volatilityExpected: number;
+  optionsActivity: 'high' | 'medium' | 'low';
+  analystRating: 'buy' | 'hold' | 'sell';
+}
+
+interface EarningsAnalysisData {
+  symbol: string;
+  metric: string;
+  impact: 'Critical' | 'High' | 'Medium';
+  prediction: string;
+  confidence: number;
+  historicalAccuracy: number;
+}
+
+interface SurprisePrediction {
+  symbol: string;
+  type: string;
+  probability: number;
+  expectedMove: string;
+  reasoning: string;
+  riskLevel: 'High' | 'Medium' | 'Low';
+}
 
 export default function EarningsPredictor() {
-  const [upcomingEarnings, setUpcomingEarnings] = useState([]);
-  const [earningsAnalysis, setEarningsAnalysis] = useState([]);
-  const [surprisePredictions, setSurprisePredictions] = useState([]);
+  const [upcomingEarnings, setUpcomingEarnings] = useState<EarningData[]>([]);
+  const [earningsAnalysis, setEarningsAnalysis] = useState<EarningsAnalysisData[]>([]);
+  const [surprisePredictions, setSurprisePredictions] = useState<SurprisePrediction[]>([]);
 
   useEffect(() => {
     generateUpcomingEarnings();
@@ -29,7 +63,7 @@ export default function EarningsPredictor() {
       { symbol: 'NFLX', name: 'Netflix Inc.', date: '2024-01-23', time: 'AMC' },
     ];
 
-    const earnings = companies.map(company => ({
+    const earnings: EarningData[] = companies.map(company => ({
       ...company,
       currentPrice: 100 + Math.random() * 400,
       estimatedEPS: (Math.random() * 5 + 0.5).toFixed(2),
@@ -52,7 +86,7 @@ export default function EarningsPredictor() {
   };
 
   const generateEarningsAnalysis = () => {
-    const analysis = [
+    const analysis: EarningsAnalysisData[] = [
       {
         symbol: 'AAPL',
         metric: 'iPhone Sales',
@@ -91,7 +125,7 @@ export default function EarningsPredictor() {
   };
 
   const generateSurprisePredictions = () => {
-    const surprises = [
+    const surprises: SurprisePrediction[] = [
       {
         symbol: 'COIN',
         type: 'Positive Surprise',
@@ -121,11 +155,11 @@ export default function EarningsPredictor() {
     setSurprisePredictions(surprises);
   };
 
-  const getPredictionColor = prediction => {
+  const getPredictionColor = (prediction: string) => {
     return prediction === 'beat' ? 'text-emerald-400' : 'text-red-400';
   };
 
-  const getImpactColor = impact => {
+  const getImpactColor = (impact: string) => {
     switch (impact) {
       case 'Critical':
         return 'text-red-400';
@@ -136,7 +170,7 @@ export default function EarningsPredictor() {
     }
   };
 
-  const getRatingColor = rating => {
+  const getRatingColor = (rating: string) => {
     switch (rating) {
       case 'buy':
         return 'text-emerald-400';
@@ -153,7 +187,7 @@ export default function EarningsPredictor() {
       <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-stone-100 flex items-center">
-            <Calendar className="h-6 w-6 mr-2 text-emerald-400" />
+            <span className="h-6 w-6 mr-2 text-emerald-400">📅</span>
             Upcoming Earnings with AI Predictions
           </CardTitle>
         </CardHeader>
@@ -169,7 +203,7 @@ export default function EarningsPredictor() {
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-stone-100 font-bold">{earning.symbol}</span>
-                        <Badge variant="outline" className="border-emerald-500/30 text-emerald-400">
+                        <Badge className="border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
                           {earning.date}
                         </Badge>
                         <Badge className={getPredictionColor(earning.aiPrediction)}>
@@ -206,7 +240,7 @@ export default function EarningsPredictor() {
                         <span className="text-emerald-400 font-bold">
                           {earning.confidenceScore.toFixed(0)}%
                         </span>
-                        <Star className="h-3 w-3 text-amber-400 ml-1" />
+                        <span className="text-amber-400 ml-1">⭐</span>
                       </div>
                     </div>
                   </div>
@@ -232,7 +266,7 @@ export default function EarningsPredictor() {
         <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-stone-100 flex items-center">
-              <Brain className="h-6 w-6 mr-2 text-purple-400" />
+              <span className="h-6 w-6 mr-2 text-purple-400">🧠</span>
               AI Key Metrics Analysis
             </CardTitle>
           </CardHeader>
@@ -277,7 +311,7 @@ export default function EarningsPredictor() {
         <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">
           <CardHeader>
             <CardTitle className="text-stone-100 flex items-center">
-              <AlertTriangle className="h-6 w-6 mr-2 text-amber-400" />
+              <span className="h-6 w-6 mr-2 text-amber-400">⚠️</span>
               Earnings Surprise Predictions
             </CardTitle>
           </CardHeader>
@@ -290,7 +324,13 @@ export default function EarningsPredictor() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
                     <span className="text-stone-100 font-bold">{surprise.symbol}</span>
-                    <Badge variant={surprise.type.includes('Positive') ? 'default' : 'destructive'}>
+                    <Badge
+                      className={
+                        surprise.type.includes('Positive')
+                          ? 'bg-emerald-500/20 text-emerald-400'
+                          : 'bg-red-500/20 text-red-400'
+                      }
+                    >
                       {surprise.type}
                     </Badge>
                   </div>
@@ -313,7 +353,13 @@ export default function EarningsPredictor() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-stone-400 text-sm">Risk Level:</span>
-                    <Badge variant={surprise.riskLevel === 'High' ? 'destructive' : 'secondary'}>
+                    <Badge
+                      className={
+                        surprise.riskLevel === 'High'
+                          ? 'bg-red-500/20 text-red-400'
+                          : 'bg-gray-500/20 text-gray-400'
+                      }
+                    >
                       {surprise.riskLevel}
                     </Badge>
                   </div>

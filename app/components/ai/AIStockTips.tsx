@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -21,13 +19,68 @@ import {
   Crown,
 } from 'lucide-react';
 
-export default function AIStockTips({ membershipLevel }) {
-  const [topPicks, setTopPicks] = useState([]);
-  const [predictions, setPredictions] = useState([]);
-  const [marketInsights, setMarketInsights] = useState({});
+interface StockTip {
+  id: number;
+  symbol: string;
+  direction: string;
+  confidence: number;
+  currentPrice: number;
+  targetPrice: number;
+  potentialReturn: number;
+  timeframe: string;
+  reason: string;
+  aiScore: number;
+  riskLevel: string;
+  timestamp: Date;
+}
+
+interface Prediction {
+  id: number;
+  title: string;
+  prediction: string;
+  probability: number;
+  timeframe: string;
+  impact: string;
+  category: string;
+}
+
+interface MarketInsights {
+  marketSentiment?: {
+    score: number;
+    trend: string;
+    drivers: string[];
+  };
+  sectorRotation?: {
+    inflow: string;
+    outflow: string;
+    strength: number;
+  };
+  volatilityForecast?: {
+    level: string;
+    direction: string;
+    timeframe: string;
+  };
+  keyLevels?: {
+    support: number;
+    resistance: number;
+    breakoutTarget: number;
+  };
+}
+
+interface AIStockTipsProps {
+  membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+}
+
+export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
+  const [topPicks, setTopPicks] = useState<StockTip[]>([]);
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
+  const [marketInsights, setMarketInsights] = useState<MarketInsights>({});
   const [loading, setLoading] = useState(true);
 
-  const membershipLimits = {
+  const membershipLimits: Record<
+    string,
+    { tips: number | string; predictions: number | string; insights: number | string }
+  > = {
     free: { tips: 3, predictions: 1, insights: 1 },
     basic: { tips: 10, predictions: 5, insights: 3 },
     pro: { tips: 25, predictions: 15, insights: 10 },
@@ -88,7 +141,7 @@ export default function AIStockTips({ membershipLevel }) {
     ];
 
     const tips = [];
-    const maxTips = currentLimits.tips === 'unlimited' ? 15 : currentLimits.tips;
+    const maxTips = currentLimits.tips === 'unlimited' ? 15 : Number(currentLimits.tips);
 
     for (let i = 0; i < maxTips; i++) {
       const symbol = stocks[Math.floor(Math.random() * stocks.length)];
@@ -121,7 +174,7 @@ export default function AIStockTips({ membershipLevel }) {
   const generatePredictions = () => {
     const predictions = [];
     const maxPredictions =
-      currentLimits.predictions === 'unlimited' ? 10 : currentLimits.predictions;
+      currentLimits.predictions === 'unlimited' ? 10 : Number(currentLimits.predictions);
 
     for (let i = 0; i < maxPredictions; i++) {
       predictions.push({
@@ -189,13 +242,13 @@ export default function AIStockTips({ membershipLevel }) {
     setMarketInsights(insights);
   };
 
-  const getConfidenceColor = confidence => {
+  const getConfidenceColor = (confidence: number) => {
     if (confidence >= 85) return 'text-green-400';
     if (confidence >= 75) return 'text-yellow-400';
     return 'text-orange-400';
   };
 
-  const getRiskColor = risk => {
+  const getRiskColor = (risk: string) => {
     switch (risk) {
       case 'Low':
         return 'text-green-400';
@@ -374,7 +427,7 @@ export default function AIStockTips({ membershipLevel }) {
             <div>
               <h5 className="text-white font-semibold mb-2">Key Drivers</h5>
               <div className="space-y-1">
-                {marketInsights.marketSentiment?.drivers.map((driver, index) => (
+                {marketInsights.marketSentiment?.drivers.map((driver: string, index: number) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
                     <span className="text-gray-300 text-sm">{driver}</span>

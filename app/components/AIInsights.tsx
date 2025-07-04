@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
 
-export default function AIInsights({ selectedStock }) {
+interface AIInsightsProps {
+  selectedStock: string;
+}
+
+export default function AIInsights({ selectedStock }: AIInsightsProps) {
   const [insights, setInsights] = useState(null);
   const [loading, setLoading] = useState(true);
 

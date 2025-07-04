@@ -17,10 +17,10 @@ export default function AutoTraderDemo() {
     setError(null);
     try {
       const trader = new AdvancedAIAutoTrader(25000, 'MEDIUM');
-      
+
       // Simulate some AI trading
       await trader.executeAITrading(['AAPL', 'TSLA', 'MSFT']);
-      
+
       const portfolioData = trader.getPortfolio();
       setPortfolio(portfolioData);
     } catch (e: any) {
@@ -43,7 +43,7 @@ export default function AutoTraderDemo() {
               AI Auto-Trader Demo
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-              Experience the power of advanced AI-driven trading with real-time market analysis, 
+              Experience the power of advanced AI-driven trading with real-time market analysis,
               sentiment evaluation, and automated portfolio optimization.
             </p>
           </div>
@@ -65,28 +65,36 @@ export default function AutoTraderDemo() {
                       <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                       <div>
                         <h4 className="font-semibold">Advanced Pattern Recognition</h4>
-                        <p className="text-gray-300 text-sm">AI identifies complex market patterns and trends</p>
+                        <p className="text-gray-300 text-sm">
+                          AI identifies complex market patterns and trends
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                       <div>
                         <h4 className="font-semibold">Sentiment Analysis</h4>
-                        <p className="text-gray-300 text-sm">Real-time analysis of market sentiment and news</p>
+                        <p className="text-gray-300 text-sm">
+                          Real-time analysis of market sentiment and news
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                       <div>
                         <h4 className="font-semibold">Risk Management</h4>
-                        <p className="text-gray-300 text-sm">Dynamic risk assessment and position sizing</p>
+                        <p className="text-gray-300 text-sm">
+                          Dynamic risk assessment and position sizing
+                        </p>
                       </div>
                     </div>
                   </div>
                 </Card>
 
                 <Card className="p-8 bg-gray-900/50 border-gray-700">
-                  <h3 className="text-2xl font-semibold mb-4 text-purple-400">Performance Metrics</h3>
+                  <h3 className="text-2xl font-semibold mb-4 text-purple-400">
+                    Performance Metrics
+                  </h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-green-400">94.7%</div>
@@ -114,37 +122,40 @@ export default function AutoTraderDemo() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   {
-                    title: "Multi-Strategy AI",
-                    description: "Combines momentum, mean reversion, and sentiment strategies",
-                    icon: "🧠"
+                    title: 'Multi-Strategy AI',
+                    description: 'Combines momentum, mean reversion, and sentiment strategies',
+                    icon: '🧠',
                   },
                   {
-                    title: "Real-Time Analysis",
-                    description: "Live market data processing and signal generation",
-                    icon: "⚡"
+                    title: 'Real-Time Analysis',
+                    description: 'Live market data processing and signal generation',
+                    icon: '⚡',
                   },
                   {
-                    title: "Risk Controls",
-                    description: "Advanced risk management and position sizing",
-                    icon: "🛡️"
+                    title: 'Risk Controls',
+                    description: 'Advanced risk management and position sizing',
+                    icon: '🛡️',
                   },
                   {
-                    title: "Portfolio Optimization",
-                    description: "AI-driven portfolio allocation and rebalancing",
-                    icon: "📊"
+                    title: 'Portfolio Optimization',
+                    description: 'AI-driven portfolio allocation and rebalancing',
+                    icon: '📊',
                   },
                   {
-                    title: "Backtesting",
-                    description: "Historical performance validation and optimization",
-                    icon: "📈"
+                    title: 'Backtesting',
+                    description: 'Historical performance validation and optimization',
+                    icon: '📈',
                   },
                   {
-                    title: "24/7 Monitoring",
-                    description: "Continuous market monitoring and opportunity detection",
-                    icon: "🕰️"
-                  }
+                    title: '24/7 Monitoring',
+                    description: 'Continuous market monitoring and opportunity detection',
+                    icon: '🕰️',
+                  },
                 ].map((feature, index) => (
-                  <Card key={index} className="p-6 bg-gray-900/50 border-gray-700 hover:border-blue-500 transition-all">
+                  <Card
+                    key={index}
+                    className="p-6 bg-gray-900/50 border-gray-700 hover:border-blue-500 transition-all"
+                  >
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                     <p className="text-gray-300 text-sm">{feature.description}</p>
@@ -160,7 +171,6 @@ export default function AutoTraderDemo() {
                   <div className="text-center">
                     <h3 className="text-2xl font-semibold mb-4">Choose Your Demo Experience</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                      
                       {/* Quick Demo */}
                       <div className="p-6 bg-gray-800 rounded-lg">
                         <h4 className="text-xl font-semibold mb-4 text-blue-400">Quick Demo</h4>
@@ -174,20 +184,30 @@ export default function AutoTraderDemo() {
                         >
                           {loading ? 'Running Demo...' : 'Start Quick Demo'}
                         </Button>
-                        
+
                         {error && (
                           <div className="mt-4 p-3 bg-red-900/50 border border-red-500 rounded text-red-300">
                             Error: {error}
                           </div>
                         )}
-                        
+
                         {portfolio && (
                           <div className="mt-6 p-4 bg-green-900/30 border border-green-500 rounded">
                             <h5 className="font-semibold mb-2">Demo Results:</h5>
                             <div className="text-sm space-y-1">
-                              <p>Portfolio Value: <span className="text-green-400">${portfolio.totalValue?.toFixed(2)}</span></p>
+                              <p>
+                                Portfolio Value:{' '}
+                                <span className="text-green-400">
+                                  ${portfolio.totalValue?.toFixed(2)}
+                                </span>
+                              </p>
                               <p>Cash: ${portfolio.cash?.toFixed(2)}</p>
-                              <p>Total Return: <span className="text-green-400">{portfolio.performance?.totalReturn?.toFixed(2)}%</span></p>
+                              <p>
+                                Total Return:{' '}
+                                <span className="text-green-400">
+                                  {portfolio.performance?.totalReturn?.toFixed(2)}%
+                                </span>
+                              </p>
                               <p>Trades Executed: {portfolio.trades?.length || 0}</p>
                             </div>
                           </div>
@@ -196,7 +216,9 @@ export default function AutoTraderDemo() {
 
                       {/* Full Dashboard */}
                       <div className="p-6 bg-gray-800 rounded-lg">
-                        <h4 className="text-xl font-semibold mb-4 text-purple-400">Full Dashboard</h4>
+                        <h4 className="text-xl font-semibold mb-4 text-purple-400">
+                          Full Dashboard
+                        </h4>
                         <p className="text-gray-300 mb-6">
                           Access the complete AI trading dashboard with advanced features
                         </p>
@@ -206,7 +228,7 @@ export default function AutoTraderDemo() {
                         >
                           Launch Full Dashboard
                         </Button>
-                        
+
                         <div className="mt-4 text-xs text-gray-400">
                           Includes: Portfolio management, AI signals, performance metrics, and more
                         </div>
@@ -219,7 +241,6 @@ export default function AutoTraderDemo() {
                 <Card className="p-8 bg-gray-900/50 border-gray-700">
                   <h3 className="text-2xl font-semibold mb-6 text-center">AI Trading Strategies</h3>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    
                     <div className="text-center">
                       <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span className="text-2xl">📈</span>

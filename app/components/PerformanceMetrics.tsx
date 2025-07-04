@@ -1,14 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
 
-export default function PerformanceMetrics({ botStats, recentTrades }) {
+interface Trade {
+  id: number;
+  symbol: string;
+  type: string;
+  quantity: number;
+  price: number;
+  pnl: number;
+  timestamp: string;
+}
+
+interface BotStats {
+  sharpeRatio: number;
+  maxDrawdown: number;
+  totalTrades: number;
+  winRate: number;
+  totalPnL: number;
+  activeTrades: number;
+}
+
+interface PerformanceMetricsProps {
+  botStats: BotStats;
+  recentTrades: Trade[];
+}
+
+export default function PerformanceMetrics({ botStats, recentTrades }: PerformanceMetricsProps) {
   const [performanceData, setPerformanceData] = useState({
     dailyReturns: [],
     monthlyReturns: [],
@@ -218,7 +240,7 @@ export default function PerformanceMetrics({ botStats, recentTrades }) {
             {/* Monthly Performance */}
             <div className="space-y-3">
               <h4 className="text-white font-semibold">Monthly Returns</h4>
-              {['January', 'February', 'March'].map((month, index) => {
+              {['January', 'February', 'March'].map(month => {
                 const return_ = (Math.random() - 0.3) * 15;
                 return (
                   <div key={month} className="flex items-center justify-between">

@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -166,7 +164,7 @@ export default function SportsAlphaTrader() {
     setOpportunities(newOpportunities.slice(0, 8));
   };
 
-  const executeTrade = opportunity => {
+  const executeTrade = (opportunity: any) => {
     const newTrade = {
       id: Date.now(),
       eventName: opportunity.eventName,

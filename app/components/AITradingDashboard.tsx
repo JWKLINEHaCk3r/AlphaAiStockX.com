@@ -25,7 +25,7 @@ export default function AITradingDashboard() {
     performance: null,
     analysis: null,
     loading: true,
-    error: null
+    error: null,
   });
 
   const [selectedSymbols, setSelectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
@@ -39,18 +39,18 @@ export default function AITradingDashboard() {
     try {
       const trader = new AdvancedAIAutoTrader(50000, riskLevel);
       const portfolio = trader.getPortfolio();
-      
+
       setState(prev => ({
         ...prev,
         trader,
         portfolio,
-        loading: false
+        loading: false,
       }));
     } catch (error) {
       setState(prev => ({
         ...prev,
         error: 'Failed to initialize AI trader',
-        loading: false
+        loading: false,
       }));
     }
   };
@@ -59,22 +59,22 @@ export default function AITradingDashboard() {
     if (!state.trader) return;
 
     setState(prev => ({ ...prev, loading: true }));
-    
+
     try {
       const analysis = await state.trader.runAIAnalysis(selectedSymbols);
       const portfolio = state.trader.getPortfolio();
-      
+
       setState(prev => ({
         ...prev,
         analysis,
         portfolio,
-        loading: false
+        loading: false,
       }));
     } catch (error) {
       setState(prev => ({
         ...prev,
         error: 'Analysis failed',
-        loading: false
+        loading: false,
       }));
     }
   };
@@ -83,22 +83,22 @@ export default function AITradingDashboard() {
     if (!state.trader) return;
 
     setState(prev => ({ ...prev, isTrading: true }));
-    
+
     try {
       const result = await state.trader.executeAITrading(selectedSymbols);
       const portfolio = state.trader.getPortfolio();
-      
+
       setState(prev => ({
         ...prev,
         portfolio,
         isTrading: false,
-        analysis: { ...prev.analysis, lastTradeResult: result }
+        analysis: { ...prev.analysis, lastTradeResult: result },
       }));
     } catch (error) {
       setState(prev => ({
         ...prev,
         error: 'Trading execution failed',
-        isTrading: false
+        isTrading: false,
       }));
     }
   };
@@ -147,7 +147,7 @@ export default function AITradingDashboard() {
               >
                 {state.loading ? 'Analyzing...' : 'Run AI Analysis'}
               </Button>
-              
+
               <Button
                 onClick={executeAITrading}
                 disabled={state.isTrading || !state.analysis}
@@ -155,7 +155,7 @@ export default function AITradingDashboard() {
               >
                 {state.isTrading ? 'Trading...' : 'Execute AI Trading'}
               </Button>
-              
+
               <Button
                 onClick={emergencyStop}
                 variant="destructive"
@@ -168,7 +168,7 @@ export default function AITradingDashboard() {
             <div className="flex gap-4 items-center">
               <select
                 value={riskLevel}
-                onChange={(e) => setRiskLevel(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')}
+                onChange={e => setRiskLevel(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')}
                 className="px-3 py-2 bg-gray-800 border border-gray-600 rounded text-white"
               >
                 <option value="LOW">Low Risk</option>
@@ -211,17 +211,23 @@ export default function AITradingDashboard() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-400">Total Return</p>
-                        <p className={`text-xl font-semibold ${
-                          (state.portfolio.totalReturn || 0) >= 0 ? 'text-green-400' : 'text-red-400'
-                        }`}>
+                        <p
+                          className={`text-xl font-semibold ${
+                            (state.portfolio.totalReturn || 0) >= 0
+                              ? 'text-green-400'
+                              : 'text-red-400'
+                          }`}
+                        >
                           {(state.portfolio.totalReturn || 0).toFixed(2)}%
                         </p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-400">Daily P&L</p>
-                        <p className={`text-xl font-semibold ${
-                          (state.portfolio.dailyPnL || 0) >= 0 ? 'text-green-400' : 'text-red-400'
-                        }`}>
+                        <p
+                          className={`text-xl font-semibold ${
+                            (state.portfolio.dailyPnL || 0) >= 0 ? 'text-green-400' : 'text-red-400'
+                          }`}
+                        >
                           ${(state.portfolio.dailyPnL || 0).toFixed(2)}
                         </p>
                       </div>
@@ -235,18 +241,23 @@ export default function AITradingDashboard() {
                 <h3 className="text-xl font-semibold mb-4">Current Holdings</h3>
                 {state.portfolio?.holdings && Object.keys(state.portfolio.holdings).length > 0 ? (
                   <div className="space-y-3">
-                    {Object.entries(state.portfolio.holdings).map(([symbol, holding]: [string, any]) => (
-                      <div key={symbol} className="flex justify-between items-center p-3 bg-gray-800 rounded">
-                        <div>
-                          <p className="font-semibold">{symbol}</p>
-                          <p className="text-sm text-gray-400">{holding.shares} shares</p>
+                    {Object.entries(state.portfolio.holdings).map(
+                      ([symbol, holding]: [string, any]) => (
+                        <div
+                          key={symbol}
+                          className="flex justify-between items-center p-3 bg-gray-800 rounded"
+                        >
+                          <div>
+                            <p className="font-semibold">{symbol}</p>
+                            <p className="text-sm text-gray-400">{holding.shares} shares</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-semibold">${holding.avgPrice?.toFixed(2)}</p>
+                            <p className="text-sm text-gray-400">Avg Cost</p>
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <p className="font-semibold">${holding.avgPrice?.toFixed(2)}</p>
-                          <p className="text-sm text-gray-400">Avg Cost</p>
-                        </div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 ) : (
                   <p className="text-gray-400">No current holdings</p>
@@ -267,9 +278,11 @@ export default function AITradingDashboard() {
                       <div key={index} className="p-3 bg-gray-800 rounded">
                         <div className="flex justify-between items-start mb-2">
                           <span className="font-semibold">{signal.symbol}</span>
-                          <span className={`px-2 py-1 rounded text-sm ${
-                            signal.action === 'BUY' ? 'bg-green-600' : 'bg-red-600'
-                          }`}>
+                          <span
+                            className={`px-2 py-1 rounded text-sm ${
+                              signal.action === 'BUY' ? 'bg-green-600' : 'bg-red-600'
+                            }`}
+                          >
                             {signal.action}
                           </span>
                         </div>
@@ -294,7 +307,10 @@ export default function AITradingDashboard() {
                 {state.analysis?.recommendations?.length > 0 ? (
                   <div className="space-y-2">
                     {state.analysis.recommendations.map((rec: string, index: number) => (
-                      <div key={index} className="p-3 bg-blue-900/30 border border-blue-700 rounded">
+                      <div
+                        key={index}
+                        className="p-3 bg-blue-900/30 border border-blue-700 rounded"
+                      >
                         <p className="text-sm">{rec}</p>
                       </div>
                     ))}
@@ -324,26 +340,31 @@ export default function AITradingDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {state.portfolio.trades.slice(-10).reverse().map((trade: any, index: number) => (
-                        <tr key={index} className="border-b border-gray-800">
-                          <td className="p-2 font-semibold">{trade.symbol}</td>
-                          <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${
-                              trade.action === 'buy' ? 'bg-green-600' : 'bg-red-600'
-                            }`}>
-                              {trade.action.toUpperCase()}
-                            </span>
-                          </td>
-                          <td className="p-2">{trade.shares}</td>
-                          <td className="p-2">${trade.price.toFixed(2)}</td>
-                          <td className="p-2 text-sm text-gray-400">
-                            {new Date(trade.time).toLocaleTimeString()}
-                          </td>
-                          <td className="p-2 text-sm text-gray-400 max-w-xs truncate">
-                            {trade.reason}
-                          </td>
-                        </tr>
-                      ))}
+                      {state.portfolio.trades
+                        .slice(-10)
+                        .reverse()
+                        .map((trade: any, index: number) => (
+                          <tr key={index} className="border-b border-gray-800">
+                            <td className="p-2 font-semibold">{trade.symbol}</td>
+                            <td className="p-2">
+                              <span
+                                className={`px-2 py-1 rounded text-xs ${
+                                  trade.action === 'buy' ? 'bg-green-600' : 'bg-red-600'
+                                }`}
+                              >
+                                {trade.action.toUpperCase()}
+                              </span>
+                            </td>
+                            <td className="p-2">{trade.shares}</td>
+                            <td className="p-2">${trade.price.toFixed(2)}</td>
+                            <td className="p-2 text-sm text-gray-400">
+                              {new Date(trade.time).toLocaleTimeString()}
+                            </td>
+                            <td className="p-2 text-sm text-gray-400 max-w-xs truncate">
+                              {trade.reason}
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -397,13 +418,11 @@ export default function AITradingDashboard() {
                     <div>
                       <p className="text-sm text-gray-400">Risk Score</p>
                       <div className="flex items-center gap-2">
-                        <Progress 
-                          value={state.analysis.riskAnalysis.riskScore} 
+                        <Progress
+                          value={state.analysis.riskAnalysis.riskScore}
                           className="flex-1 h-3"
                         />
-                        <span className="text-sm">
-                          {state.analysis.riskAnalysis.riskScore}/100
-                        </span>
+                        <span className="text-sm">{state.analysis.riskAnalysis.riskScore}/100</span>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4 text-sm">
@@ -432,9 +451,11 @@ export default function AITradingDashboard() {
                     <div key={strategy.id} className="p-4 bg-gray-800 rounded">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-semibold">{strategy.name}</h4>
-                        <span className={`px-2 py-1 rounded text-xs ${
-                          strategy.status === 'ACTIVE' ? 'bg-green-600' : 'bg-gray-600'
-                        }`}>
+                        <span
+                          className={`px-2 py-1 rounded text-xs ${
+                            strategy.status === 'ACTIVE' ? 'bg-green-600' : 'bg-gray-600'
+                          }`}
+                        >
                           {strategy.status}
                         </span>
                       </div>

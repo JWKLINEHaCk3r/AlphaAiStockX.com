@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -21,11 +20,75 @@ import {
   GitBranch,
 } from 'lucide-react';
 
+interface NeuralAnalysis {
+  marketSentiment?: {
+    overall: number;
+    bullish: number;
+    bearish: number;
+    neutral: number;
+    confidence: number;
+  };
+  volatilityPrediction?: {
+    current: number;
+    predicted: number;
+    trend: string;
+    accuracy: number;
+  };
+  momentumAnalysis?: {
+    shortTerm: string;
+    mediumTerm: string;
+    longTerm: string;
+    strength: number;
+  };
+  riskAssessment?: {
+    level: string;
+    score: number;
+    factors: string[];
+    mitigation: number;
+  };
+}
+
+interface DeepLearningModel {
+  id: number;
+  name: string;
+  type: string;
+  accuracy: number;
+  layers: number;
+  parameters: string;
+  specialty: string;
+  status: string;
+  processing: string;
+}
+
+interface MarketPattern {
+  id: number;
+  name: string;
+  confidence: number;
+  timeframe: string;
+  symbol: string;
+  direction: string;
+  completion: number;
+  target: number;
+  probability: number;
+}
+
+interface NeuralPrediction {
+  symbol: string;
+  neuralScore: number;
+  priceTarget: number;
+  timeframe: string;
+  confidence: number;
+  direction: string;
+  volatility: number;
+  momentum: number;
+  riskLevel: string;
+}
+
 export default function NeuralMarketAnalysis() {
-  const [neuralAnalysis, setNeuralAnalysis] = useState({});
-  const [deepLearningModels, setDeepLearningModels] = useState([]);
-  const [marketPatterns, setMarketPatterns] = useState([]);
-  const [neuralPredictions, setNeuralPredictions] = useState([]);
+  const [neuralAnalysis, setNeuralAnalysis] = useState<NeuralAnalysis>({});
+  const [deepLearningModels, setDeepLearningModels] = useState<DeepLearningModel[]>([]);
+  const [marketPatterns, setMarketPatterns] = useState<MarketPattern[]>([]);
+  const [neuralPredictions, setNeuralPredictions] = useState<NeuralPrediction[]>([]);
 
   useEffect(() => {
     generateNeuralAnalysis();

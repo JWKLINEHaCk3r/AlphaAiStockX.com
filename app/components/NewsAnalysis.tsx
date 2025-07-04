@@ -1,20 +1,37 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Globe, TrendingUp, TrendingDown, Clock, ExternalLink, Brain } from 'lucide-react';
 
+interface NewsArticle {
+  id: number;
+  title: string;
+  summary: string;
+  sentiment: 'bullish' | 'bearish' | 'neutral';
+  confidence: number;
+  impact: 'low' | 'medium' | 'high';
+  source: string;
+  time: string;
+  relevantStocks: string[];
+}
+
+interface SentimentData {
+  bullish: number;
+  bearish: number;
+  neutral: number;
+  avgConfidence: number;
+}
+
 export default function NewsAnalysis() {
-  const [news, setNews] = useState([]);
-  const [sentimentSummary, setSentimentSummary] = useState(null);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [sentimentSummary, setSentimentSummary] = useState<SentimentData | null>(null);
 
   useEffect(() => {
     // Mock news data with AI sentiment analysis
-    const mockNews = [
+    const mockNews: NewsArticle[] = [
       {
         id: 1,
         title: 'Apple Reports Record Q4 Earnings, Beats Expectations',
@@ -92,7 +109,7 @@ export default function NewsAnalysis() {
     });
   }, []);
 
-  const getSentimentColor = sentiment => {
+  const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
       case 'bullish':
         return 'text-green-400';
@@ -103,7 +120,7 @@ export default function NewsAnalysis() {
     }
   };
 
-  const getSentimentIcon = sentiment => {
+  const getSentimentIcon = (sentiment: string) => {
     switch (sentiment) {
       case 'bullish':
         return <TrendingUp className="h-4 w-4" />;
