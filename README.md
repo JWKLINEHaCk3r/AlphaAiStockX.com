@@ -13,6 +13,37 @@
 
 ## 🚀 Quick Start
 
+### Netlify Deployment (Recommended)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy)
+
+**Manual Netlify Setup:**
+1. Connect your GitHub repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `out`
+4. Set Node.js version: `18.19.0`
+5. Deploy!
+
+### Local Development
+```bash
+# Clone the repository
+git clone https://github.com/JWKLINEHaCk3r/AlphaAiStockX.com.git
+cd AlphaAiStockX.com
+
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
 ### Option 1: Direct Deployment
 1. Download all files
 2. Upload to any web hosting service
