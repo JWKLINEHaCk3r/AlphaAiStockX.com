@@ -1,7 +1,0 @@
-# requirements.txt for FastAPI backend
-fastapi
-uvicorn
-pandas
-numpy
-scikit-learn
-torch

@@ -25,3 +25,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python components (backend only, not needed for frontend)
+ai_trader/
+*.py
+requirements.txt
+runtime.txt
+Pipfile*
+__pycache__/

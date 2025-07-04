@@ -15,15 +15,13 @@
   NPM_CONFIG_LEGACY_PEER_DEPS = "true"
   # Disable pnpm if detected
   PNPM_HOME = ""
+  # Disable Python/pip processing
+  PYTHON_VERSION = ""
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Enable Next.js Static HTML Export
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
 [dev]
   command = "npm run dev"

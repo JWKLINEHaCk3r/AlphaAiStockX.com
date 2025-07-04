@@ -1,17 +1,31 @@
 #!/bin/bash
 
-# Netlify Build Script for AlphaAIStockX
+# Netlify Build Script for AlphaAIStockX - Node.js Frontend Only
 # This script ensures proper dependency installation and build process
 
 set -e  # Exit on any error
 
-echo "🚀 Starting AlphaAIStockX build process..."
+echo "🚀 Starting AlphaAIStockX Node.js build process..."
 
 # Print Node.js and npm versions
 echo "📋 Environment Information:"
 echo "Node.js version: $(node --version)"
 echo "npm version: $(npm --version)"
 echo "Current directory: $(pwd)"
+
+# Ensure we're working with a Node.js project only
+echo "🛡️ Verifying Node.js project structure..."
+if [ ! -f "package.json" ]; then
+    echo "❌ package.json not found - this should be a Node.js project"
+    exit 1
+fi
+
+# Remove any Python artifacts that might confuse Netlify
+echo "🧹 Removing Python artifacts..."
+rm -f requirements.txt
+rm -f runtime.txt
+rm -f Pipfile
+rm -f Pipfile.lock
 
 # Clean any existing installations
 echo "🧹 Cleaning previous installations..."
