@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
@@ -21,7 +21,7 @@ import {
   Activity,
   BarChart3,
   Flame,
-  Wolf,
+  Zap,
 } from 'lucide-react';
 import { aiBrainService } from '../../services/ai-brain-service';
 
@@ -342,7 +342,7 @@ My AI brain is currently analyzing market data. While I process the latest intel
           onClick={() => setIsOpen(true)}
           className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 rounded-full w-20 h-20 shadow-2xl border-2 border-orange-400/30 animate-pulse"
         >
-          <Wolf className="h-8 w-8 text-white" />
+          <Zap className="h-8 w-8 text-white" />
         </Button>
       </div>
     );
@@ -354,7 +354,7 @@ My AI brain is currently analyzing market data. While I process the latest intel
         <CardHeader className="bg-gradient-to-r from-orange-600 to-red-700 text-white p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Wolf className="h-8 w-8 mr-3 text-orange-400 animate-pulse" />
+              <Zap className="h-8 w-8 mr-3 text-orange-400 animate-pulse" />
               <div>
                 <CardTitle className="text-lg font-bold">Pack Leader AI</CardTitle>
                 <div className="flex items-center space-x-2 mt-1">
@@ -390,7 +390,7 @@ My AI brain is currently analyzing market data. While I process the latest intel
                 >
                   {message.type === 'ai' && (
                     <div className="flex items-center space-x-2 mb-2">
-                      <Wolf className="h-4 w-4 text-orange-400" />
+                      <Zap className="h-4 w-4 text-orange-400" />
                       <span className="text-orange-400 font-semibold text-sm">Pack Leader</span>
                       {message.mood && (
                         <Badge
@@ -414,7 +414,7 @@ My AI brain is currently analyzing market data. While I process the latest intel
               <div className="flex justify-start">
                 <div className="bg-gradient-to-r from-orange-800/60 to-red-800/60 p-4 rounded-lg border border-orange-500/30">
                   <div className="flex items-center space-x-2">
-                    <Wolf className="h-4 w-4 text-orange-400 animate-pulse" />
+                    <Zap className="h-4 w-4 text-orange-400 animate-pulse" />
                     <span className="text-orange-400 font-semibold text-sm">
                       Pack Leader is analyzing...
                     </span>

@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { useState, useEffect, useCallback } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -28,14 +26,87 @@ import {
   Atom,
 } from 'lucide-react';
 
-export default function AutomatedTradingSystem({ user, membershipLevel }) {
-  const [systemStatus, setSystemStatus] = useState('stopped'); // stopped, running, paused
-  const [tradingCapital, setTradingCapital] = useState(50000);
-  const [moneyMarketBalance, setMoneyMarketBalance] = useState(0);
-  const [totalProfit, setTotalProfit] = useState(0);
-  const [dailyProfit, setDailyProfit] = useState(0);
-  const [activeTrades, setActiveTrades] = useState([]);
-  const [systemSettings, setSystemSettings] = useState({
+// Type definitions
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface Trade {
+  id: string;
+  symbol: string;
+  side: 'buy' | 'sell';
+  quantity: number;
+  entryPrice: number;
+  currentPrice: number;
+  profit: number;
+  profitPercent: number;
+  timestamp: Date;
+  status: 'active' | 'closed';
+  // Additional fields used in the component
+  entryTime?: Date;
+  stopLoss?: number;
+  takeProfit?: number;
+  confidence?: number;
+  strategy?: string;
+  pnl?: number;
+  positionSize?: number;
+}
+
+interface SystemSettings {
+  maxRiskPerTrade: number;
+  maxDailyRisk: number;
+  maxConcurrentTrades: number;
+  profitTarget: number;
+  stopLoss: number;
+  autoScalp: boolean;
+  moneyMarketTransfer: boolean;
+  minProfitForTransfer: number;
+}
+
+interface AIAnalysis {
+  marketCondition?: string;
+  sentiment?: string;
+  volatility?: number;
+  riskLevel?: string;
+}
+
+interface ExecutionMetrics {
+  totalTrades: number;
+  winRate: number;
+  avgProfit: number;
+  maxDrawdown: number;
+  sharpeRatio: number;
+  profitFactor: number;
+}
+
+interface MarketConditions {
+  symbol: string;
+  confidence: number;
+  trend: string;
+  volatility: number;
+  price: number;
+  signal: string;
+  riskLevel: string;
+}
+
+interface AutomatedTradingSystemProps {
+  user: User;
+  membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+}
+
+export default function AutomatedTradingSystem({
+  user,
+  membershipLevel,
+}: AutomatedTradingSystemProps) {
+  const [systemStatus, setSystemStatus] = useState<'stopped' | 'running' | 'paused'>('stopped');
+  const [tradingCapital, setTradingCapital] = useState<number>(50000);
+  const [moneyMarketBalance, setMoneyMarketBalance] = useState<number>(0);
+  const [totalProfit, setTotalProfit] = useState<number>(0);
+  const [dailyProfit, setDailyProfit] = useState<number>(0);
+  const [activeTrades, setActiveTrades] = useState<Trade[]>([]);
+  const [systemSettings, setSystemSettings] = useState<SystemSettings>({
     maxRiskPerTrade: 2.0,
     maxDailyRisk: 5.0,
     maxConcurrentTrades: 5,
@@ -45,16 +116,14 @@ export default function AutomatedTradingSystem({ user, membershipLevel }) {
     moneyMarketTransfer: true,
     minProfitForTransfer: 1000,
   });
-  const [aiAnalysis, setAiAnalysis] = useState({});
-  const [executionMetrics, setExecutionMetrics] = useState({
+  const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis>({});
+  const [executionMetrics, setExecutionMetrics] = useState<ExecutionMetrics>({
     totalTrades: 0,
     winRate: 0,
-    avgWin: 0,
-    avgLoss: 0,
-    profitFactor: 0,
-    sharpeRatio: 0,
+    avgProfit: 0,
     maxDrawdown: 0,
-    executionSpeed: 0,
+    sharpeRatio: 0,
+    profitFactor: 0,
   });
 
   // Premium features check

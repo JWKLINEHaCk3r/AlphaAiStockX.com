@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -21,9 +19,33 @@ import {
   Plus,
 } from 'lucide-react';
 
+import { LucideIcon } from 'lucide-react';
+
+interface Alert {
+  id: number;
+  type: string;
+  icon: LucideIcon;
+  color: string;
+  title: string;
+  symbol: string;
+  message: string;
+  timestamp: Date;
+  priority: string;
+  read: boolean;
+}
+
+interface AlertSettings {
+  priceAlerts: boolean;
+  volumeAlerts: boolean;
+  newsAlerts: boolean;
+  aiSignals: boolean;
+  optionsFlow: boolean;
+  earnings: boolean;
+}
+
 export default function RealTimeAlerts() {
-  const [alerts, setAlerts] = useState([]);
-  const [alertSettings, setAlertSettings] = useState({
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [alertSettings, setAlertSettings] = useState<AlertSettings>({
     priceAlerts: true,
     volumeAlerts: true,
     newsAlerts: true,
@@ -31,7 +53,7 @@ export default function RealTimeAlerts() {
     optionsFlow: true,
     earnings: true,
   });
-  const [customAlerts, setCustomAlerts] = useState([]);
+  const [customAlerts] = useState<Alert[]>([]);
 
   useEffect(() => {
     // Simulate real-time alerts
@@ -88,7 +110,7 @@ export default function RealTimeAlerts() {
     const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'NFLX'];
     const symbol = symbols[Math.floor(Math.random() * symbols.length)];
 
-    const messages = {
+    const messages: Record<string, string[]> = {
       price_breakout: [
         `${symbol} broke above resistance at $${(100 + Math.random() * 400).toFixed(2)}`,
         `${symbol} bullish breakout with strong volume confirmation`,
@@ -133,15 +155,15 @@ export default function RealTimeAlerts() {
     setAlerts(prev => [newAlert, ...prev.slice(0, 19)]); // Keep last 20 alerts
   };
 
-  const dismissAlert = alertId => {
+  const dismissAlert = (alertId: number) => {
     setAlerts(prev => prev.filter(alert => alert.id !== alertId));
   };
 
-  const markAsRead = alertId => {
+  const markAsRead = (alertId: number) => {
     setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
   };
 
-  const getPriorityColor = priority => {
+  const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'high':
         return 'border-red-500/50 bg-red-500/10';

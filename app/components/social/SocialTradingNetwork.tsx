@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -26,11 +24,68 @@ import {
   DollarSign,
 } from 'lucide-react';
 
+// Type definitions for social trading network
+interface Trader {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string;
+  verified: boolean;
+  followers: number;
+  winRate: number;
+  totalReturn: number;
+  monthlyReturn: number;
+  copiers: number;
+  riskScore: number;
+  specialty: string;
+  badge: string;
+}
+
+interface SocialPost {
+  id: number;
+  user: {
+    name: string;
+    username: string;
+    avatar: string;
+    verified: boolean;
+  };
+  content: string;
+  timestamp: Date;
+  likes: number;
+  comments: number;
+  shares: number;
+  trade?: {
+    symbol: string;
+    action: string;
+    profit: number;
+    amount: number;
+  };
+}
+
+interface LeaderboardEntry {
+  rank: number;
+  name: string;
+  return: number;
+  badge: string;
+}
+
+interface SocialStats {
+  totalCopiers: number;
+  totalVolume: number;
+  averageReturn: number;
+  activeTraders: number;
+}
+
 export default function SocialTradingNetwork() {
-  const [topTraders, setTopTraders] = useState([]);
-  const [socialFeed, setSocialFeed] = useState([]);
-  const [copyTradingStats, setCopyTradingStats] = useState({});
-  const [leaderboard, setLeaderboard] = useState([]);
+  const [topTraders, setTopTraders] = useState<Trader[]>([]);
+  const [socialFeed, setSocialFeed] = useState<SocialPost[]>([]);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [socialStats, setSocialStats] = useState<SocialStats>({
+    totalCopiers: 0,
+    totalVolume: 0,
+    averageReturn: 0,
+    activeTraders: 0,
+  });
 
   useEffect(() => {
     initializeTopTraders();
@@ -169,12 +224,11 @@ export default function SocialTradingNetwork() {
   };
 
   const updateCopyTradingStats = () => {
-    setCopyTradingStats({
+    setSocialStats({
       totalCopiers: 15847,
       totalVolume: 247500000,
       averageReturn: 18.7,
-      successRate: 87.3,
-      activeTrades: 2847,
+      activeTraders: 2847,
     });
   };
 
@@ -190,7 +244,7 @@ export default function SocialTradingNetwork() {
     setLeaderboard(leaders);
   };
 
-  const getBadgeColor = badge => {
+  const getBadgeColor = (badge: string) => {
     switch (badge) {
       case 'Diamond':
         return 'from-cyan-400 to-blue-500';
@@ -232,7 +286,7 @@ export default function SocialTradingNetwork() {
             <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-400/30 text-center">
               <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-blue-400">
-                {copyTradingStats.totalCopiers?.toLocaleString()}
+                {socialStats.totalCopiers?.toLocaleString()}
               </div>
               <p className="text-gray-400 text-sm">Active Copiers</p>
             </div>
@@ -240,7 +294,7 @@ export default function SocialTradingNetwork() {
             <div className="p-4 bg-green-500/10 rounded-lg border border-green-400/30 text-center">
               <DollarSign className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">
-                ${(copyTradingStats.totalVolume / 1000000)?.toFixed(0)}M
+                ${(socialStats.totalVolume / 1000000)?.toFixed(0)}M
               </div>
               <p className="text-gray-400 text-sm">Copy Volume</p>
             </div>
@@ -248,7 +302,7 @@ export default function SocialTradingNetwork() {
             <div className="p-4 bg-yellow-500/10 rounded-lg border border-yellow-400/30 text-center">
               <TrendingUp className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-yellow-400">
-                {copyTradingStats.averageReturn?.toFixed(1)}%
+                {socialStats.averageReturn?.toFixed(1)}%
               </div>
               <p className="text-gray-400 text-sm">Avg Return</p>
             </div>
@@ -256,7 +310,7 @@ export default function SocialTradingNetwork() {
             <div className="p-4 bg-purple-500/10 rounded-lg border border-purple-400/30 text-center">
               <Target className="h-8 w-8 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">
-                {copyTradingStats.successRate?.toFixed(1)}%
+                {socialStats.successRate?.toFixed(1)}%
               </div>
               <p className="text-gray-400 text-sm">Success Rate</p>
             </div>
@@ -264,7 +318,7 @@ export default function SocialTradingNetwork() {
             <div className="p-4 bg-cyan-500/10 rounded-lg border border-cyan-400/30 text-center">
               <Zap className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-cyan-400">
-                {copyTradingStats.activeTrades?.toLocaleString()}
+                {socialStats.activeTrades?.toLocaleString()}
               </div>
               <p className="text-gray-400 text-sm">Active Trades</p>
             </div>

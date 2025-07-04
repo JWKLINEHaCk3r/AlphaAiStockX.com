@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -8,15 +8,27 @@ import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import { Shield, AlertTriangle, TrendingDown, Activity, Target } from 'lucide-react';
 
-export default function RiskControls({
-  botSettings,
-  setBotSettings,
-  botStats,
-}: {
-  botSettings: any;
-  setBotSettings: any;
-  botStats: any;
-}) {
+interface BotSettings {
+  maxDailyLoss: number;
+  maxDrawdown: number;
+  maxPositionSize: number;
+  riskPerTrade: number;
+  emergencyStop: boolean;
+}
+
+interface BotStats {
+  dailyPnL: number;
+  accountBalance: number;
+  activeTrades: number;
+}
+
+interface RiskControlsProps {
+  botSettings: BotSettings;
+  setBotSettings: (settings: BotSettings) => void;
+  botStats: BotStats;
+}
+
+export default function RiskControls({ botSettings, setBotSettings, botStats }: RiskControlsProps) {
   const riskMetrics = {
     currentDrawdown: (Math.abs(botStats.dailyPnL) / botStats.accountBalance) * 100,
     dailyLossUsed: Math.abs(Math.min(0, botStats.dailyPnL)),
@@ -30,7 +42,7 @@ export default function RiskControls({
     ],
   };
 
-  const updateSetting = (key, value) => {
+  const updateSetting = (key: keyof BotSettings, value: number | boolean) => {
     setBotSettings(prev => ({ ...prev, [key]: value }));
   };
 

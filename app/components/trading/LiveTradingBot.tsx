@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -22,13 +22,45 @@ import {
   Timer,
 } from 'lucide-react';
 
+// Type definitions for live trading bot
+interface Trade {
+  id: number;
+  symbol: string;
+  side: 'BUY' | 'SELL';
+  quantity: number;
+  entryPrice: number;
+  currentPrice: number;
+  strategy: string;
+  confidence: number;
+  timestamp: Date;
+  pnl: number;
+  status: 'OPEN' | 'CLOSED' | 'PENDING';
+  stopLoss: number;
+  takeProfit: number;
+}
+
+interface TradeHistoryItem {
+  id: number;
+  symbol: string;
+  side: 'BUY' | 'SELL';
+  quantity: number;
+  entryPrice: number;
+  exitPrice: number;
+  strategy: string;
+  confidence: number;
+  entryTime: Date;
+  exitTime: Date;
+  pnl: number;
+  status: 'COMPLETED' | 'STOPPED';
+}
+
 export default function LiveTradingBot() {
   const [botStatus, setBotStatus] = useState('stopped'); // stopped, running, paused
   const [accountBalance, setAccountBalance] = useState(50000);
   const [totalPnL, setTotalPnL] = useState(0);
   const [dailyPnL, setDailyPnL] = useState(0);
-  const [activeTrades, setActiveTrades] = useState([]);
-  const [tradeHistory, setTradeHistory] = useState([]);
+  const [activeTrades, setActiveTrades] = useState<Trade[]>([]);
+  const [tradeHistory, setTradeHistory] = useState<TradeHistoryItem[]>([]);
   const [botStats, setBotStats] = useState({
     totalTrades: 0,
     winRate: 0,
@@ -92,7 +124,7 @@ export default function LiveTradingBot() {
     });
   };
 
-  const executeTrade = (symbol, confidence) => {
+  const executeTrade = (symbol: string, confidence: number) => {
     const side = Math.random() > 0.5 ? 'BUY' : 'SELL';
     const price = 100 + Math.random() * 400;
     const quantity = Math.floor(botSettings.maxPositionSize / price);
@@ -120,7 +152,7 @@ export default function LiveTradingBot() {
     setBotStats(prev => ({ ...prev, totalTrades: prev.totalTrades + 1 }));
   };
 
-  const closeTrade = tradeId => {
+  const closeTrade = (tradeId: number) => {
     const trade = activeTrades.find(t => t.id === tradeId);
     if (!trade) return;
 

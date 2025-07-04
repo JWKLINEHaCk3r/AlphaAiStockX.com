@@ -1,15 +1,60 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { TrendingUp, TrendingDown, Activity, BarChart3 } from 'lucide-react';
 
-export default function TechnicalIndicators({ selectedStock }) {
-  const [indicators, setIndicators] = useState(null);
+// Type definitions
+interface MACDData {
+  value: number;
+  signal: number;
+  histogram: number;
+  trend: 'bullish' | 'bearish';
+}
+
+interface MovingAverages {
+  sma20: number;
+  sma50: number;
+  sma200: number;
+  currentPrice: number;
+}
+
+interface BollingerBands {
+  upper: number;
+  middle: number;
+  lower: number;
+  position: 'upper' | 'middle' | 'lower';
+}
+
+interface Stochastic {
+  k: number;
+  d: number;
+  signal: 'overbought' | 'oversold' | 'neutral';
+}
+
+interface VolumeData {
+  current: number;
+  average: number;
+  trend: 'above_average' | 'below_average' | 'normal';
+}
+
+interface TechnicalIndicatorsData {
+  rsi: number;
+  macd: MACDData;
+  movingAverages: MovingAverages;
+  bollinger: BollingerBands;
+  stochastic: Stochastic;
+  volume: VolumeData;
+}
+
+interface TechnicalIndicatorsProps {
+  selectedStock: string;
+}
+
+export default function TechnicalIndicators({ selectedStock }: TechnicalIndicatorsProps) {
+  const [indicators, setIndicators] = useState<TechnicalIndicatorsData | null>(null);
 
   useEffect(() => {
     // Simulate technical indicator data
@@ -57,13 +102,13 @@ export default function TechnicalIndicators({ selectedStock }) {
     );
   }
 
-  const getRSIColor = rsi => {
+  const getRSIColor = (rsi: number) => {
     if (rsi > 70) return 'text-red-400';
     if (rsi < 30) return 'text-green-400';
     return 'text-yellow-400';
   };
 
-  const getRSISignal = rsi => {
+  const getRSISignal = (rsi: number) => {
     if (rsi > 70) return 'Overbought';
     if (rsi < 30) return 'Oversold';
     return 'Neutral';

@@ -7,12 +7,40 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AdvancedAIAutoTrader } from '../services/ai-auto-trader-enhanced';
 
+interface Portfolio {
+  totalValue: number;
+  positions: Array<{
+    symbol: string;
+    quantity: number;
+    value: number;
+    pnl: number;
+  }>;
+  cash: number;
+}
+
+interface Performance {
+  totalReturn: number;
+  dailyPnL: number;
+  winRate: number;
+  sharpeRatio: number;
+}
+
+interface Analysis {
+  signals: Array<{
+    symbol: string;
+    direction: string;
+    confidence: number;
+  }>;
+  marketCondition: string;
+  volatility: number;
+}
+
 interface DashboardState {
   trader: AdvancedAIAutoTrader | null;
-  portfolio: any;
+  portfolio: Portfolio | null;
   isTrading: boolean;
-  performance: any;
-  analysis: any;
+  performance: Performance | null;
+  analysis: Analysis | null;
   loading: boolean;
   error: string | null;
 }
@@ -28,12 +56,12 @@ export default function AITradingDashboard() {
     error: null,
   });
 
-  const [selectedSymbols, setSelectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
+  const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
   const [riskLevel, setRiskLevel] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
 
   useEffect(() => {
     initializeTrader();
-  }, []);
+  }, [initializeTrader]);
 
   const initializeTrader = async () => {
     try {

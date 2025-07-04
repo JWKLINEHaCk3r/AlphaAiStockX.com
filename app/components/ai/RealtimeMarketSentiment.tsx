@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -113,7 +113,7 @@ export default function RealtimeMarketSentiment() {
 
   const generateSentimentData = () => {
     const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY'];
-    const data = {};
+    const data: SentimentData = {};
 
     symbols.forEach(symbol => {
       data[symbol] = {

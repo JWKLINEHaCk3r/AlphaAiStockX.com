@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -26,11 +26,76 @@ import {
   Brain,
 } from 'lucide-react';
 
+// Type definitions for sports trading
+interface SportsEvent {
+  id: number;
+  type: string;
+  teams: string;
+  time: string;
+  markets: string[];
+  volatility: string;
+  opportunities: number;
+}
+
+interface TradingOpportunity {
+  id: number;
+  eventName: string;
+  sportType: string;
+  marketType: string;
+  bookA: string;
+  bookB: string;
+  oddsA: number;
+  oddsB: number;
+  spreadValue: number;
+  confidence: number;
+  maxStake: number;
+  expectedReturn: number;
+  expiryTime: Date;
+  status: string;
+  profitPotential: number;
+  risk: string;
+}
+
+interface ActiveTrade {
+  id: number;
+  eventName: string;
+  sportType: string;
+  marketType: string;
+  bookA: string;
+  bookB: string;
+  oddsA: number;
+  oddsB: number;
+  spreadValue: number;
+  entryTime: Date;
+  status: string;
+  stake: number;
+  currentPnL: number;
+  expectedPnL: number;
+  confidence: number;
+}
+
+interface ProfitStats {
+  totalProfit: number;
+  dailyProfit: number;
+  winRate: number;
+  avgSpread: number;
+  maxProfit: number;
+  riskRatio: number;
+}
+
+interface ExpandedSections {
+  realTime: boolean;
+  adaptive: boolean;
+  profit: boolean;
+  risk: boolean;
+  interface: boolean;
+}
+
 export default function SportsAlphaTrader() {
-  const [activeEvents, setActiveEvents] = useState([]);
-  const [opportunities, setOpportunities] = useState([]);
-  const [activeTrades, setActiveTrades] = useState([]);
-  const [profitStats, setProfitStats] = useState({
+  const [activeEvents, setActiveEvents] = useState<SportsEvent[]>([]);
+  const [opportunities, setOpportunities] = useState<TradingOpportunity[]>([]);
+  const [activeTrades, setActiveTrades] = useState<ActiveTrade[]>([]);
+  const [profitStats, setProfitStats] = useState<ProfitStats>({
     totalProfit: 0,
     dailyProfit: 0,
     winRate: 0,
@@ -39,7 +104,7 @@ export default function SportsAlphaTrader() {
     riskRatio: 0,
   });
   const [isHunting, setIsHunting] = useState(true);
-  const [expandedSections, setExpandedSections] = useState({
+  const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
     realTime: false,
     adaptive: false,
     profit: false,
@@ -110,10 +175,10 @@ export default function SportsAlphaTrader() {
     return () => clearInterval(interval);
   }, [isHunting]);
 
-  const generateOpportunities = events => {
-    const newOpportunities = [];
+  const generateOpportunities = (events: SportsEvent[]) => {
+    const newOpportunities: TradingOpportunity[] = [];
 
-    events.forEach(event => {
+    events.forEach((event: SportsEvent) => {
       const marketTypes = ['Spread', 'Moneyline', 'Total', 'Prop', 'Futures', 'Live'];
       const numOpps = Math.floor(Math.random() * 3) + 1;
 
@@ -164,7 +229,7 @@ export default function SportsAlphaTrader() {
     setOpportunities(newOpportunities.slice(0, 8));
   };
 
-  const executeTrade = (opportunity: any) => {
+  const executeTrade = (opportunity: TradingOpportunity) => {
     const newTrade = {
       id: Date.now(),
       eventName: opportunity.eventName,

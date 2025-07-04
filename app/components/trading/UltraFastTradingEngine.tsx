@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -27,24 +27,82 @@ import {
   Timer,
 } from 'lucide-react';
 
-export default function UltraFastTradingEngine({ user, membershipLevel }) {
-  const [selectedStock, setSelectedStock] = useState('AAPL');
-  const [orderType, setOrderType] = useState('market');
-  const [quantity, setQuantity] = useState(100);
-  const [price, setPrice] = useState(0);
-  const [side, setSide] = useState('buy');
-  const [isExecuting, setIsExecuting] = useState(false);
-  const [executionTime, setExecutionTime] = useState(0);
-  const [recentTrades, setRecentTrades] = useState([]);
-  const [marketData, setMarketData] = useState({});
-  const [aiSignals, setAiSignals] = useState([]);
-  const [autoTradeEnabled, setAutoTradeEnabled] = useState(false);
+// Type definitions
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
 
-  const executionTimeRef = useRef(0);
-  const wsRef = useRef(null);
+interface Trade {
+  id: string;
+  symbol: string;
+  side: 'buy' | 'sell';
+  quantity: number;
+  price: number;
+  timestamp: Date;
+  executionTime: number;
+  status: 'completed' | 'pending' | 'failed';
+}
+
+interface MarketData {
+  [symbol: string]: {
+    price: number;
+    change: number;
+    changePercent: number;
+    volume: number;
+    bid: number;
+    ask: number;
+    timestamp: Date;
+  };
+}
+
+interface AISignal {
+  id: number;
+  symbol: string;
+  action: 'buy' | 'sell';
+  confidence: number;
+  targetPrice: number;
+  timeframe: string;
+  reason: string;
+  timestamp: Date;
+}
+
+interface PremiumFeatures {
+  maxTrades: number | 'unlimited';
+  executionSpeed: string;
+  aiSignals: number | 'unlimited';
+  autoTrade: boolean;
+  advancedOrders: boolean;
+  realTimeData: boolean;
+}
+
+interface UltraFastTradingEngineProps {
+  user: User;
+  membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+}
+
+export default function UltraFastTradingEngine({
+  user,
+  membershipLevel,
+}: UltraFastTradingEngineProps) {
+  const [selectedStock, setSelectedStock] = useState<string>('AAPL');
+  const [orderType, setOrderType] = useState<'market' | 'limit' | 'stop'>('market');
+  const [quantity, setQuantity] = useState<number>(100);
+  const [price, setPrice] = useState<number>(0);
+  const [side, setSide] = useState<'buy' | 'sell'>('buy');
+  const [isExecuting, setIsExecuting] = useState<boolean>(false);
+  const [executionTime, setExecutionTime] = useState<number>(0);
+  const [recentTrades, setRecentTrades] = useState<Trade[]>([]);
+  const [marketData, setMarketData] = useState<MarketData>({});
+  const [aiSignals, setAiSignals] = useState<AISignal[]>([]);
+  const [autoTradeEnabled, setAutoTradeEnabled] = useState<boolean>(false);
+
+  const executionTimeRef = useRef<number>(0);
+  const wsRef = useRef<NodeJS.Timeout | null>(null);
 
   // Premium features based on membership
-  const premiumFeatures = {
+  const premiumFeatures: Record<string, PremiumFeatures> = {
     free: {
       maxTrades: 10,
       executionSpeed: 'standard',
@@ -81,6 +139,101 @@ export default function UltraFastTradingEngine({ user, membershipLevel }) {
 
   const currentFeatures = premiumFeatures[membershipLevel] || premiumFeatures.free;
 
+  const getExecutionTime = useCallback(() => {
+    switch (currentFeatures.executionSpeed) {
+      case 'lightning':
+        return Math.random() * 10 + 5; // 5-15ms
+      case 'ultra-fast':
+        return Math.random() * 50 + 20; // 20-70ms
+      case 'fast':
+        return Math.random() * 100 + 50; // 50-150ms
+      default:
+        return Math.random() * 500 + 200; // 200-700ms
+    }
+  }, [currentFeatures.executionSpeed]);
+
+  const updateMarketData = useCallback(() => {
+    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
+    const newData: MarketData = {};
+
+    stocks.forEach((symbol: string) => {
+      const basePrice = 100 + Math.random() * 400;
+      const change = (Math.random() - 0.5) * 10;
+      newData[symbol] = {
+        price: basePrice,
+        change: change,
+        changePercent: (change / basePrice) * 100,
+        volume: Math.floor(Math.random() * 10000000),
+        bid: basePrice - 0.01,
+        ask: basePrice + 0.01,
+        timestamp: new Date(),
+      };
+    });
+
+    setMarketData(newData);
+    if (selectedStock && newData[selectedStock]) {
+      setPrice(newData[selectedStock].price);
+    }
+  }, [selectedStock]);
+
+  const executeAutoTrade = useCallback(
+    async (signal: AISignal) => {
+      const autoTrade: Trade = {
+        id: Date.now().toString(),
+        symbol: signal.symbol,
+        side: signal.action,
+        quantity: Math.floor(1000 / signal.targetPrice), // $1000 position
+        price: signal.targetPrice,
+        timestamp: new Date(),
+        executionTime: getExecutionTime(),
+        status: 'completed',
+      };
+
+      setRecentTrades((prev: Trade[]) => [autoTrade, ...prev.slice(0, 49)]);
+    },
+    [getExecutionTime]
+  );
+
+  const generateAISignals = useCallback(() => {
+    if (
+      typeof currentFeatures.aiSignals === 'number' &&
+      aiSignals.length >= currentFeatures.aiSignals
+    )
+      return;
+
+    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
+    const signal: AISignal = {
+      id: Date.now(),
+      symbol: stocks[Math.floor(Math.random() * stocks.length)],
+      action: Math.random() > 0.5 ? 'buy' : 'sell',
+      confidence: 75 + Math.random() * 25,
+      targetPrice: 100 + Math.random() * 400,
+      timeframe: ['1m', '5m', '15m', '1h'][Math.floor(Math.random() * 4)],
+      reason: [
+        'Bullish momentum detected',
+        'Support level bounce',
+        'Breakout pattern confirmed',
+        'Volume surge detected',
+        'AI pattern recognition',
+        'Earnings catalyst',
+      ][Math.floor(Math.random() * 6)],
+      timestamp: new Date(),
+    };
+
+    setAiSignals((prev: AISignal[]) => [signal, ...prev.slice(0, 19)]);
+
+    // Auto-execute if enabled and premium member
+    if (autoTradeEnabled && currentFeatures.autoTrade && signal.confidence > 85) {
+      executeAutoTrade(signal);
+    }
+  }, [
+    aiSignals.length,
+    currentFeatures.aiSignals,
+    currentFeatures.autoTrade,
+    autoTradeEnabled,
+    executeAutoTrade,
+  ]);
+
   useEffect(() => {
     // Simulate WebSocket connection for real-time data
     if (currentFeatures.realTimeData) {
@@ -97,96 +250,12 @@ export default function UltraFastTradingEngine({ user, membershipLevel }) {
     return () => {
       if (wsRef.current) clearInterval(wsRef.current);
     };
-  }, [membershipLevel]);
-
-  const updateMarketData = () => {
-    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
-    const newData = {};
-
-    stocks.forEach(symbol => {
-      const basePrice = 100 + Math.random() * 400;
-      const change = (Math.random() - 0.5) * 10;
-      newData[symbol] = {
-        price: basePrice,
-        change: change,
-        changePercent: (change / basePrice) * 100,
-        volume: Math.floor(Math.random() * 10000000),
-        bid: basePrice - 0.01,
-        ask: basePrice + 0.01,
-        lastUpdate: Date.now(),
-      };
-    });
-
-    setMarketData(newData);
-    if (selectedStock && newData[selectedStock]) {
-      setPrice(newData[selectedStock].price);
-    }
-  };
-
-  const generateAISignals = () => {
-    if (aiSignals.length >= currentFeatures.aiSignals && currentFeatures.aiSignals !== 'unlimited')
-      return;
-
-    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
-    const signal = {
-      id: Date.now(),
-      symbol: stocks[Math.floor(Math.random() * stocks.length)],
-      action: Math.random() > 0.5 ? 'BUY' : 'SELL',
-      confidence: 75 + Math.random() * 25,
-      targetPrice: 100 + Math.random() * 400,
-      timeframe: ['1m', '5m', '15m', '1h'][Math.floor(Math.random() * 4)],
-      reason: [
-        'Bullish momentum detected',
-        'Support level bounce',
-        'Breakout pattern confirmed',
-        'Volume surge detected',
-        'AI pattern recognition',
-        'Earnings catalyst',
-      ][Math.floor(Math.random() * 6)],
-      timestamp: new Date(),
-    };
-
-    setAiSignals(prev => [signal, ...prev.slice(0, 19)]);
-
-    // Auto-execute if enabled and premium member
-    if (autoTradeEnabled && currentFeatures.autoTrade && signal.confidence > 85) {
-      executeAutoTrade(signal);
-    }
-  };
-
-  const executeAutoTrade = async signal => {
-    const autoTrade = {
-      id: Date.now(),
-      symbol: signal.symbol,
-      side: signal.action.toLowerCase(),
-      quantity: Math.floor(1000 / signal.targetPrice), // $1000 position
-      price: signal.targetPrice,
-      type: 'auto',
-      executionTime: getExecutionTime(),
-      timestamp: new Date(),
-      aiConfidence: signal.confidence,
-    };
-
-    setRecentTrades(prev => [autoTrade, ...prev.slice(0, 49)]);
-  };
-
-  const getExecutionTime = () => {
-    switch (currentFeatures.executionSpeed) {
-      case 'lightning':
-        return Math.random() * 10 + 5; // 5-15ms
-      case 'ultra-fast':
-        return Math.random() * 50 + 20; // 20-70ms
-      case 'fast':
-        return Math.random() * 100 + 50; // 50-150ms
-      default:
-        return Math.random() * 500 + 200; // 200-700ms
-    }
-  };
+  }, [membershipLevel, currentFeatures.realTimeData, updateMarketData, generateAISignals]);
 
   const executeTrade = async () => {
     if (
-      recentTrades.length >= currentFeatures.maxTrades &&
-      currentFeatures.maxTrades !== 'unlimited'
+      typeof currentFeatures.maxTrades === 'number' &&
+      recentTrades.length >= currentFeatures.maxTrades
     ) {
       alert(`Trade limit reached for ${membershipLevel} membership`);
       return;
@@ -199,19 +268,18 @@ export default function UltraFastTradingEngine({ user, membershipLevel }) {
     const execTime = getExecutionTime();
     await new Promise(resolve => setTimeout(resolve, execTime));
 
-    const trade = {
-      id: Date.now(),
+    const trade: Trade = {
+      id: Date.now().toString(),
       symbol: selectedStock,
       side,
       quantity,
       price: orderType === 'market' ? marketData[selectedStock]?.price || price : price,
-      type: orderType,
-      executionTime: execTime,
       timestamp: new Date(),
-      status: 'filled',
+      executionTime: execTime,
+      status: 'completed',
     };
 
-    setRecentTrades(prev => [trade, ...prev.slice(0, 49)]);
+    setRecentTrades((prev: Trade[]) => [trade, ...prev.slice(0, 49)]);
     setExecutionTime(execTime);
     setIsExecuting(false);
   };
@@ -297,7 +365,10 @@ export default function UltraFastTradingEngine({ user, membershipLevel }) {
                 </div>
                 <div className="space-y-2">
                   <label className="text-white text-sm font-medium">Side</label>
-                  <Select value={side} onValueChange={setSide}>
+                  <Select
+                    value={side}
+                    onValueChange={(value: string) => setSide(value as 'buy' | 'sell')}
+                  >
                     <SelectTrigger className="bg-black/20 border-cyan-500/30 text-white">
                       <SelectValue />
                     </SelectTrigger>
@@ -322,7 +393,12 @@ export default function UltraFastTradingEngine({ user, membershipLevel }) {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-white text-sm font-medium">Order Type</label>
-                  <Select value={orderType} onValueChange={setOrderType}>
+                  <Select
+                    value={orderType}
+                    onValueChange={(value: string) =>
+                      setOrderType(value as 'market' | 'limit' | 'stop')
+                    }
+                  >
                     <SelectTrigger className="bg-black/20 border-cyan-500/30 text-white">
                       <SelectValue />
                     </SelectTrigger>

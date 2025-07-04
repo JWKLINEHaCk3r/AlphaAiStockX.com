@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
@@ -10,8 +10,63 @@ interface AIInsightsProps {
   selectedStock: string;
 }
 
+interface Sentiment {
+  bullish: number;
+  bearish: number;
+  neutral: number;
+}
+
+interface TechnicalAnalysis {
+  rsi: number;
+  macd: string;
+  movingAverage: string;
+  support: number;
+  resistance: number;
+  bollinger?: string;
+}
+
+interface FundamentalAnalysis {
+  peRatio: number;
+  pbRatio: number;
+  debtToEquity: number;
+  roe: number;
+  revenueGrowth: number;
+}
+
+interface RiskFactor {
+  factor: string;
+  severity: string;
+  level: string;
+  impact: number;
+}
+
+interface MarketCatalyst {
+  event: string;
+  impact: string;
+  probability: number;
+  date: string;
+}
+
+interface Prediction {
+  timeframe: string;
+  direction: string;
+  probability: number;
+  target: number;
+  priceTarget: number;
+}
+
+interface AIInsightsData {
+  overallScore: number;
+  sentiment: Sentiment;
+  technicalAnalysis: TechnicalAnalysis;
+  fundamentalAnalysis: FundamentalAnalysis;
+  aiPredictions: Prediction[];
+  riskFactors: RiskFactor[];
+  marketCatalysts: MarketCatalyst[];
+}
+
 export default function AIInsights({ selectedStock }: AIInsightsProps) {
-  const [insights, setInsights] = useState(null);
+  const [insights, setInsights] = useState<AIInsightsData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,30 +99,33 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             timeframe: '1 Week',
             direction: 'bullish',
             probability: 72,
+            target: 182.5,
             priceTarget: 182.5,
           },
           {
             timeframe: '1 Month',
             direction: 'bullish',
             probability: 68,
+            target: 195.0,
             priceTarget: 195.0,
           },
           {
             timeframe: '3 Months',
             direction: 'neutral',
             probability: 55,
+            target: 175.0,
             priceTarget: 175.0,
           },
         ],
         riskFactors: [
-          { factor: 'Market Volatility', level: 'Medium', impact: 65 },
-          { factor: 'Sector Rotation', level: 'Low', impact: 30 },
-          { factor: 'Economic Indicators', level: 'High', impact: 80 },
+          { factor: 'Market Volatility', severity: 'Medium', level: 'Medium', impact: 65 },
+          { factor: 'Sector Rotation', severity: 'Low', level: 'Low', impact: 30 },
+          { factor: 'Economic Indicators', severity: 'High', level: 'High', impact: 80 },
         ],
-        catalysts: [
-          { event: 'Earnings Report', date: '2024-01-25', impact: 'High' },
-          { event: 'Product Launch', date: '2024-02-15', impact: 'Medium' },
-          { event: 'Fed Meeting', date: '2024-01-31', impact: 'High' },
+        marketCatalysts: [
+          { event: 'Earnings Report', date: '2024-01-25', impact: 'High', probability: 85 },
+          { event: 'Product Launch', date: '2024-02-15', impact: 'Medium', probability: 70 },
+          { event: 'Fed Meeting', date: '2024-01-31', impact: 'High', probability: 95 },
         ],
       });
       setLoading(false);
@@ -85,6 +143,17 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             <div className="h-2 bg-purple-500/20 rounded animate-pulse"></div>
             <div className="h-2 bg-purple-500/20 rounded animate-pulse"></div>
           </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!insights) {
+    return (
+      <Card className="bg-black/20 border-red-500/30 backdrop-blur-xl">
+        <CardContent className="p-8 text-center">
+          <AlertTriangle className="h-12 w-12 text-red-400 mx-auto mb-4" />
+          <p className="text-white">Unable to load AI insights for {selectedStock}</p>
         </CardContent>
       </Card>
     );
@@ -208,7 +277,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {insights.aiPredictions.map((prediction, index) => (
+            {insights.aiPredictions.map((prediction: Prediction, index: number) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
@@ -237,7 +306,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {insights.riskFactors.map((risk, index) => (
+            {insights.riskFactors.map((risk: RiskFactor, index: number) => (
               <div key={index} className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-white">{risk.factor}</span>
@@ -270,7 +339,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {insights.catalysts.map((catalyst, index) => (
+            {insights.marketCatalysts.map((catalyst: MarketCatalyst, index: number) => (
               <div key={index} className="p-4 bg-white/5 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-white font-medium">{catalyst.event}</h4>

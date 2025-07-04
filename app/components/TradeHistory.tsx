@@ -1,18 +1,38 @@
 'use client';
 
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 
-export default function TradeHistory({ recentTrades, botStats }) {
-  const formatTime = timestamp => {
+interface Trade {
+  id: string;
+  symbol: string;
+  type: string;
+  quantity: number;
+  price: number;
+  timestamp: number;
+  pnl: number;
+}
+
+interface BotStats {
+  totalTrades: number;
+  winRate: number;
+  totalPnL: number;
+  activeTrades: number;
+}
+
+interface TradeHistoryProps {
+  recentTrades: Trade[];
+  botStats: BotStats;
+}
+
+export default function TradeHistory({ recentTrades, botStats }: TradeHistoryProps) {
+  const formatTime = (timestamp: number) => {
     return new Date(timestamp).toLocaleTimeString();
   };
 
-  const formatCurrency = amount => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

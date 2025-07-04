@@ -13,8 +13,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   CalendarIcon,
   Play,
@@ -27,11 +25,52 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 
+// Type definitions for backtesting engine
+interface BacktestResult {
+  strategy: string;
+  period: string;
+  initialCapital: number;
+  finalCapital: number;
+  totalReturn: number;
+  totalTrades: number;
+  winningTrades: number;
+  losingTrades: number;
+  winRate: number;
+  avgWin: number;
+  avgLoss: number;
+  sharpeRatio: number;
+  maxDrawdown: number;
+  calmarRatio: number;
+  sortinoRatio: number;
+  volatility: number;
+  beta: number;
+  alpha: number;
+  profitFactor: number;
+  maxConsecutiveWins: number;
+  maxConsecutiveLosses: number;
+  avgDaysInTrade: number;
+  totalCommissions: number;
+  netProfit: number;
+  grossProfit: number;
+  grossLoss: number;
+  equityCurve: number[];
+}
+
+interface BacktestSettings {
+  symbol: string;
+  strategy: string;
+  startDate: string;
+  endDate: string;
+  initialCapital: number;
+  commissionPerTrade: number;
+  slippagePercent: number;
+}
+
 export default function BacktestingEngine() {
-  const [backtestResults, setBacktestResults] = useState(null);
+  const [backtestResults, setBacktestResults] = useState<BacktestResult | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [backtestConfig, setBacktestConfig] = useState({
+  const [backtestConfig, setBacktestConfig] = useState<BacktestSettings>({
     strategy: 'ai-pattern-recognition',
     startDate: new Date('2023-01-01'),
     endDate: new Date('2024-01-01'),
@@ -93,7 +132,7 @@ export default function BacktestingEngine() {
     const totalReturn = winningTrades * avgWin + losingTrades * avgLoss;
     const finalCapital = backtestConfig.initialCapital * (1 + totalReturn);
 
-    const results = {
+    const results: BacktestResult = {
       strategy: strategy.name,
       period: `${format(backtestConfig.startDate, 'MMM dd, yyyy')} - ${format(backtestConfig.endDate, 'MMM dd, yyyy')}`,
       initialCapital: backtestConfig.initialCapital,

@@ -2,7 +2,7 @@
 
 import type React from 'react';
 import { useState } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card } from '@/components/ui/button';
 import { Card } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';

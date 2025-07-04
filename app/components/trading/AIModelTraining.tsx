@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -28,12 +26,64 @@ import {
   Square,
 } from 'lucide-react';
 
+// Type definitions
+interface ModelPerformance {
+  precision: number;
+  recall: number;
+  f1Score: number;
+  sharpeRatio: number;
+  maxDrawdown: number;
+  winRate: number;
+}
+
+interface AIModel {
+  id: number;
+  name: string;
+  type: string;
+  status: 'training' | 'deployed' | 'idle' | 'failed';
+  accuracy: number;
+  trainingTime: string;
+  dataPoints: string;
+  lastTrained: string;
+  performance: ModelPerformance;
+  predictions: number;
+  profitability: number;
+}
+
+interface TrainingConfig {
+  modelType: string;
+  datasetSize: string;
+  epochs: number;
+  learningRate: number;
+  batchSize: number;
+  validationSplit: number;
+  features: string[];
+  targetPrediction: string;
+  timeframe: string;
+  lookbackPeriod: number;
+}
+
+interface ModelType {
+  id: string;
+  name: string;
+  accuracy: string;
+  speed: string;
+}
+
+interface PredictionTarget {
+  id: string;
+  name: string;
+  type: string;
+}
+
 export default function AIModelTraining() {
-  const [trainingStatus, setTrainingStatus] = useState('idle'); // idle, training, completed, deployed
-  const [trainingProgress, setTrainingProgress] = useState(0);
-  const [models, setModels] = useState([]);
-  const [selectedModel, setSelectedModel] = useState(null);
-  const [trainingConfig, setTrainingConfig] = useState({
+  const [trainingStatus, setTrainingStatus] = useState<
+    'idle' | 'training' | 'completed' | 'deployed'
+  >('idle');
+  const [trainingProgress, setTrainingProgress] = useState<number>(0);
+  const [models, setModels] = useState<AIModel[]>([]);
+  const [selectedModel, setSelectedModel] = useState<AIModel | null>(null);
+  const [trainingConfig, setTrainingConfig] = useState<TrainingConfig>({
     modelType: 'neural-network',
     datasetSize: '1M',
     epochs: 100,
@@ -46,7 +96,7 @@ export default function AIModelTraining() {
     lookbackPeriod: 60,
   });
 
-  const modelTypes = [
+  const modelTypes: ModelType[] = [
     { id: 'neural-network', name: 'Deep Neural Network', accuracy: '92%', speed: 'Fast' },
     { id: 'lstm', name: 'LSTM Recurrent Network', accuracy: '89%', speed: 'Medium' },
     { id: 'transformer', name: 'Transformer Architecture', accuracy: '94%', speed: 'Slow' },
@@ -55,7 +105,7 @@ export default function AIModelTraining() {
     { id: 'gradient-boost', name: 'Gradient Boosting', accuracy: '87%', speed: 'Very Fast' },
   ];
 
-  const predictionTargets = [
+  const predictionTargets: PredictionTarget[] = [
     { id: 'price-direction', name: 'Price Direction (Up/Down)', type: 'classification' },
     { id: 'price-target', name: 'Price Target', type: 'regression' },
     { id: 'volatility', name: 'Volatility Prediction', type: 'regression' },
@@ -83,7 +133,7 @@ export default function AIModelTraining() {
   }, [trainingStatus]);
 
   const generateModels = () => {
-    const modelList = [
+    const modelList: AIModel[] = [
       {
         id: 1,
         name: 'AlphaAI Stock Predictor v3.2',
@@ -178,17 +228,17 @@ export default function AIModelTraining() {
     setTrainingStatus('idle');
   };
 
-  const deployModel = modelId => {
-    setModels(prev =>
-      prev.map(model =>
+  const deployModel = (modelId: number) => {
+    setModels((prev: AIModel[]) =>
+      prev.map((model: AIModel) =>
         model.id === modelId
-          ? { ...model, status: 'deployed' }
-          : { ...model, status: model.status === 'deployed' ? 'idle' : model.status }
+          ? { ...model, status: 'deployed' as const }
+          : { ...model, status: model.status === 'deployed' ? ('idle' as const) : model.status }
       )
     );
   };
 
-  const getStatusColor = status => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'deployed':
         return 'bg-green-500';
@@ -245,7 +295,7 @@ export default function AIModelTraining() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-600">
-                    {modelTypes.map(type => (
+                    {modelTypes.map((type: ModelType) => (
                       <SelectItem key={type.id} value={type.id}>
                         <div>
                           <div className="font-medium">{type.name}</div>
@@ -271,7 +321,7 @@ export default function AIModelTraining() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-600">
-                    {predictionTargets.map(target => (
+                    {predictionTargets.map((target: PredictionTarget) => (
                       <SelectItem key={target.id} value={target.id}>
                         <div>
                           <div className="font-medium">{target.name}</div>
@@ -467,7 +517,7 @@ export default function AIModelTraining() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {models.map(model => (
+            {models.map((model: AIModel) => (
               <div
                 key={model.id}
                 className="p-4 bg-gray-800/50 rounded-lg border border-red-500/20 hover:border-red-500/40 transition-all"
@@ -532,8 +582,10 @@ export default function AIModelTraining() {
                     {model.status === 'deployed' && (
                       <Button
                         onClick={() =>
-                          setModels(prev =>
-                            prev.map(m => (m.id === model.id ? { ...m, status: 'idle' } : m))
+                          setModels((prev: AIModel[]) =>
+                            prev.map((m: AIModel) =>
+                              m.id === model.id ? { ...m, status: 'idle' as const } : m
+                            )
                           )
                         }
                         variant="outline"

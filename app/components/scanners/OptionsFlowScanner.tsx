@@ -1,17 +1,49 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, AlertTriangle, Zap, BarChart3 } from 'lucide-react';
 
+// Type definitions
+interface OptionsFlow {
+  symbol: string;
+  type: 'CALL' | 'PUT';
+  strike: number;
+  expiry: string;
+  premium: number;
+  volume: number;
+  openInterest: number;
+  sentiment: 'bullish' | 'bearish' | 'neutral';
+  size: 'whale' | 'large' | 'medium' | 'small';
+  timestamp: Date;
+  notionalValue: number;
+}
+
+interface UnusualActivity {
+  symbol: string;
+  type: string;
+  description: string;
+  severity: 'high' | 'medium' | 'low';
+  timestamp: Date;
+  volume?: number;
+  change?: string;
+}
+
+interface DarkPoolData {
+  symbol: string;
+  volume: number;
+  avgPrice: number;
+  trend: 'increasing' | 'decreasing' | 'stable';
+  timestamp: Date;
+  percentage: number;
+}
+
 export default function OptionsFlowScanner() {
-  const [optionsFlow, setOptionsFlow] = useState([]);
-  const [unusualActivity, setUnusualActivity] = useState([]);
-  const [darkPools, setDarkPools] = useState([]);
+  const [optionsFlow, setOptionsFlow] = useState<OptionsFlow[]>([]);
+  const [unusualActivity, setUnusualActivity] = useState<UnusualActivity[]>([]);
+  const [darkPools, setDarkPools] = useState<DarkPoolData[]>([]);
 
   useEffect(() => {
     // Simulate real-time options flow data
@@ -26,80 +58,95 @@ export default function OptionsFlowScanner() {
 
   const generateOptionsFlow = () => {
     const symbols = ['AAPL', 'MSFT', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'AMZN', 'GOOGL'];
-    const flow = symbols.map(symbol => ({
+    const flow: OptionsFlow[] = symbols.map((symbol: string) => ({
       symbol,
-      type: Math.random() > 0.5 ? 'CALL' : 'PUT',
+      type: Math.random() > 0.5 ? ('CALL' as const) : ('PUT' as const),
       strike: Math.round((100 + Math.random() * 400) / 5) * 5,
       expiry: ['1DTE', '2DTE', '1W', '2W', '1M', '2M'][Math.floor(Math.random() * 6)],
       premium: Math.random() * 10 + 0.5,
       volume: Math.floor(Math.random() * 5000) + 100,
       openInterest: Math.floor(Math.random() * 10000) + 500,
-      sentiment: Math.random() > 0.6 ? 'bullish' : Math.random() > 0.3 ? 'bearish' : 'neutral',
-      size: Math.random() > 0.8 ? 'whale' : Math.random() > 0.5 ? 'large' : 'medium',
+      sentiment:
+        Math.random() > 0.6
+          ? ('bullish' as const)
+          : Math.random() > 0.3
+            ? ('bearish' as const)
+            : ('neutral' as const),
+      size:
+        Math.random() > 0.8
+          ? ('whale' as const)
+          : Math.random() > 0.5
+            ? ('large' as const)
+            : ('medium' as const),
       timestamp: new Date(),
       notionalValue: 0,
     }));
 
-    flow.forEach(trade => {
+    flow.forEach((trade: OptionsFlow) => {
       trade.notionalValue = trade.premium * trade.volume * 100;
     });
 
-    setOptionsFlow(flow.sort((a, b) => b.notionalValue - a.notionalValue));
+    setOptionsFlow(
+      flow.sort((a: OptionsFlow, b: OptionsFlow) => b.notionalValue - a.notionalValue)
+    );
   };
 
   const generateUnusualActivity = () => {
-    const activities = [
+    const activities: UnusualActivity[] = [
       {
         symbol: 'AAPL',
-        activity: 'Massive Call Buying',
+        type: 'Massive Call Buying',
         description: '10,000+ calls bought at $180 strike',
-        impact: 'Bullish',
-        confidence: 92,
-        timeDetected: '2 minutes ago',
+        severity: 'high' as const,
+        timestamp: new Date(),
+        volume: 10000,
+        change: '+23%',
       },
       {
         symbol: 'TSLA',
-        activity: 'Put Wall Building',
+        type: 'Put Wall Building',
         description: 'Heavy put volume at $240 strike',
-        impact: 'Support Level',
-        confidence: 87,
-        timeDetected: '5 minutes ago',
+        severity: 'medium' as const,
+        timestamp: new Date(),
+        volume: 5000,
+        change: '+15%',
       },
       {
         symbol: 'NVDA',
-        activity: 'Gamma Squeeze Setup',
+        type: 'Gamma Squeeze Setup',
         description: 'High call OI near current price',
-        impact: 'Bullish',
-        confidence: 78,
-        timeDetected: '8 minutes ago',
+        severity: 'high' as const,
+        timestamp: new Date(),
+        volume: 8000,
+        change: '+18%',
       },
     ];
     setUnusualActivity(activities);
   };
 
   const generateDarkPoolData = () => {
-    const pools = [
+    const pools: DarkPoolData[] = [
       {
         symbol: 'SPY',
-        volume: 2.5,
-        sentiment: 'Accumulation',
-        price: 445.67,
-        size: 'Institutional',
-        timeframe: 'Last Hour',
+        volume: 2500000,
+        avgPrice: 445.67,
+        trend: 'increasing' as const,
+        timestamp: new Date(),
+        percentage: 23.5,
       },
       {
         symbol: 'QQQ',
-        volume: 1.8,
-        sentiment: 'Distribution',
-        price: 378.23,
-        size: 'Whale',
-        timeframe: 'Last 30min',
+        volume: 1800000,
+        avgPrice: 378.23,
+        trend: 'decreasing' as const,
+        timestamp: new Date(),
+        percentage: 18.3,
       },
     ];
     setDarkPools(pools);
   };
 
-  const getSentimentColor = sentiment => {
+  const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
       case 'bullish':
         return 'text-emerald-400';
@@ -110,7 +157,7 @@ export default function OptionsFlowScanner() {
     }
   };
 
-  const getSizeColor = size => {
+  const getSizeColor = (size: string) => {
     switch (size) {
       case 'whale':
         return 'text-purple-400';

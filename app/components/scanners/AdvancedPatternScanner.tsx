@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -27,11 +25,88 @@ import {
   Search,
 } from 'lucide-react';
 
+// Type definitions for advanced pattern scanner
+interface PatternMatch {
+  symbol: string;
+  pattern: string;
+  patternId: string;
+  patternType: string;
+  category: string;
+  currentPrice: number;
+  entryPrice: number;
+  targetPrice: number;
+  stopLoss: number;
+  probability: number;
+  expectedMove: number;
+  riskReward: number;
+  timeframe: string;
+  detectedAt: Date;
+  status: string;
+  confidence: number;
+  volume: number;
+  marketCap: number;
+  sector: string;
+  assetClass: string;
+}
+
+interface TradingSignal {
+  id: number;
+  symbol: string;
+  signal: string;
+  pattern: string;
+  category: string;
+  probability: number;
+  currentPrice: number;
+  entryZone: number[];
+  target: number;
+  stopLoss: number;
+  timeframe: string;
+  detectedAt: Date;
+  status: string;
+  confidence: number;
+  riskReward: number;
+  avgDaysToTarget: number;
+}
+
+interface ScanSettings {
+  timeframe: string;
+  lookbackPeriod: number;
+  minProbability: number;
+  patternTypes: string[];
+  marketCap: string;
+  assetClass: string;
+  minVolume: number;
+}
+
+interface ChartPattern {
+  id: string;
+  name: string;
+  type: string;
+  category: string;
+  avgAccuracy: number;
+  avgMove: number;
+  avgDaysToTarget: number;
+  description: string;
+  bullishBias: boolean;
+  difficultyLevel: string;
+  marketConditions: string[];
+  tradingStrategy: string;
+}
+
+interface PatternStats {
+  [key: string]: {
+    totalDetected: number;
+    successRate: number;
+    avgReturn: number;
+    avgDaysToTarget: number;
+  };
+}
+
 export default function AdvancedPatternScanner() {
-  const [patternResults, setPatternResults] = useState([]);
-  const [historicalAccuracy, setHistoricalAccuracy] = useState({});
-  const [tradingSignals, setTradingSignals] = useState([]);
-  const [scanSettings, setScanSettings] = useState({
+  const [isScanning, setIsScanning] = useState(false);
+  const [patternMatches, setPatternMatches] = useState<PatternMatch[]>([]);
+  const [tradingSignals, setTradingSignals] = useState<TradingSignal[]>([]);
+  const [scanSettings, setScanSettings] = useState<ScanSettings>({
     timeframe: '1D',
     lookbackPeriod: 252,
     minProbability: 70,
@@ -40,6 +115,8 @@ export default function AdvancedPatternScanner() {
     assetClass: 'stocks',
     minVolume: 1000000,
   });
+  const [patternStats, setPatternStats] = useState<PatternStats>({});
+  const [historicalAccuracy, setHistoricalAccuracy] = useState<PatternStats>({});
 
   // 150+ Chart and Candle Patterns
   const chartPatterns = [
@@ -1283,11 +1360,11 @@ export default function AdvancedPatternScanner() {
     return categories;
   };
 
-  const getSignalColor = signal => {
+  const getSignalColor = (signal: string) => {
     return signal === 'BUY' ? 'text-green-400' : 'text-red-400';
   };
 
-  const getStrengthColor = strength => {
+  const getStrengthColor = (strength: string) => {
     switch (strength) {
       case 'Very Strong':
         return 'bg-red-500';

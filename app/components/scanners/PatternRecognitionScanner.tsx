@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -16,8 +14,58 @@ import {
 } from '@/components/ui/select';
 import { Brain, Target, Zap, BarChart3, Activity, Star, ArrowUp, ArrowDown } from 'lucide-react';
 
+// Type definitions for pattern recognition scanner
+interface PatternMatch {
+  symbol: string;
+  pattern: string;
+  patternId: string;
+  patternType: string;
+  currentPrice: number;
+  entryPrice: number;
+  targetPrice: number;
+  stopLoss: number;
+  probability: number;
+  historicalMatches: number;
+  avgMove: number;
+  timeframe: string;
+  strength: string;
+  riskReward: number;
+  detectedAt: Date;
+  confidence: number;
+  status: string;
+}
+
+interface SignalData {
+  id: number;
+  symbol: string;
+  signal: string;
+  pattern: string;
+  probability: number;
+  currentPrice: number;
+  entryZone: number[];
+  target: number;
+  stopLoss: number;
+  timeframe: string;
+  strength: string;
+  riskReward: number;
+  historicalAccuracy: number;
+  lastOccurrence: string;
+  avgDaysToTarget: number;
+}
+
+interface PatternStats {
+  [key: string]: {
+    detected: number;
+    accuracy: number;
+    avgReturn: number;
+  };
+}
+
 export default function PatternRecognitionScanner() {
-  const [patternResults, setPatternResults] = useState([]);
+  const [isScanning, setIsScanning] = useState(false);
+  const [patternMatches, setPatternMatches] = useState<PatternMatch[]>([]);
+  const [signals, setSignals] = useState<SignalData[]>([]);
+  const [patternStats, setPatternStats] = useState<PatternStats>({});
   const [historicalAccuracy, setHistoricalAccuracy] = useState({});
   const [tradingSignals, setTradingSignals] = useState([]);
   const [scanSettings, setScanSettings] = useState({
@@ -186,7 +234,7 @@ export default function PatternRecognitionScanner() {
       };
     });
 
-    setPatternResults(results.filter(r => r.probability >= scanSettings.minProbability));
+    setPatternMatches(results.filter(r => r.probability >= scanSettings.minProbability));
   };
 
   const generateTradingSignals = () => {
@@ -261,7 +309,7 @@ export default function PatternRecognitionScanner() {
       },
     ];
 
-    setTradingSignals(signals);
+    setSignals(signals);
   };
 
   const calculateHistoricalAccuracy = () => {
@@ -279,11 +327,11 @@ export default function PatternRecognitionScanner() {
     setHistoricalAccuracy(accuracy);
   };
 
-  const getSignalColor = signal => {
+  const getSignalColor = (signal: string) => {
     return signal === 'BUY' ? 'text-green-400' : 'text-red-400';
   };
 
-  const getStrengthColor = strength => {
+  const getStrengthColor = (strength: string) => {
     switch (strength) {
       case 'Very Strong':
         return 'bg-green-500';
@@ -399,7 +447,7 @@ export default function PatternRecognitionScanner() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {tradingSignals.map(signal => (
+            {signals.map(signal => (
               <div
                 key={signal.id}
                 className="p-4 bg-gray-800/50 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all"
@@ -480,11 +528,11 @@ export default function PatternRecognitionScanner() {
         <CardHeader>
           <CardTitle className="text-gray-100 flex items-center">
             <BarChart3 className="h-6 w-6 mr-2 text-cyan-400" />
-            Pattern Recognition Results ({patternResults.length})
+            Pattern Recognition Results ({patternMatches.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {patternResults.length === 0 ? (
+          {patternMatches.length === 0 ? (
             <div className="text-center py-8">
               <Brain className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-400">
@@ -493,7 +541,7 @@ export default function PatternRecognitionScanner() {
             </div>
           ) : (
             <div className="space-y-3">
-              {patternResults.map((result, index) => (
+              {patternMatches.map((result, index) => (
                 <div
                   key={index}
                   className="p-4 bg-gray-800/30 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all"

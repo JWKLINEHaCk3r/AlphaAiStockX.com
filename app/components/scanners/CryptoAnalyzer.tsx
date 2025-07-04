@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -17,11 +16,49 @@ import {
   DollarSign,
 } from 'lucide-react';
 
+// Type definitions for crypto analyzer
+interface CryptoData {
+  symbol: string;
+  name: string;
+  price: number;
+  change24h: number;
+  volume24h: number;
+  marketCap: number;
+  aiScore: number;
+  sentiment: string;
+  fearGreedIndex: number;
+  socialVolume: number;
+  whaleActivity: string;
+}
+
+interface DefiMetric {
+  name: string;
+  tvl: number;
+  apy: number;
+  volume24h: number;
+  change24h: number;
+  users24h: number;
+  riskScore: number;
+}
+
+interface NftData {
+  name: string;
+  floorPrice: number;
+  volume24h: number;
+  change24h: number;
+  sales24h: number;
+  holders: number;
+}
+
+interface OnChainMetrics {
+  [key: string]: unknown;
+}
+
 export default function CryptoAnalyzer() {
-  const [cryptoData, setCryptoData] = useState([]);
-  const [defiMetrics, setDefiMetrics] = useState([]);
-  const [nftData, setNftData] = useState([]);
-  const [onChainMetrics, setOnChainMetrics] = useState({});
+  const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
+  const [defiMetrics, setDefiMetrics] = useState<DefiMetric[]>([]);
+  const [nftData, setNftData] = useState<NftData[]>([]);
+  const [onChainMetrics, setOnChainMetrics] = useState<OnChainMetrics>({});
 
   useEffect(() => {
     generateCryptoData();
@@ -112,7 +149,7 @@ export default function CryptoAnalyzer() {
     });
   };
 
-  const getSentimentColor = sentiment => {
+  const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
       case 'bullish':
         return 'text-emerald-400';
@@ -123,7 +160,7 @@ export default function CryptoAnalyzer() {
     }
   };
 
-  const getWhaleActivityColor = activity => {
+  const getWhaleActivityColor = (activity: string) => {
     switch (activity) {
       case 'high':
         return 'text-red-400';

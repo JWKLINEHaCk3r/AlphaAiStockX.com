@@ -1,18 +1,47 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ntent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@/components/ui/button';
-import { Card } from '@/components/ui/button';
+import { Card, CardCoCard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
-export default function StockChart({ selectedStock }) {
+interface StockInfo {
+  symbol: string;
+  price: number;
+  change: number;
+  aiScore: number;
+  volume: string;
+  marketCap: string;
+  pe: number;
+  confidence: number;
+  timeframe: string;
+  direction: string;
+  targetPrice: number;
+}
+
+interface AIFrediction {
+  direction: string;
+  confidence: number;
+  targetPrice: number;
+  timeframe: string;
+}
+
+interface ChartDataPoint {
+  time: number;
+  price: number;
+  volume: number;
+}
+
+interface StockChartProps {
+  selectedStock: string;
+}
+
+export default function StockChart({ selectedStock }: StockChartProps) {
   const [timeframe, setTimeframe] = useState('1D');
-  const [chartData, setChartData] = useState([]);
-  const [stockInfo, setStockInfo] = useState(null);
-  const [aiPrediction, setAiPrediction] = useState(null);
+  const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
+  const [stockInfo, setStockInfo] = useState<StockInfo | null>(null);
+  const [aiPrediction, setAiPrediction] = useState<AIFrediction | null>(null);
 
   useEffect(() => {
     // Simulate real-time stock data
@@ -161,7 +190,7 @@ export default function StockChart({ selectedStock }) {
                 </div>
                 <div className="text-right">
                   <Badge
-                    variant={aiPrediction.direction === 'bullish' ? 'default' : 'destructive'}
+                    variant={aiPrediction.direction === 'bullish' ? 'success' : 'destructive'}
                     className="mb-1"
                   >
                     {aiPrediction.direction.toUpperCase()}
