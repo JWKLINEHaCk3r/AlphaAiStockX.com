@@ -21,15 +21,44 @@ import {
   CheckCircle,
 } from 'lucide-react';
 
+interface EnterprisePlan {
+  id: string;
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  color: string;
+  popular: boolean;
+}
+
+interface CustomQuote {
+  users: number;
+  volume: number;
+  features: string[];
+}
+
+interface WhitelabelFeature {
+  title: string;
+  description: string;
+  icon: React.ComponentType<any>;
+}
+
+interface ComplianceFeature {
+  title: string;
+  status: string;
+  icon: React.ComponentType<any>;
+}
+
 export default function EnterpriseFeatures() {
   const [selectedPlan, setSelectedPlan] = useState('enterprise');
-  const [customQuote, setCustomQuote] = useState({
+  const [customQuote, setCustomQuote] = useState<CustomQuote>({
     users: 1000,
     volume: 10000000,
     features: [],
   });
 
-  const enterprisePlans = [
+  const enterprisePlans: EnterprisePlan[] = [
     {
       id: 'startup',
       name: 'Startup Pro',
@@ -88,7 +117,7 @@ export default function EnterpriseFeatures() {
     },
   ];
 
-  const whitelabelFeatures = [
+  const whitelabelFeatures: WhitelabelFeature[] = [
     {
       title: 'Complete Branding',
       description: 'Your logo, colors, and branding throughout',
@@ -111,7 +140,7 @@ export default function EnterpriseFeatures() {
     },
   ];
 
-  const complianceFeatures = [
+  const complianceFeatures: ComplianceFeature[] = [
     {
       title: 'SOC 2 Type II',
       status: 'Certified',
@@ -153,7 +182,7 @@ export default function EnterpriseFeatures() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {enterprisePlans.map((plan: any) => (
+            {enterprisePlans.map((plan: EnterprisePlan) => (
               <div
                 key={plan.id}
                 className={`relative p-6 rounded-xl border-2 transition-all cursor-pointer ${
@@ -186,7 +215,7 @@ export default function EnterpriseFeatures() {
                 </div>
 
                 <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, index) => (
+                  {plan.features.map((feature: string, index: number) => (
                     <li key={index} className="flex items-center text-gray-300">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
                       {feature}
@@ -219,7 +248,7 @@ export default function EnterpriseFeatures() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {whitelabelFeatures.map((feature, index) => {
+            {whitelabelFeatures.map((feature: WhitelabelFeature, index: number) => {
               const IconComponent = feature.icon;
               return (
                 <div
@@ -288,7 +317,7 @@ export default function EnterpriseFeatures() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {complianceFeatures.map((feature, index) => {
+            {complianceFeatures.map((feature: ComplianceFeature, index: number) => {
               const IconComponent = feature.icon;
               return (
                 <div

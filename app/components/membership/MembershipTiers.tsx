@@ -18,10 +18,42 @@ import {
   Diamond,
 } from 'lucide-react';
 
-export default function MembershipTiers({ currentTier, onUpgrade }) {
+interface MembershipTiersProps {
+  currentTier: string;
+  onUpgrade: (tier: string) => void;
+}
+
+interface TierFeatures {
+  trades: string;
+  executionSpeed: string;
+  aiSignals: string;
+  autoTrade: boolean;
+  advancedOrders: boolean;
+  realTimeData: boolean;
+  portfolioValue: string;
+  support: string;
+  research: string;
+  alerts: string;
+  backtesting: boolean;
+  apiAccess: boolean;
+}
+
+interface Tier {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: number;
+  yearlyPrice: number;
+  icon: React.ComponentType<any>;
+  color: string;
+  features: TierFeatures;
+  popular?: boolean;
+}
+
+export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTiersProps) {
   const [billingCycle, setBillingCycle] = useState('monthly');
 
-  const tiers = [
+  const tiers: Tier[] = [
     {
       id: 'free',
       name: 'Free Trader',
@@ -120,11 +152,11 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     },
   ];
 
-  const getPrice = (tier: any) => {
+  const getPrice = (tier: Tier) => {
     return billingCycle === 'yearly' ? tier.yearlyPrice : tier.monthlyPrice;
   };
 
-  const getSavings = (tier: any) => {
+  const getSavings = (tier: Tier) => {
     if (tier.monthlyPrice === 0) return null;
     const monthly = tier.monthlyPrice * 12;
     const yearly = tier.yearlyPrice;
@@ -133,7 +165,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     return { amount: savings.toFixed(2), percentage };
   };
 
-  const getCardStyles = (tier: any) => {
+  const getCardStyles = (tier: Tier) => {
     const isCurrentTier = currentTier === tier.id;
     const baseStyles = 'relative border-2 transition-all hover:scale-105';
 
@@ -148,7 +180,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }) {
     return `${baseStyles} bg-black/20 border-gray-700/50 hover:border-gray-600/50`;
   };
 
-  const getButtonStyles = (tier: any) => {
+  const getButtonStyles = (tier: Tier) => {
     const isCurrentTier = currentTier === tier.id;
 
     if (isCurrentTier) {

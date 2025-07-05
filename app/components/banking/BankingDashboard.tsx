@@ -157,7 +157,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
               <div>
                 <p className="text-sm text-gray-400">Account Balance</p>
                 <p className="text-3xl font-bold text-green-400">
-                  ${user.balance.toLocaleString()}
+                  ${(user.balance || 0).toLocaleString()}
                 </p>
               </div>
               <DollarSign className="h-8 w-8 text-green-400" />
@@ -183,7 +183,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
               <div>
                 <p className="text-sm text-gray-400">Available to Withdraw</p>
                 <p className="text-3xl font-bold text-purple-400">
-                  ${user.balance.toLocaleString()}
+                  ${(user.balance || 0).toLocaleString()}
                 </p>
               </div>
               <ArrowDownLeft className="h-8 w-8 text-purple-400" />
@@ -311,7 +311,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
                     value={withdrawAmount}
                     onChange={e => setWithdrawAmount(e.target.value)}
                     className="bg-black/20 border-purple-500/30 text-white"
-                    max={user.balance}
+                    max={user.balance || 0}
                   />
                 </div>
 
@@ -321,9 +321,11 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
                       key={amount}
                       variant="outline"
                       size="sm"
-                      onClick={() => setWithdrawAmount(Math.min(amount, user.balance).toString())}
+                      onClick={() =>
+                        setWithdrawAmount(Math.min(amount, user.balance || 0).toString())
+                      }
                       className="border-red-500/30 text-red-400 hover:bg-red-500/20"
-                      disabled={amount > user.balance}
+                      disabled={amount > (user.balance || 0)}
                     >
                       ${amount}
                     </Button>
@@ -331,7 +333,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => setWithdrawAmount(user.balance.toString())}
+                    onClick={() => setWithdrawAmount((user.balance || 0).toString())}
                     className="border-red-500/30 text-red-400 hover:bg-red-500/20"
                   >
                     All
@@ -343,7 +345,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
                   disabled={
                     !withdrawAmount ||
                     Number.parseFloat(withdrawAmount) <= 0 ||
-                    Number.parseFloat(withdrawAmount) > user.balance
+                    Number.parseFloat(withdrawAmount) > (user.balance || 0)
                   }
                   className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700"
                 >

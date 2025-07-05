@@ -88,8 +88,8 @@ export default function BacktestingEngine() {
   const [progress, setProgress] = useState(0);
   const [backtestConfig, setBacktestConfig] = useState<BacktestSettings>({
     strategy: 'ai-pattern-recognition',
-    startDate: '2023-01-01',
-    endDate: '2024-01-01',
+    startDate: new Date('2023-01-01'),
+    endDate: new Date('2024-01-01'),
     initialCapital: 100000,
     symbols: ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'],
     timeframe: '1D',

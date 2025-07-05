@@ -20,6 +20,47 @@ declare global {
   }
 }
 
+interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
+}
+
+interface SpeechRecognitionResult {
+  readonly length: number;
+  item(index: number): SpeechRecognitionAlternative;
+  [index: number]: SpeechRecognitionAlternative;
+  isFinal: boolean;
+}
+
+interface SpeechRecognitionResultList {
+  readonly length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  readonly resultIndex: number;
+  readonly results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onerror: ((this: SpeechRecognition, ev: Event) => any) | null;
+}
+
+declare const SpeechRecognition: {
+  prototype: SpeechRecognition;
+  new (): SpeechRecognition;
+};
+
 export default function AIVoiceAssistant() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -28,31 +69,38 @@ export default function AIVoiceAssistant() {
   const [conversation, setConversation] = useState<ConversationItem[]>([]);
   const [aiPersonality, setAiPersonality] = useState('professional');
 
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [aiThinking, setAiThinking] = useState(false);
+  const [soundWave, setSoundWave] = useState(Array(20).fill(0));
 
   useEffect(() => {
     // Initialize speech recognition
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = true;
-      recognitionRef.current.interimResults = true;
-      recognitionRef.current.lang = 'en-US';
+      const SpeechRecognitionConstructor =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognitionConstructor();
 
-      recognitionRef.current.onresult = (event: any) => {
-        const current = event.resultIndex;
-        const transcript = event.results[current][0].transcript;
-        setTranscript(transcript);
+      if (recognitionRef.current) {
+        recognitionRef.current.continuous = true;
+        recognitionRef.current.interimResults = true;
+        recognitionRef.current.lang = 'en-US';
 
-        if (event.results[current].isFinal) {
-          processVoiceCommand(transcript);
-        }
-      };
+        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+          const current = event.resultIndex;
+          const transcript = event.results[current][0].transcript;
+          setTranscript(transcript);
 
-      recognitionRef.current.onend = () => {
-        setIsListening(false);
-      };
+          if (event.results[current].isFinal) {
+            processVoiceCommand(transcript);
+          }
+        };
+
+        recognitionRef.current.onend = () => {
+          setIsListening(false);
+        };
+      }
     }
 
     // Initialize speech synthesis
@@ -60,12 +108,28 @@ export default function AIVoiceAssistant() {
       synthRef.current = window.speechSynthesis;
     }
 
+    // Simulate connection status
+    setIsConnected(true);
+
     // Add initial greeting
     addToConversation(
       'assistant',
       "Hello! I'm your AI trading assistant. Ask me about market analysis, stock recommendations, or trading strategies."
     );
   }, []);
+
+  // Sound wave animation effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isListening || isSpeaking) {
+      interval = setInterval(() => {
+        setSoundWave(prev => prev.map(() => Math.random() * 100));
+      }, 100);
+    } else {
+      setSoundWave(Array(20).fill(0));
+    }
+    return () => clearInterval(interval);
+  }, [isListening, isSpeaking]);
 
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
@@ -84,9 +148,11 @@ export default function AIVoiceAssistant() {
 
   const processVoiceCommand = async (command: string) => {
     addToConversation('user', command);
+    setAiThinking(true);
 
-    // Simulate AI processing
+    // Simulate AI processing with visual feedback
     const aiResponse = await generateAIResponse(command.toLowerCase());
+    setAiThinking(false);
     addToConversation('assistant', aiResponse);
 
     if (voiceEnabled) {
@@ -95,8 +161,8 @@ export default function AIVoiceAssistant() {
   };
 
   const generateAIResponse = async (command: string) => {
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate processing delay with animation
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
     // Enhanced AI response generation
     if (command.includes('price') || command.includes('stock')) {
@@ -104,20 +170,25 @@ export default function AIVoiceAssistant() {
       const stock = stocks[Math.floor(Math.random() * stocks.length)];
       const price = (150 + Math.random() * 200).toFixed(2);
       const change = (Math.random() - 0.5) * 10;
-      return `${stock} is currently trading at $${price}, ${change >= 0 ? 'up' : 'down'} ${Math.abs(change).toFixed(2)}% today.`;
+      return `${stock} is currently trading at $${price}, ${change >= 0 ? 'up' : 'down'} ${Math.abs(change).toFixed(2)}% today. Volume is ${(Math.random() * 50 + 10).toFixed(1)}M shares.`;
     }
 
     if (command.includes('market') || command.includes('outlook')) {
       const sentiment = Math.random() > 0.5 ? 'bullish' : 'bearish';
       const confidence = (70 + Math.random() * 30).toFixed(0);
-      return `Current market sentiment is ${sentiment} with ${confidence}% confidence.`;
+      return `Current market sentiment is ${sentiment} with ${confidence}% confidence. The S&P 500 is showing ${Math.random() > 0.5 ? 'strength' : 'consolidation'} patterns.`;
     }
 
-    // Default responses
+    if (command.includes('portfolio') || command.includes('allocation')) {
+      return `Based on current market conditions, I recommend a balanced allocation: 60% equities, 25% bonds, 10% commodities, and 5% cash. This provides optimal risk-adjusted returns.`;
+    }
+
+    // Default responses with more personality
     const responses = [
-      "That's an excellent question. My AI models are analyzing multiple data points.",
-      'Based on my analysis, I can provide specific recommendations tailored to your goals.',
-      'My algorithms are processing real-time market data to identify opportunities.',
+      'Fascinating question! My neural networks are processing multiple market indicators and sentiment data to provide you with the most accurate analysis.',
+      'Excellent timing on that query. Based on my real-time analysis of over 10,000 data points, I can provide specific recommendations tailored to your investment profile.',
+      'My quantum-enhanced algorithms are analyzing market microstructure, options flow, and institutional positioning to identify alpha opportunities.',
+      "Outstanding question! I'm cross-referencing technical patterns, fundamental metrics, and macro-economic indicators to deliver precise insights.",
     ];
 
     return responses[Math.floor(Math.random() * responses.length)];
@@ -260,6 +331,54 @@ export default function AIVoiceAssistant() {
               <div className="text-white">{transcript}</div>
             </div>
           )}
+
+          {/* Sound Wave Visualization */}
+          {(isListening || isSpeaking) && (
+            <div className="mt-4 p-4 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-lg border border-purple-500/30">
+              <div className="text-center mb-2">
+                <Badge className={`${isListening ? 'bg-red-500' : 'bg-blue-500'} animate-pulse`}>
+                  {isListening ? 'LISTENING...' : 'SPEAKING...'}
+                </Badge>
+              </div>
+              <div className="flex items-center justify-center space-x-1 h-8">
+                {soundWave.map((height, index) => (
+                  <div
+                    key={index}
+                    className={`bg-gradient-to-t ${
+                      isListening ? 'from-red-400 to-red-600' : 'from-blue-400 to-blue-600'
+                    } rounded-full transition-all duration-100`}
+                    style={{
+                      width: '3px',
+                      height: `${Math.max(4, height / 4)}px`,
+                      animation: `pulse ${0.5 + Math.random() * 0.5}s infinite`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* AI Thinking Indicator */}
+          {aiThinking && (
+            <div className="mt-4 p-4 bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-lg border border-purple-500/30">
+              <div className="flex items-center justify-center space-x-3">
+                <div className="relative">
+                  <Brain className="h-8 w-8 text-purple-400 animate-pulse" />
+                  <div className="absolute -top-1 -right-1 h-3 w-3 bg-green-400 rounded-full animate-ping"></div>
+                </div>
+                <div className="text-purple-400 font-medium">AI Processing...</div>
+                <div className="flex space-x-1">
+                  {[0, 1, 2].map(i => (
+                    <div
+                      key={i}
+                      className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"
+                      style={{ animationDelay: `${i * 0.1}s` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -272,7 +391,7 @@ export default function AIVoiceAssistant() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {conversation.map((message: any) => (
+            {conversation.map((message: ConversationItem) => (
               <div
                 key={message.id}
                 className={`p-3 rounded-lg ${

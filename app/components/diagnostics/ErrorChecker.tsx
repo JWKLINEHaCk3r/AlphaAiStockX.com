@@ -340,35 +340,39 @@ export default function ErrorChecker() {
           ) : (
             <CheckCircle className="h-5 w-5 text-green-500" />
           )}
-          <AlertTitle
-            className={
-              errorChecks > 0
-                ? 'text-red-700'
+          <AlertTitle>
+            <span
+              className={
+                errorChecks > 0
+                  ? 'text-red-700'
+                  : warningChecks > 0
+                    ? 'text-yellow-700'
+                    : 'text-green-700'
+              }
+            >
+              {errorChecks > 0
+                ? '❌ Critical Issues Found'
                 : warningChecks > 0
-                  ? 'text-yellow-700'
-                  : 'text-green-700'
-            }
-          >
-            {errorChecks > 0
-              ? '❌ Critical Issues Found'
-              : warningChecks > 0
-                ? '⚠️ Platform Ready with Minor Warnings'
-                : '✅ Platform Ready for Deployment'}
+                  ? '⚠️ Platform Ready with Minor Warnings'
+                  : '✅ Platform Ready for Deployment'}
+            </span>
           </AlertTitle>
-          <AlertDescription
-            className={
-              errorChecks > 0
-                ? 'text-red-600'
+          <AlertDescription>
+            <span
+              className={
+                errorChecks > 0
+                  ? 'text-red-600'
+                  : warningChecks > 0
+                    ? 'text-yellow-600'
+                    : 'text-green-600'
+              }
+            >
+              {errorChecks > 0
+                ? `Found ${errorChecks} critical errors that need to be fixed before deployment.`
                 : warningChecks > 0
-                  ? 'text-yellow-600'
-                  : 'text-green-600'
-            }
-          >
-            {errorChecks > 0
-              ? `Found ${errorChecks} critical errors that need to be fixed before deployment.`
-              : warningChecks > 0
-                ? `Found ${warningChecks} minor warnings. Platform is safe to deploy but consider reviewing warnings.`
-                : 'All checks passed! Your AlphaAIStockX platform is ready for production deployment.'}
+                  ? `Found ${warningChecks} minor warnings. Platform is safe to deploy but consider reviewing warnings.`
+                  : 'All checks passed! Your AlphaAIStockX platform is ready for production deployment.'}
+            </span>
           </AlertDescription>
         </Alert>
       )}

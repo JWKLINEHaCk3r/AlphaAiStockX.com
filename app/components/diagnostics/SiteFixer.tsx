@@ -261,35 +261,39 @@ export default function SiteFixer() {
           ) : (
             <CheckCircle className="h-5 w-5 text-green-500" />
           )}
-          <AlertTitle
-            className={
-              criticalIssues > 0
-                ? 'text-red-700'
+          <AlertTitle>
+            <span
+              className={
+                criticalIssues > 0
+                  ? 'text-red-700'
+                  : needsAttention > 0
+                    ? 'text-yellow-700'
+                    : 'text-green-700'
+              }
+            >
+              {criticalIssues > 0
+                ? '🚨 Critical Issues Found'
                 : needsAttention > 0
-                  ? 'text-yellow-700'
-                  : 'text-green-700'
-            }
-          >
-            {criticalIssues > 0
-              ? '🚨 Critical Issues Found'
-              : needsAttention > 0
-                ? '⚠️ Minor Issues Need Attention'
-                : '✅ Site is Healthy'}
+                  ? '⚠️ Minor Issues Need Attention'
+                  : '✅ Site is Healthy'}
+            </span>
           </AlertTitle>
-          <AlertDescription
-            className={
-              criticalIssues > 0
-                ? 'text-red-600'
+          <AlertDescription>
+            <span
+              className={
+                criticalIssues > 0
+                  ? 'text-red-600'
+                  : needsAttention > 0
+                    ? 'text-yellow-600'
+                    : 'text-green-600'
+              }
+            >
+              {criticalIssues > 0
+                ? `Found ${criticalIssues} critical issues that need immediate attention.`
                 : needsAttention > 0
-                  ? 'text-yellow-600'
-                  : 'text-green-600'
-            }
-          >
-            {criticalIssues > 0
-              ? `Found ${criticalIssues} critical issues that need immediate attention.`
-              : needsAttention > 0
-                ? `Found ${needsAttention} minor issues. Site is functional but can be improved.`
-                : 'All systems are working perfectly! Your site is optimized and ready.'}
+                  ? `Found ${needsAttention} minor issues. Site is functional but can be improved.`
+                  : 'All systems are working perfectly! Your site is optimized and ready.'}
+            </span>
           </AlertDescription>
         </Alert>
       )}
