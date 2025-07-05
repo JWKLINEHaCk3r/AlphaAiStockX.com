@@ -1,9 +1,7 @@
 @import './viewport-fix.css';
-
-/* @tailwind directives require Tailwind CSS processing. Uncomment if using Tailwind CSS build process. */
-/* @tailwind base; */
-/* @tailwind components; */
-/* @tailwind utilities; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -296,4 +294,45 @@ body {
     0 0 32px 8px #0fffc1,
     0 0 64px 16px #7e0fff;
   transform: translateY(-2px) scale(1.03);
+}
+
+/* Glassmorphism effects */
+.glassmorphic {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glassmorphic-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-bg-dark {
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0c0c0c 100%);
+}
+
+/* Animated gradients */
+.animated-gradient {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

@@ -1,4 +1,30 @@
 // Alternative Data Service for unique market insights
+
+interface SatelliteData {
+  yearOverYearChange: number;
+  confidence: number;
+}
+
+interface CreditCardData {
+  yearOverYearChange: number;
+}
+
+interface WebTrafficData {
+  yearOverYearChange: number;
+}
+
+interface SocialSentimentData {
+  overallSentiment: number;
+}
+
+interface MobileAppData {
+  yearOverYearGrowth: number;
+}
+
+interface GeolocationData {
+  yearOverYearChange: number;
+}
+
 export class AlternativeDataService {
   private static instance: AlternativeDataService;
   private dataSources: Map<string, any> = new Map();
@@ -668,12 +694,12 @@ export class AlternativeDataService {
   }
 
   private calculateAlternativeSignal(
-    satellite,
-    creditCard,
-    webTraffic,
-    socialSentiment,
-    mobileApp,
-    geolocation
+    satellite: SatelliteData | null,
+    creditCard: CreditCardData | null,
+    webTraffic: WebTrafficData | null,
+    socialSentiment: SocialSentimentData | null,
+    mobileApp: MobileAppData | null,
+    geolocation: GeolocationData | null
   ): any {
     // Calculate a combined signal from all alternative data sources
     let bullishFactors = 0;

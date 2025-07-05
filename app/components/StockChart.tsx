@@ -125,7 +125,7 @@ export default function StockChart({ selectedStock }: StockChartProps) {
       <CardContent>
         {/* Timeframe Selector */}
         <div className="flex space-x-2 mb-6">
-          {timeframes.map((tf: any) => (
+          {timeframes.map((tf: string) => (
             <Button
               key={tf}
               variant={timeframe === tf ? 'default' : 'outline'}

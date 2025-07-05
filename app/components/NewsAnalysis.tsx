@@ -178,7 +178,7 @@ export default function NewsAnalysis() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {news.map((article: any) => (
+          {news.map((article: NewsArticle) => (
             <div
               key={article.id}
               className="p-4 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 transition-all"
@@ -201,17 +201,17 @@ export default function NewsAnalysis() {
                     {getSentimentIcon(article.sentiment)}
                     <span className="font-medium capitalize">{article.sentiment}</span>
                   </div>
-                  <Badge variant="outline" className="text-xs">
+                  <Badge className="text-xs border border-gray-500/30 text-gray-400">
                     {article.confidence}% confidence
                   </Badge>
                   <Badge
-                    variant={
+                    className={`text-xs ${
                       article.impact === 'high'
-                        ? 'destructive'
+                        ? 'bg-red-500/20 text-red-400 border-red-500/30'
                         : article.impact === 'medium'
-                          ? 'secondary'
-                          : 'default'
-                    }
+                          ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                          : 'bg-green-500/20 text-green-400 border-green-500/30'
+                    }`}
                   >
                     {article.impact} impact
                   </Badge>
@@ -222,7 +222,7 @@ export default function NewsAnalysis() {
                     {article.source} • {article.time}
                   </p>
                   <div className="flex space-x-1 mt-1">
-                    {article.relevantStocks.slice(0, 3).map((stock: any) => (
+                    {article.relevantStocks.slice(0, 3).map((stock: string) => (
                       <Badge key={stock} variant="outline" className="text-xs">
                         {stock}
                       </Badge>

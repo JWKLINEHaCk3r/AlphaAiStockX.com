@@ -56,6 +56,7 @@ export default function StockChart3D({ data }: StockChart3DProps) {
       <Canvas shadows dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[60, 40, 60]} />
         <ambientLight intensity={0.7} />
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <directionalLight position={[10, 20, 10]} intensity={1.2} />
         <Line
           points={chartData as [number, number, number][]}

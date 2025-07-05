@@ -7,19 +7,28 @@ export function Switch({
   checked,
   onCheckedChange,
   className,
+  disabled = false,
 }: {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
   className?: string;
+  disabled?: boolean;
 }) {
   return (
     <button
       type="button"
       role="switch"
       aria-checked={checked}
-      onClick={() => onCheckedChange(!checked)}
+      disabled={disabled}
+      onClick={() => !disabled && onCheckedChange(!checked)}
       className={cn(
-        `relative inline-flex h-6 w-12 items-center rounded-full transition-colors focus:outline-none ${checked ? 'bg-fuchsia-600' : 'bg-slate-600'}`,
+        `relative inline-flex h-6 w-12 items-center rounded-full transition-colors focus:outline-none ${
+          disabled
+            ? 'bg-gray-400 cursor-not-allowed opacity-50'
+            : checked
+              ? 'bg-fuchsia-600'
+              : 'bg-slate-600'
+        }`,
         className
       )}
     >

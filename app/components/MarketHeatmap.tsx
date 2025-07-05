@@ -29,7 +29,7 @@ export default function MarketHeatmap() {
       'Telecom',
     ];
 
-    const sectorData = sectorNames.map((name: any) => ({
+    const sectorData = sectorNames.map((name: string) => ({
       name,
       change: (Math.random() - 0.5) * 8,
       marketCap: Math.random() * 500 + 100,

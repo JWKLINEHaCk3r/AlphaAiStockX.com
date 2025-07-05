@@ -34,12 +34,27 @@ interface AITradingAdvisorProps {
   className?: string;
 }
 
+interface TradingSignal {
+  type: 'BUY' | 'SELL';
+  strength: number;
+  indicator: string;
+  message: string;
+  confidence: number;
+}
+
+interface EntryExitPoint {
+  price: number;
+  confidence: number;
+  reasoning: string;
+  riskLevel: string;
+}
+
 interface StockData {
   symbol: string;
-  name: any;
-  sector: any;
-  currentPrice: any;
-  volume?: any;
+  name: string;
+  sector: string;
+  currentPrice: number;
+  volume?: number;
   buyScore: {
     overall: number;
     rating: string;
@@ -57,10 +72,29 @@ interface StockData {
   performance: any;
 }
 
+interface StockAnalysis {
+  stock: any;
+  currentPrice: any;
+  historical: any;
+  realTimeData: any;
+  patterns: any;
+  volumeAnalysis: any;
+  metrics: any;
+  tradingSignals?: TradingSignal[];
+  entryExitPoints?: {
+    entry: EntryExitPoint[];
+    exit: EntryExitPoint[];
+  };
+  marketClassification: any;
+  recommendation: any;
+  performanceSinceIPO?: any;
+  priceTargets?: any;
+}
+
 export default function AITradingAdvisor({ className = '' }: AITradingAdvisorProps) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedStock, setSelectedStock] = useState('AAPL');
-  const [stockAnalysis, setStockAnalysis] = useState<any>(null);
+  const [stockAnalysis, setStockAnalysis] = useState<StockAnalysis | null>(null);
   const [allStocks, setAllStocks] = useState<StockData[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -274,7 +308,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {allStocks.slice(0, 5).map((stock: any) => (
+                  {allStocks.slice(0, 5).map((stock: StockData) => (
                     <div
                       key={stock.symbol}
                       className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
@@ -372,7 +406,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                   />
                 </div>
                 <div className="flex gap-2">
-                  {['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'].map((symbol: any) => (
+                  {['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'].map((symbol: string) => (
                     <Button
                       key={symbol}
                       variant={selectedStock === symbol ? 'default' : 'outline'}
@@ -751,7 +785,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {stockAnalysis.tradingSignals.map((signal: any, index: number) => (
+                    {stockAnalysis.tradingSignals?.map((signal: TradingSignal, index: number) => (
                       <div
                         key={index}
                         className={`p-4 rounded-lg border-l-4 ${
@@ -812,7 +846,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Entry Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints.entry.map((point: any, index: number) => (
+                        {stockAnalysis.entryExitPoints?.entry.map((point: EntryExitPoint, index: number) => (
                           <div
                             key={index}
                             className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
@@ -842,7 +876,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Exit Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints.exit.map((point: any, index: number) => (
+                        {stockAnalysis.entryExitPoints?.exit.map((point: EntryExitPoint, index: number) => (
                           <div
                             key={index}
                             className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"
@@ -972,7 +1006,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {allStocks.map((stock: any) => (
+                {allStocks.map((stock: StockData) => (
                   <div
                     key={stock.symbol}
                     className="p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer"

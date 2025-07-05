@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { RefreshCw, AlertTriangle } from 'lucide-react';
 

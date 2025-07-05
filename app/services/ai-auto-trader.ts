@@ -290,9 +290,18 @@ export class AdvancedAIAutoTrader {
       },
       portfolioAnalysis: {
         totalValue: this.portfolio.totalValue,
+        totalPnL: this.portfolio.totalReturn,
         totalCash: this.portfolio.cash,
         totalEquity: this.portfolio.totalValue - this.portfolio.cash,
-        positions: this.portfolio.positions,
+        positions: Object.entries(this.portfolio.holdings).map(([symbol, holding]) => ({
+          symbol,
+          shares: holding.shares,
+          avgPrice: holding.avgPrice,
+          currentPrice: 0,
+          currentValue: 0,
+          pnl: 0,
+          pnlPercent: 0,
+        })),
         dayChange: 0,
         dayChangePercent: 0,
         allocation: {},
@@ -307,6 +316,11 @@ export class AdvancedAIAutoTrader {
           avgLoss: -0.015,
           profitFactor: 1.33,
         },
+        diversification: {
+          sectors: {},
+          risk: 'MEDIUM' as const,
+        },
+        recommendations: [],
       },
       recommendations: ['Unable to generate AI analysis', 'Monitor market manually'],
     };
@@ -445,7 +459,23 @@ export class AdvancedAIAutoTrader {
     const analysis: PortfolioAnalysis = {
       totalValue: 0,
       totalPnL: 0,
+      totalCash: this.portfolio.cash,
+      totalEquity: 0,
       positions: [],
+      dayChange: 0,
+      dayChangePercent: 0,
+      allocation: {},
+      metrics: {
+        totalReturn: 0,
+        annualizedReturn: 0,
+        volatility: 0,
+        sharpeRatio: 0,
+        maxDrawdown: 0,
+        winRate: 0,
+        avgWin: 0,
+        avgLoss: 0,
+        profitFactor: 0,
+      },
       diversification: { sectors: {}, risk: 'MEDIUM' },
       recommendations: [],
     };
@@ -565,18 +595,26 @@ interface PerformanceMetrics {
   lastUpdated: Date;
 }
 
-interface AIAnalysisResult {
-  predictions: AIModelPrediction[];
-  signals: TradingSignal[];
-  portfolioAnalysis: PortfolioAnalysis;
-  riskAnalysis: RiskAnalysis;
-  recommendations: string[];
-}
-
 interface PortfolioAnalysis {
   totalValue: number;
   totalPnL: number;
+  totalCash: number;
+  totalEquity: number;
   positions: PositionAnalysis[];
+  dayChange: number;
+  dayChangePercent: number;
+  allocation: Record<string, any>;
+  metrics: {
+    totalReturn: number;
+    annualizedReturn: number;
+    volatility: number;
+    sharpeRatio: number;
+    maxDrawdown: number;
+    winRate: number;
+    avgWin: number;
+    avgLoss: number;
+    profitFactor: number;
+  };
   diversification: {
     sectors: Record<string, number>;
     risk: 'LOW' | 'MEDIUM' | 'HIGH';

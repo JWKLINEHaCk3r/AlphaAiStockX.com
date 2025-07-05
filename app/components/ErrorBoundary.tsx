@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 interface ErrorBoundaryState {

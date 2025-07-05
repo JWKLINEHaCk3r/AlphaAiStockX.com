@@ -256,7 +256,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
               AlphaAIStockX
             </h1>
             <p className="text-2xl text-slate-300 mb-6 max-w-4xl mx-auto">
-              The World's Most Advanced AI-Powered Trading & Education Platform
+              The World&apos;s Most Advanced AI-Powered Trading & Education Platform
             </p>
             <p className="text-lg text-slate-400 mb-8 max-w-3xl mx-auto">
               Combining cutting-edge artificial intelligence, quantum computing, and decades of Wall
@@ -297,7 +297,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
       {/* Platform Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {Object.entries(platformStats).map(([key, value]) => {
-          const statConfig: Record<string, { icon: any; label: string; color: string }> = {
+          const statConfig: Record<string, { icon: React.ComponentType<any>; label: string; color: string }> = {
             totalUsers: { icon: Users, label: 'Active Users', color: 'text-blue-400' },
             successRate: { icon: Target, label: 'Success Rate', color: 'text-green-400' },
             avgReturns: { icon: TrendingUp, label: 'Avg Returns', color: 'text-purple-400' },
@@ -453,7 +453,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
                       <div className="text-slate-400 text-sm">{story.timeframe}</div>
                     </div>
                   </div>
-                  <p className="text-slate-300 italic">"{story.story}"</p>
+                  <p className="text-slate-300 italic">&quot;{story.story}&quot;</p>
                   <div className="flex items-center gap-1 mt-3">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
@@ -471,7 +471,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
         <CardHeader>
           <CardTitle className="text-3xl text-white text-center mb-2">Our Journey</CardTitle>
           <CardDescription className="text-center text-lg text-slate-300">
-            From startup to the world's leading AI trading platform
+            From startup to the world&apos;s leading AI trading platform
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -504,7 +504,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
             Why AlphaAIStockX is Amazing
           </CardTitle>
           <CardDescription className="text-center text-lg text-slate-300">
-            The reasons why we're revolutionizing the trading industry
+            The reasons why we&apos;re revolutionizing the trading industry
           </CardDescription>
         </CardHeader>
         <CardContent>

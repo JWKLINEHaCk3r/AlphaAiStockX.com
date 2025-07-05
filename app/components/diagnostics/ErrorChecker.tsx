@@ -15,7 +15,7 @@ const CardHeader = ({
   </div>
 );
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   CheckCircle,
   AlertTriangle,

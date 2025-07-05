@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
@@ -196,8 +195,8 @@ export default function AdvancedTradingStrategies() {
   }, []);
 
   const updateStrategyPerformance = () => {
-    const performance = {};
-    activeStrategies.forEach(strategy => {
+    const performance: Record<string, any> = {};
+    activeStrategies.forEach((strategy: any) => {
       performance[strategy.id] = {
         currentPnL: (Math.random() - 0.3) * 1000, // Slight positive bias
         todayTrades: Math.floor(Math.random() * 50) + 10,

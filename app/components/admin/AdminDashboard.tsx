@@ -7,6 +7,27 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+
+interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  membershipLevel: string;
+  accountValue: number;
+  profitLoss: number;
+  totalTrades: number;
+  status: string;
+  lastActivity: string;
+  riskScore: number;
+}
+
+interface SystemAlert {
+  id: string;
+  type: string;
+  message: string;
+  severity: string;
+  timestamp: string;
+}
 import {
   Shield,
   Users,
@@ -86,7 +107,6 @@ export default function AdminDashboard() {
   });
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTimeframe, setSelectedTimeframe] = useState('24h');
 
   useEffect(() => {
     // Simulate real-time admin data
@@ -187,7 +207,7 @@ export default function AdminDashboard() {
     ];
 
     // Add random variations
-    const updatedProfiles = profiles.map((profile: any) => ({
+    const updatedProfiles = profiles.map((profile: UserProfile) => ({
       ...profile,
       profitLoss: profile.profitLoss + (Math.random() - 0.5) * 1000,
       accountValue: profile.accountValue + (Math.random() - 0.5) * 5000,
@@ -261,13 +281,13 @@ export default function AdminDashboard() {
 
   const suspendUser = (userId: number) => {
     setUserProfiles(prev =>
-      prev.map((user: any) => (user.id === userId ? { ...user, status: 'suspended' } : user))
+      prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
   const activateUser = (userId: number) => {
     setUserProfiles(prev =>
-      prev.map((user: any) => (user.id === userId ? { ...user, status: 'active' } : user))
+      prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'active' } : user))
     );
   };
 
@@ -454,7 +474,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {filteredUsers.map((user: any) => (
+                {filteredUsers.map((user: UserProfile) => (
                   <div
                     key={user.id}
                     className="p-4 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
@@ -640,7 +660,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {liveData.systemAlerts.map((alert: any) => (
+                  {liveData.systemAlerts.map((alert: SystemAlert) => (
                     <div
                       key={alert.id}
                       className={`p-3 rounded-lg border ${

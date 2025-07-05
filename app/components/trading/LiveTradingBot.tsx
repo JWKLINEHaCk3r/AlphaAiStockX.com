@@ -132,10 +132,10 @@ export default function LiveTradingBot() {
       Math.floor(Math.random() * 4)
     ];
 
-    const newTrade = {
+    const newTrade: Trade = {
       id: Date.now(),
       symbol,
-      side,
+      side: side as 'BUY' | 'SELL',
       quantity,
       entryPrice: price,
       currentPrice: price,
@@ -143,7 +143,7 @@ export default function LiveTradingBot() {
       confidence,
       timestamp: new Date(),
       pnl: 0,
-      status: 'open',
+      status: 'OPEN',
       stopLoss: side === 'BUY' ? price * 0.98 : price * 1.02,
       takeProfit: side === 'BUY' ? price * 1.04 : price * 0.96,
     };
@@ -162,12 +162,19 @@ export default function LiveTradingBot() {
         ? (exitPrice - trade.entryPrice) * trade.quantity
         : (trade.entryPrice - exitPrice) * trade.quantity;
 
-    const closedTrade = {
-      ...trade,
+    const closedTrade: TradeHistoryItem = {
+      id: trade.id,
+      symbol: trade.symbol,
+      side: trade.side,
+      quantity: trade.quantity,
+      entryPrice: trade.entryPrice,
       exitPrice,
-      pnl,
-      status: 'closed',
+      strategy: trade.strategy,
+      confidence: trade.confidence,
+      entryTime: trade.timestamp, // Use timestamp as entryTime
       exitTime: new Date(),
+      pnl,
+      status: 'COMPLETED',
     };
 
     setActiveTrades(prev => prev.filter(t => t.id !== tradeId));

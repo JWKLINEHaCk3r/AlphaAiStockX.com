@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 const PaymentForm = () => {
   const [plan, setPlan] = useState('basic');
@@ -31,11 +31,11 @@ const PaymentForm = () => {
     }
   };
 
-  const handlePlanChange = (event: any) => {
+  const handlePlanChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPlan(event.target.value);
   };
 
-  const handleBillingCycleChange = (event: any) => {
+  const handleBillingCycleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setBillingCycle(event.target.value);
   };
 

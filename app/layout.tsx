@@ -94,9 +94,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="robots" content="noindex, nofollow" />
         )}
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white`}>
         <ErrorBoundary>
-          <main role="main" id="main-content" className="relative z-10">
+          <main role="main" id="main-content" className="relative z-10 min-h-screen">
             {children}
           </main>
         </ErrorBoundary>

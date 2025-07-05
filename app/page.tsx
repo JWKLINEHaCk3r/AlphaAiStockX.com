@@ -1,14 +1,9 @@
 'use client';
 
-'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Brain, BarChart3, Zap, TrendingUp, Shield, Atom, Infinity, Sparkles } from 'lucide-react';
-import AnimatedBackground from '@/app/components/ui/animated-background';
-import DynamicStockTicker from '@/app/components/ui/dynamic-stock-ticker';
-import DynamicPricingGrid from '@/app/components/ui/dynamic-pricing-grid';
 
 // Remove unused dynamic import
 // import dynamic from 'next/dynamic';
@@ -85,7 +80,7 @@ function AITicker() {
   );
 }
 
-function AnimatedBackground() {
+function LocalAnimatedBackground() {
   // Simple animated stars/particles background using canvas
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -311,7 +306,7 @@ export default function AlphaAIStockX() {
     <>
       <div className="relative min-h-screen overflow-hidden">
         {/* Background Effects */}
-        <AnimatedBackground />
+        <LocalAnimatedBackground />
         <FuturisticHoloRings />
         <FloatingAIMascot />
 

@@ -48,6 +48,7 @@ interface AIModel {
   performance: ModelPerformance;
   predictions: number;
   profitability: number;
+  progress?: number;
 }
 
 interface TrainingConfig {
@@ -570,7 +571,7 @@ export default function AIModelTraining() {
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    {model.status === 'completed' && (
+                    {model.status === 'training' && model.progress === 100 && (
                       <Button
                         onClick={() => deployModel(model.id)}
                         className="bg-green-600 hover:bg-green-700"

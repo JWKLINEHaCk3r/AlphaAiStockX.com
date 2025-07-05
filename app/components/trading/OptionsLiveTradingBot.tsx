@@ -25,11 +25,33 @@ import {
   DollarSign,
 } from 'lucide-react';
 
+interface OptionsLeg {
+  symbol: string;
+  type: string;
+  strike: number;
+  expiry: string;
+  dte: number;
+  action: 'BUY' | 'SELL';
+  quantity: number;
+  price: number;
+  bid: number;
+  ask: number;
+  last?: number;
+  volume?: number;
+  openInterest?: number;
+  iv: number;
+  delta: number;
+  gamma: number;
+  theta: number;
+  vega: number;
+  stockPrice?: number;
+}
+
 interface OptionsTrade {
   id: number;
   symbol: string;
   strategy: string;
-  legs: any[];
+  legs: OptionsLeg[];
   confidence: number;
   timestamp: Date;
   pnl: number;
@@ -38,6 +60,13 @@ interface OptionsTrade {
   maxProfit: string | number;
   maxLoss: number;
   breakeven: number;
+  exitTime?: Date;
+}
+
+interface OptionsStrategy {
+  id: string;
+  name: string;
+  description: string;
 }
 
 interface OptionsChainItem {
@@ -47,12 +76,16 @@ interface OptionsChainItem {
   type: string;
   bid: number;
   ask: number;
+  last: number;
+  volume?: number;
+  openInterest?: number;
   dte: number;
   iv: number;
   delta: number;
   gamma: number;
   theta: number;
   vega: number;
+  stockPrice?: number;
 }
 
 export default function OptionsLiveTradingBot() {
@@ -94,11 +127,12 @@ export default function OptionsLiveTradingBot() {
     }, 3000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [botStatus, botSettings]);
 
   const generateOptionsChain = () => {
     const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'META'];
-    const chain = [];
+    const chain: OptionsChainItem[] = [];
 
     symbols.forEach(symbol => {
       const stockPrice = 100 + Math.random() * 400;
@@ -197,7 +231,7 @@ export default function OptionsLiveTradingBot() {
         legs = [
           {
             ...selectedOption,
-            action: 'BUY',
+            action: 'BUY' as const,
             quantity: contracts,
             price: selectedOption.ask,
           },
@@ -210,14 +244,14 @@ export default function OptionsLiveTradingBot() {
           {
             ...selectedOption,
             type: 'CALL',
-            action: 'BUY',
+            action: 'BUY' as const,
             quantity: contracts,
             price: selectedOption.ask,
           },
           {
             ...selectedOption,
             type: 'PUT',
-            action: 'BUY',
+            action: 'BUY' as const,
             quantity: contracts,
             price: selectedOption.ask,
           },
@@ -229,14 +263,14 @@ export default function OptionsLiveTradingBot() {
         legs = [
           {
             ...selectedOption,
-            action: 'SELL',
+            action: 'SELL' as const,
             quantity: contracts,
             price: selectedOption.bid,
           },
           {
             ...selectedOption,
             strike: selectedOption.strike + (tradeType === 'BULL_PUT_SPREAD' ? -10 : 10),
-            action: 'BUY',
+            action: 'BUY' as const,
             quantity: contracts,
             price: selectedOption.ask * 0.7,
           },
@@ -248,7 +282,7 @@ export default function OptionsLiveTradingBot() {
         legs = [
           {
             ...selectedOption,
-            action: 'BUY',
+            action: 'BUY' as const,
             quantity: contracts,
             price: selectedOption.ask,
           },
@@ -273,14 +307,14 @@ export default function OptionsLiveTradingBot() {
     setActiveOptionsTrades(prev => [...prev, newTrade]);
   };
 
-  const calculateMaxProfit = (strategy, legs) => {
+  const calculateMaxProfit = (strategy: string, legs: OptionsLeg[]): string | number => {
     // Simplified calculation
     const totalCredit = legs
-      .filter(leg => leg.action === 'SELL')
-      .reduce((sum, leg) => sum + leg.price * leg.quantity, 0);
+      .filter((leg: OptionsLeg) => leg.action === 'SELL')
+      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
     const totalDebit = legs
-      .filter(leg => leg.action === 'BUY')
-      .reduce((sum, leg) => sum + leg.price * leg.quantity, 0);
+      .filter((leg: OptionsLeg) => leg.action === 'BUY')
+      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
 
     if (strategy.includes('SPREAD')) {
       return Math.max(totalCredit - totalDebit, 0) * 100;
@@ -288,17 +322,17 @@ export default function OptionsLiveTradingBot() {
     return strategy.includes('LONG') ? 'Unlimited' : totalCredit * 100;
   };
 
-  const calculateMaxLoss = (strategy, legs) => {
+  const calculateMaxLoss = (strategy: string, legs: OptionsLeg[]): number => {
     const totalDebit = legs
-      .filter(leg => leg.action === 'BUY')
-      .reduce((sum, leg) => sum + leg.price * leg.quantity, 0);
+      .filter((leg: OptionsLeg) => leg.action === 'BUY')
+      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
     return totalDebit * 100;
   };
 
-  const calculateBreakeven = (strategy, legs) => {
+  const calculateBreakeven = (strategy: string, legs: OptionsLeg[]): number => {
     const mainLeg = legs[0];
     const netDebit = legs.reduce(
-      (sum, leg) => sum + (leg.action === 'BUY' ? leg.price : -leg.price),
+      (sum: number, leg: OptionsLeg) => sum + (leg.action === 'BUY' ? leg.price : -leg.price),
       0
     );
 
@@ -309,7 +343,7 @@ export default function OptionsLiveTradingBot() {
     }
   };
 
-  const closeOptionsTrade = (tradeId: any) => {
+  const closeOptionsTrade = (tradeId: number) => {
     const trade = activeOptionsTrades.find(t => t.id === tradeId);
     if (!trade) return;
 
@@ -334,7 +368,7 @@ export default function OptionsLiveTradingBot() {
   const updateOptionsData = () => {
     // Update options prices and Greeks
     setOptionsChain(prev =>
-      prev.map((option: any) => ({
+      prev.map((option: OptionsChainItem) => ({
         ...option,
         bid: Math.max(option.bid + (Math.random() - 0.5) * 0.5, 0.01),
         ask: Math.max(option.ask + (Math.random() - 0.5) * 0.5, 0.02),
@@ -459,7 +493,7 @@ export default function OptionsLiveTradingBot() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-600">
-                  {optionsStrategies.map((strategy: any) => (
+                  {optionsStrategies.map((strategy: OptionsStrategy) => (
                     <SelectItem key={strategy.id} value={strategy.id}>
                       <div>
                         <div className="font-medium">{strategy.name}</div>
@@ -621,7 +655,7 @@ export default function OptionsLiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-3">
-              {activeOptionsTrades.map((trade: any) => (
+              {activeOptionsTrades.map((trade: OptionsTrade) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-gray-800/50 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all"
@@ -681,7 +715,7 @@ export default function OptionsLiveTradingBot() {
                   {/* Legs Details */}
                   <div className="mt-3 pt-3 border-t border-gray-700/30">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-                      {trade.legs.map((leg, index) => (
+                      {trade.legs.map((leg: OptionsLeg, index: number) => (
                         <div key={index} className="text-xs bg-gray-700/30 p-2 rounded">
                           <span
                             className={leg.action === 'BUY' ? 'text-green-400' : 'text-red-400'}

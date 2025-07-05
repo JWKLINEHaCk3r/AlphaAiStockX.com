@@ -72,7 +72,9 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }: P
       // For demo purposes, we'll just show a success message
       setSuccess(true);
       setTimeout(() => {
-        onSuccess?.(plan);
+        if (plan) {
+          onSuccess?.(plan);
+        }
       }, 2000);
     } catch (err: unknown) {
       setError((err as Error).message || 'Payment processing failed. Please try again.');

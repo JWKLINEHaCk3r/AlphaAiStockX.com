@@ -1,31 +1,29 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
-import { Input } from '@/components/ui/input';
-import {
-  BookOpen,
-  GraduationCap,
-  Target,
-  CheckCircle,
-  Clock,
-  Star,
-  TrendingUp,
-  BarChart3,
-  Brain,
-  Award,
-  Search,
-  Play,
-  FileText,
-  Users,
-  Lightbulb,
-} from 'lucide-react';
 
 import { tradingEducationService } from '../../services/trading-education-service';
+
+// Simple text-based icon placeholders
+const BookOpen = ({ className }: { className?: string }) => <span className={className}>📚</span>;
+const GraduationCap = ({ className }: { className?: string }) => (
+  <span className={className}>🎓</span>
+);
+const Target = ({ className }: { className?: string }) => <span className={className}>🎯</span>;
+const CheckCircle = ({ className }: { className?: string }) => (
+  <span className={className}>✅</span>
+);
+const Clock = ({ className }: { className?: string }) => <span className={className}>⏰</span>;
+const Star = ({ className }: { className?: string }) => <span className={className}>⭐</span>;
+const TrendingUp = ({ className }: { className?: string }) => <span className={className}>📈</span>;
+const BarChart3 = ({ className }: { className?: string }) => <span className={className}>📊</span>;
+const Brain = ({ className }: { className?: string }) => <span className={className}>🧠</span>;
+const Award = ({ className }: { className?: string }) => <span className={className}>🏆</span>;
+const Play = ({ className }: { className?: string }) => <span className={className}>▶️</span>;
+const Lightbulb = ({ className }: { className?: string }) => <span className={className}>💡</span>;
 
 interface TradingEducationCenterProps {
   className?: string;
@@ -59,7 +57,7 @@ interface EducationalTopic {
   id: string;
   title: string;
   description: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   lessons: number;
   duration: string;
   difficulty: string;
@@ -83,7 +81,6 @@ export default function TradingEducationCenter({ className = '' }: TradingEducat
   const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
   const [testResults, setTestResults] = useState<TestResults | null>(null);
   const [studyProgress, setStudyProgress] = useState<StudyProgress>({});
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const initEducation = async () => {
@@ -138,10 +135,8 @@ export default function TradingEducationCenter({ className = '' }: TradingEducat
       calculateTestResults();
     }
   };
-
   const calculateTestResults = () => {
-    const correct = testQuestions.filter((q, index) => userAnswers[q.id] === q.correct).length;
-
+    const correct = testQuestions.filter(q => userAnswers[q.id] === q.correct).length;
     const total = testQuestions.length;
     const score = (correct / total) * 100;
     const passed = score >= 70;
@@ -285,9 +280,7 @@ export default function TradingEducationCenter({ className = '' }: TradingEducat
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <topic.icon className="h-8 w-8 text-blue-400" />
-                    <Badge variant="outline" className="text-xs">
-                      {topic.difficulty}
-                    </Badge>
+                    <Badge className="text-xs">{topic.difficulty}</Badge>
                   </div>
                   <CardTitle className="text-white text-lg">{topic.title}</CardTitle>
                   <CardDescription className="text-slate-400 text-sm">

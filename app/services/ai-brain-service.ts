@@ -82,7 +82,8 @@ class AIBrainService {
       if (prediction.confidence > 0.7) {
         signals.push({
           symbol: prediction.symbol,
-          type: prediction.action,
+          action: prediction.action,
+          confidence: prediction.confidence,
           strength:
             prediction.confidence > 0.9
               ? 'VERY_STRONG'
@@ -91,11 +92,18 @@ class AIBrainService {
                 : prediction.confidence > 0.7
                   ? 'MODERATE'
                   : 'WEAK',
-          price: prediction.targetPrice,
-          stopLoss: prediction.stopLoss,
-          timestamp: new Date(),
-          reasoning: prediction.reasoning,
           timeframe: prediction.timeframe,
+          targetPrice: prediction.targetPrice,
+          stopLoss: prediction.stopLoss,
+          reasoning: prediction.reasoning,
+          indicators: {
+            technical: 0,
+            fundamental: 0,
+            sentiment: 0,
+            momentum: 0,
+            volume: 0,
+          },
+          timestamp: new Date(),
         });
       }
     }
@@ -289,8 +297,10 @@ class AIBrainService {
     if (data.length < 20) return 0;
     const recent = data.slice(-10);
     const previous = data.slice(-20, -10);
-    const recentAvg = recent.reduce((sum, d) => sum + d.close, 0) / recent.length;
-    const previousAvg = previous.reduce((sum, d) => sum + d.close, 0) / previous.length;
+    const recentAvg =
+      recent.reduce((sum: number, d: MarketData) => sum + d.price, 0) / recent.length;
+    const previousAvg =
+      previous.reduce((sum: number, d: MarketData) => sum + d.price, 0) / previous.length;
     return (recentAvg - previousAvg) / previousAvg;
   }
 
@@ -301,7 +311,7 @@ class AIBrainService {
     let losses = 0;
 
     for (let i = data.length - period; i < data.length; i++) {
-      const change = data[i].close - data[i - 1].close;
+      const change = data[i].price - data[i - 1].price;
       if (change > 0) gains += change;
       else losses -= change;
     }
@@ -500,12 +510,15 @@ class AIBrainService {
   }
   private async assessRisk(symbol: string, data: MarketData[]): Promise<RiskAnalysis> {
     return {
+      symbol,
       volatility: 0.2,
       var95: 0.05,
       maxDrawdown: 0.1,
       sharpeRatio: 1.5,
       beta: 1.0,
       riskScore: 0.4,
+      recommendations: ['Monitor position size', 'Consider stop loss'],
+      timestamp: new Date(),
     };
   }
 }

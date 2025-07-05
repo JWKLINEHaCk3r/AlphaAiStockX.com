@@ -49,6 +49,21 @@ interface Performance {
   sharpeRatio: number;
 }
 
+interface TradingStrategy {
+  id: string;
+  name: string;
+  status: string;
+  description?: string;
+  performance?: {
+    totalReturn: number;
+    sharpeRatio: number;
+    maxDrawdown: number;
+    winRate: number;
+    profitFactor: number;
+    avgTrade: number;
+  };
+}
+
 interface Analysis {
   signals?: TradingSignal[];
   marketCondition?: string;
@@ -56,7 +71,7 @@ interface Analysis {
   lastTradeResult?: {
     success: boolean;
     message: string;
-    trades?: any[];
+    trades?: Trade[];
   };
   recommendations?: string[];
   riskAnalysis?: {
@@ -301,7 +316,7 @@ export default function AITradingDashboard() {
                 {state.portfolio?.holdings && Object.keys(state.portfolio.holdings).length > 0 ? (
                   <div className="space-y-3">
                     {Object.entries(state.portfolio.holdings).map(
-                      ([symbol, holding]: [string, any]) => (
+                      ([symbol, holding]: [string, { shares: number; avgPrice: number }]) => (
                         <div
                           key={symbol}
                           className="flex justify-between items-center p-3 bg-gray-800 rounded"
@@ -508,7 +523,7 @@ export default function AITradingDashboard() {
               <h3 className="text-xl font-semibold mb-4">Active AI Strategies</h3>
               {state.trader && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {state.trader.getStrategies().map((strategy: any) => (
+                  {state.trader.getStrategies().map((strategy: TradingStrategy) => (
                     <div key={strategy.id} className="p-4 bg-gray-800 rounded">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-semibold">{strategy.name}</h4>
@@ -524,11 +539,11 @@ export default function AITradingDashboard() {
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <p className="text-gray-400">Return</p>
-                          <p className="text-green-400">{strategy.performance.totalReturn}%</p>
+                          <p className="text-green-400">{strategy.performance?.totalReturn || 0}%</p>
                         </div>
                         <div>
                           <p className="text-gray-400">Win Rate</p>
-                          <p>{strategy.performance.winRate}%</p>
+                          <p>{strategy.performance?.winRate || 0}%</p>
                         </div>
                       </div>
                     </div>

@@ -449,7 +449,8 @@ export class ReinforcementLearningService {
 
       // Update average reward
       progress.averageReward =
-        progress.recentRewards.reduce((a, b) => a + b, 0) / progress.recentRewards.length;
+        progress.recentRewards.reduce((a: number, b: number) => a + b, 0) /
+        progress.recentRewards.length;
 
       // Update exploration rate (epsilon decay)
       progress.explorationRate = Math.max(0.01, progress.explorationRate * 0.9995);
@@ -463,8 +464,10 @@ export class ReinforcementLearningService {
 
       // Check for convergence
       if (episode > 500 && progress.recentRewards.length >= 100) {
-        const recentAvg = progress.recentRewards.slice(-50).reduce((a, b) => a + b, 0) / 50;
-        const olderAvg = progress.recentRewards.slice(-100, -50).reduce((a, b) => a + b, 0) / 50;
+        const recentAvg =
+          progress.recentRewards.slice(-50).reduce((a: number, b: number) => a + b, 0) / 50;
+        const olderAvg =
+          progress.recentRewards.slice(-100, -50).reduce((a: number, b: number) => a + b, 0) / 50;
         if (Math.abs(recentAvg - olderAvg) < 0.01) {
           progress.convergence = true;
         }
@@ -533,10 +536,13 @@ export class ReinforcementLearningService {
       prediction = {
         action: actions[maxIndex],
         confidence: actionProbs[maxIndex],
-        actionProbabilities: actions.reduce((acc, action, i) => {
-          acc[action] = actionProbs[i];
-          return acc;
-        }, {}),
+        actionProbabilities: actions.reduce(
+          (acc: Record<string, number>, action: string, i: number) => {
+            acc[action] = actionProbs[i];
+            return acc;
+          },
+          {} as Record<string, number>
+        ),
         qValues: actionProbs.map(p => p * 10),
       };
     } else if (model.type === 'PPO' || model.type === 'A3C') {
@@ -642,11 +648,11 @@ export class ReinforcementLearningService {
         largestLoss: -0.032,
       },
       dailyReturns: returns,
-      equityCurve: returns.reduce((acc, ret, i) => {
+      equityCurve: returns.reduce((acc: number[], ret: number, i: number) => {
         const prevValue = i === 0 ? 100000 : acc[i - 1];
         acc.push(prevValue * (1 + ret));
         return acc;
-      }, []),
+      }, [] as number[]),
       timestamp: new Date(),
     };
 

@@ -8,8 +8,33 @@ import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import { Brain, Activity, Plus, Settings, Play } from 'lucide-react';
 
-export default function TradingStrategies({ activeStrategies, setActiveStrategies, botStatus }) {
-  const [availableStrategies] = useState([
+interface TradingStrategy {
+  id: number;
+  name: string;
+  description: string;
+  winRate: number;
+  avgReturn: number;
+  maxDrawdown: number;
+  riskLevel: string;
+  timeframe: string;
+  allocation: number;
+  status: string;
+}
+
+interface TradingStrategiesProps {
+  activeStrategies?: TradingStrategy[];
+  setActiveStrategies?: (
+    strategies: TradingStrategy[] | ((prev: TradingStrategy[]) => TradingStrategy[])
+  ) => void;
+  botStatus?: string;
+}
+
+export default function TradingStrategies({
+  activeStrategies = [],
+  setActiveStrategies = () => {},
+  botStatus = 'stopped',
+}: TradingStrategiesProps) {
+  const [availableStrategies] = useState<TradingStrategy[]>([
     {
       id: 1,
       name: 'AI Momentum',
@@ -84,52 +109,19 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
     },
   ]);
 
-  const toggleStrategy = (strategyId: any) => {
+  const toggleStrategy = (strategyId: number) => {
     setActiveStrategies(prev => {
       const existing = prev.find(s => s.id === strategyId);
       if (existing) {
         return prev.filter(s => s.id !== strategyId);
       } else {
         const strategy = availableStrategies.find(s => s.id === strategyId);
-        return [...prev, { ...strategy, status: 'active' }];
+        if (strategy) {
+          return [...prev, { ...strategy, status: 'active' }];
+        }
+        return prev;
       }
     });
-  };
-
-  const updateAllocation = (strategyId, allocation) => {
-    setActiveStrategies(prev =>
-      prev.map((s: any) => (s.id === strategyId ? { ...s, allocation } : s))
-    );
-  };
-
-  const getRiskColor = (risk: any) => {
-    switch (risk) {
-      case 'Low':
-        return 'text-green-400';
-      case 'Medium':
-        return 'text-yellow-400';
-      case 'High':
-        return 'text-orange-400';
-      case 'Very High':
-        return 'text-red-400';
-      default:
-        return 'text-gray-400';
-    }
-  };
-
-  const getRiskBadge = (risk: any) => {
-    switch (risk) {
-      case 'Low':
-        return 'default';
-      case 'Medium':
-        return 'secondary';
-      case 'High':
-        return 'destructive';
-      case 'Very High':
-        return 'destructive';
-      default:
-        return 'outline';
-    }
   };
 
   return (
@@ -152,7 +144,7 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
             </div>
           ) : (
             <div className="space-y-4">
-              {activeStrategies.map((strategy: any) => (
+              {activeStrategies.map((strategy: TradingStrategy) => (
                 <div
                   key={strategy.id}
                   className="p-4 bg-white/5 rounded-lg border border-green-500/30"
@@ -160,11 +152,19 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
                       <h3 className="text-white font-semibold">{strategy.name}</h3>
-                      <Badge variant="default" className="bg-green-500">
+                      <Badge className="bg-green-500 text-white">
                         <Play className="h-3 w-3 mr-1" />
                         Running
                       </Badge>
-                      <Badge variant={getRiskBadge(strategy.riskLevel)}>
+                      <Badge
+                        className={`text-xs ${
+                          strategy.riskLevel === 'Low'
+                            ? 'bg-green-500/20 text-green-400 border-green-500/30'
+                            : strategy.riskLevel === 'Medium'
+                              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                              : 'bg-red-500/20 text-red-400 border-red-500/30'
+                        }`}
+                      >
                         {strategy.riskLevel} Risk
                       </Badge>
                     </div>
@@ -227,7 +227,15 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
                       <h3 className="text-white font-semibold">{strategy.name}</h3>
-                      <Badge variant={getRiskBadge(strategy.riskLevel)} className="text-xs">
+                      <Badge
+                        className={`text-xs ${
+                          strategy.riskLevel === 'Low'
+                            ? 'bg-green-500/20 text-green-400 border-green-500/30'
+                            : strategy.riskLevel === 'Medium'
+                              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                              : 'bg-red-500/20 text-red-400 border-red-500/30'
+                        }`}
+                      >
                         {strategy.riskLevel}
                       </Badge>
                     </div>

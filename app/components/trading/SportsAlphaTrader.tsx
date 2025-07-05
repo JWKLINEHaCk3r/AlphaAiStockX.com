@@ -39,6 +39,7 @@ interface SportsEvent {
 
 interface TradingOpportunity {
   id: number;
+  eventId: number;
   eventName: string;
   sportType: string;
   marketType: string;
@@ -50,6 +51,9 @@ interface TradingOpportunity {
   confidence: number;
   maxStake: number;
   expectedReturn: number;
+  expectedValue: string;
+  timeWindow: string;
+  timestamp: Date;
   expiryTime: Date;
   status: string;
   profitPotential: number;
@@ -207,13 +211,19 @@ export default function SportsAlphaTrader() {
           marketType,
           bookA,
           bookB,
-          oddsA: oddsA > 0 ? `+${oddsA}` : oddsA,
-          oddsB: oddsB > 0 ? `+${oddsB}` : oddsB,
-          spreadValue,
+          oddsA: Number(oddsA),
+          oddsB: Number(oddsB),
+          spreadValue: Number(spreadValue),
           confidence,
+          maxStake: Math.floor(Math.random() * 1000) + 100,
+          expectedReturn: Number(expectedValue) * 10,
           expectedValue,
           timeWindow,
           timestamp: new Date(),
+          expiryTime: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes from now
+          status: 'active',
+          profitPotential: Number(expectedValue) * 10,
+          risk: confidence > 85 ? 'Low' : confidence > 70 ? 'Medium' : 'High',
         });
       }
     });
@@ -269,7 +279,7 @@ export default function SportsAlphaTrader() {
             totalProfit: prev.totalProfit + newPnL,
             dailyProfit: prev.dailyProfit + newPnL,
             winRate: newPnL > 0 ? prev.winRate * 0.9 + 10 : prev.winRate * 0.9,
-            avgSpread: (prev.avgSpread + Number.parseFloat(trade.spreadValue)) / 2,
+            avgSpread: (prev.avgSpread + trade.spreadValue) / 2,
             maxProfit: newPnL > prev.maxProfit ? newPnL : prev.maxProfit,
           }));
 
@@ -286,7 +296,7 @@ export default function SportsAlphaTrader() {
     }, 5000);
   };
 
-  const toggleSection = (section: any) => {
+  const toggleSection = (section: keyof ExpandedSections) => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section],
@@ -687,7 +697,7 @@ export default function SportsAlphaTrader() {
                         </Badge>
                       </div>
                       <div className="flex flex-wrap gap-1 mt-1">
-                        {event.markets.map((market, i) => (
+                        {event.markets.map((market: string, i: number) => (
                           <Badge
                             key={i}
                             variant="outline"

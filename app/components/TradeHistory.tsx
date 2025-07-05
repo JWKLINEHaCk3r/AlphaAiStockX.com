@@ -9,10 +9,12 @@ interface Trade {
   id: string;
   symbol: string;
   type: string;
+  side: 'BUY' | 'SELL';
   quantity: number;
   price: number;
   timestamp: number;
   pnl: number;
+  strategy?: string;
 }
 
 interface BotStats {
@@ -105,7 +107,7 @@ export default function TradeHistory({ recentTrades, botStats }: TradeHistoryPro
             </div>
           ) : (
             <div className="space-y-3">
-              {recentTrades.map((trade: any) => (
+              {recentTrades.map((trade: Trade) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 transition-all"

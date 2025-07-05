@@ -2,15 +2,22 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Send, Bot, User, Sparkles } from 'lucide-react';
 import { aiBrainService } from '../services/ai-brain-service';
 
+interface ChatMessage {
+  id: number;
+  type: 'user' | 'ai';
+  content: string;
+  timestamp: Date;
+}
+
 export default function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 1,
       type: 'ai',
@@ -25,9 +32,9 @@ export default function AIChat() {
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
 
-    const userMessage = {
+    const userMessage: ChatMessage = {
       id: messages.length + 1,
-      type: 'user',
+      type: 'user' as const,
       content: inputMessage,
       timestamp: new Date(),
     };
@@ -40,9 +47,9 @@ export default function AIChat() {
       const symbolMatch = inputMessage.match(/\b[A-Z]{1,5}\b/);
       const symbol = symbolMatch ? symbolMatch[0] : 'SPY';
       const aiResponse = await aiBrainService.getIntelligentRecommendation(symbol);
-      const aiMessage = {
+      const aiMessage: ChatMessage = {
         id: messages.length + 2,
-        type: 'ai',
+        type: 'ai' as const,
         content: `**AI Recommendation for ${symbol}:**\n\nAction: ${aiResponse.action}\nConfidence: ${(aiResponse.confidence * 100).toFixed(1)}%\nReasoning: ${Array.isArray(aiResponse.reasoning) ? aiResponse.reasoning.join('; ') : aiResponse.reasoning}\n\nPrice Targets: $${aiResponse.priceTargets.moderate.toFixed(2)} (mod)`,
         timestamp: new Date(),
       };
@@ -52,7 +59,7 @@ export default function AIChat() {
         ...prev,
         {
           id: messages.length + 2,
-          type: 'ai',
+          type: 'ai' as const,
           content: 'Sorry, the AI is currently unavailable. Please try again later.',
           timestamp: new Date(),
         },
@@ -102,7 +109,7 @@ export default function AIChat() {
         <CardContent className="space-y-4">
           {/* Messages */}
           <div className="h-64 overflow-y-auto space-y-3 pr-2">
-            {messages.map((message: any) => (
+            {messages.map((message: ChatMessage) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}

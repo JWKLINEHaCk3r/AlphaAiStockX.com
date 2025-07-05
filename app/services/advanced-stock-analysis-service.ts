@@ -681,7 +681,7 @@ export class AdvancedStockAnalysisService {
     ema.push(firstSMA);
 
     for (let i = period; i < prices.length; i++) {
-      const emaValue = (prices[i] - ema[ema.length - 1]) * multiplier + ema[ema.length - 1];
+      const emaValue: number = (prices[i] - ema[ema.length - 1]) * multiplier + ema[ema.length - 1];
       ema.push(emaValue);
     }
 
@@ -896,7 +896,7 @@ export class AdvancedStockAnalysisService {
     // Pattern Score (10 points)
     const stock = this.stockDatabase.get(symbol);
     if (stock.patterns && stock.patterns.length > 0) {
-      stock.patterns.forEach(pattern => {
+      stock.patterns.forEach((pattern: any) => {
         if (!pattern.bearish && pattern.confidence > 0.7) {
           score += 4;
         } else if (pattern.bearish && pattern.confidence > 0.7) {
@@ -1422,7 +1422,7 @@ export class AdvancedStockAnalysisService {
     if (!stock) return null;
 
     // Simulated competitor data based on sector
-    const competitors = {
+    const competitors: Record<string, string[]> = {
       Technology: ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'META'],
       'Consumer Discretionary': ['TSLA', 'AMZN', 'NFLX', 'NKE', 'SBUX'],
       Healthcare: ['JNJ', 'PFE', 'UNH', 'ABBV', 'TMO'],
@@ -1430,7 +1430,9 @@ export class AdvancedStockAnalysisService {
     };
 
     const sectorCompetitors = competitors[stock.sector] || [];
-    const relevantCompetitors = sectorCompetitors.filter(comp => comp !== symbol).slice(0, 4);
+    const relevantCompetitors = sectorCompetitors
+      .filter((comp: string) => comp !== symbol)
+      .slice(0, 4);
 
     return {
       sector: stock.sector,
@@ -1448,7 +1450,7 @@ export class AdvancedStockAnalysisService {
   }
 
   private getCompetitiveAdvantages(stock: any) {
-    const advantages = {
+    const advantages: Record<string, string[]> = {
       AAPL: ['Brand loyalty', 'Ecosystem integration', 'Premium pricing power'],
       MSFT: ['Cloud dominance', 'Enterprise relationships', 'Recurring revenue'],
       GOOGL: ['Search monopoly', 'Data advantages', 'AI capabilities'],
