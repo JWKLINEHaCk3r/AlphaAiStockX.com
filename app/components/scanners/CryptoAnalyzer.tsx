@@ -51,7 +51,12 @@ interface NftData {
 }
 
 interface OnChainMetrics {
-  [key: string]: unknown;
+  btcHashRate?: number;
+  ethGasPrice?: number;
+  totalValueLocked?: number;
+  activeAddresses?: number;
+  exchangeInflows?: number;
+  exchangeOutflows?: number;
 }
 
 export default function CryptoAnalyzer() {
@@ -209,7 +214,10 @@ export default function CryptoAnalyzer() {
           <CardContent className="p-4 text-center">
             <Activity className="h-6 w-6 text-purple-400 mx-auto mb-2" />
             <p className="text-lg font-bold text-stone-100">
-              {(onChainMetrics.activeAddresses / 1000)?.toFixed(0)}K
+              {onChainMetrics.activeAddresses
+                ? (onChainMetrics.activeAddresses / 1000).toFixed(0)
+                : '0'}
+              K
             </p>
             <p className="text-xs text-stone-400">Active Addresses</p>
           </CardContent>

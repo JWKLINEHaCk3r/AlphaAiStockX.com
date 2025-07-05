@@ -8,11 +8,36 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
+interface Stock {
+  symbol: string;
+  weight: number;
+  currentPrice: number;
+  expectedReturn: number;
+  risk: number;
+}
+
+interface Recommendation {
+  action: string;
+  symbol: string;
+  reason: string;
+  suggestedWeight: number;
+  impact: string;
+}
+
+interface OptimizationResult {
+  totalWeight: number;
+  expectedReturn: number;
+  risk: number;
+  sharpeRatio: number;
+  diversificationScore: number;
+  recommendations: Recommendation[];
+}
+
 export default function PortfolioOptimizer() {
-  const [portfolio, setPortfolio] = useState<any[]>([]);
+  const [portfolio, setPortfolio] = useState<Stock[]>([]);
   const [newStock, setNewStock] = useState('');
   const [newWeight, setNewWeight] = useState('');
-  const [optimization, setOptimization] = useState(null);
+  const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
 
   useEffect(() => {
     // Initialize with sample portfolio
@@ -51,18 +76,21 @@ export default function PortfolioOptimizer() {
             symbol: 'TSLA',
             reason: 'High volatility',
             impact: 'Lower risk by 8%',
+            suggestedWeight: 8.5,
           },
           {
             action: 'Increase',
             symbol: 'MSFT',
             reason: 'Stable growth',
             impact: 'Improve Sharpe ratio',
+            suggestedWeight: 25.0,
           },
           {
             action: 'Add',
             symbol: 'VTI',
             reason: 'Diversification',
             impact: 'Reduce concentration risk',
+            suggestedWeight: 15.0,
           },
         ],
       });
@@ -89,13 +117,13 @@ export default function PortfolioOptimizer() {
     }
   };
 
-  const removeStock = (index: any) => {
+  const removeStock = (index: number) => {
     setPortfolio(portfolio.filter((_, i) => i !== index));
   };
 
   const optimizePortfolio = () => {
     // Simulate AI optimization
-    const optimized = portfolio.map((stock: any) => ({
+    const optimized = portfolio.map((stock: Stock) => ({
       ...stock,
       weight: Math.max(5, Math.min(30, stock.weight + (Math.random() - 0.5) * 10)),
     }));

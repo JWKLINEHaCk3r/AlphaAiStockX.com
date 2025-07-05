@@ -47,6 +47,12 @@ interface PatternMatch {
   marketCap: number;
   sector: string;
   assetClass: string;
+  direction?: string;
+  historicalMatches?: number;
+  successRate?: number;
+  timeToTarget?: number;
+  avgMove?: number;
+  strength?: number;
 }
 
 interface TradingSignal {
@@ -1248,17 +1254,24 @@ export default function AdvancedPatternScanner() {
         direction,
         riskReward: Math.abs(targetPrice - entryPrice) / Math.abs(entryPrice - stopLoss),
         volume: Math.random() * 50 + 10,
-        timestamp: new Date(),
+        expectedMove: avgMove,
+        timeframe: scanSettings.timeframe,
+        detectedAt: new Date(),
         status: 'active',
+        marketCap: Math.random() * 1000000000000 + 1000000000,
+        sector: ['Technology', 'Healthcare', 'Finance', 'Energy', 'Consumer'][
+          Math.floor(Math.random() * 5)
+        ],
         assetClass: symbol.includes('USD')
           ? 'forex'
           : symbol.includes('BTC') || symbol.includes('ETH')
             ? 'crypto'
             : 'stocks',
+        strength: probability,
       };
     });
 
-    setPatternResults(results.filter(r => r.probability >= scanSettings.minProbability));
+    setPatternMatches(results.filter(r => r.probability >= scanSettings.minProbability));
   };
 
   const generateTradingSignals = () => {
@@ -1275,10 +1288,10 @@ export default function AdvancedPatternScanner() {
         target: 195.0,
         stopLoss: 168.0,
         timeframe: '1D',
-        strength: 'Very Strong',
+        detectedAt: new Date(),
+        status: 'active',
+        confidence: 87,
         riskReward: 2.8,
-        historicalAccuracy: 83,
-        lastOccurrence: '2023-08-15',
         avgDaysToTarget: 18,
       },
       {
@@ -1293,10 +1306,10 @@ export default function AdvancedPatternScanner() {
         target: 220.0,
         stopLoss: 265.0,
         timeframe: '1D',
-        strength: 'Strong',
+        detectedAt: new Date(),
+        status: 'active',
+        confidence: 84,
         riskReward: 2.1,
-        historicalAccuracy: 81,
-        lastOccurrence: '2023-09-22',
         avgDaysToTarget: 25,
       },
       {
@@ -1311,10 +1324,10 @@ export default function AdvancedPatternScanner() {
         target: 1050.0,
         stopLoss: 820.0,
         timeframe: '1D',
-        strength: 'Very Strong',
+        detectedAt: new Date(),
+        status: 'active',
+        confidence: 91,
         riskReward: 3.2,
-        historicalAccuracy: 89,
-        lastOccurrence: '2023-10-05',
         avgDaysToTarget: 12,
       },
       {
@@ -1329,10 +1342,10 @@ export default function AdvancedPatternScanner() {
         target: 48000,
         stopLoss: 41000,
         timeframe: '4H',
-        strength: 'Strong',
+        detectedAt: new Date(),
+        status: 'active',
+        confidence: 82,
         riskReward: 2.1,
-        historicalAccuracy: 78,
-        lastOccurrence: '2023-11-02',
         avgDaysToTarget: 8,
       },
     ];
@@ -1341,7 +1354,7 @@ export default function AdvancedPatternScanner() {
   };
 
   const calculateHistoricalAccuracy = () => {
-    const accuracy = {};
+    const accuracy: { [key: string]: any } = {};
     chartPatterns.forEach(pattern => {
       accuracy[pattern.id] = {
         totalOccurrences: Math.floor(Math.random() * 500) + 100,
@@ -1377,8 +1390,8 @@ export default function AdvancedPatternScanner() {
     }
   };
 
-  const getCategoryColor = (category: any) => {
-    const colors = {
+  const getCategoryColor = (category: string) => {
+    const colors: Record<string, string> = {
       classic: 'bg-red-500/20 text-red-300 border-red-500/30',
       flag: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
       triangle: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
@@ -1632,11 +1645,11 @@ export default function AdvancedPatternScanner() {
         <CardHeader>
           <CardTitle className="text-gray-100 flex items-center">
             <BarChart3 className="h-6 w-6 mr-2 text-red-400" />
-            Advanced Pattern Recognition Results ({patternResults.length})
+            Advanced Pattern Recognition Results ({patternMatches.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {patternResults.length === 0 ? (
+          {patternMatches.length === 0 ? (
             <div className="text-center py-8">
               <Brain className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-400">
@@ -1645,7 +1658,7 @@ export default function AdvancedPatternScanner() {
             </div>
           ) : (
             <div className="space-y-3">
-              {patternResults.map((result, index) => (
+              {patternMatches.map((result: PatternMatch, index: number) => (
                 <div
                   key={index}
                   className="p-4 bg-gray-800/30 rounded-lg border border-red-500/20 hover:border-red-500/40 transition-all"
@@ -1674,7 +1687,7 @@ export default function AdvancedPatternScanner() {
                         </div>
                         <p className="text-sm text-gray-400">
                           {result.historicalMatches} historical matches •{' '}
-                          {result.successRate.toFixed(1)}% success rate
+                          {(result.successRate || 0).toFixed(1)}% success rate
                         </p>
                       </div>
 
@@ -1717,7 +1730,9 @@ export default function AdvancedPatternScanner() {
                         </Badge>
                         <p className="text-xs text-gray-400">R/R: {result.riskReward.toFixed(1)}</p>
                         <p className="text-xs text-gray-400">Target: {result.timeToTarget} days</p>
-                        <p className="text-xs text-gray-400">Move: {result.avgMove.toFixed(1)}%</p>
+                        <p className="text-xs text-gray-400">
+                          Move: {(result.avgMove || 0).toFixed(1)}%
+                        </p>
                       </div>
                     </div>
                   </div>

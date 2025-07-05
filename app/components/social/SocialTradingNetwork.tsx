@@ -57,7 +57,7 @@ interface SocialPost {
   trade?: {
     symbol: string;
     action: string;
-    profit: number;
+    profit: number | null;
     amount: number;
   };
 }
@@ -74,6 +74,8 @@ interface SocialStats {
   totalVolume: number;
   averageReturn: number;
   activeTraders: number;
+  successRate?: number;
+  activeTrades?: number;
 }
 
 export default function SocialTradingNetwork() {
@@ -257,9 +259,9 @@ export default function SocialTradingNetwork() {
     }
   };
 
-  const formatTimeAgo = (timestamp: any) => {
+  const formatTimeAgo = (timestamp: Date) => {
     const now = new Date();
-    const diff = now - timestamp;
+    const diff = now.getTime() - timestamp.getTime();
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
 
@@ -352,7 +354,7 @@ export default function SocialTradingNetwork() {
                       <AvatarFallback>
                         {trader.name
                           .split(' ')
-                          .map(n => n[0])
+                          .map((n: string) => n[0])
                           .join('')}
                       </AvatarFallback>
                     </Avatar>
@@ -432,7 +434,7 @@ export default function SocialTradingNetwork() {
                     <AvatarFallback>
                       {post.user.name
                         .split(' ')
-                        .map(n => n[0])
+                        .map((n: string) => n[0])
                         .join('')}
                     </AvatarFallback>
                   </Avatar>

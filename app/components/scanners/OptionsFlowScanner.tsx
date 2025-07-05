@@ -29,6 +29,10 @@ interface UnusualActivity {
   timestamp: Date;
   volume?: number;
   change?: string;
+  activity?: string;
+  impact?: string;
+  timeDetected?: string;
+  confidence?: number;
 }
 
 interface DarkPoolData {
@@ -38,6 +42,10 @@ interface DarkPoolData {
   trend: 'increasing' | 'decreasing' | 'stable';
   timestamp: Date;
   percentage: number;
+  size?: string;
+  price?: number;
+  sentiment?: string;
+  timeframe?: string;
 }
 
 export default function OptionsFlowScanner() {

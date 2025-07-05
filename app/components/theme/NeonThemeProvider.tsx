@@ -1,15 +1,25 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-const NeonThemeContext = createContext();
+interface NeonThemeContextType {
+  theme: string;
+  setTheme: (theme: string) => void;
+  glowIntensity: number;
+  setGlowIntensity: (intensity: number) => void;
+  animationSpeed: number;
+  setAnimationSpeed: (speed: number) => void;
+  themes: Record<string, any>;
+}
 
-export function NeonThemeProvider({ children }) {
+const NeonThemeContext = createContext<NeonThemeContextType | undefined>(undefined);
+
+export function NeonThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState('cyber-neon');
   const [glowIntensity, setGlowIntensity] = useState(100);
   const [animationSpeed, setAnimationSpeed] = useState(100);
 
-  const themes = {
+  const themes: Record<string, any> = {
     'cyber-neon': {
       name: 'Cyber Neon',
       primary: 'from-cyan-400 to-blue-500',
@@ -87,7 +97,7 @@ export function NeonThemeProvider({ children }) {
 
     // Add theme class to body
     document.body.className = `theme-${theme} glow-${glowIntensity} speed-${animationSpeed}`;
-  }, [theme, glowIntensity, animationSpeed]);
+  }, [theme, glowIntensity, animationSpeed, themes]);
 
   const value = {
     theme,

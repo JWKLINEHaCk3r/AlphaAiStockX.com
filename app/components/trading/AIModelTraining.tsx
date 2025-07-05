@@ -178,7 +178,7 @@ export default function AIModelTraining() {
         id: 3,
         name: 'Crypto Pattern AI v1.7',
         type: 'transformer',
-        status: 'completed',
+        status: 'deployed',
         accuracy: 96.1,
         trainingTime: '6h 45m',
         dataPoints: '3.2M',
@@ -251,8 +251,8 @@ export default function AIModelTraining() {
     }
   };
 
-  const getModelTypeColor = (type: any) => {
-    const colors = {
+  const getModelTypeColor = (type: string) => {
+    const colors: Record<string, string> = {
       'neural-network': 'bg-red-500/20 text-red-300 border-red-500/30',
       lstm: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
       transformer: 'bg-purple-500/20 text-purple-300 border-purple-500/30',

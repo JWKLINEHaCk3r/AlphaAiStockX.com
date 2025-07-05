@@ -70,6 +70,9 @@ interface AIAnalysis {
   sentiment?: string;
   volatility?: number;
   riskLevel?: string;
+  marketSentiment?: number;
+  opportunityScore?: number;
+  nextTradeETA?: number;
 }
 
 interface ExecutionMetrics {
@@ -79,6 +82,9 @@ interface ExecutionMetrics {
   maxDrawdown: number;
   sharpeRatio: number;
   profitFactor: number;
+  executionSpeed: number;
+  avgWin: number;
+  avgLoss: number;
 }
 
 interface MarketConditions {
@@ -124,6 +130,9 @@ export default function AutomatedTradingSystem({
     maxDrawdown: 0,
     sharpeRatio: 0,
     profitFactor: 0,
+    executionSpeed: 25,
+    avgWin: 0,
+    avgLoss: 0,
   });
 
   // Premium features check
@@ -210,13 +219,17 @@ export default function AutomatedTradingSystem({
     const quantity = Math.floor(positionSize / price);
 
     if (quantity > 0 && positionSize <= tradingCapital) {
-      const newTrade = {
-        id: Date.now(),
+      const newTrade: Trade = {
+        id: Date.now().toString(),
         symbol: conditions.symbol,
-        side: conditions.direction,
+        side: conditions.direction.toLowerCase() as 'buy' | 'sell',
         quantity,
         entryPrice: price,
         currentPrice: price,
+        profit: 0,
+        profitPercent: 0,
+        timestamp: new Date(),
+        status: 'active',
         positionSize,
         entryTime: new Date(),
         stopLoss: conditions.direction === 'BUY' ? price * 0.97 : price * 1.03,
@@ -224,7 +237,6 @@ export default function AutomatedTradingSystem({
         confidence: conditions.confidence,
         strategy: 'AI Automated',
         pnl: 0,
-        status: 'open',
       };
 
       setActiveTrades(prev => [...prev, newTrade]);
@@ -241,56 +253,66 @@ export default function AutomatedTradingSystem({
 
   const manageActiveTrades = () => {
     setActiveTrades(prevTrades => {
-      const updatedTrades = prevTrades.map(trade => {
-        // Update current price with realistic movement
-        const priceChange = (Math.random() - 0.5) * trade.entryPrice * 0.02; // ±2% max movement
-        const newPrice = Math.max(trade.currentPrice + priceChange, 1);
+      return prevTrades
+        .map(trade => {
+          // Update current price with realistic movement
+          const priceChange = (Math.random() - 0.5) * trade.entryPrice * 0.02; // ±2% max movement
+          const newPrice = Math.max(trade.currentPrice + priceChange, 1);
 
-        // Calculate P&L
-        const pnl =
-          trade.side === 'BUY'
-            ? (newPrice - trade.entryPrice) * trade.quantity
-            : (trade.entryPrice - newPrice) * trade.quantity;
+          // Calculate P&L
+          const pnl =
+            trade.side === 'buy'
+              ? (newPrice - trade.entryPrice) * trade.quantity
+              : (trade.entryPrice - newPrice) * trade.quantity;
 
-        const updatedTrade = { ...trade, currentPrice: newPrice, pnl };
+          const profit = pnl;
+          const profitPercent = (pnl / (trade.entryPrice * trade.quantity)) * 100;
 
-        // Check exit conditions
-        const shouldExit =
-          newPrice <= updatedTrade.stopLoss ||
-          newPrice >= updatedTrade.takeProfit ||
-          Math.random() > 0.995; // Random exit for variety
+          const updatedTrade: Trade = {
+            ...trade,
+            currentPrice: newPrice,
+            pnl,
+            profit,
+            profitPercent,
+          };
 
-        if (shouldExit) {
-          closeTrade(updatedTrade);
-          return null; // Will be filtered out
-        }
+          // Check exit conditions
+          const shouldExit =
+            (updatedTrade.stopLoss && newPrice <= updatedTrade.stopLoss) ||
+            (updatedTrade.takeProfit && newPrice >= updatedTrade.takeProfit) ||
+            Math.random() > 0.995; // Random exit for variety
 
-        return updatedTrade;
-      });
+          if (shouldExit) {
+            closeTrade(updatedTrade);
+            return { ...updatedTrade, status: 'closed' as const };
+          }
 
-      return updatedTrades.filter(Boolean); // Remove null trades
+          return updatedTrade;
+        })
+        .filter(trade => trade.status === 'active');
     });
   };
 
-  const closeTrade = (trade: any) => {
-    const profit = trade.pnl;
+  const closeTrade = (trade: Trade) => {
+    const profit = trade.pnl || 0;
     const isWin = profit > 0;
 
     // Update capital and profits
-    setTradingCapital(prev => prev + trade.positionSize + profit);
+    setTradingCapital(prev => prev + (trade.positionSize || 0) + profit);
     setTotalProfit(prev => prev + profit);
     setDailyProfit(prev => prev + profit);
 
-    // Update win rate and metrics
+    // Update execution metrics
     setExecutionMetrics(prev => {
       const totalTrades = prev.totalTrades;
       const currentWins = (prev.winRate / 100) * (totalTrades - 1);
-      const newWins = currentWins + (isWin ? 1 : 0);
+      const newWins = isWin ? currentWins + 1 : currentWins;
       const newWinRate = (newWins / totalTrades) * 100;
 
       return {
         ...prev,
         winRate: newWinRate,
+        avgProfit: (prev.avgProfit * (totalTrades - 1) + profit) / totalTrades,
         avgWin: isWin ? (prev.avgWin + profit) / 2 : prev.avgWin,
         avgLoss: !isWin ? (prev.avgLoss + Math.abs(profit)) / 2 : prev.avgLoss,
         profitFactor: prev.avgLoss > 0 ? prev.avgWin / prev.avgLoss : 0,
@@ -304,7 +326,7 @@ export default function AutomatedTradingSystem({
     }
   };
 
-  const transferToMoneyMarket = (amount: any) => {
+  const transferToMoneyMarket = (amount: number) => {
     setMoneyMarketBalance(prev => prev + amount);
     setTradingCapital(prev => prev - amount);
   };
@@ -319,14 +341,14 @@ export default function AutomatedTradingSystem({
   };
 
   const updateAIAnalysis = () => {
-    setAiAnalysis({
+    setAiAnalysis(prev => ({
+      ...prev,
       marketSentiment: 60 + Math.random() * 40,
-      volatilityForecast: 15 + Math.random() * 25,
-      trendStrength: 70 + Math.random() * 30,
-      riskLevel: Math.random() > 0.7 ? 'high' : Math.random() > 0.4 ? 'medium' : 'low',
+      volatility: 15 + Math.random() * 25,
+      riskLevel: Math.random() > 0.5 ? 'Low' : 'Medium',
       opportunityScore: 75 + Math.random() * 25,
-      nextTradeETA: Math.floor(Math.random() * 300) + 30, // 30-330 seconds
-    });
+      nextTradeETA: Math.floor(30 + Math.random() * 120),
+    }));
   };
 
   const updateExecutionMetrics = () => {
@@ -693,10 +715,12 @@ export default function AutomatedTradingSystem({
                           <div>
                             <div className="flex items-center space-x-2">
                               <span className="text-white font-bold text-lg">{trade.symbol}</span>
-                              <Badge variant={trade.side === 'BUY' ? 'default' : 'destructive'}>
-                                {trade.side}
+                              <Badge variant={trade.side === 'buy' ? 'default' : 'destructive'}>
+                                {trade.side.toUpperCase()}
                               </Badge>
-                              <Badge className="bg-purple-500">{trade.strategy}</Badge>
+                              <Badge variant="secondary" className="bg-purple-500">
+                                {trade.strategy}
+                              </Badge>
                             </div>
                             <p className="text-sm text-gray-400">
                               {trade.quantity} shares @ ${trade.entryPrice.toFixed(2)}

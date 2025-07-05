@@ -26,10 +26,22 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 );
 Alert.displayName = 'Alert';
 
-export function AlertTitle({ children }: { children: React.ReactNode }) {
-  return <div className="font-bold mb-1">{children}</div>;
+export function AlertTitle({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={`font-bold mb-1 ${className || ''}`}>{children}</div>;
 }
 
-export function AlertDescription({ children }: { children: React.ReactNode }) {
-  return <div className="text-sm opacity-80">{children}</div>;
+export function AlertDescription({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={`text-sm opacity-80 ${className || ''}`}>{children}</div>;
 }

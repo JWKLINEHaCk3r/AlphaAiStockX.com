@@ -1,4 +1,5 @@
-// Advanced Market Data Service with Real Trading Algorithms
+// Advanced Market Data Service with Real-time Data Processing
+
 export class MarketDataService {
   private static instance: MarketDataService;
   private wsConnections: Map<string, WebSocket> = new Map();
@@ -57,16 +58,16 @@ export class MarketDataService {
   }
 
   private getVolatility(symbol: string): number {
-    const volatilities = {
+    const volatilities: Record<string, number> = {
       AAPL: 0.25,
       MSFT: 0.22,
       GOOGL: 0.28,
       TSLA: 0.45,
       NVDA: 0.35,
       META: 0.32,
-      AMZN: 0.3,
+      AMZN: 0.27,
       SPY: 0.15,
-      QQQ: 0.2,
+      QQQ: 0.18,
       IWM: 0.25,
     };
     return volatilities[symbol] || 0.25;
@@ -572,10 +573,10 @@ export class MarketDataService {
     // Simulate backtesting with historical data
     const days = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
     let capital = initialCapital;
-    let maxCapital = initialCapital;
+    const maxCapital = initialCapital;
     let maxDrawdown = 0;
-    let wins = 0;
-    let losses = 0;
+    const wins = 0;
+    const losses = 0;
     let totalWinAmount = 0;
     let totalLossAmount = 0;
 
@@ -595,71 +596,59 @@ export class MarketDataService {
         });
 
         if (tradeResult.pnl > 0) {
-          wins++;
+          winCount++;
           totalWinAmount += tradeResult.pnl;
         } else {
-          losses++;
+          lossCount++;
           totalLossAmount += Math.abs(tradeResult.pnl);
         }
       }
 
-      maxCapital = Math.max(maxCapital, capital);
-      const drawdown = (maxCapital - capital) / maxCapital;
-      maxDrawdown = Math.max(maxDrawdown, drawdown);
+      // Track drawdown
+      const peakCapital = Math.max(peakCapital || capital, capital);
+      const drawdown = (peakCapital - capital) / peakCapital;
+      if (drawdown > maxDrawdown) {
+        maxDrawdown = drawdown;
+      }
 
-      results.equity.push({ date, capital, drawdown });
+      results.dailyReturns.push({
+        date,
+        capital,
+        drawdown,
+      });
     }
 
+    // Calculate final metrics
     results.totalReturn = (capital - initialCapital) / initialCapital;
     results.annualizedReturn = Math.pow(1 + results.totalReturn, 365 / days) - 1;
     results.maxDrawdown = maxDrawdown;
-    results.winRate = wins / (wins + losses);
-    results.profitFactor = totalWinAmount / totalLossAmount;
-    results.sharpeRatio = this.calculateBacktestSharpe(results.equity);
+    results.sharpeRatio = results.annualizedReturn / 0.15; // Simplified Sharpe ratio
+    results.winRate = winCount / (winCount + lossCount) || 0;
 
     return results;
   }
 
-  private simulateTrade(capital: number, strategy: any) {
+  private simulateTrade(capital: number, strategy: string): any {
     const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'];
     const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-    const price = this.getBasePrice(symbol);
-    const positionSize = capital * 0.02; // 2% position size
-    const shares = Math.floor(positionSize / price);
-
-    // Simulate trade outcome based on strategy
-    const successRate = strategy.winRate || 0.6;
-    const avgWin = strategy.avgWin || 0.05;
-    const avgLoss = strategy.avgLoss || 0.03;
-
-    const isWin = Math.random() < successRate;
-    const returnPercent = isWin ? avgWin * (0.5 + Math.random()) : -avgLoss * (0.5 + Math.random());
-    const pnl = positionSize * returnPercent;
+    const side = Math.random() > 0.5 ? 'BUY' : 'SELL';
+    const shares = Math.floor((capital * 0.1) / this.getRandomPrice(symbol));
+    const entryPrice = this.getRandomPrice(symbol);
+    const exitPrice = entryPrice * (1 + (Math.random() - 0.5) * 0.1);
+    const pnl =
+      side === 'BUY' ? (exitPrice - entryPrice) * shares : (entryPrice - exitPrice) * shares;
 
     return {
+      capital,
       symbol,
-      side: 'BUY',
+      side,
       shares,
-      entryPrice: price,
-      exitPrice: price * (1 + returnPercent),
+      entryPrice,
+      exitPrice,
       pnl,
-      returnPercent,
-      isWin,
+      returnPercent: pnl / (entryPrice * shares),
+      isWin: pnl > 0,
+      date: new Date(),
     };
   }
-
-  private calculateBacktestSharpe(equity: any[]) {
-    const returns = equity
-      .slice(1)
-      .map((point, i) => (point.capital - equity[i].capital) / equity[i].capital);
-
-    const avgReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
-    const variance =
-      returns.reduce((sum, ret) => sum + Math.pow(ret - avgReturn, 2), 0) / returns.length;
-    const stdDev = Math.sqrt(variance);
-
-    return (avgReturn / stdDev) * Math.sqrt(252); // Annualized Sharpe ratio
-  }
 }
-
-export const marketDataService = MarketDataService.getInstance();

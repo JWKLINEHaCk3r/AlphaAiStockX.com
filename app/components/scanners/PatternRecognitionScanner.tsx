@@ -33,6 +33,9 @@ interface PatternMatch {
   detectedAt: Date;
   confidence: number;
   status: string;
+  direction?: string;
+  successRate?: number;
+  timeToTarget?: number;
 }
 
 interface SignalData {
@@ -228,8 +231,9 @@ export default function PatternRecognitionScanner() {
         confidence,
         direction,
         riskReward: Math.abs(targetPrice - entryPrice) / Math.abs(entryPrice - stopLoss),
-        volume: Math.random() * 50 + 10,
-        timestamp: new Date(),
+        timeframe: scanSettings.timeframe,
+        strength: probability > 80 ? 'Strong' : probability > 60 ? 'Medium' : 'Weak',
+        detectedAt: new Date(),
         status: 'active',
       };
     });
@@ -313,7 +317,7 @@ export default function PatternRecognitionScanner() {
   };
 
   const calculateHistoricalAccuracy = () => {
-    const accuracy = {};
+    const accuracy: Record<string, any> = {};
     patternTypes.forEach(pattern => {
       accuracy[pattern.id] = {
         totalOccurrences: Math.floor(Math.random() * 200) + 50,
@@ -564,7 +568,7 @@ export default function PatternRecognitionScanner() {
                         </div>
                         <p className="text-sm text-gray-400">
                           {result.historicalMatches} historical matches •{' '}
-                          {result.successRate.toFixed(1)}% success rate
+                          {(result.successRate || 0).toFixed(1)}% success rate
                         </p>
                       </div>
 

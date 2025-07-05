@@ -10,10 +10,12 @@ interface Trade {
   id: number;
   symbol: string;
   type: string;
+  side: string;
   quantity: number;
   price: number;
   pnl: number;
   timestamp: string;
+  strategy: string;
 }
 
 interface BotStats {
@@ -30,8 +32,26 @@ interface PerformanceMetricsProps {
   recentTrades: Trade[];
 }
 
+interface DailyReturn {
+  date: Date;
+  return: number;
+  cumulative: number;
+}
+
+interface PerformanceData {
+  dailyReturns: DailyReturn[];
+  monthlyReturns: DailyReturn[];
+  drawdownPeriods: DailyReturn[];
+  bestTrade: Trade | null;
+  worstTrade: Trade | null;
+  avgHoldTime: string;
+  profitFactor: number;
+  calmarRatio: number;
+  sortinoRatio: number;
+}
+
 export default function PerformanceMetrics({ botStats, recentTrades }: PerformanceMetricsProps) {
-  const [performanceData, setPerformanceData] = useState({
+  const [performanceData, setPerformanceData] = useState<PerformanceData>({
     dailyReturns: [],
     monthlyReturns: [],
     drawdownPeriods: [],
@@ -73,7 +93,7 @@ export default function PerformanceMetrics({ botStats, recentTrades }: Performan
     }
   }, [recentTrades]);
 
-  const formatCurrency = (amount: any) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

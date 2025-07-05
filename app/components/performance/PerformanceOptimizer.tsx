@@ -3,23 +3,32 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
-  Cpu,
-  Database,
+  TrendingUp,
+  TrendingDown,
   Zap,
-  MemoryStick,
-  HardDrive,
-  Wifi,
-  Server,
-  CloudLightning,
-  Gauge,
-  Rocket,
-  Brain,
+  Target,
+  BarChart3,
   Activity,
+  Settings,
+  Rocket,
+  Cpu,
+  HardDrive,
+  Database,
+  Wifi,
 } from 'lucide-react';
+
+interface Optimization {
+  category: string;
+  title: string;
+  description: string;
+  impact: string;
+  status: string;
+  priority: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
 
 export default function PerformanceOptimizer() {
   const [systemMetrics, setSystemMetrics] = useState({
@@ -33,7 +42,7 @@ export default function PerformanceOptimizer() {
     dataProcessingRate: 0,
   });
 
-  const [optimizations, setOptimizations] = useState<any[]>([]);
+  const [optimizations, setOptimizations] = useState<Optimization[]>([]);
   const [performanceScore, setPerformanceScore] = useState(0);
 
   useEffect(() => {
@@ -63,39 +72,49 @@ export default function PerformanceOptimizer() {
   const runOptimizations = () => {
     const optimizationTypes = [
       {
-        type: 'Memory Optimization',
+        category: 'Memory',
+        title: 'Memory Optimization',
         description: 'Garbage collection and memory defragmentation',
         impact: '15% performance boost',
         status: 'active',
-        icon: MemoryStick,
+        priority: 'high',
+        icon: ({ className }: { className?: string }) => <div className={className}>🧠</div>,
       },
       {
-        type: 'Cache Warming',
+        category: 'Cache',
+        title: 'Cache Warming',
         description: 'Preloading frequently accessed data',
         impact: '25% faster response times',
         status: 'active',
-        icon: Database,
+        priority: 'high',
+        icon: ({ className }: { className?: string }) => <div className={className}>⚡</div>,
       },
       {
-        type: 'Connection Pooling',
+        category: 'Database',
+        title: 'Connection Pooling',
         description: 'Optimizing database connections',
         impact: '30% reduced latency',
         status: 'active',
-        icon: Server,
+        priority: 'medium',
+        icon: ({ className }: { className?: string }) => <div className={className}>🗄️</div>,
       },
       {
-        type: 'CDN Acceleration',
+        category: 'CDN',
+        title: 'CDN Acceleration',
         description: 'Global content delivery optimization',
         impact: '40% faster load times',
         status: 'active',
-        icon: CloudLightning,
+        priority: 'medium',
+        icon: ({ className }: { className?: string }) => <div className={className}>🌐</div>,
       },
       {
-        type: 'AI Model Caching',
+        category: 'AI',
+        title: 'AI Model Caching',
         description: 'Caching neural network predictions',
         impact: '60% faster AI responses',
         status: 'active',
-        icon: Brain,
+        priority: 'low',
+        icon: ({ className }: { className?: string }) => <div className={className}>🤖</div>,
       },
     ];
 
@@ -112,7 +131,7 @@ export default function PerformanceOptimizer() {
     setPerformanceScore(Math.max(85, Math.min(99, score)));
   };
 
-  const getStatusColor = (value, isReverse = false) => {
+  const getStatusColor = (value: number, isReverse = false) => {
     if (isReverse) {
       return value > 90 ? 'text-green-400' : value > 70 ? 'text-yellow-400' : 'text-red-400';
     }
@@ -125,7 +144,7 @@ export default function PerformanceOptimizer() {
       <Card className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border-cyan-400/30 backdrop-blur-xl">
         <CardHeader>
           <CardTitle className="text-white flex items-center">
-            <Gauge className="h-6 w-6 mr-2 text-cyan-400" />
+            <Zap className="h-6 w-6 mr-2 text-cyan-400" />
             System Performance Monitor
             <Badge className="ml-3 bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse">
               <Rocket className="h-3 w-3 mr-1" />
@@ -170,7 +189,7 @@ export default function PerformanceOptimizer() {
             <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-400/30">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-blue-400 font-semibold">Memory</span>
-                <MemoryStick className="h-5 w-5 text-blue-400" />
+                <Activity className="h-5 w-5 text-blue-400" />
               </div>
               <p className={`text-2xl font-bold ${getStatusColor(systemMetrics.memoryUsage)}`}>
                 {systemMetrics.memoryUsage.toFixed(1)}%
@@ -275,7 +294,7 @@ export default function PerformanceOptimizer() {
                         <IconComponent className="h-6 w-6 text-green-400" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold">{optimization.type}</h4>
+                        <h4 className="text-white font-bold">{optimization.title}</h4>
                         <p className="text-gray-300 text-sm">{optimization.description}</p>
                       </div>
                     </div>

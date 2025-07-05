@@ -6,10 +6,56 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
+interface SectorData {
+  name: string;
+  symbol: string;
+  weight: number;
+  performance1D: number;
+  performance1W: number;
+  performance1M: number;
+  momentum: number;
+  relativeStrength: number;
+  flowRating: 'inflow' | 'outflow' | 'neutral';
+  aiScore: number;
+  volatility: number;
+  recommendation: 'overweight' | 'underweight' | 'neutral';
+}
+
+interface RotationSignal {
+  from: string;
+  to: string;
+  strength: number;
+  timeframe: string;
+  catalyst: string;
+  confidence: number;
+  historicalSuccess: number;
+}
+
+interface EconomicIndicator {
+  name: string;
+  status: string;
+  impact: string;
+}
+
+interface EconomicCycle {
+  currentPhase: string;
+  nextPhase: string;
+  transitionProbability: number;
+  timeToTransition: string;
+  keyIndicators?: EconomicIndicator[];
+  recommendedSectors?: string[];
+  avoidSectors?: string[];
+}
+
 export default function SectorRotationAI() {
-  const [sectorData, setSectorData] = useState<any[]>([]);
-  const [rotationSignals, setRotationSignals] = useState<any[]>([]);
-  const [economicCycle, setEconomicCycle] = useState<any>({});
+  const [sectorData, setSectorData] = useState<SectorData[]>([]);
+  const [rotationSignals, setRotationSignals] = useState<RotationSignal[]>([]);
+  const [economicCycle, setEconomicCycle] = useState<EconomicCycle>({
+    currentPhase: '',
+    nextPhase: '',
+    transitionProbability: 0,
+    timeToTransition: '',
+  });
 
   useEffect(() => {
     generateSectorData();
@@ -39,7 +85,7 @@ export default function SectorRotationAI() {
       { name: 'Materials', symbol: 'XLB', weight: 2.9 },
     ];
 
-    const data = sectors.map((sector: any) => ({
+    const data = sectors.map(sector => ({
       ...sector,
       performance1D: (Math.random() - 0.5) * 4,
       performance1W: (Math.random() - 0.5) * 8,
@@ -51,9 +97,9 @@ export default function SectorRotationAI() {
       volatility: 10 + Math.random() * 20,
       recommendation:
         Math.random() > 0.6 ? 'overweight' : Math.random() > 0.3 ? 'underweight' : 'neutral',
-    }));
+    })) as SectorData[];
 
-    setSectorData(data.sort((a, b) => b.aiScore - a.aiScore));
+    setSectorData(data.sort((a: SectorData, b: SectorData) => b.aiScore - a.aiScore));
   };
 
   const generateRotationSignals = () => {
@@ -116,7 +162,7 @@ export default function SectorRotationAI() {
     });
   };
 
-  const getFlowColor = (flow: any) => {
+  const getFlowColor = (flow: 'inflow' | 'outflow' | 'neutral') => {
     switch (flow) {
       case 'inflow':
         return 'text-emerald-400';
@@ -127,7 +173,7 @@ export default function SectorRotationAI() {
     }
   };
 
-  const getRecommendationColor = (rec: any) => {
+  const getRecommendationColor = (rec: string) => {
     switch (rec) {
       case 'overweight':
         return 'text-emerald-400';
@@ -180,7 +226,7 @@ export default function SectorRotationAI() {
 
               <div className="space-y-3">
                 <h4 className="text-stone-200 font-semibold">Key Economic Indicators</h4>
-                {economicCycle.keyIndicators?.map((indicator, index) => (
+                {economicCycle.keyIndicators?.map((indicator: EconomicIndicator, index: number) => (
                   <div
                     key={index}
                     className="flex items-center justify-between p-3 bg-stone-800/30 rounded-lg"
@@ -207,7 +253,7 @@ export default function SectorRotationAI() {
               <div>
                 <h4 className="text-stone-200 font-semibold mb-3">AI Recommended Sectors</h4>
                 <div className="space-y-2">
-                  {economicCycle.recommendedSectors?.map((sector, index) => (
+                  {economicCycle.recommendedSectors?.map((sector: string, index: number) => (
                     <div
                       key={index}
                       className="flex items-center justify-between p-2 bg-emerald-500/10 rounded border border-emerald-500/30"
@@ -222,7 +268,7 @@ export default function SectorRotationAI() {
               <div>
                 <h4 className="text-stone-200 font-semibold mb-3">Sectors to Avoid</h4>
                 <div className="space-y-2">
-                  {economicCycle.avoidSectors?.map((sector, index) => (
+                  {economicCycle.avoidSectors?.map((sector: string, index: number) => (
                     <div
                       key={index}
                       className="flex items-center justify-between p-2 bg-red-500/10 rounded border border-red-500/30"

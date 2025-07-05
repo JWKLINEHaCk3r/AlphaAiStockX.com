@@ -40,7 +40,7 @@ export default function SubscriptionPage() {
     <main className="max-w-4xl mx-auto p-8 glassmorphic rounded-xl shadow-2xl mt-8 animate-fade-in">
       <h1 className="text-4xl font-bold text-fuchsia-400 mb-4 drop-shadow">Choose Your Plan</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {plans.map((plan: any) => (
+        {plans.map((plan: { name: string; price: number; features: string[] }) => (
           <div key={plan.name} className="bg-black/30 rounded-xl p-6 flex flex-col gap-4 shadow-lg">
             <h2 className="text-2xl font-bold text-fuchsia-300">{plan.name}</h2>
             <div className="text-4xl font-extrabold text-white mb-2">
@@ -48,7 +48,7 @@ export default function SubscriptionPage() {
               <span className="text-fuchsia-400 text-lg font-normal">/mo</span>
             </div>
             <ul className="text-fuchsia-200 flex-1 space-y-2">
-              {plan.features.map((f, i) => (
+              {plan.features.map((f: string, i: number) => (
                 <li key={i}>• {f}</li>
               ))}
             </ul>

@@ -22,7 +22,20 @@ import {
   Gem,
 } from 'lucide-react';
 
-export default function OwnerProfile({ user, onSwitchToAdmin }) {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  tier: string;
+  joinDate: string;
+}
+
+interface OwnerProfileProps {
+  user: User;
+  onSwitchToAdmin: () => void;
+}
+
+export default function OwnerProfile({ user, onSwitchToAdmin }: OwnerProfileProps) {
   const [activeFeatures, setActiveFeatures] = useState({
     ultraFastTrading: true,
     aiAutoPilot: true,

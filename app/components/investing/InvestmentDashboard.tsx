@@ -19,8 +19,33 @@ import {
   BarChart3,
 } from 'lucide-react';
 
-export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
-  const [portfolio] = useState([
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  balance?: number;
+}
+
+interface PortfolioItem {
+  symbol: string;
+  name: string;
+  shares: number;
+  avgPrice: number;
+  currentPrice: number;
+  value: number;
+  dayChange: number;
+  change: number;
+  price: number;
+  totalReturn: number;
+}
+
+interface InvestmentDashboardProps {
+  user: User;
+  onUpdatePortfolio: (portfolio: PortfolioItem[]) => void;
+}
+
+export default function InvestmentDashboard({ user, onUpdatePortfolio }: InvestmentDashboardProps) {
+  const [portfolio] = useState<PortfolioItem[]>([
     {
       symbol: 'AAPL',
       name: 'Apple Inc.',
@@ -30,6 +55,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       value: 8771.5,
       dayChange: 2.34,
       totalReturn: 1259,
+      change: 1.5,
+      price: 175.43,
     },
     {
       symbol: 'MSFT',
@@ -40,6 +67,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       value: 9471.25,
       dayChange: -1.23,
       totalReturn: 1458.75,
+      change: -0.5,
+      price: 378.85,
     },
     {
       symbol: 'GOOGL',
@@ -50,6 +79,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
       value: 4146.3,
       dayChange: 4.56,
       totalReturn: 373.8,
+      change: 3.5,
+      price: 138.21,
     },
   ]);
 
@@ -68,7 +99,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStock, setSelectedStock] = useState(null);
+  const [selectedStock, setSelectedStock] = useState<PortfolioItem | null>(null);
   const [orderType, setOrderType] = useState('buy');
   const [orderAmount, setOrderAmount] = useState('');
 
@@ -76,7 +107,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
   const totalReturn = portfolio.reduce((sum, stock) => sum + stock.totalReturn, 0);
   const totalReturnPercent = ((totalReturn / (totalPortfolioValue - totalReturn)) * 100).toFixed(2);
 
-  const handleStockSelect = (stock: any) => {
+  const handleStockSelect = (stock: PortfolioItem) => {
     setSelectedStock(stock);
   };
 
@@ -137,7 +168,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
               <div>
                 <p className="text-sm text-gray-400">Buying Power</p>
                 <p className="text-2xl font-bold text-yellow-400">
-                  ${user.balance.toLocaleString()}
+                  ${user.balance?.toLocaleString() || '0'}
                 </p>
               </div>
               <DollarSign className="h-8 w-8 text-yellow-400" />
@@ -173,7 +204,7 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {portfolio.map((stock: any) => (
+                {portfolio.map((stock: PortfolioItem) => (
                   <div
                     key={stock.symbol}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30 hover:border-purple-500/30 transition-all cursor-pointer"
@@ -285,7 +316,8 @@ export default function InvestmentDashboard({ user, onUpdatePortfolio }) {
                       <p className="text-sm text-gray-400">
                         Estimated cost: $
                         {(
-                          (selectedStock.price || selectedStock.currentPrice) * (orderAmount || 0)
+                          (selectedStock.price || selectedStock.currentPrice) *
+                          (Number(orderAmount) || 0)
                         ).toLocaleString()}
                       </p>
                     </div>

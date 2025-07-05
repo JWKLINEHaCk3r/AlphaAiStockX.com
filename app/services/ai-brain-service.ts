@@ -83,7 +83,14 @@ class AIBrainService {
         signals.push({
           symbol: prediction.symbol,
           type: prediction.action,
-          strength: prediction.confidence,
+          strength:
+            prediction.confidence > 0.9
+              ? 'VERY_STRONG'
+              : prediction.confidence > 0.8
+                ? 'STRONG'
+                : prediction.confidence > 0.7
+                  ? 'MODERATE'
+                  : 'WEAK',
           price: prediction.targetPrice,
           stopLoss: prediction.stopLoss,
           timestamp: new Date(),

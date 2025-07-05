@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -119,8 +118,8 @@ export default function AIStockScanner() {
     setIsScanning(false);
   };
 
-  const getScanTypeColor = (type: any) => {
-    const colors = {
+  const getScanTypeColor = (type: string) => {
+    const colors: Record<string, string> = {
       momentum: 'text-emerald-400',
       reversal: 'text-amber-400',
       volume: 'text-blue-400',

@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
 import {
   Select,
   SelectContent,
@@ -18,21 +16,47 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
+  Settings,
   User,
-  Camera,
-  Palette,
-  Trophy,
-  Target,
+  MapPin,
+  Globe,
   TrendingUp,
-  Star,
-  Crown,
-  Flame,
   Shield,
   Eye,
+  Camera,
+  Crown,
+  Star,
+  Target,
+  Flame,
+  Palette,
+  Trophy,
 } from 'lucide-react';
 
-export default function CustomizableProfile({ user, onUpdateProfile }) {
+interface User {
+  name?: string;
+  bio?: string;
+  location?: string;
+  website?: string;
+  tradingExperience?: string;
+  riskTolerance?: string;
+  investmentGoals?: string[];
+  profileVisibility?: string;
+  showPortfolio?: boolean;
+  showReturns?: boolean;
+  theme?: string;
+  accentColor?: string;
+  avatar?: string;
+  subscription?: string;
+}
+
+interface CustomizableProfileProps {
+  user: User;
+  onUpdateProfile: (data: any) => void;
+}
+
+export default function CustomizableProfile({ user, onUpdateProfile }: CustomizableProfileProps) {
   const [profileData, setProfileData] = useState({
     displayName: user?.name || '',
     bio: user?.bio || '',
@@ -96,7 +120,7 @@ export default function CustomizableProfile({ user, onUpdateProfile }) {
     maxDrawdown: 12.1,
   });
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: any) => {
     setProfileData(prev => ({ ...prev, [field]: value }));
   };
 

@@ -5,17 +5,29 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import SubscriptionPlans from './SubscriptionPlans';
 import PaymentForm from './PaymentForm';
 
-export default function SubscriptionModal({ isOpen, onClose, currentPlan, onSubscribe }) {
-  const [view, setView] = useState('plans'); // plans, payment
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [billingCycle, setBillingCycle] = useState('yearly');
+interface SubscriptionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  currentPlan: string;
+  onSubscribe: (planId: string) => void;
+}
 
-  const handleSelectPlan = (planId: any) => {
+export default function SubscriptionModal({
+  isOpen,
+  onClose,
+  currentPlan,
+  onSubscribe,
+}: SubscriptionModalProps) {
+  const [view, setView] = useState('plans'); // plans, payment
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [billingCycle] = useState('yearly');
+
+  const handleSelectPlan = (planId: string) => {
     setSelectedPlan(planId);
     setView('payment');
   };
 
-  const handlePaymentSuccess = (planId: any) => {
+  const handlePaymentSuccess = (planId: string) => {
     onSubscribe(planId);
     onClose();
   };

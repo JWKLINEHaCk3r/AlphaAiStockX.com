@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,7 +16,14 @@ import {
 import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
+interface PaymentFormProps {
+  plan: string | null;
+  billingCycle: string;
+  onBack: () => void;
+  onSuccess?: (planId: string) => void;
+}
+
+export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }: PaymentFormProps) {
   const [cardNumber, setCardNumber] = useState('');
   const [cardName, setCardName] = useState('');
   const [expiryMonth, setExpiryMonth] = useState('');
@@ -27,7 +33,7 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const formatCardNumber = (value: any) => {
+  const formatCardNumber = (value: string) => {
     // Remove all non-digits
     const digits = value.replace(/\D/g, '');
     // Add space after every 4 digits
@@ -36,11 +42,11 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
     return formatted.slice(0, 19);
   };
 
-  const handleCardNumberChange = (e: any) => {
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardNumber(formatCardNumber(e.target.value));
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -66,10 +72,10 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }) {
       // For demo purposes, we'll just show a success message
       setSuccess(true);
       setTimeout(() => {
-        onSuccess(plan);
+        onSuccess?.(plan);
       }, 2000);
-    } catch (err) {
-      setError(err.message || 'Payment processing failed. Please try again.');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Payment processing failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

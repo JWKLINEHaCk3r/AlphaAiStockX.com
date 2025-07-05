@@ -2,40 +2,39 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import {
-  Check,
-  X,
-  Crown,
-  Zap,
-  Bot,
-  Brain,
-  CloudLightningIcon as Lightning,
-  Rocket,
-  Star,
-  Diamond,
-} from 'lucide-react';
+  FaCheck,
+  FaTimes,
+  FaCrown,
+  FaBolt,
+  FaRobot,
+  FaBrain,
+  FaRocket,
+  FaStar,
+  FaGem,
+} from 'react-icons/fa';
 
 interface MembershipTiersProps {
   currentTier: string;
-  onUpgrade: (tier: string) => void;
+  onUpgrade: (tierId: string) => void;
 }
 
 interface TierFeatures {
   trades: string;
   executionSpeed: string;
   aiSignals: string;
-  autoTrade: boolean;
+  autoTrade: boolean | string;
   advancedOrders: boolean;
   realTimeData: boolean;
   portfolioValue: string;
   support: string;
   research: string;
   alerts: string;
-  backtesting: boolean;
-  apiAccess: boolean;
+  backtesting: boolean | string;
+  apiAccess: boolean | string;
 }
 
 interface Tier {
@@ -44,10 +43,10 @@ interface Tier {
   description: string;
   monthlyPrice: number;
   yearlyPrice: number;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
+  popular: boolean;
   features: TierFeatures;
-  popular?: boolean;
 }
 
 export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTiersProps) {
@@ -60,7 +59,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
       description: 'Get started with basic trading',
       monthlyPrice: 0,
       yearlyPrice: 0,
-      icon: Star,
+      icon: FaStar,
       color: 'gray',
       features: {
         trades: '10 per day',
@@ -84,7 +83,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
       description: 'Enhanced trading with AI insights',
       monthlyPrice: 29.99,
       yearlyPrice: 299.99,
-      icon: Zap,
+      icon: FaBolt,
       color: 'blue',
       features: {
         trades: '100 per day',
@@ -108,7 +107,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
       description: 'Professional trading with automation',
       monthlyPrice: 99.99,
       yearlyPrice: 999.99,
-      icon: Bot,
+      icon: FaRobot,
       color: 'purple',
       features: {
         trades: '500 per day',
@@ -132,7 +131,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
       description: 'Ultimate trading machine with unlimited power',
       monthlyPrice: 299.99,
       yearlyPrice: 2999.99,
-      icon: Lightning,
+      icon: FaBolt,
       color: 'gold',
       features: {
         trades: 'Unlimited',
@@ -202,18 +201,18 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
   };
 
   const featuresList = [
-    { key: 'trades', label: 'Daily Trades', icon: Zap },
-    { key: 'executionSpeed', label: 'Execution Speed', icon: Lightning },
-    { key: 'aiSignals', label: 'AI Signals', icon: Brain },
-    { key: 'autoTrade', label: 'Auto-Trade Bot', icon: Bot },
-    { key: 'advancedOrders', label: 'Advanced Orders', icon: Rocket },
-    { key: 'realTimeData', label: 'Real-time Data', icon: Zap },
-    { key: 'portfolioValue', label: 'Portfolio Limit', icon: Diamond },
-    { key: 'support', label: 'Support Level', icon: Star },
-    { key: 'research', label: 'Research Tools', icon: Brain },
-    { key: 'alerts', label: 'Price Alerts', icon: Zap },
-    { key: 'backtesting', label: 'Backtesting', icon: Rocket },
-    { key: 'apiAccess', label: 'API Access', icon: Lightning },
+    { key: 'trades' as keyof TierFeatures, label: 'Daily Trades', icon: FaBolt },
+    { key: 'executionSpeed' as keyof TierFeatures, label: 'Execution Speed', icon: FaBolt },
+    { key: 'aiSignals' as keyof TierFeatures, label: 'AI Signals', icon: FaBrain },
+    { key: 'autoTrade' as keyof TierFeatures, label: 'Auto-Trade Bot', icon: FaRobot },
+    { key: 'advancedOrders' as keyof TierFeatures, label: 'Advanced Orders', icon: FaRocket },
+    { key: 'realTimeData' as keyof TierFeatures, label: 'Real-time Data', icon: FaBolt },
+    { key: 'portfolioValue' as keyof TierFeatures, label: 'Portfolio Limit', icon: FaGem },
+    { key: 'support' as keyof TierFeatures, label: 'Support Level', icon: FaStar },
+    { key: 'research' as keyof TierFeatures, label: 'Research Tools', icon: FaBrain },
+    { key: 'alerts' as keyof TierFeatures, label: 'Price Alerts', icon: FaBolt },
+    { key: 'backtesting' as keyof TierFeatures, label: 'Backtesting', icon: FaRocket },
+    { key: 'apiAccess' as keyof TierFeatures, label: 'API Access', icon: FaBolt },
   ];
 
   return (
@@ -261,7 +260,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
               {tier.popular && (
                 <div className="absolute -top-3 left-0 right-0 flex justify-center">
                   <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-1">
-                    <Crown className="h-3 w-3 mr-1" />
+                    <FaCrown className="h-3 w-3 mr-1" />
                     Most Popular
                   </Badge>
                 </div>
@@ -311,12 +310,12 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
                         <div className="flex items-center">
                           {isBoolean ? (
                             value ? (
-                              <Check className="h-4 w-4 text-green-400" />
+                              <FaCheck className="h-4 w-4 text-green-400" />
                             ) : (
-                              <X className="h-4 w-4 text-gray-500" />
+                              <FaTimes className="h-4 w-4 text-gray-500" />
                             )
                           ) : (
-                            <span className="text-white text-sm font-medium">{value}</span>
+                            <span className="text-white text-sm font-medium">{String(value)}</span>
                           )}
                         </div>
                       </div>
@@ -350,7 +349,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center space-y-3">
               <div className="p-4 bg-blue-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <Lightning className="h-8 w-8 text-blue-400" />
+                <FaBolt className="h-8 w-8 text-blue-400" />
               </div>
               <h3 className="text-white font-bold">Lightning Speed</h3>
               <p className="text-gray-400 text-sm">
@@ -360,7 +359,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
 
             <div className="text-center space-y-3">
               <div className="p-4 bg-purple-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <Bot className="h-8 w-8 text-purple-400" />
+                <FaRobot className="h-8 w-8 text-purple-400" />
               </div>
               <h3 className="text-white font-bold">AI Automation</h3>
               <p className="text-gray-400 text-sm">
@@ -370,7 +369,7 @@ export default function MembershipTiers({ currentTier, onUpgrade }: MembershipTi
 
             <div className="text-center space-y-3">
               <div className="p-4 bg-green-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <Brain className="h-8 w-8 text-green-400" />
+                <FaBrain className="h-8 w-8 text-green-400" />
               </div>
               <h3 className="text-white font-bold">Smart Insights</h3>
               <p className="text-gray-400 text-sm">

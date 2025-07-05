@@ -25,7 +25,7 @@ interface BotStats {
 
 interface RiskControlsProps {
   botSettings: BotSettings;
-  setBotSettings: (settings: BotSettings) => void;
+  setBotSettings: (updater: (prev: BotSettings) => BotSettings) => void;
   botStats: BotStats;
 }
 
@@ -44,7 +44,7 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }: 
   };
 
   const updateSetting = (key: keyof BotSettings, value: number | boolean) => {
-    setBotSettings(prev => ({ ...prev, [key]: value }));
+    setBotSettings((prev: BotSettings) => ({ ...prev, [key]: value }));
   };
 
   return (

@@ -69,6 +69,10 @@ export default function StockChart({ selectedStock }: StockChartProps) {
       marketCap: '2.8T',
       pe: 28.5,
       aiScore: 85 + Math.random() * 15,
+      confidence: 75 + Math.random() * 20,
+      timeframe: '30 days',
+      direction: Math.random() > 0.5 ? 'bullish' : 'bearish',
+      targetPrice: 180 + Math.random() * 40,
     });
 
     setAiPrediction({
@@ -91,16 +95,16 @@ export default function StockChart({ selectedStock }: StockChartProps) {
               <span className="text-3xl font-bold text-white">${stockInfo?.price.toFixed(2)}</span>
               <span
                 className={`flex items-center text-lg font-medium ${
-                  stockInfo?.change > 0 ? 'text-green-400' : 'text-red-400'
+                  (stockInfo?.change || 0) > 0 ? 'text-green-400' : 'text-red-400'
                 }`}
               >
-                {stockInfo?.change > 0 ? (
+                {(stockInfo?.change || 0) > 0 ? (
                   <TrendingUp className="h-4 w-4 mr-1" />
                 ) : (
                   <TrendingDown className="h-4 w-4 mr-1" />
                 )}
-                {stockInfo?.change > 0 ? '+' : ''}
-                {stockInfo?.change.toFixed(2)}%
+                {(stockInfo?.change || 0) > 0 ? '+' : ''}
+                {(stockInfo?.change || 0).toFixed(2)}%
               </span>
             </div>
           </div>

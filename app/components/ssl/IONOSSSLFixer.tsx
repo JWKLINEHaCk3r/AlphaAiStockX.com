@@ -164,7 +164,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`,
               <CardContent>
                 <p className="text-gray-300 mb-4">{step.description}</p>
                 <ol className="space-y-2">
-                  {step.actions.map((action, index) => (
+                  {step.actions.map((action: string, index: number) => (
                     <li key={index} className="flex items-start gap-3 text-gray-300">
                       <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                         {index + 1}

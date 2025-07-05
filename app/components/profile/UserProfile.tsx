@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -68,11 +67,11 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
   };
 
   const handlePreferenceChange = (preference: string, value: boolean) => {
-    setPreferences(prev => ({ ...prev, [preference]: value }));
+    setPreferences((prev: any) => ({ ...prev, [preference]: value }));
   };
 
   const getSubscriptionColor = (subscription: string) => {
-    const colors = {
+    const colors: { [key: string]: string } = {
       free: 'bg-slate-600',
       basic: 'bg-blue-600',
       premium: 'bg-purple-600',
