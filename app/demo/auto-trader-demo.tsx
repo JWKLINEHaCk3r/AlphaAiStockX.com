@@ -23,7 +23,7 @@ export default function AutoTraderDemo() {
 
       const portfolioData = trader.getPortfolio();
       setPortfolio(portfolioData);
-    } catch (e: any) {
+    } catch (e: Error) {
       setError(e.message || 'Unknown error');
     } finally {
       setLoading(false);

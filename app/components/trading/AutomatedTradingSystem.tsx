@@ -1,3 +1,45 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -210,7 +252,7 @@ export default function AutomatedTradingSystem({
     };
   };
 
-  const executeTrade = (conditions: any) => {
+  const executeTrade = (conditions: Record<string, unknown>) => {
     const price = 100 + Math.random() * 400;
     const positionSize = Math.min(
       (tradingCapital * systemSettings.maxRiskPerTrade) / 100,

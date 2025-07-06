@@ -3,7 +3,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "es6"
+      "es2023"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -27,7 +27,12 @@
         "./*"
       ]
     },
-    "target": "ES2017"
+    "target": "ES2022",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "verbatimModuleSyntax": true
   },
   "include": [
     "**/*.ts",

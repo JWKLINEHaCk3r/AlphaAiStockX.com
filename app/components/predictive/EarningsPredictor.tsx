@@ -1,3 +1,45 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -40,6 +82,14 @@ interface SurprisePrediction {
   riskLevel: 'High' | 'Medium' | 'Low';
 }
 
+// Add interface for company data
+interface CompanyData {
+  symbol: string;
+  name: string;
+  date: string;
+  time: string;
+}
+
 export default function EarningsPredictor() {
   const [upcomingEarnings, setUpcomingEarnings] = useState<EarningData[]>([]);
   const [earningsAnalysis, setEarningsAnalysis] = useState<EarningsAnalysisData[]>([]);
@@ -63,7 +113,7 @@ export default function EarningsPredictor() {
       { symbol: 'NFLX', name: 'Netflix Inc.', date: '2024-01-23', time: 'AMC' },
     ];
 
-    const earnings: EarningData[] = companies.map((company: any) => ({
+    const earnings: EarningData[] = companies.map((company: CompanyData) => ({
       ...company,
       currentPrice: 100 + Math.random() * 400,
       estimatedEPS: (Math.random() * 5 + 0.5).toFixed(2),

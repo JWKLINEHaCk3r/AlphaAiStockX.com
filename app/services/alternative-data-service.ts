@@ -775,7 +775,7 @@ export class AlternativeDataService {
     };
   }
 
-  getDataSources(): any[] {
+  getDataSources(): Record<string, unknown>[] {
     return Array.from(this.dataSources.values());
   }
 

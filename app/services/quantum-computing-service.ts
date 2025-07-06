@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 // Quantum Computing Integration Service for ultra-fast processing
 export class QuantumComputingService {
   private static instance: QuantumComputingService;
@@ -178,7 +188,7 @@ export class QuantumComputingService {
     return result;
   }
 
-  async runQuantumPatternRecognition(marketData: any[]): Promise<any> {
+  async runQuantumPatternRecognition(marketData: Record<string, unknown>[]): Promise<any> {
     console.log('Running quantum pattern recognition...');
     const algorithm = this.quantumAlgorithms.get('quantum_pattern_recognition');
 
@@ -297,15 +307,15 @@ export class QuantumComputingService {
     return this.quantumCapabilities;
   }
 
-  getQuantumProcessors(): any[] {
+  getQuantumProcessors(): Record<string, unknown>[] {
     return Array.from(this.quantumProcessors.values());
   }
 
-  getQuantumAlgorithms(): any[] {
+  getQuantumAlgorithms(): Record<string, unknown>[] {
     return Array.from(this.quantumAlgorithms.values());
   }
 
-  getRecentResults(limit = 10): any[] {
+  getRecentResults(limit = 10): Record<string, unknown>[] {
     return Array.from(this.quantumResults.values()).slice(-limit);
   }
 }

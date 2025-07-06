@@ -25,75 +25,13 @@ import {
   Minimize2,
   Brain,
 } from 'lucide-react';
-
-// Type definitions for sports trading
-interface SportsEvent {
-  id: number;
-  type: string;
-  teams: string;
-  time: string;
-  markets: string[];
-  volatility: string;
-  opportunities: number;
-}
-
-interface TradingOpportunity {
-  id: number;
-  eventId: number;
-  eventName: string;
-  sportType: string;
-  marketType: string;
-  bookA: string;
-  bookB: string;
-  oddsA: number;
-  oddsB: number;
-  spreadValue: number;
-  confidence: number;
-  maxStake: number;
-  expectedReturn: number;
-  expectedValue: string;
-  timeWindow: string;
-  timestamp: Date;
-  expiryTime: Date;
-  status: string;
-  profitPotential: number;
-  risk: string;
-}
-
-interface ActiveTrade {
-  id: number;
-  eventName: string;
-  sportType: string;
-  marketType: string;
-  bookA: string;
-  bookB: string;
-  oddsA: number;
-  oddsB: number;
-  spreadValue: number;
-  entryTime: Date;
-  status: string;
-  stake: number;
-  currentPnL: number;
-  expectedPnL: number;
-  confidence: number;
-}
-
-interface ProfitStats {
-  totalProfit: number;
-  dailyProfit: number;
-  winRate: number;
-  avgSpread: number;
-  maxProfit: number;
-  riskRatio: number;
-}
-
-interface ExpandedSections {
-  realTime: boolean;
-  adaptive: boolean;
-  profit: boolean;
-  risk: boolean;
-  interface: boolean;
-}
+import {
+  SportsEvent,
+  TradingOpportunity,
+  ActiveTrade,
+  ProfitStats,
+  ExpandedSections,
+} from '../../types/trading-types';
 
 export default function SportsAlphaTrader() {
   const [activeEvents, setActiveEvents] = useState<SportsEvent[]>([]);
@@ -751,7 +689,7 @@ export default function SportsAlphaTrader() {
                   <p className="text-gray-400">Hunting for spread opportunities...</p>
                 </div>
               ) : (
-                opportunities.map((opportunity: any) => (
+                opportunities.map((opportunity: TradingOpportunity) => (
                   <div
                     key={opportunity.id}
                     className="p-3 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"

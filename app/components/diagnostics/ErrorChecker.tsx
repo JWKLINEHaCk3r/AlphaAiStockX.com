@@ -1,19 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-// CardHeader is not defined in ui/card, so define it here:
-const CardHeader = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={`p-4 border-b border-gray-200 bg-black/30 rounded-t-2xl ${className}`}>
-    {children}
-  </div>
-);
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {

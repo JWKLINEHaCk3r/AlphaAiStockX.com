@@ -184,7 +184,7 @@ export default function SectorRotationAI() {
     }
   };
 
-  const getPerformanceColor = (perf: any) => {
+  const getPerformanceColor = (perf: { change?: number; value?: number }) => {
     return perf >= 0 ? 'text-emerald-400' : 'text-red-400';
   };
 

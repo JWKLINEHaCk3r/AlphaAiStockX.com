@@ -10,6 +10,12 @@ import {
   RiskAnalysis,
   AIModelPrediction,
 } from './ai-types';
+import {
+  Position,
+  TechnicalIndicators,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
 
 // Environment variables for production (client-side safe)
 const API_CONFIG = {
@@ -524,13 +530,17 @@ export class AdvancedAIAutoTrader {
     };
   }
 
-  private assessTechnicalRisk(technicals: any): 'LOW' | 'MEDIUM' | 'HIGH' {
+  private assessTechnicalRisk(technicals: TechnicalIndicators): 'LOW' | 'MEDIUM' | 'HIGH' {
     if (technicals.rsi > 80 || technicals.rsi < 20) return 'HIGH';
     if (technicals.rsi > 70 || technicals.rsi < 30) return 'MEDIUM';
     return 'LOW';
   }
 
-  private getRiskRecommendation(analysis: any): string {
+  private getRiskRecommendation(analysis: {
+    sentiment: any;
+    technicals: TechnicalIndicators;
+    risk: RiskAnalysis;
+  }): string {
     if (analysis.risk.riskScore > 80) return 'REDUCE_POSITION';
     if (analysis.risk.riskScore > 60) return 'MONITOR_CLOSELY';
     if (analysis.sentiment.overall > 0.7) return 'CONSIDER_INCREASE';
@@ -577,8 +587,8 @@ interface TradeExecutionResult {
 
 interface OptimizationResult {
   currentAllocation: Record<string, number>;
-  suggestedAllocation: any;
-  rebalanceActions: any[];
+  suggestedAllocation: OptimalAllocations;
+  rebalanceActions: RebalanceAction[];
   expectedImprovement: {
     returnIncrease: number;
     riskReduction: number;

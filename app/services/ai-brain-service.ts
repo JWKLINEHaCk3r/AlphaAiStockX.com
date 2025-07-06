@@ -6,6 +6,15 @@ import {
   PortfolioMetrics,
   AIModelPrediction,
 } from './ai-types';
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
 
 interface MarketSentiment {
   overall: number; // -1 to 1
@@ -17,7 +26,7 @@ interface MarketSentiment {
 
 class AIBrainService {
   private static instance: AIBrainService;
-  private models: Map<string, any> = new Map();
+  private models: Map<string, Record<string, any>> = new Map();
   private historicalData: Map<string, MarketData[]> = new Map();
   private sentimentCache: Map<string, MarketSentiment> = new Map();
 
@@ -111,7 +120,12 @@ class AIBrainService {
     return signals;
   }
 
-  async optimizePortfolio(currentPositions: any[], availableCapital: number): Promise<any> {
+  async optimizePortfolio(currentPositions: Position[], availableCapital: number): Promise<{
+    suggestedAllocations: OptimalAllocations;
+    riskMetrics: number;
+    expectedReturn: number;
+    rebalanceActions: RebalanceAction[];
+  }> {
     const optimizationModel = this.models.get('portfolioOptimization');
 
     return {
@@ -127,7 +141,7 @@ class AIBrainService {
 
   async performRealTimeAnalysis(symbol: string): Promise<{
     sentiment: MarketSentiment;
-    technicals: any;
+    technicals: TechnicalIndicators;
     prediction: AIModelPrediction;
     risk: RiskAnalysis;
   }> {
@@ -148,7 +162,14 @@ class AIBrainService {
     return { sentiment, technicals, prediction, risk };
   }
 
-  async getIntelligentRecommendation(symbol: string): Promise<any> {
+  async getIntelligentRecommendation(symbol: string): Promise<{
+    action: 'buy' | 'sell' | 'hold';
+    confidence: number;
+    reasoning: string[];
+    targetPrice: number;
+    stopLoss: number;
+    timeframe: string;
+  }> {
     const predictions = await this.analyzeMarket([symbol]);
     const prediction = predictions[0];
 
@@ -276,7 +297,7 @@ class AIBrainService {
 
   private async loadPortfolioModel(): Promise<any> {
     return {
-      optimize: (positions: any[], capital: number) => {
+      optimize: (positions: Record<string, unknown>[], capital: number) => {
         // Modern Portfolio Theory implementation
         const returns = this.calculateExpectedReturns(positions);
         const covariance = this.calculateCovarianceMatrix(positions);
@@ -348,17 +369,27 @@ class AIBrainService {
     return sentiment;
   }
 
-  private async performTechnicalAnalysis(symbol: string, data?: MarketData[]): Promise<any> {
+  private async performTechnicalAnalysis(symbol: string, data?: MarketData[]): Promise<TechnicalIndicators> {
     const marketData = data || (await this.getMarketData(symbol));
 
     return {
       rsi: this.calculateRSI(marketData),
       macd: this.calculateMACD(marketData),
       bollingerBands: this.calculateBollingerBands(marketData),
-      sma: this.calculateSMA(marketData, 20),
-      ema: this.calculateEMA(marketData, 12),
-      volume: this.analyzeVolumeProfile(marketData),
-      support: this.findSupportResistance(marketData),
+      movingAverages: {
+        sma20: this.calculateSMA(marketData, 20),
+        sma50: this.calculateSMA(marketData, 50),
+        sma200: this.calculateSMA(marketData, 200),
+        ema12: this.calculateEMA(marketData, 12),
+        ema26: this.calculateEMA(marketData, 26),
+      },
+      volume: {
+        current: marketData[marketData.length - 1]?.volume || 0,
+        average: this.calculateAverageVolume(marketData),
+        ratio: this.calculateVolumeRatio(marketData),
+      },
+      support: this.findSupportResistance(marketData).support || [],
+      resistance: this.findSupportResistance(marketData).resistance || [],
     };
   }
 
@@ -410,116 +441,251 @@ class AIBrainService {
     };
   }
 
-  private generateReasoning(analysis: any, score: number): string[] {
+  private generateReasoning(analysis: {
+    sentiment: MarketSentiment;
+    technical: TechnicalIndicators;
+    risk: RiskAnalysis;
+  }, score: number): string[] {
     const reasons: string[] = [];
 
     if (analysis.sentiment.overall > 0.5) reasons.push('Positive market sentiment detected');
     if (analysis.sentiment.overall < -0.5) reasons.push('Negative market sentiment detected');
     if (analysis.technical.rsi > 70) reasons.push('Overbought conditions (RSI > 70)');
     if (analysis.technical.rsi < 30) reasons.push('Oversold conditions (RSI < 30)');
-    if (analysis.technical.volume.strength > 0.7) reasons.push('Strong volume confirmation');
+    if (analysis.technical.volume.ratio > 1.5) reasons.push('Strong volume confirmation');
     if (analysis.risk.overallRisk > 0.8) reasons.push('High risk detected - proceed with caution');
 
     return reasons;
   }
 
-  // Placeholder implementations for helper methods
+  // Helper method implementations
   private isDataFresh(data: MarketData[]): boolean {
-    return true;
+    if (data.length === 0) return false;
+    const lastDataTime = new Date(data[data.length - 1].timestamp);
+    const now = new Date();
+    return (now.getTime() - lastDataTime.getTime()) < 5 * 60 * 1000; // 5 minutes
   }
+
   private isSentimentFresh(symbol: string): boolean {
-    return true;
+    return true; // Placeholder implementation
   }
+
   private async fetchMarketData(symbol: string): Promise<MarketData[]> {
+    // Placeholder implementation
     return [];
   }
-  private analyzeVolumeProfile(data: MarketData[]): any {
-    return { strength: 0.5 };
-  }
+
   private detectBreakouts(data: MarketData[]): number {
-    return 0.5;
+    const prices = data.map(d => d.price);
+    const recentHigh = Math.max(...prices.slice(-10));
+    const previousHigh = Math.max(...prices.slice(-30, -10));
+    return recentHigh > previousHigh * 1.02 ? 0.8 : 0.2;
   }
-  private calculateBollingerBands(data: MarketData[]): any {
-    return {};
+
+  private calculateMeanReversionConfidence(rsi: number, bb: BollingerBands, support: SupportResistance): number {
+    let confidence = 0;
+    if (rsi < 30 && bb.percentB < 0.1) confidence += 0.4;
+    if (rsi > 70 && bb.percentB > 0.9) confidence += 0.4;
+    return Math.min(confidence, 1);
   }
-  private findSupportResistance(data: MarketData[]): any {
-    return {};
+
+  private async analyzeNewsData(symbol: string): Promise<{ sentiment: number }> {
+    // Placeholder implementation for news sentiment analysis
+    return { sentiment: Math.random() * 2 - 1 };
   }
-  private calculateMeanReversionConfidence(rsi: number, bb: any, support: any): number {
-    return 0.5;
+
+  private async analyzeSocialMedia(symbol: string): Promise<{ sentiment: number }> {
+    // Placeholder implementation for social media sentiment analysis
+    return { sentiment: Math.random() * 2 - 1 };
   }
-  private async analyzeNewsData(symbol: string): Promise<any> {
-    return { sentiment: 0 };
+
+  private async analyzeInstitutionalFlow(symbol: string): Promise<{ sentiment: number }> {
+    // Placeholder implementation for institutional flow analysis
+    return { sentiment: Math.random() * 2 - 1 };
   }
-  private async analyzeSocialMedia(symbol: string): Promise<any> {
-    return { sentiment: 0 };
-  }
-  private async analyzeInstitutionalFlow(symbol: string): Promise<any> {
-    return { sentiment: 0 };
-  }
+
   private calculateVolatility(data: MarketData[]): number {
-    return 0.2;
+    const returns = data.slice(1).map((d, i) => 
+      Math.log(d.price / data[i].price)
+    );
+    return this.calculateStdDev(returns);
   }
+
   private calculateVaR(data: MarketData[], confidence: number): number {
-    return 0.05;
+    const returns = data.slice(1).map((d, i) => 
+      (d.price - data[i].price) / data[i].price
+    );
+    returns.sort((a, b) => a - b);
+    const index = Math.floor((1 - confidence) * returns.length);
+    return Math.abs(returns[index] || 0.05);
   }
+
   private calculateMarketCorrelation(symbol: string): number {
-    return 0.5;
+    // Placeholder implementation for market correlation
+    return Math.random() * 2 - 1;
   }
+
   private assessLiquidity(data: MarketData[]): number {
-    return 0.8;
+    const avgVolume = data.reduce((sum, d) => sum + d.volume, 0) / data.length;
+    return Math.min(avgVolume / 1000000, 1); // Normalize to 0-1 scale
   }
+
   private calculateOverallRisk(vol: number, var95: number, corr: number, liq: number): number {
-    return 0.4;
+    return (vol * 0.3 + var95 * 0.3 + Math.abs(corr) * 0.2 + (1 - liq) * 0.2);
   }
-  private calculateExpectedReturns(positions: any[]): number[] {
-    return [];
+
+  private calculateExpectedReturns(positions: Position[]): number[] {
+    return positions.map(() => 0.1); // Placeholder 10% expected return
   }
-  private calculateCovarianceMatrix(positions: any[]): number[][] {
-    return [];
+
+  private calculateCovarianceMatrix(positions: Position[]): number[][] {
+    const n = positions.length;
+    return Array(n).fill(0).map(() => Array(n).fill(0.02)); // Placeholder covariance
   }
+
   private optimizeWeights(returns: number[], cov: number[][], capital: number): number[] {
-    return [];
+    // Simplified equal weight optimization
+    const n = returns.length;
+    return Array(n).fill(1 / n);
   }
+
   private calculatePortfolioReturn(weights: number[], returns: number[]): number {
-    return 0.1;
+    return weights.reduce((sum, w, i) => sum + w * returns[i], 0);
   }
-  private calculatePortfolioRisk(weights: any, cov?: any): number {
-    return 0.15;
+
+  private calculatePortfolioRisk(weights: number[], cov?: number[][]): number {
+    if (!cov) return 0.15; // Default risk
+    const n = weights.length;
+    let risk = 0;
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        risk += weights[i] * weights[j] * (cov[i]?.[j] || 0);
+      }
+    }
+    return Math.sqrt(risk);
   }
+
   private calculateSharpeRatio(weights: number[], returns: number[], cov: number[][]): number {
-    return 1.5;
+    const portfolioReturn = this.calculatePortfolioReturn(weights, returns);
+    const portfolioRisk = this.calculatePortfolioRisk(weights, cov);
+    const riskFreeRate = 0.02; // 2% risk-free rate
+    return portfolioRisk > 0 ? (portfolioReturn - riskFreeRate) / portfolioRisk : 0;
   }
-  private calculateMACD(data: MarketData[]): any {
-    return {};
+
+  private calculateMACD(data: MarketData[]): { value: number; signal: number; histogram: number } {
+    const ema12 = this.calculateEMA(data, 12);
+    const ema26 = this.calculateEMA(data, 26);
+    const macdLine = ema12 - ema26;
+    const signalLine = macdLine * 0.9; // Simplified signal line
+    return {
+      value: macdLine,
+      signal: signalLine,
+      histogram: macdLine - signalLine,
+    };
   }
+
   private calculateSMA(data: MarketData[], period: number): number {
-    return 100;
+    const prices = data.slice(-period).map(d => d.price);
+    return prices.reduce((sum, price) => sum + price, 0) / prices.length;
   }
+
   private calculateEMA(data: MarketData[], period: number): number {
-    return 100;
+    const prices = data.map(d => d.price);
+    const multiplier = 2 / (period + 1);
+    let ema = prices[0];
+    
+    for (let i = 1; i < prices.length; i++) {
+      ema = (prices[i] * multiplier) + (ema * (1 - multiplier));
+    }
+    
+    return ema;
   }
-  private calculateOptimalAllocations(positions: any[], capital: number): any {
-    return {};
+
+  private calculateRSI(data: MarketData[]): number {
+    const period = 14;
+    const prices = data.map(d => d.price);
+    const gains: number[] = [];
+    const losses: number[] = [];
+
+    for (let i = 1; i < prices.length; i++) {
+      const change = prices[i] - prices[i - 1];
+      gains.push(change > 0 ? change : 0);
+      losses.push(change < 0 ? Math.abs(change) : 0);
+    }
+
+    const avgGain = gains.slice(-period).reduce((a, b) => a + b, 0) / period;
+    const avgLoss = losses.slice(-period).reduce((a, b) => a + b, 0) / period;
+
+    if (avgLoss === 0) return 100;
+    const rs = avgGain / avgLoss;
+    return 100 - (100 / (1 + rs));
   }
-  private calculateExpectedReturn(positions: any[]): number {
-    return 0.1;
+
+  private calculateOptimalAllocations(positions: Position[], capital: number): OptimalAllocations {
+    const allocations: OptimalAllocations = {};
+    
+    positions.forEach(position => {
+      const targetWeight = 1 / positions.length; // Equal weight
+      const currentValue = position.quantity * position.currentPrice;
+      const targetValue = capital * targetWeight;
+      
+      allocations[position.symbol] = {
+        currentWeight: currentValue / capital,
+        targetWeight,
+        recommendedAction: targetValue > currentValue ? 'buy' : 
+                          targetValue < currentValue ? 'sell' : 'hold',
+        shares: Math.round((targetValue - currentValue) / position.currentPrice),
+        dollarAmount: targetValue - currentValue,
+      };
+    });
+    
+    return allocations;
   }
-  private getRebalanceActions(positions: any[]): any[] {
-    return [];
+
+  private calculateExpectedReturn(positions: Position[]): number {
+    const totalValue = positions.reduce((sum, p) => sum + p.marketValue, 0);
+    return totalValue > 0 ? 0.12 : 0; // 12% expected return
   }
+
+  private getRebalanceActions(positions: Position[]): RebalanceAction[] {
+    return positions.map(position => ({
+      symbol: position.symbol,
+      action: 'hold' as const,
+      quantity: 0,
+      reason: 'Position within target allocation',
+      priority: 'low' as const,
+      estimatedImpact: 0,
+    }));
+  }
+
   private async assessRisk(symbol: string, data: MarketData[]): Promise<RiskAnalysis> {
+    const volatility = this.calculateVolatility(data);
+    const var95 = this.calculateVaR(data, 0.95);
+    const correlation = this.calculateMarketCorrelation(symbol);
+    const liquidity = this.assessLiquidity(data);
+    
     return {
       symbol,
-      volatility: 0.2,
-      var95: 0.05,
-      maxDrawdown: 0.1,
-      sharpeRatio: 1.5,
-      beta: 1.0,
-      riskScore: 0.4,
-      recommendations: ['Monitor position size', 'Consider stop loss'],
+      volatility,
+      var95,
+      maxDrawdown: volatility * 2, // Simplified calculation
+      sharpeRatio: this.calculateSharpeRatio([1], [0.1], [[0.02]]),
+      beta: correlation,
+      riskScore: this.calculateOverallRisk(volatility, var95, correlation, liquidity),
+      recommendations: this.generateRiskRecommendations(volatility, var95),
       timestamp: new Date(),
+      overallRisk: this.calculateOverallRisk(volatility, var95, correlation, liquidity),
     };
+  }
+
+  private generateRiskRecommendations(volatility: number, var95: number): string[] {
+    const recommendations: string[] = [];
+    
+    if (volatility > 0.3) recommendations.push('High volatility detected - consider reducing position size');
+    if (var95 > 0.1) recommendations.push('High VaR - implement strict stop losses');
+    recommendations.push('Monitor position regularly');
+    
+    return recommendations;
   }
 }
 

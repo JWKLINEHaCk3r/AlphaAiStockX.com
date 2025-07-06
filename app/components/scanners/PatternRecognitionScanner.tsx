@@ -1,3 +1,45 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -451,7 +493,7 @@ export default function PatternRecognitionScanner() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {signals.map((signal: any) => (
+            {signals.map((signal: TradingSignalData) => (
               <div
                 key={signal.id}
                 className="p-4 bg-gray-800/50 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all"

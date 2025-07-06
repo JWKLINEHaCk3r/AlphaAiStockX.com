@@ -249,7 +249,7 @@ export class HighFrequencyTradingService {
     return shuffled.slice(0, count);
   }
 
-  private generateRoutingPath(): any[] {
+  private generateRoutingPath(): Record<string, unknown>[] {
     const path = [];
     const hopCount = Math.floor(Math.random() * 3) + 2; // 2-4 hops
 
@@ -273,11 +273,11 @@ export class HighFrequencyTradingService {
     };
   }
 
-  getActiveAlgorithms(): any[] {
+  getActiveAlgorithms(): Record<string, unknown>[] {
     return Array.from(this.activeAlgorithms.values());
   }
 
-  getAvailableStrategies(): any[] {
+  getAvailableStrategies(): Record<string, unknown>[] {
     return Array.from(this.strategies.values());
   }
 

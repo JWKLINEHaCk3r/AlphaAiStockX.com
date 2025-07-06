@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 
 interface Trade {
-  id: string;
+  id: number; // Changed from string to number to match other components
   symbol: string;
   type: string;
   side: 'BUY' | 'SELL';

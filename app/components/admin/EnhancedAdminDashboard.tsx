@@ -140,7 +140,7 @@ export default function EnhancedAdminDashboard({ onSwitchToOwner }: EnhancedAdmi
 
   const updateUser = (userId: number, updates: Partial<User>) => {
     setUsers(prev =>
-      prev.map((user: any) => (user.id === userId ? { ...user, ...updates } : user))
+      prev.map((user: User) => (user.id === userId ? { ...user, ...updates } : user))
     );
     if (selectedUser && selectedUser.id === userId) {
       setSelectedUser({ ...selectedUser, ...updates });

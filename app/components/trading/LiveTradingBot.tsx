@@ -21,38 +21,13 @@ import {
   Wallet,
   Timer,
 } from 'lucide-react';
-
-// Type definitions for live trading bot
-interface Trade {
-  id: number;
-  symbol: string;
-  side: 'BUY' | 'SELL';
-  quantity: number;
-  entryPrice: number;
-  currentPrice: number;
-  strategy: string;
-  confidence: number;
-  timestamp: Date;
-  pnl: number;
-  status: 'OPEN' | 'CLOSED' | 'PENDING';
-  stopLoss: number;
-  takeProfit: number;
-}
-
-interface TradeHistoryItem {
-  id: number;
-  symbol: string;
-  side: 'BUY' | 'SELL';
-  quantity: number;
-  entryPrice: number;
-  exitPrice: number;
-  strategy: string;
-  confidence: number;
-  entryTime: Date;
-  exitTime: Date;
-  pnl: number;
-  status: 'COMPLETED' | 'STOPPED';
-}
+import { 
+  Trade, 
+  TradeHistoryItem,
+  BotStats,
+  BotSettings,
+  MarketAnalysis,
+} from '../../types/trading-types';
 
 export default function LiveTradingBot() {
   const [botStatus, setBotStatus] = useState('stopped'); // stopped, running, paused
@@ -61,7 +36,7 @@ export default function LiveTradingBot() {
   const [dailyPnL, setDailyPnL] = useState(0);
   const [activeTrades, setActiveTrades] = useState<Trade[]>([]);
   const [tradeHistory, setTradeHistory] = useState<TradeHistoryItem[]>([]);
-  const [botStats, setBotStats] = useState({
+  const [botStats, setBotStats] = useState<BotStats>({
     totalTrades: 0,
     winRate: 0,
     avgWin: 0,
@@ -71,8 +46,8 @@ export default function LiveTradingBot() {
     profitFactor: 0,
     tradingDays: 0,
   });
-  const [marketAnalysis, setMarketAnalysis] = useState<Record<string, any>>({});
-  const [botSettings, setBotSettings] = useState({
+  const [marketAnalysis, setMarketAnalysis] = useState<MarketAnalysis>({});
+  const [botSettings, setBotSettings] = useState<BotSettings>({
     maxPositionSize: 5000,
     maxDailyLoss: 1000,
     maxConcurrentTrades: 3,

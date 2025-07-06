@@ -26,6 +26,7 @@ import {
   Eye,
   Timer,
 } from 'lucide-react';
+import { TradingSignalData, Trade } from '../../types/trading-types';
 
 // Type definitions
 interface User {
@@ -355,7 +356,7 @@ export default function UltraFastTradingEngine({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {Object.keys(marketData).map((symbol: any) => (
+                      {Object.keys(marketData).map((symbol: string) => (
                         <SelectItem key={symbol} value={symbol}>
                           {symbol} - ${marketData[symbol]?.price?.toFixed(2)}
                         </SelectItem>
@@ -574,7 +575,7 @@ export default function UltraFastTradingEngine({
                     ? aiSignals.length
                     : currentFeatures.aiSignals
                 )
-                .map((signal: any) => (
+                .map((signal: TradingSignalData) => (
                   <div
                     key={signal.id}
                     className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30"
@@ -617,7 +618,7 @@ export default function UltraFastTradingEngine({
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {recentTrades.slice(0, 10).map((trade: any) => (
+              {recentTrades.slice(0, 10).map((trade: Trade) => (
                 <div
                   key={trade.id}
                   className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30"

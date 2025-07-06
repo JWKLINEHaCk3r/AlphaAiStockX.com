@@ -25,62 +25,13 @@ import {
   Activity,
   Zap,
 } from 'lucide-react';
+// Import type definitions
 import { format } from 'date-fns';
-
-// Type definitions for backtesting engine
-interface BacktestResult {
-  strategy: string;
-  period: string;
-  initialCapital: number;
-  finalCapital: number;
-  totalReturn: number;
-  totalTrades: number;
-  winningTrades: number;
-  losingTrades: number;
-  winRate: number;
-  avgWin: number;
-  avgLoss: number;
-  sharpeRatio: number;
-  maxDrawdown: number;
-  calmarRatio: number;
-  sortinoRatio: number;
-  volatility: number;
-  beta: number;
-  alpha: number;
-  profitFactor: number;
-  maxConsecutiveWins: number;
-  maxConsecutiveLosses: number;
-  avgDaysInTrade: number;
-  totalCommissions: number;
-  netProfit: number;
-  grossProfit: number;
-  grossLoss: number;
-  equityCurve: number[];
-  largestWin: number;
-  largestLoss: number;
-  consecutiveWins: number;
-  consecutiveLosses: number;
-  tradingDays: number;
-  avgHoldingPeriod: number;
-}
-
-interface BacktestSettings {
-  symbol?: string;
-  strategy: string;
-  startDate: Date;
-  endDate: Date;
-  initialCapital: number;
-  commissionPerTrade?: number;
-  slippagePercent?: number;
-  symbols?: string[];
-  timeframe?: string;
-  commission?: number;
-  slippage?: number;
-  maxPositionSize?: number;
-  riskPerTrade?: number;
-  stopLoss?: number;
-  takeProfit?: number;
-}
+import {
+  BacktestResult,
+  BacktestSettings,
+  TradingStrategy,
+} from '../../types/trading-types';
 
 export default function BacktestingEngine() {
   const [backtestResults, setBacktestResults] = useState<BacktestResult | null>(null);
@@ -101,7 +52,7 @@ export default function BacktestingEngine() {
     takeProfit: 0.1,
   });
 
-  const strategies = [
+  const strategies: TradingStrategy[] = [
     { id: 'ai-pattern-recognition', name: 'AI Pattern Recognition', type: 'AI', winRate: 73.5 },
     { id: 'momentum-breakout', name: 'Momentum Breakout', type: 'Technical', winRate: 68.2 },
     { id: 'mean-reversion', name: 'Mean Reversion', type: 'Statistical', winRate: 65.8 },
@@ -199,7 +150,7 @@ export default function BacktestingEngine() {
     setBacktestResults(null);
   };
 
-  const getReturnColor = (value: any) => {
+  const getReturnColor = (value: number) => {
     return value >= 0 ? 'text-green-400' : 'text-red-400';
   };
 
@@ -233,7 +184,7 @@ export default function BacktestingEngine() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-600">
-                    {strategies.map((strategy: any) => (
+                    {strategies.map((strategy: TradingStrategy) => (
                       <SelectItem key={strategy.id} value={strategy.id}>
                         <div>
                           <div className="font-medium">{strategy.name}</div>

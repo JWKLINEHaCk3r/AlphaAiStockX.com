@@ -95,17 +95,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className={`${inter.className} antialiased min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white`}>
-        <ErrorBoundary>
-          <main role="main" id="main-content" className="relative z-10 min-h-screen">
-            {children}
-          </main>
-        </ErrorBoundary>
+        <main role="main" id="main-content" className="relative z-10 min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );
 }
 
-export function ErrorBoundary({ children }: PropsWithChildren<object>) {
+// Simple error boundary component (internal use only)
+function ErrorBoundary({ children }: PropsWithChildren<object>) {
   // Simple passthrough error boundary (replace with real error handling as needed)
   return <>{children}</>;
 }

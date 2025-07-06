@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 // Reinforcement Learning Service for advanced trading strategies
 export class ReinforcementLearningService {
   private static instance: ReinforcementLearningService;
@@ -680,15 +690,15 @@ export class ReinforcementLearningService {
     };
   }
 
-  getModels(): any[] {
+  getModels(): Record<string, unknown>[] {
     return Array.from(this.models.values());
   }
 
-  getEnvironments(): any[] {
+  getEnvironments(): Record<string, unknown>[] {
     return Array.from(this.environments.values());
   }
 
-  getAgents(): any[] {
+  getAgents(): Record<string, unknown>[] {
     return Array.from(this.agents.values());
   }
 
@@ -696,7 +706,7 @@ export class ReinforcementLearningService {
     return this.agents.get(agentId);
   }
 
-  getTrainingHistory(limit = 10): any[] {
+  getTrainingHistory(limit = 10): Record<string, unknown>[] {
     return Array.from(this.trainingHistory.values()).slice(-limit);
   }
 

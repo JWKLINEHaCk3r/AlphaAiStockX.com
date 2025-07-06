@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 import { aiBrainService } from './ai-brain-service';
 
 export class AdvancedStockAnalysisService {
@@ -295,7 +305,7 @@ export class AdvancedStockAnalysisService {
     });
   }
 
-  private detectPatterns(data: any[]) {
+  private detectPatterns(data: Record<string, unknown>[]) {
     const patterns = [];
 
     // Simplified pattern detection (in reality, this would be much more sophisticated)
@@ -340,7 +350,7 @@ export class AdvancedStockAnalysisService {
     return patterns;
   }
 
-  private detectHeadAndShoulders(data: any[]) {
+  private detectHeadAndShoulders(data: Record<string, unknown>[]) {
     // Simplified detection - look for three peaks with middle one highest
     const peaks = this.findPeaks(data);
     if (peaks.length >= 3) {
@@ -350,7 +360,7 @@ export class AdvancedStockAnalysisService {
     return false;
   }
 
-  private detectDoubleBottom(data: any[]) {
+  private detectDoubleBottom(data: Record<string, unknown>[]) {
     // Look for two similar lows
     const troughs = this.findTroughs(data);
     if (troughs.length >= 2) {
@@ -361,7 +371,7 @@ export class AdvancedStockAnalysisService {
     return false;
   }
 
-  private detectCupAndHandle(data: any[]) {
+  private detectCupAndHandle(data: Record<string, unknown>[]) {
     // Look for U-shaped pattern followed by small consolidation
     if (data.length < 30) return false;
 
@@ -374,7 +384,7 @@ export class AdvancedStockAnalysisService {
     return firstHalfTrend < -0.1 && secondHalfTrend > 0.1; // Down then up
   }
 
-  private findPeaks(data: any[]) {
+  private findPeaks(data: Record<string, unknown>[]) {
     const peaks = [];
     for (let i = 1; i < data.length - 1; i++) {
       if (data[i].high > data[i - 1].high && data[i].high > data[i + 1].high) {
@@ -384,7 +394,7 @@ export class AdvancedStockAnalysisService {
     return peaks;
   }
 
-  private findTroughs(data: any[]) {
+  private findTroughs(data: Record<string, unknown>[]) {
     const troughs = [];
     for (let i = 1; i < data.length - 1; i++) {
       if (data[i].low < data[i - 1].low && data[i].low < data[i + 1].low) {
@@ -394,14 +404,14 @@ export class AdvancedStockAnalysisService {
     return troughs;
   }
 
-  private calculateTrend(data: any[]) {
+  private calculateTrend(data: Record<string, unknown>[]) {
     if (data.length < 2) return 0;
     const start = data[0].close;
     const end = data[data.length - 1].close;
     return (end - start) / start;
   }
 
-  private calculatePatternTarget(data: any[], patternType: string) {
+  private calculatePatternTarget(data: Record<string, unknown>[], patternType: string) {
     const currentPrice = data[data.length - 1].close;
 
     switch (patternType) {
@@ -430,7 +440,7 @@ export class AdvancedStockAnalysisService {
     });
   }
 
-  private analyzeVolume(data: any[]) {
+  private analyzeVolume(data: Record<string, unknown>[]) {
     const volumes = data.map(d => d.volume);
     const avgVolume = volumes.reduce((sum, vol) => sum + vol, 0) / volumes.length;
     const currentVolume = volumes[volumes.length - 1];
@@ -447,7 +457,7 @@ export class AdvancedStockAnalysisService {
     };
   }
 
-  private calculateVolumeTrend(data: any[]) {
+  private calculateVolumeTrend(data: Record<string, unknown>[]) {
     const volumes = data.map(d => d.volume);
     const firstHalf = volumes.slice(0, Math.floor(volumes.length / 2));
     const secondHalf = volumes.slice(Math.floor(volumes.length / 2));
@@ -530,7 +540,7 @@ export class AdvancedStockAnalysisService {
     return historical[historical.length - 1].close;
   }
 
-  private calculateComprehensiveMetrics(historical: any[]) {
+  private calculateComprehensiveMetrics(historical: Record<string, unknown>[]) {
     if (!historical || historical.length === 0) return {};
 
     const prices = historical.map(d => d.close);
@@ -591,7 +601,7 @@ export class AdvancedStockAnalysisService {
     };
   }
 
-  private calculateTechnicalIndicators(historical: any[]) {
+  private calculateTechnicalIndicators(historical: Record<string, unknown>[]) {
     if (!historical || historical.length < 50) return {};
 
     const prices = historical.map(d => d.close);
@@ -942,7 +952,7 @@ export class AdvancedStockAnalysisService {
     return 'STRONG SELL';
   }
 
-  private classifyMarketCondition(historical: any[], metrics: any) {
+  private classifyMarketCondition(historical: Record<string, unknown>[], metrics: any) {
     const prices = historical.map(d => d.close);
     const currentPrice = prices[prices.length - 1];
 
@@ -1285,7 +1295,7 @@ export class AdvancedStockAnalysisService {
     };
   }
 
-  private getEntryExitRecommendation(currentPrice: number, entryPoints: any[], exitPoints: any[]) {
+  private getEntryExitRecommendation(currentPrice: number, entryPoints: Record<string, unknown>[], exitPoints: Record<string, unknown>[]) {
     const bestEntry = entryPoints.reduce(
       (best, point) => (point.confidence > best.confidence ? point : best),
       entryPoints[0] || { confidence: 0 }
@@ -1331,7 +1341,7 @@ export class AdvancedStockAnalysisService {
     };
   }
 
-  private identifyPriceMilestones(symbol: string, historical: any[]) {
+  private identifyPriceMilestones(symbol: string, historical: Record<string, unknown>[]) {
     const milestones = [];
     const prices = historical.map(d => d.close);
 
@@ -1366,7 +1376,7 @@ export class AdvancedStockAnalysisService {
     return milestones.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
-  private identifyKeyEvents(symbol: string, historical: any[]) {
+  private identifyKeyEvents(symbol: string, historical: Record<string, unknown>[]) {
     const events = [];
     const prices = historical.map(d => d.close);
     const volumes = historical.map(d => d.volume);

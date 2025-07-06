@@ -17,8 +17,8 @@ export interface Trade {
 }
 export interface PerformanceData {
   dailyReturns: { date: Date; return: number; cumulative: number }[];
-  monthlyReturns: any[];
-  drawdownPeriods: any[];
+  monthlyReturns: Record<string, unknown>[];
+  drawdownPeriods: Record<string, unknown>[];
   bestTrade: Trade | null;
   worstTrade: Trade | null;
   avgHoldTime: string;

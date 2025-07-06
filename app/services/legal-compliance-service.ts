@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 // Comprehensive Legal Compliance Service
 export class LegalComplianceService {
   private static instance: LegalComplianceService;

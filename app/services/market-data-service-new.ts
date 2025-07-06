@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 // Advanced Market Data Service with Real-time capabilities
 
 export class MarketDataService {

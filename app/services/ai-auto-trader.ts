@@ -1,3 +1,13 @@
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';
+
 // AI Auto-Trader Service (Demo)
 // This service simulates an AI-driven auto-trader using live stock data APIs and user settings.
 // Replace mock logic with real API calls and trading logic for production.

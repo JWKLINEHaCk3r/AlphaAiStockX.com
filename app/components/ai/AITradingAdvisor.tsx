@@ -1,3 +1,45 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -36,17 +78,20 @@ interface AITradingAdvisorProps {
 
 interface TradingSignal {
   type: 'BUY' | 'SELL';
-  strength: number;
+  strength: number | string;
   indicator: string;
-  message: string;
+  message?: string;
+  description?: string;
   confidence: number;
 }
 
 interface EntryExitPoint {
   price: number;
   confidence: number;
-  reasoning: string;
-  riskLevel: string;
+  reasoning?: string;
+  riskLevel?: string;
+  type?: string;
+  description?: string;
 }
 
 interface StockData {
@@ -67,28 +112,86 @@ interface StockData {
       levels: number;
     };
   };
-  marketClassification: any;
-  recommendation: any;
-  performance: any;
+  marketClassification: MarketClassification;
+  recommendation: TradingRecommendation;
+  performance: {
+    day: number;
+    week: number;
+    month: number;
+    year: number;
+  };
 }
 
 interface StockAnalysis {
-  stock: any;
-  currentPrice: any;
-  historical: any;
-  realTimeData: any;
-  patterns: any;
-  volumeAnalysis: any;
-  metrics: any;
+  stock: {
+    symbol: string;
+    name: string;
+    sector: string;
+    marketCap: number;
+    ipoDate: string;
+  };
+  currentPrice: number;
+  historical: Array<{ price: number; volume: number; timestamp: string }>;
+  realTimeData: RealtimeData;
+  patterns: ChartPattern[];
+  volumeAnalysis: VolumeProfile;
+  metrics: {
+    performance: {
+      day: number;
+      week: number;
+      month: number;
+      year: number;
+    };
+    levels: {
+      year52High: number;
+      year52Low: number;
+    };
+  };
+  buyScore?: {
+    overall: number;
+    rating: string;
+    components: AIAnalysisComponents;
+  };
   tradingSignals?: TradingSignal[];
   entryExitPoints?: {
     entry: EntryExitPoint[];
     exit: EntryExitPoint[];
+    recommendation?: string;
   };
-  marketClassification: any;
-  recommendation: any;
-  performanceSinceIPO?: any;
-  priceTargets?: any;
+  marketClassification: MarketClassification & {
+    classification: string;
+    confidence: number;
+    description: string;
+    bullishFactors: number;
+    bearishFactors: number;
+    trends: {
+      short: 'UP' | 'DOWN';
+      medium: 'UP' | 'DOWN';
+      long: 'UP' | 'DOWN';
+    };
+  };
+  recommendation: TradingRecommendation & {
+    action: string;
+    confidence: number;
+    positionSize: string;
+    stopLoss: number;
+    takeProfit: number;
+    timeframe: string;
+    keyFactors: string[];
+    riskLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  };
+  performanceSinceIPO?: {
+    ipoPrice: number;
+    totalReturn: number;
+    annualizedReturn: number;
+  };
+  priceTargets: {
+    conservative: number;
+    moderate: number;
+    aggressive: number;
+    stopLoss: number;
+    timeframe: string;
+  };
 }
 
 export default function AITradingAdvisor({ className = '' }: AITradingAdvisorProps) {
@@ -498,23 +601,23 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="text-center">
                       <div
-                        className={`text-6xl font-bold mb-2 ${getScoreColor(stockAnalysis.buyScore.overall)}`}
+                        className={`text-6xl font-bold mb-2 ${getScoreColor(stockAnalysis.buyScore?.overall || 0)}`}
                       >
-                        {stockAnalysis.buyScore.overall}
+                        {stockAnalysis.buyScore?.overall || 'N/A'}
                       </div>
                       <Badge
-                        className={`text-lg px-4 py-2 ${getScoreBadgeColor(stockAnalysis.buyScore.overall)}`}
+                        className={`text-lg px-4 py-2 ${getScoreBadgeColor(stockAnalysis.buyScore?.overall || 0)}`}
                       >
-                        {stockAnalysis.buyScore.rating}
+                        {stockAnalysis.buyScore?.rating || 'N/A'}
                       </Badge>
                       <div className="mt-4">
-                        <Progress value={stockAnalysis.buyScore.overall} className="h-3" />
+                        <Progress value={stockAnalysis.buyScore?.overall || 0} className="h-3" />
                       </div>
                     </div>
 
                     <div className="space-y-3">
                       <h4 className="text-white font-semibold">Score Components:</h4>
-                      {Object.entries(stockAnalysis.buyScore.components).map(
+                      {stockAnalysis.buyScore?.components && Object.entries(stockAnalysis.buyScore.components).map(
                         ([key, value]: [string, unknown]) => (
                           <div key={key} className="flex items-center justify-between">
                             <span className="text-slate-300 capitalize">
@@ -809,14 +912,14 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                           </div>
                           <Badge
                             className={
-                              signal.strength === 'STRONG' ? 'bg-red-600' : 'bg-yellow-600'
+                              (typeof signal.strength === 'number' ? signal.strength >= 70 : signal.strength === 'STRONG') ? 'bg-red-600' : 'bg-yellow-600'
                             }
                           >
                             {signal.strength}
                           </Badge>
                         </div>
                         <div className="text-white font-medium mb-1">{signal.indicator}</div>
-                        <div className="text-slate-300 text-sm mb-2">{signal.description}</div>
+                        <div className="text-slate-300 text-sm mb-2">{signal.message || signal.description}</div>
                         <div className="flex items-center gap-2">
                           <span className="text-slate-400 text-sm">Confidence:</span>
                           <Progress value={signal.confidence * 100} className="w-24 h-2" />
@@ -852,12 +955,12 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                             className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
                           >
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-white font-medium">{point.type}</span>
+                              <span className="text-white font-medium">{point.type || 'Entry Point'}</span>
                               <span className="text-green-400 font-semibold">
                                 {formatCurrency(point.price)}
                               </span>
                             </div>
-                            <div className="text-slate-300 text-sm mb-2">{point.description}</div>
+                            <div className="text-slate-300 text-sm mb-2">{point.description || point.reasoning}</div>
                             <div className="flex items-center gap-2">
                               <span className="text-slate-400 text-xs">Confidence:</span>
                               <Progress value={point.confidence * 100} className="w-16 h-1" />
@@ -882,12 +985,12 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                             className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"
                           >
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-white font-medium">{point.type}</span>
+                              <span className="text-white font-medium">{point.type || 'Exit Point'}</span>
                               <span className="text-red-400 font-semibold">
                                 {formatCurrency(point.price)}
                               </span>
                             </div>
-                            <div className="text-slate-300 text-sm mb-2">{point.description}</div>
+                            <div className="text-slate-300 text-sm mb-2">{point.description || point.reasoning}</div>
                             <div className="flex items-center gap-2">
                               <span className="text-slate-400 text-xs">Confidence:</span>
                               <Progress value={point.confidence * 100} className="w-16 h-1" />
@@ -904,7 +1007,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                   <div className="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
                     <h4 className="text-white font-semibold mb-2">AI Recommendation:</h4>
                     <p className="text-slate-300 text-sm">
-                      {stockAnalysis.entryExitPoints.recommendation}
+                      {stockAnalysis.entryExitPoints?.recommendation}
                     </p>
                   </div>
                 </CardContent>
@@ -1058,7 +1161,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         <div className="text-center">
                           <Volume2 className="h-5 w-5 text-blue-400 mx-auto" />
                           <div className="text-white text-sm">
-                            {formatVolume(stock.volume?.currentVolume || 0)}
+                            {formatVolume(typeof stock.volume === 'number' ? stock.volume : (stock.volume as any)?.currentVolume || 0)}
                           </div>
                         </div>
                       </div>

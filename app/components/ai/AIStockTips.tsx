@@ -18,6 +18,7 @@ import {
   CheckCircle,
   Crown,
 } from 'lucide-react';
+import { AIStockPrediction } from '../../types/trading-types';
 
 interface StockTip {
   id: number;
@@ -370,7 +371,7 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {predictions.map((prediction: any) => (
+            {predictions.map((prediction: AIStockPrediction) => (
               <div
                 key={prediction.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"

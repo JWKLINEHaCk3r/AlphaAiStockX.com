@@ -7,27 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-
-interface UserProfile {
-  id: string;
-  name: string;
-  email: string;
-  membershipLevel: string;
-  accountValue: number;
-  profitLoss: number;
-  totalTrades: number;
-  status: string;
-  lastActivity: string;
-  riskScore: number;
-}
-
-interface SystemAlert {
-  id: string;
-  type: string;
-  message: string;
-  severity: string;
-  timestamp: string;
-}
 import {
   Shield,
   Users,
@@ -52,26 +31,28 @@ import {
 } from 'lucide-react';
 
 interface UserProfile {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  subscription: string;
-  status: string;
-  totalTrades: number;
-  profitLoss: number;
-  riskScore: number;
-  lastActive: string;
-  location: string;
+  membershipLevel: string;
   accountValue: number;
-  winRate: number;
+  profitLoss: number;
+  totalTrades: number;
+  status: string;
+  lastActivity: string;
+  riskScore: number;
+  subscription?: string;
+  lastActive?: string;
+  location?: string;
+  winRate?: number;
 }
 
 interface SystemAlert {
-  id: number;
+  id: string;
   type: string;
   message: string;
-  timestamp: Date;
   severity: string;
+  timestamp: string;
 }
 
 interface LiveData {
@@ -135,74 +116,84 @@ export default function AdminDashboard() {
   const generateUserProfiles = () => {
     const profiles = [
       {
-        id: 1,
+        id: '1',
         name: 'John Alpha',
         email: 'john@example.com',
-        subscription: 'ultimate',
+        membershipLevel: 'ultimate',
         status: 'active',
         totalTrades: 1247,
         profitLoss: 23847.32,
         riskScore: 7.2,
-        lastActive: '2 minutes ago',
+        lastActivity: '2 minutes ago',
         location: 'New York, USA',
         accountValue: 125000,
         winRate: 73.5,
+        subscription: 'ultimate',
+        lastActive: '2 minutes ago',
       },
       {
-        id: 2,
+        id: '2',
         name: 'Sarah Wolf',
         email: 'sarah@example.com',
-        subscription: 'pro',
+        membershipLevel: 'pro',
         status: 'active',
         totalTrades: 892,
         profitLoss: 15632.18,
         riskScore: 5.8,
-        lastActive: '5 minutes ago',
+        lastActivity: '5 minutes ago',
         location: 'London, UK',
         accountValue: 87500,
         winRate: 68.2,
+        subscription: 'pro',
+        lastActive: '5 minutes ago',
       },
       {
-        id: 3,
+        id: '3',
         name: 'Mike Predator',
         email: 'mike@example.com',
-        subscription: 'ultimate',
+        membershipLevel: 'ultimate',
         status: 'suspended',
         totalTrades: 2156,
         profitLoss: -8934.67,
         riskScore: 9.1,
-        lastActive: '1 hour ago',
+        lastActivity: '1 hour ago',
         location: 'Tokyo, Japan',
         accountValue: 45000,
         winRate: 42.3,
+        subscription: 'ultimate',
+        lastActive: '1 hour ago',
       },
       {
-        id: 4,
+        id: '4',
         name: 'Emma Hunter',
         email: 'emma@example.com',
-        subscription: 'basic',
+        membershipLevel: 'basic',
         status: 'active',
         totalTrades: 234,
         profitLoss: 3247.89,
         riskScore: 3.4,
-        lastActive: '10 minutes ago',
+        lastActivity: '10 minutes ago',
         location: 'Sydney, Australia',
         accountValue: 25000,
         winRate: 61.7,
+        subscription: 'basic',
+        lastActive: '10 minutes ago',
       },
       {
-        id: 5,
+        id: '5',
         name: 'David Apex',
         email: 'david@example.com',
+        membershipLevel: 'ultimate',
         subscription: 'ultimate',
         status: 'active',
         totalTrades: 3421,
         profitLoss: 67834.21,
         riskScore: 6.9,
-        lastActive: '1 minute ago',
+        lastActivity: '1 minute ago',
         location: 'Toronto, Canada',
         accountValue: 250000,
         winRate: 78.9,
+        lastActive: '1 minute ago',
       },
     ];
 
@@ -223,24 +214,24 @@ export default function AdminDashboard() {
       tradesPerSecond: 12.5 + Math.random() * 5,
       systemAlerts: [
         {
-          id: 1,
+          id: '1',
           type: 'warning',
           message: 'High server load detected on EU-West-1',
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
           severity: 'medium',
         },
         {
-          id: 2,
+          id: '2',
           type: 'info',
           message: 'New user registration spike: +15% in last hour',
-          timestamp: new Date(Date.now() - 300000),
+          timestamp: new Date(Date.now() - 300000).toISOString(),
           severity: 'low',
         },
         {
-          id: 3,
+          id: '3',
           type: 'error',
           message: 'Payment gateway timeout for 3 transactions',
-          timestamp: new Date(Date.now() - 600000),
+          timestamp: new Date(Date.now() - 600000).toISOString(),
           severity: 'high',
         },
       ],
@@ -279,13 +270,13 @@ export default function AdminDashboard() {
     }
   };
 
-  const suspendUser = (userId: number) => {
+  const suspendUser = (userId: string) => {
     setUserProfiles(prev =>
       prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
-  const activateUser = (userId: number) => {
+  const activateUser = (userId: string) => {
     setUserProfiles(prev =>
       prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'active' } : user))
     );
@@ -495,8 +486,8 @@ export default function AdminDashboard() {
                         <div>
                           <div className="flex items-center space-x-2">
                             <span className="text-gray-100 font-bold text-lg">{user.name}</span>
-                            <Badge className={getSubscriptionColor(user.subscription)}>
-                              {user.subscription.toUpperCase()}
+                            <Badge className={getSubscriptionColor(user.subscription || 'basic')}>
+                              {(user.subscription || 'basic').toUpperCase()}
                             </Badge>
                             <Badge
                               className={`${getStatusColor(user.status)} border border-current`}
@@ -535,7 +526,7 @@ export default function AdminDashboard() {
                           <div>
                             <p className="text-xs text-gray-400">Win Rate</p>
                             <p className="text-sm font-bold text-purple-400">
-                              {user.winRate.toFixed(1)}%
+                              {(user.winRate || 0).toFixed(1)}%
                             </p>
                           </div>
                         </div>
@@ -685,7 +676,7 @@ export default function AdminDashboard() {
                           </span>
                         </div>
                         <span className="text-xs text-gray-400">
-                          {alert.timestamp.toLocaleTimeString()}
+                          {new Date(alert.timestamp).toLocaleTimeString()}
                         </span>
                       </div>
                       <p className="text-sm text-gray-300 mt-1">{alert.message}</p>

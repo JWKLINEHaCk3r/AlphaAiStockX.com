@@ -23,13 +23,18 @@ import {
   Save,
 } from 'lucide-react';
 
+import {
+  AdminPermissions,
+  AdminSettings,
+} from '../../types/trading-types';
+
 interface Admin {
   id: string;
   name: string;
   email: string;
   role: string;
-  permissions: any;
-  settings: any;
+  permissions: AdminPermissions;
+  settings: AdminSettings;
 }
 
 interface AdminProfileProps {

@@ -1,3 +1,45 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';
+
 'use client';
 
 import { useState } from 'react';
@@ -434,7 +476,7 @@ export default function BankingDashboard({ user, onUpdateBalance }: BankingDashb
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {transactions.map((transaction: any) => (
+                {transactions.map((transaction: Transaction) => (
                   <div
                     key={transaction.id}
                     className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-gray-700/30"
