@@ -17,6 +17,7 @@ import {
   EnhancedParticleField,
   QuantumDataViz 
 } from '@/components/ui/advanced-3d-effects';
+import SuperiorTradingPlatform from '@/components/platform/SuperiorTradingPlatform';
 import { 
   Brain, 
   BarChart3, 
@@ -34,19 +35,20 @@ import {
   Target,
   Globe
 } from 'lucide-react';
+import Link from 'next/link';
 
 const features = [
   {
     icon: <Brain className="w-8 h-8" />,
-    title: 'Neural Trading AI',
-    desc: 'Advanced GPT-4o powered analysis with 47+ specialized AI agents providing real-time market insights.',
+    title: 'Live AI Trading Engine',
+    desc: 'Real-time AI-powered trading system with LSTM neural networks, pattern recognition, and automated execution.',
     gradient: 'from-neon-blue to-neon-purple',
     delay: '0ms',
   },
   {
     icon: <BarChart3 className="w-8 h-8" />,
-    title: 'Quantum Analytics',
-    desc: 'Breakthrough quantum-enhanced backtesting and predictive modeling with microsecond precision.',
+    title: 'Advanced Market Analysis',
+    desc: 'Multi-provider market data aggregation with 50+ technical indicators and real-time signal generation.',
     gradient: 'from-neon-green to-neon-cyan',
     delay: '100ms',
   },
@@ -186,10 +188,13 @@ function HeroSection() {
         </div>
 
         <div className="animate-slide-up flex flex-col sm:flex-row gap-4 justify-center mb-12" style={{ animationDelay: '400ms' }}>
-          <Button size="lg" className="btn-primary group text-lg px-8 py-4 interactive-cursor">
-            Start Trading
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <Link href="/ai-trading">
+            <Button size="lg" className="btn-primary group text-lg px-8 py-4 interactive-cursor">
+              <Brain className="mr-2 w-5 h-5" />
+              Live AI Trading
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
           <Button size="lg" variant="outline" className="glass-card text-lg px-8 py-4 group interactive-cursor">
             <Play className="mr-2 w-5 h-5" />
             Watch Demo

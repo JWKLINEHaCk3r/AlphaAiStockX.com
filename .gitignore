@@ -35,3 +35,5 @@ Pipfile*
 __pycache__/
 # Local Netlify folder
 .netlify
+*.db
+.env.local

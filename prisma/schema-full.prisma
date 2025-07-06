@@ -1,0 +1,713 @@
+// Advanced Database Schema for Next-Gen Trading Platform
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String            @id @default(cuid())
+  email            String            @unique
+  username         String?           @unique
+  name             String
+  avatar           String?
+  password         String?
+  tier             UserTier          @default(FREE)
+  status           UserStatus        @default(PENDING)
+  balance          Float             @default(0)
+  portfolioValue   Float             @default(0)
+  totalPnL         Float             @default(0)
+  winRate          Float             @default(0)
+  riskScore        Float             @default(5)
+  tradingLevel     Int               @default(1)
+  aiAccess         Boolean           @default(true)
+  permissions      String[]
+  preferences      Json
+  kycStatus        KYCStatus         @default(PENDING)
+  accountType      AccountType       @default(CASH)
+  phone            String?
+  address          Json?
+  dateOfBirth      DateTime?
+  ssn              String?           @map("social_security_number")
+  employmentInfo   Json?
+  investmentGoals  String[]
+  
+  // Timestamps
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  lastActive       DateTime          @default(now())
+  emailVerifiedAt  DateTime?
+  phoneVerifiedAt  DateTime?
+
+  // Relations
+  portfolios       Portfolio[]
+  trades           Trade[]
+  orders           Order[]
+  subscriptions    Subscription[]
+  notifications    Notification[]
+  activities       UserActivity[]
+  watchlists       Watchlist[]
+  aiModels         UserAIModel[]
+  socialFollowing  UserFollowing[]   @relation("UserFollowing")
+  socialFollowers  UserFollowing[]   @relation("UserFollowers")
+  posts            SocialPost[]
+  comments         SocialComment[]
+  riskAssessments  RiskAssessment[]
+  kyc              KYCDocument[]
+  sessions         Session[]
+  accounts         Account[]
+
+  @@map("users")
+}
+
+model Portfolio {
+  id           String          @id @default(cuid())
+  userId       String
+  name         String
+  description  String?
+  type         PortfolioType   @default(PERSONAL)
+  balance      Float           @default(0)
+  totalValue   Float           @default(0)
+  pnl          Float           @default(0)
+  pnlPercent   Float           @default(0)
+  allocations  Json            // Asset allocation targets
+  isActive     Boolean         @default(true)
+  isPublic     Boolean         @default(false)
+  
+  // AI Configuration
+  aiEnabled    Boolean         @default(false)
+  aiModelId    String?
+  riskLevel    RiskLevel       @default(MODERATE)
+  strategy     String?
+  
+  // Performance Metrics
+  sharpeRatio  Float?
+  maxDrawdown  Float?
+  volatility   Float?
+  beta         Float?
+  alpha        Float?
+  
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positions    Position[]
+  trades       Trade[]
+  orders       Order[]
+  aiModel      AIModel?        @relation(fields: [aiModelId], references: [id])
+  
+  @@map("portfolios")
+}
+
+model Position {
+  id            String        @id @default(cuid())
+  portfolioId   String
+  symbol        String
+  side          PositionSide
+  quantity      Float
+  avgPrice      Float
+  currentPrice  Float         @default(0)
+  marketValue   Float         @default(0)
+  unrealizedPnL Float         @default(0)
+  realizedPnL   Float         @default(0)
+  cost          Float         @default(0)
+  
+  // Risk Metrics
+  stopLoss      Float?
+  takeProfit    Float?
+  riskAmount    Float?
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  portfolio     Portfolio     @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  trades        Trade[]
+  
+  @@unique([portfolioId, symbol])
+  @@map("positions")
+}
+
+model Trade {
+  id            String        @id @default(cuid())
+  userId        String
+  portfolioId   String
+  positionId    String?
+  orderId       String?
+  symbol        String
+  side          TradeSide
+  type          TradeType
+  quantity      Float
+  price         Float
+  amount        Float
+  fees          Float         @default(0)
+  pnl           Float?
+  status        TradeStatus   @default(PENDING)
+  
+  // AI Information
+  aiGenerated   Boolean       @default(false)
+  aiModelId     String?
+  aiConfidence  Float?
+  aiReason      String?
+  
+  // Execution Details
+  executedAt    DateTime?
+  settledAt     DateTime?
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  user          User          @relation(fields: [userId], references: [id])
+  portfolio     Portfolio     @relation(fields: [portfolioId], references: [id])
+  position      Position?     @relation(fields: [positionId], references: [id])
+  order         Order?        @relation(fields: [orderId], references: [id])
+  aiModel       AIModel?      @relation(fields: [aiModelId], references: [id])
+  
+  @@map("trades")
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  userId        String
+  portfolioId   String
+  symbol        String
+  side          OrderSide
+  type          OrderType
+  timeInForce   TimeInForce   @default(DAY)
+  quantity      Float
+  price         Float?
+  stopPrice     Float?
+  limitPrice    Float?
+  status        OrderStatus   @default(PENDING)
+  
+  // AI Information
+  aiGenerated   Boolean       @default(false)
+  aiModelId     String?
+  aiConfidence  Float?
+  
+  // Execution
+  filledQty     Float         @default(0)
+  avgFillPrice  Float?
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  expiresAt     DateTime?
+  
+  user          User          @relation(fields: [userId], references: [id])
+  portfolio     Portfolio     @relation(fields: [portfolioId], references: [id])
+  aiModel       AIModel?      @relation(fields: [aiModelId], references: [id])
+  trades        Trade[]
+  
+  @@map("orders")
+}
+
+model AIModel {
+  id            String        @id @default(cuid())
+  name          String
+  description   String?
+  type          AIModelType
+  version       String        @default("1.0")
+  status        ModelStatus   @default(TRAINING)
+  accuracy      Float?
+  performance   Json?         // Performance metrics
+  parameters    Json          // Model parameters and hyperparameters
+  
+  // Trading Specific
+  riskLevel     RiskLevel     @default(MODERATE)
+  assetClasses  String[]      // Stocks, crypto, forex, etc.
+  strategies    String[]      // Strategy types this model supports
+  
+  // Usage Stats
+  totalTrades   Int           @default(0)
+  winRate       Float         @default(0)
+  totalPnL      Float         @default(0)
+  sharpeRatio   Float?
+  maxDrawdown   Float?
+  
+  isPublic      Boolean       @default(false)
+  isActive      Boolean       @default(true)
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  portfolios    Portfolio[]
+  trades        Trade[]
+  orders        Order[]
+  signals       AISignal[]
+  userModels    UserAIModel[]
+  
+  @@map("ai_models")
+}
+
+model AISignal {
+  id            String        @id @default(cuid())
+  modelId       String
+  symbol        String
+  signal        SignalType
+  confidence    Float
+  strength      Float         // 1-10 signal strength
+  price         Float
+  targetPrice   Float?
+  stopLoss      Float?
+  timeframe     String        // 1m, 5m, 1h, 1d, etc.
+  
+  // Technical Analysis
+  indicators    Json          // RSI, MACD, etc.
+  patterns      String[]      // Chart patterns detected
+  
+  // Fundamental Analysis  
+  sentiment     Float?        // -1 to 1
+  newsImpact    Float?        // News sentiment impact
+  
+  isActive      Boolean       @default(true)
+  expiresAt     DateTime?
+  
+  createdAt     DateTime      @default(now())
+  
+  model         AIModel       @relation(fields: [modelId], references: [id])
+  
+  @@map("ai_signals")
+}
+
+model UserAIModel {
+  id            String        @id @default(cuid())
+  userId        String
+  modelId       String
+  isActive      Boolean       @default(true)
+  customParams  Json?         // User-specific model parameters
+  performance   Json?         // User-specific performance metrics
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  user          User          @relation(fields: [userId], references: [id])
+  model         AIModel       @relation(fields: [modelId], references: [id])
+  
+  @@unique([userId, modelId])
+  @@map("user_ai_models")
+}
+
+model Watchlist {
+  id          String          @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  symbols     String[]
+  isPublic    Boolean         @default(false)
+  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  user        User            @relation(fields: [userId], references: [id])
+  
+  @@map("watchlists")
+}
+
+model MarketData {
+  id            String        @id @default(cuid())
+  symbol        String
+  timestamp     DateTime
+  open          Float
+  high          Float
+  low           Float
+  close         Float
+  volume        Float
+  vwap          Float?        // Volume Weighted Average Price
+  
+  // Technical Indicators (computed)
+  sma20         Float?
+  sma50         Float?
+  ema12         Float?
+  ema26         Float?
+  rsi           Float?
+  macd          Float?
+  macdSignal    Float?
+  bollinger     Json?         // Upper, Lower, Middle bands
+  
+  createdAt     DateTime      @default(now())
+  
+  @@unique([symbol, timestamp])
+  @@map("market_data")
+}
+
+model News {
+  id          String          @id @default(cuid())
+  title       String
+  content     String
+  summary     String?
+  source      String
+  url         String?
+  symbols     String[]        // Related symbols
+  sentiment   Float?          // -1 to 1
+  impact      Float?          // Expected price impact
+  category    NewsCategory
+  
+  publishedAt DateTime
+  createdAt   DateTime        @default(now())
+  
+  @@map("news")
+}
+
+model SocialPost {
+  id          String          @id @default(cuid())
+  userId      String
+  content     String
+  symbols     String[]        // Related trading symbols
+  sentiment   Float?          // Sentiment analysis
+  likes       Int             @default(0)
+  shares      Int             @default(0)
+  isPublic    Boolean         @default(true)
+  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  user        User            @relation(fields: [userId], references: [id])
+  comments    SocialComment[]
+  
+  @@map("social_posts")
+}
+
+model SocialComment {
+  id          String          @id @default(cuid())
+  postId      String
+  userId      String
+  content     String
+  likes       Int             @default(0)
+  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  post        SocialPost      @relation(fields: [postId], references: [id])
+  user        User            @relation(fields: [userId], references: [id])
+  
+  @@map("social_comments")
+}
+
+model UserFollowing {
+  id          String          @id @default(cuid())
+  followerId  String
+  followingId String
+  
+  createdAt   DateTime        @default(now())
+  
+  follower    User            @relation("UserFollowing", fields: [followerId], references: [id])
+  following   User            @relation("UserFollowers", fields: [followingId], references: [id])
+  
+  @@unique([followerId, followingId])
+  @@map("user_following")
+}
+
+model Subscription {
+  id            String            @id @default(cuid())
+  userId        String
+  tier          UserTier
+  status        SubscriptionStatus @default(ACTIVE)
+  stripeId      String?           @unique
+  price         Float
+  currency      String            @default("USD")
+  interval      BillingInterval   @default(MONTHLY)
+  
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  cancelAt           DateTime?
+  canceledAt         DateTime?
+  
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  
+  user          User              @relation(fields: [userId], references: [id])
+  
+  @@map("subscriptions")
+}
+
+model Notification {
+  id          String              @id @default(cuid())
+  userId      String
+  title       String
+  message     String
+  type        NotificationType
+  priority    NotificationPriority @default(NORMAL)
+  read        Boolean             @default(false)
+  data        Json?               // Additional notification data
+  
+  createdAt   DateTime            @default(now())
+  readAt      DateTime?
+  
+  user        User                @relation(fields: [userId], references: [id])
+  
+  @@map("notifications")
+}
+
+model UserActivity {
+  id          String          @id @default(cuid())
+  userId      String
+  type        String          // login, trade, view, etc.
+  details     Json
+  ip          String?
+  userAgent   String?
+  
+  timestamp   DateTime        @default(now())
+  
+  user        User            @relation(fields: [userId], references: [id])
+  
+  @@map("user_activities")
+}
+
+model RiskAssessment {
+  id              String        @id @default(cuid())
+  userId          String
+  riskTolerance   RiskLevel
+  investmentGoals String[]
+  timeHorizon     String
+  experience      String
+  income          Float?
+  netWorth        Float?
+  
+  // Questionnaire Responses
+  responses       Json
+  score           Float
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  user            User          @relation(fields: [userId], references: [id])
+  
+  @@map("risk_assessments")
+}
+
+model KYCDocument {
+  id            String        @id @default(cuid())
+  userId        String
+  type          DocumentType
+  filename      String
+  url           String
+  status        DocumentStatus @default(PENDING)
+  reviewedBy    String?
+  reviewedAt    DateTime?
+  rejectionReason String?
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  user          User          @relation(fields: [userId], references: [id])
+  
+  @@map("kyc_documents")
+}
+
+// NextAuth.js tables
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Enums
+enum UserTier {
+  FREE
+  BASIC
+  PRO
+  ULTIMATE
+  OWNER
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
+  CLOSED
+}
+
+enum KYCStatus {
+  PENDING
+  IN_REVIEW
+  VERIFIED
+  REJECTED
+}
+
+enum AccountType {
+  CASH
+  MARGIN
+  CRYPTO
+  INSTITUTIONAL
+}
+
+enum PortfolioType {
+  PERSONAL
+  SHARED
+  AI_MANAGED
+  DEMO
+}
+
+enum PositionSide {
+  LONG
+  SHORT
+}
+
+enum TradeSide {
+  BUY
+  SELL
+}
+
+enum TradeType {
+  MARKET
+  LIMIT
+  STOP_MARKET
+  STOP_LIMIT
+  TRAILING_STOP
+}
+
+enum TradeStatus {
+  PENDING
+  FILLED
+  PARTIALLY_FILLED
+  CANCELLED
+  REJECTED
+  EXPIRED
+}
+
+enum OrderSide {
+  BUY
+  SELL
+}
+
+enum OrderType {
+  MARKET
+  LIMIT
+  STOP_MARKET
+  STOP_LIMIT
+  TRAILING_STOP
+  OCO
+}
+
+enum OrderStatus {
+  PENDING
+  OPEN
+  FILLED
+  PARTIALLY_FILLED
+  CANCELLED
+  REJECTED
+  EXPIRED
+}
+
+enum TimeInForce {
+  DAY
+  GTC
+  IOC
+  FOK
+}
+
+enum AIModelType {
+  LSTM
+  TRANSFORMER
+  ENSEMBLE
+  REINFORCEMENT
+  NEURAL_NETWORK
+  RANDOM_FOREST
+  GRADIENT_BOOSTING
+}
+
+enum ModelStatus {
+  TRAINING
+  ACTIVE
+  DEPRECATED
+  ARCHIVED
+}
+
+enum SignalType {
+  BUY
+  SELL
+  STRONG_BUY
+  STRONG_SELL
+  HOLD
+}
+
+enum RiskLevel {
+  CONSERVATIVE
+  MODERATE
+  AGGRESSIVE
+  ULTRA_AGGRESSIVE
+}
+
+enum NewsCategory {
+  EARNINGS
+  MERGER
+  ECONOMIC
+  SECTOR
+  REGULATORY
+  GENERAL
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+  UNPAID
+}
+
+enum BillingInterval {
+  MONTHLY
+  YEARLY
+}
+
+enum NotificationType {
+  TRADE_EXECUTED
+  AI_SIGNAL
+  PRICE_ALERT
+  NEWS
+  SYSTEM
+  SOCIAL
+}
+
+enum NotificationPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum DocumentType {
+  DRIVERS_LICENSE
+  PASSPORT
+  UTILITY_BILL
+  BANK_STATEMENT
+  W9
+  TAX_DOCUMENT
+}
+
+enum DocumentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
