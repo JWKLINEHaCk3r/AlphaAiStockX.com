@@ -64,9 +64,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
-
-export { Button };
     return (
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
         {children}
@@ -74,6 +71,7 @@ export { Button };
     );
   }
 );
+
 Button.displayName = 'Button';
 
 export { Button };

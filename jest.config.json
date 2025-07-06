@@ -1,0 +1,49 @@
+{
+  "collectCoverageFrom": [
+    "app/**/*.{js,jsx,ts,tsx}",
+    "lib/**/*.{js,jsx,ts,tsx}",
+    "components/**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.next/**",
+    "!**/out/**",
+    "!**/coverage/**"
+  ],
+  "coverageReporters": ["text", "lcov", "html"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  },
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
+  "testPathIgnorePatterns": [
+    "<rootDir>/.next/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/out/",
+    "<rootDir>/cypress/"
+  ],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { "presets": ["next/babel"] }]
+  },
+  "transformIgnorePatterns": [
+    "/node_modules/",
+    "^.+\\.module\\.(css|sass|scss)$"
+  ],
+  "moduleNameMapping": {
+    "^@/(.*)$": "<rootDir>/$1",
+    "^@/components/(.*)$": "<rootDir>/app/components/$1",
+    "^@/lib/(.*)$": "<rootDir>/app/lib/$1",
+    "^@/utils/(.*)$": "<rootDir>/app/utils/$1",
+    "\\.(css|less|scss)$": "identity-obj-proxy",
+    "\\.(gif|ttf|eot|svg|png)$": "jest-transform-stub"
+  },
+  "testMatch": [
+    "**/__tests__/**/*.(js|jsx|ts|tsx)",
+    "**/*.(test|spec).(js|jsx|ts|tsx)"
+  ],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}

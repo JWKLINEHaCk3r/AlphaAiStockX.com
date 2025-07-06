@@ -598,16 +598,412 @@ export class NextGenAITradingEngine extends EventEmitter {
     return tf.tensor3d([features]);
   }
 
+  // Helper methods for strategy calculations
+  private calculateVolatility(data: MarketData[]): number {
+    const returns = [];
+    for (let i = 1; i < data.length; i++) {
+      returns.push(Math.log(data[i].close / data[i-1].close));
+    }
+    
+    const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+    const variance = returns.reduce((sum, r) => sum + Math.pow(r - mean, 2), 0) / returns.length;
+    return Math.sqrt(variance) * Math.sqrt(252) * 100; // Annualized volatility
+  }
+
+  private calculateDelta(spotPrice: number, volatility: number): number {
+    // Simplified delta calculation for demonstration
+    const timeToExpiry = 30 / 365; // 30 days
+    const riskFreeRate = 0.05;
+    const strikePrice = spotPrice;
+    
+    const d1 = (Math.log(spotPrice / strikePrice) + (riskFreeRate + Math.pow(volatility / 100, 2) / 2) * timeToExpiry) / 
+               (volatility / 100 * Math.sqrt(timeToExpiry));
+    
+    // Standard normal CDF approximation
+    const delta = 0.5 * (1 + Math.sign(d1) * Math.sqrt(1 - Math.exp(-2 * Math.pow(d1, 2) / Math.PI)));
+    return delta;
+  }
+
+  private detectCandlestickPatterns(data: MarketData[]): Array<{type: string, bullish: boolean, strength: number}> {
+    const patterns = [];
+    
+    for (let i = 1; i < data.length; i++) {
+      const current = data[i];
+      const previous = data[i-1];
+      
+      const bodySize = Math.abs(current.close - current.open);
+      const totalRange = current.high - current.low;
+      const upperShadow = current.high - Math.max(current.open, current.close);
+      const lowerShadow = Math.min(current.open, current.close) - current.low;
+      
+      // Hammer pattern
+      if (lowerShadow > 2 * bodySize && upperShadow < bodySize * 0.1) {
+        patterns.push({
+          type: 'hammer',
+          bullish: true,
+          strength: Math.min(0.9, lowerShadow / bodySize / 3)
+        });
+      }
+      
+      // Doji pattern
+      if (bodySize < totalRange * 0.1) {
+        patterns.push({
+          type: 'doji',
+          bullish: Math.random() > 0.5, // Neutral pattern
+          strength: 0.6
+        });
+      }
+      
+      // Engulfing pattern
+      if (bodySize > Math.abs(previous.close - previous.open) * 1.5) {
+        patterns.push({
+          type: 'engulfing',
+          bullish: current.close > current.open,
+          strength: 0.8
+        });
+      }
+    }
+    
+    return patterns;
+  }
+
   // Placeholder implementations for remaining strategies
-  private async statisticalArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async triangularArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async marketMakingStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async adaptiveTrendStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async ichimokuTrendStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async patternRecognitionStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async volumeProfileStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async onBalanceVolumeStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
-  private async deltaHedgingStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
+  private async statisticalArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 20) return [];
+    
+    // Implementation for statistical arbitrage using mean reversion
+    const prices = data.map(d => d.close);
+    const returns = [];
+    for (let i = 1; i < prices.length; i++) {
+      returns.push((prices[i] - prices[i-1]) / prices[i-1]);
+    }
+    
+    const meanReturn = returns.reduce((a, b) => a + b, 0) / returns.length;
+    const stdReturn = Math.sqrt(returns.reduce((sum, r) => sum + Math.pow(r - meanReturn, 2), 0) / returns.length);
+    const zScore = (returns[returns.length - 1] - meanReturn) / stdReturn;
+    
+    const signals: TradingSignal[] = [];
+    
+    if (Math.abs(zScore) > 2) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: zScore > 2 ? 'SELL' : 'BUY',
+        confidence: Math.min(0.95, Math.abs(zScore) / 3),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'statisticalArbitrage',
+        stopLoss: data[data.length - 1].close * (zScore > 2 ? 1.02 : 0.98),
+        takeProfit: data[data.length - 1].close * (zScore > 2 ? 0.95 : 1.05)
+      });
+    }
+    
+    return signals;
+  }
+
+  private async triangularArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    // Implementation for triangular arbitrage in forex/crypto markets
+    if (data.length < 3) return [];
+    
+    const signals: TradingSignal[] = [];
+    const threshold = 0.001; // 0.1% arbitrage opportunity
+    
+    // Mock triangular arbitrage calculation
+    const syntheticPrice = data[0].close * data[1].close / data[2].close;
+    const directPrice = data[0].close;
+    const arbitrageOpportunity = Math.abs(syntheticPrice - directPrice) / directPrice;
+    
+    if (arbitrageOpportunity > threshold) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: syntheticPrice > directPrice ? 'BUY' : 'SELL',
+        confidence: Math.min(0.9, arbitrageOpportunity * 100),
+        price: directPrice,
+        timestamp: new Date(),
+        strategy: 'triangularArbitrage',
+        stopLoss: directPrice * (syntheticPrice > directPrice ? 0.999 : 1.001),
+        takeProfit: directPrice * (syntheticPrice > directPrice ? 1.001 : 0.999)
+      });
+    }
+    
+    return signals;
+  }
+
+  private async marketMakingStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 10) return [];
+    
+    const signals: TradingSignal[] = [];
+    const currentPrice = data[data.length - 1].close;
+    const volumes = data.slice(-10).map(d => d.volume);
+    const avgVolume = volumes.reduce((a, b) => a + b, 0) / volumes.length;
+    const currentVolume = data[data.length - 1].volume;
+    
+    // Market making based on volume and volatility
+    if (currentVolume > avgVolume * 1.5) { // High volume scenario
+      const volatility = this.calculateVolatility(data.slice(-10));
+      const spread = currentPrice * (volatility / 100) * 0.5;
+      
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: 0.7,
+        price: currentPrice - spread,
+        timestamp: new Date(),
+        strategy: 'marketMaking',
+        stopLoss: (currentPrice - spread) * 0.98,
+        takeProfit: currentPrice
+      });
+      
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: 0.7,
+        price: currentPrice + spread,
+        timestamp: new Date(),
+        strategy: 'marketMaking',
+        stopLoss: (currentPrice + spread) * 1.02,
+        takeProfit: currentPrice
+      });
+    }
+    
+    return signals;
+  }
+
+  private async adaptiveTrendStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 50) return [];
+    
+    const signals: TradingSignal[] = [];
+    const prices = data.map(d => d.close);
+    
+    // Adaptive trend using multiple EMAs
+    const ema8 = this.calculateEMA(prices, 8);
+    const ema21 = this.calculateEMA(prices, 21);
+    const ema55 = this.calculateEMA(prices, 55);
+    
+    if (ema8.length === 0 || ema21.length === 0 || ema55.length === 0) return [];
+    
+    const currentEma8 = ema8[ema8.length - 1];
+    const currentEma21 = ema21[ema21.length - 1];
+    const currentEma55 = ema55[ema55.length - 1];
+    
+    if (!currentEma8 || !currentEma21 || !currentEma55) return [];
+    
+    // Trend strength calculation
+    const trendStrength = Math.abs((currentEma8 - currentEma55) / currentEma55);
+    
+    if (currentEma8 > currentEma21 && currentEma21 > currentEma55 && trendStrength > 0.02) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: Math.min(0.95, trendStrength * 10),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'adaptiveTrend',
+        stopLoss: currentEma21,
+        takeProfit: data[data.length - 1].close * 1.05
+      });
+    } else if (currentEma8 < currentEma21 && currentEma21 < currentEma55 && trendStrength > 0.02) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: Math.min(0.95, trendStrength * 10),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'adaptiveTrend',
+        stopLoss: currentEma21,
+        takeProfit: data[data.length - 1].close * 0.95
+      });
+    }
+    
+    return signals;
+  }
+
+  private async ichimokuTrendStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 55) return [];
+    
+    const signals: TradingSignal[] = [];
+    const highs = data.map(d => d.high);
+    const lows = data.map(d => d.low);
+    const closes = data.map(d => d.close);
+    
+    // Ichimoku Cloud calculation
+    const tenkanPeriod = 9;
+    const kijunPeriod = 26;
+    const senkouBPeriod = 52;
+    
+    // Tenkan-sen (Conversion Line)
+    const tenkanHigh = Math.max(...highs.slice(-tenkanPeriod));
+    const tenkanLow = Math.min(...lows.slice(-tenkanPeriod));
+    const tenkanSen = (tenkanHigh + tenkanLow) / 2;
+    
+    // Kijun-sen (Base Line)
+    const kijunHigh = Math.max(...highs.slice(-kijunPeriod));
+    const kijunLow = Math.min(...lows.slice(-kijunPeriod));
+    const kijunSen = (kijunHigh + kijunLow) / 2;
+    
+    // Senkou Span A (Leading Span A)
+    const senkouSpanA = (tenkanSen + kijunSen) / 2;
+    
+    // Senkou Span B (Leading Span B)
+    const senkouBHigh = Math.max(...highs.slice(-senkouBPeriod));
+    const senkouBLow = Math.min(...lows.slice(-senkouBPeriod));
+    const senkouSpanB = (senkouBHigh + senkouBLow) / 2;
+    
+    const currentPrice = closes[closes.length - 1];
+    const cloudTop = Math.max(senkouSpanA, senkouSpanB);
+    const cloudBottom = Math.min(senkouSpanA, senkouSpanB);
+    
+    // Generate signals based on Ichimoku
+    if (currentPrice > cloudTop && tenkanSen > kijunSen) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: 0.85,
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'ichimokuTrend',
+        stopLoss: kijunSen,
+        takeProfit: currentPrice * 1.08
+      });
+    } else if (currentPrice < cloudBottom && tenkanSen < kijunSen) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: 0.85,
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'ichimokuTrend',
+        stopLoss: kijunSen,
+        takeProfit: currentPrice * 0.92
+      });
+    }
+    
+    return signals;
+  }
+
+  private async patternRecognitionStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 20) return [];
+    
+    const signals: TradingSignal[] = [];
+    const prices = data.map(d => d.close);
+    
+    // Detect common patterns
+    const patterns = this.detectCandlestickPatterns(data.slice(-10));
+    
+    for (const pattern of patterns) {
+      if (pattern.type === 'hammer' || pattern.type === 'doji') {
+        signals.push({
+          symbol: data[0].symbol,
+          action: pattern.bullish ? 'BUY' : 'SELL',
+          confidence: pattern.strength,
+          price: data[data.length - 1].close,
+          timestamp: new Date(),
+          strategy: 'patternRecognition',
+          stopLoss: data[data.length - 1].close * (pattern.bullish ? 0.97 : 1.03),
+          takeProfit: data[data.length - 1].close * (pattern.bullish ? 1.05 : 0.95)
+        });
+      }
+    }
+    
+    return signals;
+  }
+
+  private async volumeProfileStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 20) return [];
+    
+    const signals: TradingSignal[] = [];
+    const volumes = data.map(d => d.volume);
+    const prices = data.map(d => d.close);
+    
+    // Volume profile analysis
+    const volumeWeightedPrice = data.reduce((sum, d) => sum + (d.close * d.volume), 0) / 
+                               volumes.reduce((sum, v) => sum + v, 0);
+    
+    const currentPrice = prices[prices.length - 1];
+    const volumeRatio = volumes[volumes.length - 1] / (volumes.reduce((a, b) => a + b, 0) / volumes.length);
+    
+    if (volumeRatio > 2 && Math.abs(currentPrice - volumeWeightedPrice) / volumeWeightedPrice > 0.02) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: currentPrice > volumeWeightedPrice ? 'SELL' : 'BUY',
+        confidence: Math.min(0.9, volumeRatio / 3),
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'volumeProfile',
+        stopLoss: currentPrice * (currentPrice > volumeWeightedPrice ? 1.02 : 0.98),
+        takeProfit: volumeWeightedPrice
+      });
+    }
+    
+    return signals;
+  }
+
+  private async onBalanceVolumeStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 14) return [];
+    
+    const signals: TradingSignal[] = [];
+    
+    // Calculate OBV
+    let obv = [0];
+    for (let i = 1; i < data.length; i++) {
+      const volume = data[i].volume;
+      const priceChange = data[i].close - data[i-1].close;
+      
+      if (priceChange > 0) {
+        obv.push(obv[obv.length - 1] + volume);
+      } else if (priceChange < 0) {
+        obv.push(obv[obv.length - 1] - volume);
+      } else {
+        obv.push(obv[obv.length - 1]);
+      }
+    }
+    
+    // OBV trend analysis
+    const obvTrend = obv[obv.length - 1] - obv[obv.length - 5];
+    const priceTrend = data[data.length - 1].close - data[data.length - 5].close;
+    
+    // Divergence detection
+    if ((obvTrend > 0 && priceTrend < 0) || (obvTrend < 0 && priceTrend > 0)) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: obvTrend > 0 ? 'BUY' : 'SELL',
+        confidence: 0.75,
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'onBalanceVolume',
+        stopLoss: data[data.length - 1].close * (obvTrend > 0 ? 0.97 : 1.03),
+        takeProfit: data[data.length - 1].close * (obvTrend > 0 ? 1.05 : 0.95)
+      });
+    }
+    
+    return signals;
+  }
+
+  private async deltaHedgingStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+    if (data.length < 10) return [];
+    
+    const signals: TradingSignal[] = [];
+    const prices = data.map(d => d.close);
+    const volatility = this.calculateVolatility(data.slice(-10));
+    
+    // Delta hedging for options-like exposure
+    const delta = this.calculateDelta(prices[prices.length - 1], volatility);
+    const currentPrice = prices[prices.length - 1];
+    
+    if (Math.abs(delta) > 0.5) {
+      signals.push({
+        symbol: data[0].symbol,
+        action: delta > 0 ? 'BUY' : 'SELL',
+        confidence: Math.min(0.8, Math.abs(delta)),
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'deltaHedging',
+        stopLoss: currentPrice * (delta > 0 ? 0.98 : 1.02),
+        takeProfit: currentPrice * (delta > 0 ? 1.03 : 0.97)
+      });
+    }
+    
+    return signals;
+  }
   private async gammaScalpingStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
   private async newsSentimentStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
   private async socialSentimentStrategy(data: MarketData[]): Promise<TradingSignal[]> { return []; }
