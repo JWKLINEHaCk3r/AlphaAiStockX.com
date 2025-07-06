@@ -3,9 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
 import NextLevelNavigation from '@/components/ui/navigation';
-import { ScrollProgress, MatrixRain, AIConsciousnessOrb } from '@/components/ui/enhanced-effects';
-import { VoiceControl, AIAssistantIndicator } from '@/components/ui/voice-control';
-import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -53,7 +50,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   manifest: '/site.webmanifest',
-  generator: 'Next.js 14 + AlphaAI',
+  generator: 'v0.dev',
 };
 
 // Add separate viewport export (Next.js 14+ requirement)
@@ -63,7 +60,7 @@ export const viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#3b82f6' },
+    { media: '(prefers-color-scheme: light)', color: '#7c3aed' },
     { media: '(prefers-color-scheme: dark)', color: '#1e293b' },
   ],
 };
@@ -99,17 +96,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className={`${inter.className} antialiased min-h-screen text-white overflow-x-hidden`}>
-        <ScrollProgress />
-        <MatrixRain />
-        <AIConsciousnessOrb />
-        <VoiceControl />
-        <AIAssistantIndicator />
         <NextLevelNavigation />
         <main role="main" id="main-content" className="relative z-10">
           {children}
         </main>
-        <Toaster />
       </body>
     </html>
   );
+}
+
+// Simple error boundary component (internal use only)
+function ErrorBoundary({ children }: PropsWithChildren<object>) {
+  // Simple passthrough error boundary (replace with real error handling as needed)
+  return <>{children}</>;
 }

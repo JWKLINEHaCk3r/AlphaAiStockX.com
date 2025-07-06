@@ -3,9 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
 import NextLevelNavigation from '@/components/ui/navigation';
-import { ScrollProgress, MatrixRain, AIConsciousnessOrb } from '@/components/ui/enhanced-effects';
-import { VoiceControl, AIAssistantIndicator } from '@/components/ui/voice-control';
-import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -99,16 +96,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className={`${inter.className} antialiased min-h-screen text-white overflow-x-hidden`}>
-        <ScrollProgress />
-        <MatrixRain />
-        <AIConsciousnessOrb />
-        <VoiceControl />
-        <AIAssistantIndicator />
         <NextLevelNavigation />
         <main role="main" id="main-content" className="relative z-10">
           {children}
         </main>
-        <Toaster />
       </body>
     </html>
   );

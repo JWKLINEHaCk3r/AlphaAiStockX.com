@@ -4,20 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
-  FloatingElements, 
-  MorphingBlob, 
-  QuantumGrid, 
-  HolographicDisplay,
-  DataStream 
-} from '@/components/ui/animated-effects';
-import TradingDashboardDemo from '@/components/ui/trading-dashboard-demo';
-import { 
-  Advanced3DBackground, 
-  InteractiveCursor, 
-  EnhancedParticleField,
-  QuantumDataViz 
-} from '@/components/ui/advanced-3d-effects';
-import { 
   Brain, 
   BarChart3, 
   Zap, 
@@ -95,7 +81,7 @@ function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?:
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry && entry.isIntersecting) {
+        if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },
@@ -138,25 +124,106 @@ function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?:
 }
 
 function ParticleField() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d')!;
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      life: number;
+      size: number;
+    }> = [];
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const createParticle = () => {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        life: 1,
+        size: Math.random() * 2 + 1,
+      });
+    };
+
+    const animate = () => {
+      ctx.fillStyle = 'rgba(34, 35, 58, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Create new particles
+      if (Math.random() < 0.1) createParticle();
+
+      // Update particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.005;
+
+        if (p.life <= 0 || p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        // Draw particle
+        ctx.save();
+        ctx.globalAlpha = p.life;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${217 + Math.sin(p.x * 0.01) * 30}, 91%, 60%)`;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Connect nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            ctx.save();
+            ctx.globalAlpha = (1 - distance / 100) * 0.2;
+            ctx.strokeStyle = 'hsl(217, 91%, 60%)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
   return (
-    <>
-      <Advanced3DBackground />
-      <EnhancedParticleField />
-      <QuantumDataViz />
-      <QuantumGrid />
-      <FloatingElements count={30} />
-      <DataStream density={0.05} speed={1.5} />
-      <MorphingBlob 
-        className="top-1/4 left-1/4 animate-float" 
-        color="hsl(217, 91%, 60%)" 
-        size={300} 
-      />
-      <MorphingBlob 
-        className="bottom-1/4 right-1/4 animate-float [animation-delay:2s]" 
-        color="hsl(322, 85%, 70%)" 
-        size={250} 
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ background: 'transparent' }}
+    />
   );
 }
 
@@ -166,17 +233,15 @@ function HeroSection() {
       <div className="absolute inset-0 grid-pattern opacity-30" />
       
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
-        <HolographicDisplay intensity={1.2}>
-          <div className="animate-slide-up" style={{ animationDelay: '0ms' }}>
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-              <span className="holographic-text">Alpha AI</span>
-              <br />
-              <span className="bg-gradient-secondary bg-clip-text text-transparent">
-                Stock X
-              </span>
-            </h1>
-          </div>
-        </HolographicDisplay>
+        <div className="animate-slide-up" style={{ animationDelay: '0ms' }}>
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+            <span className="neon-text">Alpha AI</span>
+            <br />
+            <span className="bg-gradient-secondary bg-clip-text text-transparent">
+              Stock X
+            </span>
+          </h1>
+        </div>
 
         <div className="animate-slide-up" style={{ animationDelay: '200ms' }}>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -186,36 +251,34 @@ function HeroSection() {
         </div>
 
         <div className="animate-slide-up flex flex-col sm:flex-row gap-4 justify-center mb-12" style={{ animationDelay: '400ms' }}>
-          <Button size="lg" className="btn-primary group text-lg px-8 py-4 interactive-cursor">
+          <Button size="lg" className="btn-primary group text-lg px-8 py-4">
             Start Trading
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button size="lg" variant="outline" className="glass-card text-lg px-8 py-4 group interactive-cursor">
+          <Button size="lg" variant="outline" className="glass-card text-lg px-8 py-4 group">
             <Play className="mr-2 w-5 h-5" />
             Watch Demo
           </Button>
         </div>
 
-        <HolographicDisplay intensity={0.8}>
-          <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
-            <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="flex items-center justify-center mb-2 text-neon-blue animate-bounce-gentle">
-                    {stat.icon}
-                  </div>
-                  <div className="text-2xl md:text-3xl font-bold">
-                    <AnimatedCounter value={stat.value} />
-                  </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+        <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="flex items-center justify-center mb-2 text-neon-blue">
+                  {stat.icon}
                 </div>
-              ))}
-            </div>
+                <div className="text-2xl md:text-3xl font-bold">
+                  <AnimatedCounter value={stat.value} />
+                </div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
           </div>
-        </HolographicDisplay>
+        </div>
 
         <div className="animate-bounce mt-16">
-          <ChevronDown className="w-8 h-8 mx-auto text-muted-foreground animate-pulse-glow" />
+          <ChevronDown className="w-8 h-8 mx-auto text-muted-foreground" />
         </div>
       </div>
     </section>
@@ -231,7 +294,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
       style={{ animationDelay: feature.delay }}
     >
       <Card 
-        className={`glass-card interactive-hover group relative overflow-hidden h-full interactive-cursor ${
+        className={`glass-card interactive-hover group relative overflow-hidden h-full ${
           isHovered ? 'neon-border' : ''
         }`}
         onMouseEnter={() => setIsHovered(true)}
@@ -289,7 +352,7 @@ function FeaturesSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="holographic-text">Next-Level</span> Trading Technology
+            <span className="neon-text">Next-Level</span> Trading Technology
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Experience the future of financial markets with our cutting-edge AI technology stack.
@@ -321,12 +384,12 @@ function CTASection() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="btn-primary group text-lg px-8 py-4 interactive-cursor">
+            <Button size="lg" className="btn-primary group text-lg px-8 py-4">
               <Rocket className="mr-2 w-5 h-5" />
               Get Started Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="glass-card text-lg px-8 py-4 interactive-cursor">
+            <Button size="lg" variant="outline" className="glass-card text-lg px-8 py-4">
               <Globe className="mr-2 w-5 h-5" />
               View Live Demo
             </Button>
@@ -349,12 +412,10 @@ function CTASection() {
 export default function NextLevelHomePage() {
   return (
     <div className="relative min-h-screen">
-      <InteractiveCursor />
       <ParticleField />
       
       <HeroSection />
       <FeaturesSection />
-      <TradingDashboardDemo />
       <CTASection />
     </div>
   );

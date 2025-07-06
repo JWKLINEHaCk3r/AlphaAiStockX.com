@@ -319,42 +319,33 @@ class AIBrainService {
     const sma = prices.reduce((sum, price) => sum + price, 0) / prices.length;
     const variance = prices.reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / prices.length;
     const stdDev = Math.sqrt(variance);
-    const currentPrice = prices[prices.length - 1] || sma;
     
     return {
       upper: sma + (2 * stdDev),
       middle: sma,
       lower: sma - (2 * stdDev),
-      percentB: (currentPrice - (sma - 2 * stdDev)) / (4 * stdDev),
+      percentB: (prices[prices.length - 1] - (sma - 2 * stdDev)) / (4 * stdDev),
       bandwidth: (4 * stdDev) / sma,
     };
   }
 
   private findSupportResistance(data: MarketData[]): SupportResistance {
     const prices = data.map(d => d.price);
-    const highs: number[] = [];
-    const lows: number[] = [];
+    const highs = [];
+    const lows = [];
     
     for (let i = 1; i < prices.length - 1; i++) {
-      const current = prices[i];
-      const prev = prices[i - 1];
-      const next = prices[i + 1];
-      
-      if (current !== undefined && prev !== undefined && next !== undefined) {
-        if (current > prev && current > next) {
-          highs.push(current);
-        }
-        if (current < prev && current < next) {
-          lows.push(current);
-        }
+      if (prices[i] > prices[i - 1] && prices[i] > prices[i + 1]) {
+        highs.push(prices[i]);
+      }
+      if (prices[i] < prices[i - 1] && prices[i] < prices[i + 1]) {
+        lows.push(prices[i]);
       }
     }
     
     return {
       support: lows.slice(-3),
       resistance: highs.slice(-3),
-      pivotPoints: [...lows.slice(-2), ...highs.slice(-2)],
-      strength: Math.min(lows.length + highs.length, 10) / 10,
     };
   }
 
@@ -382,11 +373,8 @@ class AIBrainService {
     let losses = 0;
 
     for (let i = data.length - period; i < data.length; i++) {
-      const current = data[i];
-      const previous = data[i - 1];
-      
-      if (current && previous) {
-        const change = current.price - previous.price;
+      if (data[i] && data[i - 1]) {
+        const change = data[i].price - data[i - 1].price;
         if (change > 0) gains += change;
         else losses -= change;
       }

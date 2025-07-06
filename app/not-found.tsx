@@ -12,15 +12,19 @@ import { Home, TrendingUp, AlertCircle } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-black/50 border-purple-500/20 backdrop-blur-xl">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-violet-500/10 to-background opacity-50" />
+      <div className="absolute inset-0 grid-pattern opacity-20" />
+      
+      <Card className="glass-card neon-border w-full max-w-md relative z-10">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
+          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center animate-pulse-glow">
             <AlertCircle className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold text-white">404 - Page Not Found</CardTitle>
-          <CardDescription className="text-gray-300">
-            The page you're looking for doesn't exist in our AI trading universe.
+          <CardTitle className="text-2xl font-bold text-white holographic-text">404 - Page Not Found</CardTitle>
+          <CardDescription className="text-muted-foreground">
+            This quantum pathway doesn't exist in our AI trading universe.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -30,21 +34,22 @@ export default function NotFound() {
           <div className="flex flex-col gap-3">
             <Button
               asChild
-              className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700"
+              className="btn-primary w-full group"
+              size="lg"
             >
               <Link href="/" className="flex items-center gap-2">
-                <Home className="w-4 h-4" />
-                Return to Dashboard
+                <Home className="w-5 h-5" />
+                Return to Home
               </Link>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="w-full border-purple-500/20 text-purple-300 hover:bg-purple-500/10"
+              className="glass-card w-full group"
             >
-              <Link href="/trading" className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4" />
-                Start Trading
+              <Link href="/dashboard" className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Trading Dashboard
               </Link>
             </Button>
           </div>

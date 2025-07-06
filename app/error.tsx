@@ -17,17 +17,21 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-orange-900 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-black/50 border-red-500/20 backdrop-blur-xl">
-        <div className="text-center p-6">
-          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 via-orange-500/10 to-background opacity-50" />
+      <div className="absolute inset-0 grid-pattern opacity-20" />
+      
+      <Card className="glass-card neon-border w-full max-w-md relative z-10">
+        <div className="text-center p-8">
+          <div className="mx-auto mb-6 w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center animate-pulse-glow">
             <AlertTriangle className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold text-white">
-            Oops! Something went wrong
+          <CardTitle className="text-2xl font-bold text-white mb-4 holographic-text">
+            System Error Detected
           </CardTitle>
-          <CardDescription className="text-gray-300">
-            Our AI encountered an unexpected error. Don&apos;t worry, we&apos;re on it!
+          <CardDescription className="text-muted-foreground mb-6">
+            Our quantum AI systems encountered an anomaly. Neural networks are recalibrating...
           </CardDescription>
         </div>
         <CardContent className="space-y-4">
@@ -36,10 +40,11 @@ export default function Error({
           </div>
           <Button
             onClick={reset}
-            className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
+            className="btn-primary w-full group"
+            size="lg"
           >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Try Again
+            <RefreshCw className="w-5 h-5 mr-2 group-hover:animate-spin" />
+            Restart AI Systems
           </Button>
           <div className="text-center text-xs text-gray-500 mt-6">
             AlphaAIStockX - Powered by Quantum AI
