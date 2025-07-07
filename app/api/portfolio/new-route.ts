@@ -8,15 +8,25 @@ import { z } from 'zod';
 
 const portfolioQuerySchema = z.object({
   portfolioId: z.string().optional(),
-  includePositions: z.string().transform((val) => val === 'true').optional(),
-  includePerformance: z.string().transform((val) => val === 'true').optional(),
+  includePositions: z
+    .string()
+    .transform(val => val === 'true')
+    .optional(),
+  includePerformance: z
+    .string()
+    .transform(val => val === 'true')
+    .optional(),
 });
 
 const createPortfolioSchema = z.object({
   name: z.string().min(1, 'Portfolio name is required').max(100, 'Name too long'),
   description: z.string().max(500, 'Description too long').optional(),
   type: z.enum(['PERSONAL', 'RETIREMENT', 'MARGIN', 'CRYPTO']).default('PERSONAL'),
-  initialDeposit: z.number().positive('Initial deposit must be positive').max(10000000, 'Amount too large').optional(),
+  initialDeposit: z
+    .number()
+    .positive('Initial deposit must be positive')
+    .max(10000000, 'Amount too large')
+    .optional(),
   riskLevel: z.enum(['LOW', 'MEDIUM', 'HIGH']).default('MEDIUM'),
   autoTrading: z.boolean().default(false),
 });
@@ -24,12 +34,9 @@ const createPortfolioSchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -38,10 +45,10 @@ export async function GET(request: NextRequest) {
     if (queryParams.portfolioId) {
       // Get specific portfolio with trading data
       const tradingService = await TradingService.create(session.user.id, queryParams.portfolioId);
-      
+
       // Get comprehensive portfolio summary
       const portfolioSummary = await tradingService.getPortfolioSummary();
-      
+
       // Get portfolio metadata from database
       const portfolioData = await prisma.portfolio.findFirst({
         where: {
@@ -59,10 +66,7 @@ export async function GET(request: NextRequest) {
       });
 
       if (!portfolioData) {
-        return NextResponse.json(
-          { error: 'Portfolio not found' },
-          { status: 404 }
-        );
+        return NextResponse.json({ error: 'Portfolio not found' }, { status: 404 });
       }
 
       // Combine database data with live trading data
@@ -75,7 +79,7 @@ export async function GET(request: NextRequest) {
         autoTrading: portfolioData.autoTrading,
         createdAt: portfolioData.createdAt,
         updatedAt: portfolioData.updatedAt,
-        
+
         // Live trading data
         totalValue: portfolioSummary.totalValue,
         cash: portfolioSummary.cash,
@@ -87,10 +91,10 @@ export async function GET(request: NextRequest) {
         equity: portfolioSummary.equity,
         longMarketValue: portfolioSummary.longMarketValue,
         shortMarketValue: portfolioSummary.shortMarketValue,
-        
+
         // Include positions if requested
         ...(queryParams.includePositions && {
-          positions: portfolioSummary.positions
+          positions: portfolioSummary.positions,
         }),
       };
 
@@ -107,7 +111,6 @@ export async function GET(request: NextRequest) {
         success: true,
         portfolio: response,
       });
-    
     } else {
       // Get all portfolios for user
       const portfolios = await prisma.portfolio.findMany({
@@ -117,11 +120,11 @@ export async function GET(request: NextRequest) {
 
       // Get summary data for each portfolio
       const portfoliosWithSummary = await Promise.all(
-        portfolios.map(async (portfolio) => {
+        portfolios.map(async portfolio => {
           try {
             const tradingService = await TradingService.create(session.user.id, portfolio.id);
             const summary = await tradingService.getPortfolioSummary();
-            
+
             return {
               id: portfolio.id,
               name: portfolio.name,
@@ -176,10 +179,9 @@ export async function GET(request: NextRequest) {
         count: portfoliosWithSummary.length,
       });
     }
-
   } catch (error) {
     console.error('Portfolio fetch error:', error);
-    
+
     // Log the error
     SecurityAudit.logSecurityEvent({
       type: 'data_access_error',
@@ -198,22 +200,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Failed to fetch portfolio data' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch portfolio data' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -262,25 +258,27 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({
-      success: true,
-      portfolio: {
-        id: portfolio.id,
-        name: portfolio.name,
-        description: portfolio.description,
-        type: portfolio.type,
-        riskLevel: portfolio.riskLevel,
-        autoTrading: portfolio.autoTrading,
-        totalValue: portfolio.totalValue,
-        cashBalance: portfolio.cashBalance,
-        createdAt: portfolio.createdAt,
+    return NextResponse.json(
+      {
+        success: true,
+        portfolio: {
+          id: portfolio.id,
+          name: portfolio.name,
+          description: portfolio.description,
+          type: portfolio.type,
+          riskLevel: portfolio.riskLevel,
+          autoTrading: portfolio.autoTrading,
+          totalValue: portfolio.totalValue,
+          cashBalance: portfolio.cashBalance,
+          createdAt: portfolio.createdAt,
+        },
+        message: 'Portfolio created successfully',
       },
-      message: 'Portfolio created successfully',
-    }, { status: 201 });
-
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Portfolio creation error:', error);
-    
+
     // Log the error
     SecurityAudit.logSecurityEvent({
       type: 'portfolio_management_error',
@@ -299,9 +297,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Failed to create portfolio' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create portfolio' }, { status: 500 });
   }
 }

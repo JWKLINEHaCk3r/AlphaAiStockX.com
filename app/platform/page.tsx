@@ -1,5 +1,9 @@
 'use client';
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { useSession } from 'next-auth/react';
 import SuperiorTradingPlatform from '@/app/components/platform/SuperiorTradingPlatform';
 import { Button } from '@/components/ui/button';
@@ -31,26 +35,31 @@ export default function TradingPlatformPage() {
             Welcome to AlphaAI Trading Platform
           </h1>
           <p className="text-xl text-slate-300 mb-8">
-            Advanced AI-powered trading with real-time signals, social trading, and professional portfolio management.
+            Advanced AI-powered trading with real-time signals, social trading, and professional
+            portfolio management.
           </p>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-6 text-center">
                 <TrendingUp className="h-12 w-12 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">AI Trading Signals</h3>
-                <p className="text-slate-400">Real-time AI-generated trading signals with confidence scoring</p>
+                <p className="text-slate-400">
+                  Real-time AI-generated trading signals with confidence scoring
+                </p>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-6 text-center">
                 <DollarSign className="h-12 w-12 text-blue-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">Portfolio Management</h3>
-                <p className="text-slate-400">Professional-grade portfolio tracking and risk management</p>
+                <p className="text-slate-400">
+                  Professional-grade portfolio tracking and risk management
+                </p>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-6 text-center">
                 <Shield className="h-12 w-12 text-purple-400 mx-auto mb-4" />
@@ -59,10 +68,13 @@ export default function TradingPlatformPage() {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/api/auth/signin">
-              <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4"
+              >
                 Sign In to Trade
               </Button>
             </Link>
@@ -72,7 +84,7 @@ export default function TradingPlatformPage() {
               </Button>
             </Link>
           </div>
-          
+
           <p className="text-sm text-slate-500 mt-6">
             Demo mode available • No real money required to explore
           </p>

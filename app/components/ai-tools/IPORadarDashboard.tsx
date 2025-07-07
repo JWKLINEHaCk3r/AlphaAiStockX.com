@@ -140,11 +140,16 @@ export default function IPORadarDashboard() {
 
   const getRatingColor = (rating: string) => {
     switch (rating) {
-      case 'STRONG_BUY': return 'bg-green-500';
-      case 'BUY': return 'bg-blue-500';
-      case 'HOLD': return 'bg-yellow-500';
-      case 'AVOID': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'STRONG_BUY':
+        return 'bg-green-500';
+      case 'BUY':
+        return 'bg-blue-500';
+      case 'HOLD':
+        return 'bg-yellow-500';
+      case 'AVOID':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
@@ -155,8 +160,9 @@ export default function IPORadarDashboard() {
   };
 
   const filteredIPOs = ipos.filter(ipo => {
-    const matchesSearch = ipo.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         ipo.symbol.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      ipo.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ipo.symbol.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSector = selectedSector === 'all' || ipo.sector === selectedSector;
     return matchesSearch && matchesSector;
   });
@@ -185,7 +191,7 @@ export default function IPORadarDashboard() {
             <Input
               placeholder="Search IPOs..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
@@ -194,12 +200,14 @@ export default function IPORadarDashboard() {
           <Filter className="h-4 w-4 text-gray-400" />
           <select
             value={selectedSector}
-            onChange={(e) => setSelectedSector(e.target.value)}
+            onChange={e => setSelectedSector(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-md"
           >
             <option value="all">All Sectors</option>
             {sectors.map(sector => (
-              <option key={sector} value={sector}>{sector}</option>
+              <option key={sector} value={sector}>
+                {sector}
+              </option>
             ))}
           </select>
         </div>
@@ -218,7 +226,7 @@ export default function IPORadarDashboard() {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
@@ -226,13 +234,17 @@ export default function IPORadarDashboard() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Avg Success Rate</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {Math.round(filteredIPOs.reduce((acc, ipo) => acc + ipo.successProbability, 0) / filteredIPOs.length || 0)}%
+                  {Math.round(
+                    filteredIPOs.reduce((acc, ipo) => acc + ipo.successProbability, 0) /
+                      filteredIPOs.length || 0
+                  )}
+                  %
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
@@ -240,13 +252,17 @@ export default function IPORadarDashboard() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Market Cap</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  ${(filteredIPOs.reduce((acc, ipo) => acc + ipo.marketCap, 0) / 1000000000).toFixed(1)}B
+                  $
+                  {(filteredIPOs.reduce((acc, ipo) => acc + ipo.marketCap, 0) / 1000000000).toFixed(
+                    1
+                  )}
+                  B
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
@@ -264,7 +280,7 @@ export default function IPORadarDashboard() {
 
       {/* IPO List */}
       <div className="space-y-4">
-        {filteredIPOs.map((ipo) => (
+        {filteredIPOs.map(ipo => (
           <Card key={ipo.id} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -276,7 +292,9 @@ export default function IPORadarDashboard() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{ipo.company}</h3>
-                      <p className="text-sm text-gray-600">{ipo.symbol} • {ipo.sector}</p>
+                      <p className="text-sm text-gray-600">
+                        {ipo.symbol} • {ipo.sector}
+                      </p>
                       <p className="text-sm text-gray-500">{ipo.expectedDate}</p>
                     </div>
                   </div>
@@ -287,15 +305,21 @@ export default function IPORadarDashboard() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Price Range:</span>
-                      <span className="text-sm font-medium">${ipo.priceRange[0]} - ${ipo.priceRange[1]}</span>
+                      <span className="text-sm font-medium">
+                        ${ipo.priceRange[0]} - ${ipo.priceRange[1]}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Market Cap:</span>
-                      <span className="text-sm font-medium">${(ipo.marketCap / 1000000000).toFixed(1)}B</span>
+                      <span className="text-sm font-medium">
+                        ${(ipo.marketCap / 1000000000).toFixed(1)}B
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Revenue Growth:</span>
-                      <span className="text-sm font-medium text-green-600">{ipo.keyMetrics.revenueGrowth}%</span>
+                      <span className="text-sm font-medium text-green-600">
+                        {ipo.keyMetrics.revenueGrowth}%
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -331,7 +355,9 @@ export default function IPORadarDashboard() {
                     <div className="space-y-1">
                       <p className="text-xs text-gray-600">Key Catalysts:</p>
                       {ipo.catalysts.slice(0, 2).map((catalyst, idx) => (
-                        <p key={idx} className="text-xs text-gray-500">• {catalyst}</p>
+                        <p key={idx} className="text-xs text-gray-500">
+                          • {catalyst}
+                        </p>
                       ))}
                     </div>
                   </div>

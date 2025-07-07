@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const user = await prisma.user.findUnique({
@@ -64,10 +60,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     // Calculate portfolio metrics
@@ -120,25 +113,18 @@ export async function GET(request: NextRequest) {
       success: true,
       user: userProfile,
     });
-
   } catch (error) {
     console.error('Profile fetch error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -154,10 +140,7 @@ export async function PUT(request: NextRequest) {
       });
 
       if (existingUser) {
-        return NextResponse.json(
-          { error: 'Username is already taken' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Username is already taken' }, { status: 400 });
       }
     }
 
@@ -187,12 +170,8 @@ export async function PUT(request: NextRequest) {
       message: 'Profile updated successfully',
       user: updatedUser,
     });
-
   } catch (error) {
     console.error('Profile update error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

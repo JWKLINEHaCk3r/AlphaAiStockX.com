@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 
 export async function POST(request: NextRequest, { params }: { params: { modelId: string } }) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const modelId = params.modelId;
@@ -30,17 +26,11 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
     });
 
     if (!model) {
-      return NextResponse.json(
-        { error: 'Model not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Model not found' }, { status: 404 });
     }
 
     if (!model.isPublic && model.creatorId !== session.user.id) {
-      return NextResponse.json(
-        { error: 'Model is not public' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Model is not public' }, { status: 403 });
     }
 
     // Check if already subscribed
@@ -54,10 +44,7 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
     });
 
     if (existingSubscription) {
-      return NextResponse.json(
-        { error: 'Already subscribed to this model' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Already subscribed to this model' }, { status: 400 });
     }
 
     // Create subscription
@@ -96,25 +83,18 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
       subscription,
       trainingJob,
     });
-
   } catch (error) {
     console.error('Model subscription error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { modelId: string } }) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const modelId = params.modelId;
@@ -128,23 +108,16 @@ export async function DELETE(request: NextRequest, { params }: { params: { model
     });
 
     if (deletedSubscription.count === 0) {
-      return NextResponse.json(
-        { error: 'Not subscribed to this model' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Not subscribed to this model' }, { status: 400 });
     }
 
     return NextResponse.json({
       success: true,
       message: 'Successfully unsubscribed from model',
     });
-
   } catch (error) {
     console.error('Model unsubscription error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 

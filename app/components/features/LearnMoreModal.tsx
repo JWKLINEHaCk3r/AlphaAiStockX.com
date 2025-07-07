@@ -1,25 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { 
-  CheckCircle, 
-  TrendingUp, 
-  DollarSign, 
-  Clock, 
-  Users, 
+import {
+  CheckCircle,
+  TrendingUp,
+  DollarSign,
+  Clock,
+  Users,
   Shield,
   Zap,
   Target,
   BarChart3,
   Brain,
   ArrowRight,
-  Star
+  Star,
 } from 'lucide-react';
 
 interface FeatureDetails {
@@ -59,28 +65,22 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900/95 backdrop-blur-xl border-slate-700">
         <DialogHeader className="border-b border-slate-700 pb-6">
           <div className="flex items-center gap-4">
             <div className={`p-3 rounded-xl bg-gradient-to-br ${feature.gradient}`}>
-              <div className="text-white">
-                {feature.icon}
-              </div>
+              <div className="text-white">{feature.icon}</div>
             </div>
             <div>
               <DialogTitle className="text-3xl font-bold text-white mb-2">
                 {feature.title}
               </DialogTitle>
-              <p className="text-slate-400 text-lg">
-                {feature.desc}
-              </p>
+              <p className="text-slate-400 text-lg">{feature.desc}</p>
             </div>
           </div>
         </DialogHeader>
-        
+
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
           <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -88,15 +88,13 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
             <TabsTrigger value="stats">Performance</TabsTrigger>
             <TabsTrigger value="pricing">Pricing</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="overview" className="mt-6 space-y-6">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-4">What is {feature.title}?</h3>
-                <p className="text-slate-300 leading-relaxed mb-6">
-                  {feature.details.overview}
-                </p>
-                
+                <p className="text-slate-300 leading-relaxed mb-6">{feature.details.overview}</p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
@@ -112,32 +110,39 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                       ))}
                     </ul>
                   </div>
-                  
+
                   <div>
                     <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
                       <BarChart3 className="h-5 w-5 text-blue-400" />
                       Key Metrics
                     </h4>
                     <div className="space-y-3">
-                      {Object.entries(feature.details.stats).slice(0, 4).map(([key, value]) => (
-                        <div key={key} className="flex justify-between items-center">
-                          <span className="text-slate-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
-                          <Badge variant="outline" className="text-green-400 border-green-400/30">
-                            {value}
-                          </Badge>
-                        </div>
-                      ))}
+                      {Object.entries(feature.details.stats)
+                        .slice(0, 4)
+                        .map(([key, value]) => (
+                          <div key={key} className="flex justify-between items-center">
+                            <span className="text-slate-400 capitalize">
+                              {key.replace(/([A-Z])/g, ' $1')}
+                            </span>
+                            <Badge variant="outline" className="text-green-400 border-green-400/30">
+                              {value}
+                            </Badge>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="features" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {feature.details.features.map((featureItem, index) => (
-                <Card key={index} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-colors">
+                <Card
+                  key={index}
+                  className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-colors"
+                >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
                       <div className="p-2 rounded-lg bg-blue-500/20">
@@ -145,7 +150,10 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                       </div>
                       <div>
                         <p className="text-white font-medium">
-                          {featureItem.replace(/^[🧠⚡📊🔄🎯📈🌐🔗🛡️⚖️🔍📋🔐🔑☁️⚛️🔬🚀🧬🌌🔮]+\s*/, '')}
+                          {featureItem.replace(
+                            /^[🧠⚡📊🔄🎯📈🌐🔗🛡️⚖️🔍📋🔐🔑☁️⚛️🔬🚀🧬🌌🔮]+\s*/,
+                            ''
+                          )}
                         </p>
                         <p className="text-slate-400 text-sm mt-1">
                           Advanced capability for enhanced trading performance
@@ -157,7 +165,7 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
               ))}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="stats" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               {Object.entries(feature.details.stats).map(([key, value]) => (
@@ -171,7 +179,7 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                 </Card>
               ))}
             </div>
-            
+
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
@@ -206,13 +214,15 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="pricing" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardHeader>
                   <CardTitle className="text-white">Starter</CardTitle>
-                  <div className="text-3xl font-bold text-white">$49<span className="text-lg text-slate-400">/mo</span></div>
+                  <div className="text-3xl font-bold text-white">
+                    $49<span className="text-lg text-slate-400">/mo</span>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -221,8 +231,7 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                       Basic AI features
                     </li>
                     <li className="flex items-center gap-2 text-slate-300">
-                      <CheckCircle className="h-4 w-4 text-green-400" />
-                      5 concurrent trades
+                      <CheckCircle className="h-4 w-4 text-green-400" />5 concurrent trades
                     </li>
                     <li className="flex items-center gap-2 text-slate-300">
                       <CheckCircle className="h-4 w-4 text-green-400" />
@@ -234,14 +243,16 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                   </Button>
                 </CardContent>
               </Card>
-              
+
               <Card className="bg-slate-800/50 border-blue-500 relative">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <Badge className="bg-blue-500 text-white">Most Popular</Badge>
                 </div>
                 <CardHeader>
                   <CardTitle className="text-white">Professional</CardTitle>
-                  <div className="text-3xl font-bold text-white">$149<span className="text-lg text-slate-400">/mo</span></div>
+                  <div className="text-3xl font-bold text-white">
+                    $149<span className="text-lg text-slate-400">/mo</span>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -267,7 +278,7 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                   </Button>
                 </CardContent>
               </Card>
-              
+
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardHeader>
                   <CardTitle className="text-white">Enterprise</CardTitle>
@@ -298,16 +309,19 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                 </CardContent>
               </Card>
             </div>
-            
+
             <Card className="bg-slate-800/50 border-slate-700 mt-6">
               <CardContent className="p-6">
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold text-white mb-2">30-Day Money-Back Guarantee</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    30-Day Money-Back Guarantee
+                  </h3>
                   <p className="text-slate-400">
-                    Try {feature.title} risk-free. If you're not completely satisfied, get a full refund within 30 days.
+                    Try {feature.title} risk-free. If you're not completely satisfied, get a full
+                    refund within 30 days.
                   </p>
                   <div className="flex justify-center gap-1 mt-4">
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4, 5].map(star => (
                       <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
@@ -319,15 +333,22 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
             </Card>
           </TabsContent>
         </Tabs>
-        
+
         <div className="border-t border-slate-700 pt-6 mt-6">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            >
               <Zap className="mr-2 h-5 w-5" />
               Get Started Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-800">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-slate-600 text-slate-300 hover:bg-slate-800"
+            >
               Schedule Demo
             </Button>
           </div>

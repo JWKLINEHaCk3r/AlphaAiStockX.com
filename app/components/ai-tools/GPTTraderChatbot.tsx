@@ -7,10 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { 
-  Bot, User, Send, MessageCircle, TrendingUp, 
-  DollarSign, BarChart3, Brain, Sparkles,
-  Clock, Star, Target, AlertCircle
+import {
+  Bot,
+  User,
+  Send,
+  MessageCircle,
+  TrendingUp,
+  DollarSign,
+  BarChart3,
+  Brain,
+  Sparkles,
+  Clock,
+  Star,
+  Target,
+  AlertCircle,
 } from 'lucide-react';
 
 interface ChatMessage {
@@ -59,9 +69,9 @@ export default function GPTTraderChatbot() {
     timeHorizon: 'Long-term (5+ years)',
     experience: 'intermediate',
     portfolioValue: 100000,
-    preferredSectors: ['Technology', 'Healthcare']
+    preferredSectors: ['Technology', 'Healthcare'],
   });
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -85,8 +95,8 @@ export default function GPTTraderChatbot() {
         body: JSON.stringify({
           userId: userProfile.id,
           action: 'initialize',
-          userProfile
-        })
+          userProfile,
+        }),
       });
 
       const result = await response.json();
@@ -106,7 +116,7 @@ export default function GPTTraderChatbot() {
       id: `msg_${Date.now()}`,
       role: 'user',
       content: inputMessage,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -120,8 +130,8 @@ export default function GPTTraderChatbot() {
         body: JSON.stringify({
           userId: userProfile.id,
           action: 'message',
-          message: inputMessage
-        })
+          message: inputMessage,
+        }),
       });
 
       const result = await response.json();
@@ -136,7 +146,7 @@ export default function GPTTraderChatbot() {
         id: `error_${Date.now()}`,
         role: 'assistant',
         content: "I apologize, but I'm experiencing some technical difficulties. Please try again.",
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -161,25 +171,24 @@ export default function GPTTraderChatbot() {
   };
 
   const formatTimestamp = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    return new Date(timestamp).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
     });
   };
 
   const renderMessage = (message: ChatMessage) => {
     const isUser = message.role === 'user';
-    
+
     return (
-      <div
-        key={message.id}
-        className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}
-      >
+      <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
         <div className={`flex max-w-[80%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
           <div className={`flex-shrink-0 ${isUser ? 'ml-3' : 'mr-3'}`}>
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-              isUser ? 'bg-blue-500' : 'bg-green-500'
-            }`}>
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                isUser ? 'bg-blue-500' : 'bg-green-500'
+              }`}
+            >
               {isUser ? (
                 <User className="h-4 w-4 text-white" />
               ) : (
@@ -187,16 +196,14 @@ export default function GPTTraderChatbot() {
               )}
             </div>
           </div>
-          
-          <div className={`rounded-lg px-4 py-2 ${
-            isUser 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-gray-100 text-gray-900 border'
-          }`}>
-            <div className="text-sm leading-relaxed whitespace-pre-wrap">
-              {message.content}
-            </div>
-            
+
+          <div
+            className={`rounded-lg px-4 py-2 ${
+              isUser ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-900 border'
+            }`}
+          >
+            <div className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</div>
+
             {/* Render recommendations if available */}
             {message.metadata?.recommendations && message.metadata.recommendations.length > 0 && (
               <div className="mt-3 space-y-2">
@@ -204,7 +211,15 @@ export default function GPTTraderChatbot() {
                   <div key={index} className="bg-white rounded-lg p-3 border">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-2">
-                        <Badge variant={rec.action === 'BUY' ? 'default' : rec.action === 'SELL' ? 'destructive' : 'secondary'}>
+                        <Badge
+                          variant={
+                            rec.action === 'BUY'
+                              ? 'default'
+                              : rec.action === 'SELL'
+                                ? 'destructive'
+                                : 'secondary'
+                          }
+                        >
                           {rec.action}
                         </Badge>
                         <span className="font-semibold text-gray-900">{rec.symbol}</span>
@@ -224,10 +239,8 @@ export default function GPTTraderChatbot() {
                 ))}
               </div>
             )}
-            
-            <div className="text-xs opacity-70 mt-2">
-              {formatTimestamp(message.timestamp)}
-            </div>
+
+            <div className="text-xs opacity-70 mt-2">{formatTimestamp(message.timestamp)}</div>
           </div>
         </div>
       </div>
@@ -235,12 +248,12 @@ export default function GPTTraderChatbot() {
   };
 
   const quickActions = [
-    "Analyze AAPL stock",
-    "Recommend growth stocks",
-    "Portfolio diversification tips",
-    "Market outlook today",
-    "Best tech stocks to buy",
-    "Risk management strategies"
+    'Analyze AAPL stock',
+    'Recommend growth stocks',
+    'Portfolio diversification tips',
+    'Market outlook today',
+    'Best tech stocks to buy',
+    'Risk management strategies',
   ];
 
   return (
@@ -257,7 +270,7 @@ export default function GPTTraderChatbot() {
               <p className="text-sm text-gray-600">Your AI Trading Assistant</p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="text-right">
               <p className="text-sm text-gray-600">Risk Tolerance</p>
@@ -265,7 +278,7 @@ export default function GPTTraderChatbot() {
                 {userProfile.riskTolerance}
               </Badge>
             </div>
-            
+
             <Button variant="outline" size="sm" onClick={clearChat}>
               Clear Chat
             </Button>
@@ -290,7 +303,7 @@ export default function GPTTraderChatbot() {
               <span>{userProfile.timeHorizon}</span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <Star className="h-4 w-4 text-yellow-500" />
             <span className="text-gray-600">Goals: {userProfile.investmentGoals.join(', ')}</span>
@@ -308,9 +321,7 @@ export default function GPTTraderChatbot() {
                 <h3 className="text-lg font-semibold text-gray-600 mb-2">
                   Initializing GPT-Trader...
                 </h3>
-                <p className="text-gray-500">
-                  Setting up your personalized trading assistant
-                </p>
+                <p className="text-gray-500">Setting up your personalized trading assistant</p>
               </div>
             ) : (
               <>
@@ -324,8 +335,14 @@ export default function GPTTraderChatbot() {
                       <div className="bg-gray-100 rounded-lg px-4 py-2">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                          <div
+                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                            style={{ animationDelay: '0.1s' }}
+                          />
+                          <div
+                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                            style={{ animationDelay: '0.2s' }}
+                          />
                         </div>
                       </div>
                     </div>
@@ -365,21 +382,21 @@ export default function GPTTraderChatbot() {
           <Input
             ref={inputRef}
             value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
+            onChange={e => setInputMessage(e.target.value)}
             placeholder="Ask me about stocks, market analysis, or trading strategies..."
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+            onKeyPress={e => e.key === 'Enter' && sendMessage()}
             disabled={isLoading}
             className="flex-1"
           />
-          <Button 
-            onClick={sendMessage} 
+          <Button
+            onClick={sendMessage}
             disabled={isLoading || !inputMessage.trim()}
             className="px-6"
           >
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        
+
         <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
           <span>Powered by GPT-4 • Real-time market data • Professional analysis</span>
           <div className="flex items-center space-x-2">

@@ -222,6 +222,8 @@ export function useWindowSize() {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -250,6 +252,8 @@ export function useIntersectionObserver(
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const node = elementRef?.current;
     const hasIOSupport = !!window.IntersectionObserver;
 
@@ -271,6 +275,8 @@ export function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const media = window.matchMedia(query);
     if (media.matches !== matches) {
       setMatches(media.matches);
@@ -291,6 +297,8 @@ export function useTheme() {
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
 
@@ -333,6 +341,8 @@ export function useOnlineStatus() {
   );
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 

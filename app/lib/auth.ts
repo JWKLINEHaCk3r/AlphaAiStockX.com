@@ -1,12 +1,12 @@
-// Next-Generation Authentication & User Management System
-import { NextAuthOptions } from 'next-auth';
+// Next-Generation Authentication & User Management System (NextAuth v5)
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import AppleProvider from 'next-auth/providers/apple';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from './prisma';
 import bcrypt from 'bcryptjs';
-import { JWT } from 'next-auth/jwt';
+import type { NextAuthConfig } from 'next-auth';
 
 export interface User {
   id: string;
@@ -55,7 +55,7 @@ export interface UserPreferences {
   };
 }
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -81,14 +81,11 @@ export const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (!user || !user.password) {
+        if (!user?.password) {
           return null;
         }
 
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
 
         if (!isPasswordValid) {
           return null;
@@ -134,6 +131,11 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+
+// For backward compatibility, export authOptions
+export const authOptions = authConfig;
+
 // Enhanced User Service
 export class UserService {
   static async createUser(data: {
@@ -143,7 +145,7 @@ export class UserService {
     username?: string;
   }) {
     const hashedPassword = await bcrypt.hash(data.password, 12);
-    
+
     const user = await prisma.user.create({
       data: {
         email: data.email,
@@ -229,7 +231,7 @@ export class UserService {
 
   static async upgradeUserTier(id: string, tier: User['tier']) {
     const permissions = this.getTierPermissions(tier);
-    
+
     return await prisma.user.update({
       where: { id },
       data: {
@@ -246,39 +248,57 @@ export class UserService {
       free: ['basic_trading', 'view_portfolio'],
       basic: ['basic_trading', 'view_portfolio', 'ai_signals', 'basic_analytics'],
       pro: [
-        'basic_trading', 'view_portfolio', 'ai_signals', 'basic_analytics',
-        'advanced_trading', 'auto_trading', 'advanced_analytics', 'priority_support'
+        'basic_trading',
+        'view_portfolio',
+        'ai_signals',
+        'basic_analytics',
+        'advanced_trading',
+        'auto_trading',
+        'advanced_analytics',
+        'priority_support',
       ],
       ultimate: [
-        'basic_trading', 'view_portfolio', 'ai_signals', 'basic_analytics',
-        'advanced_trading', 'auto_trading', 'advanced_analytics', 'priority_support',
-        'unlimited_trades', 'ai_autopilot', 'custom_algorithms', 'api_access'
+        'basic_trading',
+        'view_portfolio',
+        'ai_signals',
+        'basic_analytics',
+        'advanced_trading',
+        'auto_trading',
+        'advanced_analytics',
+        'priority_support',
+        'unlimited_trades',
+        'ai_autopilot',
+        'custom_algorithms',
+        'api_access',
       ],
       owner: ['*'], // All permissions
     };
-    
+
     return permissions[tier] || permissions.free;
   }
 
   static async validateUser(token: JWT): Promise<boolean> {
     if (!token.userId) return false;
-    
+
     const user = await prisma.user.findUnique({
-      where: { id: token.userId as string },
+      where: { id: token.userId },
     });
-    
+
     return user?.status === 'active';
   }
 }
 
 // Real-time User Activity Tracking
 export class ActivityTracker {
-  static async recordActivity(userId: string, activity: {
-    type: string;
-    details: any;
-    ip?: string;
-    userAgent?: string;
-  }) {
+  static async recordActivity(
+    userId: string,
+    activity: {
+      type: string;
+      details: any;
+      ip?: string;
+      userAgent?: string;
+    }
+  ) {
     await prisma.userActivity.create({
       data: {
         userId,

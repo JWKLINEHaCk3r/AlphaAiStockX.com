@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 
 // Enhanced Trading Execution API with AI Integration
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -21,38 +17,31 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'place_order':
         return await handlePlaceOrder(data, session.user.id);
-      
+
       case 'cancel_order':
         return await handleCancelOrder(data, session.user.id);
-      
+
       case 'modify_order':
         return await handleModifyOrder(data, session.user.id);
-      
+
       case 'execute_ai_signal':
         return await handleAISignalExecution(data, session.user.id);
-      
+
       case 'batch_orders':
         return await handleBatchOrders(data, session.user.id);
-      
+
       case 'auto_trade_toggle':
         return await handleAutoTradeToggle(data, session.user.id);
-      
+
       case 'emergency_close':
         return await handleEmergencyClose(data, session.user.id);
-      
-      default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
-    }
 
+      default:
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
+    }
   } catch (error) {
     console.error('Trading execution error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -60,12 +49,9 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -114,13 +100,9 @@ export async function GET(request: NextRequest) {
       },
       timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Trading data fetch error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -140,19 +122,13 @@ async function handlePlaceOrder(orderData: any, userId: string) {
 
   // Validate order data
   if (!symbol || !side || !quantity || quantity <= 0) {
-    return NextResponse.json(
-      { error: 'Invalid order parameters' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Invalid order parameters' }, { status: 400 });
   }
 
   // Risk checks
   const riskCheck = await performRiskChecks(orderData, userId);
   if (!riskCheck.approved) {
-    return NextResponse.json(
-      { error: riskCheck.reason },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: riskCheck.reason }, { status: 400 });
   }
 
   // Generate order ID
@@ -180,9 +156,12 @@ async function handlePlaceOrder(orderData: any, userId: string) {
   };
 
   // Simulate order execution for demo
-  setTimeout(async () => {
-    await simulateOrderExecution(orderId, orderData);
-  }, Math.random() * 3000 + 1000); // 1-4 seconds
+  setTimeout(
+    async () => {
+      await simulateOrderExecution(orderId, orderData);
+    },
+    Math.random() * 3000 + 1000
+  ); // 1-4 seconds
 
   return NextResponse.json({
     success: true,
@@ -228,16 +207,8 @@ async function handleModifyOrder(modifyData: any, userId: string) {
 }
 
 async function handleAISignalExecution(signalData: any, userId: string) {
-  const {
-    signalId,
-    symbol,
-    action,
-    confidence,
-    targetPrice,
-    stopLoss,
-    positionSize,
-    strategy,
-  } = signalData;
+  const { signalId, symbol, action, confidence, targetPrice, stopLoss, positionSize, strategy } =
+    signalData;
 
   // Calculate position sizing based on portfolio and risk
   const portfolioValue = await getPortfolioValue(userId);
@@ -373,11 +344,13 @@ async function performRiskChecks(orderData: any, userId: string) {
   const orderValue = (orderData.price || getCurrentPrice(orderData.symbol)) * orderData.quantity;
   const positionSizePercent = orderValue / portfolioValue;
 
-  if (positionSizePercent > 0.1) { // 10% max position size
+  if (positionSizePercent > 0.1) {
+    // 10% max position size
     return { approved: false, reason: 'Position size exceeds risk limits (10% max)' };
   }
 
-  if (orderData.quantity > 10000) { // Max quantity check
+  if (orderData.quantity > 10000) {
+    // Max quantity check
     return { approved: false, reason: 'Order quantity exceeds maximum allowed' };
   }
 
@@ -420,8 +393,8 @@ async function getTradingStatus(userId: string) {
     accountStatus: 'ACTIVE',
     tradingEnabled: true,
     autoTradingEnabled: Math.random() > 0.5,
-    dayTradingBuyingPower: 100000.00,
-    overnightBuyingPower: 50000.00,
+    dayTradingBuyingPower: 100000.0,
+    overnightBuyingPower: 50000.0,
     dayTradesRemaining: 3,
     pendingOrders: Math.floor(Math.random() * 10),
     openPositions: Math.floor(Math.random() * 20) + 5,
@@ -456,8 +429,8 @@ function getCurrentPrice(symbol: string): number {
   // Mock current price
   const basePrices: { [key: string]: number } = {
     AAPL: 189.45,
-    TSLA: 251.20,
-    NVDA: 495.30,
+    TSLA: 251.2,
+    NVDA: 495.3,
     MSFT: 378.85,
     GOOGL: 142.65,
   };

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 
 // Rate limiting store (in-memory for demo - use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
@@ -72,16 +71,16 @@ interface MarketDataResponse {
 function getClientIP(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for');
   const real = request.headers.get('x-real-ip');
-  
+
   if (forwarded) {
     const firstIP = forwarded.split(',')[0];
     return firstIP ? firstIP.trim() : 'unknown';
   }
-  
+
   if (real) {
     return real.trim();
   }
-  
+
   return 'unknown';
 }
 
@@ -104,8 +103,17 @@ function checkRateLimit(clientId: string, maxRequests: number, windowMs: number)
 
 async function authenticateUser(request: NextRequest): Promise<UserSession | null> {
   try {
-    const session = await getServerSession(authOptions) as UserSession | null;
-    return session?.user?.id ? session : null;
+    const session = await auth();
+    if (!session?.user?.id) {
+      return null;
+    }
+    return {
+      user: {
+        id: session.user.id,
+        email: session.user.email,
+        name: session.user.name
+      }
+    };
   } catch (error) {
     console.error('Authentication error:', error);
     return null;
@@ -114,26 +122,30 @@ async function authenticateUser(request: NextRequest): Promise<UserSession | nul
 
 // Market data validation schemas
 const MARKET_DATA_VALIDATION = {
-  symbols: (symbols: string[]) => symbols.every(s => /^[A-Z]{1,5}$/.test(s)) && symbols.length <= 50,
+  symbols: (symbols: string[]) =>
+    symbols.every(s => /^[A-Z]{1,5}$/.test(s)) && symbols.length <= 50,
   timeframe: (tf: string) => ['1Min', '5Min', '15Min', '1Hour', '1Day'].includes(tf),
   period: (period: string) => ['1D', '5D', '1M', '3M', '6M', '1Y', '2Y', '5Y'].includes(period),
-  limit: (limit: number) => limit > 0 && limit <= 1000
+  limit: (limit: number) => limit > 0 && limit <= 1000,
 };
 
 // Technical indicators calculation
-function calculateTechnicalIndicators(prices: number[], period: number = 20): TechnicalIndicators | null {
+function calculateTechnicalIndicators(
+  prices: number[],
+  period: number = 20
+): TechnicalIndicators | null {
   if (prices.length < period) return null;
 
   // Simple Moving Average
   const sma = prices.slice(-period).reduce((sum, price) => sum + price, 0) / period;
-  
+
   // Exponential Moving Average
   const multiplier = 2 / (period + 1);
   let ema: number = prices[0] || 0;
   for (let i = 1; i < prices.length; i++) {
     const currentPrice = prices[i];
     if (currentPrice !== undefined) {
-      ema = (currentPrice * multiplier) + (ema * (1 - multiplier));
+      ema = currentPrice * multiplier + ema * (1 - multiplier);
     }
   }
 
@@ -150,29 +162,30 @@ function calculateTechnicalIndicators(prices: number[], period: number = 20): Te
     }
   }
   const rs = gains / losses;
-  const rsi = 100 - (100 / (1 + rs));
+  const rsi = 100 - 100 / (1 + rs);
 
   // Bollinger Bands
-  const variance = prices.slice(-period).reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / period;
+  const variance =
+    prices.slice(-period).reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / period;
   const stdDev = Math.sqrt(variance);
-  const upperBand = sma + (stdDev * 2);
-  const lowerBand = sma - (stdDev * 2);
+  const upperBand = sma + stdDev * 2;
+  const lowerBand = sma - stdDev * 2;
 
   return {
     sma: parseFloat(sma.toFixed(2)),
     ema: parseFloat(ema.toFixed(2)),
-        rsi: parseFloat(rsi.toFixed(2)),
+    rsi: parseFloat(rsi.toFixed(2)),
     bollingerBands: {
       upper: parseFloat(upperBand.toFixed(2)),
       middle: parseFloat(sma.toFixed(2)),
-      lower: parseFloat(lowerBand.toFixed(2))
-    }
+      lower: parseFloat(lowerBand.toFixed(2)),
+    },
   };
 }
 
 function validateMarketDataParams(params: Partial<MarketDataParams>): string | null {
   const { symbols, timeframe, period, limit } = params;
-  
+
   if (!symbols || !Array.isArray(symbols) || !MARKET_DATA_VALIDATION.symbols(symbols)) {
     return 'Invalid symbols. Maximum 50 symbols, 1-5 uppercase letters each.';
   }
@@ -196,20 +209,20 @@ function validateMarketDataParams(params: Partial<MarketDataParams>): string | n
 function generateMockMarketData(symbol: string, params: MarketDataParams): MarketDataResponse {
   const basePrice = Math.random() * 500 + 50; // Random price between $50-$550
   const bars: MarketBarData[] = [];
-  
+
   // Generate mock historical bars
   for (let i = 0; i < params.limit; i++) {
     const variation = (Math.random() - 0.5) * 10; // ±$5 variation
     const price = Math.max(basePrice + variation, 1);
     const volume = Math.floor(Math.random() * 1000000) + 10000;
-    
+
     bars.push({
       timestamp: new Date(Date.now() - (params.limit - i) * 86400000).toISOString(),
       open: parseFloat((price * 0.995).toFixed(2)),
       high: parseFloat((price * 1.005).toFixed(2)),
       low: parseFloat((price * 0.99).toFixed(2)),
       close: parseFloat(price.toFixed(2)),
-      volume
+      volume,
     });
   }
 
@@ -218,7 +231,7 @@ function generateMockMarketData(symbol: string, params: MarketDataParams): Marke
   const previousPrice = prices[prices.length - 2] || basePrice;
   const change = currentPrice - previousPrice;
   const changePercent = (change / previousPrice) * 100;
-  
+
   return {
     symbol,
     currentPrice: parseFloat(currentPrice.toFixed(2)),
@@ -230,15 +243,17 @@ function generateMockMarketData(symbol: string, params: MarketDataParams): Marke
     avgVolume: Math.floor(bars.reduce((sum, bar) => sum + bar.volume, 0) / bars.length),
     marketCap: null,
     bars,
-    quote: params.includeQuotes ? {
-      bid: parseFloat((currentPrice * 0.999).toFixed(2)),
-      ask: parseFloat((currentPrice * 1.001).toFixed(2)),
-      bidSize: Math.floor(Math.random() * 1000) + 100,
-      askSize: Math.floor(Math.random() * 1000) + 100,
-      timestamp: new Date().toISOString()
-    } : null,
+    quote: params.includeQuotes
+      ? {
+          bid: parseFloat((currentPrice * 0.999).toFixed(2)),
+          ask: parseFloat((currentPrice * 1.001).toFixed(2)),
+          bidSize: Math.floor(Math.random() * 1000) + 100,
+          askSize: Math.floor(Math.random() * 1000) + 100,
+          timestamp: new Date().toISOString(),
+        }
+      : null,
     indicators: params.includeIndicators ? calculateTechnicalIndicators(prices) : null,
-    lastUpdated: new Date().toISOString()
+    lastUpdated: new Date().toISOString(),
   };
 }
 
@@ -246,7 +261,8 @@ export async function GET(request: NextRequest) {
   try {
     // Rate limiting check
     const clientIP = getClientIP(request);
-    if (!checkRateLimit(clientIP, 200, 900000)) { // 200 requests per 15 minutes
+    if (!checkRateLimit(clientIP, 200, 900000)) {
+      // 200 requests per 15 minutes
       return NextResponse.json(
         { error: 'Rate limit exceeded. Maximum 200 requests per 15 minutes.' },
         { status: 429 }
@@ -256,10 +272,7 @@ export async function GET(request: NextRequest) {
     // Authentication
     const session = await authenticateUser(request);
     if (!session) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
     // Parse query parameters
@@ -272,10 +285,7 @@ export async function GET(request: NextRequest) {
     const includeQuotes = searchParams.get('includeQuotes') === 'true';
 
     if (!symbolsParam) {
-      return NextResponse.json(
-        { error: 'Symbols parameter is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Symbols parameter is required' }, { status: 400 });
     }
 
     const symbols = symbolsParam.split(',').map(s => s.trim().toUpperCase());
@@ -287,14 +297,11 @@ export async function GET(request: NextRequest) {
       period,
       limit,
       includeIndicators,
-      includeQuotes
+      includeQuotes,
     });
 
     if (validationError) {
-      return NextResponse.json(
-        { error: validationError },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: validationError }, { status: 400 });
     }
 
     const params: MarketDataParams = {
@@ -303,7 +310,7 @@ export async function GET(request: NextRequest) {
       period,
       limit,
       includeIndicators,
-      includeQuotes
+      includeQuotes,
     };
 
     // Generate market data for each symbol
@@ -325,7 +332,7 @@ export async function GET(request: NextRequest) {
           bars: [],
           quote: null,
           indicators: null,
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         } as MarketDataResponse;
       }
     });
@@ -344,20 +351,22 @@ export async function GET(request: NextRequest) {
         limit,
         successful: successfulData.length,
         failed: failedSymbols.length,
-        failedSymbols
+        failedSymbols,
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Error fetching market data:', error);
-    
+
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to fetch market data',
-        message: process.env.NODE_ENV === 'development' 
-          ? (error instanceof Error ? error.message : 'Unknown error')
-          : 'Internal server error'
+        message:
+          process.env.NODE_ENV === 'development'
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Internal server error',
       },
       { status: 500 }
     );
@@ -368,7 +377,8 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting check for subscriptions
     const clientIP = getClientIP(request);
-    if (!checkRateLimit(clientIP + ':post', 20, 900000)) { // 20 subscriptions per 15 minutes
+    if (!checkRateLimit(clientIP + ':post', 20, 900000)) {
+      // 20 subscriptions per 15 minutes
       return NextResponse.json(
         { error: 'Rate limit exceeded. Maximum 20 subscription requests per 15 minutes.' },
         { status: 429 }
@@ -378,10 +388,7 @@ export async function POST(request: NextRequest) {
     // Authentication
     const session = await authenticateUser(request);
     if (!session) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
     // Parse subscription request
@@ -408,7 +415,11 @@ export async function POST(request: NextRequest) {
 
     // Validate channels
     const validChannels = ['trades', 'quotes', 'bars', 'news'];
-    if (!channels || !Array.isArray(channels) || !channels.every(ch => validChannels.includes(ch))) {
+    if (
+      !channels ||
+      !Array.isArray(channels) ||
+      !channels.every(ch => validChannels.includes(ch))
+    ) {
       return NextResponse.json(
         { error: `Valid channels required. Available: ${validChannels.join(', ')}` },
         { status: 400 }
@@ -423,31 +434,33 @@ export async function POST(request: NextRequest) {
       userId: session.user.id,
       status: 'success',
       subscriptionId: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      message: `Market data ${action} successful for ${symbols.length} symbols`
+      message: `Market data ${action} successful for ${symbols.length} symbols`,
     };
 
     console.log('Market data subscription:', {
       userId: session.user.id,
       action,
       symbolCount: symbols.length,
-      channels
+      channels,
     });
 
     return NextResponse.json({
       success: true,
       data: subscriptionResult,
-      message: `Market data ${action} successful`
+      message: `Market data ${action} successful`,
     });
-
   } catch (error) {
     console.error('Error managing market data subscription:', error);
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to manage market data subscription',
-        message: process.env.NODE_ENV === 'development' 
-          ? (error instanceof Error ? error.message : 'Unknown error')
-          : 'Internal server error'
+        message:
+          process.env.NODE_ENV === 'development'
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Internal server error',
       },
       { status: 500 }
     );

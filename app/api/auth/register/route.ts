@@ -21,10 +21,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingUser) {
-      return NextResponse.json(
-        { error: 'User with this email already exists' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
     }
 
     // Check if username is taken
@@ -34,10 +31,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (existingUsername) {
-        return NextResponse.json(
-          { error: 'Username is already taken' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Username is already taken' }, { status: 400 });
       }
     }
 
@@ -116,10 +110,9 @@ export async function POST(request: NextRequest) {
       message: 'User registered successfully',
       user,
     });
-
   } catch (error) {
     console.error('Registration error:', error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
@@ -127,9 +120,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

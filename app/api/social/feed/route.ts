@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 import { z } from 'zod';
 
@@ -8,23 +7,22 @@ const socialPostSchema = z.object({
   content: z.string().min(1).max(500),
   type: z.enum(['POST', 'TRADE_IDEA', 'MARKET_ANALYSIS', 'NEWS_SHARE']),
   attachments: z.array(z.string()).optional(),
-  tradingData: z.object({
-    symbol: z.string().optional(),
-    action: z.enum(['BUY', 'SELL', 'HOLD']).optional(),
-    price: z.number().optional(),
-    confidence: z.number().optional(),
-  }).optional(),
+  tradingData: z
+    .object({
+      symbol: z.string().optional(),
+      action: z.enum(['BUY', 'SELL', 'HOLD']).optional(),
+      price: z.number().optional(),
+      confidence: z.number().optional(),
+    })
+    .optional(),
 });
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -111,25 +109,18 @@ export async function GET(request: NextRequest) {
       success: true,
       posts: feedPosts,
     });
-
   } catch (error) {
     console.error('Social feed error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -197,10 +188,9 @@ export async function POST(request: NextRequest) {
         comments: [],
       },
     });
-
   } catch (error) {
     console.error('Social post creation error:', error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
@@ -208,9 +198,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

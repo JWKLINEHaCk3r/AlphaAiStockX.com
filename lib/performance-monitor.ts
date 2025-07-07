@@ -81,8 +81,9 @@ class PerformanceMonitor {
     }
 
     // Calculate moving average response time
-    existing.averageResponseTime = 
-      (existing.averageResponseTime * (existing.totalRequests - 1) + metric.duration) / existing.totalRequests;
+    existing.averageResponseTime =
+      (existing.averageResponseTime * (existing.totalRequests - 1) + metric.duration) /
+      existing.totalRequests;
 
     existing.errorRate = existing.failedRequests / existing.totalRequests;
 
@@ -98,7 +99,7 @@ class PerformanceMonitor {
     if (metric.duration > PERFORMANCE_CONFIG.slowQueryThreshold) {
       const alertKey = `slow_query_${metric.endpoint}`;
       const lastAlert = this.alertsSent.get(alertKey) || 0;
-      
+
       if (now - lastAlert > oneHour) {
         this.sendAlert('SLOW_QUERY', {
           endpoint: metric.endpoint,
@@ -113,7 +114,7 @@ class PerformanceMonitor {
     if (metric.memoryUsage > PERFORMANCE_CONFIG.memoryWarningThreshold) {
       const alertKey = 'high_memory_usage';
       const lastAlert = this.alertsSent.get(alertKey) || 0;
-      
+
       if (now - lastAlert > oneHour) {
         this.sendAlert('HIGH_MEMORY_USAGE', {
           memoryUsage: metric.memoryUsage,
@@ -126,11 +127,15 @@ class PerformanceMonitor {
     // Check for high error rate alert
     const apiKey = `${metric.method}:${metric.endpoint}`;
     const apiMetrics = this.apiMetrics.get(apiKey);
-    
-    if (apiMetrics && apiMetrics.errorRate > PERFORMANCE_CONFIG.errorRateThreshold && apiMetrics.totalRequests > 10) {
+
+    if (
+      apiMetrics &&
+      apiMetrics.errorRate > PERFORMANCE_CONFIG.errorRateThreshold &&
+      apiMetrics.totalRequests > 10
+    ) {
       const alertKey = `high_error_rate_${metric.endpoint}`;
       const lastAlert = this.alertsSent.get(alertKey) || 0;
-      
+
       if (now - lastAlert > oneHour) {
         this.sendAlert('HIGH_ERROR_RATE', {
           endpoint: metric.endpoint,
@@ -181,14 +186,14 @@ class PerformanceMonitor {
 
   // Clean up old metrics
   private cleanup() {
-    const cutoff = Date.now() - (PERFORMANCE_CONFIG.metricsRetentionHours * 60 * 60 * 1000);
+    const cutoff = Date.now() - PERFORMANCE_CONFIG.metricsRetentionHours * 60 * 60 * 1000;
     this.metrics = this.metrics.filter(metric => metric.timestamp > cutoff);
   }
 
   // Get performance statistics
   getStats(timeframe: '1h' | '6h' | '24h' = '1h') {
     const hours = { '1h': 1, '6h': 6, '24h': 24 }[timeframe];
-    const cutoff = Date.now() - (hours * 60 * 60 * 1000);
+    const cutoff = Date.now() - hours * 60 * 60 * 1000;
     const recentMetrics = this.metrics.filter(metric => metric.timestamp > cutoff);
 
     if (recentMetrics.length === 0) {
@@ -206,10 +211,15 @@ class PerformanceMonitor {
     }
 
     const totalRequests = recentMetrics.length;
-    const successfulRequests = recentMetrics.filter(m => m.statusCode >= 200 && m.statusCode < 400).length;
+    const successfulRequests = recentMetrics.filter(
+      m => m.statusCode >= 200 && m.statusCode < 400
+    ).length;
     const failedRequests = totalRequests - successfulRequests;
-    const averageResponseTime = recentMetrics.reduce((sum, m) => sum + m.duration, 0) / totalRequests;
-    const slowQueries = recentMetrics.filter(m => m.duration > PERFORMANCE_CONFIG.slowQueryThreshold).length;
+    const averageResponseTime =
+      recentMetrics.reduce((sum, m) => sum + m.duration, 0) / totalRequests;
+    const slowQueries = recentMetrics.filter(
+      m => m.duration > PERFORMANCE_CONFIG.slowQueryThreshold
+    ).length;
     const errorRate = failedRequests / totalRequests;
 
     // Get top endpoints by request count
@@ -324,7 +334,7 @@ export function withPerformanceMonitoring<T extends any[], R>(
       throw err;
     } finally {
       const duration = Date.now() - startTime;
-      
+
       performanceMonitor.recordMetric({
         endpoint,
         method,
@@ -340,7 +350,7 @@ export function withPerformanceMonitoring<T extends any[], R>(
 export function createPerformanceMiddleware(endpoint: string) {
   return (request: NextRequest, response: any, next?: Function) => {
     const startTime = Date.now();
-    
+
     // Capture original response methods
     const originalSend = response.send;
     const originalJson = response.json;
@@ -349,27 +359,27 @@ export function createPerformanceMiddleware(endpoint: string) {
     let statusCode = 200;
 
     // Override response methods to capture status code
-    response.send = function(body: any) {
+    response.send = function (body: any) {
       statusCode = response.statusCode || 200;
       return originalSend.call(this, body);
     };
 
-    response.json = function(body: any) {
+    response.json = function (body: any) {
       statusCode = response.statusCode || 200;
       return originalJson.call(this, body);
     };
 
-    response.end = function(...args: any[]) {
+    response.end = function (...args: any[]) {
       const duration = Date.now() - startTime;
       statusCode = response.statusCode || 200;
-      
+
       performanceMonitor.recordMetric({
         endpoint,
         method: request.method || 'GET',
         duration,
         statusCode,
       });
-      
+
       return originalEnd.apply(this, args);
     };
 
@@ -383,7 +393,7 @@ export class PerformanceOptimizer {
   static optimizeQuery(query: string, params: any[]): { query: string; params: any[] } {
     // Add query optimization logic here
     // For example: Add LIMIT clauses, optimize JOINs, use indexes
-    
+
     // Simple optimization: Add LIMIT if not present
     if (!query.toLowerCase().includes('limit') && query.toLowerCase().includes('select')) {
       query += ' LIMIT 1000';

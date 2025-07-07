@@ -95,7 +95,7 @@ export default function MarketPredictorDashboard() {
   const mockPrediction: PredictionResult = {
     symbol: 'AAPL',
     currentPrice: 185.25,
-    predictedPrice: 192.80,
+    predictedPrice: 192.8,
     priceChange: 7.55,
     priceChangePercent: 4.08,
     confidence: 78,
@@ -130,8 +130,8 @@ export default function MarketPredictorDashboard() {
       rsi: 58.3,
       macd: 2.15,
       bollinger: 'Upper Band Touch',
-      support: 182.50,
-      resistance: 187.20,
+      support: 182.5,
+      resistance: 187.2,
     },
     aiInsights: [
       'Strong institutional buying pressure detected in last 3 trading sessions',
@@ -147,7 +147,7 @@ export default function MarketPredictorDashboard() {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         setUploadedChart(e.target?.result as string);
       };
       reader.readAsDataURL(file);
@@ -156,12 +156,18 @@ export default function MarketPredictorDashboard() {
 
   const getRecommendationColor = (recommendation: string) => {
     switch (recommendation) {
-      case 'STRONG_BUY': return 'bg-green-600 text-white';
-      case 'BUY': return 'bg-green-500 text-white';
-      case 'HOLD': return 'bg-yellow-500 text-white';
-      case 'SELL': return 'bg-red-500 text-white';
-      case 'STRONG_SELL': return 'bg-red-600 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'STRONG_BUY':
+        return 'bg-green-600 text-white';
+      case 'BUY':
+        return 'bg-green-500 text-white';
+      case 'HOLD':
+        return 'bg-yellow-500 text-white';
+      case 'SELL':
+        return 'bg-red-500 text-white';
+      case 'STRONG_SELL':
+        return 'bg-red-600 text-white';
+      default:
+        return 'bg-gray-500 text-white';
     }
   };
 
@@ -196,23 +202,19 @@ export default function MarketPredictorDashboard() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-2 block">
-                Symbol
-              </label>
+              <label className="text-sm font-medium text-gray-700 mb-2 block">Symbol</label>
               <Input
                 value={symbol}
-                onChange={(e) => setSymbol(e.target.value.toUpperCase())}
+                onChange={e => setSymbol(e.target.value.toUpperCase())}
                 placeholder="Enter symbol..."
                 className="uppercase"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-2 block">
-                Timeframe
-              </label>
+              <label className="text-sm font-medium text-gray-700 mb-2 block">Timeframe</label>
               <select
                 value={timeframe}
-                onChange={(e) => setTimeframe(e.target.value)}
+                onChange={e => setTimeframe(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
               >
                 <option value="5M">5 Minutes</option>
@@ -295,7 +297,7 @@ export default function MarketPredictorDashboard() {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -307,7 +309,7 @@ export default function MarketPredictorDashboard() {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -318,14 +320,16 @@ export default function MarketPredictorDashboard() {
                   )}
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-600">Price Change</p>
-                    <p className={`text-2xl font-bold ${prediction.priceChange > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <p
+                      className={`text-2xl font-bold ${prediction.priceChange > 0 ? 'text-green-600' : 'text-red-600'}`}
+                    >
                       {prediction.priceChange > 0 ? '+' : ''}${prediction.priceChange.toFixed(2)}
                     </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -342,13 +346,15 @@ export default function MarketPredictorDashboard() {
           {/* Recommendation */}
           <Card>
             <CardContent className="p-6 text-center">
-              <Badge className={`text-xl px-6 py-3 ${getRecommendationColor(prediction.recommendation)}`}>
+              <Badge
+                className={`text-xl px-6 py-3 ${getRecommendationColor(prediction.recommendation)}`}
+              >
                 {prediction.recommendation.replace('_', ' ')}
               </Badge>
               <div className="mt-4">
                 <p className="text-lg font-medium text-gray-900">
-                  {prediction.priceChangePercent > 0 ? '+' : ''}{prediction.priceChangePercent.toFixed(2)}% 
-                  expected in {prediction.timeframe}
+                  {prediction.priceChangePercent > 0 ? '+' : ''}
+                  {prediction.priceChangePercent.toFixed(2)}% expected in {prediction.timeframe}
                 </p>
                 <div className="mt-2">
                   <Progress value={prediction.confidence} className="h-3 max-w-xs mx-auto" />
@@ -375,9 +381,7 @@ export default function MarketPredictorDashboard() {
                         <Badge className={getPatternBullishness(pattern.bullishness)}>
                           {pattern.bullishness}% Bullish
                         </Badge>
-                        <Badge variant="outline">
-                          {pattern.confidence}% Confidence
-                        </Badge>
+                        <Badge variant="outline">{pattern.confidence}% Confidence</Badge>
                       </div>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">{pattern.description}</p>
@@ -404,19 +408,27 @@ export default function MarketPredictorDashboard() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">RSI (14)</span>
-                    <span className={`text-sm font-medium ${
-                      prediction.technicalAnalysis.rsi > 70 ? 'text-red-600' :
-                      prediction.technicalAnalysis.rsi < 30 ? 'text-green-600' : 'text-gray-600'
-                    }`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        prediction.technicalAnalysis.rsi > 70
+                          ? 'text-red-600'
+                          : prediction.technicalAnalysis.rsi < 30
+                            ? 'text-green-600'
+                            : 'text-gray-600'
+                      }`}
+                    >
                       {prediction.technicalAnalysis.rsi}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">MACD</span>
-                    <span className={`text-sm font-medium ${
-                      prediction.technicalAnalysis.macd > 0 ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {prediction.technicalAnalysis.macd > 0 ? '+' : ''}{prediction.technicalAnalysis.macd}
+                    <span
+                      className={`text-sm font-medium ${
+                        prediction.technicalAnalysis.macd > 0 ? 'text-green-600' : 'text-red-600'
+                      }`}
+                    >
+                      {prediction.technicalAnalysis.macd > 0 ? '+' : ''}
+                      {prediction.technicalAnalysis.macd}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
@@ -480,7 +492,9 @@ export default function MarketPredictorDashboard() {
           <CardContent className="p-12 text-center">
             <Eye className="h-12 w-12 text-blue-500 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">Ready for Analysis</h3>
-            <p className="text-gray-600 mb-4">Enter a symbol and run the AI analysis to get predictions.</p>
+            <p className="text-gray-600 mb-4">
+              Enter a symbol and run the AI analysis to get predictions.
+            </p>
             <Button onClick={runPrediction}>
               <Brain className="h-4 w-4 mr-2" />
               Start Analysis

@@ -1,20 +1,45 @@
 'use client';
 
+'use client';
+
 import { useEffect, useState } from 'react';
 
 export function ScrollProgress() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollPx = document.documentElement.scrollTop;
-      const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scrollPx / winHeightPx) * 100;
-      setScrollProgress(scrolled);
-    };
+  // Early return for SSR
+  if (typeof window === 'undefined') {
+    return null;
+  }
 
-    window.addEventListener('scroll', updateScrollProgress);
-    return () => window.removeEventListener('scroll', updateScrollProgress);
+  useEffect(() => {
+    // Skip during SSR or if document is not available
+    if (typeof window === 'undefined') return;
+    if (typeof document === 'undefined') return;
+    
+    try {
+      const updateScrollProgress = () => {
+        if (typeof document === 'undefined') return;
+        
+        const scrollPx = document.documentElement?.scrollTop || 0;
+        const scrollHeight = document.documentElement?.scrollHeight || 0;
+        const clientHeight = document.documentElement?.clientHeight || 0;
+        const winHeightPx = scrollHeight - clientHeight;
+        
+        if (winHeightPx > 0) {
+          const scrolled = (scrollPx / winHeightPx) * 100;
+          setScrollProgress(Math.min(100, Math.max(0, scrolled)));
+        }
+      };
+
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      updateScrollProgress(); // Initial calculation
+      
+      return () => window.removeEventListener('scroll', updateScrollProgress);
+    } catch (error) {
+      console.warn('ScrollProgress initialization failed during SSR:', error);
+      return () => {}; // Return empty cleanup function
+    }
   }, []);
 
   return (
@@ -34,17 +59,29 @@ export function MatrixRain() {
     delay: number;
   }>>([]);
 
+  // Early return for SSR
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   useEffect(() => {
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    const newCharacters = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      char: chars[Math.floor(Math.random() * chars.length)],
-      left: Math.random() * 100,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 2,
-    }));
+    // Skip during SSR
+    if (typeof window === 'undefined') return;
     
-    setCharacters(newCharacters);
+    try {
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      const newCharacters = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        char: chars[Math.floor(Math.random() * chars.length)] || '0', // Fallback to '0'
+        left: Math.random() * 100,
+        duration: Math.random() * 3 + 2,
+        delay: Math.random() * 2,
+      }));
+      
+      setCharacters(newCharacters);
+    } catch (error) {
+      console.warn('MatrixRain initialization failed during SSR:', error);
+    }
   }, []);
 
   return (
@@ -67,6 +104,11 @@ export function MatrixRain() {
 }
 
 export function AIConsciousnessOrb() {
+  // Early return for SSR
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  
   return (
     <div className="fixed bottom-8 right-8 w-16 h-16 rounded-full ai-consciousness opacity-30 pointer-events-none z-50">
       <div className="absolute inset-2 rounded-full bg-black/50 backdrop-blur-sm" />

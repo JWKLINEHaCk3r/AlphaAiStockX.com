@@ -1,26 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 
 export async function POST(request: NextRequest, { params }: { params: { userId: string } }) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const targetUserId = params.userId;
 
     if (targetUserId === session.user.id) {
-      return NextResponse.json(
-        { error: 'Cannot follow yourself' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Cannot follow yourself' }, { status: 400 });
     }
 
     // Check if target user exists
@@ -30,10 +23,7 @@ export async function POST(request: NextRequest, { params }: { params: { userId:
     });
 
     if (!targetUser) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     // Check if already following
@@ -47,10 +37,7 @@ export async function POST(request: NextRequest, { params }: { params: { userId:
     });
 
     if (existingFollow) {
-      return NextResponse.json(
-        { error: 'Already following this user' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Already following this user' }, { status: 400 });
     }
 
     // Create follow relationship
@@ -97,25 +84,18 @@ export async function POST(request: NextRequest, { params }: { params: { userId:
       success: true,
       message: `Now following ${targetUser.name}`,
     });
-
   } catch (error) {
     console.error('Follow user error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { userId: string } }) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const targetUserId = params.userId;
@@ -129,10 +109,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { userI
     });
 
     if (deletedFollow.count === 0) {
-      return NextResponse.json(
-        { error: 'Not following this user' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Not following this user' }, { status: 400 });
     }
 
     // Update social profiles
@@ -153,12 +130,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { userI
       success: true,
       message: 'Unfollowed successfully',
     });
-
   } catch (error) {
     console.error('Unfollow user error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

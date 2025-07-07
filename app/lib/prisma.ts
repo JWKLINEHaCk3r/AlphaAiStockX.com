@@ -4,11 +4,10 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-export const prisma = globalForPrisma.prisma ?? 
+export const prisma =
+  globalForPrisma.prisma ??
   new PrismaClient({
-    log: process.env.NODE_ENV === 'development' 
-      ? ['query', 'error', 'warn'] 
-      : ['error'],
+    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
     datasources: {
       db: {
         url: process.env.DATABASE_URL || 'file:./dev.db',
@@ -35,10 +34,10 @@ export const initializeDatabase = async () => {
   try {
     // Check if we have any users
     const userCount = await prisma.user.count();
-    
+
     if (userCount === 0) {
       console.log('🌱 Seeding database with initial data...');
-      
+
       // Create demo admin user
       const adminUser = await prisma.user.create({
         data: {
@@ -161,7 +160,7 @@ export const initializeDatabase = async () => {
               accuracy: 0.85 + Math.random() * 0.1,
               precision: 0.82 + Math.random() * 0.1,
               recall: 0.78 + Math.random() * 0.1,
-              f1Score: 0.80 + Math.random() * 0.1,
+              f1Score: 0.8 + Math.random() * 0.1,
               sharpeRatio: 1.5 + Math.random() * 0.5,
               maxDrawdown: 0.05 + Math.random() * 0.05,
               totalReturn: 0.15 + Math.random() * 0.25,

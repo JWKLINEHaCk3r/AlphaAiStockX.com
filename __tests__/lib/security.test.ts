@@ -79,7 +79,8 @@ describe('Security Utilities', () => {
   describe('EncryptionUtils', () => {
     beforeEach(() => {
       // Mock encryption key
-      process.env.ENCRYPTION_KEY = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+      process.env.ENCRYPTION_KEY =
+        '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
     });
 
     it('should encrypt and decrypt data correctly', () => {
@@ -90,11 +91,7 @@ describe('Security Utilities', () => {
       expect(encrypted.iv).toBeDefined();
       expect(encrypted.tag).toBeDefined();
 
-      const decrypted = EncryptionUtils.decrypt(
-        encrypted.encrypted,
-        encrypted.iv,
-        encrypted.tag
-      );
+      const decrypted = EncryptionUtils.decrypt(encrypted.encrypted, encrypted.iv, encrypted.tag);
 
       expect(decrypted).toBe(originalData);
     });

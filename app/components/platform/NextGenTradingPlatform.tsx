@@ -310,6 +310,8 @@ interface Reaction {
 interface NextGenPlatformProps {
   user: User;
 }
+
+interface AISignal {
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';

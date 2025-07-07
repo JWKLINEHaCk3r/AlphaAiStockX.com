@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';
 
 // Rate limiting storage (in production, use Redis or similar)
@@ -75,9 +74,9 @@ function checkRateLimit(key: string, maxRequests: number, windowMs: number): boo
 
 async function authenticateUser(): Promise<string | null> {
   try {
-    // Get session using explicit type casting to handle NextAuth type issues
-    const session = (await getServerSession(authOptions)) as UserSession | null;
-    
+    // Get session using auth function from NextAuth v5
+    const session = await auth();
+
     if (!session?.user?.id) {
       return null;
     }
@@ -94,22 +93,16 @@ export async function GET(request: NextRequest) {
     // Rate limiting
     const clientIP = getClientIP(request);
     const rateLimitKey = `portfolio-get-${clientIP}`;
-    
+
     if (!checkRateLimit(rateLimitKey, 60, 900000)) {
       // 60 requests per 15 minutes
-      return NextResponse.json(
-        { error: 'Too many requests' },
-        { status: 429 }
-      );
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
 
     // Authentication
     const userId = await authenticateUser();
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' }, 
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     console.log(`Portfolio access request from user: ${userId}`);
@@ -147,14 +140,15 @@ export async function GET(request: NextRequest) {
       shortMarketValue: portfolioSummary.shortMarketValue,
     };
 
-    console.log(`Portfolio retrieved successfully for user ${userId}: $${portfolioSummary.totalValue}`);
+    console.log(
+      `Portfolio retrieved successfully for user ${userId}: $${portfolioSummary.totalValue}`
+    );
 
     return NextResponse.json({
       success: true,
       data: portfolioData,
       timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Error fetching portfolio:', error);
 
@@ -162,7 +156,7 @@ export async function GET(request: NextRequest) {
     const isDevelopment = process.env.NODE_ENV === 'development';
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to fetch portfolio',
         message: isDevelopment ? errorMessage : 'Internal server error',
       },
@@ -176,21 +170,16 @@ export async function POST(request: NextRequest) {
     // Rate limiting
     const clientIP = getClientIP(request);
     const rateLimitKey = `portfolio-post-${clientIP}`;
-    
-    if (!checkRateLimit(rateLimitKey, 10, 900000)) { // 10 requests per 15 minutes
-      return NextResponse.json(
-        { error: 'Too many requests' }, 
-        { status: 429 }
-      );
+
+    if (!checkRateLimit(rateLimitKey, 10, 900000)) {
+      // 10 requests per 15 minutes
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
 
     // Authentication
     const userId = await authenticateUser();
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' }, 
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Parse request body
@@ -198,10 +187,7 @@ export async function POST(request: NextRequest) {
     try {
       updateData = await request.json();
     } catch {
-      return NextResponse.json(
-        { error: 'Invalid JSON in request body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid JSON in request body' }, { status: 400 });
     }
 
     console.log(`Portfolio update request from user: ${userId}`, updateData);
@@ -213,7 +199,6 @@ export async function POST(request: NextRequest) {
       message: 'Portfolio update functionality is not yet implemented',
       data: updateData,
     });
-
   } catch (error) {
     console.error('Error updating portfolio:', error);
 
@@ -221,7 +206,7 @@ export async function POST(request: NextRequest) {
     const isDevelopment = process.env.NODE_ENV === 'development';
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to update portfolio',
         message: isDevelopment ? errorMessage : 'Internal server error',
       },
@@ -235,21 +220,16 @@ export async function PUT(request: NextRequest) {
     // Rate limiting
     const clientIP = getClientIP(request);
     const rateLimitKey = `portfolio-put-${clientIP}`;
-    
-    if (!checkRateLimit(rateLimitKey, 5, 900000)) { // 5 requests per 15 minutes
-      return NextResponse.json(
-        { error: 'Too many requests' }, 
-        { status: 429 }
-      );
+
+    if (!checkRateLimit(rateLimitKey, 5, 900000)) {
+      // 5 requests per 15 minutes
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
 
     // Authentication
     const userId = await authenticateUser();
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' }, 
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Parse rebalancing parameters
@@ -257,10 +237,7 @@ export async function PUT(request: NextRequest) {
     try {
       rebalanceData = await request.json();
     } catch {
-      return NextResponse.json(
-        { error: 'Invalid JSON in request body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid JSON in request body' }, { status: 400 });
     }
 
     console.log(`Portfolio rebalance request from user: ${userId}`, rebalanceData);
@@ -272,7 +249,6 @@ export async function PUT(request: NextRequest) {
       message: 'Portfolio rebalancing functionality is not yet implemented',
       data: rebalanceData,
     });
-
   } catch (error) {
     console.error('Error rebalancing portfolio:', error);
 
@@ -280,7 +256,7 @@ export async function PUT(request: NextRequest) {
     const isDevelopment = process.env.NODE_ENV === 'development';
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to rebalance portfolio',
         message: isDevelopment ? errorMessage : 'Internal server error',
       },

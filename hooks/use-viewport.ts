@@ -20,6 +20,8 @@ export function useViewport(): ViewportSize {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const updateViewport = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;

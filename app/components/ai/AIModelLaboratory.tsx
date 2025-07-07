@@ -7,15 +7,42 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import {
-  Brain, Cpu, Network, Atom, Zap, Target, TrendingUp, BarChart3,
-  Play, Pause, Square, Settings, Eye, Download, Upload, Share,
-  Award, Trophy, Medal, Star, Rocket, Activity, Database, Cloud
+  Brain,
+  Cpu,
+  Network,
+  Atom,
+  Zap,
+  Target,
+  TrendingUp,
+  BarChart3,
+  Play,
+  Pause,
+  Square,
+  Settings,
+  Eye,
+  Download,
+  Upload,
+  Share,
+  Award,
+  Trophy,
+  Medal,
+  Star,
+  Rocket,
+  Activity,
+  Database,
+  Cloud,
 } from 'lucide-react';
 
 interface AIModel {
@@ -110,14 +137,14 @@ export default function AIModelLaboratory() {
       epochs: 100,
       hiddenLayers: 3,
       dropout: 0.2,
-      regularization: 0.01
-    }
+      regularization: 0.01,
+    },
   });
 
   useEffect(() => {
     loadModels();
     loadTrainingJobs();
-    
+
     // Setup real-time updates for training jobs
     const interval = setInterval(updateTrainingProgress, 5000);
     return () => clearInterval(interval);
@@ -150,7 +177,7 @@ export default function AIModelLaboratory() {
             avgHoldingPeriod: 2.5,
             volatility: 15.2,
             alpha: 12.4,
-            beta: 0.85
+            beta: 0.85,
           },
           trainingData: {
             symbols: ['AAPL', 'GOOGL', 'MSFT', 'TSLA'],
@@ -159,7 +186,7 @@ export default function AIModelLaboratory() {
             endDate: new Date('2024-12-31'),
             features: ['price', 'volume', 'technical_indicators', 'sentiment'],
             lookbackPeriod: 60,
-            predictionHorizon: 1
+            predictionHorizon: 1,
           },
           hyperparameters: {
             learningRate: 0.001,
@@ -167,18 +194,18 @@ export default function AIModelLaboratory() {
             epochs: 500,
             hiddenLayers: 4,
             dropout: 0.3,
-            regularization: 0.01
+            regularization: 0.01,
           },
           author: {
             id: '1',
             username: 'alex_trader',
             avatar: '/avatars/alex.jpg',
-            tier: 'ultimate'
+            tier: 'ultimate',
           },
           createdAt: new Date('2024-01-15'),
           lastTrained: new Date('2024-12-20'),
           subscribers: 1247,
-          rating: 4.8
+          rating: 4.8,
         },
         {
           id: '2',
@@ -198,7 +225,7 @@ export default function AIModelLaboratory() {
             avgHoldingPeriod: 3.2,
             volatility: 18.7,
             alpha: 8.9,
-            beta: 1.12
+            beta: 1.12,
           },
           trainingData: {
             symbols: ['SPY', 'QQQ', 'IWM'],
@@ -207,7 +234,7 @@ export default function AIModelLaboratory() {
             endDate: new Date('2024-12-31'),
             features: ['price', 'volume', 'options_flow', 'news_sentiment'],
             lookbackPeriod: 30,
-            predictionHorizon: 5
+            predictionHorizon: 5,
           },
           hyperparameters: {
             learningRate: 0.0005,
@@ -215,19 +242,19 @@ export default function AIModelLaboratory() {
             epochs: 200,
             hiddenLayers: 6,
             dropout: 0.4,
-            regularization: 0.02
+            regularization: 0.02,
           },
           author: {
             id: '2',
             username: 'quantum_dev',
             avatar: '/avatars/quantum.jpg',
-            tier: 'pro'
+            tier: 'pro',
           },
           createdAt: new Date('2024-02-10'),
           lastTrained: new Date('2024-12-22'),
           subscribers: 892,
-          rating: 4.6
-        }
+          rating: 4.6,
+        },
       ]);
     }
   };
@@ -251,29 +278,31 @@ export default function AIModelLaboratory() {
           loss: 0.0234,
           accuracy: 91.8,
           estimatedTimeRemaining: 2340000, // 39 minutes
-          startedAt: new Date(Date.now() - 3600000) // 1 hour ago
-        }
+          startedAt: new Date(Date.now() - 3600000), // 1 hour ago
+        },
       ]);
     }
   };
 
   const updateTrainingProgress = async () => {
     // Update training job progress
-    setTrainingJobs(prev => prev.map(job => {
-      if (job.status === 'running') {
-        const newProgress = Math.min(job.progress + Math.random() * 2, 100);
-        const newEpoch = Math.floor((newProgress / 100) * job.totalEpochs);
-        return {
-          ...job,
-          progress: newProgress,
-          currentEpoch: newEpoch,
-          loss: job.loss * (1 - Math.random() * 0.01),
-          accuracy: job.accuracy + Math.random() * 0.1,
-          estimatedTimeRemaining: Math.max(job.estimatedTimeRemaining - 5000, 0)
-        };
-      }
-      return job;
-    }));
+    setTrainingJobs(prev =>
+      prev.map(job => {
+        if (job.status === 'running') {
+          const newProgress = Math.min(job.progress + Math.random() * 2, 100);
+          const newEpoch = Math.floor((newProgress / 100) * job.totalEpochs);
+          return {
+            ...job,
+            progress: newProgress,
+            currentEpoch: newEpoch,
+            loss: job.loss * (1 - Math.random() * 0.01),
+            accuracy: job.accuracy + Math.random() * 0.1,
+            estimatedTimeRemaining: Math.max(job.estimatedTimeRemaining - 5000, 0),
+          };
+        }
+        return job;
+      })
+    );
   };
 
   const createModel = async () => {
@@ -282,7 +311,7 @@ export default function AIModelLaboratory() {
       const response = await fetch('/api/ai/models', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newModel)
+        body: JSON.stringify(newModel),
       });
 
       if (response.ok) {
@@ -300,7 +329,7 @@ export default function AIModelLaboratory() {
   const startTraining = async (modelId: string) => {
     try {
       const response = await fetch(`/api/ai/models/${modelId}/train`, {
-        method: 'POST'
+        method: 'POST',
       });
 
       if (response.ok) {
@@ -315,13 +344,13 @@ export default function AIModelLaboratory() {
   const deployModel = async (modelId: string) => {
     try {
       const response = await fetch(`/api/ai/models/${modelId}/deploy`, {
-        method: 'POST'
+        method: 'POST',
       });
 
       if (response.ok) {
-        setModels(prev => prev.map(model => 
-          model.id === modelId ? { ...model, status: 'deployed' } : model
-        ));
+        setModels(prev =>
+          prev.map(model => (model.id === modelId ? { ...model, status: 'deployed' } : model))
+        );
       }
     } catch (error) {
       console.error('Failed to deploy model:', error);
@@ -330,29 +359,40 @@ export default function AIModelLaboratory() {
 
   const getModelTypeIcon = (type: string) => {
     switch (type) {
-      case 'LSTM': return <Network className="h-5 w-5" />;
-      case 'Transformer': return <Atom className="h-5 w-5" />;
-      case 'GAN': return <Zap className="h-5 w-5" />;
-      case 'Ensemble': return <Brain className="h-5 w-5" />;
-      case 'CNN': return <Eye className="h-5 w-5" />;
-      default: return <Cpu className="h-5 w-5" />;
+      case 'LSTM':
+        return <Network className="h-5 w-5" />;
+      case 'Transformer':
+        return <Atom className="h-5 w-5" />;
+      case 'GAN':
+        return <Zap className="h-5 w-5" />;
+      case 'Ensemble':
+        return <Brain className="h-5 w-5" />;
+      case 'CNN':
+        return <Eye className="h-5 w-5" />;
+      default:
+        return <Cpu className="h-5 w-5" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'deployed': return 'bg-green-600';
-      case 'training': return 'bg-yellow-600';
-      case 'testing': return 'bg-blue-600';
-      case 'failed': return 'bg-red-600';
-      default: return 'bg-gray-600';
+      case 'deployed':
+        return 'bg-green-600';
+      case 'training':
+        return 'bg-yellow-600';
+      case 'testing':
+        return 'bg-blue-600';
+      case 'failed':
+        return 'bg-red-600';
+      default:
+        return 'bg-gray-600';
     }
   };
 
   const formatTime = (milliseconds: number) => {
     const minutes = Math.floor(milliseconds / 60000);
     const hours = Math.floor(minutes / 60);
-    
+
     if (hours > 0) {
       return `${hours}h ${minutes % 60}m`;
     }
@@ -376,7 +416,7 @@ export default function AIModelLaboratory() {
                 <label className="text-sm text-slate-400 mb-2 block">Model Name</label>
                 <Input
                   value={newModel.name}
-                  onChange={(e) => setNewModel(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={e => setNewModel(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g., AlphaNet Pro v2"
                   className="bg-slate-700 border-slate-600"
                 />
@@ -406,7 +446,7 @@ export default function AIModelLaboratory() {
                 <label className="text-sm text-slate-400 mb-2 block">Timeframe</label>
                 <Select
                   value={newModel.timeframe}
-                  onValueChange={(value) => setNewModel(prev => ({ ...prev, timeframe: value }))}
+                  onValueChange={value => setNewModel(prev => ({ ...prev, timeframe: value }))}
                 >
                   <SelectTrigger className="bg-slate-700 border-slate-600">
                     <SelectValue />
@@ -427,7 +467,7 @@ export default function AIModelLaboratory() {
                 <label className="text-sm text-slate-400 mb-2 block">Description</label>
                 <Textarea
                   value={newModel.description}
-                  onChange={(e) => setNewModel(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={e => setNewModel(prev => ({ ...prev, description: e.target.value }))}
                   placeholder="Describe your model's strategy and approach..."
                   className="bg-slate-700 border-slate-600 h-32"
                 />
@@ -440,10 +480,12 @@ export default function AIModelLaboratory() {
             <label className="text-sm text-slate-400 mb-2 block">Trading Symbols</label>
             <Input
               value={newModel.symbols.join(', ')}
-              onChange={(e) => setNewModel(prev => ({ 
-                ...prev, 
-                symbols: e.target.value.split(',').map(s => s.trim().toUpperCase()) 
-              }))}
+              onChange={e =>
+                setNewModel(prev => ({
+                  ...prev,
+                  symbols: e.target.value.split(',').map(s => s.trim().toUpperCase()),
+                }))
+              }
               placeholder="AAPL, GOOGL, MSFT, TSLA"
               className="bg-slate-700 border-slate-600"
             />
@@ -453,23 +495,28 @@ export default function AIModelLaboratory() {
           <div>
             <label className="text-sm text-slate-400 mb-2 block">Input Features</label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {['price', 'volume', 'technical_indicators', 'sentiment', 'options_flow', 'news'].map((feature) => (
-                <div key={feature} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={newModel.features.includes(feature)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setNewModel(prev => ({ ...prev, features: [...prev.features, feature] }));
-                      } else {
-                        setNewModel(prev => ({ ...prev, features: prev.features.filter(f => f !== feature) }));
-                      }
-                    }}
-                    className="rounded"
-                  />
-                  <span className="text-sm capitalize">{feature.replace('_', ' ')}</span>
-                </div>
-              ))}
+              {['price', 'volume', 'technical_indicators', 'sentiment', 'options_flow', 'news'].map(
+                feature => (
+                  <div key={feature} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={newModel.features.includes(feature)}
+                      onChange={e => {
+                        if (e.target.checked) {
+                          setNewModel(prev => ({ ...prev, features: [...prev.features, feature] }));
+                        } else {
+                          setNewModel(prev => ({
+                            ...prev,
+                            features: prev.features.filter(f => f !== feature),
+                          }));
+                        }
+                      }}
+                      className="rounded"
+                    />
+                    <span className="text-sm capitalize">{feature.replace('_', ' ')}</span>
+                  </div>
+                )
+              )}
             </div>
           </div>
 
@@ -486,10 +533,15 @@ export default function AIModelLaboratory() {
                     type="number"
                     step="0.0001"
                     value={newModel.hyperparameters.learningRate}
-                    onChange={(e) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, learningRate: Number(e.target.value) }
-                    }))}
+                    onChange={e =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: {
+                          ...prev.hyperparameters,
+                          learningRate: Number(e.target.value),
+                        },
+                      }))
+                    }
                     className="bg-slate-600 border-slate-500"
                   />
                 </div>
@@ -499,10 +551,15 @@ export default function AIModelLaboratory() {
                   <Input
                     type="number"
                     value={newModel.hyperparameters.batchSize}
-                    onChange={(e) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, batchSize: Number(e.target.value) }
-                    }))}
+                    onChange={e =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: {
+                          ...prev.hyperparameters,
+                          batchSize: Number(e.target.value),
+                        },
+                      }))
+                    }
                     className="bg-slate-600 border-slate-500"
                   />
                 </div>
@@ -512,10 +569,15 @@ export default function AIModelLaboratory() {
                   <Input
                     type="number"
                     value={newModel.hyperparameters.epochs}
-                    onChange={(e) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, epochs: Number(e.target.value) }
-                    }))}
+                    onChange={e =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: {
+                          ...prev.hyperparameters,
+                          epochs: Number(e.target.value),
+                        },
+                      }))
+                    }
                     className="bg-slate-600 border-slate-500"
                   />
                 </div>
@@ -524,10 +586,12 @@ export default function AIModelLaboratory() {
                   <label className="text-sm text-slate-400 mb-2 block">Hidden Layers</label>
                   <Slider
                     value={[newModel.hyperparameters.hiddenLayers]}
-                    onValueChange={(value) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, hiddenLayers: value[0] }
-                    }))}
+                    onValueChange={value =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: { ...prev.hyperparameters, hiddenLayers: value[0] },
+                      }))
+                    }
                     max={10}
                     min={1}
                     step={1}
@@ -542,10 +606,12 @@ export default function AIModelLaboratory() {
                   <label className="text-sm text-slate-400 mb-2 block">Dropout Rate</label>
                   <Slider
                     value={[newModel.hyperparameters.dropout]}
-                    onValueChange={(value) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, dropout: value[0] }
-                    }))}
+                    onValueChange={value =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: { ...prev.hyperparameters, dropout: value[0] },
+                      }))
+                    }
                     max={0.5}
                     min={0}
                     step={0.01}
@@ -560,10 +626,12 @@ export default function AIModelLaboratory() {
                   <label className="text-sm text-slate-400 mb-2 block">Regularization</label>
                   <Slider
                     value={[newModel.hyperparameters.regularization]}
-                    onValueChange={(value) => setNewModel(prev => ({
-                      ...prev,
-                      hyperparameters: { ...prev.hyperparameters, regularization: value[0] }
-                    }))}
+                    onValueChange={value =>
+                      setNewModel(prev => ({
+                        ...prev,
+                        hyperparameters: { ...prev.hyperparameters, regularization: value[0] },
+                      }))
+                    }
                     max={0.1}
                     min={0}
                     step={0.001}
@@ -603,7 +671,7 @@ export default function AIModelLaboratory() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {trainingJobs.map((job) => (
+              {trainingJobs.map(job => (
                 <div key={job.id} className="bg-slate-700/50 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
@@ -611,7 +679,9 @@ export default function AIModelLaboratory() {
                       <Badge className="bg-yellow-600">{job.status}</Badge>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-yellow-400">{job.progress.toFixed(1)}%</div>
+                      <div className="text-2xl font-bold text-yellow-400">
+                        {job.progress.toFixed(1)}%
+                      </div>
                       <div className="text-sm text-slate-400">
                         Epoch {job.currentEpoch}/{job.totalEpochs}
                       </div>
@@ -647,17 +717,18 @@ export default function AIModelLaboratory() {
 
       {/* Models Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {models.map((model) => (
-          <Card key={model.id} className="bg-slate-800 border-slate-700 hover:border-slate-600 transition-colors">
+        {models.map(model => (
+          <Card
+            key={model.id}
+            className="bg-slate-800 border-slate-700 hover:border-slate-600 transition-colors"
+          >
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center space-x-2">
                   {getModelTypeIcon(model.type)}
                   <span>{model.name}</span>
                 </CardTitle>
-                <Badge className={getStatusColor(model.status)}>
-                  {model.status}
-                </Badge>
+                <Badge className={getStatusColor(model.status)}>{model.status}</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -685,13 +756,19 @@ export default function AIModelLaboratory() {
                 </div>
                 <div>
                   <div className="text-slate-400">Max DD</div>
-                  <div className="font-semibold text-red-400">{model.backtestResults.maxDrawdown}%</div>
+                  <div className="font-semibold text-red-400">
+                    {model.backtestResults.maxDrawdown}%
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <img src={model.author.avatar} alt={model.author.username} className="h-6 w-6 rounded-full" />
+                  <img
+                    src={model.author.avatar}
+                    alt={model.author.username}
+                    className="h-6 w-6 rounded-full"
+                  />
                   <span className="text-sm">{model.author.username}</span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -702,18 +779,14 @@ export default function AIModelLaboratory() {
 
               <div className="flex space-x-2">
                 {model.status === 'draft' && (
-                  <Button 
-                    size="sm" 
-                    onClick={() => startTraining(model.id)}
-                    className="flex-1"
-                  >
+                  <Button size="sm" onClick={() => startTraining(model.id)} className="flex-1">
                     <Play className="h-4 w-4 mr-2" />
                     Start Training
                   </Button>
                 )}
                 {model.status === 'testing' && (
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     onClick={() => deployModel(model.id)}
                     className="flex-1 bg-green-600 hover:bg-green-700"
                   >
@@ -746,10 +819,10 @@ export default function AIModelLaboratory() {
           <div className="text-center py-12">
             <Trophy className="h-16 w-16 text-slate-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Advanced Backtesting</h3>
-            <p className="text-slate-400 mb-6">Test your models against historical data with professional-grade analytics</p>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
-              Coming Soon
-            </Button>
+            <p className="text-slate-400 mb-6">
+              Test your models against historical data with professional-grade analytics
+            </p>
+            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">Coming Soon</Button>
           </div>
         </CardContent>
       </Card>
@@ -769,10 +842,10 @@ export default function AIModelLaboratory() {
           <div className="text-center py-12">
             <Medal className="h-16 w-16 text-slate-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Model Marketplace</h3>
-            <p className="text-slate-400 mb-6">Buy, sell, and license AI trading models from top developers worldwide</p>
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600">
-              Coming Soon
-            </Button>
+            <p className="text-slate-400 mb-6">
+              Buy, sell, and license AI trading models from top developers worldwide
+            </p>
+            <Button className="bg-gradient-to-r from-purple-600 to-pink-600">Coming Soon</Button>
           </div>
         </CardContent>
       </Card>
@@ -813,21 +886,13 @@ export default function AIModelLaboratory() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="create">
-            {renderCreateModel()}
-          </TabsContent>
+          <TabsContent value="create">{renderCreateModel()}</TabsContent>
 
-          <TabsContent value="models">
-            {renderModels()}
-          </TabsContent>
+          <TabsContent value="models">{renderModels()}</TabsContent>
 
-          <TabsContent value="backtest">
-            {renderBacktest()}
-          </TabsContent>
+          <TabsContent value="backtest">{renderBacktest()}</TabsContent>
 
-          <TabsContent value="marketplace">
-            {renderMarketplace()}
-          </TabsContent>
+          <TabsContent value="marketplace">{renderMarketplace()}</TabsContent>
         </Tabs>
 
         {/* Model Details Modal */}
@@ -857,15 +922,21 @@ export default function AIModelLaboratory() {
                   </div>
                   <div className="bg-slate-700 rounded-lg p-3">
                     <div className="text-sm text-slate-400">Sharpe Ratio</div>
-                    <div className="text-xl font-bold">{selectedModel.backtestResults.sharpeRatio}</div>
+                    <div className="text-xl font-bold">
+                      {selectedModel.backtestResults.sharpeRatio}
+                    </div>
                   </div>
                   <div className="bg-slate-700 rounded-lg p-3">
                     <div className="text-sm text-slate-400">Win Rate</div>
-                    <div className="text-xl font-bold">{selectedModel.backtestResults.winRate}%</div>
+                    <div className="text-xl font-bold">
+                      {selectedModel.backtestResults.winRate}%
+                    </div>
                   </div>
                   <div className="bg-slate-700 rounded-lg p-3">
                     <div className="text-sm text-slate-400">Total Trades</div>
-                    <div className="text-xl font-bold">{selectedModel.backtestResults.totalTrades}</div>
+                    <div className="text-xl font-bold">
+                      {selectedModel.backtestResults.totalTrades}
+                    </div>
                   </div>
                 </div>
 

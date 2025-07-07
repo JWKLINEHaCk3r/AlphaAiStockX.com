@@ -1,63 +1,46 @@
 import { EventEmitter } from 'events';
-import { io, Socket } from 'socket.io-client';
-import { useState, useEffect } from 'react';
 
-interface MarketDataPoint {
+// Interface definitions
+export interface MarketDataPoint {
   symbol: string;
   price: number;
-  volume: number;
-  bid: number;
-  ask: number;
   change: number;
   changePercent: number;
-  timestamp: number;
-  high: number;
-  low: number;
-  vwap?: number;
-  rsi?: number;
-  macd?: number;
+  volume: number;
+  timestamp: Date;
 }
 
-interface AISignal {
+export interface AISignal {
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   confidence: number;
-  currentPrice: number;
-  targetPrice: number;
-  stopLoss: number;
-  strategy: string;
-  reasoning: string;
-  timestamp: number;
-  risk: 'LOW' | 'MEDIUM' | 'HIGH';
-  timeframe: string;
+  price: number;
+  timestamp: Date;
 }
 
-interface TradingUpdate {
-  type: 'POSITION' | 'ORDER' | 'EXECUTION' | 'PNL';
+export interface TradingUpdate {
+  id: string;
+  type: 'ORDER' | 'TRADE' | 'PORTFOLIO';
   data: any;
-  timestamp: number;
+  timestamp: Date;
 }
 
-interface SentimentData {
+export interface SentimentData {
   symbol: string;
-  overall: number;
-  bullish: number;
-  bearish: number;
-  neutral: number;
+  sentiment: number;
   volume: number;
-  sources: string[];
-  timestamp: number;
+  timestamp: Date;
 }
 
 export class EnhancedWebSocketService extends EventEmitter {
-  private socket: Socket | null = null;
-  private reconnectAttempts = 0;
-  private maxReconnectAttempts = 10;
-  private reconnectDelay = 1000;
+  private socket: any = null;
   private isConnected = false;
-  private subscriptions = new Set<string>();
+  private reconnectAttempts = 0;
+  private maxReconnectAttempts = 5;
+  private reconnectDelay = 1000;
   private heartbeatInterval: NodeJS.Timeout | null = null;
+  private subscriptions = new Set<string>();
 
   // Data caches
   private marketDataCache = new Map<string, MarketDataPoint>();
@@ -67,46 +50,23 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   constructor() {
     super();
-    this.setMaxListeners(100); // Increase listener limit for multiple subscribers
+    this.setMaxListeners(100);
   }
 
   async connect(userId?: string): Promise<boolean> {
+    // Server-side guard - return false on server
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
     if (this.socket && this.isConnected) {
       return true;
     }
 
     try {
-      // Initialize socket.io endpoint
-      await fetch('/api/socketio');
-      
-      this.socket = io(process.env.NODE_ENV === 'production' 
-        ? process.env.NEXT_PUBLIC_APP_URL || ''
-        : 'http://localhost:3000', {
-        path: '/api/socketio',
-        addTrailingSlash: false,
-        transports: ['websocket', 'polling'],
-        timeout: 20000,
-        forceNew: true,
-      });
-
-      this.setupEventHandlers(userId);
-      
-      return new Promise((resolve) => {
-        this.socket!.on('connect', () => {
-          this.isConnected = true;
-          this.reconnectAttempts = 0;
-          this.startHeartbeat();
-          this.emit('connected');
-          resolve(true);
-        });
-
-        this.socket!.on('connect_error', () => {
-          resolve(false);
-        });
-
-        setTimeout(() => resolve(false), 5000); // 5s timeout
-      });
-
+      // Dynamic import for client-side only - temporarily return false since socket.io-client is not installed
+      console.log('WebSocket service disabled until socket.io-client is properly configured');
+      return false;
     } catch (error) {
       console.error('WebSocket connection failed:', error);
       return false;
@@ -137,17 +97,12 @@ export class EnhancedWebSocketService extends EventEmitter {
     });
 
     // AI signals events
-    this.socket.on('new-ai-signal', (signal: AISignal) => {
+    this.socket.on('ai-signal', (signal: AISignal) => {
       this.aiSignalsCache.unshift(signal);
       if (this.aiSignalsCache.length > 100) {
         this.aiSignalsCache = this.aiSignalsCache.slice(0, 100);
       }
       this.emit('aiSignal', signal);
-    });
-
-    this.socket.on('ai-signals', (signals: AISignal[]) => {
-      this.aiSignalsCache = signals;
-      this.emit('aiSignals', signals);
     });
 
     // Trading updates
@@ -164,16 +119,6 @@ export class EnhancedWebSocketService extends EventEmitter {
       this.emit('portfolioUpdate', data);
     });
 
-    // Social feed
-    this.socket.on('new-social-post', (post: any) => {
-      this.emit('socialPost', post);
-    });
-
-    // Trade notifications
-    this.socket.on('trade-notification', (notification: any) => {
-      this.emit('tradeNotification', notification);
-    });
-
     // Sentiment updates
     this.socket.on('sentiment-update', (data: SentimentData) => {
       this.sentimentCache.set(data.symbol, data);
@@ -188,11 +133,13 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   private startHeartbeat(): void {
+    if (typeof window === 'undefined') return;
+    
     this.heartbeatInterval = setInterval(() => {
       if (this.socket && this.isConnected) {
         this.socket.emit('ping');
       }
-    }, 30000); // Ping every 30 seconds
+    }, 30000); // 30 seconds
   }
 
   private stopHeartbeat(): void {
@@ -204,13 +151,13 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   private async attemptReconnect(userId?: string): Promise<void> {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-      this.emit('maxReconnectAttemptsReached');
+      console.error('Max reconnection attempts reached');
       return;
     }
 
     this.reconnectAttempts++;
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
-
+    
     setTimeout(async () => {
       console.log(`Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
       await this.connect(userId);
@@ -218,7 +165,6 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   private resubscribeAll(): void {
-    // Re-subscribe to all previous subscriptions
     this.subscriptions.forEach(subscription => {
       const [type, ...params] = subscription.split(':');
       switch (type) {
@@ -231,9 +177,6 @@ export class EnhancedWebSocketService extends EventEmitter {
         case 'portfolio':
           if (params[0]) this.subscribeToPortfolio(params[0]);
           break;
-        case 'social':
-          if (params[0]) this.subscribeToSocialFeed(params[0]);
-          break;
         case 'notifications':
           if (params[0]) this.subscribeToTradeNotifications(params[0]);
           break;
@@ -243,8 +186,8 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   // Subscription methods
   subscribeToMarketData(symbols: string[]): void {
-    if (!this.socket || !this.isConnected) return;
-
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
     this.socket.emit('subscribe-market-data', symbols);
     symbols.forEach(symbol => {
       this.subscriptions.add(`market:${symbol}`);
@@ -252,8 +195,8 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   unsubscribeFromMarketData(symbols: string[]): void {
-    if (!this.socket || !this.isConnected) return;
-
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
     this.socket.emit('unsubscribe-market-data', symbols);
     symbols.forEach(symbol => {
       this.subscriptions.delete(`market:${symbol}`);
@@ -261,57 +204,31 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   subscribeToAISignals(userId: string): void {
-    if (!this.socket || !this.isConnected) return;
-
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
     this.socket.emit('subscribe-ai-signals', userId);
     this.subscriptions.add(`signals:${userId}`);
   }
 
   subscribeToPortfolio(userId: string): void {
-    if (!this.socket || !this.isConnected) return;
-
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
     this.socket.emit('subscribe-portfolio', userId);
     this.subscriptions.add(`portfolio:${userId}`);
   }
 
-  subscribeToSocialFeed(userId: string): void {
-    if (!this.socket || !this.isConnected) return;
-
-    this.socket.emit('subscribe-social-feed', userId);
-    this.subscriptions.add(`social:${userId}`);
-  }
-
   subscribeToTradeNotifications(userId: string): void {
-    if (!this.socket || !this.isConnected) return;
-
-    this.socket.emit('subscribe-trade-notifications', userId);
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
+    this.socket.emit('subscribe-notifications', userId);
     this.subscriptions.add(`notifications:${userId}`);
   }
 
-  // Batch subscription for efficiency
-  subscribeToMultiple(subscriptions: Array<{
-    type: 'market' | 'signals' | 'portfolio' | 'social' | 'notifications';
-    data: string | string[];
-  }>): void {
-    subscriptions.forEach(({ type, data }) => {
-      switch (type) {
-        case 'market':
-          this.subscribeToMarketData(Array.isArray(data) ? data : [data]);
-          break;
-        case 'signals':
-          this.subscribeToAISignals(data as string);
-          break;
-        case 'portfolio':
-          this.subscribeToPortfolio(data as string);
-          break;
-        case 'social':
-          this.subscribeToSocialFeed(data as string);
-          break;
-        case 'notifications':
-          this.subscribeToTradeNotifications(data as string);
-          break;
-      }
-    });
+  subscribeToSocialFeed(userId: string): void {
+    if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
+    
+    this.socket.emit('subscribe-social', userId);
+    this.subscriptions.add(`social:${userId}`);
   }
 
   // Data getters
@@ -319,11 +236,11 @@ export class EnhancedWebSocketService extends EventEmitter {
     return symbol ? this.marketDataCache.get(symbol) : this.marketDataCache;
   }
 
-  getAISignals(limit = 50): AISignal[] {
+  getAISignals(limit: number = 50): AISignal[] {
     return this.aiSignalsCache.slice(0, limit);
   }
 
-  getTradingUpdates(limit = 100): TradingUpdate[] {
+  getTradingUpdates(limit: number = 100): TradingUpdate[] {
     return this.tradingUpdatesCache.slice(0, limit);
   }
 
@@ -331,40 +248,34 @@ export class EnhancedWebSocketService extends EventEmitter {
     return symbol ? this.sentimentCache.get(symbol) : this.sentimentCache;
   }
 
-  // Connection status
-  getConnectionStatus(): {
-    connected: boolean;
-    reconnectAttempts: number;
-    subscriptions: number;
-    dataPoints: {
-      marketData: number;
-      aiSignals: number;
-      tradingUpdates: number;
-      sentiment: number;
-    };
-  } {
+  getConnectionStatus() {
     return {
       connected: this.isConnected,
-      reconnectAttempts: this.reconnectAttempts,
       subscriptions: this.subscriptions.size,
-      dataPoints: {
-        marketData: this.marketDataCache.size,
-        aiSignals: this.aiSignalsCache.length,
-        tradingUpdates: this.tradingUpdatesCache.length,
-        sentiment: this.sentimentCache.size,
-      },
+      marketData: this.marketDataCache.size,
+      aiSignals: this.aiSignalsCache.length,
+      tradingUpdates: this.tradingUpdatesCache.length,
+      reconnectAttempts: this.reconnectAttempts,
     };
   }
 
-  // Cleanup
   disconnect(): void {
-    this.stopHeartbeat();
-    if (this.socket) {
+    if (this.socket && typeof window !== 'undefined') {
+      this.stopHeartbeat();
       this.socket.disconnect();
       this.socket = null;
+      this.isConnected = false;
+      this.subscriptions.clear();
+      this.emit('disconnected');
     }
-    this.isConnected = false;
-    this.subscriptions.clear();
+  }
+
+  // Cleanup method
+  cleanup(): void {
+    if (typeof window === 'undefined') return;
+    
+    this.disconnect();
+    this.removeAllListeners();
     this.marketDataCache.clear();
     this.aiSignalsCache = [];
     this.tradingUpdatesCache = [];
@@ -374,50 +285,4 @@ export class EnhancedWebSocketService extends EventEmitter {
 
 // Singleton instance
 export const websocketService = new EnhancedWebSocketService();
-
-// React hook for easy usage
-export const useEnhancedWebSocket = (userId?: string) => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState(websocketService.getConnectionStatus());
-
-  useEffect(() => {
-    const handleConnect = () => setIsConnected(true);
-    const handleDisconnect = () => setIsConnected(false);
-    const handleReconnect = () => setIsConnected(true);
-
-    websocketService.on('connected', handleConnect);
-    websocketService.on('disconnected', handleDisconnect);
-    websocketService.on('reconnected', handleReconnect);
-
-    // Auto-connect if not connected
-    if (!websocketService.getConnectionStatus().connected) {
-      websocketService.connect(userId);
-    }
-
-    // Update connection status periodically
-    const statusInterval = setInterval(() => {
-      setConnectionStatus(websocketService.getConnectionStatus());
-    }, 5000);
-
-    return () => {
-      websocketService.off('connected', handleConnect);
-      websocketService.off('disconnected', handleDisconnect);
-      websocketService.off('reconnected', handleReconnect);
-      clearInterval(statusInterval);
-    };
-  }, [userId]);
-
-  return {
-    websocketService,
-    isConnected,
-    connectionStatus,
-  };
-};
-
-// Type exports
-export type {
-  MarketDataPoint,
-  AISignal,
-  TradingUpdate,
-  SentimentData,
-};
+export default websocketService;

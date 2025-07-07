@@ -9,13 +9,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { 
-  Bot, 
-  Play, 
-  Pause, 
-  Settings, 
-  TrendingUp, 
-  DollarSign, 
+import {
+  Bot,
+  Play,
+  Pause,
+  Settings,
+  TrendingUp,
+  DollarSign,
   Target,
   Shield,
   Zap,
@@ -25,7 +25,7 @@ import {
   AlertTriangle,
   CheckCircle,
   Clock,
-  Cpu
+  Cpu,
 } from 'lucide-react';
 
 interface TradingBot {
@@ -72,7 +72,7 @@ export default function AutomatedTradingBotManager() {
         totalTrades: 1247,
         avgTradeTime: '4.2h',
         sharpeRatio: 2.14,
-        maxDrawdown: 8.3
+        maxDrawdown: 8.3,
       },
       settings: {
         maxPositionSize: 10,
@@ -80,14 +80,14 @@ export default function AutomatedTradingBotManager() {
         takeProfit: 8,
         riskLevel: 'medium',
         symbols: ['AAPL', 'TSLA', 'NVDA', 'MSFT', 'GOOGL'],
-        capital: 100000
+        capital: 100000,
       },
       lastSignal: {
         symbol: 'AAPL',
         action: 'BUY',
         confidence: 94.7,
-        timestamp: '2 minutes ago'
-      }
+        timestamp: '2 minutes ago',
+      },
     },
     {
       id: 'quantum-arbitrage',
@@ -101,7 +101,7 @@ export default function AutomatedTradingBotManager() {
         totalTrades: 3421,
         avgTradeTime: '1.7h',
         sharpeRatio: 3.41,
-        maxDrawdown: 4.2
+        maxDrawdown: 4.2,
       },
       settings: {
         maxPositionSize: 5,
@@ -109,14 +109,14 @@ export default function AutomatedTradingBotManager() {
         takeProfit: 3,
         riskLevel: 'low',
         symbols: ['SPY', 'QQQ', 'IWM', 'GLD', 'TLT'],
-        capital: 250000
+        capital: 250000,
       },
       lastSignal: {
         symbol: 'QQQ',
         action: 'SELL',
         confidence: 87.3,
-        timestamp: '5 minutes ago'
-      }
+        timestamp: '5 minutes ago',
+      },
     },
     {
       id: 'neural-pattern',
@@ -130,7 +130,7 @@ export default function AutomatedTradingBotManager() {
         totalTrades: 892,
         avgTradeTime: '6.1h',
         sharpeRatio: 1.97,
-        maxDrawdown: 12.4
+        maxDrawdown: 12.4,
       },
       settings: {
         maxPositionSize: 15,
@@ -138,8 +138,8 @@ export default function AutomatedTradingBotManager() {
         takeProfit: 12,
         riskLevel: 'high',
         symbols: ['TSLA', 'AMZN', 'META', 'NFLX', 'AMD'],
-        capital: 150000
-      }
+        capital: 150000,
+      },
     },
     {
       id: 'volume-master',
@@ -153,7 +153,7 @@ export default function AutomatedTradingBotManager() {
         totalTrades: 2156,
         avgTradeTime: '2.8h',
         sharpeRatio: 2.73,
-        maxDrawdown: 6.1
+        maxDrawdown: 6.1,
       },
       settings: {
         maxPositionSize: 8,
@@ -161,51 +161,64 @@ export default function AutomatedTradingBotManager() {
         takeProfit: 6,
         riskLevel: 'medium',
         symbols: ['BTC-USD', 'ETH-USD', 'SPX', 'NDX', 'CRUDE'],
-        capital: 200000
+        capital: 200000,
       },
       lastSignal: {
         symbol: 'BTC-USD',
         action: 'BUY',
         confidence: 91.2,
-        timestamp: '1 minute ago'
-      }
-    }
+        timestamp: '1 minute ago',
+      },
+    },
   ]);
 
   const [selectedBot, setSelectedBot] = useState<TradingBot | null>(null);
   const [isCreatingBot, setIsCreatingBot] = useState(false);
 
   const toggleBotStatus = (botId: string) => {
-    setBots(prev => prev.map(bot => {
-      if (bot.id === botId) {
-        const newStatus = bot.status === 'active' ? 'paused' : 'active';
-        return { ...bot, status: newStatus };
-      }
-      return bot;
-    }));
+    setBots(prev =>
+      prev.map(bot => {
+        if (bot.id === botId) {
+          const newStatus = bot.status === 'active' ? 'paused' : 'active';
+          return { ...bot, status: newStatus };
+        }
+        return bot;
+      })
+    );
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-500';
-      case 'paused': return 'bg-yellow-500';
-      case 'stopped': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'active':
+        return 'bg-green-500';
+      case 'paused':
+        return 'bg-yellow-500';
+      case 'stopped':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
   const getRiskLevelColor = (level: string) => {
     switch (level) {
-      case 'low': return 'text-green-400';
-      case 'medium': return 'text-yellow-400';
-      case 'high': return 'text-red-400';
-      default: return 'text-gray-400';
+      case 'low':
+        return 'text-green-400';
+      case 'medium':
+        return 'text-yellow-400';
+      case 'high':
+        return 'text-red-400';
+      default:
+        return 'text-gray-400';
     }
   };
 
   const activeBots = bots.filter(bot => bot.status === 'active');
   const totalCapital = bots.reduce((sum, bot) => sum + bot.settings.capital, 0);
-  const totalReturn = bots.reduce((sum, bot) => sum + (bot.performance.totalReturn * bot.settings.capital / 100), 0);
+  const totalReturn = bots.reduce(
+    (sum, bot) => sum + (bot.performance.totalReturn * bot.settings.capital) / 100,
+    0
+  );
   const avgWinRate = bots.reduce((sum, bot) => sum + bot.performance.winRate, 0) / bots.length;
   const totalTrades = bots.reduce((sum, bot) => sum + bot.performance.totalTrades, 0);
 
@@ -228,7 +241,9 @@ export default function AutomatedTradingBotManager() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <DollarSign className="w-8 h-8 text-green-400" />
-              <Badge className="bg-green-500/20 text-green-400">+{((totalReturn / totalCapital) * 100).toFixed(1)}%</Badge>
+              <Badge className="bg-green-500/20 text-green-400">
+                +{((totalReturn / totalCapital) * 100).toFixed(1)}%
+              </Badge>
             </div>
             <h3 className="text-2xl font-bold text-white">${totalReturn.toLocaleString()}</h3>
             <p className="text-gray-400">Total Profit</p>
@@ -261,9 +276,15 @@ export default function AutomatedTradingBotManager() {
       {/* Bot Management */}
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList className="grid w-full grid-cols-3 bg-slate-800/50">
-          <TabsTrigger value="overview" className="text-white">Bot Overview</TabsTrigger>
-          <TabsTrigger value="performance" className="text-white">Performance</TabsTrigger>
-          <TabsTrigger value="settings" className="text-white">Settings</TabsTrigger>
+          <TabsTrigger value="overview" className="text-white">
+            Bot Overview
+          </TabsTrigger>
+          <TabsTrigger value="performance" className="text-white">
+            Performance
+          </TabsTrigger>
+          <TabsTrigger value="settings" className="text-white">
+            Settings
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -279,7 +300,7 @@ export default function AutomatedTradingBotManager() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {bots.map((bot) => (
+            {bots.map(bot => (
               <Card key={bot.id} className="bg-slate-800/50 backdrop-blur-sm border-slate-700">
                 <CardHeader>
                   <div className="flex items-center justify-between">
@@ -301,7 +322,9 @@ export default function AutomatedTradingBotManager() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <p className="text-gray-400 text-xs">Total Return</p>
-                      <p className="text-green-400 font-semibold">+{bot.performance.totalReturn}%</p>
+                      <p className="text-green-400 font-semibold">
+                        +{bot.performance.totalReturn}%
+                      </p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-gray-400 text-xs">Win Rate</p>
@@ -313,7 +336,9 @@ export default function AutomatedTradingBotManager() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-gray-400 text-xs">Risk Level</p>
-                      <p className={`font-semibold capitalize ${getRiskLevelColor(bot.settings.riskLevel)}`}>
+                      <p
+                        className={`font-semibold capitalize ${getRiskLevelColor(bot.settings.riskLevel)}`}
+                      >
                         {bot.settings.riskLevel}
                       </p>
                     </div>
@@ -323,7 +348,7 @@ export default function AutomatedTradingBotManager() {
                   <div className="space-y-2">
                     <p className="text-gray-400 text-xs">Active Strategies</p>
                     <div className="flex flex-wrap gap-1">
-                      {bot.strategies.map((strategy) => (
+                      {bot.strategies.map(strategy => (
                         <Badge key={strategy} variant="outline" className="text-xs">
                           {strategy}
                         </Badge>
@@ -338,12 +363,16 @@ export default function AutomatedTradingBotManager() {
                         <div className="flex items-center gap-2">
                           <Zap className="w-4 h-4 text-yellow-400" />
                           <span className="text-white font-medium">{bot.lastSignal.symbol}</span>
-                          <Badge className={`${bot.lastSignal.action === 'BUY' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+                          <Badge
+                            className={`${bot.lastSignal.action === 'BUY' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                          >
                             {bot.lastSignal.action}
                           </Badge>
                         </div>
                         <div className="text-right">
-                          <p className="text-green-400 font-semibold">{bot.lastSignal.confidence}%</p>
+                          <p className="text-green-400 font-semibold">
+                            {bot.lastSignal.confidence}%
+                          </p>
                           <p className="text-gray-400 text-xs">{bot.lastSignal.timestamp}</p>
                         </div>
                       </div>
@@ -361,11 +390,7 @@ export default function AutomatedTradingBotManager() {
                       <Settings className="w-4 h-4 mr-2" />
                       Configure
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1"
-                    >
+                    <Button size="sm" variant="outline" className="flex-1">
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Details
                     </Button>
@@ -386,22 +411,25 @@ export default function AutomatedTradingBotManager() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {bots.map((bot) => (
+                {bots.map(bot => (
                   <div key={bot.id} className="space-y-4">
                     <div className="flex items-center gap-2">
                       <div className={`w-2 h-2 rounded-full ${getStatusColor(bot.status)}`} />
                       <h4 className="text-white font-medium">{bot.name}</h4>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-400">Return</span>
                           <span className="text-green-400">+{bot.performance.totalReturn}%</span>
                         </div>
-                        <Progress value={Math.min(100, bot.performance.totalReturn * 2)} className="h-2" />
+                        <Progress
+                          value={Math.min(100, bot.performance.totalReturn * 2)}
+                          className="h-2"
+                        />
                       </div>
-                      
+
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-400">Win Rate</span>
@@ -409,13 +437,16 @@ export default function AutomatedTradingBotManager() {
                         </div>
                         <Progress value={bot.performance.winRate} className="h-2" />
                       </div>
-                      
+
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-400">Sharpe Ratio</span>
                           <span className="text-purple-400">{bot.performance.sharpeRatio}</span>
                         </div>
-                        <Progress value={Math.min(100, bot.performance.sharpeRatio * 25)} className="h-2" />
+                        <Progress
+                          value={Math.min(100, bot.performance.sharpeRatio * 25)}
+                          className="h-2"
+                        />
                       </div>
                     </div>
                   </div>
@@ -459,7 +490,7 @@ export default function AutomatedTradingBotManager() {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div>
                       <Label className="text-white">Trading Capital</Label>
@@ -486,11 +517,9 @@ export default function AutomatedTradingBotManager() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex gap-4">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Save Changes
-                  </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">Save Changes</Button>
                   <Button variant="outline" onClick={() => setSelectedBot(null)}>
                     Cancel
                   </Button>
@@ -502,7 +531,9 @@ export default function AutomatedTradingBotManager() {
               <CardContent className="p-12 text-center">
                 <Settings className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Select a Bot to Configure</h3>
-                <p className="text-gray-400">Choose a trading bot from the overview tab to modify its settings</p>
+                <p className="text-gray-400">
+                  Choose a trading bot from the overview tab to modify its settings
+                </p>
               </CardContent>
             </Card>
           )}

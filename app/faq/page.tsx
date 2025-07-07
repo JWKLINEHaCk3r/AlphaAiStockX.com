@@ -1,5 +1,9 @@
 'use client';
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function FAQPage() {
   return (
     <div className="max-w-3xl mx-auto py-12 px-4">

@@ -19,7 +19,12 @@ export async function POST(request: NextRequest) {
         }
 
         // Validate constraints
-        const requiredConstraints = ['riskTolerance', 'minWeight', 'maxWeight', 'maxSectorAllocation'];
+        const requiredConstraints = [
+          'riskTolerance',
+          'minWeight',
+          'maxWeight',
+          'maxSectorAllocation',
+        ];
         for (const field of requiredConstraints) {
           if (constraints[field] === undefined) {
             return NextResponse.json(
@@ -38,7 +43,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,
           data: optimizedPortfolio,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'backtest':
@@ -50,16 +55,13 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const backtestResults = await optimizer.backtestPortfolio(
-          allocations,
-          timeframe || '1Y'
-        );
+        const backtestResults = await optimizer.backtestPortfolio(allocations, timeframe || '1Y');
 
         return NextResponse.json({
           success: true,
           data: backtestResults,
           timeframe: timeframe || '1Y',
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'recommendations':
@@ -80,7 +82,7 @@ export async function POST(request: NextRequest) {
           success: true,
           data: recommendations,
           count: recommendations.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       default:
@@ -89,11 +91,13 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
     }
-
   } catch (error) {
     console.error('Portfolio Optimizer API Error:', error);
     return NextResponse.json(
-      { error: 'Failed to process request', details: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Failed to process request',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -107,23 +111,23 @@ export async function GET(request: NextRequest) {
     switch (action) {
       case 'assets':
         const availableAssets = optimizer.getAvailableAssets();
-        
+
         return NextResponse.json({
           success: true,
           data: availableAssets,
           count: availableAssets.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'sectors':
         const assets = optimizer.getAvailableAssets();
         const sectors = [...new Set(assets.map(asset => asset.sector))];
-        
+
         return NextResponse.json({
           success: true,
           data: sectors,
           count: sectors.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'asset_classes':
@@ -136,13 +140,13 @@ export async function GET(request: NextRequest) {
           'Bonds',
           'REITs',
           'Commodities',
-          'Sector ETFs'
+          'Sector ETFs',
         ];
-        
+
         return NextResponse.json({
           success: true,
           data: assetClasses,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       default:
@@ -151,13 +155,9 @@ export async function GET(request: NextRequest) {
           { status: 400 }
         );
     }
-
   } catch (error) {
     console.error('Portfolio Optimizer GET API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }
 
@@ -169,14 +169,18 @@ export async function PUT(request: NextRequest) {
     switch (action) {
       case 'add_asset':
         if (!assetData) {
-          return NextResponse.json(
-            { error: 'Asset data is required' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Asset data is required' }, { status: 400 });
         }
 
         // Validate required fields
-        const requiredFields = ['symbol', 'name', 'sector', 'price', 'expectedReturn', 'volatility'];
+        const requiredFields = [
+          'symbol',
+          'name',
+          'sector',
+          'price',
+          'expectedReturn',
+          'volatility',
+        ];
         for (const field of requiredFields) {
           if (assetData[field] === undefined) {
             return NextResponse.json(
@@ -187,12 +191,12 @@ export async function PUT(request: NextRequest) {
         }
 
         optimizer.addCustomAsset(assetData);
-        
+
         return NextResponse.json({
           success: true,
           message: 'Custom asset added successfully',
           symbol: assetData.symbol,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       default:
@@ -201,12 +205,8 @@ export async function PUT(request: NextRequest) {
           { status: 400 }
         );
     }
-
   } catch (error) {
     console.error('Portfolio Optimizer PUT API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }

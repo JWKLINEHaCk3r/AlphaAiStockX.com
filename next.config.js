@@ -1,15 +1,42 @@
 /** @type {import('next').NextConfig} */
+// Setup global polyfills before anything else
+require('./global-setup.js');
+
+const SelfPolyfillPlugin = require('./scripts/self-polyfill-plugin.js');
+
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  // output: 'export', // Temporarily disabled to debug SSR issues
   trailingSlash: true,
-  distDir: 'out',
+  // distDir: 'out',
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    // Disable static optimization to avoid SSR issues during development
+    optimizePackageImports: false,
+    // Disable static export to prevent SSR issues
+    optimizeCss: false,
+    // Disable webpack build worker to simplify debugging
+    webpackBuildWorker: false,
+    // Force dynamic rendering to avoid static generation errors
+    forceSwcTransforms: false,
+    // Disable CSS optimization to prevent entryCSSFiles error
+    // turbo: false,
+    // Disable static generation to prevent CSS processing errors
+    staticPageGenerationTimeout: 0,
+  },
+  // Moved from experimental
+  serverExternalPackages: ['sharp'],
+  // Force all pages to be dynamic to avoid static generation issues
+  generateBuildId: async () => {
+    return 'development-build'
+  },
+  // Disable static optimization
+  output: undefined,
   images: {
     domains: ['alphaaistockx.com', 'cdn.alphaaistockx.com'],
     formats: ['image/webp', 'image/avif'],
@@ -17,9 +44,57 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     unoptimized: true,
   },
+  // SSR configuration
+  env: {
+    CUSTOM_KEY: 'my-value',
+  },
   // Improved webpack configuration
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Fix for webpack 5 compatibility
+    // Inject webpack polyfill at the beginning of server-side bundles
+    if (isServer) {
+      const originalEntry = config.entry;
+      
+      config.entry = async () => {
+        const entries = await originalEntry();
+        const polyfillPath = require.resolve('./runtime-polyfills.js');
+        
+        // Add polyfill to all server-side entry points
+        Object.keys(entries).forEach((entryName) => {
+          if (Array.isArray(entries[entryName])) {
+            entries[entryName].unshift(polyfillPath);
+          } else if (typeof entries[entryName] === 'string') {
+            entries[entryName] = [polyfillPath, entries[entryName]];
+          } else if (typeof entries[entryName] === 'object') {
+            if (Array.isArray(entries[entryName].import)) {
+              entries[entryName].import.unshift(polyfillPath);
+            } else if (typeof entries[entryName].import === 'string') {
+              entries[entryName].import = [polyfillPath, entries[entryName].import];
+            }
+          }
+        });
+        
+        return entries;
+      };
+      
+      // Ensure self is defined in server context using DefinePlugin
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          'process.browser': false,
+          'typeof self': JSON.stringify('object'),
+          'self.webpackChunk_N_E': 'global.webpackChunk_N_E',
+          'self': 'global',
+        })
+      );
+
+      // Add custom plugin to handle document access during SSR
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          document: [require.resolve('./runtime-polyfills.js'), 'documentPolyfill']
+        })
+      );
+    }
+
+    // Fix for webpack 5 compatibility and SSR issues
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
@@ -36,6 +111,78 @@ const nextConfig = {
       path: false,
     };
 
+    // Add DefinePlugin for server-side builds
+    if (isServer) {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          'typeof window': JSON.stringify('undefined'),
+          'typeof self': JSON.stringify('object'),
+        })
+      );
+    }
+
+    // Exclude service worker files from server-side processing
+    if (isServer) {
+      config.module.rules.push({
+        test: /sw\.js$/,
+        loader: 'ignore-loader'
+      });
+    }
+
+    // Fix SSR issues with browser globals
+    if (isServer) {
+      // Add custom plugin to fix webpack chunk loading
+      config.plugins.push(new SelfPolyfillPlugin());
+      
+      // Simple global definitions for server-side rendering
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          'process.browser': false,
+          'typeof self': JSON.stringify('object'),
+        })
+      );
+
+      // Provide polyfills for browser globals in server environment
+      config.resolve.alias = {
+        ...config.resolve.alias,
+      };
+      
+      // Replace problematic browser globals with safe alternatives in source code
+      config.module.rules.push({
+        test: /\.(js|ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'string-replace-loader',
+        options: {
+          multiple: [
+            {
+              search: /\bself\.webpackChunk/g,
+              replace: 'global.webpackChunk',
+              flags: 'g',
+            },
+            {
+              search: /\(self\.webpackChunk/g,
+              replace: '(global.webpackChunk',
+              flags: 'g',
+            },
+          ]
+        }
+      });
+    }
+
+    // Exclude problematic packages from server-side rendering
+    if (isServer) {
+      config.externals = [...(config.externals || [])];
+      config.externals.push({
+        'socket.io-client': 'commonjs socket.io-client',
+      });
+
+      // Additional fixes for service worker globals
+      config.module.rules.push({
+        test: /sw\.js$/,
+        use: 'null-loader'
+      });
+    }
+
     // SVG optimization
     config.module.rules.push({
       test: /\.svg$/,
@@ -43,24 +190,32 @@ const nextConfig = {
     });
 
     // Bundle optimization
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
+    if (isServer) {
+      // Disable chunk splitting for server build to avoid self reference issues
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: false,
+      };
+    } else {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+            },
           },
         },
-      },
-    };
+      };
+    }
 
     // Minimize bundle size in production
     if (!dev && !isServer) {
@@ -75,8 +230,9 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    // Remove turbo config that's causing issues
     webVitalsAttribution: ['CLS', 'LCP'],
+    // Additional settings to help with CSS processing
+    // turbo: false,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

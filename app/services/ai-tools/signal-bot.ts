@@ -59,22 +59,22 @@ export class AISignalBot {
       const [marketData, technicals, news] = await Promise.all([
         this.getMarketData(symbol),
         this.getTechnicalIndicators(symbol),
-        this.getNewsAndSentiment(symbol)
+        this.getNewsAndSentiment(symbol),
       ]);
 
       // Calculate technical score
       const technicalScore = this.calculateTechnicalScore(technicals);
-      
+
       // Calculate sentiment score
       const sentimentScore = this.calculateSentimentScore(news);
 
       // Generate AI-powered signal using GPT-4
       const aiAnalysis = await this.generateAIAnalysis(
-        symbol, 
-        marketData, 
-        technicals, 
-        news, 
-        technicalScore, 
+        symbol,
+        marketData,
+        technicals,
+        news,
+        technicalScore,
         sentimentScore
       );
 
@@ -95,9 +95,8 @@ export class AISignalBot {
         timeframe: '1D',
         indicators: technicals,
         news,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
-
     } catch (error) {
       console.error('Error generating signal:', error);
       throw new Error(`Failed to generate signal for ${symbol}`);
@@ -110,7 +109,7 @@ export class AISignalBot {
         `https://api.polygon.io/v2/aggs/ticker/${symbol}/prev?adjusted=true&apikey=${this.polygonApiKey}`
       );
       const data = await response.json();
-      
+
       if (data.results && data.results.length > 0) {
         const result = data.results[0];
         return {
@@ -120,10 +119,10 @@ export class AISignalBot {
           low: result.l,
           volume: result.v,
           change: result.c - result.o,
-          changePercent: ((result.c - result.o) / result.o) * 100
+          changePercent: ((result.c - result.o) / result.o) * 100,
         };
       }
-      
+
       throw new Error('No market data available');
     } catch (error) {
       // Fallback to mock data for development
@@ -134,7 +133,7 @@ export class AISignalBot {
         low: 148,
         volume: 1000000,
         change: Math.random() * 10 - 5,
-        changePercent: Math.random() * 5 - 2.5
+        changePercent: Math.random() * 5 - 2.5,
       };
     }
   }
@@ -146,7 +145,7 @@ export class AISignalBot {
       const rsi = 30 + Math.random() * 40; // 30-70 range
       const macd = Math.random() * 4 - 2; // -2 to 2 range
       const basePrice = 150 + Math.random() * 50;
-      
+
       return {
         rsi,
         macd,
@@ -156,8 +155,8 @@ export class AISignalBot {
         bollinger: {
           upper: basePrice * 1.02,
           lower: basePrice * 0.98,
-          middle: basePrice
-        }
+          middle: basePrice,
+        },
       };
     } catch (error) {
       throw new Error(`Failed to get technical indicators for ${symbol}`);
@@ -174,7 +173,7 @@ export class AISignalBot {
           sentiment: 0.8,
           timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           source: 'Reuters',
-          url: '#'
+          url: '#',
         },
         {
           title: `Analysts Upgrade ${symbol} to Buy Rating`,
@@ -182,7 +181,7 @@ export class AISignalBot {
           sentiment: 0.6,
           timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
           source: 'Bloomberg',
-          url: '#'
+          url: '#',
         },
         {
           title: `Market Volatility Affects ${symbol} Trading`,
@@ -190,8 +189,8 @@ export class AISignalBot {
           sentiment: -0.3,
           timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
           source: 'CNBC',
-          url: '#'
-        }
+          url: '#',
+        },
       ];
 
       return mockNews;
@@ -202,29 +201,32 @@ export class AISignalBot {
 
   private calculateTechnicalScore(indicators: TechnicalIndicators): number {
     let score = 0;
-    
+
     // RSI analysis (0-100, optimal 30-70)
-    if (indicators.rsi < 30) score += 20; // Oversold - bullish
-    else if (indicators.rsi > 70) score -= 20; // Overbought - bearish
+    if (indicators.rsi < 30)
+      score += 20; // Oversold - bullish
+    else if (indicators.rsi > 70)
+      score -= 20; // Overbought - bearish
     else score += 10; // Neutral - slightly positive
-    
+
     // MACD analysis
     if (indicators.macd > 0) score += 15;
     else score -= 10;
-    
+
     // Moving average analysis
-    if (indicators.sma20 > indicators.sma50) score += 25; // Bullish trend
+    if (indicators.sma20 > indicators.sma50)
+      score += 25; // Bullish trend
     else score -= 15; // Bearish trend
-    
+
     // Normalize to 0-100
     return Math.max(0, Math.min(100, score + 50));
   }
 
   private calculateSentimentScore(news: NewsItem[]): number {
     if (news.length === 0) return 50;
-    
+
     const avgSentiment = news.reduce((sum, item) => sum + item.sentiment, 0) / news.length;
-    
+
     // Convert sentiment (-1 to 1) to score (0 to 100)
     return (avgSentiment + 1) * 50;
   }
@@ -268,26 +270,26 @@ export class AISignalBot {
         model: 'gpt-4',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 500,
-        temperature: 0.3
+        temperature: 0.3,
       });
 
       return {
-        reasoning: response.choices[0].message.content || 'Analysis unavailable'
+        reasoning: response.choices[0].message.content || 'Analysis unavailable',
       };
     } catch (error) {
       return {
-        reasoning: `Technical analysis shows ${technicalScore > 60 ? 'bullish' : 'bearish'} signals. Sentiment is ${sentimentScore > 60 ? 'positive' : 'negative'} based on recent news.`
+        reasoning: `Technical analysis shows ${technicalScore > 60 ? 'bullish' : 'bearish'} signals. Sentiment is ${sentimentScore > 60 ? 'positive' : 'negative'} based on recent news.`,
       };
     }
   }
 
   private determineSignal(technicalScore: number, sentimentScore: number, aiAnalysis: any) {
-    const combinedScore = (technicalScore * 0.6) + (sentimentScore * 0.4);
-    
+    const combinedScore = technicalScore * 0.6 + sentimentScore * 0.4;
+
     let signal: StockSignal['signal'];
     let confidence: number;
     let riskLevel: StockSignal['riskLevel'];
-    
+
     if (combinedScore >= 80) {
       signal = 'STRONG_BUY';
       confidence = 0.9;
@@ -315,7 +317,7 @@ export class AISignalBot {
       confidence,
       riskLevel,
       targetPrice: signal.includes('BUY') ? 155 : 145,
-      stopLoss: signal.includes('BUY') ? 140 : 160
+      stopLoss: signal.includes('BUY') ? 140 : 160,
     };
   }
 

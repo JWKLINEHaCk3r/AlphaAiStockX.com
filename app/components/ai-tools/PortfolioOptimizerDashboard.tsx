@@ -214,10 +214,14 @@ export default function PortfolioOptimizerDashboard() {
 
   const getActionColor = (action: string) => {
     switch (action) {
-      case 'BUY': return 'text-green-600 bg-green-50';
-      case 'SELL': return 'text-red-600 bg-red-50';
-      case 'HOLD': return 'text-gray-600 bg-gray-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'BUY':
+        return 'text-green-600 bg-green-50';
+      case 'SELL':
+        return 'text-red-600 bg-red-50';
+      case 'HOLD':
+        return 'text-gray-600 bg-gray-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
@@ -282,12 +286,10 @@ export default function PortfolioOptimizerDashboard() {
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-2 block">
-                Time Horizon
-              </label>
+              <label className="text-sm font-medium text-gray-700 mb-2 block">Time Horizon</label>
               <select
                 value={timeHorizon}
-                onChange={(e) => setTimeHorizon(e.target.value)}
+                onChange={e => setTimeHorizon(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
               >
                 <option value="1">1 Year</option>
@@ -297,13 +299,8 @@ export default function PortfolioOptimizerDashboard() {
               </select>
             </div>
             <div className="flex items-center space-x-2">
-              <Switch
-                checked={includeRebalancing}
-                onCheckedChange={setIncludeRebalancing}
-              />
-              <label className="text-sm font-medium text-gray-700">
-                Include Rebalancing
-              </label>
+              <Switch checked={includeRebalancing} onCheckedChange={setIncludeRebalancing} />
+              <label className="text-sm font-medium text-gray-700">Include Rebalancing</label>
             </div>
           </div>
           <div className="mt-4">
@@ -325,12 +322,14 @@ export default function PortfolioOptimizerDashboard() {
                   <TrendingUp className="h-8 w-8 text-green-600" />
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-600">Expected Return</p>
-                    <p className="text-2xl font-bold text-gray-900">{optimization.expectedReturn}%</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {optimization.expectedReturn}%
+                    </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -342,7 +341,7 @@ export default function PortfolioOptimizerDashboard() {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -354,7 +353,7 @@ export default function PortfolioOptimizerDashboard() {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center">
@@ -386,7 +385,9 @@ export default function PortfolioOptimizerDashboard() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium">Diversification</span>
-                      <span className="text-sm text-gray-600">{optimization.diversificationScore}/100</span>
+                      <span className="text-sm text-gray-600">
+                        {optimization.diversificationScore}/100
+                      </span>
                     </div>
                     <Progress value={optimization.diversificationScore} className="h-3" />
                   </div>
@@ -410,7 +411,9 @@ export default function PortfolioOptimizerDashboard() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Rebalancing Actions:</span>
-                    <span className="text-sm font-medium">{optimization.rebalanceActions.length}</span>
+                    <span className="text-sm font-medium">
+                      {optimization.rebalanceActions.length}
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -428,9 +431,15 @@ export default function PortfolioOptimizerDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {optimization.positions.map((position, index) => {
-                  const change = getAllocationChange(position.currentAllocation, position.recommendedAllocation);
+                  const change = getAllocationChange(
+                    position.currentAllocation,
+                    position.recommendedAllocation
+                  );
                   return (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <div>
@@ -438,17 +447,23 @@ export default function PortfolioOptimizerDashboard() {
                             <p className="text-sm text-gray-600">{position.name}</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-sm font-medium">${position.currentValue.toLocaleString()}</p>
+                            <p className="text-sm font-medium">
+                              ${position.currentValue.toLocaleString()}
+                            </p>
                             <p className="text-xs text-gray-500">Sharpe: {position.sharpeRatio}</p>
                           </div>
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-4">
                           <div>
-                            <p className="text-xs text-gray-500">Current: {position.currentAllocation}%</p>
+                            <p className="text-xs text-gray-500">
+                              Current: {position.currentAllocation}%
+                            </p>
                             <Progress value={position.currentAllocation} className="h-2 mt-1" />
                           </div>
                           <div>
-                            <p className="text-xs text-gray-500">Recommended: {position.recommendedAllocation}%</p>
+                            <p className="text-xs text-gray-500">
+                              Recommended: {position.recommendedAllocation}%
+                            </p>
                             <Progress value={position.recommendedAllocation} className="h-2 mt-1" />
                           </div>
                         </div>
@@ -456,7 +471,8 @@ export default function PortfolioOptimizerDashboard() {
                       <div className="ml-4">
                         {change.direction !== 'hold' && (
                           <Badge className={change.color}>
-                            {change.direction === 'increase' ? '+' : '-'}{change.value.toFixed(1)}%
+                            {change.direction === 'increase' ? '+' : '-'}
+                            {change.value.toFixed(1)}%
                           </Badge>
                         )}
                       </div>
@@ -479,11 +495,12 @@ export default function PortfolioOptimizerDashboard() {
               <CardContent>
                 <div className="space-y-3">
                   {optimization.rebalanceActions.map((action, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
-                        <Badge className={getActionColor(action.action)}>
-                          {action.action}
-                        </Badge>
+                        <Badge className={getActionColor(action.action)}>{action.action}</Badge>
                         <div>
                           <p className="font-medium text-gray-900">{action.symbol}</p>
                           <p className="text-sm text-gray-600">
@@ -492,8 +509,11 @@ export default function PortfolioOptimizerDashboard() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className={`font-medium ${action.dollarAmount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {action.dollarAmount > 0 ? '+' : ''}${action.dollarAmount.toLocaleString()}
+                        <p
+                          className={`font-medium ${action.dollarAmount > 0 ? 'text-green-600' : 'text-red-600'}`}
+                        >
+                          {action.dollarAmount > 0 ? '+' : ''}$
+                          {action.dollarAmount.toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -516,7 +536,9 @@ export default function PortfolioOptimizerDashboard() {
           <CardContent className="p-12 text-center">
             <AlertTriangle className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No Optimization Results</h3>
-            <p className="text-gray-600 mb-4">Run the optimization to see portfolio recommendations.</p>
+            <p className="text-gray-600 mb-4">
+              Run the optimization to see portfolio recommendations.
+            </p>
             <Button onClick={runOptimization}>
               <Zap className="h-4 w-4 mr-2" />
               Start Optimization

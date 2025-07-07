@@ -179,6 +179,8 @@ export function QuantumGrid({
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -327,6 +329,8 @@ export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamPr
   }>>([]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>';
     const columns = Math.floor(window.innerWidth / 20);
     
@@ -343,6 +347,8 @@ export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamPr
   }, [density]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const interval = setInterval(() => {
       setStreams(prev => prev.map(stream => ({
         ...stream,

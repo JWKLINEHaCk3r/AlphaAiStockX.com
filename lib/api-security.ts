@@ -6,7 +6,11 @@ import { z } from 'zod';
 
 // API request validation schemas
 const orderSchema = z.object({
-  symbol: z.string().min(1).max(10).regex(/^[A-Z]+$/, 'Invalid symbol format'),
+  symbol: z
+    .string()
+    .min(1)
+    .max(10)
+    .regex(/^[A-Z]+$/, 'Invalid symbol format'),
   quantity: z.number().positive().max(10000),
   side: z.enum(['buy', 'sell']),
   type: z.enum(['market', 'limit', 'stop', 'stop_limit']),
@@ -29,7 +33,9 @@ const RATE_LIMITS = {
 };
 
 // API endpoint wrapper with security
-export function withApiSecurity(handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>) {
+export function withApiSecurity(
+  handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
+) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const startTime = Date.now();
     const ip = req.socket.remoteAddress || req.headers['x-forwarded-for'] || 'unknown';
@@ -58,7 +64,7 @@ export function withApiSecurity(handler: (req: NextApiRequest, res: NextApiRespo
       const rateLimitKey = `${session.user.id}:${req.url}`;
       const endpoint = req.url?.split('/').pop() || 'unknown';
       const rateLimit = RATE_LIMITS[endpoint as keyof typeof RATE_LIMITS] || RATE_LIMITS.portfolio;
-      
+
       const rateLimitResult = RateLimiter.checkLimit(
         rateLimitKey,
         rateLimit.maxRequests,
@@ -72,9 +78,9 @@ export function withApiSecurity(handler: (req: NextApiRequest, res: NextApiRespo
           ip: ip as string,
           details: { reason: 'rate_limit_exceeded', endpoint: req.url },
         });
-        return res.status(429).json({ 
+        return res.status(429).json({
           error: 'Rate limit exceeded',
-          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000)
+          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
         });
       }
 
@@ -99,10 +105,9 @@ export function withApiSecurity(handler: (req: NextApiRequest, res: NextApiRespo
         ip: ip as string,
         success: true,
       });
-
     } catch (error) {
       console.error('API Security wrapper error:', error);
-      
+
       SecurityAudit.logDataAccess({
         userId: session?.user?.id || 'unknown',
         resource: req.url || 'unknown',
@@ -111,9 +116,9 @@ export function withApiSecurity(handler: (req: NextApiRequest, res: NextApiRespo
         success: false,
       });
 
-      res.status(500).json({ 
+      res.status(500).json({
         error: 'Internal server error',
-        requestId: req.headers['x-request-id'] || crypto.randomUUID()
+        requestId: req.headers['x-request-id'] || crypto.randomUUID(),
       });
     } finally {
       const duration = Date.now() - startTime;
@@ -163,16 +168,16 @@ export async function handleTradingOrders(req: NextApiRequest, res: NextApiRespo
       res.status(201).json({ success: true, order });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          error: 'Invalid order data', 
-          details: error.errors 
+        return res.status(400).json({
+          error: 'Invalid order data',
+          details: error.errors,
         });
       }
       throw error;
     }
   } else if (req.method === 'GET') {
     const session = await getServerSession(req, res, authOptions);
-    
+
     // Mock order history (replace with actual database query)
     const orders = [
       {
@@ -203,45 +208,49 @@ export async function handlePortfolio(req: NextApiRequest, res: NextApiResponse)
 
       // Mock portfolio data (replace with actual database query)
       const portfolio = {
-        totalValue: 125000.50,
+        totalValue: 125000.5,
         dailyPnL: 2500.75,
         dailyPnLPercent: 2.04,
-        cashBalance: 25000.00,
-        buyingPower: 50000.00,
-        positions: query.includePositions ? [
-          {
-            symbol: 'AAPL',
-            quantity: 100,
-            avgPrice: 145.30,
-            currentPrice: 150.25,
-            unrealizedPnL: 495.00,
-            unrealizedPnLPercent: 3.41,
-          },
-          {
-            symbol: 'GOOGL',
-            quantity: 50,
-            avgPrice: 2800.00,
-            currentPrice: 2850.75,
-            unrealizedPnL: 2537.50,
-            unrealizedPnLPercent: 1.81,
-          },
-        ] : [],
-        history: query.includeHistory ? [
-          {
-            date: '2025-07-06',
-            value: 125000.50,
-            pnl: 2500.75,
-          },
-          // More historical data...
-        ] : [],
+        cashBalance: 25000.0,
+        buyingPower: 50000.0,
+        positions: query.includePositions
+          ? [
+              {
+                symbol: 'AAPL',
+                quantity: 100,
+                avgPrice: 145.3,
+                currentPrice: 150.25,
+                unrealizedPnL: 495.0,
+                unrealizedPnLPercent: 3.41,
+              },
+              {
+                symbol: 'GOOGL',
+                quantity: 50,
+                avgPrice: 2800.0,
+                currentPrice: 2850.75,
+                unrealizedPnL: 2537.5,
+                unrealizedPnLPercent: 1.81,
+              },
+            ]
+          : [],
+        history: query.includeHistory
+          ? [
+              {
+                date: '2025-07-06',
+                value: 125000.5,
+                pnl: 2500.75,
+              },
+              // More historical data...
+            ]
+          : [],
       };
 
       res.status(200).json({ portfolio });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          error: 'Invalid query parameters', 
-          details: error.errors 
+        return res.status(400).json({
+          error: 'Invalid query parameters',
+          details: error.errors,
         });
       }
       throw error;
@@ -256,13 +265,13 @@ export async function handlePortfolio(req: NextApiRequest, res: NextApiResponse)
 export async function handleMarketData(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     const { symbols } = req.query;
-    
+
     if (!symbols || typeof symbols !== 'string') {
       return res.status(400).json({ error: 'Symbols parameter required' });
     }
 
     const symbolList = symbols.split(',').map(s => s.trim().toUpperCase());
-    
+
     // Validate symbols
     for (const symbol of symbolList) {
       if (!/^[A-Z]{1,10}$/.test(symbol)) {

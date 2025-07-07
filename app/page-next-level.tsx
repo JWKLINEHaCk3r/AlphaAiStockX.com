@@ -328,7 +328,7 @@ function FeaturesSection() {
   const [ref, setRef] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!ref) return;
+    if (!ref || typeof window === 'undefined') return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -341,8 +341,12 @@ function FeaturesSection() {
       { threshold: 0.1 }
     );
 
-    const elements = ref.querySelectorAll('.scroll-fade-in');
-    elements.forEach((el) => observer.observe(el));
+    try {
+      const elements = ref.querySelectorAll('.scroll-fade-in');
+      elements.forEach((el) => observer.observe(el));
+    } catch (error) {
+      console.warn('Error setting up scroll animation:', error);
+    }
 
     return () => observer.disconnect();
   }, [ref]);

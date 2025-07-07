@@ -46,15 +46,15 @@ class PerformanceMonitor {
     if (!this.metrics.has(name)) {
       this.metrics.set(name, []);
     }
-    
+
     const values = this.metrics.get(name)!;
     values.push(value);
-    
+
     // Keep only last 100 measurements
     if (values.length > 100) {
       values.shift();
     }
-    
+
     this.checkAlerts(name, value);
   }
 
@@ -66,7 +66,7 @@ class PerformanceMonitor {
 
   private static checkAlerts(name: string, value: number): void {
     const average = this.getAverageMetric(name, 5);
-    
+
     if (name === 'responseTime' && average > this.alertThresholds.responseTime) {
       this.sendAlert('HIGH_RESPONSE_TIME', {
         metric: name,
@@ -74,7 +74,7 @@ class PerformanceMonitor {
         threshold: this.alertThresholds.responseTime,
       });
     }
-    
+
     if (name === 'errorRate' && average > this.alertThresholds.errorRate) {
       this.sendAlert('HIGH_ERROR_RATE', {
         metric: name,
@@ -86,7 +86,7 @@ class PerformanceMonitor {
 
   private static sendAlert(type: string, data: any): void {
     console.error(`ALERT [${type}]:`, data);
-    
+
     // In production, integrate with alerting services like:
     // - PagerDuty
     // - Slack
@@ -100,12 +100,12 @@ class PerformanceMonitor {
 class HealthChecker {
   static async checkDatabase(): Promise<ServiceHealth> {
     const startTime = Date.now();
-    
+
     try {
       // Mock database health check (replace with actual implementation)
       // Example: await prisma.$queryRaw`SELECT 1`;
       await new Promise(resolve => setTimeout(resolve, 10));
-      
+
       return {
         status: 'up',
         responseTime: Date.now() - startTime,
@@ -122,12 +122,12 @@ class HealthChecker {
 
   static async checkRedis(): Promise<ServiceHealth> {
     const startTime = Date.now();
-    
+
     try {
       // Mock Redis health check (replace with actual implementation)
       // Example: await redis.ping();
       await new Promise(resolve => setTimeout(resolve, 5));
-      
+
       return {
         status: 'up',
         responseTime: Date.now() - startTime,
@@ -144,7 +144,7 @@ class HealthChecker {
 
   static async checkExternalAPIs(): Promise<ServiceHealth> {
     const startTime = Date.now();
-    
+
     try {
       // Check critical external services
       const checks = await Promise.allSettled([
@@ -154,10 +154,10 @@ class HealthChecker {
         }),
         // Add other critical API checks
       ]);
-      
+
       const failures = checks.filter(result => result.status === 'rejected').length;
       const successRate = (checks.length - failures) / checks.length;
-      
+
       return {
         status: successRate > 0.8 ? 'up' : successRate > 0.5 ? 'degraded' : 'down',
         responseTime: Date.now() - startTime,
@@ -241,7 +241,7 @@ class SecurityMetrics {
 // Main health check endpoint
 export async function getSystemHealth(): Promise<HealthMetrics> {
   const startTime = Date.now();
-  
+
   const [database, redis, externalAPIs, websocket] = await Promise.all([
     HealthChecker.checkDatabase(),
     HealthChecker.checkRedis(),
@@ -250,12 +250,12 @@ export async function getSystemHealth(): Promise<HealthMetrics> {
   ]);
 
   const services = { database, redis, externalAPIs, websocket };
-  
+
   // Determine overall system status
   const serviceStatuses = Object.values(services).map(service => service.status);
   const downServices = serviceStatuses.filter(status => status === 'down').length;
   const degradedServices = serviceStatuses.filter(status => status === 'degraded').length;
-  
+
   let overallStatus: 'healthy' | 'degraded' | 'unhealthy';
   if (downServices > 0) {
     overallStatus = downServices > 1 ? 'unhealthy' : 'degraded';
@@ -287,7 +287,7 @@ export async function getSystemHealth(): Promise<HealthMetrics> {
 // Logging utilities
 class Logger {
   private static logLevel = process.env.LOG_LEVEL || 'info';
-  
+
   static debug(message: string, meta?: any): void {
     if (this.shouldLog('debug')) {
       console.debug(this.formatLog('DEBUG', message, meta));
@@ -334,11 +334,11 @@ export function monitorRequest(req: any, res: any, next: () => void): void {
   const startTime = Date.now();
   const originalSend = res.send;
 
-  res.send = function(data: any) {
+  res.send = function (data: any) {
     const responseTime = Date.now() - startTime;
-    
+
     PerformanceMonitor.recordMetric('responseTime', responseTime);
-    
+
     Logger.info('Request processed', {
       method: req.method,
       url: req.url,
@@ -355,10 +355,4 @@ export function monitorRequest(req: any, res: any, next: () => void): void {
 }
 
 // Export for use in API routes
-export {
-  PerformanceMonitor,
-  HealthChecker,
-  SystemMetrics,
-  SecurityMetrics,
-  Logger,
-};
+export { PerformanceMonitor, HealthChecker, SystemMetrics, SecurityMetrics, Logger };

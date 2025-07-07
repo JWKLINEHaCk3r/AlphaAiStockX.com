@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
+import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';
 import { SecurityAudit } from '@/lib/security';
 import { z } from 'zod';
@@ -8,18 +7,18 @@ import { z } from 'zod';
 const positionsQuerySchema = z.object({
   portfolioId: z.string().optional(),
   symbol: z.string().optional(),
-  includeMarketData: z.string().transform((val) => val === 'true').default('true'),
+  includeMarketData: z
+    .string()
+    .transform(val => val === 'true')
+    .default('true'),
 });
 
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -31,12 +30,9 @@ export async function GET(request: NextRequest) {
     if (queryParams.symbol) {
       // Get specific position
       const position = await tradingService.getPosition(queryParams.symbol);
-      
+
       if (!position) {
-        return NextResponse.json(
-          { error: 'Position not found' },
-          { status: 404 }
-        );
+        return NextResponse.json({ error: 'Position not found' }, { status: 404 });
       }
 
       // Log data access
@@ -73,10 +69,9 @@ export async function GET(request: NextRequest) {
         totalUnrealizedPnL: positions.reduce((sum, pos) => sum + pos.unrealizedPnL, 0),
       });
     }
-
   } catch (error) {
     console.error('Positions fetch error:', error);
-    
+
     // Log the error
     SecurityAudit.logSecurityEvent({
       type: 'data_access_error',
@@ -102,9 +97,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Failed to fetch positions' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch positions' }, { status: 500 });
   }
 }

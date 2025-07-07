@@ -23,15 +23,13 @@ jest.mock('recharts', () => ({
   YAxis: () => <div data-testid="y-axis" />,
   CartesianGrid: () => <div data-testid="cartesian-grid" />,
   Tooltip: () => <div data-testid="tooltip" />,
-  ResponsiveContainer: ({ children }: any) => <div data-testid="responsive-container">{children}</div>,
+  ResponsiveContainer: ({ children }: any) => (
+    <div data-testid="responsive-container">{children}</div>
+  ),
 }));
 
 const renderWithProviders = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider defaultTheme="dark">
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider defaultTheme="dark">{component}</ThemeProvider>);
 };
 
 describe('TradingDashboard', () => {
@@ -53,16 +51,17 @@ describe('TradingDashboard', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve({
-          portfolio: {
-            totalValue: 100000,
-            dailyPnL: 1500,
-            positions: [],
-          },
-          marketData: {
-            indices: [],
-          },
-        }),
+        json: () =>
+          Promise.resolve({
+            portfolio: {
+              totalValue: 100000,
+              dailyPnL: 1500,
+              positions: [],
+            },
+            marketData: {
+              indices: [],
+            },
+          }),
       })
     ) as jest.Mock;
   });

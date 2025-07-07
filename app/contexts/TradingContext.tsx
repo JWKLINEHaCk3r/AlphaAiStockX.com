@@ -95,28 +95,28 @@ interface TradingContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  
+
   // Portfolios & Positions
   portfolios: Portfolio[];
   activePortfolio: Portfolio | null;
   positions: Position[];
   orders: Order[];
-  
+
   // Market Data
   marketData: Record<string, any>;
   subscribedSymbols: string[];
-  
+
   // AI Trading
   aiSignals: AISignal[];
   aiModels: any[];
-  
+
   // Social Trading
   socialFeed: any[];
   notifications: any[];
-  
+
   // Real-time connections
   isConnected: boolean;
-  
+
   // Actions
   refreshUserData: () => Promise<void>;
   refreshPortfolios: () => Promise<void>;
@@ -126,7 +126,7 @@ interface TradingContextType {
   subscribeToSymbols: (symbols: string[]) => void;
   unsubscribeFromSymbols: (symbols: string[]) => void;
   setActivePortfolio: (portfolio: Portfolio) => void;
-  
+
   // Real-time subscriptions
   subscribeToRealTimeData: () => void;
   unsubscribeFromRealTimeData: () => void;
@@ -204,14 +204,18 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   // Update portfolio data from WebSocket
   useEffect(() => {
     if (wsPortfolioData && activePortfolio) {
-      setActivePortfolioState(prev => prev ? {
-        ...prev,
-        totalValue: wsPortfolioData.totalValue,
-        dailyPnL: wsPortfolioData.dailyPnL,
-        dailyPnLPercent: wsPortfolioData.dailyPnLPercent,
-        cashBalance: wsPortfolioData.cashBalance,
-        lastUpdated: wsPortfolioData.timestamp,
-      } : null);
+      setActivePortfolioState(prev =>
+        prev
+          ? {
+              ...prev,
+              totalValue: wsPortfolioData.totalValue,
+              dailyPnL: wsPortfolioData.dailyPnL,
+              dailyPnLPercent: wsPortfolioData.dailyPnLPercent,
+              cashBalance: wsPortfolioData.cashBalance,
+              lastUpdated: wsPortfolioData.timestamp,
+            }
+          : null
+      );
     }
   }, [wsPortfolioData, activePortfolio]);
 
@@ -251,7 +255,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
         if (response.data.portfolios.length > 0 && !activePortfolio) {
           setActivePortfolioState(response.data.portfolios[0]);
         }
-        
+
         // Update positions from active portfolio
         const active = activePortfolio || response.data.portfolios[0];
         if (active) {
@@ -294,7 +298,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
         ...orderData,
         portfolioId: orderData.portfolioId || activePortfolio?.id,
       });
-      
+
       if (response.success) {
         // Refresh orders and portfolios
         await Promise.all([refreshOrders(), refreshPortfolios()]);
@@ -339,10 +343,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   // Initial data loading
   useEffect(() => {
     if (isAuthenticated && !isLoading) {
-      Promise.all([
-        refreshPortfolios(),
-        refreshAISignals(),
-      ]);
+      Promise.all([refreshPortfolios(), refreshAISignals()]);
     }
   }, [isAuthenticated, isLoading]);
 
@@ -351,28 +352,28 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
     user,
     isAuthenticated,
     isLoading,
-    
+
     // Portfolios & Positions
     portfolios,
     activePortfolio,
     positions,
     orders,
-    
+
     // Market Data
     marketData,
     subscribedSymbols,
-    
+
     // AI Trading
     aiSignals,
     aiModels,
-    
+
     // Social Trading
     socialFeed,
     notifications,
-    
+
     // Real-time connections
     isConnected,
-    
+
     // Actions
     refreshUserData,
     refreshPortfolios,
@@ -386,11 +387,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
     unsubscribeFromRealTimeData,
   };
 
-  return (
-    <TradingContext.Provider value={contextValue}>
-      {children}
-    </TradingContext.Provider>
-  );
+  return <TradingContext.Provider value={contextValue}>{children}</TradingContext.Provider>;
 };
 
 export default TradingProvider;

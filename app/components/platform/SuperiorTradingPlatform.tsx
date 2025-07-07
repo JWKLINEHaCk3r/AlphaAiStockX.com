@@ -15,14 +15,61 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Input } from '@/components/ui/input';
 import type { AISignal } from '@/app/types/socket';
 import AIToolsDashboard from '@/app/components/ai-tools/AIToolsDashboard';
-import { 
-  Brain, TrendingUp, TrendingDown, DollarSign, Users, Zap, Shield, Target,
-  Bot, Activity, Crown, Sparkles, Infinity, Globe, Star, PieChart, BarChart3,
-  LineChart, Settings, Bell, Search, Filter, Download, Share, Heart,
-  MessageCircle, Eye, ThumbsUp, Rocket, Layers, Database, Cloud, Lock,
-  Award, Trophy, Medal, Diamond, Gem, Play, Pause, Square, RefreshCw,
-  AlertTriangle, CheckCircle, Camera, Mic, Bookmark, Gift, Unlock,
-  Cpu, Network, Atom, ChevronUp, ChevronDown
+import {
+  Brain,
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  Users,
+  Zap,
+  Shield,
+  Target,
+  Bot,
+  Activity,
+  Crown,
+  Sparkles,
+  Infinity,
+  Globe,
+  Star,
+  PieChart,
+  BarChart3,
+  LineChart,
+  Settings,
+  Bell,
+  Search,
+  Filter,
+  Download,
+  Share,
+  Heart,
+  MessageCircle,
+  Eye,
+  ThumbsUp,
+  Rocket,
+  Layers,
+  Database,
+  Cloud,
+  Lock,
+  Award,
+  Trophy,
+  Medal,
+  Diamond,
+  Gem,
+  Play,
+  Pause,
+  Square,
+  RefreshCw,
+  AlertTriangle,
+  CheckCircle,
+  Camera,
+  Mic,
+  Bookmark,
+  Gift,
+  Unlock,
+  Cpu,
+  Network,
+  Atom,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 
 // Advanced Interfaces for Next-Gen Trading Platform
@@ -151,12 +198,12 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
     subscribeToSymbols,
     setActivePortfolio,
   } = useTradingContext();
-  
+
   // UI State
   const [activeTab, setActiveTab] = useState('social');
   const [isLiveTrading, setIsLiveTrading] = useState(false);
   const [notifications, setNotifications] = useState<any[]>([]);
-  
+
   // Additional state for platform data
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [tradingSignals, setTradingSignals] = useState<TradingSignal[]>([]);
@@ -164,23 +211,26 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [aiModels, setAiModels] = useState<AIModel[]>([]);
   const ws = useRef<WebSocket | null>(null);
-  
+
   // Use context data or fallback to local state
   const displayUser = user || currentUser || initialUser;
   const displayPortfolio = activePortfolio || portfolio;
   const displaySocialFeed = socialFeed || platformSocialFeed;
   const displaySignals = aiSignals || tradingSignals;
-  
+
   // Type-safe access with fallbacks for missing properties
   const userFollowers = (displayUser as any)?.followers ?? 0;
   const userFollowing = (displayUser as any)?.following ?? 0;
   const userReputation = (displayUser as any)?.reputation ?? 0;
-  
-  const portfolioDayChange = (displayPortfolio as any)?.dayChange ?? (displayPortfolio as any)?.dailyPnL ?? 0;
-  const portfolioDayChangePercent = (displayPortfolio as any)?.dayChangePercent ?? (displayPortfolio as any)?.dailyPnLPercent ?? 0;
-  const portfolioPnlPercent = (displayPortfolio as any)?.pnlPercent ?? (displayPortfolio as any)?.totalPnLPercent ?? 0;
+
+  const portfolioDayChange =
+    (displayPortfolio as any)?.dayChange ?? (displayPortfolio as any)?.dailyPnL ?? 0;
+  const portfolioDayChangePercent =
+    (displayPortfolio as any)?.dayChangePercent ?? (displayPortfolio as any)?.dailyPnLPercent ?? 0;
+  const portfolioPnlPercent =
+    (displayPortfolio as any)?.pnlPercent ?? (displayPortfolio as any)?.totalPnLPercent ?? 0;
   const portfolioRiskScore = (displayPortfolio as any)?.riskScore ?? 0;
-  
+
   useEffect(() => {
     if (session?.user && !user) {
       refreshUserData();
@@ -237,7 +287,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       tradingLevel: 47,
       balance: 125000,
       joinDate: new Date('2023-01-15'),
-      lastActive: new Date()
+      lastActive: new Date(),
     };
     setCurrentUser(mockUser);
 
@@ -253,9 +303,10 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
           tier: 'pro',
           reputation: 8750,
           followers: 2340,
-          verified: true
+          verified: true,
         } as User,
-        content: 'Just spotted a massive bullish divergence on $AAPL RSI. My AI model is showing 94% confidence for a breakout above $180. 🚀',
+        content:
+          'Just spotted a massive bullish divergence on $AAPL RSI. My AI model is showing 94% confidence for a breakout above $180. 🚀',
         symbols: ['AAPL'],
         likes: 47,
         comments: 8,
@@ -265,8 +316,8 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
           symbol: 'AAPL',
           action: 'BUY',
           targetPrice: 185,
-          reasoning: 'Technical analysis + AI confirmation'
-        }
+          reasoning: 'Technical analysis + AI confirmation',
+        },
       },
       {
         id: '2',
@@ -278,9 +329,10 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
           tier: 'ultimate',
           reputation: 12450,
           followers: 5670,
-          verified: true
+          verified: true,
         } as User,
-        content: 'My quantitative model just triggered a SELL signal on $TSLA. Expected pullback to $235 support level.',
+        content:
+          'My quantitative model just triggered a SELL signal on $TSLA. Expected pullback to $235 support level.',
         symbols: ['TSLA'],
         likes: 89,
         comments: 15,
@@ -290,9 +342,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
           symbol: 'TSLA',
           action: 'SELL',
           targetPrice: 235,
-          reasoning: 'Quantitative momentum analysis'
-        }
-      }
+          reasoning: 'Quantitative momentum analysis',
+        },
+      },
     ];
     setSocialFeed(mockFeed);
 
@@ -316,7 +368,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         comments: 5,
         copies: 156,
         price: 178.25,
-        currentPrice: 178.25
+        currentPrice: 178.25,
       },
       {
         id: '2',
@@ -335,9 +387,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         likes: 18,
         comments: 3,
         copies: 89,
-        price: 248.50,
-        currentPrice: 248.50
-      }
+        price: 248.5,
+        currentPrice: 248.5,
+      },
     ];
     setTradingSignals(mockSignals);
 
@@ -356,22 +408,22 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         {
           symbol: 'AAPL',
           quantity: 150,
-          avgPrice: 165.50,
+          avgPrice: 165.5,
           currentPrice: 178.25,
-          pnl: 1912.50,
+          pnl: 1912.5,
           pnlPercent: 7.71,
-          allocation: 25.3
+          allocation: 25.3,
         },
         {
           symbol: 'TSLA',
           quantity: 75,
-          avgPrice: 220.00,
-          currentPrice: 248.50,
-          pnl: 2137.50,
+          avgPrice: 220.0,
+          currentPrice: 248.5,
+          pnl: 2137.5,
           pnlPercent: 12.95,
-          allocation: 18.7
-        }
-      ]
+          allocation: 18.7,
+        },
+      ],
     };
     setPortfolio(mockPortfolio);
 
@@ -386,7 +438,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         status: 'running',
         author: mockUser,
         subscribers: 1247,
-        price: 99
+        price: 99,
       },
       {
         id: '2',
@@ -397,8 +449,8 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         status: 'optimizing',
         author: mockUser,
         subscribers: 892,
-        price: 149
-      }
+        price: 149,
+      },
     ];
     setAiModels(mockAIModels);
   };
@@ -410,7 +462,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         fetch('/api/portfolio'),
         fetch('/api/signals/latest'),
         fetch('/api/social/feed'),
-        fetch('/api/ai/models')
+        fetch('/api/ai/models'),
       ]);
 
       if (portfolioRes.ok) setPortfolio(await portfolioRes.json());
@@ -425,15 +477,17 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
   const setupWebSocket = () => {
     try {
       ws.current = new WebSocket('ws://localhost:8000/ws/platform');
-      
+
       ws.current.onopen = () => {
         console.log('Connected to trading platform');
         if (displayUser) {
-          ws.current?.send(JSON.stringify({
-            type: 'subscribe',
-            user: displayUser.id,
-            channels: ['signals', 'social', 'portfolio']
-          }));
+          ws.current?.send(
+            JSON.stringify({
+              type: 'subscribe',
+              user: displayUser.id,
+              channels: ['signals', 'social', 'portfolio'],
+            })
+          );
         }
       };
 
@@ -472,15 +526,18 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       await fetch('/api/users/follow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId })
+        body: JSON.stringify({ userId }),
       });
       // Update UI optimistically
-      setNotifications(prev => [{
-        id: Date.now().toString(),
-        type: 'success',
-        message: 'User followed successfully!',
-        timestamp: new Date()
-      }, ...prev]);
+      setNotifications(prev => [
+        {
+          id: Date.now().toString(),
+          type: 'success',
+          message: 'User followed successfully!',
+          timestamp: new Date(),
+        },
+        ...prev,
+      ]);
     } catch (error) {
       console.error('Failed to follow user:', error);
     }
@@ -491,14 +548,17 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       await fetch('/api/trades/copy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ signalId: signal.id })
+        body: JSON.stringify({ signalId: signal.id }),
       });
-      setNotifications(prev => [{
-        id: Date.now().toString(),
-        type: 'success',
-        message: `Copied ${signal.symbol} trade - ${signal.action} at $${signal.price}`,
-        timestamp: new Date()
-      }, ...prev]);
+      setNotifications(prev => [
+        {
+          id: Date.now().toString(),
+          type: 'success',
+          message: `Copied ${signal.symbol} trade - ${signal.action} at $${signal.price}`,
+          timestamp: new Date(),
+        },
+        ...prev,
+      ]);
     } catch (error) {
       console.error('Failed to copy trade:', error);
     }
@@ -509,7 +569,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       await fetch('/api/ai/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ modelId })
+        body: JSON.stringify({ modelId }),
       });
     } catch (error) {
       console.error('Failed to subscribe to AI model:', error);
@@ -519,28 +579,29 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
   const handleCopyTrade = async (signal: TradingSignal | AISignal) => {
     try {
       // Convert AISignal to TradingSignal format if needed
-      const tradingSignal: TradingSignal = 'likes' in signal 
-        ? signal as TradingSignal
-        : {
-            id: signal.id,
-            symbol: signal.symbol,
-            action: signal.action,
-            confidence: signal.confidence,
-            aiModel: 'Unknown',
-            strategy: signal.strategy,
-            targetPrice: signal.targetPrice,
-            stopLoss: 0,
-            timeframe: '1D',
-            reasoning: [],
-            sentiment: 0,
-            riskLevel: 'MEDIUM' as 'LOW' | 'MEDIUM' | 'HIGH',
-            timestamp: new Date(signal.timestamp),
-            likes: 0,
-            comments: 0,
-            copies: 0,
-            price: signal.currentPrice,
-            currentPrice: signal.currentPrice
-          };
+      const tradingSignal: TradingSignal =
+        'likes' in signal
+          ? signal
+          : {
+              id: signal.id,
+              symbol: signal.symbol,
+              action: signal.action,
+              confidence: signal.confidence,
+              aiModel: 'Unknown',
+              strategy: signal.strategy,
+              targetPrice: signal.targetPrice,
+              stopLoss: 0,
+              timeframe: '1D',
+              reasoning: [],
+              sentiment: 0,
+              riskLevel: 'MEDIUM' as 'LOW' | 'MEDIUM' | 'HIGH',
+              timestamp: new Date(signal.timestamp),
+              likes: 0,
+              comments: 0,
+              copies: 0,
+              price: signal.currentPrice,
+              currentPrice: signal.currentPrice,
+            };
 
       const success = await placeOrder({
         symbol: tradingSignal.symbol,
@@ -549,52 +610,70 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         quantity: 10, // Default quantity, should be configurable
         portfolioId: displayPortfolio?.id,
       });
-      
+
       if (success) {
-        setNotifications(prev => [{
-          id: Date.now().toString(),
-          type: 'success',
-          message: `Successfully copied ${tradingSignal.symbol} ${tradingSignal.action} trade`,
-          timestamp: new Date()
-        }, ...prev]);
+        setNotifications(prev => [
+          {
+            id: Date.now().toString(),
+            type: 'success',
+            message: `Successfully copied ${tradingSignal.symbol} ${tradingSignal.action} trade`,
+            timestamp: new Date(),
+          },
+          ...prev,
+        ]);
       } else {
-        setNotifications(prev => [{
-          id: Date.now().toString(),
-          type: 'error',
-          message: `Failed to copy ${tradingSignal.symbol} trade`,
-          timestamp: new Date()
-        }, ...prev]);
+        setNotifications(prev => [
+          {
+            id: Date.now().toString(),
+            type: 'error',
+            message: `Failed to copy ${tradingSignal.symbol} trade`,
+            timestamp: new Date(),
+          },
+          ...prev,
+        ]);
       }
     } catch (error) {
       console.error('Failed to copy trade:', error);
-      setNotifications(prev => [{
-        id: Date.now().toString(),
-        type: 'error',
-        message: 'Failed to execute trade',
-        timestamp: new Date()
-      }, ...prev]);
+      setNotifications(prev => [
+        {
+          id: Date.now().toString(),
+          type: 'error',
+          message: 'Failed to execute trade',
+          timestamp: new Date(),
+        },
+        ...prev,
+      ]);
     }
   };
 
   const toggleLiveTrading = () => {
     setIsLiveTrading(!isLiveTrading);
-    setNotifications(prev => [{
-      id: Date.now().toString(),
-      type: 'info',
-      message: `Live trading ${!isLiveTrading ? 'enabled' : 'disabled'}`,
-      timestamp: new Date()
-    }, ...prev]);
+    setNotifications(prev => [
+      {
+        id: Date.now().toString(),
+        type: 'info',
+        message: `Live trading ${!isLiveTrading ? 'enabled' : 'disabled'}`,
+        timestamp: new Date(),
+      },
+      ...prev,
+    ]);
   };
 
   // Helper functions
   const getTierColor = (tier: string) => {
     switch (tier?.toLowerCase()) {
-      case 'free': return 'bg-gray-500';
-      case 'basic': return 'bg-blue-500';
-      case 'pro': return 'bg-purple-500';
-      case 'ultimate': return 'bg-gradient-to-r from-yellow-400 to-orange-500';
-      case 'owner': return 'bg-gradient-to-r from-pink-500 to-red-500';
-      default: return 'bg-gray-500';
+      case 'free':
+        return 'bg-gray-500';
+      case 'basic':
+        return 'bg-blue-500';
+      case 'pro':
+        return 'bg-purple-500';
+      case 'ultimate':
+        return 'bg-gradient-to-r from-yellow-400 to-orange-500';
+      case 'owner':
+        return 'bg-gradient-to-r from-pink-500 to-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
@@ -608,7 +687,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(amount);
   };
 
@@ -629,15 +708,21 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
             </div>
             <div className="flex items-center space-x-6">
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{userFollowers?.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-white">
+                  {userFollowers?.toLocaleString()}
+                </div>
                 <div className="text-gray-400 text-sm">Followers</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{userFollowing?.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-white">
+                  {userFollowing?.toLocaleString()}
+                </div>
                 <div className="text-gray-400 text-sm">Following</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{userReputation?.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-white">
+                  {userReputation?.toLocaleString()}
+                </div>
                 <div className="text-gray-400 text-sm">Reputation</div>
               </div>
             </div>
@@ -670,9 +755,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                     Chart
                   </Button>
                 </div>
-                <Button className="bg-gradient-to-r from-purple-500 to-pink-500">
-                  Share Idea
-                </Button>
+                <Button className="bg-gradient-to-r from-purple-500 to-pink-500">Share Idea</Button>
               </div>
             </div>
           </div>
@@ -681,7 +764,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
 
       {/* Social Feed */}
       <div className="space-y-4">
-        {displaySocialFeed.map((post) => (
+        {displaySocialFeed.map(post => (
           <Card key={post.id} className="bg-slate-800/50 border-slate-700">
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
@@ -689,7 +772,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                   <AvatarImage src={post.author.avatar} />
                   <AvatarFallback>{post.author.name.slice(0, 2)}</AvatarFallback>
                 </Avatar>
-                
+
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-3">
                     <h4 className="font-semibold text-white">{post.author.name}</h4>
@@ -702,28 +785,38 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                       {post.timestamp.toLocaleTimeString()}
                     </span>
                   </div>
-                  
+
                   <p className="text-slate-200 mb-3">{post.content}</p>
-                  
+
                   {post.symbols.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-3">
                       {post.symbols.map((symbol: string) => (
-                        <Badge key={symbol} variant="outline" className="text-blue-400 border-blue-500">
+                        <Badge
+                          key={symbol}
+                          variant="outline"
+                          className="text-blue-400 border-blue-500"
+                        >
                           ${symbol}
                         </Badge>
                       ))}
                     </div>
                   )}
-                  
+
                   {post.tradingIdea && (
                     <div className="bg-slate-700/50 rounded-lg p-4 mb-3">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h5 className="text-white font-medium">Trading Idea: {post.tradingIdea.symbol}</h5>
+                          <h5 className="text-white font-medium">
+                            Trading Idea: {post.tradingIdea.symbol}
+                          </h5>
                           <p className="text-slate-400 text-sm">{post.tradingIdea.reasoning}</p>
                         </div>
                         <div className="text-right">
-                          <Badge className={post.tradingIdea.action === 'BUY' ? 'bg-green-600' : 'bg-red-600'}>
+                          <Badge
+                            className={
+                              post.tradingIdea.action === 'BUY' ? 'bg-green-600' : 'bg-red-600'
+                            }
+                          >
                             {post.tradingIdea.action}
                           </Badge>
                           <p className="text-white font-medium mt-1">
@@ -731,21 +824,23 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                           </p>
                         </div>
                       </div>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         className="mt-3 w-full"
-                        onClick={() => copyTrade({
-                          id: post.id,
-                          symbol: post.tradingIdea!.symbol,
-                          action: post.tradingIdea!.action as 'BUY' | 'SELL',
-                          price: post.tradingIdea!.targetPrice
-                        } as TradingSignal)}
+                        onClick={() =>
+                          copyTrade({
+                            id: post.id,
+                            symbol: post.tradingIdea!.symbol,
+                            action: post.tradingIdea!.action as 'BUY' | 'SELL',
+                            price: post.tradingIdea!.targetPrice,
+                          } as TradingSignal)
+                        }
                       >
                         Copy This Trade
                       </Button>
                     </div>
                   )}
-                  
+
                   <div className="flex items-center space-x-6 text-slate-400">
                     <button className="flex items-center space-x-2 hover:text-red-400 transition-colors">
                       <Heart className="h-4 w-4" />
@@ -759,11 +854,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                       <Share className="h-4 w-4" />
                       <span>{post.shares}</span>
                     </button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={() => followUser(post.author.id)}
-                    >
+                    <Button size="sm" variant="outline" onClick={() => followUser(post.author.id)}>
                       Follow
                     </Button>
                   </div>
@@ -789,7 +880,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {displaySignals.map((signal) => (
+            {displaySignals.map(signal => (
               <div key={signal.id} className="bg-slate-700/50 rounded-lg p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-4">
@@ -813,11 +904,15 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div>
                     <div className="text-sm text-slate-400">Current Price</div>
-                    <div className="text-lg font-semibold text-white">{formatCurrency(signal.currentPrice)}</div>
+                    <div className="text-lg font-semibold text-white">
+                      {formatCurrency(signal.currentPrice)}
+                    </div>
                   </div>
                   <div>
                     <div className="text-sm text-slate-400">Target Price</div>
-                    <div className="text-lg font-semibold text-green-400">{formatCurrency(signal.targetPrice)}</div>
+                    <div className="text-lg font-semibold text-green-400">
+                      {formatCurrency(signal.targetPrice)}
+                    </div>
                   </div>
                   <div>
                     <div className="text-sm text-slate-400">Stop Loss</div>
@@ -832,14 +927,16 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                 </div>
 
                 <p className="text-slate-300 mb-4">
-                  {signal.reasoning && signal.reasoning.length > 0 
-                    ? signal.reasoning.join('. ') 
+                  {signal.reasoning && signal.reasoning.length > 0
+                    ? signal.reasoning.join('. ')
                     : 'AI analysis indicates favorable trading opportunity'}
                 </p>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <Badge className={`bg-${signal.riskLevel.toLowerCase()}-500/20 text-${signal.riskLevel.toLowerCase()}-400`}>
+                    <Badge
+                      className={`bg-${signal.riskLevel.toLowerCase()}-500/20 text-${signal.riskLevel.toLowerCase()}-400`}
+                    >
                       {signal.riskLevel} RISK
                     </Badge>
                     <span className="text-sm text-slate-400">{signal.strategy}</span>
@@ -848,8 +945,8 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                     <Button size="sm" variant="outline">
                       Details
                     </Button>
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       onClick={() => handleCopyTrade(signal)}
                       disabled={!isConnected}
                     >
@@ -891,7 +988,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                       <Cpu className="h-5 w-5 text-purple-400" />
                       <span>{model.name}</span>
                     </CardTitle>
-                    <Badge className={model.status === 'running' ? 'bg-green-600' : 'bg-yellow-600'}>
+                    <Badge
+                      className={model.status === 'running' ? 'bg-green-600' : 'bg-yellow-600'}
+                    >
                       {model.status}
                     </Badge>
                   </div>
@@ -904,7 +1003,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                     </div>
                     <div>
                       <div className="text-sm text-slate-400">Performance</div>
-                      <div className="text-lg font-semibold text-blue-400">+{model.performance}%</div>
+                      <div className="text-lg font-semibold text-blue-400">
+                        +{model.performance}%
+                      </div>
                     </div>
                   </div>
 
@@ -920,15 +1021,14 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Users className="h-4 w-4 text-slate-400" />
-                      <span className="text-sm text-slate-300">{model.subscribers} subscribers</span>
+                      <span className="text-sm text-slate-300">
+                        {model.subscribers} subscribers
+                      </span>
                     </div>
                     <div className="text-lg font-semibold text-white">${model.price}/mo</div>
                   </div>
 
-                  <Button 
-                    className="w-full"
-                    onClick={() => subscribeToAIModel(model.id)}
-                  >
+                  <Button className="w-full" onClick={() => subscribeToAIModel(model.id)}>
                     Subscribe
                   </Button>
                 </CardContent>
@@ -954,7 +1054,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                     {formatPercentage(portfolioDayChangePercent)}
                   </Badge>
                 </div>
-                <h3 className="text-2xl font-bold text-white">{formatCurrency(displayPortfolio.totalValue)}</h3>
+                <h3 className="text-2xl font-bold text-white">
+                  {formatCurrency(displayPortfolio.totalValue)}
+                </h3>
                 <p className="text-slate-400">Total Portfolio Value</p>
               </CardContent>
             </Card>
@@ -965,7 +1067,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                   <TrendingUp className="h-8 w-8 text-green-400" />
                   <Badge className="bg-green-500/20 text-green-400">Today</Badge>
                 </div>
-                <h3 className="text-2xl font-bold text-white">{formatCurrency(portfolioDayChange)}</h3>
+                <h3 className="text-2xl font-bold text-white">
+                  {formatCurrency(portfolioDayChange)}
+                </h3>
                 <p className="text-slate-400">Day Change</p>
               </CardContent>
             </Card>
@@ -976,7 +1080,9 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                   <Target className="h-8 w-8 text-purple-400" />
                   <Badge className="bg-purple-500/20 text-purple-400">All Time</Badge>
                 </div>
-                <h3 className="text-2xl font-bold text-white">{formatPercentage(portfolioPnlPercent)}</h3>
+                <h3 className="text-2xl font-bold text-white">
+                  {formatPercentage(portfolioPnlPercent)}
+                </h3>
                 <p className="text-slate-400">Total Return</p>
               </CardContent>
             </Card>
@@ -1004,7 +1110,10 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
             <CardContent>
               <div className="space-y-4">
                 {positions.map((position, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-slate-700/50 rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 bg-slate-700/50 rounded-lg"
+                  >
                     <div className="flex items-center space-x-4">
                       <span className="font-semibold text-xl text-white">{position.symbol}</span>
                       <span className="text-slate-400">
@@ -1012,11 +1121,15 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                       </span>
                     </div>
                     <div className="text-right">
-                      <div className={`font-semibold ${position.unrealizedPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {formatCurrency(position.unrealizedPnL)} ({formatPercentage(position.unrealizedPnLPercent)})
+                      <div
+                        className={`font-semibold ${position.unrealizedPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {formatCurrency(position.unrealizedPnL)} (
+                        {formatPercentage(position.unrealizedPnLPercent)})
                       </div>
                       <div className="text-sm text-slate-400">
-                        Current: {formatCurrency(position.currentPrice)} • Market Value: {formatCurrency(position.marketValue)}
+                        Current: {formatCurrency(position.currentPrice)} • Market Value:{' '}
+                        {formatCurrency(position.marketValue)}
                       </div>
                     </div>
                   </div>
@@ -1042,8 +1155,11 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {orders.slice(0, 5).map((order) => (
-                  <div key={order.id} className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg">
+                {orders.slice(0, 5).map(order => (
+                  <div
+                    key={order.id}
+                    className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
+                  >
                     <div className="flex items-center space-x-3">
                       <Badge className={order.side === 'BUY' ? 'bg-green-600' : 'bg-red-600'}>
                         {order.side}
@@ -1052,15 +1168,22 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                       <span className="text-slate-400">{order.quantity} shares</span>
                     </div>
                     <div className="text-right">
-                      <Badge variant="outline" className={
-                        order.status === 'FILLED' ? 'border-green-500 text-green-400' :
-                        order.status === 'PENDING' ? 'border-yellow-500 text-yellow-400' :
-                        'border-red-500 text-red-400'
-                      }>
+                      <Badge
+                        variant="outline"
+                        className={
+                          order.status === 'FILLED'
+                            ? 'border-green-500 text-green-400'
+                            : order.status === 'PENDING'
+                              ? 'border-yellow-500 text-yellow-400'
+                              : 'border-red-500 text-red-400'
+                        }
+                      >
                         {order.status}
                       </Badge>
                       <div className="text-sm text-slate-400 mt-1">
-                        {order.executionPrice ? formatCurrency(order.executionPrice) : formatCurrency(order.price || 0)}
+                        {order.executionPrice
+                          ? formatCurrency(order.executionPrice)
+                          : formatCurrency(order.price || 0)}
                       </div>
                     </div>
                   </div>
@@ -1123,14 +1246,18 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                   <span className="text-lg font-semibold">
                     {formatCurrency(displayPortfolio.totalValue)}
                   </span>
-                  <span className={`text-sm ${portfolioDayChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  <span
+                    className={`text-sm ${portfolioDayChange >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                  >
                     ({formatPercentage(portfolioDayChangePercent)})
                   </span>
                 </div>
               )}
 
               <div className="flex items-center space-x-2">
-                <div className={`h-3 w-3 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`} />
+                <div
+                  className={`h-3 w-3 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}
+                />
                 <span className="text-sm text-slate-400">
                   {isConnected ? 'Live' : 'Disconnected'}
                 </span>
@@ -1140,7 +1267,11 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
                 onClick={toggleLiveTrading}
                 className={`${isLiveTrading ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}`}
               >
-                {isLiveTrading ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
+                {isLiveTrading ? (
+                  <Pause className="h-4 w-4 mr-2" />
+                ) : (
+                  <Play className="h-4 w-4 mr-2" />
+                )}
                 {isLiveTrading ? 'Stop Trading' : 'Start Trading'}
               </Button>
 
@@ -1191,31 +1322,25 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="social">
-            {renderSocialFeed()}
-          </TabsContent>
+          <TabsContent value="social">{renderSocialFeed()}</TabsContent>
 
-          <TabsContent value="signals">
-            {renderLiveSignals()}
-          </TabsContent>
+          <TabsContent value="signals">{renderLiveSignals()}</TabsContent>
 
           <TabsContent value="ai-tools">
             <AIToolsDashboard />
           </TabsContent>
 
-          <TabsContent value="ai">
-            {renderAIHub()}
-          </TabsContent>
+          <TabsContent value="ai">{renderAIHub()}</TabsContent>
 
-          <TabsContent value="portfolio">
-            {renderPortfolio()}
-          </TabsContent>
+          <TabsContent value="portfolio">{renderPortfolio()}</TabsContent>
 
           <TabsContent value="analytics">
             <div className="text-center py-12">
               <BarChart3 className="h-16 w-16 text-slate-400 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
-              <p className="text-slate-400">Coming in the next phase - Advanced performance analytics and AI model insights</p>
+              <p className="text-slate-400">
+                Coming in the next phase - Advanced performance analytics and AI model insights
+              </p>
             </div>
           </TabsContent>
         </Tabs>
@@ -1223,8 +1348,8 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
 
       {/* Floating Action Button */}
       <div className="fixed bottom-6 right-6">
-        <Button 
-          size="lg" 
+        <Button
+          size="lg"
           className="rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-2xl"
           onClick={() => setActiveTab('signals')}
         >
@@ -1236,7 +1361,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       {/* Notifications */}
       {notifications.length > 0 && (
         <div className="fixed top-20 right-4 space-y-2 z-50">
-          {notifications.slice(0, 3).map((notification) => (
+          {notifications.slice(0, 3).map(notification => (
             <Alert key={notification.id} className="bg-slate-800 border-slate-600">
               <CheckCircle className="h-4 w-4" />
               <AlertDescription className="text-white">{notification.message}</AlertDescription>

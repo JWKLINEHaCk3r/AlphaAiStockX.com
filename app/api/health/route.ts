@@ -1,21 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { performanceMonitor } from '@/lib/performance-monitor';
-import { AlpacaClient } from '@/lib/trading/alpaca-client';
+import { AlpacaClient, createAlpacaClientSafe } from '@/lib/trading/alpaca-client';
 
 // Health check configuration
 const HEALTH_CONFIG = {
   timeout: 5000, // 5 seconds
-  criticalServices: [
-    'database',
-    'trading_api',
-    'authentication',
-    'market_data'
-  ],
+  criticalServices: ['database', 'trading_api', 'authentication', 'market_data'],
   warningThresholds: {
     responseTime: 1000, // 1 second
     memoryUsage: 80, // 80%
     errorRate: 5, // 5%
-  }
+  },
 };
 
 interface HealthStatus {
@@ -63,7 +58,12 @@ interface DependencyHealth {
 }
 
 class HealthChecker {
-  private alpacaClient = new AlpacaClient();
+  private alpacaClient: AlpacaClient | null = null;
+
+  constructor() {
+    // Try to initialize Alpaca client, but handle missing credentials gracefully
+    this.alpacaClient = createAlpacaClientSafe();
+  }
 
   // Check database connectivity
   async checkDatabase(): Promise<ServiceHealth> {
@@ -71,10 +71,10 @@ class HealthChecker {
     try {
       // Simple database ping - adapt to your database client
       // const result = await prisma.$queryRaw`SELECT 1`;
-      
+
       // For now, simulate database check
       await new Promise(resolve => setTimeout(resolve, 10));
-      
+
       return {
         name: 'database',
         status: 'healthy',
@@ -96,9 +96,20 @@ class HealthChecker {
   async checkTradingAPI(): Promise<ServiceHealth> {
     const startTime = Date.now();
     try {
+      // If Alpaca client is not available (during build), return warning status
+      if (!this.alpacaClient) {
+        return {
+          name: 'trading_api',
+          status: 'warning',
+          responseTime: Date.now() - startTime,
+          lastCheck: new Date().toISOString(),
+          error: 'Trading API credentials not configured',
+        };
+      }
+
       // Check Alpaca API connectivity
       await this.alpacaClient.getAccount();
-      
+
       return {
         name: 'trading_api',
         status: 'healthy',
@@ -108,7 +119,7 @@ class HealthChecker {
     } catch (error) {
       const responseTime = Date.now() - startTime;
       const status = responseTime > HEALTH_CONFIG.timeout ? 'critical' : 'warning';
-      
+
       return {
         name: 'trading_api',
         status,
@@ -126,11 +137,11 @@ class HealthChecker {
       // Check NextAuth configuration
       const authUrl = process.env.NEXTAUTH_URL;
       const authSecret = process.env.NEXTAUTH_SECRET;
-      
+
       if (!authUrl || !authSecret) {
         throw new Error('Authentication configuration missing');
       }
-      
+
       return {
         name: 'authentication',
         status: 'healthy',
@@ -152,9 +163,20 @@ class HealthChecker {
   async checkMarketData(): Promise<ServiceHealth> {
     const startTime = Date.now();
     try {
+      // If Alpaca client is not available (during build), return warning status
+      if (!this.alpacaClient) {
+        return {
+          name: 'market_data',
+          status: 'warning',
+          responseTime: Date.now() - startTime,
+          lastCheck: new Date().toISOString(),
+          error: 'Market data API credentials not configured',
+        };
+      }
+
       // Check market data API connectivity
       await this.alpacaClient.getLatestQuote('AAPL');
-      
+
       return {
         name: 'market_data',
         status: 'healthy',
@@ -164,7 +186,7 @@ class HealthChecker {
     } catch (error) {
       const responseTime = Date.now() - startTime;
       const status = responseTime > HEALTH_CONFIG.timeout ? 'critical' : 'warning';
-      
+
       return {
         name: 'market_data',
         status,
@@ -179,7 +201,7 @@ class HealthChecker {
   getPerformanceHealth(): PerformanceHealth {
     const stats = performanceMonitor.getStats('1h');
     const memoryUsage = process.memoryUsage();
-    
+
     return {
       memory: {
         used: memoryUsage.heapUsed,
@@ -197,12 +219,16 @@ class HealthChecker {
   }
 
   // Determine overall system status
-  determineOverallStatus(services: ServiceHealth[], performance: PerformanceHealth): 'healthy' | 'warning' | 'critical' | 'down' {
+  determineOverallStatus(
+    services: ServiceHealth[],
+    performance: PerformanceHealth
+  ): 'healthy' | 'warning' | 'critical' | 'down' {
     // Check for critical service failures
-    const criticalServiceDown = services.some(service => 
-      HEALTH_CONFIG.criticalServices.includes(service.name) && service.status === 'critical'
+    const criticalServiceDown = services.some(
+      service =>
+        HEALTH_CONFIG.criticalServices.includes(service.name) && service.status === 'critical'
     );
-    
+
     if (criticalServiceDown) {
       return 'critical';
     }
@@ -216,7 +242,8 @@ class HealthChecker {
     // Check performance thresholds
     const highMemory = performance.memory.percentage > HEALTH_CONFIG.warningThresholds.memoryUsage;
     const highErrorRate = performance.errorRate > HEALTH_CONFIG.warningThresholds.errorRate;
-    const slowResponse = performance.responseTime.average > HEALTH_CONFIG.warningThresholds.responseTime;
+    const slowResponse =
+      performance.responseTime.average > HEALTH_CONFIG.warningThresholds.responseTime;
 
     if (highMemory || highErrorRate || slowResponse) {
       return 'warning';
@@ -233,12 +260,7 @@ class HealthChecker {
 
   // Perform complete health check
   async performHealthCheck(): Promise<HealthStatus> {
-    const [
-      databaseHealth,
-      tradingApiHealth,
-      authHealth,
-      marketDataHealth,
-    ] = await Promise.all([
+    const [databaseHealth, tradingApiHealth, authHealth, marketDataHealth] = await Promise.all([
       this.checkDatabase(),
       this.checkTradingAPI(),
       this.checkAuthentication(),
@@ -269,12 +291,9 @@ export async function GET(request: NextRequest) {
     // Basic authentication for health endpoint
     const authHeader = request.headers.get('authorization');
     const healthSecret = process.env.HEALTH_CHECK_SECRET;
-    
+
     if (healthSecret && authHeader !== `Bearer ${healthSecret}`) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Get query parameters
@@ -292,8 +311,8 @@ export async function GET(request: NextRequest) {
         environment: process.env.NODE_ENV || 'development',
         memory: {
           used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
-          total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024)
-        }
+          total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+        },
       };
 
       return NextResponse.json(basicHealth, { status: 200 });
@@ -321,21 +340,19 @@ export async function GET(request: NextRequest) {
 
       return new NextResponse(metrics, {
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-        status: healthStatus.status === 'healthy' ? 200 : healthStatus.status === 'warning' ? 200 : 503,
+        status:
+          healthStatus.status === 'healthy' ? 200 : healthStatus.status === 'warning' ? 200 : 503,
       });
     }
 
     // Detailed health check response
-    return NextResponse.json(
-      healthStatus,
-      { 
-        status: healthStatus.status === 'healthy' ? 200 : healthStatus.status === 'warning' ? 200 : 503,
-      }
-    );
-
+    return NextResponse.json(healthStatus, {
+      status:
+        healthStatus.status === 'healthy' ? 200 : healthStatus.status === 'warning' ? 200 : 503,
+    });
   } catch (error) {
     console.error('Health check failed:', error);
-    
+
     return NextResponse.json(
       {
         status: 'critical',
@@ -343,13 +360,13 @@ export async function GET(request: NextRequest) {
         error: 'Health check system failure',
         message: error instanceof Error ? error.message : 'Unknown error',
       },
-      { 
+      {
         status: 503,
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0'
-        }
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
       }
     );
   }

@@ -14,60 +14,57 @@ export async function GET(request: NextRequest) {
     switch (action) {
       case 'all':
         const allIPOs = await ipoRadar.getAllIPOs();
-        
+
         return NextResponse.json({
           success: true,
           data: allIPOs,
           count: allIPOs.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'upcoming':
         const upcomingIPOs = await ipoRadar.getUpcomingIPOs();
-        
+
         return NextResponse.json({
           success: true,
           data: upcomingIPOs,
           count: upcomingIPOs.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'analyze':
         if (!ipoId) {
-          return NextResponse.json(
-            { error: 'IPO ID is required for analysis' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'IPO ID is required for analysis' }, { status: 400 });
         }
 
         const analysis = await ipoRadar.analyzeIPO(ipoId);
-        
+
         return NextResponse.json({
           success: true,
           data: analysis,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'top_rated':
         const scoreThreshold = minScore ? parseInt(minScore) : 70;
         const topRated = await ipoRadar.getIPOsByScore(scoreThreshold);
-        
+
         return NextResponse.json({
           success: true,
           data: topRated,
           count: topRated.length,
           minScore: scoreThreshold,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'scan':
         const opportunities = await ipoRadar.scanForIPOOpportunities();
-        
+
         return NextResponse.json({
           success: true,
           data: opportunities,
           count: opportunities.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       default:
@@ -76,11 +73,13 @@ export async function GET(request: NextRequest) {
           { status: 400 }
         );
     }
-
   } catch (error) {
     console.error('IPO Radar API Error:', error);
     return NextResponse.json(
-      { error: 'Failed to process request', details: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Failed to process request',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -94,10 +93,7 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'add':
         if (!ipoData) {
-          return NextResponse.json(
-            { error: 'IPO data is required' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'IPO data is required' }, { status: 400 });
         }
 
         // Validate required fields
@@ -112,21 +108,18 @@ export async function POST(request: NextRequest) {
         }
 
         ipoRadar.addIPO(ipoData);
-        
+
         return NextResponse.json({
           success: true,
           message: 'IPO added successfully',
           ipoId: ipoData.id,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       case 'bulk_analyze':
         const { ipoIds } = body;
         if (!ipoIds || !Array.isArray(ipoIds)) {
-          return NextResponse.json(
-            { error: 'IPO IDs array is required' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'IPO IDs array is required' }, { status: 400 });
         }
 
         const analyses = [];
@@ -143,7 +136,7 @@ export async function POST(request: NextRequest) {
           success: true,
           data: analyses,
           count: analyses.length,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
       default:
@@ -152,13 +145,9 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
     }
-
   } catch (error) {
     console.error('IPO Radar POST API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }
 
@@ -168,33 +157,23 @@ export async function DELETE(request: NextRequest) {
     const ipoId = searchParams.get('ipoId');
 
     if (!ipoId) {
-      return NextResponse.json(
-        { error: 'IPO ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'IPO ID is required' }, { status: 400 });
     }
 
     const removed = ipoRadar.removeIPO(ipoId);
-    
+
     if (removed) {
       return NextResponse.json({
         success: true,
         message: 'IPO removed successfully',
         ipoId,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     } else {
-      return NextResponse.json(
-        { error: 'IPO not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'IPO not found' }, { status: 404 });
     }
-
   } catch (error) {
     console.error('IPO Radar DELETE API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to remove IPO' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to remove IPO' }, { status: 500 });
   }
 }

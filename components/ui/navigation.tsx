@@ -201,8 +201,15 @@ export default function NextLevelNavigation() {
       setOpenDropdown(null);
     };
 
+    // Skip during SSR
+    if (typeof document === 'undefined') return;
+
     document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('click', handleClickOutside);
+      }
+    };
   }, []);
 
   return (

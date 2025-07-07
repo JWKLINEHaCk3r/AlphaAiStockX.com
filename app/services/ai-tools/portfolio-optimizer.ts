@@ -83,30 +83,262 @@ export class AIPortfolioOptimizer {
   private initializeAssetUniverse() {
     const assets: Asset[] = [
       // Large Cap Stocks
-      { symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology', price: 178.25, marketCap: 2800000000000, beta: 1.2, expectedReturn: 0.12, volatility: 0.24, dividend: 0.005, peRatio: 28.5 },
-      { symbol: 'MSFT', name: 'Microsoft Corp.', sector: 'Technology', price: 365.50, marketCap: 2700000000000, beta: 0.9, expectedReturn: 0.11, volatility: 0.22, dividend: 0.007, peRatio: 32.1 },
-      { symbol: 'GOOGL', name: 'Alphabet Inc.', sector: 'Technology', price: 138.75, marketCap: 1750000000000, beta: 1.1, expectedReturn: 0.10, volatility: 0.26, dividend: 0, peRatio: 25.8 },
-      { symbol: 'AMZN', name: 'Amazon.com Inc.', sector: 'Consumer Discretionary', price: 155.20, marketCap: 1600000000000, beta: 1.3, expectedReturn: 0.13, volatility: 0.28, dividend: 0, peRatio: 48.2 },
-      { symbol: 'TSLA', name: 'Tesla Inc.', sector: 'Consumer Discretionary', price: 248.50, marketCap: 790000000000, beta: 2.0, expectedReturn: 0.15, volatility: 0.45, dividend: 0, peRatio: 65.4 },
-      { symbol: 'JPM', name: 'JPMorgan Chase', sector: 'Financial Services', price: 175.80, marketCap: 510000000000, beta: 1.1, expectedReturn: 0.09, volatility: 0.25, dividend: 0.025, peRatio: 12.8 },
-      { symbol: 'JNJ', name: 'Johnson & Johnson', sector: 'Healthcare', price: 162.30, marketCap: 425000000000, beta: 0.7, expectedReturn: 0.07, volatility: 0.16, dividend: 0.028, peRatio: 15.6 },
-      { symbol: 'V', name: 'Visa Inc.', sector: 'Financial Services', price: 275.40, marketCap: 580000000000, beta: 0.8, expectedReturn: 0.10, volatility: 0.20, dividend: 0.012, peRatio: 35.2 },
-      
+      {
+        symbol: 'AAPL',
+        name: 'Apple Inc.',
+        sector: 'Technology',
+        price: 178.25,
+        marketCap: 2800000000000,
+        beta: 1.2,
+        expectedReturn: 0.12,
+        volatility: 0.24,
+        dividend: 0.005,
+        peRatio: 28.5,
+      },
+      {
+        symbol: 'MSFT',
+        name: 'Microsoft Corp.',
+        sector: 'Technology',
+        price: 365.5,
+        marketCap: 2700000000000,
+        beta: 0.9,
+        expectedReturn: 0.11,
+        volatility: 0.22,
+        dividend: 0.007,
+        peRatio: 32.1,
+      },
+      {
+        symbol: 'GOOGL',
+        name: 'Alphabet Inc.',
+        sector: 'Technology',
+        price: 138.75,
+        marketCap: 1750000000000,
+        beta: 1.1,
+        expectedReturn: 0.1,
+        volatility: 0.26,
+        dividend: 0,
+        peRatio: 25.8,
+      },
+      {
+        symbol: 'AMZN',
+        name: 'Amazon.com Inc.',
+        sector: 'Consumer Discretionary',
+        price: 155.2,
+        marketCap: 1600000000000,
+        beta: 1.3,
+        expectedReturn: 0.13,
+        volatility: 0.28,
+        dividend: 0,
+        peRatio: 48.2,
+      },
+      {
+        symbol: 'TSLA',
+        name: 'Tesla Inc.',
+        sector: 'Consumer Discretionary',
+        price: 248.5,
+        marketCap: 790000000000,
+        beta: 2.0,
+        expectedReturn: 0.15,
+        volatility: 0.45,
+        dividend: 0,
+        peRatio: 65.4,
+      },
+      {
+        symbol: 'JPM',
+        name: 'JPMorgan Chase',
+        sector: 'Financial Services',
+        price: 175.8,
+        marketCap: 510000000000,
+        beta: 1.1,
+        expectedReturn: 0.09,
+        volatility: 0.25,
+        dividend: 0.025,
+        peRatio: 12.8,
+      },
+      {
+        symbol: 'JNJ',
+        name: 'Johnson & Johnson',
+        sector: 'Healthcare',
+        price: 162.3,
+        marketCap: 425000000000,
+        beta: 0.7,
+        expectedReturn: 0.07,
+        volatility: 0.16,
+        dividend: 0.028,
+        peRatio: 15.6,
+      },
+      {
+        symbol: 'V',
+        name: 'Visa Inc.',
+        sector: 'Financial Services',
+        price: 275.4,
+        marketCap: 580000000000,
+        beta: 0.8,
+        expectedReturn: 0.1,
+        volatility: 0.2,
+        dividend: 0.012,
+        peRatio: 35.2,
+      },
+
       // ETFs for diversification
-      { symbol: 'SPY', name: 'SPDR S&P 500 ETF', sector: 'Broad Market', price: 468.50, marketCap: 480000000000, beta: 1.0, expectedReturn: 0.08, volatility: 0.18, dividend: 0.015, peRatio: 21.5, expense: 0.0009 },
-      { symbol: 'QQQ', name: 'Invesco QQQ ETF', sector: 'Technology', price: 385.20, marketCap: 180000000000, beta: 1.2, expectedReturn: 0.10, volatility: 0.22, dividend: 0.008, peRatio: 28.3, expense: 0.0020 },
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market', sector: 'Broad Market', price: 245.80, marketCap: 320000000000, beta: 1.0, expectedReturn: 0.08, volatility: 0.17, dividend: 0.018, peRatio: 20.8, expense: 0.0003 },
-      { symbol: 'VXUS', name: 'Vanguard Total International', sector: 'International', price: 58.40, marketCap: 350000000000, beta: 0.8, expectedReturn: 0.07, volatility: 0.19, dividend: 0.022, peRatio: 16.2, expense: 0.0008 },
-      { symbol: 'BND', name: 'Vanguard Total Bond Market', sector: 'Fixed Income', price: 82.15, marketCap: 280000000000, beta: 0.1, expectedReturn: 0.04, volatility: 0.06, dividend: 0.025, peRatio: 0, expense: 0.0003 },
-      { symbol: 'VEA', name: 'Vanguard FTSE Developed Markets', sector: 'International', price: 47.90, marketCap: 110000000000, beta: 0.9, expectedReturn: 0.06, volatility: 0.18, dividend: 0.025, peRatio: 15.8, expense: 0.0005 },
-      { symbol: 'VWO', name: 'Vanguard Emerging Markets', sector: 'Emerging Markets', price: 42.30, marketCap: 75000000000, beta: 1.1, expectedReturn: 0.08, volatility: 0.25, dividend: 0.032, peRatio: 13.5, expense: 0.0008 },
-      
+      {
+        symbol: 'SPY',
+        name: 'SPDR S&P 500 ETF',
+        sector: 'Broad Market',
+        price: 468.5,
+        marketCap: 480000000000,
+        beta: 1.0,
+        expectedReturn: 0.08,
+        volatility: 0.18,
+        dividend: 0.015,
+        peRatio: 21.5,
+        expense: 0.0009,
+      },
+      {
+        symbol: 'QQQ',
+        name: 'Invesco QQQ ETF',
+        sector: 'Technology',
+        price: 385.2,
+        marketCap: 180000000000,
+        beta: 1.2,
+        expectedReturn: 0.1,
+        volatility: 0.22,
+        dividend: 0.008,
+        peRatio: 28.3,
+        expense: 0.002,
+      },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market',
+        sector: 'Broad Market',
+        price: 245.8,
+        marketCap: 320000000000,
+        beta: 1.0,
+        expectedReturn: 0.08,
+        volatility: 0.17,
+        dividend: 0.018,
+        peRatio: 20.8,
+        expense: 0.0003,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International',
+        sector: 'International',
+        price: 58.4,
+        marketCap: 350000000000,
+        beta: 0.8,
+        expectedReturn: 0.07,
+        volatility: 0.19,
+        dividend: 0.022,
+        peRatio: 16.2,
+        expense: 0.0008,
+      },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market',
+        sector: 'Fixed Income',
+        price: 82.15,
+        marketCap: 280000000000,
+        beta: 0.1,
+        expectedReturn: 0.04,
+        volatility: 0.06,
+        dividend: 0.025,
+        peRatio: 0,
+        expense: 0.0003,
+      },
+      {
+        symbol: 'VEA',
+        name: 'Vanguard FTSE Developed Markets',
+        sector: 'International',
+        price: 47.9,
+        marketCap: 110000000000,
+        beta: 0.9,
+        expectedReturn: 0.06,
+        volatility: 0.18,
+        dividend: 0.025,
+        peRatio: 15.8,
+        expense: 0.0005,
+      },
+      {
+        symbol: 'VWO',
+        name: 'Vanguard Emerging Markets',
+        sector: 'Emerging Markets',
+        price: 42.3,
+        marketCap: 75000000000,
+        beta: 1.1,
+        expectedReturn: 0.08,
+        volatility: 0.25,
+        dividend: 0.032,
+        peRatio: 13.5,
+        expense: 0.0008,
+      },
+
       // Sector ETFs
-      { symbol: 'XLK', name: 'Technology Select Sector', sector: 'Technology', price: 195.60, marketCap: 48000000000, beta: 1.2, expectedReturn: 0.11, volatility: 0.24, dividend: 0.008, peRatio: 29.1, expense: 0.0010 },
-      { symbol: 'XLF', name: 'Financial Select Sector', sector: 'Financial Services', price: 38.75, marketCap: 15000000000, beta: 1.2, expectedReturn: 0.09, volatility: 0.26, dividend: 0.020, peRatio: 14.2, expense: 0.0010 },
-      { symbol: 'XLE', name: 'Energy Select Sector', sector: 'Energy', price: 85.20, marketCap: 12000000000, beta: 1.4, expectedReturn: 0.12, volatility: 0.35, dividend: 0.035, peRatio: 11.8, expense: 0.0010 },
-      { symbol: 'XLV', name: 'Health Care Select Sector', sector: 'Healthcare', price: 134.80, marketCap: 28000000000, beta: 0.8, expectedReturn: 0.08, volatility: 0.18, dividend: 0.015, peRatio: 18.5, expense: 0.0010 },
-      { symbol: 'XLRE', name: 'Real Estate Select Sector', sector: 'Real Estate', price: 38.95, marketCap: 7000000000, beta: 0.9, expectedReturn: 0.07, volatility: 0.22, dividend: 0.028, peRatio: 22.4, expense: 0.0010 }
+      {
+        symbol: 'XLK',
+        name: 'Technology Select Sector',
+        sector: 'Technology',
+        price: 195.6,
+        marketCap: 48000000000,
+        beta: 1.2,
+        expectedReturn: 0.11,
+        volatility: 0.24,
+        dividend: 0.008,
+        peRatio: 29.1,
+        expense: 0.001,
+      },
+      {
+        symbol: 'XLF',
+        name: 'Financial Select Sector',
+        sector: 'Financial Services',
+        price: 38.75,
+        marketCap: 15000000000,
+        beta: 1.2,
+        expectedReturn: 0.09,
+        volatility: 0.26,
+        dividend: 0.02,
+        peRatio: 14.2,
+        expense: 0.001,
+      },
+      {
+        symbol: 'XLE',
+        name: 'Energy Select Sector',
+        sector: 'Energy',
+        price: 85.2,
+        marketCap: 12000000000,
+        beta: 1.4,
+        expectedReturn: 0.12,
+        volatility: 0.35,
+        dividend: 0.035,
+        peRatio: 11.8,
+        expense: 0.001,
+      },
+      {
+        symbol: 'XLV',
+        name: 'Health Care Select Sector',
+        sector: 'Healthcare',
+        price: 134.8,
+        marketCap: 28000000000,
+        beta: 0.8,
+        expectedReturn: 0.08,
+        volatility: 0.18,
+        dividend: 0.015,
+        peRatio: 18.5,
+        expense: 0.001,
+      },
+      {
+        symbol: 'XLRE',
+        name: 'Real Estate Select Sector',
+        sector: 'Real Estate',
+        price: 38.95,
+        marketCap: 7000000000,
+        beta: 0.9,
+        expectedReturn: 0.07,
+        volatility: 0.22,
+        dividend: 0.028,
+        peRatio: 22.4,
+        expense: 0.001,
+      },
     ];
 
     assets.forEach(asset => this.assetUniverse.set(asset.symbol, asset));
@@ -115,7 +347,7 @@ export class AIPortfolioOptimizer {
 
   private generateCorrelationMatrix() {
     const symbols = Array.from(this.assetUniverse.keys());
-    
+
     symbols.forEach(symbol1 => {
       const correlations = new Map<string, number>();
       symbols.forEach(symbol2 => {
@@ -142,7 +374,8 @@ export class AIPortfolioOptimizer {
     }
 
     // Market cap similarity
-    const capRatio = Math.min(asset1.marketCap, asset2.marketCap) / Math.max(asset1.marketCap, asset2.marketCap);
+    const capRatio =
+      Math.min(asset1.marketCap, asset2.marketCap) / Math.max(asset1.marketCap, asset2.marketCap);
     correlation += (capRatio - 0.5) * 0.2;
 
     // Beta similarity
@@ -163,7 +396,7 @@ export class AIPortfolioOptimizer {
     try {
       // Filter eligible assets
       const eligibleAssets = this.filterAssets(constraints);
-      
+
       // Run optimization algorithm
       const optimization = await this.runOptimization(
         eligibleAssets,
@@ -172,21 +405,18 @@ export class AIPortfolioOptimizer {
       );
 
       // Generate AI insights
-      const aiInsights = await this.generateAIInsights(
-        optimization,
-        eligibleAssets,
-        constraints
-      );
+      const aiInsights = await this.generateAIInsights(optimization, eligibleAssets, constraints);
 
       // Calculate portfolio metrics
-      const portfolioMetrics = this.calculatePortfolioMetrics(
-        optimization.weights,
-        eligibleAssets
-      );
+      const portfolioMetrics = this.calculatePortfolioMetrics(optimization.weights, eligibleAssets);
 
       // Generate rebalance recommendations
-      const rebalanceRecs = currentHoldings 
-        ? this.generateRebalanceRecommendations(currentHoldings, optimization.weights, eligibleAssets)
+      const rebalanceRecs = currentHoldings
+        ? this.generateRebalanceRecommendations(
+            currentHoldings,
+            optimization.weights,
+            eligibleAssets
+          )
         : [];
 
       // Risk analysis
@@ -198,18 +428,20 @@ export class AIPortfolioOptimizer {
         expectedReturn: portfolioMetrics.expectedReturn,
         volatility: portfolioMetrics.volatility,
         sharpeRatio: portfolioMetrics.sharpeRatio,
-        diversificationScore: this.calculateDiversificationScore(optimization.weights, eligibleAssets),
+        diversificationScore: this.calculateDiversificationScore(
+          optimization.weights,
+          eligibleAssets
+        ),
         riskScore: this.calculateRiskScore(portfolioMetrics.volatility, constraints.riskTolerance),
         totalValue: investmentAmount,
         assets: eligibleAssets,
         reasoning: aiInsights.reasoning,
         rebalanceRecommendations: rebalanceRecs,
         riskAnalysis,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       return optimizedPortfolio;
-
     } catch (error) {
       console.error('Portfolio optimization error:', error);
       throw new Error('Failed to optimize portfolio');
@@ -218,7 +450,7 @@ export class AIPortfolioOptimizer {
 
   private filterAssets(constraints: PortfolioConstraints): Asset[] {
     const assets = Array.from(this.assetUniverse.values());
-    
+
     return assets.filter(asset => {
       // Exclude specific symbols
       if (constraints.excludeSymbols?.includes(asset.symbol)) {
@@ -248,22 +480,22 @@ export class AIPortfolioOptimizer {
     constraints: PortfolioConstraints
   ): Promise<OptimizationResult> {
     const numAssets = assets.length;
-    
+
     // Simple mean-variance optimization using quadratic programming approximation
     const riskAversion = this.getRiskAversionParameter(constraints.riskTolerance);
-    
+
     // Generate initial weights
     let weights = this.generateInitialWeights(numAssets, constraints);
-    
+
     // Iterative optimization (simplified)
     for (let iteration = 0; iteration < 100; iteration++) {
       const newWeights = this.optimizeStep(weights, assets, riskAversion, constraints);
-      
+
       if (this.hasConverged(weights, newWeights)) {
         weights = newWeights;
         break;
       }
-      
+
       weights = newWeights;
     }
 
@@ -280,16 +512,20 @@ export class AIPortfolioOptimizer {
       weights,
       expectedReturn,
       volatility,
-      sharpeRatio
+      sharpeRatio,
     };
   }
 
   private getRiskAversionParameter(riskTolerance: string): number {
     switch (riskTolerance) {
-      case 'conservative': return 8.0;
-      case 'moderate': return 4.0;
-      case 'aggressive': return 2.0;
-      default: return 4.0;
+      case 'conservative':
+        return 8.0;
+      case 'moderate':
+        return 4.0;
+      case 'aggressive':
+        return 2.0;
+      default:
+        return 4.0;
     }
   }
 
@@ -318,7 +554,7 @@ export class AIPortfolioOptimizer {
     for (let i = 0; i < assets.length; i++) {
       // Calculate gradient (simplified)
       const gradient = this.calculateGradient(i, currentWeights, assets, riskAversion);
-      
+
       // Update weight
       newWeights[i] = Math.max(
         constraints.minWeight,
@@ -337,14 +573,15 @@ export class AIPortfolioOptimizer {
     riskAversion: number
   ): number {
     const asset = assets[assetIndex];
-    
+
     // Expected return component
     let gradient = asset.expectedReturn;
 
     // Risk penalty component
     for (let j = 0; j < assets.length; j++) {
       const correlation = this.getCorrelation(asset.symbol, assets[j].symbol);
-      const riskContribution = riskAversion * weights[j] * asset.volatility * assets[j].volatility * correlation;
+      const riskContribution =
+        riskAversion * weights[j] * asset.volatility * assets[j].volatility * correlation;
       gradient -= riskContribution;
     }
 
@@ -357,7 +594,7 @@ export class AIPortfolioOptimizer {
     constraints: PortfolioConstraints
   ): number[] {
     const sectorWeights = new Map<string, number>();
-    
+
     // Calculate current sector weights
     assets.forEach((asset, i) => {
       const currentWeight = sectorWeights.get(asset.sector) || 0;
@@ -398,14 +635,15 @@ export class AIPortfolioOptimizer {
 
   private calculatePortfolioVolatility(weights: number[], assets: Asset[]): number {
     let variance = 0;
-    
+
     for (let i = 0; i < assets.length; i++) {
       for (let j = 0; j < assets.length; j++) {
         const correlation = this.getCorrelation(assets[i].symbol, assets[j].symbol);
-        variance += weights[i] * weights[j] * assets[i].volatility * assets[j].volatility * correlation;
+        variance +=
+          weights[i] * weights[j] * assets[i].volatility * assets[j].volatility * correlation;
       }
     }
-    
+
     return Math.sqrt(variance);
   }
 
@@ -424,7 +662,8 @@ export class AIPortfolioOptimizer {
   private createAllocationMap(weights: number[], assets: Asset[]): { [symbol: string]: number } {
     const allocations: { [symbol: string]: number } = {};
     assets.forEach((asset, i) => {
-      if (weights[i] > 0.001) { // Only include meaningful allocations
+      if (weights[i] > 0.001) {
+        // Only include meaningful allocations
         allocations[asset.symbol] = weights[i];
       }
     });
@@ -436,17 +675,17 @@ export class AIPortfolioOptimizer {
     const hhi = weights.reduce((sum, weight) => sum + weight * weight, 0);
     const maxDiversification = 1 / assets.length;
     const diversificationRatio = maxDiversification / hhi;
-    
+
     return Math.min(100, diversificationRatio * 100);
   }
 
   private calculateRiskScore(volatility: number, riskTolerance: string): number {
     const baseScore = volatility * 100; // Convert to percentage
-    
+
     const toleranceMultiplier = {
-      'conservative': 1.5,
-      'moderate': 1.0,
-      'aggressive': 0.7
+      conservative: 1.5,
+      moderate: 1.0,
+      aggressive: 0.7,
     };
 
     return Math.min(100, baseScore * toleranceMultiplier[riskTolerance]);
@@ -458,20 +697,21 @@ export class AIPortfolioOptimizer {
     assets: Asset[]
   ): RebalanceRecommendation[] {
     const recommendations: RebalanceRecommendation[] = [];
-    
+
     assets.forEach((asset, i) => {
       const currentWeight = currentHoldings[asset.symbol] || 0;
       const targetWeight = targetWeights[i];
       const difference = targetWeight - currentWeight;
-      
-      if (Math.abs(difference) > 0.01) { // Only recommend if difference > 1%
+
+      if (Math.abs(difference) > 0.01) {
+        // Only recommend if difference > 1%
         recommendations.push({
           symbol: asset.symbol,
           currentWeight,
           targetWeight,
           action: difference > 0 ? 'BUY' : 'SELL',
           amount: Math.abs(difference),
-          reasoning: `${difference > 0 ? 'Increase' : 'Decrease'} allocation to reach target weight`
+          reasoning: `${difference > 0 ? 'Increase' : 'Decrease'} allocation to reach target weight`,
         });
       }
     });
@@ -500,7 +740,8 @@ export class AIPortfolioOptimizer {
         const correlation = this.getCorrelation(asset.symbol, otherAsset.symbol);
         contribution += weights[j] * asset.volatility * otherAsset.volatility * correlation;
       });
-      riskContribution[asset.symbol] = (weights[i] * contribution) / (portfolioVolatility * portfolioVolatility);
+      riskContribution[asset.symbol] =
+        (weights[i] * contribution) / (portfolioVolatility * portfolioVolatility);
     });
 
     return {
@@ -508,13 +749,13 @@ export class AIPortfolioOptimizer {
       maxDrawdown: portfolioVolatility * 2.5, // Simplified calculation
       correlationMatrix: this.getRelevantCorrelations(assets),
       sectorConcentration,
-      riskContribution
+      riskContribution,
     };
   }
 
   private getRelevantCorrelations(assets: Asset[]): { [pair: string]: number } {
     const correlations: { [pair: string]: number } = {};
-    
+
     for (let i = 0; i < assets.length; i++) {
       for (let j = i + 1; j < assets.length; j++) {
         const symbol1 = assets[i].symbol;
@@ -534,7 +775,7 @@ export class AIPortfolioOptimizer {
   ) {
     const allocations = this.createAllocationMap(optimization.weights, assets);
     const topHoldings = Object.entries(allocations)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
 
     const prompt = `
@@ -551,10 +792,12 @@ export class AIPortfolioOptimizer {
     - Sharpe Ratio: ${optimization.sharpeRatio.toFixed(3)}
 
     Top Holdings:
-    ${topHoldings.map(([symbol, weight]) => {
-      const asset = assets.find(a => a.symbol === symbol);
-      return `- ${symbol} (${asset?.name}): ${(weight * 100).toFixed(1)}% - ${asset?.sector}`;
-    }).join('\n')}
+    ${topHoldings
+      .map(([symbol, weight]) => {
+        const asset = assets.find(a => a.symbol === symbol);
+        return `- ${symbol} (${asset?.name}): ${(weight * 100).toFixed(1)}% - ${asset?.sector}`;
+      })
+      .join('\n')}
 
     Sector Distribution:
     ${this.getSectorDistribution(optimization.weights, assets)}
@@ -576,38 +819,38 @@ export class AIPortfolioOptimizer {
         messages: [
           {
             role: 'system',
-            content: 'You are an expert portfolio manager and investment advisor with deep knowledge of modern portfolio theory and market dynamics.'
+            content:
+              'You are an expert portfolio manager and investment advisor with deep knowledge of modern portfolio theory and market dynamics.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         max_tokens: 800,
-        temperature: 0.3
+        temperature: 0.3,
       });
 
       return {
-        reasoning: response.choices[0].message.content || 'Portfolio analysis unavailable'
+        reasoning: response.choices[0].message.content || 'Portfolio analysis unavailable',
       };
-
     } catch (error) {
       return {
-        reasoning: `This ${constraints.riskTolerance} portfolio achieves a ${(optimization.expectedReturn * 100).toFixed(1)}% expected return with ${(optimization.volatility * 100).toFixed(1)}% volatility. The allocation provides balanced exposure across sectors with emphasis on ${this.getTopSector(optimization.weights, assets)}.`
+        reasoning: `This ${constraints.riskTolerance} portfolio achieves a ${(optimization.expectedReturn * 100).toFixed(1)}% expected return with ${(optimization.volatility * 100).toFixed(1)}% volatility. The allocation provides balanced exposure across sectors with emphasis on ${this.getTopSector(optimization.weights, assets)}.`,
       };
     }
   }
 
   private getSectorDistribution(weights: number[], assets: Asset[]): string {
     const sectorWeights = new Map<string, number>();
-    
+
     assets.forEach((asset, i) => {
       const current = sectorWeights.get(asset.sector) || 0;
       sectorWeights.set(asset.sector, current + weights[i]);
     });
 
     return Array.from(sectorWeights.entries())
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5)
       .map(([sector, weight]) => `- ${sector}: ${(weight * 100).toFixed(1)}%`)
       .join('\n');
@@ -615,14 +858,13 @@ export class AIPortfolioOptimizer {
 
   private getTopSector(weights: number[], assets: Asset[]): string {
     const sectorWeights = new Map<string, number>();
-    
+
     assets.forEach((asset, i) => {
       const current = sectorWeights.get(asset.sector) || 0;
       sectorWeights.set(asset.sector, current + weights[i]);
     });
 
-    const topSector = Array.from(sectorWeights.entries())
-      .sort(([,a], [,b]) => b - a)[0];
+    const topSector = Array.from(sectorWeights.entries()).sort(([, a], [, b]) => b - a)[0];
 
     return topSector ? topSector[0] : 'Technology';
   }
@@ -636,7 +878,7 @@ export class AIPortfolioOptimizer {
       if (riskTolerance === 'conservative') {
         return asset.volatility < 0.25 && asset.beta < 1.3;
       } else if (riskTolerance === 'aggressive') {
-        return asset.expectedReturn > 0.10;
+        return asset.expectedReturn > 0.1;
       }
       return true;
     });
@@ -651,7 +893,7 @@ export class AIPortfolioOptimizer {
     // Simplified backtest - in production, use historical data
     const annualReturn = Object.entries(allocations).reduce((sum, [symbol, weight]) => {
       const asset = this.assetUniverse.get(symbol);
-      return sum + (weight * (asset?.expectedReturn || 0.08));
+      return sum + weight * (asset?.expectedReturn || 0.08);
     }, 0);
 
     return {
@@ -659,7 +901,7 @@ export class AIPortfolioOptimizer {
       maxDrawdown: annualReturn * -0.3, // Simplified
       sharpeRatio: annualReturn / 0.15,
       winRate: 0.65,
-      totalReturn: annualReturn * (timeframe === '1Y' ? 1 : timeframe === '3Y' ? 3 : 5)
+      totalReturn: annualReturn * (timeframe === '1Y' ? 1 : timeframe === '3Y' ? 3 : 5),
     };
   }
 

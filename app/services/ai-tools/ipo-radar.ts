@@ -86,10 +86,10 @@ export class AIIPORadar {
           revenue: 450000000,
           netIncome: -85000000,
           employees: 2500,
-          founded: 2019
+          founded: 2019,
         },
         competitors: ['NVDA', 'GOOGL', 'MSFT'],
-        riskFactors: ['High competition', 'Regulatory uncertainty', 'Dependence on key customers']
+        riskFactors: ['High competition', 'Regulatory uncertainty', 'Dependence on key customers'],
       },
       {
         id: 'ipo_2',
@@ -104,15 +104,16 @@ export class AIIPORadar {
         industry: 'Renewable Energy',
         exchange: 'NYSE',
         underwriters: ['Bank of America', 'Citigroup', 'Wells Fargo'],
-        businessDescription: 'Solar and wind energy solutions provider with innovative storage technology',
+        businessDescription:
+          'Solar and wind energy solutions provider with innovative storage technology',
         keyMetrics: {
           revenue: 320000000,
           netIncome: 25000000,
           employees: 1800,
-          founded: 2017
+          founded: 2017,
         },
         competitors: ['TSLA', 'ENPH', 'SEDG'],
-        riskFactors: ['Commodity price volatility', 'Policy changes', 'Weather dependency']
+        riskFactors: ['Commodity price volatility', 'Policy changes', 'Weather dependency'],
       },
       {
         id: 'ipo_3',
@@ -127,16 +128,21 @@ export class AIIPORadar {
         industry: 'Medical Technology',
         exchange: 'NASDAQ',
         underwriters: ['Deutsche Bank', 'Credit Suisse', 'Barclays'],
-        businessDescription: 'Digital health platform connecting patients with healthcare providers',
+        businessDescription:
+          'Digital health platform connecting patients with healthcare providers',
         keyMetrics: {
           revenue: 180000000,
           netIncome: -45000000,
           employees: 950,
-          founded: 2020
+          founded: 2020,
         },
         competitors: ['TDOC', 'AMWL', 'VEEV'],
-        riskFactors: ['Regulatory approval delays', 'Data privacy concerns', 'Competition from tech giants']
-      }
+        riskFactors: [
+          'Regulatory approval delays',
+          'Data privacy concerns',
+          'Competition from tech giants',
+        ],
+      },
     ];
 
     mockIPOs.forEach(ipo => this.ipoDatabase.set(ipo.id, ipo));
@@ -170,7 +176,7 @@ export class AIIPORadar {
         buzzScore,
         marketScore,
         riskScore,
-        marketConditions
+        marketConditions,
       });
 
       // Calculate overall metrics
@@ -197,14 +203,13 @@ export class AIIPORadar {
         projectedFirstDayReturn: this.calculateProjectedReturns(successProbability, 'first_day'),
         projectedSixMonthReturn: this.calculateProjectedReturns(successProbability, 'six_month'),
         recommendation: aiAnalysis.recommendation,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       // Cache the analysis
       this.analysisCache.set(ipoId, analysis);
-      
-      return analysis;
 
+      return analysis;
     } catch (error) {
       console.error('Error analyzing IPO:', error);
       throw new Error(`Failed to analyze IPO: ${ipo.companyName}`);
@@ -250,11 +255,16 @@ export class AIIPORadar {
     try {
       // In production, analyze social media mentions, news coverage, etc.
       // For now, use heuristics based on sector and company characteristics
-      
+
       let buzzScore = 40; // Base score
 
       // Sector-based buzz
-      const hotSectors = ['Technology', 'Artificial Intelligence', 'Renewable Energy', 'Biotechnology'];
+      const hotSectors = [
+        'Technology',
+        'Artificial Intelligence',
+        'Renewable Energy',
+        'Biotechnology',
+      ];
       if (hotSectors.includes(ipo.sector) || hotSectors.includes(ipo.industry)) {
         buzzScore += 25;
       }
@@ -275,7 +285,6 @@ export class AIIPORadar {
       }
 
       return Math.max(0, Math.min(100, buzzScore));
-
     } catch (error) {
       return 50; // Default buzz score
     }
@@ -382,40 +391,43 @@ export class AIIPORadar {
         messages: [
           {
             role: 'system',
-            content: 'You are an expert IPO analyst with deep knowledge of public markets, valuation, and investment analysis.'
+            content:
+              'You are an expert IPO analyst with deep knowledge of public markets, valuation, and investment analysis.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         max_tokens: 800,
-        temperature: 0.3
+        temperature: 0.3,
       });
 
       const content = response.choices[0].message.content || '';
-      
+
       return {
         reasoning: content,
         keyStrengths: [
           'Strong market position in growing sector',
           'Experienced management team',
-          'Solid financial fundamentals'
+          'Solid financial fundamentals',
         ],
         keyRisks: [
           'High competition in market',
           'Regulatory uncertainties',
-          'Execution risks in scaling'
+          'Execution risks in scaling',
         ],
-        recommendation: scores.fundamentalScore > 70 ? 'Consider for investment with appropriate position sizing' : 'Wait for better entry point or more clarity'
+        recommendation:
+          scores.fundamentalScore > 70
+            ? 'Consider for investment with appropriate position sizing'
+            : 'Wait for better entry point or more clarity',
       };
-
     } catch (error) {
       return {
         reasoning: `Analysis of ${ipo.companyName}: Based on fundamental metrics, this IPO shows ${scores.fundamentalScore > 60 ? 'promising' : 'concerning'} characteristics. Market conditions are ${scores.marketScore > 60 ? 'favorable' : 'challenging'} for new listings.`,
         keyStrengths: ['Market opportunity', 'Growth potential', 'Industry position'],
         keyRisks: ['Market volatility', 'Execution risk', 'Competitive pressure'],
-        recommendation: 'Proceed with caution and thorough due diligence'
+        recommendation: 'Proceed with caution and thorough due diligence',
       };
     }
   }
@@ -427,13 +439,16 @@ export class AIIPORadar {
     riskScore: number
   ): number {
     // Weighted combination of scores
-    const positiveScore = (fundamentalScore * 0.4) + (buzzScore * 0.2) + (marketScore * 0.3);
-    const adjustedScore = positiveScore - (riskScore * 0.1);
-    
+    const positiveScore = fundamentalScore * 0.4 + buzzScore * 0.2 + marketScore * 0.3;
+    const adjustedScore = positiveScore - riskScore * 0.1;
+
     return Math.max(0, Math.min(100, adjustedScore));
   }
 
-  private determineOverallRating(successProbability: number, riskScore: number): IPOAnalysis['overallRating'] {
+  private determineOverallRating(
+    successProbability: number,
+    riskScore: number
+  ): IPOAnalysis['overallRating'] {
     if (successProbability >= 80 && riskScore < 40) {
       return 'STRONG_BUY';
     } else if (successProbability >= 65 && riskScore < 60) {
@@ -445,16 +460,19 @@ export class AIIPORadar {
     }
   }
 
-  private calculateProjectedReturns(successProbability: number, timeframe: 'first_day' | 'six_month'): number {
+  private calculateProjectedReturns(
+    successProbability: number,
+    timeframe: 'first_day' | 'six_month'
+  ): number {
     const baseReturn = timeframe === 'first_day' ? 15 : 35; // Base expected returns
     const probabilityMultiplier = (successProbability - 50) / 50; // -1 to 1
-    
+
     const projectedReturn = baseReturn * (1 + probabilityMultiplier * 0.5);
-    
+
     // Add some randomness
     const variance = timeframe === 'first_day' ? 10 : 25;
     const randomFactor = (Math.random() - 0.5) * variance;
-    
+
     return projectedReturn + randomFactor;
   }
 
@@ -462,14 +480,15 @@ export class AIIPORadar {
     // In production, fetch real market data
     return {
       vixLevel: 18 + Math.random() * 20, // 18-38 range
-      ipoMarketSentiment: Math.random() > 0.6 ? 'BULLISH' : Math.random() > 0.3 ? 'NEUTRAL' : 'BEARISH',
+      ipoMarketSentiment:
+        Math.random() > 0.6 ? 'BULLISH' : Math.random() > 0.3 ? 'NEUTRAL' : 'BEARISH',
       recentIpoPerformance: (Math.random() - 0.5) * 40, // -20% to +20%
       sectorPerformance: {
-        'Technology': (Math.random() - 0.3) * 30,
-        'Healthcare': (Math.random() - 0.4) * 25,
-        'Energy': (Math.random() - 0.5) * 35,
-        'Financial Services': (Math.random() - 0.4) * 20
-      }
+        Technology: (Math.random() - 0.3) * 30,
+        Healthcare: (Math.random() - 0.4) * 25,
+        Energy: (Math.random() - 0.5) * 35,
+        'Financial Services': (Math.random() - 0.4) * 20,
+      },
     };
   }
 
@@ -493,7 +512,7 @@ export class AIIPORadar {
 
   async getIPOsByScore(minScore: number = 70): Promise<{ ipo: IPOData; analysis: IPOAnalysis }[]> {
     const results = [];
-    
+
     for (const ipo of this.ipoDatabase.values()) {
       try {
         const analysis = await this.analyzeIPO(ipo.id);

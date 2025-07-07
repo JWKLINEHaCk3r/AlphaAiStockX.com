@@ -6,11 +6,24 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Brain, Zap, TrendingUp, BarChart3, Target, 
-  MessageCircle, PieChart, Upload, Settings,
-  Star, Activity, DollarSign, AlertTriangle,
-  Sparkles, ArrowRight, Play, Eye
+import {
+  Brain,
+  Zap,
+  TrendingUp,
+  BarChart3,
+  Target,
+  MessageCircle,
+  PieChart,
+  Upload,
+  Settings,
+  Star,
+  Activity,
+  DollarSign,
+  AlertTriangle,
+  Sparkles,
+  ArrowRight,
+  Play,
+  Eye,
 } from 'lucide-react';
 
 // Import AI Tool Components
@@ -44,7 +57,7 @@ export default function AIToolsDashboard() {
     chatMessages: 0,
     iposAnalyzed: 0,
     portfoliosOptimized: 0,
-    predictionsAccuracy: 0
+    predictionsAccuracy: 0,
   });
 
   useEffect(() => {
@@ -58,7 +71,7 @@ export default function AIToolsDashboard() {
       chatMessages: 89,
       iposAnalyzed: 15,
       portfoliosOptimized: 8,
-      predictionsAccuracy: 73.2
+      predictionsAccuracy: 73.2,
     });
   };
 
@@ -69,14 +82,14 @@ export default function AIToolsDashboard() {
       description: 'Get instant buy/sell recommendations',
       icon: <Zap className="h-6 w-6" />,
       action: () => setActiveTab('signal-bot'),
-      badge: 'Popular'
+      badge: 'Popular',
     },
     {
       id: 'chat-trader',
       title: 'Chat with AI Trader',
       description: 'Ask trading questions and get insights',
       icon: <MessageCircle className="h-6 w-6" />,
-      action: () => setActiveTab('gpt-trader')
+      action: () => setActiveTab('gpt-trader'),
     },
     {
       id: 'analyze-ipo',
@@ -84,22 +97,22 @@ export default function AIToolsDashboard() {
       description: 'Get IPO success predictions',
       icon: <TrendingUp className="h-6 w-6" />,
       action: () => setActiveTab('ipo-radar'),
-      badge: 'New'
+      badge: 'New',
     },
     {
       id: 'optimize-portfolio',
       title: 'Optimize Portfolio',
       description: 'AI-powered portfolio optimization',
       icon: <PieChart className="h-6 w-6" />,
-      action: () => setActiveTab('portfolio-optimizer')
+      action: () => setActiveTab('portfolio-optimizer'),
     },
     {
       id: 'predict-market',
       title: 'Market Prediction',
       description: 'Upload chart for AI analysis',
       icon: <Upload className="h-6 w-6" />,
-      action: () => setActiveTab('market-predictor')
-    }
+      action: () => setActiveTab('market-predictor'),
+    },
   ];
 
   const aiTools = [
@@ -111,7 +124,7 @@ export default function AIToolsDashboard() {
       status: 'Active',
       lastUsed: '2 minutes ago',
       accuracy: '89%',
-      features: ['Real-time alerts', 'Technical analysis', 'News sentiment', 'Risk scoring']
+      features: ['Real-time alerts', 'Technical analysis', 'News sentiment', 'Risk scoring'],
     },
     {
       id: 'gpt-trader',
@@ -121,7 +134,7 @@ export default function AIToolsDashboard() {
       status: 'Active',
       lastUsed: '5 minutes ago',
       accuracy: '92%',
-      features: ['Natural language', 'Portfolio advice', 'Market education', 'Risk assessment']
+      features: ['Natural language', 'Portfolio advice', 'Market education', 'Risk assessment'],
     },
     {
       id: 'ipo-radar',
@@ -131,7 +144,7 @@ export default function AIToolsDashboard() {
       status: 'Active',
       lastUsed: '1 hour ago',
       accuracy: '76%',
-      features: ['IPO scanning', 'Success prediction', 'Risk analysis', 'Market timing']
+      features: ['IPO scanning', 'Success prediction', 'Risk analysis', 'Market timing'],
     },
     {
       id: 'portfolio-optimizer',
@@ -141,7 +154,7 @@ export default function AIToolsDashboard() {
       status: 'Active',
       lastUsed: '3 hours ago',
       accuracy: '85%',
-      features: ['Risk optimization', 'Diversification', 'Rebalancing', 'Asset allocation']
+      features: ['Risk optimization', 'Diversification', 'Rebalancing', 'Asset allocation'],
     },
     {
       id: 'market-predictor',
@@ -151,8 +164,8 @@ export default function AIToolsDashboard() {
       status: 'Active',
       lastUsed: '6 hours ago',
       accuracy: '73%',
-      features: ['Chart analysis', 'Pattern recognition', 'Price prediction', 'Risk assessment']
-    }
+      features: ['Chart analysis', 'Pattern recognition', 'Price prediction', 'Risk assessment'],
+    },
   ];
 
   const renderOverview = () => (
@@ -230,7 +243,7 @@ export default function AIToolsDashboard() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {quickActions.map((action) => (
+            {quickActions.map(action => (
               <div
                 key={action.id}
                 onClick={action.action}
@@ -268,8 +281,11 @@ export default function AIToolsDashboard() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {aiTools.map((tool) => (
-              <div key={tool.id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            {aiTools.map(tool => (
+              <div
+                key={tool.id}
+                className="border rounded-lg p-6 hover:shadow-lg transition-shadow"
+              >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     {tool.icon}
@@ -305,11 +321,7 @@ export default function AIToolsDashboard() {
                   </div>
                 </div>
 
-                <Button 
-                  onClick={() => setActiveTab(tool.id)}
-                  className="w-full"
-                  variant="outline"
-                >
+                <Button onClick={() => setActiveTab(tool.id)} className="w-full" variant="outline">
                   <Play className="h-4 w-4 mr-2" />
                   Open {tool.name}
                 </Button>
@@ -334,7 +346,7 @@ export default function AIToolsDashboard() {
               Advanced AI-powered tools for professional trading and investment analysis
             </p>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <Badge variant="outline" className="text-green-600 border-green-200">
               <Activity className="h-3 w-3 mr-1" />

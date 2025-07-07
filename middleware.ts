@@ -9,9 +9,9 @@ const SECURITY_CONFIG = {
     // Enhanced rate limiting per endpoint
     strictEndpoints: {
       '/api/trading': 20, // Trading endpoints get stricter limits
-      '/api/auth': 10,    // Auth endpoints get very strict limits
+      '/api/auth': 10, // Auth endpoints get very strict limits
       '/api/portfolio': 50, // Portfolio can be more permissive
-    }
+    },
   },
   csrf: {
     enabled: process.env.NODE_ENV === 'production',
@@ -27,12 +27,15 @@ const SECURITY_CONFIG = {
     enforceHttps: process.env.NODE_ENV === 'production',
     originValidation: true,
     suspiciousActivityDetection: true,
-  }
+  },
 };
 
 // In-memory rate limiting (use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetTime: number; violations: number }>();
-const suspiciousIpStore = new Map<string, { violations: number; lastViolation: number; blocked: boolean }>();
+const suspiciousIpStore = new Map<
+  string,
+  { violations: number; lastViolation: number; blocked: boolean }
+>();
 
 // Enhanced security headers for 2024/2025 security standards
 const securityHeaders = {
@@ -41,17 +44,17 @@ const securityHeaders = {
   'X-XSS-Protection': '0', // Disable as modern browsers handle this better
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
-  
+
   // New 2024 security headers
   'Cross-Origin-Embedder-Policy': 'require-corp',
   'Cross-Origin-Opener-Policy': 'same-origin',
   'Cross-Origin-Resource-Policy': 'same-origin',
   'Origin-Agent-Cluster': '?1',
-  
+
   // Cache control for sensitive data
   'Cache-Control': 'no-store, no-cache, must-revalidate, private',
-  'Pragma': 'no-cache',
-  'Expires': '0',
+  Pragma: 'no-cache',
+  Expires: '0',
 };
 
 if (SECURITY_CONFIG.headers.frameOptions) {
@@ -59,8 +62,7 @@ if (SECURITY_CONFIG.headers.frameOptions) {
 }
 
 if (SECURITY_CONFIG.headers.hsts) {
-  securityHeaders['Strict-Transport-Security'] = 
-    'max-age=63072000; includeSubDomains; preload';
+  securityHeaders['Strict-Transport-Security'] = 'max-age=63072000; includeSubDomains; preload';
 }
 
 if (SECURITY_CONFIG.headers.csp) {
@@ -77,24 +79,27 @@ if (SECURITY_CONFIG.headers.csp) {
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "upgrade-insecure-requests",
-    "block-all-mixed-content"
+    'upgrade-insecure-requests',
+    'block-all-mixed-content',
   ].join('; ');
 }
 
 // Enhanced rate limiting with suspicious activity detection
 function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reason?: string } {
   const now = Date.now();
-  
+
   // Check if IP is blocked for suspicious activity
   const suspicious = suspiciousIpStore.get(ip);
-  if (suspicious?.blocked && now - suspicious.lastViolation < 3600000) { // 1 hour block
+  if (suspicious?.blocked && now - suspicious.lastViolation < 3600000) {
+    // 1 hour block
     return { allowed: false, reason: 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' };
   }
 
   // Get endpoint-specific rate limit
-  const endpointLimit = Object.entries(SECURITY_CONFIG.rateLimit.strictEndpoints)
-    .find(([endpoint]) => pathname.startsWith(endpoint))?.[1] || SECURITY_CONFIG.rateLimit.maxRequests;
+  const endpointLimit =
+    Object.entries(SECURITY_CONFIG.rateLimit.strictEndpoints).find(([endpoint]) =>
+      pathname.startsWith(endpoint)
+    )?.[1] || SECURITY_CONFIG.rateLimit.maxRequests;
 
   const key = `rate_limit:${ip}:${pathname.split('/').slice(0, 3).join('/')}`;
   const current = rateLimitStore.get(key);
@@ -103,7 +108,7 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reaso
     rateLimitStore.set(key, {
       count: 1,
       resetTime: now + SECURITY_CONFIG.rateLimit.windowMs,
-      violations: 0
+      violations: 0,
     });
     return { allowed: true };
   }
@@ -111,21 +116,25 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reaso
   if (current.count >= endpointLimit) {
     // Track rate limit violations
     current.violations++;
-    
+
     // Escalate to suspicious activity if too many violations
     if (current.violations > 3) {
-      const suspiciousData = suspiciousIpStore.get(ip) || { violations: 0, lastViolation: 0, blocked: false };
+      const suspiciousData = suspiciousIpStore.get(ip) || {
+        violations: 0,
+        lastViolation: 0,
+        blocked: false,
+      };
       suspiciousData.violations++;
       suspiciousData.lastViolation = now;
-      
+
       // Block IP after 5 violations across different endpoints
       if (suspiciousData.violations >= 5) {
         suspiciousData.blocked = true;
       }
-      
+
       suspiciousIpStore.set(ip, suspiciousData);
     }
-    
+
     return { allowed: false, reason: 'RATE_LIMIT_EXCEEDED' };
   }
 
@@ -136,20 +145,20 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reaso
 // Origin validation for enhanced security
 function validateOrigin(request: NextRequest): boolean {
   if (!SECURITY_CONFIG.security.originValidation) return true;
-  
+
   const origin = request.headers.get('origin');
   const host = request.headers.get('host');
-  
+
   // Allow same-origin requests
   if (!origin) return true; // Browser requests without origin (direct navigation)
-  
+
   const allowedOrigins = [
     `https://${host}`,
     `http://${host}`, // For development
     process.env.NEXT_PUBLIC_APP_URL,
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
   ].filter(Boolean);
-  
+
   return allowedOrigins.includes(origin);
 }
 
@@ -160,9 +169,9 @@ function logSecurityEvent(type: string, ip: string, details: any) {
     type,
     ip,
     details,
-    userAgent: details.userAgent || 'unknown'
+    userAgent: details.userAgent || 'unknown',
   };
-  
+
   // In production, send to your logging service
   if (process.env.NODE_ENV === 'production') {
     console.log('[SECURITY]', JSON.stringify(logEntry));
@@ -182,14 +191,7 @@ const protectedRoutes = [
   '/api/user',
 ];
 
-const publicRoutes = [
-  '/',
-  '/login',
-  '/register',
-  '/api/auth',
-  '/api/health',
-  '/api/public',
-];
+const publicRoutes = ['/', '/login', '/register', '/api/auth', '/api/health', '/api/public'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -197,19 +199,21 @@ export async function middleware(request: NextRequest) {
   const userAgent = request.headers.get('user-agent') || 'unknown';
 
   // Enhanced HTTPS enforcement for production
-  if (SECURITY_CONFIG.security.enforceHttps && 
-      request.headers.get('x-forwarded-proto') !== 'https' && 
-      process.env.NODE_ENV === 'production') {
+  if (
+    SECURITY_CONFIG.security.enforceHttps &&
+    request.headers.get('x-forwarded-proto') !== 'https' &&
+    process.env.NODE_ENV === 'production'
+  ) {
     return NextResponse.redirect(`https://${request.headers.get('host')}${pathname}`, 301);
   }
 
   // Origin validation for sensitive operations
   if (!validateOrigin(request)) {
-    logSecurityEvent('INVALID_ORIGIN', ip, { 
+    logSecurityEvent('INVALID_ORIGIN', ip, {
       origin: request.headers.get('origin'),
       host: request.headers.get('host'),
       pathname,
-      userAgent 
+      userAgent,
     });
     return new NextResponse('Invalid Origin', { status: 403 });
   }
@@ -217,17 +221,18 @@ export async function middleware(request: NextRequest) {
   // Enhanced rate limiting with endpoint-specific limits
   const rateLimitCheck = checkRateLimit(ip, pathname);
   if (!rateLimitCheck.allowed) {
-    logSecurityEvent('RATE_LIMIT_VIOLATION', ip, { 
+    logSecurityEvent('RATE_LIMIT_VIOLATION', ip, {
       reason: rateLimitCheck.reason,
       pathname,
-      userAgent 
+      userAgent,
     });
-    
+
     const status = rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' ? 403 : 429;
-    const message = rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' 
-      ? 'Access Denied - Suspicious Activity Detected' 
-      : 'Too Many Requests';
-    
+    const message =
+      rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY'
+        ? 'Access Denied - Suspicious Activity Detected'
+        : 'Too Many Requests';
+
     return new NextResponse(message, {
       status,
       headers: {
@@ -244,7 +249,7 @@ export async function middleware(request: NextRequest) {
     publicRoutes.some(route => pathname.startsWith(route))
   ) {
     const response = NextResponse.next();
-    
+
     // Apply security headers to all responses
     Object.entries(securityHeaders).forEach(([key, value]) => {
       response.headers.set(key, value);
@@ -262,11 +267,11 @@ export async function middleware(request: NextRequest) {
 
     if (!token) {
       console.warn(`Unauthorized access attempt to ${pathname} from IP: ${ip}`);
-      
+
       if (pathname.startsWith('/api/')) {
         return new NextResponse('Unauthorized', { status: 401 });
       }
-      
+
       const loginUrl = new URL('/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
@@ -294,7 +299,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next();
-  
+
   // Apply security headers
   Object.entries(securityHeaders).forEach(([key, value]) => {
     response.headers.set(key, value);
@@ -315,7 +320,7 @@ async function detectSuspiciousActivity(userId: string, ip: string): Promise<boo
   // - Unusual trading patterns
   // - Access from new geographic locations
   // - Failed authentication attempts
-  
+
   return false; // Placeholder
 }
 

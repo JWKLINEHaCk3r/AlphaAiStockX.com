@@ -50,7 +50,23 @@ export interface AlpacaOrder {
   time_in_force: 'day' | 'gtc' | 'opg' | 'cls' | 'ioc' | 'fok';
   limit_price?: string;
   stop_price?: string;
-  status: 'new' | 'partially_filled' | 'filled' | 'done_for_day' | 'canceled' | 'expired' | 'replaced' | 'pending_cancel' | 'pending_replace' | 'accepted' | 'pending_new' | 'accepted_for_bidding' | 'stopped' | 'rejected' | 'suspended' | 'calculated';
+  status:
+    | 'new'
+    | 'partially_filled'
+    | 'filled'
+    | 'done_for_day'
+    | 'canceled'
+    | 'expired'
+    | 'replaced'
+    | 'pending_cancel'
+    | 'pending_replace'
+    | 'accepted'
+    | 'pending_new'
+    | 'accepted_for_bidding'
+    | 'stopped'
+    | 'rejected'
+    | 'suspended'
+    | 'calculated';
   extended_hours: boolean;
   legs?: any[];
   trail_percent?: string;
@@ -117,7 +133,11 @@ export class AlpacaClient {
     };
   }
 
-  private async makeRequest(endpoint: string, options: RequestInit = {}, useDataUrl = false): Promise<any> {
+  private async makeRequest(
+    endpoint: string,
+    options: RequestInit = {},
+    useDataUrl = false
+  ): Promise<any> {
     const baseUrl = useDataUrl ? this.config.dataUrl : this.config.baseUrl;
     const url = `${baseUrl}${endpoint}`;
 
@@ -177,15 +197,17 @@ export class AlpacaClient {
   }
 
   // Order management
-  async getOrders(params: {
-    status?: 'open' | 'closed' | 'all';
-    limit?: number;
-    after?: string;
-    until?: string;
-    direction?: 'asc' | 'desc';
-    nested?: boolean;
-    symbols?: string;
-  } = {}): Promise<AlpacaOrder[]> {
+  async getOrders(
+    params: {
+      status?: 'open' | 'closed' | 'all';
+      limit?: number;
+      after?: string;
+      until?: string;
+      direction?: 'asc' | 'desc';
+      nested?: boolean;
+      symbols?: string;
+    } = {}
+  ): Promise<AlpacaOrder[]> {
     const queryParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined) {
@@ -263,14 +285,17 @@ export class AlpacaClient {
     });
   }
 
-  async replaceOrder(orderId: string, changes: {
-    qty?: number;
-    time_in_force?: 'day' | 'gtc' | 'opg' | 'cls' | 'ioc' | 'fok';
-    limit_price?: number;
-    stop_price?: number;
-    trail?: number;
-    client_order_id?: string;
-  }): Promise<AlpacaOrder> {
+  async replaceOrder(
+    orderId: string,
+    changes: {
+      qty?: number;
+      time_in_force?: 'day' | 'gtc' | 'opg' | 'cls' | 'ioc' | 'fok';
+      limit_price?: number;
+      stop_price?: number;
+      trail?: number;
+      client_order_id?: string;
+    }
+  ): Promise<AlpacaOrder> {
     SecurityAudit.logSecurityEvent({
       type: 'trading_activity',
       details: {
@@ -317,7 +342,7 @@ export class AlpacaClient {
     const queryParams = new URLSearchParams();
     queryParams.append('symbols', params.symbols.join(','));
     queryParams.append('timeframe', params.timeframe);
-    
+
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && key !== 'symbols' && key !== 'timeframe') {
         queryParams.append(key, value.toString());
@@ -328,12 +353,14 @@ export class AlpacaClient {
   }
 
   // Portfolio history
-  async getPortfolioHistory(params: {
-    period?: '1D' | '7D' | '1M' | '3M' | '1Y' | 'all';
-    timeframe?: '1Min' | '5Min' | '15Min' | '1H' | '1D';
-    end?: string;
-    extended_hours?: boolean;
-  } = {}): Promise<any> {
+  async getPortfolioHistory(
+    params: {
+      period?: '1D' | '7D' | '1M' | '3M' | '1Y' | 'all';
+      timeframe?: '1Min' | '5Min' | '15Min' | '1H' | '1D';
+      end?: string;
+      extended_hours?: boolean;
+    } = {}
+  ): Promise<any> {
     const queryParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined) {
@@ -350,10 +377,12 @@ export class AlpacaClient {
     return this.makeRequest('/v2/clock');
   }
 
-  async getCalendar(params: {
-    start?: string;
-    end?: string;
-  } = {}): Promise<any> {
+  async getCalendar(
+    params: {
+      start?: string;
+      end?: string;
+    } = {}
+  ): Promise<any> {
     const queryParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined) {
@@ -396,9 +425,10 @@ export function createAlpacaClient(): AlpacaClient {
   const config: AlpacaConfig = {
     apiKey: process.env.ALPACA_API_KEY!,
     secretKey: process.env.ALPACA_SECRET_KEY!,
-    baseUrl: process.env.ALPACA_PAPER_TRADING === 'true' 
-      ? 'https://paper-api.alpaca.markets'
-      : 'https://api.alpaca.markets',
+    baseUrl:
+      process.env.ALPACA_PAPER_TRADING === 'true'
+        ? 'https://paper-api.alpaca.markets'
+        : 'https://api.alpaca.markets',
     dataUrl: 'https://data.alpaca.markets',
     isPaper: process.env.ALPACA_PAPER_TRADING === 'true',
   };
@@ -409,6 +439,16 @@ export function createAlpacaClient(): AlpacaClient {
   }
 
   return new AlpacaClient(config);
+}
+
+// Safe factory function that returns null if credentials are missing (for build-time use)
+export function createAlpacaClientSafe(): AlpacaClient | null {
+  try {
+    return createAlpacaClient();
+  } catch (error) {
+    console.warn('Failed to create Alpaca client:', error);
+    return null;
+  }
 }
 
 // Utility functions
@@ -452,22 +492,22 @@ export function formatPositionForDatabase(alpacaPosition: AlpacaPosition) {
 
 function mapAlpacaStatusToDb(status: AlpacaOrder['status']): string {
   const statusMap: Record<string, string> = {
-    'new': 'PENDING',
-    'partially_filled': 'PARTIALLY_FILLED',
-    'filled': 'FILLED',
-    'done_for_day': 'DONE_FOR_DAY',
-    'canceled': 'CANCELED',
-    'expired': 'EXPIRED',
-    'replaced': 'REPLACED',
-    'pending_cancel': 'PENDING_CANCEL',
-    'pending_replace': 'PENDING_REPLACE',
-    'accepted': 'ACCEPTED',
-    'pending_new': 'PENDING',
-    'accepted_for_bidding': 'ACCEPTED',
-    'stopped': 'STOPPED',
-    'rejected': 'REJECTED',
-    'suspended': 'SUSPENDED',
-    'calculated': 'CALCULATED',
+    new: 'PENDING',
+    partially_filled: 'PARTIALLY_FILLED',
+    filled: 'FILLED',
+    done_for_day: 'DONE_FOR_DAY',
+    canceled: 'CANCELED',
+    expired: 'EXPIRED',
+    replaced: 'REPLACED',
+    pending_cancel: 'PENDING_CANCEL',
+    pending_replace: 'PENDING_REPLACE',
+    accepted: 'ACCEPTED',
+    pending_new: 'PENDING',
+    accepted_for_bidding: 'ACCEPTED',
+    stopped: 'STOPPED',
+    rejected: 'REJECTED',
+    suspended: 'SUSPENDED',
+    calculated: 'CALCULATED',
   };
 
   return statusMap[status] || 'UNKNOWN';

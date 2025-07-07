@@ -7,10 +7,21 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
-import { 
-  TrendingUp, TrendingDown, AlertTriangle, Activity, 
-  Play, Pause, Settings, Zap, Target, Shield,
-  ArrowUp, ArrowDown, Clock, Star
+import {
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Activity,
+  Play,
+  Pause,
+  Settings,
+  Zap,
+  Target,
+  Shield,
+  ArrowUp,
+  ArrowDown,
+  Clock,
+  Star,
 } from 'lucide-react';
 
 interface StockSignal {
@@ -46,7 +57,7 @@ export default function AISignalBotDashboard() {
       const response = await fetch('/api/ai-tools/signal-bot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ symbols: watchlist })
+        body: JSON.stringify({ symbols: watchlist }),
       });
 
       const result = await response.json();
@@ -72,9 +83,11 @@ export default function AISignalBotDashboard() {
 
   const startSignalStream = () => {
     // Server-Sent Events for real-time signals
-    const eventSource = new EventSource(`/api/ai-tools/signal-bot?symbol=${watchlist[0]}&stream=true`);
-    
-    eventSource.onmessage = (event) => {
+    const eventSource = new EventSource(
+      `/api/ai-tools/signal-bot?symbol=${watchlist[0]}&stream=true`
+    );
+
+    eventSource.onmessage = event => {
       const newSignal = JSON.parse(event.data);
       setSignals(prev => [newSignal, ...prev.slice(0, 19)]); // Keep last 20 signals
       setLastUpdate(new Date());
@@ -99,7 +112,7 @@ export default function AISignalBotDashboard() {
     try {
       const response = await fetch(`/api/ai-tools/signal-bot?symbol=${symbol}`);
       const result = await response.json();
-      
+
       if (result.success) {
         setSignals(prev => [result.data, ...prev]);
         setLastUpdate(new Date());
@@ -116,12 +129,18 @@ export default function AISignalBotDashboard() {
 
   const getSignalColor = (signal: string) => {
     switch (signal) {
-      case 'STRONG_BUY': return 'text-green-600 bg-green-100';
-      case 'BUY': return 'text-green-500 bg-green-50';
-      case 'HOLD': return 'text-yellow-600 bg-yellow-100';
-      case 'SELL': return 'text-red-500 bg-red-50';
-      case 'STRONG_SELL': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-500 bg-gray-100';
+      case 'STRONG_BUY':
+        return 'text-green-600 bg-green-100';
+      case 'BUY':
+        return 'text-green-500 bg-green-50';
+      case 'HOLD':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'SELL':
+        return 'text-red-500 bg-red-50';
+      case 'STRONG_SELL':
+        return 'text-red-600 bg-red-100';
+      default:
+        return 'text-gray-500 bg-gray-100';
     }
   };
 
@@ -140,10 +159,14 @@ export default function AISignalBotDashboard() {
 
   const getRiskIcon = (risk: string) => {
     switch (risk) {
-      case 'LOW': return <Shield className="h-4 w-4 text-green-500" />;
-      case 'MODERATE': return <AlertTriangle className="h-4 w-4 text-yellow-500" />;
-      case 'HIGH': return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      default: return <AlertTriangle className="h-4 w-4 text-gray-500" />;
+      case 'LOW':
+        return <Shield className="h-4 w-4 text-green-500" />;
+      case 'MODERATE':
+        return <AlertTriangle className="h-4 w-4 text-yellow-500" />;
+      case 'HIGH':
+        return <AlertTriangle className="h-4 w-4 text-red-500" />;
+      default:
+        return <AlertTriangle className="h-4 w-4 text-gray-500" />;
     }
   };
 
@@ -155,17 +178,13 @@ export default function AISignalBotDashboard() {
           <h1 className="text-3xl font-bold text-gray-900">AI Signal Bot</h1>
           <p className="text-gray-600">Real-time AI-powered trading signals</p>
         </div>
-        
+
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <Switch 
-              checked={isStreaming} 
-              onCheckedChange={toggleStreaming}
-              disabled={loading}
-            />
+            <Switch checked={isStreaming} onCheckedChange={toggleStreaming} disabled={loading} />
             <span className="text-sm font-medium">Live Stream</span>
           </div>
-          
+
           <Button onClick={loadInitialSignals} disabled={loading}>
             <Activity className="h-4 w-4 mr-2" />
             {loading ? 'Generating...' : 'Refresh Signals'}
@@ -184,9 +203,9 @@ export default function AISignalBotDashboard() {
         <CardContent>
           <div className="flex flex-wrap gap-2 mb-4">
             {watchlist.map(symbol => (
-              <Badge 
-                key={symbol} 
-                variant="outline" 
+              <Badge
+                key={symbol}
+                variant="outline"
                 className="px-3 py-1 cursor-pointer hover:bg-red-50"
                 onClick={() => removeFromWatchlist(symbol)}
               >
@@ -194,18 +213,16 @@ export default function AISignalBotDashboard() {
               </Badge>
             ))}
           </div>
-          
+
           <div className="flex space-x-2">
             <Input
               placeholder="Add symbol (e.g., AAPL)"
               value={newSymbol}
-              onChange={(e) => setNewSymbol(e.target.value.toUpperCase())}
-              onKeyPress={(e) => e.key === 'Enter' && addSymbolToWatchlist()}
+              onChange={e => setNewSymbol(e.target.value.toUpperCase())}
+              onKeyPress={e => e.key === 'Enter' && addSymbolToWatchlist()}
               className="flex-1"
             />
-            <Button onClick={addSymbolToWatchlist}>
-              Add Symbol
-            </Button>
+            <Button onClick={addSymbolToWatchlist}>Add Symbol</Button>
           </div>
         </CardContent>
       </Card>
@@ -274,7 +291,9 @@ export default function AISignalBotDashboard() {
             <CardContent className="p-8 text-center">
               <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-600 mb-2">No Signals Generated</h3>
-              <p className="text-gray-500 mb-4">Click "Refresh Signals" to generate AI trading signals</p>
+              <p className="text-gray-500 mb-4">
+                Click "Refresh Signals" to generate AI trading signals
+              </p>
               <Button onClick={loadInitialSignals} disabled={loading}>
                 Generate Signals
               </Button>
@@ -294,11 +313,13 @@ export default function AISignalBotDashboard() {
                       </Badge>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-3">
                     <div className="text-right">
                       <p className="text-sm text-gray-500">Confidence</p>
-                      <p className="text-lg font-semibold">{(signal.confidence * 100).toFixed(1)}%</p>
+                      <p className="text-lg font-semibold">
+                        {(signal.confidence * 100).toFixed(1)}%
+                      </p>
                     </div>
                     {getRiskIcon(signal.riskLevel)}
                   </div>
@@ -309,7 +330,7 @@ export default function AISignalBotDashboard() {
                     <p className="text-sm text-gray-500">Current Price</p>
                     <p className="text-lg font-semibold">${signal.price.toFixed(2)}</p>
                   </div>
-                  
+
                   {signal.targetPrice && (
                     <div>
                       <p className="text-sm text-gray-500">Target Price</p>
@@ -318,7 +339,7 @@ export default function AISignalBotDashboard() {
                       </p>
                     </div>
                   )}
-                  
+
                   {signal.stopLoss && (
                     <div>
                       <p className="text-sm text-gray-500">Stop Loss</p>
@@ -327,7 +348,7 @@ export default function AISignalBotDashboard() {
                       </p>
                     </div>
                   )}
-                  
+
                   <div>
                     <p className="text-sm text-gray-500">Risk Level</p>
                     <p className="text-lg font-semibold">{signal.riskLevel}</p>
@@ -338,23 +359,27 @@ export default function AISignalBotDashboard() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Technical Score</p>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
+                      <div
                         className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${signal.technicalScore}%` }}
                       />
                     </div>
-                    <p className="text-xs text-gray-600 mt-1">{signal.technicalScore.toFixed(1)}/100</p>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {signal.technicalScore.toFixed(1)}/100
+                    </p>
                   </div>
-                  
+
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Sentiment Score</p>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
+                      <div
                         className="bg-purple-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${signal.sentimentScore}%` }}
                       />
                     </div>
-                    <p className="text-xs text-gray-600 mt-1">{signal.sentimentScore.toFixed(1)}/100</p>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {signal.sentimentScore.toFixed(1)}/100
+                    </p>
                   </div>
                 </div>
 
@@ -372,7 +397,7 @@ export default function AISignalBotDashboard() {
                       {signal.timeframe}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex space-x-2">
                     <Button size="sm" variant="outline">
                       <Target className="h-4 w-4 mr-1" />

@@ -21,14 +21,11 @@ class ApiClient {
     const session = await getSession();
     return {
       'Content-Type': 'application/json',
-      ...(session?.user && { 'Authorization': `Bearer ${session.user.id}` }),
+      ...(session?.user && { Authorization: `Bearer ${session.user.id}` }),
     };
   }
 
-  private async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
+  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
     try {
       const headers = await this.getAuthHeaders();
       const response = await fetch(`${this.baseURL}${endpoint}`, {
@@ -114,11 +111,7 @@ class ApiClient {
     });
   }
 
-  async getOrders(filters?: {
-    portfolioId?: string;
-    status?: string;
-    limit?: number;
-  }) {
+  async getOrders(filters?: { portfolioId?: string; status?: string; limit?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/trading/orders${query ? `?${query}` : ''}`);
   }
@@ -141,20 +134,13 @@ class ApiClient {
   }
 
   // AI Trading Signals
-  async getAISignals(filters?: {
-    limit?: number;
-    minConfidence?: number;
-  }) {
+  async getAISignals(filters?: { limit?: number; minConfidence?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/ai/signals${query ? `?${query}` : ''}`);
   }
 
   // AI Models
-  async getAIModels(filters?: {
-    type?: string;
-    public?: boolean;
-    limit?: number;
-  }) {
+  async getAIModels(filters?: { type?: string; public?: boolean; limit?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/ai/models${query ? `?${query}` : ''}`);
   }
@@ -187,11 +173,7 @@ class ApiClient {
   }
 
   // Social Trading
-  async getSocialFeed(filters?: {
-    type?: string;
-    userId?: string;
-    limit?: number;
-  }) {
+  async getSocialFeed(filters?: { type?: string; userId?: string; limit?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/social/feed${query ? `?${query}` : ''}`);
   }

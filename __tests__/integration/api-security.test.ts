@@ -5,7 +5,7 @@ import { SecurityAudit, RateLimiter } from '@/lib/security';
 
 // Mock next-auth
 jest.mock('next-auth');
-const mockGetServerSession = getServerSession as jest.MockedFunction<typeof getServerSession>;
+const mockGetServerSession = getServerSession;
 
 // Mock security modules
 jest.mock('@/lib/security', () => ({
@@ -17,14 +17,14 @@ jest.mock('@/lib/security', () => ({
     checkLimit: jest.fn(),
   },
   InputValidator: {
-    sanitizeJson: jest.fn((obj) => obj),
+    sanitizeJson: jest.fn(obj => obj),
   },
 }));
 
 describe('API Security Integration Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
     // Default session mock
     mockGetServerSession.mockResolvedValue({
       user: {

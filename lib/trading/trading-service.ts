@@ -1,4 +1,9 @@
-import { createAlpacaClient, AlpacaClient, formatOrderForDatabase, formatPositionForDatabase } from './alpaca-client';
+import {
+  createAlpacaClient,
+  AlpacaClient,
+  formatOrderForDatabase,
+  formatPositionForDatabase,
+} from './alpaca-client';
 import { prisma } from '@/app/lib/prisma';
 import { SecurityAudit } from '@/lib/security';
 import { WebSocketService } from './websocket-service';
@@ -89,12 +94,12 @@ export class TradingService {
   // Factory method to create service instance
   static async create(userId: string, portfolioId?: string): Promise<TradingService> {
     const alpacaClient = createAlpacaClient();
-    
+
     // Get or create default portfolio if not specified
     let resolvedPortfolioId = portfolioId;
     if (!resolvedPortfolioId) {
       const defaultPortfolio = await prisma.portfolio.findFirst({
-        where: { 
+        where: {
           userId,
           type: 'PERSONAL',
         },
@@ -207,22 +212,26 @@ export class TradingService {
     }
   }
 
-  async getOrders(params: {
-    status?: 'open' | 'closed' | 'all';
-    limit?: number;
-    after?: string;
-    until?: string;
-  } = {}): Promise<OrderSummary[]> {
+  async getOrders(
+    params: {
+      status?: 'open' | 'closed' | 'all';
+      limit?: number;
+      after?: string;
+      until?: string;
+    } = {}
+  ): Promise<OrderSummary[]> {
     try {
       // Get orders from database with Alpaca sync
       const dbOrders = await prisma.order.findMany({
         where: {
           portfolioId: this.config.portfolioId,
-          ...(params.status && params.status !== 'all' && {
-            status: params.status === 'open' 
-              ? { in: ['PENDING', 'PARTIALLY_FILLED', 'ACCEPTED'] }
-              : { in: ['FILLED', 'CANCELED', 'EXPIRED', 'REJECTED'] }
-          }),
+          ...(params.status &&
+            params.status !== 'all' && {
+              status:
+                params.status === 'open'
+                  ? { in: ['PENDING', 'PARTIALLY_FILLED', 'ACCEPTED'] }
+                  : { in: ['FILLED', 'CANCELED', 'EXPIRED', 'REJECTED'] },
+            }),
         },
         orderBy: { createdAt: 'desc' },
         take: params.limit || 50,
@@ -253,7 +262,7 @@ export class TradingService {
 
       // Get current market data for each position
       const positionsWithMarketData = await Promise.all(
-        alpacaPositions.map(async (position) => {
+        alpacaPositions.map(async position => {
           const snapshot = await this.alpaca.getSnapshot(position.symbol);
           return this.formatPositionSummary(position, snapshot);
         })
@@ -390,7 +399,7 @@ export class TradingService {
   async syncOrdersWithAlpaca(): Promise<void> {
     try {
       const alpacaOrders = await this.alpaca.getOrders({ limit: 100 });
-      
+
       for (const alpacaOrder of alpacaOrders) {
         const existingOrder = await prisma.order.findUnique({
           where: { id: alpacaOrder.id },
@@ -449,7 +458,10 @@ export class TradingService {
       throw new Error('Limit price is required for limit orders');
     }
 
-    if ((orderRequest.type === 'stop' || orderRequest.type === 'stop_limit') && !orderRequest.stopPrice) {
+    if (
+      (orderRequest.type === 'stop' || orderRequest.type === 'stop_limit') &&
+      !orderRequest.stopPrice
+    ) {
       throw new Error('Stop price is required for stop orders');
     }
   }
@@ -473,7 +485,7 @@ export class TradingService {
     if (orderRequest.side === 'buy') {
       const account = await this.alpaca.getAccount();
       const buyingPower = parseFloat(account.buying_power);
-      
+
       if (orderRequest.notional && orderRequest.notional > buyingPower) {
         throw new Error('Insufficient buying power');
       }
@@ -535,15 +547,15 @@ export class TradingService {
     // Add bracket order legs if specified
     if (orderRequest.takeProfitPrice || orderRequest.stopLossPrice) {
       alpacaOrder.order_class = 'bracket';
-      
+
       if (orderRequest.takeProfitPrice) {
         alpacaOrder.take_profit = { limit_price: orderRequest.takeProfitPrice };
       }
 
       if (orderRequest.stopLossPrice) {
-        alpacaOrder.stop_loss = { 
+        alpacaOrder.stop_loss = {
           stop_price: orderRequest.stopLossPrice,
-          ...(orderRequest.stopLossLimitPrice && { limit_price: orderRequest.stopLossLimitPrice })
+          ...(orderRequest.stopLossLimitPrice && { limit_price: orderRequest.stopLossLimitPrice }),
         };
       }
     }
@@ -608,7 +620,7 @@ export class TradingService {
     const changeToday = parseFloat(alpacaPosition.change_today || '0');
     const quantity = parseFloat(alpacaPosition.qty);
     const marketValue = parseFloat(alpacaPosition.market_value);
-    
+
     return {
       symbol: alpacaPosition.symbol,
       quantity,
@@ -627,7 +639,7 @@ export class TradingService {
   private async syncPositionsWithDatabase(alpacaPositions: any[]): Promise<void> {
     for (const alpacaPosition of alpacaPositions) {
       const positionData = formatPositionForDatabase(alpacaPosition);
-      
+
       await prisma.position.upsert({
         where: {
           portfolioId_symbol: {

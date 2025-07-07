@@ -33,7 +33,10 @@ export const SECURITY_CONFIG = {
 // Password validation schema
 export const passwordSchema = z
   .string()
-  .min(SECURITY_CONFIG.passwords.minLength, `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`)
+  .min(
+    SECURITY_CONFIG.passwords.minLength,
+    `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`
+  )
   .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
   .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
   .regex(/[0-9]/, 'Password must contain at least one number')
@@ -50,7 +53,7 @@ export const emailSchema = z
 export const sanitizedStringSchema = z
   .string()
   .trim()
-  .transform((str) => str.replace(/[<>\"'&]/g, ''));
+  .transform(str => str.replace(/[<>\"'&]/g, ''));
 
 export const alphanumericSchema = z
   .string()
@@ -93,7 +96,10 @@ export class PasswordSecurity {
       password += allChars[Math.floor(Math.random() * allChars.length)];
     }
 
-    return password.split('').sort(() => Math.random() - 0.5).join('');
+    return password
+      .split('')
+      .sort(() => Math.random() - 0.5)
+      .join('');
   }
 }
 
@@ -105,10 +111,7 @@ export class CSRFProtection {
 
   static validateToken(token: string, sessionToken: string): boolean {
     if (!token || !sessionToken) return false;
-    return crypto.timingSafeEqual(
-      Buffer.from(token, 'hex'),
-      Buffer.from(sessionToken, 'hex')
-    );
+    return crypto.timingSafeEqual(Buffer.from(token, 'hex'), Buffer.from(sessionToken, 'hex'));
   }
 }
 
@@ -127,10 +130,10 @@ export class EncryptionUtils {
       const key = this.getKey();
       const iv = crypto.randomBytes(SECURITY_CONFIG.encryption.ivLength);
       const cipher = crypto.createCipher(SECURITY_CONFIG.encryption.algorithm, key);
-      
+
       let encrypted = cipher.update(data, 'utf8', 'hex');
       encrypted += cipher.final('hex');
-      
+
       const tag = cipher.getAuthTag();
 
       return {
@@ -147,12 +150,12 @@ export class EncryptionUtils {
     try {
       const key = this.getKey();
       const decipher = crypto.createDecipher(SECURITY_CONFIG.encryption.algorithm, key);
-      
+
       decipher.setAuthTag(Buffer.from(tag, 'hex'));
-      
+
       let decrypted = decipher.update(encrypted, 'hex', 'utf8');
       decrypted += decipher.final('utf8');
-      
+
       return decrypted;
     } catch (error) {
       throw new Error(`Decryption failed: ${error.message}`);

@@ -75,7 +75,7 @@ I can help you with:
 ${userProfile ? `I see you're a ${userProfile.experience} investor with ${userProfile.riskTolerance} risk tolerance. ` : ''}
 
 What would you like to explore today? You can ask me about specific stocks, request portfolio advice, or get market insights!`,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     this.addMessageToHistory(userId, welcomeMessage);
@@ -87,7 +87,7 @@ What would you like to explore today? You can ask me about specific stocks, requ
       id: this.generateMessageId(),
       role: 'user',
       content: userMessage,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     this.addMessageToHistory(userId, userChatMessage);
@@ -95,17 +95,12 @@ What would you like to explore today? You can ask me about specific stocks, requ
     try {
       // Analyze user intent and extract relevant information
       const intent = await this.analyzeUserIntent(userMessage);
-      
+
       // Get relevant market data if needed
       const marketContext = await this.getMarketContext(intent.symbols);
-      
+
       // Generate AI response
-      const response = await this.generateAIResponse(
-        userId,
-        userMessage,
-        intent,
-        marketContext
-      );
+      const response = await this.generateAIResponse(userId, userMessage, intent, marketContext);
 
       const assistantMessage: ChatMessage = {
         id: this.generateMessageId(),
@@ -115,21 +110,21 @@ What would you like to explore today? You can ask me about specific stocks, requ
         metadata: {
           symbols: intent.symbols,
           recommendations: response.recommendations,
-          analysis: response.analysis
-        }
+          analysis: response.analysis,
+        },
       };
 
       this.addMessageToHistory(userId, assistantMessage);
       return assistantMessage;
-
     } catch (error) {
       console.error('Error processing message:', error);
-      
+
       const errorMessage: ChatMessage = {
         id: this.generateMessageId(),
         role: 'assistant',
-        content: "I apologize, but I'm experiencing some technical difficulties. Please try again or rephrase your question.",
-        timestamp: new Date().toISOString()
+        content:
+          "I apologize, but I'm experiencing some technical difficulties. Please try again or rephrase your question.",
+        timestamp: new Date().toISOString(),
       };
 
       this.addMessageToHistory(userId, errorMessage);
@@ -140,34 +135,98 @@ What would you like to explore today? You can ask me about specific stocks, requ
   private async analyzeUserIntent(message: string) {
     const symbolRegex = /\b[A-Z]{1,5}\b/g;
     const symbols = message.match(symbolRegex) || [];
-    
+
     // Filter out common words that might match the pattern
-    const filteredSymbols = symbols.filter(symbol => 
-      !['THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL', 'CAN', 'HAD', 'HER', 'WAS', 'ONE', 'OUR', 'OUT', 'DAY', 'GET', 'USE', 'MAN', 'NEW', 'NOW', 'OLD', 'SEE', 'HIM', 'TWO', 'HOW', 'ITS', 'WHO', 'OIL', 'SIT', 'SET', 'RUN', 'EAT', 'FAR', 'SEA', 'EYE', 'RED', 'TOP', 'ARM', 'TOO', 'WHY', 'LET', 'PUT', 'END', 'GOT', 'LOT', 'WAY', 'SUN', 'CAR', 'BAD', 'WIN', 'BIG', 'YES', 'TRY', 'BUY', 'FUN'].includes(symbol)
+    const filteredSymbols = symbols.filter(
+      symbol =>
+        ![
+          'THE',
+          'AND',
+          'FOR',
+          'ARE',
+          'BUT',
+          'NOT',
+          'YOU',
+          'ALL',
+          'CAN',
+          'HAD',
+          'HER',
+          'WAS',
+          'ONE',
+          'OUR',
+          'OUT',
+          'DAY',
+          'GET',
+          'USE',
+          'MAN',
+          'NEW',
+          'NOW',
+          'OLD',
+          'SEE',
+          'HIM',
+          'TWO',
+          'HOW',
+          'ITS',
+          'WHO',
+          'OIL',
+          'SIT',
+          'SET',
+          'RUN',
+          'EAT',
+          'FAR',
+          'SEA',
+          'EYE',
+          'RED',
+          'TOP',
+          'ARM',
+          'TOO',
+          'WHY',
+          'LET',
+          'PUT',
+          'END',
+          'GOT',
+          'LOT',
+          'WAY',
+          'SUN',
+          'CAR',
+          'BAD',
+          'WIN',
+          'BIG',
+          'YES',
+          'TRY',
+          'BUY',
+          'FUN',
+        ].includes(symbol)
     );
 
     return {
       type: this.determineIntentType(message),
       symbols: filteredSymbols,
       isPortfolioQuery: message.toLowerCase().includes('portfolio'),
-      isAnalysisRequest: message.toLowerCase().includes('analyz') || message.toLowerCase().includes('research'),
-      isRecommendationRequest: message.toLowerCase().includes('recommend') || message.toLowerCase().includes('suggest'),
-      isEducationalQuery: message.toLowerCase().includes('learn') || message.toLowerCase().includes('explain'),
-      riskQuery: message.toLowerCase().includes('risk')
+      isAnalysisRequest:
+        message.toLowerCase().includes('analyz') || message.toLowerCase().includes('research'),
+      isRecommendationRequest:
+        message.toLowerCase().includes('recommend') || message.toLowerCase().includes('suggest'),
+      isEducationalQuery:
+        message.toLowerCase().includes('learn') || message.toLowerCase().includes('explain'),
+      riskQuery: message.toLowerCase().includes('risk'),
     };
   }
 
   private determineIntentType(message: string): string {
     const lowerMessage = message.toLowerCase();
-    
+
     if (lowerMessage.includes('buy') || lowerMessage.includes('purchase')) return 'buy_intent';
     if (lowerMessage.includes('sell')) return 'sell_intent';
     if (lowerMessage.includes('portfolio')) return 'portfolio_query';
-    if (lowerMessage.includes('analyz') || lowerMessage.includes('research')) return 'analysis_request';
-    if (lowerMessage.includes('recommend') || lowerMessage.includes('suggest')) return 'recommendation_request';
-    if (lowerMessage.includes('learn') || lowerMessage.includes('explain')) return 'educational_query';
+    if (lowerMessage.includes('analyz') || lowerMessage.includes('research'))
+      return 'analysis_request';
+    if (lowerMessage.includes('recommend') || lowerMessage.includes('suggest'))
+      return 'recommendation_request';
+    if (lowerMessage.includes('learn') || lowerMessage.includes('explain'))
+      return 'educational_query';
     if (lowerMessage.includes('market') || lowerMessage.includes('trend')) return 'market_query';
-    
+
     return 'general_query';
   }
 
@@ -184,7 +243,7 @@ What would you like to explore today? You can ask me about specific stocks, requ
         volume: Math.floor(Math.random() * 10000000),
         marketCap: Math.floor(Math.random() * 1000000000000),
         pe: 15 + Math.random() * 20,
-        sector: this.getSectorForSymbol(symbol)
+        sector: this.getSectorForSymbol(symbol),
       }));
 
       return marketData;
@@ -195,16 +254,16 @@ What would you like to explore today? You can ask me about specific stocks, requ
 
   private getSectorForSymbol(symbol: string): string {
     const sectorMap: { [key: string]: string } = {
-      'AAPL': 'Technology',
-      'MSFT': 'Technology',
-      'GOOGL': 'Technology',
-      'AMZN': 'Consumer Discretionary',
-      'TSLA': 'Consumer Discretionary',
-      'NVDA': 'Technology',
-      'META': 'Technology',
-      'JPM': 'Financial Services',
-      'JNJ': 'Healthcare',
-      'V': 'Financial Services'
+      AAPL: 'Technology',
+      MSFT: 'Technology',
+      GOOGL: 'Technology',
+      AMZN: 'Consumer Discretionary',
+      TSLA: 'Consumer Discretionary',
+      NVDA: 'Technology',
+      META: 'Technology',
+      JPM: 'Financial Services',
+      JNJ: 'Healthcare',
+      V: 'Financial Services',
     };
 
     return sectorMap[symbol] || 'Technology';
@@ -218,10 +277,10 @@ What would you like to explore today? You can ask me about specific stocks, requ
   ) {
     const userProfile = this.userProfiles.get(userId);
     const chatHistory = this.conversationHistory.get(userId) || [];
-    
+
     // Build context for GPT
     const contextPrompt = this.buildContextPrompt(userProfile, chatHistory, intent, marketContext);
-    
+
     const prompt = `${contextPrompt}
 
 User Message: "${userMessage}"
@@ -243,30 +302,33 @@ Use emojis appropriately to make the response engaging.
         messages: [
           {
             role: 'system',
-            content: 'You are GPT-Trader, an expert AI trading assistant. You provide professional, helpful, and educational trading advice while always emphasizing risk management.'
+            content:
+              'You are GPT-Trader, an expert AI trading assistant. You provide professional, helpful, and educational trading advice while always emphasizing risk management.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         max_tokens: 800,
-        temperature: 0.7
+        temperature: 0.7,
       });
 
-      const content = response.choices[0].message.content || 'I apologize, but I cannot provide a response at the moment.';
-      
+      const content =
+        response.choices[0].message.content ||
+        'I apologize, but I cannot provide a response at the moment.';
+
       // Generate recommendations if applicable
-      const recommendations = intent.isRecommendationRequest && intent.symbols.length > 0 
-        ? await this.generateRecommendations(intent.symbols, userProfile)
-        : [];
+      const recommendations =
+        intent.isRecommendationRequest && intent.symbols.length > 0
+          ? await this.generateRecommendations(intent.symbols, userProfile)
+          : [];
 
       return {
         content,
         recommendations,
-        analysis: marketContext
+        analysis: marketContext,
       };
-
     } catch (error) {
       return {
         content: `I understand you're asking about ${intent.symbols.length > 0 ? intent.symbols.join(', ') : 'trading'}. Let me provide some general guidance based on current market conditions.
@@ -281,7 +343,7 @@ Use emojis appropriately to make the response engaging.
 
 Would you like me to elaborate on any specific aspect?`,
         recommendations: [],
-        analysis: marketContext
+        analysis: marketContext,
       };
     }
   }
@@ -344,7 +406,7 @@ Would you like me to elaborate on any specific aspect?`,
         riskLevel: userProfile?.riskTolerance === 'aggressive' ? 'HIGH' : 'MODERATE',
         targetPrice: 150 + Math.random() * 50,
         stopLoss: 140 + Math.random() * 20,
-        timeframe: '1-3 months'
+        timeframe: '1-3 months',
       };
 
       recommendations.push(recommendation);
@@ -355,23 +417,34 @@ Would you like me to elaborate on any specific aspect?`,
 
   async simulatePortfolio(userId: string, holdings: any[]): Promise<PortfolioSimulation> {
     const userProfile = this.userProfiles.get(userId);
-    
+
     // Calculate portfolio metrics
-    const currentValue = holdings.reduce((sum, holding) => sum + (holding.quantity * holding.price), 0);
+    const currentValue = holdings.reduce(
+      (sum, holding) => sum + holding.quantity * holding.price,
+      0
+    );
     const projectedValue = currentValue * (1 + (Math.random() * 0.2 - 0.05)); // -5% to +15%
     const expectedReturn = ((projectedValue - currentValue) / currentValue) * 100;
-    
+
     // Calculate diversification score
     const sectors = new Set(holdings.map(h => h.sector));
     const diversificationScore = Math.min(100, (sectors.size / 11) * 100); // Max 11 sectors
-    
+
     return {
       currentValue,
       projectedValue,
       expectedReturn,
-      risk: userProfile?.riskTolerance === 'aggressive' ? 75 : userProfile?.riskTolerance === 'moderate' ? 50 : 25,
+      risk:
+        userProfile?.riskTolerance === 'aggressive'
+          ? 75
+          : userProfile?.riskTolerance === 'moderate'
+            ? 50
+            : 25,
       diversificationScore,
-      recommendations: await this.generateRecommendations(holdings.map(h => h.symbol).slice(0, 3), userProfile)
+      recommendations: await this.generateRecommendations(
+        holdings.map(h => h.symbol).slice(0, 3),
+        userProfile
+      ),
     };
   }
 
@@ -386,12 +459,12 @@ Would you like me to elaborate on any specific aspect?`,
   private addMessageToHistory(userId: string, message: ChatMessage): void {
     const history = this.conversationHistory.get(userId) || [];
     history.push(message);
-    
+
     // Keep only last 50 messages to manage memory
     if (history.length > 50) {
       history.splice(0, history.length - 50);
     }
-    
+
     this.conversationHistory.set(userId, history);
   }
 
