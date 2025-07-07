@@ -1,8 +1,13 @@
 'use client';
 
-import { Account } from '@/app/components/ai-tools/AIWhiteLabelBranding';
 import { getAccount } from '../../services/alpaca-service';
 import React from 'react';
+
+interface Account {
+  portfolio_value?: number | string;
+  buying_power?: number | string;
+  status?: string;
+}
 
 export default function AnalyticsWidgets(): React.JSX.Element {
   const [account, setAccount] = React.useState<Account | null>(null);
