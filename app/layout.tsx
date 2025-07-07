@@ -4,18 +4,18 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
-import NextLevelNavigation from '@/components/ui/navigation';
+// import NextLevelNavigation from '@/components/ui/navigation';
 import { Providers } from '@/app/components/providers/Providers';
 
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-// import { 
-//   ScrollProgress, 
-//   MatrixRain, 
-//   AIConsciousnessOrb, 
-//   VoiceControl, 
-//   AIAssistantIndicator 
+// import {
+//   ScrollProgress,
+//   MatrixRain,
+//   AIConsciousnessOrb,
+//   VoiceControl,
+//   AIAssistantIndicator
 // } from '@/app/components/layout/ClientSideComponents';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -117,7 +117,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <VoiceControl />
           <AIAssistantIndicator /> */}
           {/* <NextLevelNavigation /> */}
-          <main role="main" id="main-content" className="relative z-10">{children}</main>
+          <main role="main" id="main-content" className="relative z-10">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
