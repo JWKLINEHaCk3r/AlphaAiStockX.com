@@ -1,3 +1,4 @@
+import React from 'react';
 import * as React from 'react';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {

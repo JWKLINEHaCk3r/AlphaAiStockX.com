@@ -1,3 +1,4 @@
+import React from 'react';
 export { default } from './page-simple';
 import dynamic from 'next/dynamic';
 import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';

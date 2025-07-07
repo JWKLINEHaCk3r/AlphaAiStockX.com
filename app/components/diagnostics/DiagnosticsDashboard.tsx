@@ -1,3 +1,4 @@
+import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ErrorChecker from './ErrorChecker';
 import BuildValidator from './BuildValidator';

@@ -1,3 +1,4 @@
+import React from 'react';
 export default function SimpleHomePage() {
   return (
     <div className="min-h-screen bg-black text-white">

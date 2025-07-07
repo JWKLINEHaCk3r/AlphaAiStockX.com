@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 
 export type Account = {
   portfolio_value?: number | string;

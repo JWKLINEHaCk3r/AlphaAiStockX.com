@@ -1,3 +1,4 @@
+import React from 'react';
 // AI Tools Page
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';

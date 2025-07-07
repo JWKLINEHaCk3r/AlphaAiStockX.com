@@ -41,6 +41,7 @@ import {
 } from '../../types/trading-types';
 
 'use client';
+import React from 'react';
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';

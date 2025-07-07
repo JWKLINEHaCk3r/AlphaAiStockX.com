@@ -41,6 +41,7 @@ import {
 } from '../../types/trading-types';
 
 'use client';
+import React from 'react';
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
