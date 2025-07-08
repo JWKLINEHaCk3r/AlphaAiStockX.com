@@ -2,29 +2,26 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const cardVariants = cva(
-  'glass-card relative overflow-hidden transition-all duration-500 group',
-  {
-    variants: {
-      variant: {
-        default: 'hover:shadow-glow-lg hover:scale-[1.02]',
-        interactive: 'hover:shadow-glow-lg hover:scale-[1.02] cursor-pointer',
-        static: '',
-        floating: 'hover:shadow-glow-xl hover:scale-[1.03] hover:-translate-y-1',
-      },
-      glow: {
-        none: '',
-        soft: 'shadow-glow',
-        medium: 'shadow-glow-lg',
-        intense: 'shadow-glow-xl',
-      },
+const cardVariants = cva('glass-card relative overflow-hidden transition-all duration-500 group', {
+  variants: {
+    variant: {
+      default: 'hover:shadow-glow-lg hover:scale-[1.02]',
+      interactive: 'hover:shadow-glow-lg hover:scale-[1.02] cursor-pointer',
+      static: '',
+      floating: 'hover:shadow-glow-xl hover:scale-[1.03] hover:-translate-y-1',
     },
-    defaultVariants: {
-      variant: 'default',
-      glow: 'none',
+    glow: {
+      none: '',
+      soft: 'shadow-glow',
+      medium: 'shadow-glow-lg',
+      intense: 'shadow-glow-xl',
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: 'default',
+    glow: 'none',
+  },
+});
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -42,33 +39,31 @@ const Card = React.forwardRef<
 ));
 Card.displayName = 'Card';
 
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex flex-col space-y-2 p-8 relative z-10', className)}
-    {...props}
-  />
-));
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex flex-col space-y-2 p-8 relative z-10', className)}
+      {...props}
+    />
+  )
+);
 CardHeader.displayName = 'CardHeader';
 
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, children, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn(
-      'text-2xl font-bold leading-none tracking-tight text-white relative z-10',
-      className
-    )}
-    {...props}
-  >
-    {children}
-  </h3>
-));
+const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, children, ...props }, ref) => (
+    <h3
+      ref={ref}
+      className={cn(
+        'text-2xl font-bold leading-none tracking-tight text-white relative z-10',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </h3>
+  )
+);
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = React.forwardRef<
@@ -83,24 +78,22 @@ const CardDescription = React.forwardRef<
 ));
 CardDescription.displayName = 'CardDescription';
 
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('p-8 pt-0 relative z-10', className)} {...props} />
-));
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('p-8 pt-0 relative z-10', className)} {...props} />
+  )
+);
 CardContent.displayName = 'CardContent';
 
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex items-center p-8 pt-0 relative z-10', className)}
-    {...props}
-  />
-));
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex items-center p-8 pt-0 relative z-10', className)}
+      {...props}
+    />
+  )
+);
 CardFooter.displayName = 'CardFooter';
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };

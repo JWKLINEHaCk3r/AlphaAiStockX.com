@@ -195,7 +195,9 @@ export function QuantumGrid({
     };
   }, [gridSize, lineColor]);
 
-  return <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />;
+  return (
+    <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />
+  );
 }
 
 // Holographic display effect
@@ -236,7 +238,8 @@ export function HolographicDisplay({
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
         style={{
-          background: 'repeating-linear-gradient(0deg, transparent 0px, rgba(59, 130, 246, 0.03) 2px)',
+          background:
+            'repeating-linear-gradient(0deg, transparent 0px, rgba(59, 130, 246, 0.03) 2px)',
         }}
       />
     </div>
@@ -266,7 +269,9 @@ export function MatrixRain({ className, speed = 1 }: { className?: string; speed
       setStreams(prev =>
         prev.map(stream => ({
           ...stream,
-          positions: stream.positions.map(pos => (pos > window.innerHeight ? -20 : pos + speed * 2)),
+          positions: stream.positions.map(pos =>
+            pos > window.innerHeight ? -20 : pos + speed * 2
+          ),
           characters: stream.characters.map(char =>
             Math.random() < 0.05
               ? characters[Math.floor(Math.random() * characters.length)] || '0'
@@ -287,11 +292,7 @@ export function MatrixRain({ className, speed = 1 }: { className?: string; speed
       )}
     >
       {streams.map(stream => (
-        <div
-          key={stream.id}
-          className="absolute"
-          style={{ left: `${stream.column * 20}px` }}
-        >
+        <div key={stream.id} className="absolute" style={{ left: `${stream.column * 20}px` }}>
           {stream.characters.map((char, i) => (
             <div
               key={i}
@@ -329,7 +330,10 @@ export function ScrollProgress({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn('fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 z-50', className)}
+      className={cn(
+        'fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 z-50',
+        className
+      )}
       style={{ width: `${progress}%` }}
     />
   );
@@ -348,7 +352,10 @@ export function AIConsciousnessOrb({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn('fixed top-4 right-4 w-8 h-8 rounded-full bg-blue-500 opacity-60 z-50', className)}
+      className={cn(
+        'fixed top-4 right-4 w-8 h-8 rounded-full bg-blue-500 opacity-60 z-50',
+        className
+      )}
       style={{
         transform: `scale(${pulse})`,
         transition: 'transform 0.5s ease-in-out',
@@ -360,7 +367,12 @@ export function AIConsciousnessOrb({ className }: { className?: string }) {
 
 export function VoiceControl({ className }: { className?: string }) {
   return (
-    <div className={cn('fixed bottom-4 right-4 w-12 h-12 rounded-full bg-green-500 opacity-60 z-50', className)}>
+    <div
+      className={cn(
+        'fixed bottom-4 right-4 w-12 h-12 rounded-full bg-green-500 opacity-60 z-50',
+        className
+      )}
+    >
       <div className="w-full h-full flex items-center justify-center">
         <div className="w-4 h-4 bg-white rounded-full animate-pulse" />
       </div>
@@ -370,7 +382,9 @@ export function VoiceControl({ className }: { className?: string }) {
 
 export function AIAssistantIndicator({ className }: { className?: string }) {
   return (
-    <div className={cn('fixed bottom-4 left-4 flex items-center space-x-2 text-white z-50', className)}>
+    <div
+      className={cn('fixed bottom-4 left-4 flex items-center space-x-2 text-white z-50', className)}
+    >
       <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
       <span className="text-xs">AI Assistant Active</span>
     </div>

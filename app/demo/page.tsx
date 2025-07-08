@@ -15,9 +15,10 @@ export default function DemoPage() {
             AI Trading Demo
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Experience the power of AI-driven trading with advanced algorithms and real-time market analysis.
+            Experience the power of AI-driven trading with advanced algorithms and real-time market
+            analysis.
           </p>
-          
+
           <Card className="p-8 bg-gray-900/50 border-gray-700 max-w-2xl mx-auto">
             <h2 className="text-2xl font-semibold mb-4 text-blue-400">Demo Features</h2>
             <div className="space-y-4 text-left">
@@ -25,25 +26,31 @@ export default function DemoPage() {
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                 <div>
                   <h3 className="font-semibold">AI Pattern Recognition</h3>
-                  <p className="text-gray-300 text-sm">Advanced algorithms identify market patterns</p>
+                  <p className="text-gray-300 text-sm">
+                    Advanced algorithms identify market patterns
+                  </p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                 <div>
                   <h3 className="font-semibold">Real-time Analysis</h3>
-                  <p className="text-gray-300 text-sm">Live market data processing and signal generation</p>
+                  <p className="text-gray-300 text-sm">
+                    Live market data processing and signal generation
+                  </p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                 <div>
                   <h3 className="font-semibold">Risk Management</h3>
-                  <p className="text-gray-300 text-sm">Automated risk controls and position sizing</p>
+                  <p className="text-gray-300 text-sm">
+                    Automated risk controls and position sizing
+                  </p>
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-8">
               <Button className="bg-blue-600 hover:bg-blue-700">
                 Contact Us for Full Demo Access

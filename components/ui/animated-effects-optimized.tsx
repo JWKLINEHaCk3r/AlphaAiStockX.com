@@ -44,8 +44,8 @@ export function FloatingParticles({ className }: { className?: string }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setElements((prev) =>
-        prev.map((element) => ({
+      setElements(prev =>
+        prev.map(element => ({
           ...element,
           x: (element.x + Math.cos(element.direction) * element.speed + 100) % 100,
           y: (element.y + Math.sin(element.direction) * element.speed + 100) % 100,
@@ -58,7 +58,7 @@ export function FloatingParticles({ className }: { className?: string }) {
 
   return (
     <div className={cn('absolute inset-0 overflow-hidden pointer-events-none', className)}>
-      {elements.map((element) => (
+      {elements.map(element => (
         <div
           key={element.id}
           className="absolute rounded-full opacity-30 animate-pulse"
@@ -76,13 +76,7 @@ export function FloatingParticles({ className }: { className?: string }) {
   );
 }
 
-export function MorphingBlob({
-  className,
-  size = 200,
-}: {
-  className?: string;
-  size?: number;
-}) {
+export function MorphingBlob({ className, size = 200 }: { className?: string; size?: number }) {
   const [points, setPoints] = useState<Point[]>([]);
 
   useEffect(() => {
@@ -98,7 +92,7 @@ export function MorphingBlob({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPoints((prev) =>
+      setPoints(prev =>
         prev.map((point, i) => {
           const angle = (i / prev.length) * Math.PI * 2;
           const baseRadius = size / 3;
@@ -139,11 +133,7 @@ export function MorphingBlob({
       className={cn('absolute opacity-20', className)}
       viewBox={`0 0 ${size} ${size}`}
     >
-      <path
-        d={createPath()}
-        fill="url(#blobGradient)"
-        className="animate-pulse"
-      />
+      <path d={createPath()} fill="url(#blobGradient)" className="animate-pulse" />
       <defs>
         <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#3b82f6" />
@@ -217,10 +207,7 @@ export function QuantumGrid({
   }, [lineColor]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={cn('fixed inset-0 pointer-events-none z-0', className)}
-    />
+    <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />
   );
 }
 
@@ -281,16 +268,14 @@ export function MatrixRain({ className }: { className?: string }) {
     const speed = 2;
 
     const interval = setInterval(() => {
-      setStreams((prev) =>
-        prev.map((stream) => ({
+      setStreams(prev =>
+        prev.map(stream => ({
           ...stream,
-          positions: stream.positions.map((pos) =>
+          positions: stream.positions.map(pos =>
             pos > window.innerHeight ? -20 : pos + speed * 2
           ),
-          characters: stream.characters.map((char) =>
-            Math.random() < 0.05
-              ? characters[Math.floor(Math.random() * 44)] || '0'
-              : char
+          characters: stream.characters.map(char =>
+            Math.random() < 0.05 ? characters[Math.floor(Math.random() * 44)] || '0' : char
           ),
         }))
       );
@@ -306,12 +291,8 @@ export function MatrixRain({ className }: { className?: string }) {
         className
       )}
     >
-      {streams.map((stream) => (
-        <div
-          key={stream.id}
-          className="absolute"
-          style={{ left: `${stream.column * 20}px` }}
-        >
+      {streams.map(stream => (
+        <div key={stream.id} className="absolute" style={{ left: `${stream.column * 20}px` }}>
           {stream.characters.map((char, charIndex) => (
             <div
               key={charIndex}

@@ -2,17 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Menu,
-  X,
-  Home,
-  TrendingUp,
-  Brain,
-  User,
-  ChevronDown,
-  Sparkles,
-  Zap,
-} from 'lucide-react';
+import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -75,10 +65,7 @@ function DropdownMenu({
         {item.icon}
         {item.label}
         <ChevronDown
-          className={cn(
-            'w-4 h-4 transition-transform duration-200',
-            isOpen ? 'rotate-180' : ''
-          )}
+          className={cn('w-4 h-4 transition-transform duration-200', isOpen ? 'rotate-180' : '')}
         />
       </button>
 
@@ -99,13 +86,7 @@ function DropdownMenu({
   );
 }
 
-function MobileMenu({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
+function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -116,10 +97,7 @@ function MobileMenu({
       <div className="fixed top-0 right-0 h-full w-80 glass-card border-l border-neon-blue/20 p-6 overflow-y-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-bold neon-text">Menu</h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
+          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -130,9 +108,7 @@ function MobileMenu({
               {item.children ? (
                 <div>
                   <button
-                    onClick={() =>
-                      setOpenDropdown(openDropdown === item.label ? null : item.label)
-                    }
+                    onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                     className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover:bg-white/10 rounded-lg"
                   >
                     <div className="flex items-center gap-3">
@@ -227,9 +203,7 @@ export default function NextLevelNavigation() {
       <nav
         className={cn(
           'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
-          isScrolled
-            ? 'glass-card border-b border-neon-blue/20 shadow-glow'
-            : 'bg-transparent'
+          isScrolled ? 'glass-card border-b border-neon-blue/20 shadow-glow' : 'bg-transparent'
         )}
       >
         <div className="max-w-7xl mx-auto px-6">
@@ -251,7 +225,7 @@ export default function NextLevelNavigation() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
               {navigation.map((item, index) => (
-                <div key={index} onClick={(e) => e.stopPropagation()}>
+                <div key={index} onClick={e => e.stopPropagation()}>
                   {item.children ? (
                     <DropdownMenu
                       item={item}

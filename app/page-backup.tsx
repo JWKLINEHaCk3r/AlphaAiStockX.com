@@ -19,10 +19,21 @@ import {
 const FloatingElements = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const MorphingBlob = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const QuantumGrid = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
-const HolographicDisplay = dynamic(() => Promise.resolve(({ children }: any) => <div>{children}</div>), { ssr: false });
+const HolographicDisplay = dynamic(
+  () => Promise.resolve(({ children }: any) => <div>{children}</div>),
+  { ssr: false }
+);
 const DataStream = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 
-const TradingDashboardDemo = dynamic(() => Promise.resolve(() => <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center"><span className="text-white">Trading Dashboard Loading...</span></div>), { ssr: false });
+const TradingDashboardDemo = dynamic(
+  () =>
+    Promise.resolve(() => (
+      <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center">
+        <span className="text-white">Trading Dashboard Loading...</span>
+      </div>
+    )),
+  { ssr: false }
+);
 
 const Advanced3DBackground = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const InteractiveCursor = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
