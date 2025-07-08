@@ -1,3 +1,5 @@
+import { Tabs } from "@/components/ui/tabs";
+import { Card } from "@/components/ui/card";
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';

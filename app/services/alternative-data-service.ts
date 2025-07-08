@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 // Alternative Data Service for unique market insights
 
 interface SatelliteData {

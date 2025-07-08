@@ -1,12 +1,10 @@
+import React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { api, wsManager, storage, debounce } from '@/lib/api';
 import { StockData, Portfolio, AISignal, LoadingState } from '@/types';
 
 // Generic API hook
-export function useAPI<T>(
-  endpoint: string,
-  dependencies: any[] = []
-) {
+export function useAPI<T>(endpoint: string, dependencies: any[] = []) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<LoadingState>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -155,24 +153,24 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     return storage.get(key, initialValue);
   });
 
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      storage.set(key, valueToStore);
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        storage.set(key, valueToStore);
+      } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue] as const;
 }
 
 // Debounced search hook
-export function useSearch<T>(
-  searchFn: (query: string) => Promise<T[]>,
-  delay: number = 300
-) {
+export function useSearch<T>(searchFn: (query: string) => Promise<T[]>, delay: number = 300) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
@@ -223,7 +221,7 @@ export function useWindowSize() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -253,7 +251,7 @@ export function useIntersectionObserver(
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const node = elementRef?.current;
     const hasIOSupport = !!window.IntersectionObserver;
 
@@ -276,7 +274,7 @@ export function useMediaQuery(query: string) {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const media = window.matchMedia(query);
     if (media.matches !== matches) {
       setMatches(media.matches);
@@ -298,7 +296,7 @@ export function useTheme() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
 
@@ -313,7 +311,7 @@ export function useTheme() {
   const effectiveTheme = theme === 'system' ? systemTheme : theme;
 
   const toggleTheme = useCallback(() => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }, [setTheme]);
 
   return {
@@ -342,7 +340,7 @@ export function useOnlineStatus() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 

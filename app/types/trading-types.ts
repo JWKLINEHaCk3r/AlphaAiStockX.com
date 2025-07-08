@@ -1,3 +1,4 @@
+import { Alert } from "@/components/ui/alert";
 // Comprehensive TypeScript interfaces for the AlphaAiStockX platform
 
 export interface Position {

@@ -1,3 +1,4 @@
+import { VoiceControl } from "@/components/ui/voice-control";
 'use client';
 import React from 'react';
 

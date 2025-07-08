@@ -1,3 +1,4 @@
+import { VoiceControl } from "@/components/ui/voice-control";
 // Import polyfills first to handle global definitions
 import './polyfills';
 import type { Metadata } from 'next';

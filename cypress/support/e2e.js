@@ -1,3 +1,4 @@
+import React from 'react';
 // Cypress support commands for E2E testing
 import '@testing-library/cypress/add-commands';
 

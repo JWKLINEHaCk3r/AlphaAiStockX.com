@@ -1,3 +1,7 @@
+import { TabsTrigger } from "@/components/ui/tabs";
+import { TabsList } from "@/components/ui/tabs";
+import { TabsContent } from "@/components/ui/tabs";
+import { Tabs } from "@/components/ui/tabs";
 'use client';
 import React from 'react';
 

@@ -1,3 +1,6 @@
+import { AvatarImage } from "@/components/ui/avatar";
+import { AvatarFallback } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import React from 'react';
 import * as React from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';

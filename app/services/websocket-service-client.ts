@@ -1,3 +1,4 @@
+import React from 'react';
 // Client-side only WebSocket service
 'use client';
 

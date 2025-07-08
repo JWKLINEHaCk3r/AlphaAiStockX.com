@@ -1,3 +1,5 @@
+import React from 'react';
+import { VoiceControl } from "@/components/ui/voice-control";
 'use client';
 
 import dynamic from 'next/dynamic';

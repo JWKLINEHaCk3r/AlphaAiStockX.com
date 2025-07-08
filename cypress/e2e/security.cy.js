@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 describe('AlphaAiStockX Security Tests', () => {
   beforeEach(() => {
     cy.visit('/');

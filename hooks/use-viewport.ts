@@ -20,8 +20,6 @@ export function useViewport(): ViewportSize {
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
     const updateViewport = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -38,14 +36,18 @@ export function useViewport(): ViewportSize {
     // Set initial viewport
     updateViewport();
 
-    // Add event listener
-    window.addEventListener('resize', updateViewport);
-    window.addEventListener('orientationchange', updateViewport);
+    if (typeof window !== 'undefined') {
+      // Add event listener
+      window.addEventListener('resize', updateViewport);
+      window.addEventListener('orientationchange', updateViewport);
+    }
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', updateViewport);
-      window.removeEventListener('orientationchange', updateViewport);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', updateViewport);
+        window.removeEventListener('orientationchange', updateViewport);
+      }
     };
   }, []);
 

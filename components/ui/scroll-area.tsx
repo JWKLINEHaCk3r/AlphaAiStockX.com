@@ -1,3 +1,4 @@
+import { ScrollArea } from "@/components/ui/scroll-area";
 'use client';
 import React from 'react';
 

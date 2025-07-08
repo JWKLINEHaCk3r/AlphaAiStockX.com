@@ -1,3 +1,5 @@
+import React from 'react';
+import { TradingDashboard } from "@/components/ui/trading-dashboard-demo";
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
 import { TradingDashboard } from '@/components/trading/TradingDashboard';

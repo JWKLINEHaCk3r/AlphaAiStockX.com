@@ -1,3 +1,4 @@
+import { Label } from "@/components/ui/label";
 'use client';
 import React from 'react';
 

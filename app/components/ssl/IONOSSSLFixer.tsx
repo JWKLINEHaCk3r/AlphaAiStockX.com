@@ -1,3 +1,5 @@
+import { Progress } from "@/components/ui/progress";
+import { Select } from "@/components/ui/select";
 import {
   AIStockPrediction,
   SportsEvent,

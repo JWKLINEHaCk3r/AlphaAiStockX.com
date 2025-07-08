@@ -1,3 +1,4 @@
+import React from 'react';
 // Global type definitions for AlphaAIStockX platform
 
 export interface User {

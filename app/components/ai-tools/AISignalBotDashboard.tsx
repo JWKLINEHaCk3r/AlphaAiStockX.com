@@ -1,3 +1,4 @@
+import { Alert } from "@/components/ui/alert";
 // AI Signal Bot Dashboard Component
 'use client';
 

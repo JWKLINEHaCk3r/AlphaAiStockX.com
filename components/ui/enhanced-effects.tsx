@@ -32,8 +32,10 @@ export function ScrollProgress() {
         }
       };
 
-      window.addEventListener('scroll', updateScrollProgress, { passive: true });
-      updateScrollProgress(); // Initial calculation
+      if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        updateScrollProgress(); // Initial calculation
+      }
       
       return () => window.removeEventListener('scroll', updateScrollProgress);
     } catch (error) {

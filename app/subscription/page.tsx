@@ -1,3 +1,4 @@
+import { Label } from "@/components/ui/label";
 'use client';
 
 // Force dynamic rendering to prevent static generation issues

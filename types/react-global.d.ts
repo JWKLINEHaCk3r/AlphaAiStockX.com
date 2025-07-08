@@ -1,3 +1,4 @@
+import React from 'react';
 // Global React type definitions for environments without node_modules
 declare global {
   namespace JSX {

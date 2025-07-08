@@ -211,11 +211,16 @@ function ParticleField() {
     };
 
     resize();
-    window.addEventListener('resize', resize);
     animate();
 
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', resize);
+    }
+
     return () => {
-      window.removeEventListener('resize', resize);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', resize);
+      }
     };
   }, []);
 

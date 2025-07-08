@@ -1,3 +1,9 @@
+import { CardTitle } from "@/components/ui/card";
+import { CardHeader } from "@/components/ui/card";
+import { CardFooter } from "@/components/ui/card";
+import { CardDescription } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';

@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import React from 'react';
 import type * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';

@@ -1,3 +1,4 @@
+import { Slider } from "@/components/ui/slider";
 import React from 'react';
 import * as React from 'react';
 import * as SliderPrimitive from '@radix-ui/react-slider';

@@ -1,3 +1,4 @@
+import { AnimatedBackground } from "@/components/ui/animated-background-client";
 'use client';
 import React from 'react';
 
@@ -84,10 +85,14 @@ export default function AnimatedBackground() {
       createParticles();
     };
 
-    window.addEventListener('resize', handleResize);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+    }
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

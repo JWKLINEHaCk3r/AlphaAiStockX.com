@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/ui/checkbox";
 'use client';
 import React from 'react';
 
