@@ -3,13 +3,20 @@ import { Select } from "@/components/ui/select";
 import React from 'react';
 
 import { useState } from 'react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import { Brain, Activity, Plus, Settings, Play } from 'lucide-react';
+import { Strategy } from '@/app/types/trading';
 
+<<<<<<< HEAD
 interface TradingStrategy {
   id: number;
   name: string;
@@ -37,6 +44,16 @@ export default function TradingStrategies({
   botStatus = 'stopped',
 }: TradingStrategiesProps) {
   const [availableStrategies] = useState<TradingStrategy[]>([
+=======
+interface TradingStrategiesProps {
+  activeStrategies: Strategy[];
+  setActiveStrategies: (strategies: Strategy[] | ((prev: Strategy[]) => Strategy[])) => void;
+  botStatus: string;
+}
+
+export default function TradingStrategies({ activeStrategies, setActiveStrategies, botStatus }: TradingStrategiesProps) {
+  const [availableStrategies] = useState([
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     {
       id: 1,
       name: 'AI Momentum',
@@ -112,20 +129,67 @@ export default function TradingStrategies({
   ]);
 
   const toggleStrategy = (strategyId: number) => {
+<<<<<<< HEAD
     setActiveStrategies(prev => {
       const existing = prev.find(s => s.id === strategyId);
+=======
+    setActiveStrategies((prev: Strategy[]) => {
+      const existing = prev.find((s: Strategy) => s.id === strategyId);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
       if (existing) {
-        return prev.filter(s => s.id !== strategyId);
+        return prev.filter((s: Strategy) => s.id !== strategyId);
       } else {
+<<<<<<< HEAD
         const strategy = availableStrategies.find(s => s.id === strategyId);
         if (strategy) {
           return [...prev, { ...strategy, status: 'active' }];
         }
         return prev;
+=======
+        const strategy = availableStrategies.find((s: Strategy) => s.id === strategyId);
+        return strategy ? [...prev, { ...strategy, status: 'active' }] : prev;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
       }
     });
   };
 
+<<<<<<< HEAD
+=======
+  const updateAllocation = (strategyId: number, allocation: number) => {
+    setActiveStrategies((prev: Strategy[]) => prev.map((s: Strategy) => (s.id === strategyId ? { ...s, allocation } : s)));
+  };
+
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case 'Low':
+        return 'text-green-400';
+      case 'Medium':
+        return 'text-yellow-400';
+      case 'High':
+        return 'text-orange-400';
+      case 'Very High':
+        return 'text-red-400';
+      default:
+        return 'text-gray-400';
+    }
+  };
+
+  const getRiskBadge = (risk: string) => {
+    switch (risk) {
+      case 'Low':
+        return 'default';
+      case 'Medium':
+        return 'secondary';
+      case 'High':
+        return 'destructive';
+      case 'Very High':
+        return 'destructive';
+      default:
+        return 'outline';
+    }
+  };
+
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   return (
     <div className="space-y-6">
       {/* Active Strategies Overview */}
@@ -195,7 +259,7 @@ export default function TradingStrategies({
                     </div>
                   </div>
 
-                  <Progress value={strategy.allocation} className="h-2 mb-2" />
+                  <Progress value={strategy.allocation || 0} className="h-2 mb-2" />
                   <p className="text-sm text-gray-300">{strategy.description}</p>
                 </div>
               ))}

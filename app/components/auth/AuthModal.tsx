@@ -2,20 +2,47 @@
 
 import type React from 'react';
 
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { Button } from '@/components/ui/button';
+=======
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Checkbox } from '@/components/ui/checkbox';
 import { X, Mail, Lock, User, Eye, EyeOff, Shield } from 'lucide-react';
 
+interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  subscription: string;
+  role: string;
+}
+
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+<<<<<<< HEAD
   onLogin: (userData: { email: string; name?: string }) => void;
+=======
+  onLogin: (userData: UserData) => void;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+  name?: string;
+  confirmPassword?: string;
+  agreeToTerms?: string;
+  general?: string;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) {
@@ -29,7 +56,11 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
     confirmPassword: '',
     agreeToTerms: false,
   });
+<<<<<<< HEAD
   const [errors, setErrors] = useState<Record<string, string>>({});
+=======
+  const [errors, setErrors] = useState<FormErrors>({});
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   if (!isOpen) return null;
 
@@ -88,12 +119,12 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       // Mock successful authentication
-      const userData = {
-        id: 'user_' + Date.now(),
+      const userData: UserData = {
+        id: Date.now(),
         email: formData.email,
         name: formData.name || formData.email.split('@')[0],
         subscription: 'free',
-        preferences: {},
+        role: 'user',
       };
 
       onLogin(userData);
@@ -111,12 +142,12 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
       // Simulate social login
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      const userData = {
-        id: 'user_' + Date.now(),
+      const userData: UserData = {
+        id: Date.now(),
         email: `user@${provider}.com`,
         name: `${provider} User`,
         subscription: 'free',
-        preferences: {},
+        role: 'user',
       };
 
       onLogin(userData);

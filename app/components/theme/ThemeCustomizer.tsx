@@ -4,7 +4,12 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Palette, Zap, Settings, Eye, Sparkles } from 'lucide-react';

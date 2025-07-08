@@ -1,8 +1,13 @@
 'use client';
 import React from 'react';
 
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -10,6 +15,7 @@ import { Switch } from '@/components/ui/switch';
 import { Shield, AlertTriangle, TrendingDown, Activity, Target } from 'lucide-react';
 
 interface BotSettings {
+<<<<<<< HEAD
   maxDailyLoss: number;
   maxDrawdown: number;
   maxPositionSize: number;
@@ -22,11 +28,43 @@ interface BotStats {
   dailyPnL: number;
   accountBalance: number;
   activeTrades: number;
+=======
+  maxPositionSize: number;
+  maxDailyLoss: number;
+  maxConcurrentTrades: number;
+  emergencyStop: boolean;
+  riskLevel: string;
+  stopLossPercent: number;
+  takeProfitPercent: number;
+  maxLeverage: number;
+  riskPerTrade: number;
+}
+
+interface BotStats {
+  totalTrades: number;
+  winRate: number;
+  totalPnL: number;
+  dailyPnL: number;
+  sharpeRatio: number;
+  maxDrawdown: number;
+  activeTrades: number;
+  accountBalance: number;
+}
+
+interface StressTestResult {
+  scenario: string;
+  impact: number;
+  probability: number;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 interface RiskControlsProps {
   botSettings: BotSettings;
+<<<<<<< HEAD
   setBotSettings: (updater: (prev: BotSettings) => BotSettings) => void;
+=======
+  setBotSettings: (settings: BotSettings | ((prev: BotSettings) => BotSettings)) => void;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   botStats: BotStats;
 }
 
@@ -44,8 +82,13 @@ export default function RiskControls({ botSettings, setBotSettings, botStats }: 
     ],
   };
 
+<<<<<<< HEAD
   const updateSetting = (key: keyof BotSettings, value: number | boolean) => {
     setBotSettings((prev: BotSettings) => ({ ...prev, [key]: value }));
+=======
+  const updateSetting = (key: keyof BotSettings, value: string | number | boolean) => {
+    setBotSettings(prev => ({ ...prev, [key]: value }));
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   };
 
   return (

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,15 @@ interface AIFrediction {
   confidence: number;
   targetPrice: number;
   timeframe: string;
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
+
+interface StockChartProps {
+  selectedStock: string;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 interface ChartDataPoint {
@@ -34,15 +44,36 @@ interface ChartDataPoint {
   volume: number;
 }
 
+<<<<<<< HEAD
 interface StockChartProps {
   selectedStock: string;
+=======
+interface StockInfo {
+  symbol: string;
+  price: number;
+  change: number;
+  volume: string;
+  marketCap: string;
+  aiScore: number;
+}
+
+interface AIPrediction {
+  direction: string;
+  confidence: number;
+  timeframe: string;
+  targetPrice: number;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 export default function StockChart({ selectedStock }: StockChartProps) {
   const [timeframe, setTimeframe] = useState('1D');
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [stockInfo, setStockInfo] = useState<StockInfo | null>(null);
+<<<<<<< HEAD
   const [aiPrediction, setAiPrediction] = useState<AIFrediction | null>(null);
+=======
+  const [aiPrediction, setAiPrediction] = useState<AIPrediction | null>(null);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   useEffect(() => {
     // Simulate real-time stock data
@@ -68,7 +99,6 @@ export default function StockChart({ selectedStock }: StockChartProps) {
       change: (Math.random() - 0.5) * 10,
       volume: '45.2M',
       marketCap: '2.8T',
-      pe: 28.5,
       aiScore: 85 + Math.random() * 15,
       confidence: 75 + Math.random() * 20,
       timeframe: '30 days',
@@ -96,16 +126,28 @@ export default function StockChart({ selectedStock }: StockChartProps) {
               <span className="text-3xl font-bold text-white">${stockInfo?.price.toFixed(2)}</span>
               <span
                 className={`flex items-center text-lg font-medium ${
+<<<<<<< HEAD
                   (stockInfo?.change || 0) > 0 ? 'text-green-400' : 'text-red-400'
                 }`}
               >
                 {(stockInfo?.change || 0) > 0 ? (
+=======
+                  (stockInfo?.change ?? 0) > 0 ? 'text-green-400' : 'text-red-400'
+                }`}
+              >
+                {(stockInfo?.change ?? 0) > 0 ? (
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
                   <TrendingUp className="h-4 w-4 mr-1" />
                 ) : (
                   <TrendingDown className="h-4 w-4 mr-1" />
                 )}
+<<<<<<< HEAD
                 {(stockInfo?.change || 0) > 0 ? '+' : ''}
                 {(stockInfo?.change || 0).toFixed(2)}%
+=======
+                {(stockInfo?.change ?? 0) > 0 ? '+' : ''}
+                {(stockInfo?.change ?? 0).toFixed(2)}%
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               </span>
             </div>
           </div>

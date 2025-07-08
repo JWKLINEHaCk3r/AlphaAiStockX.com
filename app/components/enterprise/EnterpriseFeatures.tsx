@@ -44,9 +44,16 @@ import {
 
 'use client';
 
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+=======
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import {

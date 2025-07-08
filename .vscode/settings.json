@@ -5,7 +5,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -19,7 +19,8 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "python.testing.unittestArgs": ["-v", "-s", "./react-demo", "-p", "*test.py"],
   "python.testing.pytestEnabled": false,
-  "python.testing.unittestEnabled": true
+  "python.testing.unittestEnabled": true,
+  "github.copilot.nextEditSuggestions.enabled": true
 }
 npm install react react-dom
 

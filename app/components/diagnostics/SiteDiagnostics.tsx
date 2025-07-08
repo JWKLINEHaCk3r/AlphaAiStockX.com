@@ -46,8 +46,12 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+<<<<<<< HEAD
 
 import { Button } from '@/components/ui/button';
+=======
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } from 'lucide-react';
 
 export default function SiteDiagnostics() {

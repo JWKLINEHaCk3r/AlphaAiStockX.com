@@ -49,6 +49,52 @@ interface RiskMetrics {
   hedgingStrategies: HedgingStrategy[];
 }
 
+interface ValueAtRisk {
+  oneDay: number;
+  oneWeek: number;
+  oneMonth: number;
+}
+
+interface StressTest {
+  scenario: string;
+  portfolioImpact: number;
+  probability: number;
+}
+
+interface CorrelationRisk {
+  asset1: string;
+  asset2: string;
+  correlation: number;
+  risk: string;
+}
+
+interface RiskFactor {
+  factor: string;
+  level: string;
+  impact: number;
+  description: string;
+  score: number;
+}
+
+interface HedgingStrategy {
+  strategy: string;
+  effectiveness: number;
+  cost: string;
+  description: string;
+  protection: string;
+}
+
+interface RiskMetrics {
+  overallRisk: number;
+  riskLevel: string;
+  valueAtRisk: ValueAtRisk;
+  stressTests: StressTest[];
+  correlationRisks: CorrelationRisk[];
+  riskFactors: RiskFactor[];
+  recommendations: string[];
+  hedgingStrategies: HedgingStrategy[];
+}
+
 export default function RiskAnalyzer() {
   const [riskMetrics, setRiskMetrics] = useState<RiskMetrics | null>(null);
 
@@ -76,13 +122,39 @@ export default function RiskAnalyzer() {
       riskFactors: [
         {
           factor: 'Concentration Risk',
+          level: 'High',
+          impact: 75,
           score: 75,
           description: 'Portfolio concentrated in tech sector',
         },
-        { factor: 'Volatility Risk', score: 68, description: 'High individual stock volatilities' },
-        { factor: 'Market Risk', score: 55, description: 'Exposure to market downturns' },
-        { factor: 'Liquidity Risk', score: 25, description: 'All holdings are highly liquid' },
-        { factor: 'Currency Risk', score: 15, description: 'Minimal foreign exposure' },
+        { 
+          factor: 'Volatility Risk', 
+          level: 'Medium-High',
+          impact: 68,
+          score: 68, 
+          description: 'High individual stock volatilities' 
+        },
+        { 
+          factor: 'Market Risk', 
+          level: 'Medium',
+          impact: 55,
+          score: 55, 
+          description: 'Exposure to market downturns' 
+        },
+        { 
+          factor: 'Liquidity Risk', 
+          level: 'Low',
+          impact: 25,
+          score: 25, 
+          description: 'All holdings are highly liquid' 
+        },
+        { 
+          factor: 'Currency Risk', 
+          level: 'Low',
+          impact: 15,
+          score: 15, 
+          description: 'Minimal foreign exposure' 
+        },
       ],
       hedgingStrategies: [
         {
@@ -90,30 +162,48 @@ export default function RiskAnalyzer() {
           cost: '1.2% of portfolio',
           protection: '15-20% downside',
           effectiveness: 85,
+          description: 'Provides downside protection through put options',
         },
         {
           strategy: 'VIX Calls',
           cost: '0.8% of portfolio',
           protection: 'Volatility spikes',
           effectiveness: 70,
+          description: 'Hedges against volatility increases',
         },
         {
           strategy: 'Treasury Bonds',
           cost: 'Opportunity cost',
           protection: 'Market correlation',
           effectiveness: 60,
+          description: 'Provides portfolio diversification',
         },
+      ],
+      recommendations: [
+        'Consider reducing tech sector concentration',
+        'Implement stop-loss orders at -15% levels',
+        'Add defensive sectors (utilities, consumer staples)',
+        'Increase cash position to 10-15%',
+        'Consider hedging with put options',
       ],
     });
   }, []);
 
+<<<<<<< HEAD
   const getRiskColor = (score: number): string => {
+=======
+  const getRiskColor = (score: number) => {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     if (score >= 70) return 'text-red-400';
     if (score >= 40) return 'text-yellow-400';
     return 'text-green-400';
   };
 
+<<<<<<< HEAD
   const getRiskBadgeVariant = (level: string): string => {
+=======
+  const getRiskBadgeVariant = (level: string) => {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     switch (level) {
       case 'High':
         return 'bg-red-500/20 text-red-400';

@@ -1,2 +1,18 @@
+<<<<<<< HEAD
 ignoredBuiltDependencies:
   - unrs-resolver
+=======
+# Remove all ignored built dependencies to allow all build scripts
+
+ignoredBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@tensorflow/tfjs-node'
+  - 'bcrypt'
+  - 'ccxt'
+  - 'core-js'
+  - 'cypress'
+  - 'prisma'
+  - 'sharp'
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)

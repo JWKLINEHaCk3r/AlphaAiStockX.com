@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { TrendingUp, TrendingDown, Activity, BarChart3 } from 'lucide-react';
 
+<<<<<<< HEAD
 // Type definitions
 interface MACDData {
   value: number;
@@ -56,6 +57,50 @@ interface TechnicalIndicatorsProps {
 
 export default function TechnicalIndicators({ selectedStock }: TechnicalIndicatorsProps) {
   const [indicators, setIndicators] = useState<TechnicalIndicatorsData | null>(null);
+=======
+interface TechnicalIndicatorsProps {
+  selectedStock: {
+    symbol: string;
+    name: string;
+    price: number;
+  };
+}
+
+interface IndicatorData {
+  rsi: number;
+  macd: {
+    value: number;
+    signal: number;
+    histogram: number;
+    trend: string;
+  };
+  movingAverages: {
+    sma20: number;
+    sma50: number;
+    sma200: number;
+    currentPrice: number;
+  };
+  bollinger: {
+    upper: number;
+    middle: number;
+    lower: number;
+    position: number;
+  };
+  stochastic: {
+    k: number;
+    d: number;
+    signal: string;
+  };
+  volume: {
+    current: number;
+    average: number;
+    trend: string;
+  };
+}
+
+export default function TechnicalIndicators({ selectedStock }: TechnicalIndicatorsProps) {
+  const [indicators, setIndicators] = useState<IndicatorData | null>(null);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   useEffect(() => {
     // Simulate technical indicator data
@@ -77,7 +122,7 @@ export default function TechnicalIndicators({ selectedStock }: TechnicalIndicato
         upper: 185.2,
         middle: 175.4,
         lower: 165.6,
-        position: 'middle',
+        position: 0.6,
       },
       stochastic: {
         k: 78.5,
@@ -120,7 +165,7 @@ export default function TechnicalIndicators({ selectedStock }: TechnicalIndicato
       <CardHeader>
         <CardTitle className="text-white flex items-center">
           <BarChart3 className="h-6 w-6 mr-2 text-blue-400" />
-          Technical Analysis - {selectedStock}
+          Technical Analysis - {selectedStock?.symbol || 'No Stock Selected'}
         </CardTitle>
       </CardHeader>
       <CardContent>

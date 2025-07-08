@@ -32,11 +32,19 @@ const PaymentForm = () => {
     }
   };
 
+<<<<<<< HEAD
   const handlePlanChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPlan(event.target.value);
   };
 
   const handleBillingCycleChange = (event: ChangeEvent<HTMLInputElement>) => {
+=======
+  const handlePlanChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPlan(event.target.value);
+  };
+
+  const handleBillingCycleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setBillingCycle(event.target.value);
   };
 

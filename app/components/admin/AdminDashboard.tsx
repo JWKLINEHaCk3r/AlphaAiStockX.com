@@ -2,12 +2,18 @@
 import React from 'react';
 
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+import { User, Alert } from '@/app/types/trading';
 import {
   Shield,
   Users,
@@ -80,12 +86,22 @@ export default function AdminDashboard() {
     serverLoad: 0,
   });
 
+<<<<<<< HEAD
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
   const [liveData, setLiveData] = useState<LiveData>({
+=======
+  const [userProfiles, setUserProfiles] = useState<User[]>([]);
+  const [liveData, setLiveData] = useState({
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     realtimeUsers: 0,
     tradesPerSecond: 0,
-    systemAlerts: [],
-    performanceMetrics: {},
+    systemAlerts: [] as Alert[],
+    performanceMetrics: {
+      apiResponseTime: 0,
+      databaseConnections: 0,
+      cpuUsage: 0,
+      memoryUsage: 0,
+    },
   });
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -271,13 +287,21 @@ export default function AdminDashboard() {
     }
   };
 
+<<<<<<< HEAD
   const suspendUser = (userId: string) => {
+=======
+  const suspendUser = (userId: number) => {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setUserProfiles(prev =>
       prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
+<<<<<<< HEAD
   const activateUser = (userId: string) => {
+=======
+  const activateUser = (userId: number) => {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setUserProfiles(prev =>
       prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'active' } : user))
     );
@@ -551,14 +575,6 @@ export default function AdminDashboard() {
                             <Progress
                               value={user.riskScore * 10}
                               className="w-16 h-2 ml-2"
-                              style={{
-                                backgroundColor:
-                                  user.riskScore > 8
-                                    ? '#ef4444'
-                                    : user.riskScore > 5
-                                      ? '#eab308'
-                                      : '#22c55e',
-                              }}
                             />
                           </div>
                         </div>

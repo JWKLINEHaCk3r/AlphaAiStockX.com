@@ -5,6 +5,7 @@ import { CardDescription } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
 import { Card } from "@/components/ui/card";
 'use client';
+<<<<<<< HEAD
 import React from 'react';
 import {
   Card,
@@ -14,8 +15,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+=======
+import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/button';
 import { Bot, Zap, Sparkles, Lock } from 'lucide-react';
 
 export default function UltimateAIBots() {

@@ -3,7 +3,12 @@ import { Alert } from "@/components/ui/alert";
 import React from 'react';
 
 import { useState } from 'react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -25,6 +30,7 @@ import {
   Save,
 } from 'lucide-react';
 
+<<<<<<< HEAD
 import {
   AdminPermissions,
   AdminSettings,
@@ -42,6 +48,20 @@ interface Admin {
 interface AdminProfileProps {
   admin: Admin;
   onUpdateAdmin: (admin: Admin) => void;
+=======
+interface AdminData {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  lastLogin: string;
+  permissions: string[];
+}
+
+interface AdminProfileProps {
+  admin: AdminData;
+  onUpdateAdmin: (admin: AdminData) => void;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 export default function AdminProfile({ admin, onUpdateAdmin }: AdminProfileProps) {

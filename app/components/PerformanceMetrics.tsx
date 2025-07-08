@@ -6,7 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
+import { BotStats, Trade } from '@/app/types/trading';
 
+<<<<<<< HEAD
 interface Trade {
   id: number;
   symbol: string;
@@ -28,11 +30,14 @@ interface BotStats {
   activeTrades: number;
 }
 
+=======
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 interface PerformanceMetricsProps {
   botStats: BotStats;
   recentTrades: Trade[];
 }
 
+<<<<<<< HEAD
 interface DailyReturn {
   date: Date;
   return: number;
@@ -43,6 +48,23 @@ interface PerformanceData {
   dailyReturns: DailyReturn[];
   monthlyReturns: DailyReturn[];
   drawdownPeriods: DailyReturn[];
+=======
+interface PerformanceData {
+  dailyReturns: Array<{
+    date: Date;
+    return: number;
+    cumulative: number;
+  }>;
+  monthlyReturns: Array<{
+    month: string;
+    return: number;
+  }>;
+  drawdownPeriods: Array<{
+    start: Date;
+    end: Date;
+    depth: number;
+  }>;
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   bestTrade: Trade | null;
   worstTrade: Trade | null;
   avgHoldTime: string;
@@ -60,8 +82,8 @@ export default function PerformanceMetrics({ botStats, recentTrades }: Performan
     worstTrade: null,
     avgHoldTime: '2.5 hours',
     profitFactor: 1.85,
-    calmarRatio: 2.3,
-    sortinoRatio: 1.92,
+    calmarRatio: 2.1,
+    sortinoRatio: 1.9,
   });
 
   useEffect(() => {

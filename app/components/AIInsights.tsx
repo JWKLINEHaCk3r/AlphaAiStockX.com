@@ -3,6 +3,10 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+<<<<<<< HEAD
+=======
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
@@ -11,6 +15,7 @@ interface AIInsightsProps {
   selectedStock: string;
 }
 
+<<<<<<< HEAD
 interface Sentiment {
   bullish: number;
   bearish: number;
@@ -68,6 +73,50 @@ interface AIInsightsData {
 
 export default function AIInsights({ selectedStock }: AIInsightsProps) {
   const [insights, setInsights] = useState<AIInsightsData | null>(null);
+=======
+interface InsightsData {
+  overallScore: number;
+  sentiment: {
+    bullish: number;
+    bearish: number;
+    neutral: number;
+  };
+  technicalAnalysis: {
+    rsi: number;
+    macd: string;
+    support: number;
+    resistance: number;
+    movingAverage: string;
+  };
+  aiPredictions: Array<{
+    timeframe: string;
+    prediction: string;
+    confidence: number;
+    target: number;
+    direction: string;
+    probability: number;
+    priceTarget: number;
+  }>;
+  riskFactors: Array<{
+    factor: string;
+    level: string;
+    impact: number;
+  }>;
+  catalysts: Array<{
+    event: string;
+    impact: string;
+    date: string;
+  }>;
+  fundamentalAnalysis?: {
+    pe: number;
+    roe: number;
+    revenueGrowth: number;
+  };
+}
+
+export default function AIInsights({ selectedStock }: AIInsightsProps) {
+  const [insights, setInsights] = useState<InsightsData | null>(null);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -89,15 +138,16 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
           resistance: 185.75,
         },
         fundamentalAnalysis: {
-          peRatio: 28.5,
-          pbRatio: 6.2,
-          debtToEquity: 1.8,
+          pe: 28.5,
           roe: 15.6,
           revenueGrowth: 8.3,
         },
         aiPredictions: [
           {
             timeframe: '1 Week',
+            prediction: 'Strong bullish momentum expected',
+            confidence: 72,
+            target: 182.5,
             direction: 'bullish',
             probability: 72,
             target: 182.5,
@@ -105,6 +155,9 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
           },
           {
             timeframe: '1 Month',
+            prediction: 'Continued upward trend likely',
+            confidence: 68,
+            target: 195.0,
             direction: 'bullish',
             probability: 68,
             target: 195.0,
@@ -112,6 +165,9 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
           },
           {
             timeframe: '3 Months',
+            prediction: 'Market consolidation phase',
+            confidence: 55,
+            target: 175.0,
             direction: 'neutral',
             probability: 55,
             target: 175.0,
@@ -173,25 +229,25 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
         <CardContent>
           <div className="flex items-center justify-between mb-4">
             <span className="text-4xl font-bold text-white">
-              {insights.overallScore.toFixed(0)}/100
+              {insights?.overallScore.toFixed(0)}/100
             </span>
             <Badge
               className={`text-lg px-4 py-2 ${
-                insights.overallScore >= 80
+                (insights?.overallScore ?? 0) >= 80
                   ? 'bg-green-500'
-                  : insights.overallScore >= 60
+                  : (insights?.overallScore ?? 0) >= 60
                     ? 'bg-yellow-500'
                     : 'bg-red-500'
               }`}
             >
-              {insights.overallScore >= 80
+              {(insights?.overallScore ?? 0) >= 80
                 ? 'Strong Buy'
-                : insights.overallScore >= 60
+                : (insights?.overallScore ?? 0) >= 60
                   ? 'Hold'
                   : 'Sell'}
             </Badge>
           </div>
-          <Progress value={insights.overallScore} className="h-3" />
+          <Progress value={insights?.overallScore ?? 0} className="h-3" />
         </CardContent>
       </Card>
 
@@ -208,24 +264,24 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
                   <TrendingUp className="h-4 w-4 mr-2" />
                   Bullish
                 </span>
-                <span className="text-white">{insights.sentiment.bullish.toFixed(0)}%</span>
+                <span className="text-white">{insights?.sentiment.bullish.toFixed(0)}%</span>
               </div>
-              <Progress value={insights.sentiment.bullish} className="h-2" />
+              <Progress value={insights?.sentiment.bullish ?? 0} className="h-2" />
 
               <div className="flex justify-between items-center">
                 <span className="text-red-400 flex items-center">
                   <TrendingDown className="h-4 w-4 mr-2" />
                   Bearish
                 </span>
-                <span className="text-white">{insights.sentiment.bearish.toFixed(0)}%</span>
+                <span className="text-white">{insights?.sentiment.bearish.toFixed(0)}%</span>
               </div>
-              <Progress value={insights.sentiment.bearish} className="h-2" />
+              <Progress value={insights?.sentiment.bearish ?? 0} className="h-2" />
 
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Neutral</span>
-                <span className="text-white">{insights.sentiment.neutral.toFixed(0)}%</span>
+                <span className="text-white">{insights?.sentiment.neutral.toFixed(0)}%</span>
               </div>
-              <Progress value={insights.sentiment.neutral} className="h-2" />
+              <Progress value={insights?.sentiment.neutral ?? 0} className="h-2" />
             </div>
           </CardContent>
         </Card>
@@ -240,29 +296,29 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
               <div>
                 <p className="text-gray-400 text-sm">RSI</p>
                 <p className="text-white font-semibold">
-                  {insights.technicalAnalysis.rsi.toFixed(1)}
+                  {insights?.technicalAnalysis.rsi.toFixed(1)}
                 </p>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">MACD</p>
                 <Badge
                   variant={
-                    insights.technicalAnalysis.macd === 'bullish' ? 'default' : 'destructive'
+                    insights?.technicalAnalysis.macd === 'bullish' ? 'default' : 'destructive'
                   }
                 >
-                  {insights.technicalAnalysis.macd}
+                  {insights?.technicalAnalysis.macd}
                 </Badge>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Support</p>
                 <p className="text-green-400 font-semibold">
-                  ${insights.technicalAnalysis.support}
+                  ${insights?.technicalAnalysis.support}
                 </p>
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Resistance</p>
                 <p className="text-red-400 font-semibold">
-                  ${insights.technicalAnalysis.resistance}
+                  ${insights?.technicalAnalysis.resistance}
                 </p>
               </div>
             </div>
@@ -278,7 +334,11 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
+<<<<<<< HEAD
             {insights.aiPredictions.map((prediction: Prediction, index: number) => (
+=======
+            {insights?.aiPredictions.map((prediction, index) => (
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
@@ -307,7 +367,11 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
+<<<<<<< HEAD
             {insights.riskFactors.map((risk: RiskFactor, index: number) => (
+=======
+            {insights?.riskFactors.map((risk, index) => (
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               <div key={index} className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-white">{risk.factor}</span>
@@ -340,7 +404,11 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<<<<<<< HEAD
             {insights.marketCatalysts.map((catalyst: MarketCatalyst, index: number) => (
+=======
+            {insights?.catalysts.map((catalyst, index) => (
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               <div key={index} className="p-4 bg-white/5 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-white font-medium">{catalyst.event}</h4>

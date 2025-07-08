@@ -34,4 +34,5 @@ echo "Frontend: http://localhost:3000"
 echo "Backend:  http://localhost:8000/docs"
 
 chmod +x install-docker-and-run-demo.sh
+./install-docker-and-run-demo.shchmod +x install-docker-and-run-demo.sh
 ./install-docker-and-run-demo.sh

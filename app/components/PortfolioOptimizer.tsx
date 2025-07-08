@@ -2,14 +2,23 @@
 import React from 'react';
 
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
+<<<<<<< HEAD
 interface Stock {
+=======
+interface PortfolioStock {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   symbol: string;
   weight: number;
   currentPrice: number;
@@ -17,6 +26,7 @@ interface Stock {
   risk: number;
 }
 
+<<<<<<< HEAD
 interface Recommendation {
   action: string;
   symbol: string;
@@ -36,6 +46,39 @@ interface OptimizationResult {
 
 export default function PortfolioOptimizer() {
   const [portfolio, setPortfolio] = useState<Stock[]>([]);
+=======
+interface OptimizationResult {
+  expectedReturn: number;
+  volatility: number;
+  risk: number;
+  sharpeRatio: number;
+  maxDrawdown: number;
+  diversificationScore: number;
+  recommendations: Array<{
+    action: string;
+    symbol: string;
+    currentWeight: number;
+    suggestedWeight: number;
+    reason: string;
+    impact: string;
+  }>;
+  allocations: Array<{
+    symbol: string;
+    currentWeight: number;
+    optimizedWeight: number;
+    allocation: number;
+  }>;
+  metrics: {
+    portfolioValue: number;
+    annualizedReturn: number;
+    riskAdjustedReturn: number;
+    diversificationRatio: number;
+  };
+}
+
+export default function PortfolioOptimizer() {
+  const [portfolio, setPortfolio] = useState<PortfolioStock[]>([]);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   const [newStock, setNewStock] = useState('');
   const [newWeight, setNewWeight] = useState('');
   const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
@@ -66,34 +109,65 @@ export default function PortfolioOptimizer() {
       const sharpeRatio = weightedReturn / portfolioRisk;
 
       setOptimization({
-        totalWeight,
         expectedReturn: weightedReturn,
+        volatility: portfolioRisk,
         risk: portfolioRisk,
         sharpeRatio,
-        diversificationScore: Math.min(portfolio.length * 15, 100),
+        maxDrawdown: 12.5,
+        diversificationScore: 78,
         recommendations: [
           {
             action: 'Reduce',
             symbol: 'TSLA',
+            currentWeight: 10,
+            suggestedWeight: 8,
             reason: 'High volatility',
+<<<<<<< HEAD
             impact: 'Lower risk by 8%',
             suggestedWeight: 8.5,
+=======
+            impact: 'Medium',
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
           },
           {
             action: 'Increase',
             symbol: 'MSFT',
+            currentWeight: 20,
+            suggestedWeight: 22,
             reason: 'Stable growth',
+<<<<<<< HEAD
             impact: 'Improve Sharpe ratio',
             suggestedWeight: 25.0,
+=======
+            impact: 'High',
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
           },
           {
             action: 'Add',
             symbol: 'VTI',
+            currentWeight: 0,
+            suggestedWeight: 5,
             reason: 'Diversification',
+<<<<<<< HEAD
             impact: 'Reduce concentration risk',
             suggestedWeight: 15.0,
+=======
+            impact: 'Low',
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
           },
         ],
+        allocations: portfolio.map(stock => ({
+          symbol: stock.symbol,
+          currentWeight: stock.weight,
+          optimizedWeight: stock.weight, // Placeholder
+          allocation: (stock.weight / totalWeight) * 100,
+        })),
+        metrics: {
+          portfolioValue: 100000, // Placeholder
+          annualizedReturn: 0, // Placeholder
+          riskAdjustedReturn: 0, // Placeholder
+          diversificationRatio: 0, // Placeholder
+        },
       });
     }
   }, [portfolio]);

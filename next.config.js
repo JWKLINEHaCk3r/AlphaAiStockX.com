@@ -6,9 +6,13 @@ const SelfPolyfillPlugin = require('./scripts/self-polyfill-plugin.js');
 
 const nextConfig = {
   reactStrictMode: true,
+<<<<<<< HEAD
   // output: 'export', // Temporarily disabled to debug SSR issues
   trailingSlash: true,
   // distDir: 'out',
+=======
+  output: 'standalone',
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -16,6 +20,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   experimental: {
+<<<<<<< HEAD
     // Disable static optimization to avoid SSR issues during development
     optimizePackageImports: false,
     // Disable static export to prevent SSR issues
@@ -28,6 +33,9 @@ const nextConfig = {
     // turbo: false,
     // Disable static generation to prevent CSS processing errors
     staticPageGenerationTimeout: 0,
+=======
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   },
   // Moved from experimental
   serverExternalPackages: ['sharp'],
@@ -241,4 +249,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-module.exports = nextConfig;
+export default nextConfig;

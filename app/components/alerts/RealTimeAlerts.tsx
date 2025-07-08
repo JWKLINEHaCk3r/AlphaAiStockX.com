@@ -44,10 +44,17 @@ import {
 'use client';
 import React from 'react';
 
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+=======
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { 
@@ -85,9 +92,62 @@ interface AlertSettings {
   earnings: boolean;
 }
 
+interface Alert {
+  id: number;
+  icon: React.ComponentType<any>;
+  color: string;
+  title: string;
+  symbol: string;
+  priority: 'high' | 'medium' | 'low';
+  message: string;
+  timestamp: Date;
+  read: boolean;
+}
+
+interface AlertType {
+  type: keyof typeof messages;
+  icon: React.ComponentType<any>;
+  color: string;
+  title: string;
+  symbol: string;
+  priority: 'high' | 'medium' | 'low';
+}
+
+const messages = {
+  price_breakout: [
+    "Stock has broken resistance at ",
+    "Price momentum increasing above ",
+    "Significant price movement detected at "
+  ],
+  volume_spike: [
+    "Unusual volume detected for ",
+    "Volume spike of 300% for ",
+    "High trading activity in "
+  ],
+  ai_signal: [
+    "AI model suggests BUY signal for ",
+    "Machine learning predicts upward move in ",
+    "Neural network recommends position in "
+  ],
+  news_impact: [
+    "Breaking news affecting ",
+    "Earnings announcement for ",
+    "Major news event impacting "
+  ],
+  options_flow: [
+    "Large options flow detected in ",
+    "Unusual options activity for ",
+    "Big institutional bet on "
+  ]
+} as const;
+
 export default function RealTimeAlerts() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
+<<<<<<< HEAD
   const [alertSettings, setAlertSettings] = useState<AlertSettings>({
+=======
+  const [alertSettings, setAlertSettings] = useState({
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     priceAlerts: true,
     volumeAlerts: true,
     newsAlerts: true,
@@ -95,7 +155,13 @@ export default function RealTimeAlerts() {
     optionsFlow: true,
     earnings: true,
   });
+<<<<<<< HEAD
   const [customAlerts] = useState<Alert[]>([]);
+=======
+  const [customAlerts, setCustomAlerts] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const [enableNotifications, setEnableNotifications] = useState(true);
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   useEffect(() => {
     // Simulate real-time alerts
@@ -202,9 +268,13 @@ export default function RealTimeAlerts() {
   };
 
   const markAsRead = (alertId: number) => {
+<<<<<<< HEAD
     setAlerts(prev =>
       prev.map((alert: any) => (alert.id === alertId ? { ...alert, read: true } : alert))
     );
+=======
+    setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   };
 
   const getPriorityColor = (priority: string) => {

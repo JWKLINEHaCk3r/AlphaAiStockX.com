@@ -68,6 +68,7 @@ export const metadata: Metadata = {
   generator: 'Next.js 14 + AlphaAI',
 };
 
+<<<<<<< HEAD
 // Add separate viewport export (Next.js 14+ requirement)
 export const viewport = {
   width: 'device-width',
@@ -80,6 +81,8 @@ export const viewport = {
   ],
 };
 
+=======
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">

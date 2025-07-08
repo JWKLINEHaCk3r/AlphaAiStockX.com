@@ -1,0 +1,190 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Shield, AlertTriangle, CheckCircle } from 'lucide-react';
+
+export default function IONOSSSLSetup() {
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <h1 className="text-3xl font-bold mb-6">Setting Up SSL on IONOS</h1>
+
+      <Alert className="mb-6 border-green-500 bg-green-50">
+        <Shield className="h-5 w-5 text-green-500" />
+        <AlertTitle className="text-green-700">Security First</AlertTitle>
+        <AlertDescription className="text-green-600">
+          SSL encryption is essential for financial platforms like AlphaAIStockX to protect user
+          data and build trust.
+        </AlertDescription>
+      </Alert>
+
+      <div className="grid gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Why SSL is Critical for AlphaAIStockX</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>User Trust:</strong> Visitors expect secure connections, especially for
+                financial platforms
+              </li>
+              <li>
+                <strong>Data Protection:</strong> Encrypts sensitive user information and financial
+                data
+              </li>
+              <li>
+                <strong>SEO Benefits:</strong> Google prioritizes secure websites in search rankings
+              </li>
+              <li>
+                <strong>Browser Compatibility:</strong> Modern browsers warn users about non-secure
+                sites
+              </li>
+              <li>
+                <strong>Regulatory Compliance:</strong> Helps meet financial industry security
+                requirements
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Option 1: Free SSL Certificate from IONOS</CardTitle>
+            <CardDescription>
+              IONOS offers free SSL certificates with most hosting plans
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>Log in to your IONOS Control Panel</li>
+              <li>Go to "Domains & SSL" → "SSL Certificates"</li>
+              <li>Select your domain from the list</li>
+              <li>Click "Order SSL Certificate" or "Activate Free SSL"</li>
+              <li>Choose "DV Certificate" (Domain Validation)</li>
+              <li>Follow the verification process (usually automatic with IONOS hosting)</li>
+              <li>
+                Wait for the certificate to be issued (typically a few minutes to a few hours)
+              </li>
+            </ol>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Option 2: Premium SSL Certificate</CardTitle>
+            <CardDescription>For enhanced security and trust features</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">
+              For a financial platform like AlphaAIStockX, consider upgrading to a premium SSL
+              certificate:
+            </p>
+
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>Organization Validation (OV) SSL:</strong> Verifies your business identity
+              </li>
+              <li>
+                <strong>Extended Validation (EV) SSL:</strong> Highest level of validation, shows
+                company name in browser
+              </li>
+              <li>
+                <strong>Wildcard SSL:</strong> Covers your main domain and all subdomains
+              </li>
+            </ul>
+
+            <p className="mt-4 mb-2">To purchase and install a premium certificate:</p>
+
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>In IONOS Control Panel, go to "Domains & SSL" → "SSL Certificates"</li>
+              <li>Click "Buy SSL Certificate"</li>
+              <li>Select your preferred certificate type</li>
+              <li>Complete the purchase process</li>
+              <li>Follow the validation steps (may require business documentation)</li>
+              <li>Install the certificate when issued</li>
+            </ol>
+
+            <div className="mt-4 flex items-start gap-2 bg-amber-50 p-3 rounded-md border border-amber-200">
+              <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
+              <p className="text-amber-700 text-sm">
+                Premium certificates can take 1-5 business days for validation, depending on the
+                type. Plan accordingly.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Activating SSL for Your Website</CardTitle>
+            <CardDescription>Configure your site to use the SSL certificate</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>
+                After your SSL certificate is issued, go to "Domains & SSL" → "SSL Certificates"
+              </li>
+              <li>Find your domain and click "Assign"</li>
+              <li>Select the hosting package where your website is hosted</li>
+              <li>Save the changes</li>
+              <li>Wait for the SSL configuration to complete (usually a few minutes)</li>
+            </ol>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Force HTTPS Redirection</CardTitle>
+            <CardDescription>Ensure all traffic uses secure connections</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">
+              Create or edit the <code className="bg-gray-100 px-1 py-0.5 rounded">.htaccess</code>{' '}
+              file in your web root directory and add:
+            </p>
+
+            <div className="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm mb-4 whitespace-pre-wrap">
+              {`# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`}
+            </div>
+
+            <p>This code redirects all HTTP traffic to HTTPS, ensuring secure connections.</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-green-500">
+          <CardHeader className="bg-green-50">
+            <CardTitle className="flex items-center gap-2 text-green-700">
+              <CheckCircle className="h-5 w-5 text-green-500" />
+              Verify SSL Installation
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>Visit your website using https:// (e.g., https://alphaaistockx.com)</li>
+              <li>Check for the padlock icon in the browser address bar</li>
+              <li>Click the padlock to view certificate details</li>
+              <li>
+                Use an SSL checker tool like{' '}
+                <a
+                  href="https://www.ssllabs.com/ssltest/"
+                  className="text-blue-600 hover:underline"
+                >
+                  SSL Labs
+                </a>{' '}
+                to verify proper configuration
+              </li>
+            </ol>
+            <div className="mt-4 p-3 bg-green-50 rounded-md border border-green-200">
+              <p className="text-sm text-green-700">
+                <strong>Success:</strong> When properly configured, your site will show a secure
+                padlock icon and all pages will automatically load via HTTPS.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}

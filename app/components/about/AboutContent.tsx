@@ -43,9 +43,15 @@ import {
 
 'use client';
 
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+=======
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -340,7 +346,11 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
       {/* Platform Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {Object.entries(platformStats).map(([key, value]) => {
+<<<<<<< HEAD
           const statConfig: Record<string, { icon: React.ComponentType<any>; label: string; color: string }> = {
+=======
+          const statConfig: Record<string, { icon: any; label: string; color: string }> = {
+>>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
             totalUsers: { icon: Users, label: 'Active Users', color: 'text-blue-400' },
             successRate: { icon: Target, label: 'Success Rate', color: 'text-green-400' },
             avgReturns: { icon: TrendingUp, label: 'Avg Returns', color: 'text-purple-400' },
