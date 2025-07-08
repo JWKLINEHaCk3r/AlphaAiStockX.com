@@ -1,8 +1,14 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Progress } from "../../../components/ui/progress";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React from 'react';
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 import { CheckCircle, AlertTriangle, Globe, Upload, Settings, Shield } from 'lucide-react';
 
 export default function IONOSQuickFix() {

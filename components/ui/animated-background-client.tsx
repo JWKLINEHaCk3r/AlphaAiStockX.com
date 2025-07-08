@@ -1,4 +1,4 @@
-import { AnimatedBackground } from "@/components/ui/animated-background-client";
+import { AnimatedBackground } from "./animated-background-client";
 'use client';
 import React from 'react';
 

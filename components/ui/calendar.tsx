@@ -1,4 +1,4 @@
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "./calendar";
 'use client';
 import React from 'react';
 

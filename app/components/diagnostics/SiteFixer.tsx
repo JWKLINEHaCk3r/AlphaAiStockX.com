@@ -1,10 +1,17 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
+import { AlertTitle } from "../../../components/ui/alert";
+import { AlertDescription } from "../../../components/ui/alert";
+import { Alert } from "../../../components/ui/alert";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardDescription } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import Button from '@/components/ui/button';
 import { CheckCircle, AlertTriangle, XCircle, RefreshCw, Globe, Zap, Shield } from 'lucide-react';
 
 interface FixStatus {

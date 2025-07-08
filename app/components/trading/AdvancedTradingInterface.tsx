@@ -1,27 +1,24 @@
-import { SelectValue } from "@/components/ui/select";
-import { SelectTrigger } from "@/components/ui/select";
-import { SelectItem } from "@/components/ui/select";
-import { SelectContent } from "@/components/ui/select";
-import { Select } from "@/components/ui/select";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Switch } from "../../../components/ui/switch";
+import { SelectValue } from "../../../components/ui/select";
+import { SelectTrigger } from "../../../components/ui/select";
+import { SelectItem } from "../../../components/ui/select";
+import { SelectContent } from "../../../components/ui/select";
+import { Select } from "../../../components/ui/select";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 // Advanced Trading Interface - Professional Chart & Order Entry
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
-import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
 import {
   TrendingUp,
   TrendingDown,

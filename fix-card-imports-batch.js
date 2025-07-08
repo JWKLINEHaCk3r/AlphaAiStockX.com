@@ -1,11 +1,12 @@
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { CardTitle } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
+import { Badge } from "./components/ui/badge";
+import { Progress } from "./components/ui/progress";
+import { CardTitle } from "./components/ui/card";
+import { CardHeader } from "./components/ui/card";
+import { CardDescription } from "./components/ui/card";
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -71,7 +72,7 @@ function fixCardImports(filePath) {
         if (/\bCardTitle\b/.test(content)) cardComponents.push('CardTitle');
         if (/\bCardDescription\b/.test(content)) cardComponents.push('CardDescription');
 
-        const cardImport = `import { ${cardComponents.join(', ')} } from '@/components/ui/card';\n`;
+        const cardImport = `\n`;
         content = content.replace(insertAfter, insertAfter + cardImport);
         modified = true;
       }

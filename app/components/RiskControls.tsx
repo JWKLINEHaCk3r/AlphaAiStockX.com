@@ -1,17 +1,19 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { Badge } from "../../components/ui/badge";
+import { Progress } from "../../components/ui/progress";
+import { Switch } from "../../components/ui/switch";
+import { Input } from "../../components/ui/input";
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 import React from 'react';
 
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 =======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Switch } from '@/components/ui/switch';
 import { Shield, AlertTriangle, TrendingDown, Activity, Target } from 'lucide-react';
 
 interface BotSettings {

@@ -1,9 +1,14 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { Input } from "../../components/ui/input";
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+import React from 'react';
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Search, TrendingUp, Brain, Zap } from 'lucide-react';
 import StockResult from './StockResult';
 

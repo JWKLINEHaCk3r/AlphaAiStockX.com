@@ -1,3 +1,6 @@
+import { Card, CardContent } from './components/ui/card';
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -14,7 +17,7 @@ function processFile(filePath) {
     // Fix ntent imports
     content = content.replace(
       /import { ntent,([^}]+) } from '@\/components\/ui\/card';/g,
-      "import { Card, CardContent,$1 } from '@/components/ui/card';"
+      ""
     );
 
     // Remove duplicate Card imports from button

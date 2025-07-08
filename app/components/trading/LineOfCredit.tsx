@@ -1,20 +1,22 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Slider } from "../../../components/ui/slider";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 
 import type React from 'react';
 <<<<<<< HEAD
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
-import { Button } from '@/components/ui/button';
 =======
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
 import { CheckCheck, CreditCard, Wallet } from 'lucide-react';
 
 interface LineOfCreditProps {

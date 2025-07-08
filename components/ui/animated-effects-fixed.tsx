@@ -1,4 +1,4 @@
-import { VoiceControl } from "@/components/ui/voice-control";
+import { VoiceControl } from "./voice-control";
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';

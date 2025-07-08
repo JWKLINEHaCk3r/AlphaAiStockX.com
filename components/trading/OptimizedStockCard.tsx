@@ -1,9 +1,13 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card';
+import { Badge } from "../ui/badge";
+import { CardTitle } from "../ui/card";
+import { CardHeader } from "../ui/card";
+import { CardContent } from "../ui/card";
+import { Card } from "../ui/card";
+import { Button } from "../ui/button";
 'use client';
 
 import React, { memo, useCallback, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { TrendingUp, TrendingDown, DollarSign, Activity } from 'lucide-react';
 
 interface StockData {

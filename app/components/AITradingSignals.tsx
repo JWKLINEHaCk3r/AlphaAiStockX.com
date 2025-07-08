@@ -1,10 +1,15 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { Badge } from "../../components/ui/badge";
+import { Progress } from "../../components/ui/progress";
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+import React from 'react';
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { 
   Brain, 
   TrendingUp, 

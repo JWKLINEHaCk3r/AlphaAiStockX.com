@@ -1,7 +1,7 @@
-import { TabsTrigger } from "@/components/ui/tabs";
-import { TabsList } from "@/components/ui/tabs";
-import { TabsContent } from "@/components/ui/tabs";
-import { Tabs } from "@/components/ui/tabs";
+import { TabsTrigger } from "./tabs";
+import { TabsList } from "./tabs";
+import { TabsContent } from "./tabs";
+import { Tabs } from "./tabs";
 'use client';
 import React from 'react';
 

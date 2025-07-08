@@ -1,23 +1,23 @@
-import { DialogTrigger } from "@/components/ui/dialog";
-import { DialogTitle } from "@/components/ui/dialog";
-import { DialogHeader } from "@/components/ui/dialog";
-import { DialogContent } from "@/components/ui/dialog";
-import { Dialog } from "@/components/ui/dialog";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { DialogTrigger } from "../../../components/ui/dialog";
+import { DialogTitle } from "../../../components/ui/dialog";
+import { DialogHeader } from "../../../components/ui/dialog";
+import { DialogContent } from "../../../components/ui/dialog";
+import { Dialog } from "../../../components/ui/dialog";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import {
   CheckCircle,
   TrendingUp,

@@ -1,4 +1,4 @@
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "./switch";
 'use client';
 import React from 'react';
 

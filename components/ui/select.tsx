@@ -1,9 +1,9 @@
-import { SelectValue } from "@/components/ui/select";
-import { SelectTrigger } from "@/components/ui/select";
-import { SelectItem } from "@/components/ui/select";
-import { SelectContent } from "@/components/ui/select";
-import { Select } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+import { SelectValue } from "./select";
+import { SelectTrigger } from "./select";
+import { SelectItem } from "./select";
+import { SelectContent } from "./select";
+import { Select } from "./select";
+import { Label } from "./label";
 import React from 'react';
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';

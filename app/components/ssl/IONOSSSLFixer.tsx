@@ -1,5 +1,14 @@
-import { Progress } from "@/components/ui/progress";
-import { Select } from "@/components/ui/select";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { AlertTitle } from "../../../components/ui/alert";
+import { AlertDescription } from "../../../components/ui/alert";
+import { Alert } from "../../../components/ui/alert";
+import { Progress } from "../../../components/ui/progress";
+import { Select } from "../../../components/ui/select";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import {
   AIStockPrediction,
   SportsEvent,
@@ -47,14 +56,9 @@ import React from 'react';
 
 import { useState } from 'react';
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 =======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { CheckCircle, AlertTriangle, Shield, Settings, RefreshCw, FileCode } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function IONOSSSLFixer() {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);

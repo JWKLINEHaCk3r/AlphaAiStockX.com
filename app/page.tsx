@@ -1,3 +1,10 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card';
+import { CardTitle } from "../components/ui/card";
+import { CardHeader } from "../components/ui/card";
+import { CardDescription } from "../components/ui/card";
+import { CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 import React from 'react';
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
@@ -7,8 +14,6 @@ export const revalidate = 0;
 export { default } from './page-next-level';
 =======
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 import { Brain, Sparkles, TrendingUp, Zap, ArrowRight } from 'lucide-react';
 import StockSearch from './components/StockSearch';
 import FeatureList from './components/FeatureList';

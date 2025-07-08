@@ -1,132 +1,138 @@
-import { Advanced3DEffects } from "@/components/ui/advanced-3d-effects";
-import { Enhanced3DEffects } from "@/components/ui/enhanced-effects";
-import { AnimatedBackground } from "@/components/ui/animated-background-client";
-import { VoiceControl } from "@/components/ui/voice-control";
-import { TradingDashboard } from "@/components/ui/trading-dashboard-demo";
-import { NavigationMenuLink } from "@/components/ui/navigation";
-import { NavigationMenuItem } from "@/components/ui/navigation";
-import { NavigationMenuTrigger } from "@/components/ui/navigation";
-import { NavigationMenuContent } from "@/components/ui/navigation";
-import { NavigationMenuList } from "@/components/ui/navigation";
-import { NavigationMenu } from "@/components/ui/navigation";
-import { Calendar } from "@/components/ui/calendar";
-import { PopoverTrigger } from "@/components/ui/popover";
-import { PopoverContent } from "@/components/ui/popover";
-import { Popover } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Toaster } from "@/components/ui/toaster";
-import { Toast } from "@/components/ui/toast";
-import { TabsTrigger } from "@/components/ui/tabs";
-import { TabsList } from "@/components/ui/tabs";
-import { TabsContent } from "@/components/ui/tabs";
-import { Tabs } from "@/components/ui/tabs";
-import { AlertTitle } from "@/components/ui/alert";
-import { AlertDescription } from "@/components/ui/alert";
-import { Alert } from "@/components/ui/alert";
-import { DialogTrigger } from "@/components/ui/dialog";
-import { DialogTitle } from "@/components/ui/dialog";
-import { DialogHeader } from "@/components/ui/dialog";
-import { DialogFooter } from "@/components/ui/dialog";
-import { DialogDescription } from "@/components/ui/dialog";
-import { DialogContent } from "@/components/ui/dialog";
-import { Dialog } from "@/components/ui/dialog";
-import { AvatarImage } from "@/components/ui/avatar";
-import { AvatarFallback } from "@/components/ui/avatar";
-import { Avatar } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
-import { SelectValue } from "@/components/ui/select";
-import { SelectTrigger } from "@/components/ui/select";
-import { SelectItem } from "@/components/ui/select";
-import { SelectContent } from "@/components/ui/select";
-import { Select } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { CardTitle } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardFooter } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-#!/usr/bin/env node
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
+import { Advanced3DEffects } from "./components/ui/advanced-3d-effects";
+import { Enhanced3DEffects } from "./components/ui/enhanced-effects";
+import { AnimatedBackground } from "./components/ui/animated-background-client";
+import { VoiceControl } from "./components/ui/voice-control";
+import { TradingDashboard } from "./components/ui/trading-dashboard-demo";
+import { NavigationMenuLink } from "./components/ui/navigation";
+import { NavigationMenuItem } from "./components/ui/navigation";
+import { NavigationMenuTrigger } from "./components/ui/navigation";
+import { NavigationMenuContent } from "./components/ui/navigation";
+import { NavigationMenuList } from "./components/ui/navigation";
+import { NavigationMenu } from "./components/ui/navigation";
+import { Calendar } from "./components/ui/calendar";
+import { PopoverTrigger } from "./components/ui/popover";
+import { PopoverContent } from "./components/ui/popover";
+import { Popover } from "./components/ui/popover";
+import { ScrollArea } from "./components/ui/scroll-area";
+import { Toaster } from "./components/ui/toaster";
+import { Toast } from "./components/ui/toast";
+import { TabsTrigger } from "./components/ui/tabs";
+import { TabsList } from "./components/ui/tabs";
+import { TabsContent } from "./components/ui/tabs";
+import { Tabs } from "./components/ui/tabs";
+import { AlertTitle } from "./components/ui/alert";
+import { AlertDescription } from "./components/ui/alert";
+import { Alert } from "./components/ui/alert";
+import { DialogTrigger } from "./components/ui/dialog";
+import { DialogTitle } from "./components/ui/dialog";
+import { DialogHeader } from "./components/ui/dialog";
+import { DialogFooter } from "./components/ui/dialog";
+import { DialogDescription } from "./components/ui/dialog";
+import { DialogContent } from "./components/ui/dialog";
+import { Dialog } from "./components/ui/dialog";
+import { AvatarImage } from "./components/ui/avatar";
+import { AvatarFallback } from "./components/ui/avatar";
+import { Avatar } from "./components/ui/avatar";
+import { Badge } from "./components/ui/badge";
+import { Progress } from "./components/ui/progress";
+import { Slider } from "./components/ui/slider";
+import { Switch } from "./components/ui/switch";
+import { Checkbox } from "./components/ui/checkbox";
+import { SelectValue } from "./components/ui/select";
+import { SelectTrigger } from "./components/ui/select";
+import { SelectItem } from "./components/ui/select";
+import { SelectContent } from "./components/ui/select";
+import { Select } from "./components/ui/select";
+import { Textarea } from "./components/ui/textarea";
+import { Label } from "./components/ui/label";
+import { Input } from "./components/ui/input";
+import { CardTitle } from "./components/ui/card";
+import { CardHeader } from "./components/ui/card";
+import { CardFooter } from "./components/ui/card";
+import { CardDescription } from "./components/ui/card";
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
+// AlphaAI Stock Trading Platform - UI Import Fixer (Node.js ESM compatible)
+// This script uses only Node.js and npm modules, not Next.js path aliases
 
-/**
- * AlphaAI Stock Trading Platform - UI Import Fixer
- * Comprehensive fix for all UI component imports and dependencies
- */
-
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
 
 console.log('🚀 AlphaAI UI Import Fixer - Powering up the trading platform...');
 
-// UI Components mapping for automatic import resolution
+// Utility to get relative import path from a file to a component
+function getRelativeImportPath(filePath, componentPath) {
+  const fromDir = path.dirname(filePath);
+  let relPath = path.relative(fromDir, componentPath);
+  if (!relPath.startsWith('.')) relPath = './' + relPath;
+  // Remove .tsx/.ts/.js/.jsx extension for import
+  relPath = relPath.replace(/\\/g, '/').replace(/\.(tsx|ts|js|jsx)$/, '');
+  return relPath;
+}
+
+// UI Components mapping for automatic import resolution (relative paths)
 const UI_COMPONENTS = {
-  'Button': '@/components/ui/button',
-  'Card': '@/components/ui/card',
-  'CardContent': '@/components/ui/card',
-  'CardDescription': '@/components/ui/card',
-  'CardFooter': '@/components/ui/card',
-  'CardHeader': '@/components/ui/card',
-  'CardTitle': '@/components/ui/card',
-  'Input': '@/components/ui/input',
-  'Label': '@/components/ui/label',
-  'Textarea': '@/components/ui/textarea',
-  'Select': '@/components/ui/select',
-  'SelectContent': '@/components/ui/select',
-  'SelectItem': '@/components/ui/select',
-  'SelectTrigger': '@/components/ui/select',
-  'SelectValue': '@/components/ui/select',
-  'Checkbox': '@/components/ui/checkbox',
-  'Switch': '@/components/ui/switch',
-  'Slider': '@/components/ui/slider',
-  'Progress': '@/components/ui/progress',
-  'Badge': '@/components/ui/badge',
-  'Avatar': '@/components/ui/avatar',
-  'AvatarFallback': '@/components/ui/avatar',
-  'AvatarImage': '@/components/ui/avatar',
-  'Dialog': '@/components/ui/dialog',
-  'DialogContent': '@/components/ui/dialog',
-  'DialogDescription': '@/components/ui/dialog',
-  'DialogFooter': '@/components/ui/dialog',
-  'DialogHeader': '@/components/ui/dialog',
-  'DialogTitle': '@/components/ui/dialog',
-  'DialogTrigger': '@/components/ui/dialog',
-  'Alert': '@/components/ui/alert',
-  'AlertDescription': '@/components/ui/alert',
-  'AlertTitle': '@/components/ui/alert',
-  'Tabs': '@/components/ui/tabs',
-  'TabsContent': '@/components/ui/tabs',
-  'TabsList': '@/components/ui/tabs',
-  'TabsTrigger': '@/components/ui/tabs',
-  'Toast': '@/components/ui/toast',
-  'Toaster': '@/components/ui/toaster',
-  'ScrollArea': '@/components/ui/scroll-area',
-  'Popover': '@/components/ui/popover',
-  'PopoverContent': '@/components/ui/popover',
-  'PopoverTrigger': '@/components/ui/popover',
-  'Calendar': '@/components/ui/calendar',
-  'NavigationMenu': '@/components/ui/navigation',
-  'NavigationMenuList': '@/components/ui/navigation',
-  'NavigationMenuContent': '@/components/ui/navigation',
-  'NavigationMenuTrigger': '@/components/ui/navigation',
-  'NavigationMenuItem': '@/components/ui/navigation',
-  'NavigationMenuLink': '@/components/ui/navigation'
+  'Button': 'components/ui/button',
+  'Card': 'components/ui/card',
+  'CardContent': 'components/ui/card',
+  'CardDescription': 'components/ui/card',
+  'CardFooter': 'components/ui/card',
+  'CardHeader': 'components/ui/card',
+  'CardTitle': 'components/ui/card',
+  'Input': 'components/ui/input',
+  'Label': 'components/ui/label',
+  'Textarea': 'components/ui/textarea',
+  'Select': 'components/ui/select',
+  'SelectContent': 'components/ui/select',
+  'SelectItem': 'components/ui/select',
+  'SelectTrigger': 'components/ui/select',
+  'SelectValue': 'components/ui/select',
+  'Checkbox': 'components/ui/checkbox',
+  'Switch': 'components/ui/switch',
+  'Slider': 'components/ui/slider',
+  'Progress': 'components/ui/progress',
+  'Badge': 'components/ui/badge',
+  'Avatar': 'components/ui/avatar',
+  'AvatarFallback': 'components/ui/avatar',
+  'AvatarImage': 'components/ui/avatar',
+  'Dialog': 'components/ui/dialog',
+  'DialogContent': 'components/ui/dialog',
+  'DialogDescription': 'components/ui/dialog',
+  'DialogFooter': 'components/ui/dialog',
+  'DialogHeader': 'components/ui/dialog',
+  'DialogTitle': 'components/ui/dialog',
+  'DialogTrigger': 'components/ui/dialog',
+  'Alert': 'components/ui/alert',
+  'AlertDescription': 'components/ui/alert',
+  'AlertTitle': 'components/ui/alert',
+  'Tabs': 'components/ui/tabs',
+  'TabsContent': 'components/ui/tabs',
+  'TabsList': 'components/ui/tabs',
+  'TabsTrigger': 'components/ui/tabs',
+  'Toast': 'components/ui/toast',
+  'Toaster': 'components/ui/toaster',
+  'ScrollArea': 'components/ui/scroll-area',
+  'Popover': 'components/ui/popover',
+  'PopoverContent': 'components/ui/popover',
+  'PopoverTrigger': 'components/ui/popover',
+  'Calendar': 'components/ui/calendar',
+  'NavigationMenu': 'components/ui/navigation',
+  'NavigationMenuList': 'components/ui/navigation',
+  'NavigationMenuContent': 'components/ui/navigation',
+  'NavigationMenuTrigger': 'components/ui/navigation',
+  'NavigationMenuItem': 'components/ui/navigation',
+  'NavigationMenuLink': 'components/ui/navigation'
 };
 
-// AI Trading specific components
 const TRADING_COMPONENTS = {
-  'TradingDashboard': '@/components/ui/trading-dashboard-demo',
-  'VoiceControl': '@/components/ui/voice-control',
-  'AnimatedBackground': '@/components/ui/animated-background-client',
-  'Enhanced3DEffects': '@/components/ui/enhanced-effects',
-  'Advanced3DEffects': '@/components/ui/advanced-3d-effects'
+  'TradingDashboard': 'components/ui/trading-dashboard-demo',
+  'VoiceControl': 'components/ui/voice-control',
+  'AnimatedBackground': 'components/ui/animated-background-client',
+  'Enhanced3DEffects': 'components/ui/enhanced-effects',
+  'Advanced3DEffects': 'components/ui/advanced-3d-effects'
 };
 
 async function fixUIImports() {
@@ -145,10 +151,13 @@ async function fixUIImports() {
       let modified = false;
 
       // Fix missing UI component imports
-      for (const [component, importPath] of Object.entries(UI_COMPONENTS)) {
+      for (const [component, relComponentPath] of Object.entries(UI_COMPONENTS)) {
         const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
-        const importRegex = new RegExp(`import.*${component}.*from.*['"]${importPath}['"]`, 'g');
-        
+        // Remove any existing alias import for this component
+        content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
+        const absComponentPath = path.join(process.cwd(), relComponentPath + '.tsx');
+        const importPath = getRelativeImportPath(filePath, absComponentPath);
+        const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
         if (componentRegex.test(content) && !importRegex.test(content)) {
           // Add import at the top
           const importStatement = `import { ${component} } from "${importPath}";\n`;
@@ -159,10 +168,12 @@ async function fixUIImports() {
       }
 
       // Fix trading component imports
-      for (const [component, importPath] of Object.entries(TRADING_COMPONENTS)) {
+      for (const [component, relComponentPath] of Object.entries(TRADING_COMPONENTS)) {
         const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
-        const importRegex = new RegExp(`import.*${component}.*from.*['"]${importPath}['"]`, 'g');
-        
+        content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
+        const absComponentPath = path.join(process.cwd(), relComponentPath + '.tsx');
+        const importPath = getRelativeImportPath(filePath, absComponentPath);
+        const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
         if (componentRegex.test(content) && !importRegex.test(content)) {
           const importStatement = `import { ${component} } from "${importPath}";\n`;
           content = importStatement + content;

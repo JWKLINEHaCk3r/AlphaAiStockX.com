@@ -1,4 +1,4 @@
-import { Toast } from "@/components/ui/toast";
+import { Toast } from "./toast";
 'use client';
 import React from 'react';
 

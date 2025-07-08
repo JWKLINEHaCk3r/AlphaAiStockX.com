@@ -1,8 +1,8 @@
+import { Button } from "./button";
 import React from 'react';
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

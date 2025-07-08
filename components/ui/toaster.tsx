@@ -1,5 +1,5 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toast } from "@/components/ui/toast";
+import { Toaster } from "./toaster";
+import { Toast } from "./toast";
 'use client';
 import React from 'react';
 

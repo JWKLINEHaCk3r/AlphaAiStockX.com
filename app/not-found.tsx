@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import React from 'react';
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
@@ -7,7 +8,6 @@ import Link from 'next/link';
 <<<<<<< HEAD
 =======
 import Button from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Home, TrendingUp, AlertCircle } from 'lucide-react';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 

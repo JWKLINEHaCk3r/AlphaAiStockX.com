@@ -1,32 +1,24 @@
-import { CardTitle } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardFooter } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card';
+import { AlertDescription } from "../../../components/ui/alert";
+import { Alert } from "../../../components/ui/alert";
+import { Checkbox } from "../../../components/ui/checkbox";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardFooter } from "../../../components/ui/card";
+import { CardDescription } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 
 <<<<<<< HEAD
 import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 =======
 import { useState } from 'react';
-import { CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface SignInFormProps {
   onSignIn: (data: { email: string; name: string }) => void;

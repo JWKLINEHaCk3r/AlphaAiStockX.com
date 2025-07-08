@@ -1,8 +1,11 @@
-import { CardTitle } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
+import { Badge } from "./components/ui/badge";
+import { CardTitle } from "./components/ui/card";
+import { CardHeader } from "./components/ui/card";
+import { CardDescription } from "./components/ui/card";
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -50,16 +53,7 @@ function fixMissingImports(filePath) {
       // Find insertion point after existing imports
       const importLines = content.split('\n').filter(line => line.trim().startsWith('import'));
 
-      if (importLines.length > 0) {
-        const cardComponents = [];
-        if (/\bCard\b(?!\w)/.test(content)) cardComponents.push('Card');
-        if (/\bCardContent\b/.test(content)) cardComponents.push('CardContent');
-        if (/\bCardHeader\b/.test(content)) cardComponents.push('CardHeader');
-        if (/\bCardTitle\b/.test(content)) cardComponents.push('CardTitle');
-        if (/\bCardDescription\b/.test(content)) cardComponents.push('CardDescription');
-
-        if (cardComponents.length > 0) {
-          const cardImport = `import { ${cardComponents.join(', ')} } from '@/components/ui/card';`;
+      if (`;
 
           // Find the last import line
           const lastImportIndex = content.lastIndexOf('import ');
@@ -85,7 +79,7 @@ function fixMissingImports(filePath) {
       const nextLineIndex = content.indexOf('\n', lastImportIndex);
 
       if (nextLineIndex !== -1) {
-        const badgeImport = `import { Badge } from '@/components/ui/badge';`;
+        const badgeImport = ``;
         content =
           content.slice(0, nextLineIndex + 1) +
           badgeImport +
@@ -103,7 +97,7 @@ function fixMissingImports(filePath) {
       const nextLineIndex = content.indexOf('\n', lastImportIndex);
 
       if (nextLineIndex !== -1) {
-        const buttonImport = `import { Button } from '@/components/ui/button';`;
+        const buttonImport = ``;
         content =
           content.slice(0, nextLineIndex + 1) +
           buttonImport +

@@ -1,16 +1,18 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
+import { Badge } from "../../../components/ui/badge";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardDescription } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 import React from 'react';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 =======
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   Shield,

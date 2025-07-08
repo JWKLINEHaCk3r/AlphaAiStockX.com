@@ -1,5 +1,8 @@
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
 import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ErrorChecker from './ErrorChecker';
 import BuildValidator from './BuildValidator';
 import DeploymentChecklist from './DeploymentChecklist';

@@ -1,14 +1,20 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
+import { AlertTitle } from "../../../components/ui/alert";
+import { AlertDescription } from "../../../components/ui/alert";
+import { Alert } from "../../../components/ui/alert";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardDescription } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
 <<<<<<< HEAD
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 =======
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import Button from '@/components/ui/button';
 import {
   CheckCircle,
   AlertTriangle,

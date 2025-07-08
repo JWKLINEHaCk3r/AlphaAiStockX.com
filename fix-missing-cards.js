@@ -5,8 +5,8 @@
  * AI-powered component recovery and generation system
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components...');
 
@@ -14,20 +14,20 @@ console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components.
 function generateMissingCards() {
   const components = {
     'trading-cards.tsx': `import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card.tsx';
+import { Badge } from './badge';
+import { Button } from './button';
+import { Progress } from './progress';
 import { TrendingUp, TrendingDown, Brain, Zap, DollarSign, Target } from 'lucide-react';
 
 // AI Market Analysis Card
-export const AIMarketCard = ({ 
-  symbol, 
-  price, 
-  change, 
-  aiConfidence, 
+export const AIMarketCard = ({
+  symbol,
+  price,
+  change,
+  aiConfidence,
   aiRecommendation,
-  isLoading = false 
+  isLoading = false
 }: {
   symbol: string;
   price: number;
@@ -38,15 +38,8 @@ export const AIMarketCard = ({
 }) => {
   const isPositive = change >= 0;
   const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red';
-  
   return (
-    <Card className={`relative overflow-hidden transition-all duration-500 hover:scale-105 \${
-      isLoading ? 'animate-pulse' : ''
-    } \${
-      aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' :
-      aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' :
-      'border-yellow-500/50 shadow-yellow-500/25'
-    } shadow-lg`}>
+    <Card className={['relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 'border-yellow-500/50 shadow-yellow-500/25', 'shadow-lg'].join(' ')}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-bold">{symbol}</CardTitle>
@@ -57,8 +50,8 @@ export const AIMarketCard = ({
         </div>
         <CardDescription className="flex items-center gap-2">
           <DollarSign className="w-4 h-4" />
-          \${price.toFixed(2)}
-          <span className={\`flex items-center \${isPositive ? 'text-green-500' : 'text-red-500'}\`}>
+          {'$' + price.toFixed(2)}
+          <span className={['flex items-center', isPositive ? 'text-green-500' : 'text-red-500'].join(' ')}>
             {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
             {change > 0 ? '+' : ''}{change.toFixed(2)}%
           </span>
@@ -90,7 +83,7 @@ export const AIMarketCard = ({
         </div>
       </CardContent>
       <div className="absolute top-2 right-2">
-        <div className={\`w-2 h-2 rounded-full \${confidenceColor === 'green' ? 'bg-green-500' : confidenceColor === 'yellow' ? 'bg-yellow-500' : 'bg-red-500'} animate-pulse\`}></div>
+        <div className={['w-2 h-2 rounded-full', confidenceColor === 'green' ? 'bg-green-500' : confidenceColor === 'yellow' ? 'bg-yellow-500' : 'bg-red-500', 'animate-pulse'].join(' ')}></div>
       </div>
     </Card>
   );
@@ -239,9 +232,9 @@ export const AIRiskCard = ({
 );`,
 
     'market-overview.tsx': `import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './card.tsx';
+import { Badge } from './badge';
+import { Progress } from './progress';
 import { TrendingUp, TrendingDown, Activity, Globe, Zap } from 'lucide-react';
 
 // Real-time Market Overview Component
@@ -390,16 +383,17 @@ async function createMissingCards() {
     for (const [filename, content] of Object.entries(components)) {
       const filePath = path.join(componentsDir, filename);
       fs.writeFileSync(filePath, content);
-      console.log(\`✅ Created \${filename} with advanced AI trading components\`);
+      console.log('✅ Created ' + filename + ' with advanced AI trading components');
     }
 
     // Create index file for easy imports
-    const indexContent = \`export * from './trading-cards';
-export * from './market-overview';
-export * from './card';
-export * from './button';
-export * from './badge';
-export * from './progress';\`;
+    const indexContent = [
+      "export * from './trading-cards';",
+      "export * from './card.tsx';",
+      "export * from './button';",
+      "export * from './badge';",
+      "export * from './progress';"
+    ].join('\n');
 
     fs.writeFileSync(path.join(componentsDir, 'index.ts'), indexContent);
     console.log('📦 Created components index file');

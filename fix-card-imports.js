@@ -1,13 +1,12 @@
-#!/usr/bin/env node
-
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card';
 /**
- * AlphaAI Stock Trading Platform - Card Components Fixer
+ * AlphaAI Stock Trading Platform - Card Components Fixer (ESM compatible)
  * Advanced AI-powered card component import and dependency resolver
  */
 
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
 
 console.log('🎯 AlphaAI Card Components Fixer - Enhancing trading interface...');
 
@@ -174,6 +173,17 @@ export {
 };`;
 }
 
+// Utility to get relative import path from a file to the card component
+function getRelativeCardImport(filePath) {
+  const cardPath = path.join(process.cwd(), 'components/ui/card.tsx');
+  const fromDir = path.dirname(filePath);
+  let relPath = path.relative(fromDir, cardPath);
+  if (!relPath.startsWith('.')) relPath = './' + relPath;
+  // Remove .tsx extension for import
+  relPath = relPath.replace(/\\/g, '/').replace(/\.tsx$/, '');
+  return relPath;
+}
+
 async function fixCardImports() {
   try {
     // Ensure card component exists
@@ -215,13 +225,14 @@ async function fixCardImports() {
       }
 
       if (usedCards.length > 0) {
-        const importRegex = /import.*{[^}]*}.*from.*['"]@\/components\/ui\/card['"];?/;
-        if (!importRegex.test(content)) {
-          const importStatement = `import { ${usedCards.join(', ')} } from '@/components/ui/card';\n`;
-          content = importStatement + content;
-          modified = true;
-          console.log(`🎯 Added card imports to ${file}: ${usedCards.join(', ')}`);
-        }
+        // Remove any existing alias import for card
+        content = content.replace(/import.*{[^}]*}.*from.*['"]@\/components\/ui\/card['"];?\n?/g, '');
+        // Add correct relative import
+        const relImport = getRelativeCardImport(filePath);
+        const importStatement = `import { ${usedCards.join(', ')} } from '${relImport}';\n`;
+        content = importStatement + content;
+        modified = true;
+        console.log(`🎯 Added card imports to ${file}: ${usedCards.join(', ')}`);
       }
 
       if (modified) {

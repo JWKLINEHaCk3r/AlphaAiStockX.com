@@ -1,6 +1,11 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import React from 'react';
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Brain, Zap, Target } from 'lucide-react';
 
 interface StockData {

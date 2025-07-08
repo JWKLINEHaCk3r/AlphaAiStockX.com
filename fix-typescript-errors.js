@@ -1,3 +1,6 @@
+import { Card, CardContent } from './components/ui/card';
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -7,19 +10,19 @@ const path = require('path');
 const importFixes = [
   {
     search: /import { Card, CardCoCard, CardContent, ([^}]+) } from '@\/components\/ui\/card';/g,
-    replace: "import { Card, CardContent, $1 } from '@/components/ui/card';",
+    replace: "",
   },
   {
     search: /import { Card, CardCoCard, CardContent } from '@\/components\/ui\/card';/g,
-    replace: "import { Card, CardContent } from '@/components/ui/card';",
+    replace: "",
   },
   {
     search: /import { CardCoCard, ([^}]+) } from '@\/components\/ui\/card';/g,
-    replace: "import { CardContent, $1 } from '@/components/ui/card';",
+    replace: "",
   },
   {
     search: /import { CardCoCard } from '@\/components\/ui\/card';/g,
-    replace: "import { CardContent } from '@/components/ui/card';",
+    replace: "",
   },
   {
     search: /import { Wolf } from 'lucide-react'/g,
@@ -31,7 +34,7 @@ const importFixes = [
   },
   {
     search: /import { ntent, ([^}]+) } from '@\/components\/ui\/card';/g,
-    replace: "import { Card, CardContent, $1 } from '@/components/ui/card';",
+    replace: "",
   },
   {
     search: /import { Card } from '@\/components\/ui\/button';/g,

@@ -1,29 +1,24 @@
-import { SelectValue } from "@/components/ui/select";
-import { SelectTrigger } from "@/components/ui/select";
-import { SelectItem } from "@/components/ui/select";
-import { SelectContent } from "@/components/ui/select";
-import { Select } from "@/components/ui/select";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { SelectValue } from "../../../components/ui/select";
+import { SelectTrigger } from "../../../components/ui/select";
+import { SelectItem } from "../../../components/ui/select";
+import { SelectContent } from "../../../components/ui/select";
+import { Select } from "../../../components/ui/select";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
 =======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
 import {
   Brain,
   Cpu,

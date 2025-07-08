@@ -1,5 +1,12 @@
-import { Alert } from "@/components/ui/alert";
-import { Input } from "@/components/ui/input";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import {
   AIStockPrediction,
   SportsEvent,
@@ -47,13 +54,8 @@ import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
 =======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mic, MicOff, Volume2, VolumeX, Brain, MessageCircle, Zap, Settings } from 'lucide-react';
 
 interface ConversationItem {

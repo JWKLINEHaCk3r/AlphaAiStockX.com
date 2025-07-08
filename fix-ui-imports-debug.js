@@ -1,9 +1,10 @@
-import { Badge } from "@/components/ui/badge";
-import { CardTitle } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
+import { Badge } from "./components/ui/badge";
+import { CardTitle } from "./components/ui/card";
+import { CardHeader } from "./components/ui/card";
+import { CardDescription } from "./components/ui/card";
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -96,7 +97,7 @@ tsxFiles.forEach((filePath, index) => {
       if (/\bCardDescription\b/.test(content)) cardComponents.push('CardDescription');
 
       if (cardComponents.length > 0) {
-        const cardImport = `import { ${cardComponents.join(', ')} } from '@/components/ui/card';`;
+        const cardImport = ``;
 
         // Find the last import line
         const lastImportIndex = content.lastIndexOf('import ');

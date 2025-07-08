@@ -1,8 +1,11 @@
+import { Card, CardContent, CardTitle } from '../../components/ui/card';
+import { CardTitle } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import { Card, CardTitle, CardContent } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, BarChart3 } from 'lucide-react';
 
 export default function MarketHeatmap() {

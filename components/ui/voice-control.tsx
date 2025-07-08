@@ -1,11 +1,13 @@
-import { VoiceControl } from "@/components/ui/voice-control";
+import { Card, CardContent } from './card';
+import { VoiceControl } from "./voice-control";
+import { CardContent } from "./card";
+import { Card } from "./card";
+import { Button } from "./button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface VoiceControlProps {
   className?: string;

@@ -1,7 +1,12 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React from 'react';
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
 import { AlertTriangle, CheckCircle, Globe, Server, Clock, ExternalLink } from 'lucide-react';
 
 export default function IONOSDNSSetup() {

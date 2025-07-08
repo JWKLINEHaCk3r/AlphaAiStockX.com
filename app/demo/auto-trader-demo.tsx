@@ -1,8 +1,12 @@
+import { Card } from '../../components/ui/card';
+import { TabsTrigger } from "../../components/ui/tabs";
+import { TabsList } from "../../components/ui/tabs";
+import { TabsContent } from "../../components/ui/tabs";
+import { Tabs } from "../../components/ui/tabs";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AdvancedAIAutoTrader } from '../services/ai-auto-trader-enhanced';
 import AITradingDashboard from '../components/AITradingDashboard';
 

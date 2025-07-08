@@ -1,4 +1,16 @@
-import { Alert } from "@/components/ui/alert";
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Alert } from "../../../components/ui/alert";
+import { AvatarImage } from "../../../components/ui/avatar";
+import { AvatarFallback } from "../../../components/ui/avatar";
+import { Avatar } from "../../../components/ui/avatar";
+import { Badge } from "../../../components/ui/badge";
+import { Textarea } from "../../../components/ui/textarea";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import {
   AIStockPrediction,
   SportsEvent,
@@ -45,17 +57,9 @@ import {
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 =======
-import { Badge } from '@/components/ui/badge';
-import Button from '@/components/ui/button';
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Users,
   TrendingUp,

@@ -1,15 +1,22 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { TabsTrigger } from "../../components/ui/tabs";
+import { TabsList } from "../../components/ui/tabs";
+import { TabsContent } from "../../components/ui/tabs";
+import { Tabs } from "../../components/ui/tabs";
+import { Badge } from "../../components/ui/badge";
+import { Switch } from "../../components/ui/switch";
+import { Input } from "../../components/ui/input";
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 <<<<<<< HEAD
 import React from 'react';
 =======
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Switch } from '@/components/ui/switch';
 import {
   Bot,
   Play,

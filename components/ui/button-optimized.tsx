@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 'use client';
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';

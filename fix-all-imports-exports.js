@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-
+import { Card, CardContent } from './components/ui/card';
+import { CardContent } from "./components/ui/card";
+import { Card } from "./components/ui/card";
 console.log('🔧 Fixing all exports and imports in AlphaAI StockX...');
 
 // Function to fix React imports
@@ -27,19 +27,19 @@ function fixComponentImports(content) {
   const cardFixes = [
     {
       pattern: /import \{ Card, CardCoCard, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: "import { Card, CardContent, $1 } from '@/components/ui/card';"
+      replacement: ""
     },
     {
       pattern: /import \{ Card, CardCoCard, CardContent \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: "import { Card, CardContent } from '@/components/ui/card';"
+      replacement: ""
     },
     {
       pattern: /import \{ CardCoCard, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: "import { CardContent, $1 } from '@/components/ui/card';"
+      replacement: ""
     },
     {
       pattern: /import \{ CardCoCard \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: "import { CardContent } from '@/components/ui/card';"
+      replacement: ""
     }
   ];
   

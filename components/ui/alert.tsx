@@ -1,7 +1,7 @@
+import { AlertTitle } from "./alert";
+import { AlertDescription } from "./alert";
+import { Alert } from "./alert";
 <<<<<<< HEAD
-import { AlertTitle } from "@/components/ui/alert";
-import { AlertDescription } from "@/components/ui/alert";
-import { Alert } from "@/components/ui/alert";
 import React from 'react';
 import * as React from 'react';
 

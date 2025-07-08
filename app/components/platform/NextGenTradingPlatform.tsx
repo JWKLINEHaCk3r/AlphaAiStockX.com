@@ -1,17 +1,26 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Alert } from "../../../components/ui/alert";
+import { AvatarImage } from "../../../components/ui/avatar";
+import { AvatarFallback } from "../../../components/ui/avatar";
+import { Avatar } from "../../../components/ui/avatar";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Slider } from "../../../components/ui/slider";
+import { Switch } from "../../../components/ui/switch";
+import { Input } from "../../../components/ui/input";
+import { CardTitle } from "../../../components/ui/card";
+import { CardHeader } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 // Next-Generation AI Trading Platform - Surpasses Robinhood by 20 Years
 // The most advanced multi-user social trading platform with AI-powered automation
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Switch } from '@/components/ui/switch';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { 
   Brain, 
   TrendingUp, 
@@ -68,10 +77,6 @@ import {
   ChevronUp,
   ChevronDown
 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Slider } from '@/components/ui/slider';
 
 // Advanced Interfaces for Next-Gen Multi-User Trading Platform
 interface User {

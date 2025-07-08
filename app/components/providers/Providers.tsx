@@ -1,9 +1,9 @@
+import { Toaster } from "../../../components/ui/toaster";
 'use client';
 import React from 'react';
 
 import { SessionProvider } from 'next-auth/react';
 import { TradingProvider } from '@/app/contexts/TradingContext';
-import { Toaster } from '@/components/ui/toaster';
 
 interface ProvidersProps {
   children: React.ReactNode;

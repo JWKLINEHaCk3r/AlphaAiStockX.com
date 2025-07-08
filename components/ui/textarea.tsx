@@ -1,4 +1,4 @@
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "./textarea";
 import React from 'react';
 import * as React from 'react';
 import { cn } from '@/lib/utils';

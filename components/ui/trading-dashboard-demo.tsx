@@ -1,9 +1,13 @@
+import { Card, CardHeader, CardContent, CardTitle } from './card';
+import { CardTitle } from "./card";
+import { CardHeader } from "./card";
+import { CardContent } from "./card";
+import { Card } from "./card";
+import { Button } from "./button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { HolographicDisplay } from '@/components/ui/animated-effects';
 import { 
   TrendingUp, 

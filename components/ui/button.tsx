@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 'use client';
 import React from 'react';
 import * as React from 'react';

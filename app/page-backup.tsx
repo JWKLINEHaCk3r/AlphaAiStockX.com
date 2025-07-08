@@ -1,17 +1,13 @@
-import { DialogTrigger } from "@/components/ui/dialog";
-import { DialogTitle } from "@/components/ui/dialog";
-import { DialogHeader } from "@/components/ui/dialog";
-import { DialogContent } from "@/components/ui/dialog";
-import { Dialog } from "@/components/ui/dialog";
+import { DialogTrigger } from "../components/ui/dialog";
+import { DialogTitle } from "../components/ui/dialog";
+import { DialogHeader } from "../components/ui/dialog";
+import { DialogContent } from "../components/ui/dialog";
+import { Dialog } from "../components/ui/dialog";
 'use client';
 import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,

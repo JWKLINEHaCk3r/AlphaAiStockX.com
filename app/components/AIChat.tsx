@@ -1,10 +1,13 @@
+import { Card, CardContent, CardTitle } from '../../components/ui/card';
+import { Badge } from "../../components/ui/badge";
+import { Input } from "../../components/ui/input";
+import { CardTitle } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Send, Bot, User, Sparkles } from 'lucide-react';
 import { aiBrainService } from '../services/ai-brain-service';
 

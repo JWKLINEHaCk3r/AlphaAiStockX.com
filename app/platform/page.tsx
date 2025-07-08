@@ -1,3 +1,7 @@
+import { Card, CardContent } from '../../components/ui/card';
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 import React from 'react';
 
@@ -7,8 +11,6 @@ export const revalidate = 0;
 
 import { useSession } from 'next-auth/react';
 import SuperiorTradingPlatform from '@/app/components/platform/SuperiorTradingPlatform';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Brain, TrendingUp, DollarSign, Shield } from 'lucide-react';
 import Link from 'next/link';
 

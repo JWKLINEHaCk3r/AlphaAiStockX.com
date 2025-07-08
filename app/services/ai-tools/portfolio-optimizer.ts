@@ -1,4 +1,4 @@
-import { Select } from "@/components/ui/select";
+import { Select } from "../../../components/ui/select";
 // AI Portfolio Optimizer - Modern Portfolio Theory + GPT Insights
 import { OpenAI } from 'openai';
 

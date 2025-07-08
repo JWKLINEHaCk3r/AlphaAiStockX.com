@@ -1,9 +1,14 @@
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card';
+import { CardTitle } from "../components/ui/card";
+import { CardFooter } from "../components/ui/card";
+import { CardDescription } from "../components/ui/card";
+import { CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Brain, BarChart3, Zap, TrendingUp, Shield, Atom, Infinity, Sparkles } from 'lucide-react';
 
 // Remove unused dynamic import

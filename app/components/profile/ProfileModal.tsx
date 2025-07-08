@@ -1,7 +1,8 @@
+import { DialogContent } from "../../../components/ui/dialog";
+import { Dialog } from "../../../components/ui/dialog";
 'use client';
 import React from 'react';
 
-import { Dialog, DialogContent } from '@/components/ui/dialog';
 import UserProfile from './UserProfile';
 
 interface User {

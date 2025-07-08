@@ -1,10 +1,11 @@
+import { Card } from '../../components/ui/card';
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 import React from 'react';
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
 export default function DemoPage() {
   return (

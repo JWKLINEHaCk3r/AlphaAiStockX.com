@@ -1,11 +1,15 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import { Badge } from "../../components/ui/badge";
+import { CardTitle } from "../../components/ui/card";
+import { CardHeader } from "../../components/ui/card";
+import { CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
 <<<<<<< HEAD
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface StockInfo {
@@ -28,9 +32,6 @@ interface AIFrediction {
   targetPrice: number;
   timeframe: string;
 =======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Button from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface StockChartProps {

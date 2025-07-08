@@ -1,4 +1,16 @@
-import { Alert } from "@/components/ui/alert";
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { CardTitle } from "../../../components/ui/card";
+import { CardDescription } from "../../../components/ui/card";
+import { CardContent } from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import {
   AIStockPrediction,
   SportsEvent,
@@ -44,10 +56,6 @@ import {
 'use client';
 import React from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   TrendingUp,
@@ -67,7 +75,6 @@ import {
 } from 'lucide-react';
 import AdvancedAIFeatures from '../features/AdvancedAIFeatures';
 import ComplianceCenter from '../compliance/ComplianceCenter';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 interface InvestorProfileProps {
   onSwitchToOwner?: () => void;

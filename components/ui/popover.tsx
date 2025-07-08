@@ -1,6 +1,6 @@
-import { PopoverTrigger } from "@/components/ui/popover";
-import { PopoverContent } from "@/components/ui/popover";
-import { Popover } from "@/components/ui/popover";
+import { PopoverTrigger } from "./popover";
+import { PopoverContent } from "./popover";
+import { Popover } from "./popover";
 'use client';
 import React from 'react';
 

@@ -1,3 +1,6 @@
+import { Card } from '../../components/ui/card';
+import { Card } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 'use client';
 import React from 'react';
 
@@ -5,8 +8,6 @@ import React from 'react';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
 export default function AITradingPage() {
   return (

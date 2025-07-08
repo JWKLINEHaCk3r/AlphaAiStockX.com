@@ -1,9 +1,13 @@
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
+import { CardTitle } from "../components/ui/card";
+import { CardDescription } from "../components/ui/card";
+import { CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 'use client';
 import React from 'react';
 
 import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { RefreshCw, AlertTriangle } from 'lucide-react';
 
 export default function Error({
