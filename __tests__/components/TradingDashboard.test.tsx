@@ -1,12 +1,8 @@
-import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
+import TradingDashboardDemo from '../../components/ui/trading-dashboard-demo';
 import React from 'react';
-<<<<<<< HEAD
-=======
-import { TradingDashboard } from '@/components/ui/trading-dashboard-demo';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
-import { ThemeProvider } from '@/components/ui/theme-provider';
+import { ThemeProvider } from '../../../components/theme-provider';
 
 // Mock next-auth
 jest.mock('next-auth/react');
@@ -76,7 +72,7 @@ describe('TradingDashboard', () => {
   });
 
   it('renders trading dashboard components', async () => {
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     expect(screen.getByTestId('trading-dashboard')).toBeInTheDocument();
     expect(screen.getByTestId('portfolio-overview')).toBeInTheDocument();
@@ -85,7 +81,7 @@ describe('TradingDashboard', () => {
   });
 
   it('displays portfolio value correctly', async () => {
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     await waitFor(() => {
       expect(screen.getByTestId('portfolio-value')).toHaveTextContent('$100,000');
@@ -93,7 +89,7 @@ describe('TradingDashboard', () => {
   });
 
   it('handles order placement', async () => {
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     const symbolInput = screen.getByTestId('symbol-input');
     const quantityInput = screen.getByTestId('quantity-input');
@@ -120,7 +116,7 @@ describe('TradingDashboard', () => {
   });
 
   it('validates order inputs', async () => {
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     const placeOrderButton = screen.getByTestId('place-order-button');
     fireEvent.click(placeOrderButton);
@@ -132,7 +128,7 @@ describe('TradingDashboard', () => {
   });
 
   it('handles WebSocket connection for real-time data', async () => {
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     await waitFor(() => {
       expect(global.WebSocket).toHaveBeenCalledWith('ws://localhost:3001/market-data');
@@ -142,7 +138,7 @@ describe('TradingDashboard', () => {
   it('displays error states appropriately', async () => {
     global.fetch = jest.fn(() => Promise.reject(new Error('API Error')));
 
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     await waitFor(() => {
       expect(screen.getByText('Failed to load portfolio data')).toBeInTheDocument();
@@ -159,7 +155,7 @@ describe('TradingDashboard', () => {
 
     global.WebSocket = jest.fn(() => mockWebSocket);
 
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     // Simulate WebSocket message
     const messageHandler = mockWebSocket.addEventListener.mock.calls.find(
@@ -186,8 +182,10 @@ describe('TradingDashboard', () => {
       update: jest.fn(),
     });
 
-    renderWithProviders(<TradingDashboard />);
+    renderWithProviders(<TradingDashboardDemo />);
 
     expect(screen.getByText('Please log in to access trading')).toBeInTheDocument();
   });
 });
+
+// This file is a test file and does not use module.exports or require, so no changes needed for ESM compatibility.
