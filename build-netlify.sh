@@ -20,7 +20,7 @@ if [ ! -f "package.json" ]; then
     exit 1
 fi
 
-# Remove any Python artifacts that might confuse Netlify
+# Remove Python artifacts that might confuse Netlify
 echo "🧹 Removing Python artifacts..."
 rm -f requirements.txt
 rm -f runtime.txt
