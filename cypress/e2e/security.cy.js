@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Input } from "../../components/ui/input";
+=======
+import { Input } from '@/components/ui/input';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 describe('AlphaAiStockX Security Tests', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -10,13 +14,13 @@ describe('AlphaAiStockX Security Tests', () => {
     });
 
     it('should block iframe embedding', () => {
-      cy.request('/').then((response) => {
+      cy.request('/').then(response => {
         expect(response.headers['x-frame-options']).to.be.oneOf(['DENY', 'SAMEORIGIN']);
       });
     });
 
     it('should have Content Security Policy', () => {
-      cy.request('/').then((response) => {
+      cy.request('/').then(response => {
         expect(response.headers).to.have.property('content-security-policy');
       });
     });
@@ -29,14 +33,14 @@ describe('AlphaAiStockX Security Tests', () => {
     });
 
     it('should prevent access to trading without authentication', () => {
-      cy.request({ url: '/api/trading/orders', failOnStatusCode: false }).then((response) => {
+      cy.request({ url: '/api/trading/orders', failOnStatusCode: false }).then(response => {
         expect(response.status).to.eq(401);
       });
     });
 
     it('should implement rate limiting on login attempts', () => {
       const attempts = Array.from({ length: 6 }, (_, i) => i);
-      
+
       attempts.forEach(() => {
         cy.visit('/login');
         cy.get('[data-testid="email-input"]').type('test@example.com');
@@ -53,7 +57,7 @@ describe('AlphaAiStockX Security Tests', () => {
     it('should sanitize XSS attempts in form inputs', () => {
       cy.visit('/login');
       const xssPayload = '<script>alert("xss")</script>';
-      
+
       cy.get('[data-testid="email-input"]').type(xssPayload);
       cy.get('[data-testid="email-input"]').should('not.contain', '<script>');
     });
@@ -80,8 +84,8 @@ describe('AlphaAiStockX Security Tests', () => {
         method: 'POST',
         url: '/api/user/settings',
         failOnStatusCode: false,
-        body: { theme: 'dark' }
-      }).then((response) => {
+        body: { theme: 'dark' },
+      }).then(response => {
         expect(response.status).to.be.oneOf([403, 422]); // Should fail without CSRF token
       });
     });

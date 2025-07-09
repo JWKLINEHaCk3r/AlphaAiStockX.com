@@ -44,7 +44,7 @@ export const useWebSocket = (userId?: string): UseWebSocketReturn => {
       try {
         // Dynamic import for client-side only
         const { io } = await import('socket.io-client');
-        
+
         await fetch('/api/socketio');
 
         socketRef.current = io(

@@ -41,7 +41,7 @@ const nextConfig = {
   serverExternalPackages: ['sharp'],
   // Force all pages to be dynamic to avoid static generation issues
   generateBuildId: async () => {
-    return 'development-build'
+    return 'development-build';
   },
   // Disable static optimization
   output: undefined,
@@ -61,13 +61,13 @@ const nextConfig = {
     // Inject webpack polyfill at the beginning of server-side bundles
     if (isServer) {
       const originalEntry = config.entry;
-      
+
       config.entry = async () => {
         const entries = await originalEntry();
         const polyfillPath = require.resolve('./runtime-polyfills.js');
-        
+
         // Add polyfill to all server-side entry points
-        Object.keys(entries).forEach((entryName) => {
+        Object.keys(entries).forEach(entryName => {
           if (Array.isArray(entries[entryName])) {
             entries[entryName].unshift(polyfillPath);
           } else if (typeof entries[entryName] === 'string') {
@@ -80,24 +80,24 @@ const nextConfig = {
             }
           }
         });
-        
+
         return entries;
       };
-      
+
       // Ensure self is defined in server context using DefinePlugin
       config.plugins.push(
         new webpack.DefinePlugin({
           'process.browser': false,
           'typeof self': JSON.stringify('object'),
           'self.webpackChunk_N_E': 'global.webpackChunk_N_E',
-          'self': 'global',
+          self: 'global',
         })
       );
 
       // Add custom plugin to handle document access during SSR
       config.plugins.push(
         new webpack.ProvidePlugin({
-          document: [require.resolve('./runtime-polyfills.js'), 'documentPolyfill']
+          document: [require.resolve('./runtime-polyfills.js'), 'documentPolyfill'],
         })
       );
     }
@@ -133,7 +133,7 @@ const nextConfig = {
     if (isServer) {
       config.module.rules.push({
         test: /sw\.js$/,
-        loader: 'ignore-loader'
+        loader: 'ignore-loader',
       });
     }
 
@@ -141,7 +141,7 @@ const nextConfig = {
     if (isServer) {
       // Add custom plugin to fix webpack chunk loading
       config.plugins.push(new SelfPolyfillPlugin());
-      
+
       // Simple global definitions for server-side rendering
       config.plugins.push(
         new webpack.DefinePlugin({
@@ -154,7 +154,7 @@ const nextConfig = {
       config.resolve.alias = {
         ...config.resolve.alias,
       };
-      
+
       // Replace problematic browser globals with safe alternatives in source code
       config.module.rules.push({
         test: /\.(js|ts|tsx)$/,
@@ -172,8 +172,8 @@ const nextConfig = {
               replace: '(global.webpackChunk',
               flags: 'g',
             },
-          ]
-        }
+          ],
+        },
       });
     }
 
@@ -187,7 +187,7 @@ const nextConfig = {
       // Additional fixes for service worker globals
       config.module.rules.push({
         test: /sw\.js$/,
-        use: 'null-loader'
+        use: 'null-loader',
       });
     }
 

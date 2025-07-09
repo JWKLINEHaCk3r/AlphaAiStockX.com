@@ -5,10 +5,13 @@ const config = {
     autoprefixer: {},
     ...(process.env.NODE_ENV === 'production' && {
       cssnano: {
-        preset: ['default', {
-          discardComments: { removeAll: true },
-          normalizeWhitespace: false,
-        }],
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+            normalizeWhitespace: false,
+          },
+        ],
       },
     }),
   },

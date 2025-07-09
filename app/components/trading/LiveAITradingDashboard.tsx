@@ -9,17 +9,29 @@ import { Button } from "../../../components/ui/button";
 'use client';
 
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { 
   TrendingUp, 
   TrendingDown, 
   DollarSign, 
   Activity, 
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import {
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  Activity,
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   Brain,
   Zap,
   AlertTriangle,
   CheckCircle,
   Clock,
-  BarChart3
+  BarChart3,
 } from 'lucide-react';
 
 interface TradingSignal {
@@ -79,16 +91,16 @@ export default function LiveAITradingDashboard() {
   // WebSocket connection for real-time updates
   useEffect(() => {
     const ws = new WebSocket('ws://localhost:8000/ws/trading-updates');
-    
+
     ws.onopen = () => {
       setIsConnected(true);
       setError(null);
     };
-    
-    ws.onmessage = (event) => {
+
+    ws.onmessage = event => {
       try {
         const data = JSON.parse(event.data);
-        
+
         if (data.type === 'trading_update') {
           setPortfolio(data.portfolio_status);
           setPerformance(data.performance_metrics);
@@ -97,16 +109,16 @@ export default function LiveAITradingDashboard() {
         console.error('WebSocket message error:', err);
       }
     };
-    
+
     ws.onclose = () => {
       setIsConnected(false);
     };
-    
-    ws.onerror = (error) => {
+
+    ws.onerror = error => {
       setError('WebSocket connection failed');
       setIsConnected(false);
     };
-    
+
     return () => {
       ws.close();
     };
@@ -117,37 +129,36 @@ export default function LiveAITradingDashboard() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        
+
         // Fetch portfolio status
         const portfolioResponse = await fetch('http://localhost:8000/api/status');
         if (portfolioResponse.ok) {
           const portfolioData = await portfolioResponse.json();
           setPortfolio(portfolioData);
         }
-        
+
         // Fetch positions
         const positionsResponse = await fetch('http://localhost:8000/api/positions');
         if (positionsResponse.ok) {
           const positionsData = await positionsResponse.json();
           setPositions(positionsData);
         }
-        
+
         // Fetch recent signals
         const signalsResponse = await fetch('http://localhost:8000/api/signals/recent');
         if (signalsResponse.ok) {
           const signalsData = await signalsResponse.json();
           setRecentSignals(signalsData);
         }
-        
+
         // Fetch performance metrics
         const performanceResponse = await fetch('http://localhost:8000/api/performance');
         if (performanceResponse.ok) {
           const performanceData = await performanceResponse.json();
           setPerformance(performanceData);
         }
-        
+
         setTradingActive(true);
-        
       } catch (err) {
         setError('Failed to fetch trading data');
         console.error('Data fetch error:', err);
@@ -155,23 +166,23 @@ export default function LiveAITradingDashboard() {
         setIsLoading(false);
       }
     };
-    
+
     fetchData();
-    
+
     // Set up polling for data that doesn't come through WebSocket
     const interval = setInterval(() => {
       fetchData();
     }, 30000); // Update every 30 seconds
-    
+
     return () => clearInterval(interval);
   }, []);
 
   const handleStartTrading = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/system/start', {
-        method: 'POST'
+        method: 'POST',
       });
-      
+
       if (response.ok) {
         setTradingActive(true);
       }
@@ -183,9 +194,9 @@ export default function LiveAITradingDashboard() {
   const handleStopTrading = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/system/stop', {
-        method: 'POST'
+        method: 'POST',
       });
-      
+
       if (response.ok) {
         setTradingActive(false);
       }
@@ -210,9 +221,13 @@ export default function LiveAITradingDashboard() {
   };
 
   const getSignalIcon = (signal: string) => {
-    return signal.includes('BUY') ? <TrendingUp className="w-4 h-4" /> : 
-           signal.includes('SELL') ? <TrendingDown className="w-4 h-4" /> : 
-           <Activity className="w-4 h-4" />;
+    return signal.includes('BUY') ? (
+      <TrendingUp className="w-4 h-4" />
+    ) : signal.includes('SELL') ? (
+      <TrendingDown className="w-4 h-4" />
+    ) : (
+      <Activity className="w-4 h-4" />
+    );
   };
 
   if (isLoading) {
@@ -236,27 +251,29 @@ export default function LiveAITradingDashboard() {
         {/* Header */}
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              🤖 AlphaAI Live Trading System
-            </h1>
+            <h1 className="text-4xl font-bold text-white mb-2">🤖 AlphaAI Live Trading System</h1>
             <p className="text-purple-200">
               Advanced AI-powered automated trading with real-time market analysis
             </p>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* System Status */}
             <div className="flex items-center space-x-2">
-              <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+              <div
+                className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`}
+              />
               <span className="text-white text-sm">
                 {isConnected ? 'Connected' : 'Disconnected'}
               </span>
             </div>
-            
+
             {/* Trading Controls */}
             <Button
               onClick={tradingActive ? handleStopTrading : handleStartTrading}
-              className={tradingActive ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}
+              className={
+                tradingActive ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'
+              }
             >
               {tradingActive ? 'Stop Trading' : 'Start Trading'}
             </Button>
@@ -289,9 +306,11 @@ export default function LiveAITradingDashboard() {
                 <div className="text-2xl font-bold text-white">
                   ${portfolio.account_value.toLocaleString()}
                 </div>
-                <div className={`text-sm ${portfolio.total_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                  {portfolio.total_pnl >= 0 ? '+' : ''}${portfolio.total_pnl.toFixed(2)} 
-                  ({portfolio.total_pnl_percent.toFixed(2)}%)
+                <div
+                  className={`text-sm ${portfolio.total_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                >
+                  {portfolio.total_pnl >= 0 ? '+' : ''}${portfolio.total_pnl.toFixed(2)}(
+                  {portfolio.total_pnl_percent.toFixed(2)}%)
                 </div>
               </CardContent>
             </Card>
@@ -304,12 +323,8 @@ export default function LiveAITradingDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
-                  {portfolio.active_positions}
-                </div>
-                <div className="text-sm text-gray-400">
-                  Total Trades: {portfolio.total_trades}
-                </div>
+                <div className="text-2xl font-bold text-white">{portfolio.active_positions}</div>
+                <div className="text-sm text-gray-400">Total Trades: {portfolio.total_trades}</div>
               </CardContent>
             </Card>
 
@@ -324,9 +339,7 @@ export default function LiveAITradingDashboard() {
                 <div className="text-2xl font-bold text-white">
                   {performance ? `${(performance.win_rate * 100).toFixed(1)}%` : 'N/A'}
                 </div>
-                <div className="text-sm text-gray-400">
-                  Win Rate
-                </div>
+                <div className="text-sm text-gray-400">Win Rate</div>
               </CardContent>
             </Card>
 
@@ -352,7 +365,9 @@ export default function LiveAITradingDashboard() {
                   )}
                 </div>
                 <div className="text-sm text-gray-400">
-                  {performance ? `${performance.signals_per_hour.toFixed(1)} signals/hr` : 'No data'}
+                  {performance
+                    ? `${performance.signals_per_hour.toFixed(1)} signals/hr`
+                    : 'No data'}
                 </div>
               </CardContent>
             </Card>
@@ -372,14 +387,21 @@ export default function LiveAITradingDashboard() {
               <div className="space-y-3">
                 {recentSignals.length > 0 ? (
                   recentSignals.slice(0, 5).map((signal, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
-                        <Badge className={`${getSignalColor(signal.action || signal.signal)} text-white`}>
+                        <Badge
+                          className={`${getSignalColor(signal.action || signal.signal)} text-white`}
+                        >
                           {getSignalIcon(signal.action || signal.signal)}
                           <span className="ml-1">{signal.symbol}</span>
                         </Badge>
                         <div>
-                          <div className="text-white font-medium">{signal.action || signal.signal}</div>
+                          <div className="text-white font-medium">
+                            {signal.action || signal.signal}
+                          </div>
                           <div className="text-sm text-gray-400">
                             Confidence: {((signal.confidence || 0) * 100).toFixed(1)}%
                           </div>
@@ -415,7 +437,10 @@ export default function LiveAITradingDashboard() {
               <div className="space-y-3">
                 {positions.length > 0 ? (
                   positions.map((position, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg"
+                    >
                       <div>
                         <div className="text-white font-medium">{position.symbol}</div>
                         <div className="text-sm text-gray-400">
@@ -424,8 +449,11 @@ export default function LiveAITradingDashboard() {
                       </div>
                       <div className="text-right">
                         <div className="text-white">${position.market_value.toFixed(2)}</div>
-                        <div className={`text-sm ${position.unrealized_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                          {position.unrealized_pnl >= 0 ? '+' : ''}${position.unrealized_pnl.toFixed(2)}
+                        <div
+                          className={`text-sm ${position.unrealized_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                        >
+                          {position.unrealized_pnl >= 0 ? '+' : ''}$
+                          {position.unrealized_pnl.toFixed(2)}
                         </div>
                       </div>
                     </div>
@@ -453,15 +481,21 @@ export default function LiveAITradingDashboard() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">{performance.total_signals_generated}</div>
+                  <div className="text-2xl font-bold text-white">
+                    {performance.total_signals_generated}
+                  </div>
                   <div className="text-sm text-gray-400">Signals Generated</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">{performance.total_trades_executed}</div>
+                  <div className="text-2xl font-bold text-white">
+                    {performance.total_trades_executed}
+                  </div>
                   <div className="text-sm text-gray-400">Trades Executed</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">{performance.successful_trades}</div>
+                  <div className="text-2xl font-bold text-green-400">
+                    {performance.successful_trades}
+                  </div>
                   <div className="text-sm text-gray-400">Successful Trades</div>
                 </div>
                 <div className="text-center">
@@ -471,7 +505,7 @@ export default function LiveAITradingDashboard() {
                   <div className="text-sm text-gray-400">Runtime</div>
                 </div>
               </div>
-              
+
               <div className="mt-6">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-white">Win Rate</span>

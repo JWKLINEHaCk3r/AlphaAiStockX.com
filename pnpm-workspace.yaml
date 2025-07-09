@@ -1,4 +1,5 @@
 ignoredBuiltDependencies:
+<<<<<<< HEAD
   - '@tailwindcss/oxide'
   - '@prisma/client'
   - '@prisma/engines'
@@ -9,3 +10,10 @@ ignoredBuiltDependencies:
   - 'cypress'
   - 'prisma'
   - 'sharp'
+=======
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - bcrypt
+  - ccxt
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.

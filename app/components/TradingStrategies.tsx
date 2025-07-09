@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
@@ -9,6 +10,10 @@ import { CardContent } from "../../components/ui/card";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
+=======
+import { Select } from '@/components/ui/select';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import { useState } from 'react';

@@ -11,28 +11,28 @@ const keyFiles = [
   'app/components/ai/AITradingAdvisor.tsx',
   'app/components/trading/AIModelTraining.tsx',
   'components/ui/card.tsx',
-  'app/components/PortfolioOptimizer.tsx'
+  'app/components/PortfolioOptimizer.tsx',
 ];
 
 // Validation checks
 const checks = {
-  hasReactImport: (content) => content.includes('import React'),
-  hasUseClient: (content) => content.includes("'use client'"),
-  hasValidExport: (content) => {
+  hasReactImport: content => content.includes('import React'),
+  hasUseClient: content => content.includes("'use client'"),
+  hasValidExport: content => {
     const exportMatches = content.match(/export default/g);
     return exportMatches && exportMatches.length === 1;
   },
-  noMalformedCardImports: (content) => !content.includes('CardCoCard'),
-  noDuplicateUseClient: (content) => {
+  noMalformedCardImports: content => !content.includes('CardCoCard'),
+  noDuplicateUseClient: content => {
     const matches = content.match(/'use client'/g);
     return !matches || matches.length <= 1;
   },
-  correctImportOrder: (content) => {
+  correctImportOrder: content => {
     if (!content.includes("'use client'")) return true;
     const lines = content.split('\n');
     let useClientIndex = -1;
     let firstImportAfterClient = -1;
-    
+
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].includes("'use client'")) {
         useClientIndex = i;
@@ -42,9 +42,9 @@ const checks = {
         break;
       }
     }
-    
+
     return firstImportAfterClient > useClientIndex || firstImportAfterClient === -1;
-  }
+  },
 };
 
 let totalChecks = 0;
@@ -55,30 +55,30 @@ console.log('\n📁 Checking key files...\n');
 
 keyFiles.forEach(filePath => {
   const fullPath = path.resolve(filePath);
-  
+
   if (!fs.existsSync(fullPath)) {
     console.log(`⚠️  ${filePath} - File not found`);
     return;
   }
-  
+
   const content = fs.readFileSync(fullPath, 'utf8');
   const fileResults = {
     file: filePath,
     checks: {},
     score: 0,
-    total: 0
+    total: 0,
   };
-  
+
   console.log(`📄 ${filePath}`);
-  
+
   Object.entries(checks).forEach(([checkName, checkFn]) => {
     totalChecks++;
     fileResults.total++;
-    
+
     try {
       const passed = checkFn(content);
       fileResults.checks[checkName] = passed;
-      
+
       if (passed) {
         passedChecks++;
         fileResults.score++;
@@ -90,10 +90,10 @@ keyFiles.forEach(filePath => {
       console.log(`  ⚠️  ${checkName} - Error: ${error.message}`);
     }
   });
-  
+
   const percentage = Math.round((fileResults.score / fileResults.total) * 100);
   console.log(`  📊 Score: ${fileResults.score}/${fileResults.total} (${percentage}%)\n`);
-  
+
   results.push(fileResults);
 });
 
@@ -109,7 +109,7 @@ const checkSummary = {};
 Object.keys(checks).forEach(checkName => {
   checkSummary[checkName] = {
     passed: 0,
-    total: 0
+    total: 0,
   };
 });
 
@@ -169,5 +169,5 @@ module.exports = {
   results,
   overallPercentage,
   status,
-  recommendation
+  recommendation,
 };

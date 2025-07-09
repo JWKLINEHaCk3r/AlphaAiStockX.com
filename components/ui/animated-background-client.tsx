@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { AnimatedBackground } from "./animated-background-client";
 'use client';
+=======
+import { AnimatedBackground } from '@/components/ui/animated-background-client';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import { useEffect, useRef } from 'react';
@@ -21,7 +26,7 @@ export default function AnimatedBackground() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -57,7 +62,7 @@ export default function AnimatedBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particlesRef.current.forEach((particle) => {
+      particlesRef.current.forEach(particle => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 

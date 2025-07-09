@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { Calendar } from "../../../components/ui/calendar";
 import { TabsTrigger } from "../../../components/ui/tabs";
@@ -14,6 +15,10 @@ import { CardDescription } from "../../../components/ui/card";
 import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
+=======
+import { Calendar } from '@/components/ui/calendar';
+import { Alert } from '@/components/ui/alert';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import {
   AIStockPrediction,
   SportsEvent,
@@ -56,7 +61,7 @@ import {
   MarketPattern,
 } from '../../types/trading-types';
 
-'use client';
+('use client');
 import React from 'react';
 
 import { useState, useEffect } from 'react';
@@ -631,21 +636,22 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
 
                     <div className="space-y-3">
                       <h4 className="text-white font-semibold">Score Components:</h4>
-                      {stockAnalysis.buyScore?.components && Object.entries(stockAnalysis.buyScore.components).map(
-                        ([key, value]: [string, unknown]) => (
-                          <div key={key} className="flex items-center justify-between">
-                            <span className="text-slate-300 capitalize">
-                              {key.replace('_', ' ')}
-                            </span>
-                            <div className="flex items-center gap-2">
-                              <Progress value={(Number(value) / 30) * 100} className="w-20 h-2" />
-                              <span className="text-white font-medium w-8">
-                                {Math.round(Number(value))}
+                      {stockAnalysis.buyScore?.components &&
+                        Object.entries(stockAnalysis.buyScore.components).map(
+                          ([key, value]: [string, unknown]) => (
+                            <div key={key} className="flex items-center justify-between">
+                              <span className="text-slate-300 capitalize">
+                                {key.replace('_', ' ')}
                               </span>
+                              <div className="flex items-center gap-2">
+                                <Progress value={(Number(value) / 30) * 100} className="w-20 h-2" />
+                                <span className="text-white font-medium w-8">
+                                  {Math.round(Number(value))}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        )
-                      )}
+                          )
+                        )}
                     </div>
                   </div>
                 </CardContent>
@@ -926,14 +932,22 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                           </div>
                           <Badge
                             className={
-                              (typeof signal.strength === 'number' ? signal.strength >= 70 : signal.strength === 'STRONG') ? 'bg-red-600' : 'bg-yellow-600'
+                              (
+                                typeof signal.strength === 'number'
+                                  ? signal.strength >= 70
+                                  : signal.strength === 'STRONG'
+                              )
+                                ? 'bg-red-600'
+                                : 'bg-yellow-600'
                             }
                           >
                             {signal.strength}
                           </Badge>
                         </div>
                         <div className="text-white font-medium mb-1">{signal.indicator}</div>
-                        <div className="text-slate-300 text-sm mb-2">{signal.message || signal.description}</div>
+                        <div className="text-slate-300 text-sm mb-2">
+                          {signal.message || signal.description}
+                        </div>
                         <div className="flex items-center gap-2">
                           <span className="text-slate-400 text-sm">Confidence:</span>
                           <Progress value={signal.confidence * 100} className="w-24 h-2" />
@@ -963,27 +977,33 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Entry Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints?.entry.map((point: EntryExitPoint, index: number) => (
-                          <div
-                            key={index}
-                            className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
-                          >
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-white font-medium">{point.type || 'Entry Point'}</span>
-                              <span className="text-green-400 font-semibold">
-                                {formatCurrency(point.price)}
-                              </span>
+                        {stockAnalysis.entryExitPoints?.entry.map(
+                          (point: EntryExitPoint, index: number) => (
+                            <div
+                              key={index}
+                              className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg"
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-white font-medium">
+                                  {point.type || 'Entry Point'}
+                                </span>
+                                <span className="text-green-400 font-semibold">
+                                  {formatCurrency(point.price)}
+                                </span>
+                              </div>
+                              <div className="text-slate-300 text-sm mb-2">
+                                {point.description || point.reasoning}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-slate-400 text-xs">Confidence:</span>
+                                <Progress value={point.confidence * 100} className="w-16 h-1" />
+                                <span className="text-white text-xs">
+                                  {(point.confidence * 100).toFixed(0)}%
+                                </span>
+                              </div>
                             </div>
-                            <div className="text-slate-300 text-sm mb-2">{point.description || point.reasoning}</div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-slate-400 text-xs">Confidence:</span>
-                              <Progress value={point.confidence * 100} className="w-16 h-1" />
-                              <span className="text-white text-xs">
-                                {(point.confidence * 100).toFixed(0)}%
-                              </span>
-                            </div>
-                          </div>
-                        ))}
+                          )
+                        )}
                       </div>
                     </div>
 
@@ -993,27 +1013,33 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         Exit Points
                       </h4>
                       <div className="space-y-3">
-                        {stockAnalysis.entryExitPoints?.exit.map((point: EntryExitPoint, index: number) => (
-                          <div
-                            key={index}
-                            className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"
-                          >
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-white font-medium">{point.type || 'Exit Point'}</span>
-                              <span className="text-red-400 font-semibold">
-                                {formatCurrency(point.price)}
-                              </span>
+                        {stockAnalysis.entryExitPoints?.exit.map(
+                          (point: EntryExitPoint, index: number) => (
+                            <div
+                              key={index}
+                              className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg"
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-white font-medium">
+                                  {point.type || 'Exit Point'}
+                                </span>
+                                <span className="text-red-400 font-semibold">
+                                  {formatCurrency(point.price)}
+                                </span>
+                              </div>
+                              <div className="text-slate-300 text-sm mb-2">
+                                {point.description || point.reasoning}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-slate-400 text-xs">Confidence:</span>
+                                <Progress value={point.confidence * 100} className="w-16 h-1" />
+                                <span className="text-white text-xs">
+                                  {(point.confidence * 100).toFixed(0)}%
+                                </span>
+                              </div>
                             </div>
-                            <div className="text-slate-300 text-sm mb-2">{point.description || point.reasoning}</div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-slate-400 text-xs">Confidence:</span>
-                              <Progress value={point.confidence * 100} className="w-16 h-1" />
-                              <span className="text-white text-xs">
-                                {(point.confidence * 100).toFixed(0)}%
-                              </span>
-                            </div>
-                          </div>
-                        ))}
+                          )
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1175,7 +1201,11 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                         <div className="text-center">
                           <Volume2 className="h-5 w-5 text-blue-400 mx-auto" />
                           <div className="text-white text-sm">
-                            {formatVolume(typeof stock.volume === 'number' ? stock.volume : (stock.volume as any)?.currentVolume || 0)}
+                            {formatVolume(
+                              typeof stock.volume === 'number'
+                                ? stock.volume
+                                : (stock.volume as any)?.currentVolume || 0
+                            )}
                           </div>
                         </div>
                       </div>

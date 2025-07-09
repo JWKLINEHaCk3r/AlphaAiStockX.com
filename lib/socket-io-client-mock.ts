@@ -9,7 +9,7 @@ export const io = (url: string, options?: any) => {
       connect: () => {},
     };
   }
-  
+
   // For client-side, we'll need to install socket.io-client
   throw new Error('socket.io-client not available - install it for client-side usage');
 };

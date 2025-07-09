@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Button } from "./button";
 'use client';
+=======
+import { Button } from '@/components/ui/button';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';

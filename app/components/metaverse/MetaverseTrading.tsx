@@ -12,9 +12,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 
 =======
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+=======
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import {
   CuboidIcon as Cube,
   Glasses,

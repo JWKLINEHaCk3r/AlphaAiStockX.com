@@ -156,9 +156,21 @@ export const WS_EVENTS = {
 
 // Stock symbols for demo/testing
 export const DEMO_SYMBOLS = [
-  'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA',
-  'NVDA', 'META', 'NFLX', 'AMD', 'BABA',
-  'UBER', 'SNAP', 'COIN', 'RBLX', 'HOOD',
+  'AAPL',
+  'MSFT',
+  'GOOGL',
+  'AMZN',
+  'TSLA',
+  'NVDA',
+  'META',
+  'NFLX',
+  'AMD',
+  'BABA',
+  'UBER',
+  'SNAP',
+  'COIN',
+  'RBLX',
+  'HOOD',
 ] as const;
 
 // AI agent names and specializations
@@ -228,8 +240,14 @@ export const CHART_CONFIG = {
     { label: 'ALL', value: 'ALL', minutes: 0 },
   ],
   indicators: [
-    'SMA', 'EMA', 'RSI', 'MACD', 'Bollinger Bands',
-    'Volume', 'Support/Resistance', 'Fibonacci',
+    'SMA',
+    'EMA',
+    'RSI',
+    'MACD',
+    'Bollinger Bands',
+    'Volume',
+    'Support/Resistance',
+    'Fibonacci',
   ],
 } as const;
 
@@ -248,10 +266,10 @@ export const isMarketHours = () => {
   const now = new Date();
   const hour = now.getHours();
   const day = now.getDay();
-  
+
   // Weekend check (0 = Sunday, 6 = Saturday)
   if (day === 0 || day === 6) return false;
-  
+
   // Market hours: 9:30 AM - 4:00 PM EST
   return hour >= 9 && hour < 16;
 };

@@ -120,7 +120,10 @@ class AIBrainService {
     return signals;
   }
 
-  async optimizePortfolio(currentPositions: Position[], availableCapital: number): Promise<{
+  async optimizePortfolio(
+    currentPositions: Position[],
+    availableCapital: number
+  ): Promise<{
     suggestedAllocations: OptimalAllocations;
     riskMetrics: number;
     expectedReturn: number;
@@ -172,7 +175,7 @@ class AIBrainService {
     const prediction = predictions[0];
 
     return {
-      action: prediction?.action?.toLowerCase() as 'buy' | 'sell' | 'hold' || 'hold',
+      action: (prediction?.action?.toLowerCase() as 'buy' | 'sell' | 'hold') || 'hold',
       confidence: prediction?.confidence || 0.5,
       reasoning: prediction?.reasoning || ['Analysis pending'],
       targetPrice: prediction?.targetPrice || 100,
@@ -317,14 +320,15 @@ class AIBrainService {
     const period = 20;
     const prices = data.slice(-period).map(d => d.price);
     const sma = prices.reduce((sum, price) => sum + price, 0) / prices.length;
-    const variance = prices.reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / prices.length;
+    const variance =
+      prices.reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / prices.length;
     const stdDev = Math.sqrt(variance);
     const currentPrice = prices[prices.length - 1] || sma;
-    
+
     return {
-      upper: sma + (2 * stdDev),
+      upper: sma + 2 * stdDev,
       middle: sma,
-      lower: sma - (2 * stdDev),
+      lower: sma - 2 * stdDev,
       percentB: (currentPrice - (sma - 2 * stdDev)) / (4 * stdDev),
       bandwidth: (4 * stdDev) / sma,
     };
@@ -334,12 +338,12 @@ class AIBrainService {
     const prices = data.map(d => d.price);
     const highs: number[] = [];
     const lows: number[] = [];
-    
+
     for (let i = 1; i < prices.length - 1; i++) {
       const current = prices[i];
       const prev = prices[i - 1];
       const next = prices[i + 1];
-      
+
       if (current !== undefined && prev !== undefined && next !== undefined) {
         if (current > prev && current > next) {
           highs.push(current);
@@ -349,7 +353,7 @@ class AIBrainService {
         }
       }
     }
-    
+
     return {
       support: lows.slice(-3),
       resistance: highs.slice(-3),
@@ -384,7 +388,7 @@ class AIBrainService {
     for (let i = data.length - period; i < data.length; i++) {
       const current = data[i];
       const previous = data[i - 1];
-      
+
       if (current && previous) {
         const change = current.price - previous.price;
         if (change > 0) gains += change;
@@ -418,12 +422,20 @@ class AIBrainService {
     }
 
     const sentimentModel = this.models.get('sentimentAnalysis');
-    const sentiment = await sentimentModel?.analyze(symbol) || { news: 0, social: 0, institutional: 0, overall: 0 };
+    const sentiment = (await sentimentModel?.analyze(symbol)) || {
+      news: 0,
+      social: 0,
+      institutional: 0,
+      overall: 0,
+    };
     this.sentimentCache.set(symbol, sentiment);
     return sentiment;
   }
 
-  private async performTechnicalAnalysis(symbol: string, data?: MarketData[]): Promise<TechnicalIndicators> {
+  private async performTechnicalAnalysis(
+    symbol: string,
+    data?: MarketData[]
+  ): Promise<TechnicalIndicators> {
     const marketData = data || (await this.getMarketData(symbol));
 
     return {
@@ -513,7 +525,7 @@ class AIBrainService {
     if (!lastData) return false;
     const lastDataTime = new Date(lastData.timestamp);
     const now = new Date();
-    return (now.getTime() - lastDataTime.getTime()) < 5 * 60 * 1000;
+    return now.getTime() - lastDataTime.getTime() < 5 * 60 * 1000;
   }
 
   private isSentimentFresh(symbol: string): boolean {
@@ -532,7 +544,11 @@ class AIBrainService {
     return recentHigh > previousHigh * 1.02 ? 0.8 : 0.2;
   }
 
-  private calculateMeanReversionConfidence(rsi: number, bb: BollingerBands, support: SupportResistance): number {
+  private calculateMeanReversionConfidence(
+    rsi: number,
+    bb: BollingerBands,
+    support: SupportResistance
+  ): number {
     let confidence = 0;
     if (rsi < 30 && bb.percentB < 0.1) confidence += 0.4;
     if (rsi > 70 && bb.percentB > 0.9) confidence += 0.4;
@@ -545,28 +561,28 @@ class AIBrainService {
       const mockNewsCount = Math.floor(Math.random() * 20) + 5;
       let sentimentScore = 0;
       let totalWeight = 0;
-      
+
       for (let i = 0; i < mockNewsCount; i++) {
         const hasPositive = Math.random() > 0.4;
         const hasNegative = Math.random() > 0.6;
         const recency = Math.random();
-        const weight = 0.1 + (recency * 0.9);
-        
+        const weight = 0.1 + recency * 0.9;
+
         let articleSentiment = 0;
         if (hasPositive && !hasNegative) {
-          articleSentiment = 0.3 + (Math.random() * 0.7);
+          articleSentiment = 0.3 + Math.random() * 0.7;
         } else if (hasNegative && !hasPositive) {
-          articleSentiment = -1.0 + (Math.random() * 0.7);
+          articleSentiment = -1.0 + Math.random() * 0.7;
         } else if (hasPositive && hasNegative) {
           articleSentiment = (Math.random() - 0.5) * 0.6;
         } else {
           articleSentiment = (Math.random() - 0.5) * 0.4;
         }
-        
+
         sentimentScore += articleSentiment * weight;
         totalWeight += weight;
       }
-      
+
       const finalSentiment = totalWeight > 0 ? sentimentScore / totalWeight : 0;
       return { sentiment: Math.max(-1, Math.min(1, finalSentiment)) };
     } catch (error) {
@@ -578,11 +594,11 @@ class AIBrainService {
     try {
       const platforms = ['twitter', 'reddit', 'stocktwits', 'discord'];
       const sentimentData: Array<{ platform: string; sentiment: number; volume: number }> = [];
-      
+
       for (const platform of platforms) {
         const volume = Math.floor(Math.random() * 1000) + 50;
         let platformSentiment: number;
-        
+
         switch (platform) {
           case 'twitter':
             platformSentiment = (Math.random() - 0.5) * 1.6;
@@ -599,27 +615,28 @@ class AIBrainService {
           default:
             platformSentiment = (Math.random() - 0.5) * 1.0;
         }
-        
+
         sentimentData.push({
           platform,
           sentiment: Math.max(-1, Math.min(1, platformSentiment)),
-          volume
+          volume,
         });
       }
-      
+
       const platformWeights = { twitter: 0.3, reddit: 0.3, stocktwits: 0.25, discord: 0.15 };
       let weightedSentiment = 0;
       let totalWeight = 0;
-      
+
       sentimentData.forEach(data => {
         const volumeWeight = Math.log(data.volume + 1) / 10;
-        const platformWeight = platformWeights[data.platform as keyof typeof platformWeights] || 0.2;
+        const platformWeight =
+          platformWeights[data.platform as keyof typeof platformWeights] || 0.2;
         const finalWeight = volumeWeight * platformWeight;
-        
+
         weightedSentiment += data.sentiment * finalWeight;
         totalWeight += finalWeight;
       });
-      
+
       const finalSentiment = totalWeight > 0 ? weightedSentiment / totalWeight : 0;
       return { sentiment: Math.max(-1, Math.min(1, finalSentiment)) };
     } catch (error) {
@@ -637,29 +654,30 @@ class AIBrainService {
         optionsFlow: (Math.random() - 0.5) * 2,
         futuresPositioning: (Math.random() - 0.5) * 2,
       };
-      
-      const netFlow = institutionalData.institutionalBuying - institutionalData.institutionalSelling;
-      const flowRatio = institutionalData.institutionalBuying / 
+
+      const netFlow =
+        institutionalData.institutionalBuying - institutionalData.institutionalSelling;
+      const flowRatio =
+        institutionalData.institutionalBuying /
         (institutionalData.institutionalBuying + institutionalData.institutionalSelling + 1);
-      
-      const darkPoolScore = institutionalData.darkPoolVolume > 500000 ? 
-        (flowRatio > 0.6 ? 0.3 : -0.3) : 0;
-      
-      const blockTradeScore = institutionalData.blockTrades > 20 ? 
-        (flowRatio > 0.55 ? 0.4 : -0.4) : 0;
-      
+
+      const darkPoolScore =
+        institutionalData.darkPoolVolume > 500000 ? (flowRatio > 0.6 ? 0.3 : -0.3) : 0;
+
+      const blockTradeScore =
+        institutionalData.blockTrades > 20 ? (flowRatio > 0.55 ? 0.4 : -0.4) : 0;
+
       const optionsScore = institutionalData.optionsFlow * 0.3;
       const futuresScore = institutionalData.futuresPositioning * 0.2;
       const flowScore = (flowRatio - 0.5) * 2;
-      
-      const combinedScore = (
+
+      const combinedScore =
         flowScore * 0.4 +
         darkPoolScore * 0.2 +
         blockTradeScore * 0.2 +
         optionsScore * 0.1 +
-        futuresScore * 0.1
-      );
-      
+        futuresScore * 0.1;
+
       return { sentiment: Math.max(-1, Math.min(1, combinedScore)) };
     } catch (error) {
       return { sentiment: 0 };
@@ -667,18 +685,24 @@ class AIBrainService {
   }
 
   private calculateVolatility(data: MarketData[]): number {
-    const returns = data.slice(1).map((d, i) => {
-      const prevPrice = data[i]?.price;
-      return prevPrice ? Math.log(d.price / prevPrice) : 0;
-    }).filter(r => r !== 0);
+    const returns = data
+      .slice(1)
+      .map((d, i) => {
+        const prevPrice = data[i]?.price;
+        return prevPrice ? Math.log(d.price / prevPrice) : 0;
+      })
+      .filter(r => r !== 0);
     return this.calculateStdDev(returns);
   }
 
   private calculateVaR(data: MarketData[], confidence: number): number {
-    const returns = data.slice(1).map((d, i) => {
-      const prevPrice = data[i]?.price;
-      return prevPrice ? (d.price - prevPrice) / prevPrice : 0;
-    }).filter(r => r !== 0);
+    const returns = data
+      .slice(1)
+      .map((d, i) => {
+        const prevPrice = data[i]?.price;
+        return prevPrice ? (d.price - prevPrice) / prevPrice : 0;
+      })
+      .filter(r => r !== 0);
     returns.sort((a, b) => a - b);
     const index = Math.floor((1 - confidence) * returns.length);
     return Math.abs(returns[index] || 0.05);
@@ -688,29 +712,30 @@ class AIBrainService {
     try {
       const marketIndices = ['SPY', 'QQQ', 'IWM', 'VTI', 'DIA'];
       const correlations: number[] = [];
-      
+
       marketIndices.forEach(index => {
         let baseCorrelation = 0.6;
         if (symbol.length <= 3) {
           baseCorrelation += 0.1;
         }
-        
+
         const variance = (Math.random() - 0.5) * 0.4;
         const correlation = Math.max(-1, Math.min(1, baseCorrelation + variance));
         correlations.push(correlation);
       });
-      
+
       const sectorCorrelation = Math.random() * 0.8 + 0.1;
       correlations.push(sectorCorrelation);
-      
+
       const marketWeight = 0.7;
       const sectorWeight = 0.3;
-      
-      const avgMarketCorr = correlations.slice(0, marketIndices.length)
-        .reduce((sum, corr) => sum + corr, 0) / marketIndices.length;
-      
+
+      const avgMarketCorr =
+        correlations.slice(0, marketIndices.length).reduce((sum, corr) => sum + corr, 0) /
+        marketIndices.length;
+
       const weightedCorrelation = avgMarketCorr * marketWeight + sectorCorrelation * sectorWeight;
-      
+
       return Math.max(-1, Math.min(1, weightedCorrelation));
     } catch (error) {
       return 0.5;
@@ -728,7 +753,9 @@ class AIBrainService {
 
   private calculateCovarianceMatrix(positions: Position[]): number[][] {
     const n = positions.length;
-    return Array(n).fill(0).map(() => Array(n).fill(0.02));
+    return Array(n)
+      .fill(0)
+      .map(() => Array(n).fill(0.02));
   }
 
   private optimizeWeights(returns: number[], cov: number[][], capital: number): number[] {
@@ -783,35 +810,35 @@ class AIBrainService {
     const prices = data.map(d => d.price);
     const multiplier = 2 / (period + 1);
     let ema = prices[0] || 0;
-    
+
     for (let i = 1; i < prices.length; i++) {
       const price = prices[i];
       if (price !== undefined) {
-        ema = (price * multiplier) + (ema * (1 - multiplier));
+        ema = price * multiplier + ema * (1 - multiplier);
       }
     }
-    
+
     return ema;
   }
 
   private calculateOptimalAllocations(positions: Position[], capital: number): OptimalAllocations {
     const allocations: OptimalAllocations = {};
-    
+
     positions.forEach(position => {
       const targetWeight = 1 / positions.length;
       const currentValue = position.quantity * position.currentPrice;
       const targetValue = capital * targetWeight;
-      
+
       allocations[position.symbol] = {
         currentWeight: currentValue / capital,
         targetWeight,
-        recommendedAction: targetValue > currentValue ? 'buy' : 
-                          targetValue < currentValue ? 'sell' : 'hold',
+        recommendedAction:
+          targetValue > currentValue ? 'buy' : targetValue < currentValue ? 'sell' : 'hold',
         shares: Math.round((targetValue - currentValue) / position.currentPrice),
         dollarAmount: targetValue - currentValue,
       };
     });
-    
+
     return allocations;
   }
 
@@ -836,7 +863,7 @@ class AIBrainService {
     const var95 = this.calculateVaR(data, 0.95);
     const correlation = this.calculateMarketCorrelation(symbol);
     const liquidity = this.assessLiquidity(data);
-    
+
     return {
       symbol,
       volatility,
@@ -844,7 +871,8 @@ class AIBrainService {
       maxDrawdown: volatility * 2,
       sharpeRatio: this.calculateSharpeRatio([1], [0.1], [[0.02]]),
       beta: correlation,
-      riskScore: volatility * 0.3 + var95 * 0.3 + Math.abs(correlation) * 0.2 + (1 - liquidity) * 0.2,
+      riskScore:
+        volatility * 0.3 + var95 * 0.3 + Math.abs(correlation) * 0.2 + (1 - liquidity) * 0.2,
       recommendations: this.generateRiskRecommendations(volatility, var95),
       timestamp: new Date(),
     };
@@ -852,11 +880,12 @@ class AIBrainService {
 
   private generateRiskRecommendations(volatility: number, var95: number): string[] {
     const recommendations: string[] = [];
-    
-    if (volatility > 0.3) recommendations.push('High volatility detected - consider reducing position size');
+
+    if (volatility > 0.3)
+      recommendations.push('High volatility detected - consider reducing position size');
     if (var95 > 0.1) recommendations.push('High VaR - implement strict stop losses');
     recommendations.push('Monitor position regularly');
-    
+
     return recommendations;
   }
 }

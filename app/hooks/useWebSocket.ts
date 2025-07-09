@@ -30,7 +30,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
     onError,
     onClose,
     reconnectInterval = 3000,
-    maxReconnectAttempts = 5
+    maxReconnectAttempts = 5,
   } = options;
 
   const wsRef = useRef<WebSocket | null>(null);
@@ -38,23 +38,26 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
   const readyStateRef = useRef(CLOSED);
   const isConnectedRef = useRef(false);
 
-  const sendMessage = useCallback((message: any) => {
-    if (typeof window === 'undefined') {
-      console.warn('WebSocket: Cannot send message on server side');
-      return;
-    }
-
-    if (wsRef.current && wsRef.current.readyState === OPEN) {
-      try {
-        wsRef.current.send(JSON.stringify(message));
-      } catch (error) {
-        console.error('WebSocket send error:', error);
-        onError?.(error);
+  const sendMessage = useCallback(
+    (message: any) => {
+      if (typeof window === 'undefined') {
+        console.warn('WebSocket: Cannot send message on server side');
+        return;
       }
-    } else {
-      console.warn('WebSocket: Connection not ready');
-    }
-  }, [onError]);
+
+      if (wsRef.current && wsRef.current.readyState === OPEN) {
+        try {
+          wsRef.current.send(JSON.stringify(message));
+        } catch (error) {
+          console.error('WebSocket send error:', error);
+          onError?.(error);
+        }
+      } else {
+        console.warn('WebSocket: Connection not ready');
+      }
+    },
+    [onError]
+  );
 
   const connect = useCallback(() => {
     if (typeof window === 'undefined') {
@@ -72,7 +75,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
         onOpen?.();
       };
 
-      wsRef.current.onmessage = (event) => {
+      wsRef.current.onmessage = event => {
         try {
           const data = JSON.parse(event.data);
           onMessage?.(data);
@@ -81,7 +84,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
         }
       };
 
-      wsRef.current.onerror = (error) => {
+      wsRef.current.onerror = error => {
         console.error('WebSocket error:', error);
         onError?.(error);
       };
@@ -121,6 +124,6 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
   return {
     sendMessage,
     readyState: readyStateRef.current,
-    isConnected: isConnectedRef.current
+    isConnected: isConnectedRef.current,
   };
 }

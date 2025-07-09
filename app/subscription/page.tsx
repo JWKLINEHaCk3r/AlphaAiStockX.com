@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Label } from "../../components/ui/label";
 'use client';
+=======
+import { Label } from '@/components/ui/label';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';

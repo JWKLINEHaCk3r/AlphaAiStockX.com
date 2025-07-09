@@ -96,7 +96,7 @@ export interface SubscriptionTopic {
 // Mock WebSocket service for static builds
 export class WebSocketService {
   private isEnabled = false;
-  
+
   constructor(config?: Partial<WebSocketConfig>) {
     console.log('WebSocket service initialized in mock mode for static build');
   }
@@ -120,7 +120,7 @@ export class WebSocketService {
       messagesPerSecond: 0,
       avgLatency: 0,
       errorRate: 0,
-      uptime: 0
+      uptime: 0,
     };
   }
 
@@ -144,7 +144,10 @@ export class WebSocketService {
     console.log('Mock unsubscribe:', socketId, topic);
   }
 
-  authenticateSocket(socketId: string, token: string): Promise<{ success: boolean; userId?: string; error?: string }> {
+  authenticateSocket(
+    socketId: string,
+    token: string
+  ): Promise<{ success: boolean; userId?: string; error?: string }> {
     return Promise.resolve({ success: false, error: 'WebSocket disabled in static build' });
   }
 
@@ -228,8 +231,8 @@ export class WebSocketService {
     return {
       status: 'unhealthy',
       details: {
-        reason: 'WebSocket service disabled for static build'
-      }
+        reason: 'WebSocket service disabled for static build',
+      },
     };
   }
 
@@ -248,7 +251,7 @@ export class WebSocketService {
   exportMetrics(): any {
     return {
       enabled: false,
-      mode: 'static_build_mock'
+      mode: 'static_build_mock',
     };
   }
 }

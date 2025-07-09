@@ -21,16 +21,16 @@ if (typeof global !== 'undefined' && typeof global.document === 'undefined') {
     documentElement: {
       scrollTop: 0,
       scrollHeight: 0,
-      clientHeight: 0
+      clientHeight: 0,
     },
     body: {
-      className: ''
+      className: '',
     },
     addEventListener: () => {},
     removeEventListener: () => {},
     getElementById: () => null,
     querySelector: () => null,
-    querySelectorAll: () => []
+    querySelectorAll: () => [],
   };
   console.log('[Global Setup] Added document polyfill for SSR');
 }

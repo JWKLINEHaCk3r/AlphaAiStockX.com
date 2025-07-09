@@ -299,7 +299,9 @@ export default function AdminDashboard() {
   const suspendUser = (userId: number) => {
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setUserProfiles(prev =>
-      prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'suspended' } : user))
+      prev.map((user: UserProfile) =>
+        user.id === userId ? { ...user, status: 'suspended' } : user
+      )
     );
   };
 

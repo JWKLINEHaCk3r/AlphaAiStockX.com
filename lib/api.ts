@@ -7,9 +7,8 @@ const WS_BASE_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8001';
 // Request headers
 const getHeaders = (): HeadersInit => ({
   'Content-Type': 'application/json',
-  'Authorization': typeof window !== 'undefined' 
-    ? `Bearer ${localStorage.getItem('auth_token') || ''}` 
-    : '',
+  Authorization:
+    typeof window !== 'undefined' ? `Bearer ${localStorage.getItem('auth_token') || ''}` : '',
 });
 
 // Generic API request function
@@ -27,11 +26,7 @@ export async function apiRequest<T = any>(
     const data = await response.json();
 
     if (!response.ok) {
-      throw new APIError(
-        data.message || 'API request failed',
-        response.status,
-        data.code
-      );
+      throw new APIError(data.message || 'API request failed', response.status, data.code);
     }
 
     return data;
@@ -39,39 +34,34 @@ export async function apiRequest<T = any>(
     if (error instanceof APIError) {
       throw error;
     }
-    
-    throw new APIError(
-      error instanceof Error ? error.message : 'Network error',
-      0
-    );
+
+    throw new APIError(error instanceof Error ? error.message : 'Network error', 0);
   }
 }
 
 // HTTP method helpers
 export const api = {
-  get: <T>(endpoint: string) => 
-    apiRequest<T>(endpoint, { method: 'GET' }),
-    
+  get: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'GET' }),
+
   post: <T>(endpoint: string, data?: any) =>
     apiRequest<T>(endpoint, {
       method: 'POST',
       body: data ? JSON.stringify(data) : undefined,
     }),
-    
+
   put: <T>(endpoint: string, data?: any) =>
     apiRequest<T>(endpoint, {
       method: 'PUT',
       body: data ? JSON.stringify(data) : undefined,
     }),
-    
+
   patch: <T>(endpoint: string, data?: any) =>
     apiRequest<T>(endpoint, {
       method: 'PATCH',
       body: data ? JSON.stringify(data) : undefined,
     }),
-    
-  delete: <T>(endpoint: string) =>
-    apiRequest<T>(endpoint, { method: 'DELETE' }),
+
+  delete: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'DELETE' }),
 };
 
 // WebSocket connection manager
@@ -85,13 +75,13 @@ export class WSManager {
   connect(endpoint: string = '') {
     try {
       this.ws = new WebSocket(`${WS_BASE_URL}${endpoint}`);
-      
+
       this.ws.onopen = () => {
         console.log('WebSocket connected');
         this.reconnectAttempts = 0;
       };
-      
-      this.ws.onmessage = (event) => {
+
+      this.ws.onmessage = event => {
         try {
           const message = JSON.parse(event.data);
           this.handleMessage(message);
@@ -99,13 +89,13 @@ export class WSManager {
           console.error('Failed to parse WebSocket message:', error);
         }
       };
-      
+
       this.ws.onclose = () => {
         console.log('WebSocket disconnected');
         this.handleReconnect();
       };
-      
-      this.ws.onerror = (error) => {
+
+      this.ws.onerror = error => {
         console.error('WebSocket error:', error);
       };
     } catch (error) {
@@ -164,20 +154,20 @@ export const auth = {
       localStorage.setItem('auth_token', token);
     }
   },
-  
+
   getToken: (): string | null => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('auth_token');
     }
     return null;
   },
-  
+
   removeToken: () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('auth_token');
     }
   },
-  
+
   isAuthenticated: (): boolean => {
     return !!auth.getToken();
   },
@@ -193,25 +183,25 @@ export const formatters = {
       maximumFractionDigits: 2,
     }).format(value);
   },
-  
+
   percentage: (value: number, decimals = 2) => {
     return `${value >= 0 ? '+' : ''}${value.toFixed(decimals)}%`;
   },
-  
+
   number: (value: number, decimals = 0) => {
     return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     }).format(value);
   },
-  
+
   compactNumber: (value: number) => {
     return new Intl.NumberFormat('en-US', {
       notation: 'compact',
       maximumFractionDigits: 1,
     }).format(value);
   },
-  
+
   date: (date: Date | string) => {
     const d = new Date(date);
     return new Intl.DateTimeFormat('en-US', {
@@ -220,7 +210,7 @@ export const formatters = {
       day: 'numeric',
     }).format(d);
   },
-  
+
   time: (date: Date | string) => {
     const d = new Date(date);
     return new Intl.DateTimeFormat('en-US', {
@@ -229,7 +219,7 @@ export const formatters = {
       second: '2-digit',
     }).format(d);
   },
-  
+
   datetime: (date: Date | string) => {
     const d = new Date(date);
     return new Intl.DateTimeFormat('en-US', {
@@ -246,30 +236,30 @@ export const formatters = {
 export const storage = {
   get: <T>(key: string, defaultValue?: T): T | null => {
     if (typeof window === 'undefined') return null;
-    
+
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue ?? null;
+      return item ? JSON.parse(item) : (defaultValue ?? null);
     } catch {
       return defaultValue ?? null;
     }
   },
-  
+
   set: (key: string, value: any): void => {
     if (typeof window === 'undefined') return;
-    
+
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.error('Failed to save to localStorage:', error);
     }
   },
-  
+
   remove: (key: string): void => {
     if (typeof window === 'undefined') return;
     localStorage.removeItem(key);
   },
-  
+
   clear: (): void => {
     if (typeof window === 'undefined') return;
     localStorage.clear();
@@ -282,18 +272,18 @@ export const errorHandler = {
     if (error instanceof APIError) {
       return error.message;
     }
-    
+
     if (error instanceof Error) {
       return error.message;
     }
-    
+
     return 'An unexpected error occurred';
   },
-  
+
   notify: (error: unknown): void => {
     const message = errorHandler.handle(error);
     console.error('Error:', message);
-    
+
     // Here you could integrate with a toast notification system
     if (typeof window !== 'undefined') {
       // Example: show a toast notification
@@ -308,19 +298,19 @@ export const validators = {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   },
-  
+
   password: (password: string): boolean => {
     // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   },
-  
+
   stockSymbol: (symbol: string): boolean => {
     // 1-5 uppercase letters
     const symbolRegex = /^[A-Z]{1,5}$/;
     return symbolRegex.test(symbol);
   },
-  
+
   amount: (amount: number): boolean => {
     return amount > 0 && Number.isFinite(amount);
   },
@@ -332,7 +322,7 @@ export const debounce = <T extends (...args: any[]) => any>(
   wait: number
 ): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -344,12 +334,12 @@ export const throttle = <T extends (...args: any[]) => any>(
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 };

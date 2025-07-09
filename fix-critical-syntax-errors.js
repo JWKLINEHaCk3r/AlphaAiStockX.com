@@ -17,26 +17,26 @@ const SYNTAX_FIXES = [
   {
     pattern: /([^;{}\s])\s*$/gm,
     replacement: '$1;',
-    description: 'Adding missing semicolons'
+    description: 'Adding missing semicolons',
   },
   // Fix missing imports
   {
     pattern: /^(\s*)(export\s+(?:default\s+)?(?:const|let|var|function|class|interface|type)\s+)/gm,
     replacement: '$1$2',
-    description: 'Fixing export statements'
+    description: 'Fixing export statements',
   },
   // Fix React component syntax
   {
     pattern: /(\w+)\s*=\s*\(\s*\)\s*=>\s*\{/g,
     replacement: '$1 = () => {',
-    description: 'Fixing arrow function syntax'
+    description: 'Fixing arrow function syntax',
   },
   // Fix JSX syntax
   {
     pattern: /className\s*=\s*{([^}]+)}/g,
     replacement: 'className={$1}',
-    description: 'Fixing JSX className syntax'
-  }
+    description: 'Fixing JSX className syntax',
+  },
 ];
 
 // TypeScript/JavaScript critical fixes
@@ -44,13 +44,13 @@ const TYPESCRIPT_FIXES = [
   {
     pattern: /interface\s+(\w+)\s*{([^}]*)}/gs,
     replacement: 'interface $1 {\n$2\n}',
-    description: 'Fixing interface formatting'
+    description: 'Fixing interface formatting',
   },
   {
     pattern: /type\s+(\w+)\s*=\s*([^;]+);?/g,
     replacement: 'type $1 = $2;',
-    description: 'Fixing type definitions'
-  }
+    description: 'Fixing type definitions',
+  },
 ];
 
 // AI Trading specific fixes
@@ -58,13 +58,13 @@ const TRADING_FIXES = [
   {
     pattern: /useEffect\s*\(\s*\(\s*\)\s*=>\s*\{/g,
     replacement: 'useEffect(() => {',
-    description: 'Fixing useEffect syntax'
+    description: 'Fixing useEffect syntax',
   },
   {
     pattern: /useState\s*\(\s*([^)]+)\s*\)/g,
     replacement: 'useState($1)',
-    description: 'Fixing useState syntax'
-  }
+    description: 'Fixing useState syntax',
+  },
 ];
 
 async function fixCriticalSyntaxErrors() {
@@ -72,7 +72,7 @@ async function fixCriticalSyntaxErrors() {
     // Get all TypeScript and JavaScript files
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: process.cwd(),
-      ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*', '**/fix-*.js']
+      ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*', '**/fix-*.js'],
     });
 
     console.log(`🔍 Scanning ${files.length} files for critical syntax errors...`);
@@ -89,7 +89,7 @@ async function fixCriticalSyntaxErrors() {
       for (const fix of [...SYNTAX_FIXES, ...TYPESCRIPT_FIXES, ...TRADING_FIXES]) {
         const originalContent = content;
         content = content.replace(fix.pattern, fix.replacement);
-        
+
         if (content !== originalContent) {
           fileModified = true;
           fileFixes++;
@@ -110,7 +110,11 @@ async function fixCriticalSyntaxErrors() {
         }
 
         // Fix component export
-        if (content.includes('export default') && !content.includes('export default function') && !content.includes('export default class')) {
+        if (
+          content.includes('export default') &&
+          !content.includes('export default function') &&
+          !content.includes('export default class')
+        ) {
           const componentMatch = content.match(/const\s+(\w+)\s*=\s*\([^)]*\)\s*=>/);
           if (componentMatch && !content.includes(`export default ${componentMatch[1]}`)) {
             content += `\n\nexport default ${componentMatch[1]};`;
@@ -126,7 +130,7 @@ async function fixCriticalSyntaxErrors() {
         // Add type annotations for common patterns
         content = content.replace(/const\s+(\w+)\s*=\s*\[\]/g, 'const $1: any[] = []');
         content = content.replace(/const\s+(\w+)\s*=\s*{}/g, 'const $1: any = {}');
-        
+
         // Fix async function types
         content = content.replace(/async\s+(\w+)\s*\(/g, 'async $1(');
       }

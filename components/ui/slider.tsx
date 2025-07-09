@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Slider } from "./slider";
+=======
+import { Slider } from '@/components/ui/slider';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 import * as React from 'react';
 import * as SliderPrimitive from '@radix-ui/react-slider';

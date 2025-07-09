@@ -79,7 +79,10 @@
     "clsx": "^2.1.1",
     "core-js": "^3.37.0",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "cypress": "^13.17.0",
+=======
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
     "d3": "^7.8.5",
     "date-fns": "^4.1.0",
     "express-rate-limit": "^7.4.1",
@@ -127,6 +130,7 @@
     "@netlify/plugin-nextjs": "^5.11.4",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
+    "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",

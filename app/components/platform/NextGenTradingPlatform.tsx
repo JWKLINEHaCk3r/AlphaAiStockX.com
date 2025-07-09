@@ -21,14 +21,28 @@ import { Button } from "../../../components/ui/button";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+<<<<<<< HEAD
 import { 
   Brain, 
   TrendingUp, 
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Switch } from '@/components/ui/switch';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+  Brain,
+  TrendingUp,
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   TrendingDown,
-  DollarSign, 
-  Users, 
-  Zap, 
-  Shield, 
+  DollarSign,
+  Users,
+  Zap,
+  Shield,
   Target,
   Bot,
   Activity,
@@ -75,8 +89,21 @@ import {
   Network,
   Atom,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
 } from 'lucide-react';
+<<<<<<< HEAD
+=======
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Slider } from '@/components/ui/slider';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 // Advanced Interfaces for Next-Gen Multi-User Trading Platform
 interface User {
@@ -143,7 +170,7 @@ interface TradingSignal {
 interface TechnicalData {
   rsi: number;
   macd: number;
-  bollinger: { upper: number; middle: number; lower: number; };
+  bollinger: { upper: number; middle: number; lower: number };
   volume: number;
   support: number;
   resistance: number;
@@ -408,7 +435,7 @@ export default function NextGenTradingPlatform() {
       lastActive: 'Now',
       badges: ['AI_MASTER', 'HIGH_PERFORMER', 'RISK_MANAGER', 'SOCIAL_TRADER'],
       achievements: [],
-      preferences: {}
+      preferences: {},
     };
     setCurrentUser(userData);
   };
@@ -422,39 +449,39 @@ export default function NextGenTradingPlatform() {
         action: 'BUY',
         confidence: 0.94,
         price: 178.25,
-        targetPrice: 185.00,
-        stopLoss: 172.00,
+        targetPrice: 185.0,
+        stopLoss: 172.0,
         strategy: 'Neural Ensemble',
         timeframe: '1D',
         timestamp: new Date(),
-        aiModel: 'AlphaNet-Pro-v3.2'
+        aiModel: 'AlphaNet-Pro-v3.2',
       },
       {
         id: '2',
         symbol: 'TSLA',
         action: 'SELL',
         confidence: 0.87,
-        price: 248.50,
-        targetPrice: 235.00,
-        stopLoss: 255.00,
+        price: 248.5,
+        targetPrice: 235.0,
+        stopLoss: 255.0,
         strategy: 'Momentum Reversal',
         timeframe: '4H',
         timestamp: new Date(),
-        aiModel: 'TrendMaster-AI'
+        aiModel: 'TrendMaster-AI',
       },
       {
         id: '3',
         symbol: 'NVDA',
         action: 'BUY',
         confidence: 0.91,
-        price: 445.80,
-        targetPrice: 475.00,
-        stopLoss: 425.00,
+        price: 445.8,
+        targetPrice: 475.0,
+        stopLoss: 425.0,
         strategy: 'Pattern Recognition',
         timeframe: '1D',
         timestamp: new Date(),
-        aiModel: 'PatternNet-Elite'
-      }
+        aiModel: 'PatternNet-Elite',
+      },
     ];
     setTradingSignals(signals);
 
@@ -468,7 +495,7 @@ export default function NextGenTradingPlatform() {
         pnlPercent: 7.25,
         positions: [],
         allocation: { stocks: 70, crypto: 20, bonds: 10 },
-        riskLevel: 'moderate'
+        riskLevel: 'moderate',
       },
       {
         id: '2',
@@ -478,7 +505,7 @@ export default function NextGenTradingPlatform() {
         pnlPercent: 5.26,
         positions: [],
         allocation: { stocks: 40, bonds: 50, cash: 10 },
-        riskLevel: 'conservative'
+        riskLevel: 'conservative',
       },
       {
         id: '3',
@@ -488,8 +515,8 @@ export default function NextGenTradingPlatform() {
         pnlPercent: 42.86,
         positions: [],
         allocation: { crypto: 80, stocks: 20 },
-        riskLevel: 'aggressive'
-      }
+        riskLevel: 'aggressive',
+      },
     ];
     setPortfolios(portfolioData);
   };
@@ -506,9 +533,10 @@ export default function NextGenTradingPlatform() {
           avatar: '/avatars/sarah.jpg',
           tier: 'pro',
           reputation: 8750,
-          followers: 2340
+          followers: 2340,
         } as User,
-        content: 'Just spotted a massive bullish divergence on $AAPL RSI. My AI model is showing 94% confidence for a breakout above $180. 🚀',
+        content:
+          'Just spotted a massive bullish divergence on $AAPL RSI. My AI model is showing 94% confidence for a breakout above $180. 🚀',
         symbols: ['AAPL'],
         sentiment: 0.8,
         likes: 47,
@@ -519,8 +547,8 @@ export default function NextGenTradingPlatform() {
           symbol: 'AAPL',
           action: 'BUY',
           targetPrice: 185,
-          reasoning: 'Technical analysis + AI confirmation'
-        }
+          reasoning: 'Technical analysis + AI confirmation',
+        },
       },
       {
         id: '2',
@@ -531,9 +559,10 @@ export default function NextGenTradingPlatform() {
           avatar: '/avatars/mike.jpg',
           tier: 'ultimate',
           reputation: 12450,
-          followers: 5670
+          followers: 5670,
         } as User,
-        content: 'My quantitative model just triggered a SELL signal on $TSLA. Expected pullback to $235 support level. Risk/reward looks good here.',
+        content:
+          'My quantitative model just triggered a SELL signal on $TSLA. Expected pullback to $235 support level. Risk/reward looks good here.',
         symbols: ['TSLA'],
         sentiment: -0.6,
         likes: 89,
@@ -544,9 +573,9 @@ export default function NextGenTradingPlatform() {
           symbol: 'TSLA',
           action: 'SELL',
           targetPrice: 235,
-          reasoning: 'Quantitative momentum analysis'
-        }
-      }
+          reasoning: 'Quantitative momentum analysis',
+        },
+      },
     ];
     setSocialFeed(feed);
   };
@@ -554,10 +583,10 @@ export default function NextGenTradingPlatform() {
   const startRealTimeUpdates = () => {
     // WebSocket connection for real-time updates
     const ws = new WebSocket('wss://api.alphaaistockx.com/ws');
-    
-    ws.onmessage = (event) => {
+
+    ws.onmessage = event => {
       const data = JSON.parse(event.data);
-      
+
       switch (data.type) {
         case 'signal':
           setTradingSignals(prev => [data.signal, ...prev.slice(0, 19)]);
@@ -583,7 +612,7 @@ export default function NextGenTradingPlatform() {
       basic: 'bg-blue-500',
       pro: 'bg-purple-500',
       ultimate: 'bg-gradient-to-r from-yellow-400 to-orange-500',
-      owner: 'bg-gradient-to-r from-pink-500 to-red-500'
+      owner: 'bg-gradient-to-r from-pink-500 to-red-500',
     };
     return colors[tier as keyof typeof colors] || colors.free;
   };
@@ -594,7 +623,7 @@ export default function NextGenTradingPlatform() {
       basic: Target,
       pro: Crown,
       ultimate: Diamond,
-      owner: Infinity
+      owner: Infinity,
     };
     const IconComponent = icons[tier as keyof typeof icons] || Star;
     return <IconComponent className="w-4 h-4" />;
@@ -604,7 +633,7 @@ export default function NextGenTradingPlatform() {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(amount);
   };
 
@@ -622,7 +651,9 @@ export default function NextGenTradingPlatform() {
               <DollarSign className="w-8 h-8 text-green-400" />
               <Badge className="bg-green-500/20 text-green-400">+{formatPercentage(8.7)}</Badge>
             </div>
-            <h3 className="text-2xl font-bold text-white">{formatCurrency(currentUser?.portfolioValue || 0)}</h3>
+            <h3 className="text-2xl font-bold text-white">
+              {formatCurrency(currentUser?.portfolioValue || 0)}
+            </h3>
             <p className="text-gray-400">Total Portfolio Value</p>
           </CardContent>
         </Card>
@@ -633,7 +664,9 @@ export default function NextGenTradingPlatform() {
               <TrendingUp className="w-8 h-8 text-green-400" />
               <Badge className="bg-green-500/20 text-green-400">Today</Badge>
             </div>
-            <h3 className="text-2xl font-bold text-white">{formatCurrency(currentUser?.totalPnL || 0)}</h3>
+            <h3 className="text-2xl font-bold text-white">
+              {formatCurrency(currentUser?.totalPnL || 0)}
+            </h3>
             <p className="text-gray-400">Total P&L</p>
           </CardContent>
         </Card>
@@ -678,7 +711,7 @@ export default function NextGenTradingPlatform() {
                 <span className="text-gray-400">{aiEnabled ? 'Enabled' : 'Disabled'}</span>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <label className="text-white text-sm font-medium">Auto-Execute</label>
               <div className="flex items-center space-x-2">
@@ -686,9 +719,11 @@ export default function NextGenTradingPlatform() {
                 <span className="text-gray-400">{autoTrading ? 'Auto' : 'Manual'}</span>
               </div>
             </div>
-            
+
             <div className="space-y-2">
-              <label className="text-white text-sm font-medium">Risk Level: {riskLevel[0]}/10</label>
+              <label className="text-white text-sm font-medium">
+                Risk Level: {riskLevel[0]}/10
+              </label>
               <Slider
                 value={riskLevel}
                 onValueChange={setRiskLevel}
@@ -712,31 +747,48 @@ export default function NextGenTradingPlatform() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {tradingSignals.slice(0, 5).map((signal) => (
-              <div key={signal.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
+            {tradingSignals.slice(0, 5).map(signal => (
+              <div
+                key={signal.id}
+                className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700/50"
+              >
                 <div className="flex items-center space-x-4">
-                  <div className={`w-3 h-3 rounded-full ${signal.action === 'BUY' ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></div>
+                  <div
+                    className={`w-3 h-3 rounded-full ${signal.action === 'BUY' ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}
+                  ></div>
                   <div>
                     <h4 className="text-white font-medium">{signal.symbol}</h4>
                     <p className="text-gray-400 text-sm">{signal.strategy}</p>
                   </div>
                 </div>
-                
+
                 <div className="text-center">
-                  <Badge className={signal.action === 'BUY' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}>
+                  <Badge
+                    className={
+                      signal.action === 'BUY'
+                        ? 'bg-green-500/20 text-green-400'
+                        : 'bg-red-500/20 text-red-400'
+                    }
+                  >
                     {signal.action}
                   </Badge>
                   <p className="text-gray-400 text-sm mt-1">{formatCurrency(signal.price)}</p>
                 </div>
-                
+
                 <div className="text-center">
-                  <div className="text-white font-medium">{Math.round(signal.confidence * 100)}%</div>
+                  <div className="text-white font-medium">
+                    {Math.round(signal.confidence * 100)}%
+                  </div>
                   <Progress value={signal.confidence * 100} className="w-16 h-2 mt-1" />
                 </div>
-                
+
                 <div className="flex space-x-2">
-                  <Button size="sm" className="bg-green-600 hover:bg-green-700">Execute</Button>
-                  <Button size="sm" variant="outline">Details</Button>
+                  <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                    Execute
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    Details
+                  </Button>
                 </div>
               </div>
             ))}
@@ -755,18 +807,27 @@ export default function NextGenTradingPlatform() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {portfolios.map((portfolio) => (
+              {portfolios.map(portfolio => (
                 <div key={portfolio.id} className="p-4 bg-gray-800/30 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="text-white font-medium">{portfolio.name}</h4>
-                    <Badge className={portfolio.pnl >= 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}>
+                    <Badge
+                      className={
+                        portfolio.pnl >= 0
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-red-500/20 text-red-400'
+                      }
+                    >
                       {formatPercentage(portfolio.pnlPercent)}
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-400">Value: {formatCurrency(portfolio.value)}</span>
-                    <span className={`font-medium ${portfolio.pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {portfolio.pnl >= 0 ? '+' : ''}{formatCurrency(portfolio.pnl)}
+                    <span
+                      className={`font-medium ${portfolio.pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                    >
+                      {portfolio.pnl >= 0 ? '+' : ''}
+                      {formatCurrency(portfolio.pnl)}
                     </span>
                   </div>
                 </div>
@@ -791,7 +852,7 @@ export default function NextGenTradingPlatform() {
                   <span className="text-white">{currentUser?.winRate}%</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Risk Score</span>
                 <div className="flex items-center space-x-2">
@@ -799,17 +860,17 @@ export default function NextGenTradingPlatform() {
                   <span className="text-white">{currentUser?.riskScore}/10</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Sharpe Ratio</span>
                 <span className="text-white">2.47</span>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Max Drawdown</span>
                 <span className="text-white">-8.3%</span>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Alpha</span>
                 <span className="text-green-400">+12.4%</span>
@@ -884,7 +945,7 @@ export default function NextGenTradingPlatform() {
 
       {/* Social Feed */}
       <div className="space-y-4">
-        {socialFeed.map((post) => (
+        {socialFeed.map(post => (
           <Card key={post.id} className="bg-gray-900/50 border-gray-700/50">
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
@@ -892,7 +953,7 @@ export default function NextGenTradingPlatform() {
                   <AvatarImage src={post.user.avatar} />
                   <AvatarFallback>{post.user.name.slice(0, 2)}</AvatarFallback>
                 </Avatar>
-                
+
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
                     <h4 className="font-medium text-white">{post.user.name}</h4>
@@ -905,29 +966,41 @@ export default function NextGenTradingPlatform() {
                       {post.timestamp.toLocaleTimeString()}
                     </span>
                   </div>
-                  
+
                   <p className="text-gray-300 mb-3">{post.content}</p>
-                  
+
                   {post.symbols.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-3">
-                      {post.symbols.map((symbol) => (
-                        <Badge key={symbol} variant="outline" className="text-blue-400 border-blue-500">
+                      {post.symbols.map(symbol => (
+                        <Badge
+                          key={symbol}
+                          variant="outline"
+                          className="text-blue-400 border-blue-500"
+                        >
                           ${symbol}
                         </Badge>
                       ))}
                     </div>
                   )}
-                  
+
                   {post.tradingIdea && (
                     <Card className="bg-gray-800/30 border-gray-600/50 mb-3">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between">
                           <div>
-                            <h5 className="text-white font-medium">Trading Idea: {post.tradingIdea.symbol}</h5>
+                            <h5 className="text-white font-medium">
+                              Trading Idea: {post.tradingIdea.symbol}
+                            </h5>
                             <p className="text-gray-400 text-sm">{post.tradingIdea.reasoning}</p>
                           </div>
                           <div className="text-right">
-                            <Badge className={post.tradingIdea.action === 'BUY' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}>
+                            <Badge
+                              className={
+                                post.tradingIdea.action === 'BUY'
+                                  ? 'bg-green-500/20 text-green-400'
+                                  : 'bg-red-500/20 text-red-400'
+                              }
+                            >
                               {post.tradingIdea.action}
                             </Badge>
                             <p className="text-white font-medium mt-1">
@@ -938,7 +1011,7 @@ export default function NextGenTradingPlatform() {
                       </CardContent>
                     </Card>
                   )}
-                  
+
                   <div className="flex items-center space-x-6 text-gray-400">
                     <button className="flex items-center space-x-1 hover:text-red-400 transition-colors">
                       <Heart className="w-4 h-4" />
@@ -976,7 +1049,7 @@ export default function NextGenTradingPlatform() {
               <AvatarImage src={currentUser?.avatar} />
               <AvatarFallback className="text-2xl">{currentUser?.name?.slice(0, 2)}</AvatarFallback>
             </Avatar>
-            
+
             <div className="flex-1">
               <div className="flex items-center space-x-3 mb-2">
                 <h1 className="text-3xl font-bold text-white">{currentUser?.name}</h1>
@@ -986,7 +1059,7 @@ export default function NextGenTradingPlatform() {
                 </Badge>
               </div>
               <p className="text-gray-300 mb-4">@{currentUser?.username}</p>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
                   <div className="text-2xl font-bold text-white">{currentUser?.tradingLevel}</div>
@@ -1006,7 +1079,7 @@ export default function NextGenTradingPlatform() {
                 </div>
               </div>
             </div>
-            
+
             <div className="text-right">
               <Button className="mb-2">Edit Profile</Button>
               <div className="flex space-x-2">
@@ -1033,7 +1106,10 @@ export default function NextGenTradingPlatform() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {currentUser?.badges.map((badge, index) => (
-              <div key={index} className="text-center p-4 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-lg border border-yellow-500/30">
+              <div
+                key={index}
+                className="text-center p-4 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-lg border border-yellow-500/30"
+              >
                 <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
                 <h4 className="text-white font-medium text-sm">{badge.replace('_', ' ')}</h4>
               </div>
@@ -1055,7 +1131,9 @@ export default function NextGenTradingPlatform() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Total P&L</span>
-                <span className="text-green-400 font-bold">{formatCurrency(currentUser?.totalPnL || 0)}</span>
+                <span className="text-green-400 font-bold">
+                  {formatCurrency(currentUser?.totalPnL || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Best Month</span>
@@ -1132,11 +1210,9 @@ export default function NextGenTradingPlatform() {
               <div className="flex items-center space-x-2">
                 <Brain className="w-8 h-8 text-cyan-400" />
                 <span className="text-xl font-bold text-white">AlphaAI StockX</span>
-                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">
-                  Pro
-                </Badge>
+                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">Pro</Badge>
               </div>
-              
+
               <div className="hidden md:flex space-x-1">
                 <Button
                   variant={activeTab === 'dashboard' ? 'default' : 'ghost'}
@@ -1175,18 +1251,18 @@ export default function NextGenTradingPlatform() {
                 </Button>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <Input
                   placeholder="Search stocks, users, ideas..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="pl-10 bg-gray-800/50 border-gray-600 text-white w-64"
                 />
               </div>
-              
+
               <Button variant="ghost" size="sm" className="relative">
                 <Bell className="w-5 h-5 text-gray-400" />
                 {notifications.length > 0 && (
@@ -1195,7 +1271,7 @@ export default function NextGenTradingPlatform() {
                   </Badge>
                 )}
               </Button>
-              
+
               <div className="flex items-center space-x-2">
                 <Avatar className="w-8 h-8">
                   <AvatarImage src={currentUser?.avatar} />
@@ -1203,10 +1279,12 @@ export default function NextGenTradingPlatform() {
                 </Avatar>
                 <div className="text-white text-sm">
                   <div className="font-medium">{currentUser?.name}</div>
-                  <div className="text-gray-400 text-xs">{formatCurrency(currentUser?.portfolioValue || 0)}</div>
+                  <div className="text-gray-400 text-xs">
+                    {formatCurrency(currentUser?.portfolioValue || 0)}
+                  </div>
                 </div>
               </div>
-              
+
               <Button
                 variant="ghost"
                 size="sm"
@@ -1223,32 +1301,26 @@ export default function NextGenTradingPlatform() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsContent value="dashboard">
-            {renderDashboard()}
-          </TabsContent>
-          
-          <TabsContent value="social">
-            {renderSocialTrading()}
-          </TabsContent>
-          
-          <TabsContent value="profile">
-            {renderProfile()}
-          </TabsContent>
-          
+          <TabsContent value="dashboard">{renderDashboard()}</TabsContent>
+
+          <TabsContent value="social">{renderSocialTrading()}</TabsContent>
+
+          <TabsContent value="profile">{renderProfile()}</TabsContent>
+
           <TabsContent value="trading">
             <div className="text-center text-white">
               <h2 className="text-2xl font-bold mb-4">Advanced Trading Interface</h2>
               <p className="text-gray-400">Coming in next phase...</p>
             </div>
           </TabsContent>
-          
+
           <TabsContent value="portfolio">
             <div className="text-center text-white">
               <h2 className="text-2xl font-bold mb-4">Portfolio Management</h2>
               <p className="text-gray-400">Coming in next phase...</p>
             </div>
           </TabsContent>
-          
+
           <TabsContent value="ai">
             <div className="text-center text-white">
               <h2 className="text-2xl font-bold mb-4">AI Model Laboratory</h2>

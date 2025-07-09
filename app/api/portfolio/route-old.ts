@@ -6,12 +6,9 @@ import { prisma } from '@/app/lib/prisma';
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -19,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     // Get user's portfolios
     const portfolios = await prisma.portfolio.findMany({
-      where: { 
+      where: {
         userId: session.user.id,
         ...(portfolioId && { id: portfolioId }),
       },
@@ -35,13 +32,14 @@ export async function GET(request: NextRequest) {
 
     // Calculate portfolio metrics
     const portfolioData = await Promise.all(
-      portfolios.map(async (portfolio) => {
+      portfolios.map(async portfolio => {
         // Get current market prices (mock for demo)
         const updatedPositions = portfolio.positions.map(position => {
           const currentPrice = 150 + Math.random() * 50; // Mock price
           const marketValue = position.quantity * currentPrice;
-          const unrealizedPnL = marketValue - (position.quantity * position.averagePrice);
-          const unrealizedPnLPercent = (unrealizedPnL / (position.quantity * position.averagePrice)) * 100;
+          const unrealizedPnL = marketValue - position.quantity * position.averagePrice;
+          const unrealizedPnLPercent =
+            (unrealizedPnL / (position.quantity * position.averagePrice)) * 100;
 
           return {
             ...position,
@@ -53,13 +51,17 @@ export async function GET(request: NextRequest) {
         });
 
         const totalMarketValue = updatedPositions.reduce((sum, pos) => sum + pos.marketValue, 0);
-        const totalUnrealizedPnL = updatedPositions.reduce((sum, pos) => sum + pos.unrealizedPnL, 0);
+        const totalUnrealizedPnL = updatedPositions.reduce(
+          (sum, pos) => sum + pos.unrealizedPnL,
+          0
+        );
         const totalValue = portfolio.cashBalance + totalMarketValue;
         const totalPnL = totalUnrealizedPnL + portfolio.realizedPnL;
-        const totalPnLPercent = portfolio.initialValue > 0 ? (totalPnL / portfolio.initialValue) * 100 : 0;
+        const totalPnLPercent =
+          portfolio.initialValue > 0 ? (totalPnL / portfolio.initialValue) * 100 : 0;
 
         // Calculate daily P&L (mock calculation)
-        const previousValue = totalValue - (totalValue * 0.02 * (Math.random() - 0.5)); // Mock previous value
+        const previousValue = totalValue - totalValue * 0.02 * (Math.random() - 0.5); // Mock previous value
         const dailyPnL = totalValue - previousValue;
         const dailyPnLPercent = previousValue > 0 ? (dailyPnL / previousValue) * 100 : 0;
 
@@ -88,25 +90,18 @@ export async function GET(request: NextRequest) {
       success: true,
       portfolios: portfolioData,
     });
-
   } catch (error) {
     console.error('Portfolio fetch error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -135,12 +130,8 @@ export async function POST(request: NextRequest) {
       message: 'Portfolio created successfully',
       portfolio,
     });
-
   } catch (error) {
     console.error('Portfolio creation error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

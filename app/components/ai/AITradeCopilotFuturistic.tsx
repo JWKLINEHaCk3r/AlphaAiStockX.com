@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Alert } from "../../../components/ui/alert";
+=======
+import { Alert } from '@/components/ui/alert';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import {
   AIStockPrediction,
   SportsEvent,
@@ -41,7 +45,7 @@ import {
   MarketPattern,
 } from '../../types/trading-types';
 
-'use client';
+('use client');
 
 import React from 'react';
 import { getAccount, getPositions } from '../../services/alpaca-service';

@@ -1,12 +1,12 @@
 describe('Trading Platform E2E Tests', () => {
   const testUser = {
     email: 'test@alphaaistockx.com',
-    password: 'SecureTest123!@#'
+    password: 'SecureTest123!@#',
   };
 
   beforeEach(() => {
     // Mock authentication for testing
-    cy.window().then((win) => {
+    cy.window().then(win => {
       win.localStorage.setItem('test-mode', 'true');
     });
   });
@@ -16,7 +16,7 @@ describe('Trading Platform E2E Tests', () => {
       cy.visit('/login');
       cy.get('[data-testid="email-input"]').should('be.visible');
       cy.get('[data-testid="password-input"]').should('be.visible');
-      
+
       cy.login(testUser.email, testUser.password);
       cy.url().should('include', '/dashboard');
       cy.get('[data-testid="user-avatar"]').should('be.visible');
@@ -70,7 +70,7 @@ describe('Trading Platform E2E Tests', () => {
       const orderData = {
         symbol: 'AAPL',
         quantity: 10,
-        type: 'market'
+        type: 'market',
       };
 
       cy.placeOrder(orderData);
@@ -82,7 +82,7 @@ describe('Trading Platform E2E Tests', () => {
         symbol: 'TSLA',
         quantity: 5,
         type: 'limit',
-        price: 250
+        price: 250,
       };
 
       cy.placeOrder(orderData);
@@ -135,7 +135,7 @@ describe('Trading Platform E2E Tests', () => {
   describe('Performance and Accessibility', () => {
     it('should load pages within performance budget', () => {
       cy.visit('/dashboard');
-      cy.window().then((win) => {
+      cy.window().then(win => {
         const perfEntries = win.performance.getEntriesByType('navigation');
         const loadTime = perfEntries[0].loadEventEnd - perfEntries[0].fetchStart;
         expect(loadTime).to.be.lessThan(3000); // 3 second budget

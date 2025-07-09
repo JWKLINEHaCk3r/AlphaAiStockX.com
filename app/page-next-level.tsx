@@ -8,6 +8,7 @@ import { Button } from "../components/ui/button";
 import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
+<<<<<<< HEAD
 import { 
   Brain, 
   BarChart3, 
@@ -16,6 +17,18 @@ import {
   Shield, 
   Atom, 
   Infinity, 
+=======
+import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+  Brain,
+  BarChart3,
+  Zap,
+  TrendingUp,
+  Shield,
+  Atom,
+  Infinity,
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   Sparkles,
   ArrowRight,
   Play,
@@ -23,7 +36,7 @@ import {
   Star,
   Rocket,
   Target,
-  Globe
+  Globe,
 } from 'lucide-react';
 
 const features = [
@@ -125,7 +138,11 @@ function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?:
     return () => clearInterval(timer);
   }, [isVisible, value, duration]);
 
-  return <span ref={ref} className="neon-text">{displayValue}</span>;
+  return (
+    <span ref={ref} className="neon-text">
+      {displayValue}
+    </span>
+  );
 }
 
 function ParticleField() {
@@ -241,26 +258,28 @@ function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-30" />
-      
+
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
         <div className="animate-slide-up" style={{ animationDelay: '0ms' }}>
           <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
             <span className="neon-text">Alpha AI</span>
             <br />
-            <span className="bg-gradient-secondary bg-clip-text text-transparent">
-              Stock X
-            </span>
+            <span className="bg-gradient-secondary bg-clip-text text-transparent">Stock X</span>
           </h1>
         </div>
 
         <div className="animate-slide-up" style={{ animationDelay: '200ms' }}>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            The world's most advanced AI trading platform. Harness the power of 47+ specialized AI agents, 
-            quantum analytics, and real-time market intelligence to dominate financial markets.
+            The world's most advanced AI trading platform. Harness the power of 47+ specialized AI
+            agents, quantum analytics, and real-time market intelligence to dominate financial
+            markets.
           </p>
         </div>
 
-        <div className="animate-slide-up flex flex-col sm:flex-row gap-4 justify-center mb-12" style={{ animationDelay: '400ms' }}>
+        <div
+          className="animate-slide-up flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          style={{ animationDelay: '400ms' }}
+        >
           <Button size="lg" className="btn-primary group text-lg px-8 py-4">
             Start Trading
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -295,15 +314,12 @@ function HeroSection() {
   );
 }
 
-function FeatureCard({ feature, index }: { feature: typeof features[0]; index: number }) {
+function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
-      className="scroll-fade-in"
-      style={{ animationDelay: feature.delay }}
-    >
-      <Card 
+    <div className="scroll-fade-in" style={{ animationDelay: feature.delay }}>
+      <Card
         className={`glass-card interactive-hover group relative overflow-hidden h-full ${
           isHovered ? 'neon-border' : ''
         }`}
@@ -311,24 +327,26 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20" />
-        
+
         <CardContent className="p-8 relative z-10">
-          <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${feature.gradient} mb-6 animate-float`}>
-            <div className="text-white">
-              {feature.icon}
-            </div>
+          <div
+            className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${feature.gradient} mb-6 animate-float`}
+          >
+            <div className="text-white">{feature.icon}</div>
           </div>
-          
+
           <CardTitle className="text-2xl font-bold mb-4 group-hover:neon-text transition-all duration-300">
             {feature.title}
           </CardTitle>
-          
+
           <CardDescription className="text-muted-foreground leading-relaxed">
             {feature.desc}
           </CardDescription>
         </CardContent>
 
-        <div className={`shimmer-effect ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`} />
+        <div
+          className={`shimmer-effect ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+        />
       </Card>
     </div>
   );
@@ -341,8 +359,8 @@ function FeaturesSection() {
     if (!ref || typeof window === 'undefined') return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
           }
@@ -353,7 +371,7 @@ function FeaturesSection() {
 
     try {
       const elements = ref.querySelectorAll('.scroll-fade-in');
-      elements.forEach((el) => observer.observe(el));
+      elements.forEach(el => observer.observe(el));
     } catch (error) {
       console.warn('Error setting up scroll animation:', error);
     }
@@ -387,16 +405,14 @@ function CTASection() {
   return (
     <section className="py-24 px-6 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10" />
-      
+
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="glass-card p-12 neon-border">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Transform Your Trading?
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Trading?</h2>
           <p className="text-xl text-muted-foreground mb-8">
             Join thousands of traders who are already using AI to maximize their profits.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="btn-primary group text-lg px-8 py-4">
               <Rocket className="mr-2 w-5 h-5" />
@@ -410,7 +426,7 @@ function CTASection() {
           </div>
 
           <div className="flex justify-center mt-8 gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
+            {[1, 2, 3, 4, 5].map(star => (
               <Star key={star} className="w-6 h-6 fill-neon-orange text-neon-orange" />
             ))}
           </div>
@@ -427,7 +443,7 @@ export default function NextLevelHomePage() {
   return (
     <div className="relative min-h-screen">
       <ParticleField />
-      
+
       <HeroSection />
       <FeaturesSection />
       <CTASection />

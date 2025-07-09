@@ -1,5 +1,5 @@
 import React from 'react';
-'use client';
+('use client');
 
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -47,20 +47,22 @@ export function FloatingElements({ count = 20, className }: FloatingElementsProp
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setElements(prev => prev.map(element => ({
-        ...element,
-        x: (element.x + Math.cos(element.direction) * element.speed + 100) % 100,
-        y: (element.y + Math.sin(element.direction) * element.speed + 100) % 100,
-      })));
+      setElements(prev =>
+        prev.map(element => ({
+          ...element,
+          x: (element.x + Math.cos(element.direction) * element.speed + 100) % 100,
+          y: (element.y + Math.sin(element.direction) * element.speed + 100) % 100,
+        }))
+      );
     }, 50);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}
+      className={cn('absolute inset-0 overflow-hidden pointer-events-none', className)}
     >
       {elements.map(element => (
         <div
@@ -86,10 +88,10 @@ interface MorphingBlobProps {
   size?: number;
 }
 
-export function MorphingBlob({ 
-  className, 
+export function MorphingBlob({
+  className,
   color = 'hsl(217, 91%, 60%)',
-  size = 200 
+  size = 200,
 }: MorphingBlobProps) {
   const pathRef = useRef<SVGPathElement>(null);
 
@@ -102,7 +104,7 @@ export function MorphingBlob({
 
     const animate = () => {
       time += 0.02;
-      
+
       const points = [];
       const numPoints = 6;
       const radius = size / 2;
@@ -119,16 +121,16 @@ export function MorphingBlob({
 
       // Create smooth curve through points
       let pathData = `M ${points[0].x} ${points[0].y}`;
-      
+
       for (let i = 0; i < points.length; i++) {
         const current = points[i];
         const next = points[(i + 1) % points.length];
         const controlX = current.x + (next.x - current.x) * 0.5;
         const controlY = current.y + (next.y - current.y) * 0.5;
-        
+
         pathData += ` Q ${controlX} ${controlY} ${next.x} ${next.y}`;
       }
-      
+
       pathData += ' Z';
       path.setAttribute('d', pathData);
 
@@ -145,10 +147,10 @@ export function MorphingBlob({
   }, [size]);
 
   return (
-    <svg 
-      width={size} 
-      height={size} 
-      className={cn("absolute opacity-20", className)}
+    <svg
+      width={size}
+      height={size}
+      className={cn('absolute opacity-20', className)}
       style={{ filter: 'blur(2px)' }}
     >
       <defs>
@@ -174,16 +176,16 @@ interface QuantumGridProps {
   lineColor?: string;
 }
 
-export function QuantumGrid({ 
-  className, 
+export function QuantumGrid({
+  className,
   gridSize = 50,
-  lineColor = 'hsl(217, 91%, 60%)' 
+  lineColor = 'hsl(217, 91%, 60%)',
 }: QuantumGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -198,7 +200,7 @@ export function QuantumGrid({
 
     const animate = () => {
       time += 0.01;
-      
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 0.5;
@@ -250,10 +252,7 @@ export function QuantumGrid({
   }, [gridSize, lineColor]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={cn("fixed inset-0 pointer-events-none z-0", className)}
-    />
+    <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />
   );
 }
 
@@ -263,10 +262,10 @@ interface HolographicDisplayProps {
   intensity?: number;
 }
 
-export function HolographicDisplay({ 
-  children, 
+export function HolographicDisplay({
+  children,
   className,
-  intensity = 1 
+  intensity = 1,
 }: HolographicDisplayProps) {
   const [scanlinePosition, setScanlinePosition] = useState(0);
 
@@ -279,9 +278,9 @@ export function HolographicDisplay({
   }, []);
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div className={cn('relative overflow-hidden', className)}>
       {/* Holographic scanlines */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none z-10"
         style={{
           background: `repeating-linear-gradient(
@@ -290,10 +289,10 @@ export function HolographicDisplay({
             transparent 2px,
             rgba(0, 255, 255, ${0.03 * intensity}) 2px,
             rgba(0, 255, 255, ${0.03 * intensity}) 4px
-          )`
+          )`,
         }}
       />
-      
+
       {/* Moving scanline */}
       <div
         className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent pointer-events-none z-20 opacity-60"
@@ -302,9 +301,9 @@ export function HolographicDisplay({
           boxShadow: '0 0 10px hsl(189, 85%, 70%)',
         }}
       />
-      
+
       {/* Content with holographic glow */}
-      <div 
+      <div
         className="relative z-0"
         style={{
           filter: `drop-shadow(0 0 20px hsl(189, 85%, 70%, ${0.3 * intensity}))`,
@@ -324,23 +323,26 @@ interface DataStreamProps {
 
 export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [streams, setStreams] = useState<Array<{
-    id: number;
-    characters: string[];
-    positions: number[];
-    column: number;
-  }>>([]);
+  const [streams, setStreams] = useState<
+    Array<{
+      id: number;
+      characters: string[];
+      positions: number[];
+      column: number;
+    }>
+  >([]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>';
     const columns = Math.floor(window.innerWidth / 20);
-    
+
     const newStreams = Array.from({ length: Math.floor(columns * density) }, (_, i) => ({
       id: i,
-      characters: Array.from({ length: 20 }, () => 
-        characters[Math.floor(Math.random() * characters.length)]
+      characters: Array.from(
+        { length: 20 },
+        () => characters[Math.floor(Math.random() * characters.length)]
       ),
       positions: Array.from({ length: 20 }, (_, j) => -j * 20),
       column: Math.floor(Math.random() * columns),
@@ -351,28 +353,33 @@ export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamPr
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const interval = setInterval(() => {
-      setStreams(prev => prev.map(stream => ({
-        ...stream,
-        positions: stream.positions.map(pos => 
-          pos > window.innerHeight ? -20 : pos + speed * 2
-        ),
-        characters: stream.characters.map(char => 
-          Math.random() < 0.05 ? 
-            '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>'[Math.floor(Math.random() * 44)] : 
-            char
-        ),
-      })));
+      setStreams(prev =>
+        prev.map(stream => ({
+          ...stream,
+          positions: stream.positions.map(pos =>
+            pos > window.innerHeight ? -20 : pos + speed * 2
+          ),
+          characters: stream.characters.map(char =>
+            Math.random() < 0.05
+              ? '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>'[Math.floor(Math.random() * 44)]
+              : char
+          ),
+        }))
+      );
     }, 100);
 
     return () => clearInterval(interval);
   }, [speed]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className={cn("absolute inset-0 overflow-hidden pointer-events-none font-mono text-sm", className)}
+      className={cn(
+        'absolute inset-0 overflow-hidden pointer-events-none font-mono text-sm',
+        className
+      )}
     >
       {streams.map(stream => (
         <div key={stream.id} className="absolute" style={{ left: `${stream.column * 20}px` }}>

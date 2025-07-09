@@ -8,19 +8,19 @@ if (typeof global !== 'undefined') {
       value: global,
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   if (typeof global.window === 'undefined') {
     Object.defineProperty(global, 'window', {
       value: global,
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   // Add document polyfill for SSR compatibility
   if (typeof global.document === 'undefined') {
     Object.defineProperty(global, 'document', {
@@ -28,10 +28,10 @@ if (typeof global !== 'undefined') {
         documentElement: {
           scrollTop: 0,
           scrollHeight: 1000,
-          clientHeight: 800
+          clientHeight: 800,
         },
         body: {
-          className: ''
+          className: '',
         },
         addEventListener: () => {},
         removeEventListener: () => {},
@@ -41,15 +41,15 @@ if (typeof global !== 'undefined') {
         createElement: () => ({
           style: {},
           addEventListener: () => {},
-          removeEventListener: () => {}
-        })
+          removeEventListener: () => {},
+        }),
       },
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   // Ensure webpackChunk is initialized
   if (typeof global.webpackChunk_N_E === 'undefined') {
     global.webpackChunk_N_E = [];
@@ -63,19 +63,19 @@ if (typeof globalThis !== 'undefined') {
       value: globalThis,
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   if (typeof globalThis.window === 'undefined') {
     Object.defineProperty(globalThis, 'window', {
       value: globalThis,
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   // Add document polyfill to globalThis as well
   if (typeof globalThis.document === 'undefined') {
     Object.defineProperty(globalThis, 'document', {
@@ -83,10 +83,10 @@ if (typeof globalThis !== 'undefined') {
         documentElement: {
           scrollTop: 0,
           scrollHeight: 1000,
-          clientHeight: 800
+          clientHeight: 800,
         },
         body: {
-          className: ''
+          className: '',
         },
         addEventListener: () => {},
         removeEventListener: () => {},
@@ -96,15 +96,15 @@ if (typeof globalThis !== 'undefined') {
         createElement: () => ({
           style: {},
           addEventListener: () => {},
-          removeEventListener: () => {}
-        })
+          removeEventListener: () => {},
+        }),
       },
       writable: true,
       enumerable: false,
-      configurable: true
+      configurable: true,
     });
   }
-  
+
   // Ensure webpackChunk is initialized
   if (typeof globalThis.webpackChunk_N_E === 'undefined') {
     globalThis.webpackChunk_N_E = [];
@@ -118,11 +118,11 @@ const documentPolyfill = {
     scrollHeight: 1000,
     clientHeight: 800,
     style: {
-      setProperty: () => {}
-    }
+      setProperty: () => {},
+    },
   },
   body: {
-    className: ''
+    className: '',
   },
   addEventListener: () => {},
   removeEventListener: () => {},
@@ -131,18 +131,18 @@ const documentPolyfill = {
   querySelectorAll: () => [],
   createElement: () => ({
     style: {
-      setProperty: () => {}
+      setProperty: () => {},
     },
     addEventListener: () => {},
-    removeEventListener: () => {}
+    removeEventListener: () => {},
   }),
   createTextNode: () => ({
-    textContent: ''
+    textContent: '',
   }),
   head: {
     appendChild: () => {},
-    removeChild: () => {}
-  }
+    removeChild: () => {},
+  },
 };
 
 module.exports = { documentPolyfill };

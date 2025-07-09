@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
@@ -9,6 +10,9 @@ import { CardTitle } from "../../../components/ui/card";
 import { CardHeader } from "../../../components/ui/card";
 import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
+=======
+import { Alert } from '@/components/ui/alert';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import {
   AIStockPrediction,
   SportsEvent,
@@ -51,7 +55,7 @@ import {
   MarketPattern,
 } from '../../types/trading-types';
 
-'use client';
+('use client');
 import React from 'react';
 
 import { useState, useEffect } from 'react';

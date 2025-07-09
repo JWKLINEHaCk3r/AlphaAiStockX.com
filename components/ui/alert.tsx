@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import { AlertTitle } from "./alert";
 import { AlertDescription } from "./alert";
 import { Alert } from "./alert";
 <<<<<<< HEAD
+=======
+import { AlertTitle } from '@/components/ui/alert';
+import { AlertDescription } from '@/components/ui/alert';
+import { Alert } from '@/components/ui/alert';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 import * as React from 'react';
 

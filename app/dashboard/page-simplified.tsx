@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import { Card } from '../../components/ui/card';
 import { Tabs } from "../../components/ui/tabs";
 import { Card } from "../../components/ui/card";
 'use client';
+=======
+import { Tabs } from '@/components/ui/tabs';
+import { Card } from '@/components/ui/card';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 import React, { useState, useEffect, useMemo } from 'react';
 
@@ -45,10 +51,17 @@ export default function Dashboard() {
   const [portfolioValue, setPortfolioValue] = useState(125000);
   const [dailyPnL, setDailyPnL] = useState(2850);
   const [activeSignals, setActiveSignals] = useState(12);
-  
+
   const [aiBeings] = useState<AIBeing[]>([
     { id: 1, name: 'Alpha Prime', status: 'active', profits: 15420, accuracy: 89.5, trades: 145 },
-    { id: 2, name: 'Beta Sentinel', status: 'analyzing', profits: 12350, accuracy: 92.1, trades: 123 },
+    {
+      id: 2,
+      name: 'Beta Sentinel',
+      status: 'analyzing',
+      profits: 12350,
+      accuracy: 92.1,
+      trades: 123,
+    },
     { id: 3, name: 'Gamma Nexus', status: 'active', profits: 18750, accuracy: 87.8, trades: 167 },
   ]);
 
@@ -57,12 +70,14 @@ export default function Dashboard() {
   // Simulate real-time market updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setMarketData(prev => prev.map(stock => ({
-        ...stock,
-        price: stock.price + (Math.random() - 0.5) * 2,
-        change: stock.change + (Math.random() - 0.5) * 0.5,
-        changePercent: stock.changePercent + (Math.random() - 0.5) * 0.1,
-      })));
+      setMarketData(prev =>
+        prev.map(stock => ({
+          ...stock,
+          price: stock.price + (Math.random() - 0.5) * 2,
+          change: stock.change + (Math.random() - 0.5) * 0.5,
+          changePercent: stock.changePercent + (Math.random() - 0.5) * 0.1,
+        }))
+      );
 
       setPortfolioValue(prev => prev + (Math.random() - 0.4) * 500);
       setDailyPnL(prev => prev + (Math.random() - 0.4) * 100);
@@ -84,7 +99,9 @@ export default function Dashboard() {
   const handleVoiceToggle = () => {
     setIsVoiceEnabled(!isVoiceEnabled);
     if (!isVoiceEnabled && typeof speechSynthesis !== 'undefined') {
-      const utterance = new SpeechSynthesisUtterance("Voice announcements activated. Alpha AI is now speaking.");
+      const utterance = new SpeechSynthesisUtterance(
+        'Voice announcements activated. Alpha AI is now speaking.'
+      );
       speechSynthesis.speak(utterance);
     } else if (typeof speechSynthesis !== 'undefined') {
       speechSynthesis.cancel();
@@ -95,8 +112,8 @@ export default function Dashboard() {
     <button
       onClick={() => setActiveTab(id)}
       className={`px-4 py-2 rounded-lg font-medium transition-all ${
-        isActive 
-          ? 'bg-purple-600 text-white shadow-lg' 
+        isActive
+          ? 'bg-purple-600 text-white shadow-lg'
           : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
       }`}
     >
@@ -104,16 +121,29 @@ export default function Dashboard() {
     </button>
   );
 
-  const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-    <div className={`bg-black/30 border border-purple-500/20 rounded-xl p-6 shadow-xl backdrop-blur-sm ${className}`}>
+  const Card = ({
+    children,
+    className = '',
+  }: {
+    children: React.ReactNode;
+    className?: string;
+  }) => (
+    <div
+      className={`bg-black/30 border border-purple-500/20 rounded-xl p-6 shadow-xl backdrop-blur-sm ${className}`}
+    >
       {children}
     </div>
   );
 
-  const StatCard = ({ title, value, subtitle, color }: { 
-    title: string; 
-    value: string; 
-    subtitle: string; 
+  const StatCard = ({
+    title,
+    value,
+    subtitle,
+    color,
+  }: {
+    title: string;
+    value: string;
+    subtitle: string;
     color: string;
   }) => (
     <Card>
@@ -131,20 +161,20 @@ export default function Dashboard() {
           <h1 className="text-5xl font-bold bg-gradient-to-r from-fuchsia-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg">
             Alpha AI Dashboard
           </h1>
-          
+
           <div className="flex items-center gap-4">
             <button
               onClick={handleVoiceToggle}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                isVoiceEnabled 
-                  ? 'bg-green-600 text-white' 
+                isVoiceEnabled
+                  ? 'bg-green-600 text-white'
                   : 'bg-gray-700 text-gray-300 border border-gray-600'
               }`}
             >
               <span className="text-lg">{isVoiceEnabled ? '🔊' : '🔇'}</span>
               Voice AI
             </button>
-            
+
             <div className="bg-green-500/20 border border-green-400 px-3 py-2 rounded-lg text-green-400 font-medium">
               {activeAICount} AI Active
             </div>
@@ -170,7 +200,7 @@ export default function Dashboard() {
               <Card>
                 <h2 className="text-3xl font-bold mb-6 text-white">Your Portfolio</h2>
                 <PortfolioSummary />
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                   <StatCard
                     title="Portfolio Value"
@@ -178,14 +208,14 @@ export default function Dashboard() {
                     subtitle={`${dailyPnL >= 0 ? '+' : ''}$${dailyPnL.toFixed(2)} today`}
                     color="green-400"
                   />
-                  
+
                   <StatCard
                     title="Active Signals"
                     value={activeSignals.toString()}
                     subtitle="Market opportunities"
                     color="blue-400"
                   />
-                  
+
                   <StatCard
                     title="AI Accuracy"
                     value={`${averageAccuracy.toFixed(1)}%`}
@@ -199,12 +229,15 @@ export default function Dashboard() {
               <Card>
                 <h3 className="text-xl font-bold text-white mb-4">Market Overview</h3>
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                  {marketData.map((stock) => (
+                  {marketData.map(stock => (
                     <div key={stock.symbol} className="bg-gray-800/50 rounded-lg p-4">
                       <div className="font-bold text-white text-lg">{stock.symbol}</div>
                       <div className="text-2xl font-bold text-white">${stock.price.toFixed(2)}</div>
-                      <div className={`text-sm ${stock.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
+                      <div
+                        className={`text-sm ${stock.change >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                      >
+                        {stock.change >= 0 ? '+' : ''}
+                        {stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
                       </div>
                     </div>
                   ))}
@@ -230,17 +263,19 @@ export default function Dashboard() {
           {activeTab === 'algos' && (
             <Card>
               <h2 className="text-3xl font-bold mb-6 text-white">AI Trading Strategies</h2>
-              
+
               <div className="space-y-8">
                 <AITradeCopilot />
-                
+
                 <div>
-                  <h3 className="text-xl font-bold text-fuchsia-300 mb-4">Advanced AI Strategies</h3>
+                  <h3 className="text-xl font-bold text-fuchsia-300 mb-4">
+                    Advanced AI Strategies
+                  </h3>
                   <AdvancedAIStrategies onSelect={(name: string) => alert(`Activated: ${name}`)} />
                 </div>
-                
+
                 <HotStockTips />
-                
+
                 <AutoTradeBotFuturistic />
               </div>
             </Card>
@@ -250,7 +285,9 @@ export default function Dashboard() {
             <Card>
               <h2 className="text-3xl font-bold mb-6 text-white">Brokerage Connection</h2>
               <div className="space-y-6">
-                <p className="text-gray-300 text-lg">Connect your brokerage account to enable live trading.</p>
+                <p className="text-gray-300 text-lg">
+                  Connect your brokerage account to enable live trading.
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6">
                     <h3 className="text-green-400 text-xl font-bold mb-2">Alpaca Markets</h3>
@@ -259,7 +296,7 @@ export default function Dashboard() {
                       Connect Alpaca
                     </button>
                   </div>
-                  
+
                   <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
                     <h3 className="text-blue-400 text-xl font-bold mb-2">Interactive Brokers</h3>
                     <p className="text-gray-400 mb-4">Professional trading platform</p>
@@ -284,9 +321,11 @@ export default function Dashboard() {
                   { text: 'Activate AI trading strategies', completed: false },
                 ].map((step, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
-                      step.completed ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'
-                    }`}>
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
+                        step.completed ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'
+                      }`}
+                    >
                       {step.completed ? '✓' : '○'}
                     </span>
                     <span className="text-white text-lg">{step.text}</span>
@@ -303,21 +342,31 @@ export default function Dashboard() {
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-fuchsia-300">Quick Help</h3>
                   <div className="space-y-3">
-                    {['Settings & Configuration', 'Security & Privacy', 'AI Strategy Guide'].map((item) => (
-                      <button key={item} className="w-full text-left bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors">
-                        {item}
-                      </button>
-                    ))}
+                    {['Settings & Configuration', 'Security & Privacy', 'AI Strategy Guide'].map(
+                      item => (
+                        <button
+                          key={item}
+                          className="w-full text-left bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors"
+                        >
+                          {item}
+                        </button>
+                      )
+                    )}
                   </div>
                 </div>
-                
+
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-fuchsia-300">Contact Us</h3>
                   <div className="space-y-3">
                     {['Live Chat Support', 'Email Support', 'Schedule Call'].map((item, index) => (
-                      <button key={item} className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-                        index === 0 ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'border border-purple-600 text-purple-400 hover:bg-purple-600 hover:text-white'
-                      }`}>
+                      <button
+                        key={item}
+                        className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
+                          index === 0
+                            ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                            : 'border border-purple-600 text-purple-400 hover:bg-purple-600 hover:text-white'
+                        }`}
+                      >
                         {item}
                       </button>
                     ))}

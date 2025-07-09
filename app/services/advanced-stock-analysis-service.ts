@@ -1295,7 +1295,11 @@ export class AdvancedStockAnalysisService {
     };
   }
 
-  private getEntryExitRecommendation(currentPrice: number, entryPoints: Record<string, unknown>[], exitPoints: Record<string, unknown>[]) {
+  private getEntryExitRecommendation(
+    currentPrice: number,
+    entryPoints: Record<string, unknown>[],
+    exitPoints: Record<string, unknown>[]
+  ) {
     const bestEntry = entryPoints.reduce(
       (best, point) => (point.confidence > best.confidence ? point : best),
       entryPoints[0] || { confidence: 0 }

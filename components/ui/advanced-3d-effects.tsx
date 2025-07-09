@@ -19,7 +19,9 @@ export function InteractiveCursor() {
 // Advanced Background 3D Scene
 export function Advanced3DBackground({ className }: { className?: string }) {
   return (
-    <div className={`fixed inset-0 -z-10 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 ${className}`}>
+    <div
+      className={`fixed inset-0 -z-10 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 ${className}`}
+    >
       <div className="absolute inset-0 opacity-20 bg-grid-pattern" />
     </div>
   );
@@ -27,7 +29,9 @@ export function Advanced3DBackground({ className }: { className?: string }) {
 
 // Quantum Data Visualization
 export function QuantumDataViz() {
-  const [dataPoints, setDataPoints] = useState<Array<{ x: number; y: number; z: number; intensity: number }>>([]);
+  const [dataPoints, setDataPoints] = useState<
+    Array<{ x: number; y: number; z: number; intensity: number }>
+  >([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,7 +40,7 @@ export function QuantumDataViz() {
           x: (Math.random() - 0.5) * 100,
           y: (Math.random() - 0.5) * 100,
           z: Math.random() * 100,
-          intensity: Math.random()
+          intensity: Math.random(),
         };
         return [...prev.slice(-19), newPoint];
       });
@@ -66,7 +70,9 @@ export function QuantumDataViz() {
 
 // Enhanced Particle Field with Mouse Interaction
 export function EnhancedParticleField() {
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; vx: number; vy: number; size: number }>>([]);
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; vx: number; vy: number; size: number }>
+  >([]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -84,11 +90,13 @@ export function EnhancedParticleField() {
     setParticles(newParticles);
 
     const interval = setInterval(() => {
-      setParticles(prev => prev.map(particle => ({
-        ...particle,
-        x: (particle.x + particle.vx + window.innerWidth) % window.innerWidth,
-        y: (particle.y + particle.vy + window.innerHeight) % window.innerHeight,
-      })));
+      setParticles(prev =>
+        prev.map(particle => ({
+          ...particle,
+          x: (particle.x + particle.vx + window.innerWidth) % window.innerWidth,
+          y: (particle.y + particle.vy + window.innerHeight) % window.innerHeight,
+        }))
+      );
     }, 50);
 
     return () => clearInterval(interval);
@@ -107,15 +115,14 @@ export function EnhancedParticleField() {
             opacity="0.3"
           />
         ))}
-        
+
         {/* Connection lines between nearby particles */}
         {particles.flatMap((particle, i) => {
           return particles.slice(i + 1).map((otherParticle, j) => {
             const distance = Math.sqrt(
-              Math.pow(particle.x - otherParticle.x, 2) + 
-              Math.pow(particle.y - otherParticle.y, 2)
+              Math.pow(particle.x - otherParticle.x, 2) + Math.pow(particle.y - otherParticle.y, 2)
             );
-            
+
             if (distance < 150) {
               return (
                 <line
@@ -133,7 +140,7 @@ export function EnhancedParticleField() {
             return null;
           });
         })}
-        
+
         <defs>
           <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.5" />

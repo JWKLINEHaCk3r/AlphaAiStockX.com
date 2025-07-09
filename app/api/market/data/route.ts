@@ -111,8 +111,8 @@ async function authenticateUser(request: NextRequest): Promise<UserSession | nul
       user: {
         id: session.user.id,
         email: session.user.email,
-        name: session.user.name
-      }
+        name: session.user.name,
+      },
     };
   } catch (error) {
     console.error('Authentication error:', error);

@@ -1,18 +1,8 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   Brain,
   TrendingUp,
@@ -26,7 +16,6 @@ import {
   CheckCircle,
   Crown,
 } from 'lucide-react';
-import { AIStockPrediction } from '../../types/trading-types';
 
 interface StockTip {
   id: number;
@@ -80,10 +69,34 @@ interface AIStockTipsProps {
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
 }
 
+// Fix: Set initial state for marketInsights to a fully defined object to avoid unnecessary optional chaining and nullish checks
+const initialMarketInsights: MarketInsights = {
+  marketSentiment: {
+    score: 0,
+    trend: '',
+    drivers: [],
+  },
+  sectorRotation: {
+    inflow: '',
+    outflow: '',
+    strength: 0,
+  },
+  volatilityForecast: {
+    level: '',
+    direction: '',
+    timeframe: '',
+  },
+  keyLevels: {
+    support: 0,
+    resistance: 0,
+    breakoutTarget: 0,
+  },
+};
+
 export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
   const [topPicks, setTopPicks] = useState<StockTip[]>([]);
   const [predictions, setPredictions] = useState<Prediction[]>([]);
-  const [marketInsights, setMarketInsights] = useState<MarketInsights>({});
+  const [marketInsights, setMarketInsights] = useState<MarketInsights>(initialMarketInsights);
   const [loading, setLoading] = useState(true);
 
   const membershipLimits: Record<
@@ -96,25 +109,10 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
     ultimate: { tips: 'unlimited', predictions: 'unlimited', insights: 'unlimited' },
   };
 
-  const currentLimits = membershipLimits[membershipLevel] || membershipLimits.free;
-
-  useEffect(() => {
-    generateAITips();
-    generatePredictions();
-    generateMarketInsights();
-
-    const interval = setInterval(() => {
-      generateAITips();
-      generatePredictions();
-      generateMarketInsights();
-    }, 30000); // Update every 30 seconds
-
-    return () => clearInterval(interval);
-  }, [membershipLevel]);
+  const currentLimits = membershipLimits[membershipLevel];
 
   const generateAITips = () => {
     setLoading(true);
-
     const stocks = [
       'AAPL',
       'MSFT',
@@ -135,7 +133,6 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
       'PYPL',
       'ROKU',
     ];
-
     const reasons = [
       'Strong earnings momentum',
       'Technical breakout pattern',
@@ -148,18 +145,15 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
       'AI adoption tailwind',
       'Revenue growth acceleration',
     ];
-
-    const tips = [];
+    const tips: StockTip[] = [];
     const maxTips = currentLimits.tips === 'unlimited' ? 15 : Number(currentLimits.tips);
-
     for (let i = 0; i < maxTips; i++) {
       const symbol = stocks[Math.floor(Math.random() * stocks.length)];
-      const direction = Math.random() > 0.3 ? 'bullish' : 'bearish'; // 70% bullish bias
+      const direction = Math.random() > 0.3 ? 'bullish' : 'bearish';
       const confidence = 70 + Math.random() * 30;
       const targetPrice = 100 + Math.random() * 400;
       const currentPrice = targetPrice * (0.85 + Math.random() * 0.3);
       const timeframe = ['1 week', '2 weeks', '1 month', '3 months'][Math.floor(Math.random() * 4)];
-
       tips.push({
         id: i + 1,
         symbol,
@@ -175,15 +169,13 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         timestamp: new Date(),
       });
     }
-
-    setTopPicks(tips.sort((a, b) => b.confidence - a.confidence));
+    setTopPicks([...tips].sort((a, b) => b.confidence - a.confidence));
     setLoading(false);
   };
 
   const generatePredictions = () => {
-    const predictions = [];
-    const maxPredictions =
-      currentLimits.predictions === 'unlimited' ? 10 : Number(currentLimits.predictions);
+    const predictions: Prediction[] = [];
+    const maxPredictions = currentLimits.predictions === 'unlimited' ? 10 : Number(currentLimits.predictions); // prettier-ignore
 
     for (let i = 0; i < maxPredictions; i++) {
       predictions.push({
@@ -220,12 +212,11 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         category: ['Market', 'Sector', 'Individual'][Math.floor(Math.random() * 3)],
       });
     }
-
     setPredictions(predictions);
   };
 
   const generateMarketInsights = () => {
-    const insights = {
+    const insights: MarketInsights = {
       marketSentiment: {
         score: 65 + Math.random() * 30,
         trend: Math.random() > 0.5 ? 'improving' : 'declining',
@@ -247,9 +238,19 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         breakoutTarget: 5000 + Math.random() * 200,
       },
     };
-
     setMarketInsights(insights);
   };
+
+  useEffect(() => {
+    const generateAll = () => {
+      generateAITips();
+      generatePredictions();
+      generateMarketInsights();
+    };
+    generateAll();
+    const interval = setInterval(generateAll, 30000); // Update every 30 seconds
+    return () => clearInterval(interval);
+  }, [membershipLevel, generateAITips, generatePredictions, generateMarketInsights]);
 
   const getConfidenceColor = (confidence: number) => {
     if (confidence >= 85) return 'text-green-400';
@@ -379,7 +380,7 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {predictions.map((prediction: AIStockPrediction) => (
+            {predictions.map(prediction => (
               <div
                 key={prediction.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"
@@ -390,7 +391,13 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
                     <Badge className="bg-cyan-500">{prediction.probability.toFixed(0)}%</Badge>
                     <Badge
                       variant="outline"
-                      className={`border-${prediction.impact === 'High' ? 'red' : prediction.impact === 'Medium' ? 'yellow' : 'green'}-500/30`}
+                      className={
+                        prediction.impact === 'High'
+                          ? 'border-red-500/30'
+                          : prediction.impact === 'Medium'
+                            ? 'border-yellow-500/30'
+                            : 'border-green-500/30'
+                      }
                     >
                       {prediction.impact} Impact
                     </Badge>
@@ -426,23 +433,28 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
           <CardContent className="space-y-4">
             <div className="text-center">
               <div className="text-4xl font-bold text-green-400 mb-2">
-                {marketInsights.marketSentiment?.score.toFixed(0)}
+                {typeof marketInsights.marketSentiment.score === 'number'
+                  ? marketInsights.marketSentiment.score.toFixed(0)
+                  : '--'}
               </div>
-              <Progress value={marketInsights.marketSentiment?.score} className="h-3 mb-2" />
+              <Progress
+                value={
+                  typeof marketInsights.marketSentiment.score === 'number'
+                    ? marketInsights.marketSentiment.score
+                    : 0
+                }
+                className="h-3 mb-2"
+              />
               <p className="text-sm text-gray-400">
-                Sentiment is {marketInsights.marketSentiment?.trend}
+                Sentiment is {marketInsights.marketSentiment.trend || '--'}
               </p>
-            </div>
-            <div>
-              <h5 className="text-white font-semibold mb-2">Key Drivers</h5>
-              <div className="space-y-1">
-                {marketInsights.marketSentiment?.drivers.map((driver: string, index: number) => (
+              {Array.isArray(marketInsights.marketSentiment.drivers) &&
+                marketInsights.marketSentiment.drivers.map((driver: string, index: number) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
                     <span className="text-gray-300 text-sm">{driver}</span>
                   </div>
                 ))}
-              </div>
             </div>
           </CardContent>
         </Card>
@@ -461,19 +473,93 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
                   <span className="text-green-400 font-semibold">Inflow</span>
                   <TrendingUp className="h-4 w-4 text-green-400" />
                 </div>
-                <p className="text-white font-bold">{marketInsights.sectorRotation?.inflow}</p>
+                <p className="text-white font-bold">
+                  {marketInsights.sectorRotation.inflow || '--'}
+                </p>
               </div>
               <div className="p-3 bg-red-500/10 rounded border border-red-500/30">
                 <div className="flex items-center justify-between">
                   <span className="text-red-400 font-semibold">Outflow</span>
                   <TrendingDown className="h-4 w-4 text-red-400" />
                 </div>
-                <p className="text-white font-bold">{marketInsights.sectorRotation?.outflow}</p>
+                <p className="text-white font-bold">
+                  {marketInsights.sectorRotation.outflow || '--'}
+                </p>
               </div>
             </div>
             <div>
               <p className="text-gray-400 text-sm">Rotation Strength</p>
-              <Progress value={marketInsights.sectorRotation?.strength} className="h-2 mt-1" />
+              <Progress
+                value={
+                  typeof marketInsights.sectorRotation.strength === 'number'
+                    ? marketInsights.sectorRotation.strength
+                    : 0
+                }
+                className="h-2 mt-1"
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Volatility Forecast & Key Levels */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <Card className="bg-black/20 border-blue-500/30 backdrop-blur-xl">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center">
+              <BarChart3 className="h-6 w-6 mr-2 text-blue-400" />
+              Volatility Forecast
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-400 mb-2">
+                {marketInsights.volatilityForecast.level || '--'}
+              </div>
+              <p className="text-sm text-gray-400 mb-2">
+                {' '}
+                Direction:{' '}
+                <span className="text-white">
+                  {marketInsights.volatilityForecast.direction || '--'}
+                </span>
+              </p>
+              <p className="text-sm text-gray-400">
+                {' '}
+                Timeframe:{' '}
+                <span className="text-blue-400">
+                  {marketInsights.volatilityForecast.timeframe || '--'}
+                </span>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="bg-black/20 border-pink-500/30 backdrop-blur-xl">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center">
+              <BarChart3 className="h-6 w-6 mr-2 text-pink-400" />
+              Key Levels
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-400">Support</span>
+                <span className="text-green-400 font-bold">
+                  {marketInsights.keyLevels.support.toFixed(0)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-400">Resistance</span>
+                <span className="text-red-400 font-bold">
+                  {marketInsights.keyLevels.resistance.toFixed(0)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-400">Breakout Target</span>
+                <span className="text-pink-400 font-bold">
+                  {marketInsights.keyLevels.breakoutTarget.toFixed(0)}
+                </span>
+              </div>
             </div>
           </CardContent>
         </Card>

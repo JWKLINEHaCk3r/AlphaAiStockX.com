@@ -11,7 +11,10 @@ function findFilesWithGetServerSession() {
       'find . -name "*.ts" -o -name "*.tsx" | xargs grep -l "getServerSession" | grep -v node_modules | grep -v .next',
       { encoding: 'utf8' }
     );
-    return result.trim().split('\n').filter(file => file.length > 0);
+    return result
+      .trim()
+      .split('\n')
+      .filter(file => file.length > 0);
   } catch (error) {
     console.log('No files found with getServerSession');
     return [];
@@ -21,17 +24,19 @@ function findFilesWithGetServerSession() {
 // Fix the import and usage in a file
 function fixFile(filePath) {
   console.log(`Fixing ${filePath}...`);
-  
+
   let content = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
   // Replace import statements
-  if (content.includes("import { getServerSession } from 'next-auth'") || 
-      content.includes("import { getServerSession } from 'next-auth/next'")) {
+  if (
+    content.includes("import { getServerSession } from 'next-auth'") ||
+    content.includes("import { getServerSession } from 'next-auth/next'")
+  ) {
     content = content
       .replace(/import { getServerSession } from 'next-auth'(?:\/next)?;?\n?/g, '')
       .replace(/import { authOptions } from '@\/app\/lib\/auth';?\n?/g, '');
-    
+
     // Add the new import at the top after other imports
     if (!content.includes("import { auth } from '@/app/lib/auth'")) {
       const importMatch = content.match(/(import.*?from.*?;[\s\n]*)+/);
@@ -52,23 +57,23 @@ function fixFile(filePath) {
     // Direct usage with authOptions
     {
       from: /const session = await getServerSession\(authOptions\);?/g,
-      to: 'const session = await auth();'
+      to: 'const session = await auth();',
     },
     // Usage with type casting
     {
       from: /const session = \(await getServerSession\(authOptions\)\) as.*?;/g,
-      to: 'const session = await auth();'
+      to: 'const session = await auth();',
     },
     // Usage in ternary or complex expressions
     {
       from: /\(await getServerSession\(authOptions\)\)\?\.user\?\.id/g,
-      to: '(await auth())?.user?.id'
+      to: '(await auth())?.user?.id',
     },
     // Legacy usage with req, res parameters
     {
       from: /await getServerSession\(req, res, authOptions\)/g,
-      to: 'await auth()'
-    }
+      to: 'await auth()',
+    },
   ];
 
   patterns.forEach(({ from, to }) => {

@@ -11,6 +11,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export { default } from './page-next-level';
 =======
 import { useState, useEffect } from 'react';
@@ -167,3 +168,16 @@ export default function HomePage() {
   );
 }
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+=======
+import DynamicStockTicker from './components/ui/dynamic-stock-ticker';
+
+export default function HomePage() {
+  return (
+    <main>
+      {/* ...existing content... */}
+      <DynamicStockTicker data-testid="stock-ticker" />
+      {/* ...existing content... */}
+    </main>
+  );
+}
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.

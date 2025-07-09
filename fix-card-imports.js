@@ -12,23 +12,23 @@ console.log('🎯 AlphaAI Card Components Fixer - Enhancing trading interface...
 
 // Card component variations and their imports
 const CARD_COMPONENTS = {
-  'Card': 'Card',
-  'CardHeader': 'CardHeader', 
-  'CardContent': 'CardContent',
-  'CardDescription': 'CardDescription',
-  'CardTitle': 'CardTitle',
-  'CardFooter': 'CardFooter'
+  Card: 'Card',
+  CardHeader: 'CardHeader',
+  CardContent: 'CardContent',
+  CardDescription: 'CardDescription',
+  CardTitle: 'CardTitle',
+  CardFooter: 'CardFooter',
 };
 
 // AI Trading Dashboard Card Types
 const TRADING_CARDS = {
-  'TradingCard': 'TradingCard',
-  'MarketCard': 'MarketCard',
-  'PortfolioCard': 'PortfolioCard',
-  'AIAnalysisCard': 'AIAnalysisCard',
-  'ProfitCard': 'ProfitCard',
-  'RiskCard': 'RiskCard',
-  'SignalCard': 'SignalCard'
+  TradingCard: 'TradingCard',
+  MarketCard: 'MarketCard',
+  PortfolioCard: 'PortfolioCard',
+  AIAnalysisCard: 'AIAnalysisCard',
+  ProfitCard: 'ProfitCard',
+  RiskCard: 'RiskCard',
+  SignalCard: 'SignalCard',
 };
 
 function generateCardComponent() {
@@ -197,7 +197,7 @@ async function fixCardImports() {
     // Get all files that might use cards
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: process.cwd(),
-      ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*']
+      ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*'],
     });
 
     console.log(`🔍 Scanning ${files.length} files for card usage...`);
@@ -209,7 +209,7 @@ async function fixCardImports() {
 
       // Check for card usage and add imports
       const usedCards = [];
-      
+
       for (const [component] of Object.entries(CARD_COMPONENTS)) {
         const regex = new RegExp(`\\b${component}\\b`, 'g');
         if (regex.test(content)) {

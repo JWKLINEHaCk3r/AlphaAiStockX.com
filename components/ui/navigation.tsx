@@ -2,6 +2,7 @@ import { Button } from "./button";
 'use client';
 
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { 
   Menu, 
   X, 
@@ -9,10 +10,20 @@ import {
   TrendingUp, 
   Brain, 
   Settings, 
+=======
+import { Button } from '@/components/ui/button';
+import {
+  Menu,
+  X,
+  Home,
+  TrendingUp,
+  Brain,
+  Settings,
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   User,
   ChevronDown,
   Sparkles,
-  Zap
+  Zap,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +69,11 @@ const navigation: NavItem[] = [
   },
 ];
 
-function DropdownMenu({ item, isOpen, onToggle }: {
+function DropdownMenu({
+  item,
+  isOpen,
+  onToggle,
+}: {
   item: NavItem;
   isOpen: boolean;
   onToggle: () => void;
@@ -71,12 +86,11 @@ function DropdownMenu({ item, isOpen, onToggle }: {
       >
         {item.icon}
         {item.label}
-        <ChevronDown className={cn(
-          "w-4 h-4 transition-transform duration-200",
-          isOpen ? "rotate-180" : ""
-        )} />
+        <ChevronDown
+          className={cn('w-4 h-4 transition-transform duration-200', isOpen ? 'rotate-180' : '')}
+        />
       </button>
-      
+
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-56 glass-card border border-neon-blue/20 rounded-xl shadow-glow overflow-hidden z-50">
           {item.children?.map((child, index) => (
@@ -94,10 +108,7 @@ function DropdownMenu({ item, isOpen, onToggle }: {
   );
 }
 
-function MobileMenu({ isOpen, onClose }: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
+function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -108,10 +119,7 @@ function MobileMenu({ isOpen, onClose }: {
       <div className="fixed top-0 right-0 h-full w-80 glass-card border-l border-neon-blue/20 p-6 overflow-y-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-bold neon-text">Menu</h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
+          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -122,21 +130,21 @@ function MobileMenu({ isOpen, onClose }: {
               {item.children ? (
                 <div>
                   <button
-                    onClick={() => setOpenDropdown(
-                      openDropdown === item.label ? null : item.label
-                    )}
+                    onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                     className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover:bg-white/10 rounded-lg"
                   >
                     <div className="flex items-center gap-3">
                       {item.icon}
                       {item.label}
                     </div>
-                    <ChevronDown className={cn(
-                      "w-4 h-4 transition-transform",
-                      openDropdown === item.label ? "rotate-180" : ""
-                    )} />
+                    <ChevronDown
+                      className={cn(
+                        'w-4 h-4 transition-transform',
+                        openDropdown === item.label ? 'rotate-180' : ''
+                      )}
+                    />
                   </button>
-                  
+
                   {openDropdown === item.label && (
                     <div className="ml-6 mt-2 space-y-1">
                       {item.children.map((child, childIndex) => (
@@ -216,12 +224,12 @@ export default function NextLevelNavigation() {
 
   return (
     <>
-      <nav className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-        isScrolled 
-          ? "glass-card border-b border-neon-blue/20 shadow-glow" 
-          : "bg-transparent"
-      )}>
+      <nav
+        className={cn(
+          'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
+          isScrolled ? 'glass-card border-b border-neon-blue/20 shadow-glow' : 'bg-transparent'
+        )}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -241,14 +249,14 @@ export default function NextLevelNavigation() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
               {navigation.map((item, index) => (
-                <div key={index} onClick={(e) => e.stopPropagation()}>
+                <div key={index} onClick={e => e.stopPropagation()}>
                   {item.children ? (
                     <DropdownMenu
                       item={item}
                       isOpen={openDropdown === item.label}
-                      onToggle={() => setOpenDropdown(
-                        openDropdown === item.label ? null : item.label
-                      )}
+                      onToggle={() =>
+                        setOpenDropdown(openDropdown === item.label ? null : item.label)
+                      }
                     />
                   ) : (
                     <a
@@ -286,10 +294,7 @@ export default function NextLevelNavigation() {
       </nav>
 
       {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
       {/* Spacer for fixed navigation */}
       <div className="h-16" />

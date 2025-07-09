@@ -543,7 +543,9 @@ export default function AITradingDashboard() {
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <p className="text-gray-400">Return</p>
-                          <p className="text-green-400">{strategy.performance?.totalReturn || 0}%</p>
+                          <p className="text-green-400">
+                            {strategy.performance?.totalReturn || 0}%
+                          </p>
                         </div>
                         <div>
                           <p className="text-gray-400">Win Rate</p>

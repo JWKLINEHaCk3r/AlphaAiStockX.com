@@ -21,8 +21,8 @@ export async function GET(request: NextRequest) {
       reasons: [
         'Technical indicators show strong momentum',
         'Volume analysis suggests positive sentiment',
-        'AI algorithm detected favorable patterns'
-      ]
+        'AI algorithm detected favorable patterns',
+      ],
     };
 
     return NextResponse.json({
@@ -30,16 +30,15 @@ export async function GET(request: NextRequest) {
       stockData,
       recommendation,
       timestamp: new Date().toISOString(),
-      status: 'success'
+      status: 'success',
     });
-
   } catch (error) {
     console.error('Trading analysis API error:', error);
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to analyze trading data',
         status: 'error',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );

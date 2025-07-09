@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
         const volatility = 0.02;
         const price = basePrice + (Math.random() - 0.5) * basePrice * volatility;
         const volume = Math.floor(Math.random() * 1000000) + 100000;
-        
+
         return {
           timestamp: timestamp.toISOString(),
           open: Math.round(price * 100) / 100,
@@ -69,13 +69,9 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString(),
       interval,
     });
-
   } catch (error) {
     console.error('Market data error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -83,12 +79,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -110,16 +103,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json(
-      { error: 'Invalid action' },
-      { status: 400 }
-    );
-
+    return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
   } catch (error) {
     console.error('Market data subscription error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

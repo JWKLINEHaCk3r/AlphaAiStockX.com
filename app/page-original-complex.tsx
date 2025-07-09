@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import { DialogTrigger } from "../components/ui/dialog";
 import { DialogTitle } from "../components/ui/dialog";
@@ -9,6 +10,13 @@ import { CardDescription } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
+=======
+import { DialogTrigger } from '@/components/ui/dialog';
+import { DialogTitle } from '@/components/ui/dialog';
+import { DialogHeader } from '@/components/ui/dialog';
+import { DialogContent } from '@/components/ui/dialog';
+import { Dialog } from '@/components/ui/dialog';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 export { default } from './page-simple';
 import dynamic from 'next/dynamic';
@@ -24,10 +32,21 @@ import {
 const FloatingElements = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const MorphingBlob = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const QuantumGrid = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
-const HolographicDisplay = dynamic(() => Promise.resolve(({ children }: any) => <div>{children}</div>), { ssr: false });
+const HolographicDisplay = dynamic(
+  () => Promise.resolve(({ children }: any) => <div>{children}</div>),
+  { ssr: false }
+);
 const DataStream = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 
-const TradingDashboardDemo = dynamic(() => Promise.resolve(() => <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center"><span className="text-white">Trading Dashboard Loading...</span></div>), { ssr: false });
+const TradingDashboardDemo = dynamic(
+  () =>
+    Promise.resolve(() => (
+      <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center">
+        <span className="text-white">Trading Dashboard Loading...</span>
+      </div>
+    )),
+  { ssr: false }
+);
 
 const Advanced3DBackground = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const InteractiveCursor = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
@@ -483,13 +502,13 @@ function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index:
 
           <div className="flex gap-3">
             {/* <LearnMoreModal feature={feature}> */}
-              <Button
-                variant="outline"
-                className="flex-1 bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30"
-              >
-                Learn More
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+            <Button
+              variant="outline"
+              className="flex-1 bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30"
+            >
+              Learn More
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
             {/* </LearnMoreModal> */}
 
             <Button size="sm" className={`bg-gradient-to-r ${feature.gradient} hover:opacity-90`}>

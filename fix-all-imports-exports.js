@@ -6,18 +6,22 @@ console.log('🔧 Fixing all exports and imports in AlphaAI StockX...');
 // Function to fix React imports
 function fixReactImports(content) {
   // Fix React imports for client components
-  if (content.includes("'use client'") && !content.includes("import React") && content.includes("React.")) {
+  if (
+    content.includes("'use client'") &&
+    !content.includes('import React') &&
+    content.includes('React.')
+  ) {
     content = content.replace(
       /import \{ ([^}]+) \} from ['"]react['"];/g,
       "import React, { $1 } from 'react';"
     );
   }
-  
+
   // Fix missing React import when JSX is used
   if ((content.includes('<') || content.includes('jsx')) && !content.includes('import React')) {
     content = "import React from 'react';\n" + content;
   }
-  
+
   return content;
 }
 
@@ -26,6 +30,7 @@ function fixComponentImports(content) {
   // Fix malformed Card imports
   const cardFixes = [
     {
+<<<<<<< HEAD
       pattern: /import \{ Card, CardCoCard, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
       replacement: ""
     },
@@ -41,12 +46,30 @@ function fixComponentImports(content) {
       pattern: /import \{ CardCoCard \} from ['"]@\/components\/ui\/card['"];/g,
       replacement: ""
     }
+=======
+      pattern:
+        /import \{ Card, CardCoCard, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
+      replacement: "import { Card, CardContent, $1 } from '@/components/ui/card';",
+    },
+    {
+      pattern: /import \{ Card, CardCoCard, CardContent \} from ['"]@\/components\/ui\/card['"];/g,
+      replacement: "import { Card, CardContent } from '@/components/ui/card';",
+    },
+    {
+      pattern: /import \{ CardCoCard, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
+      replacement: "import { CardContent, $1 } from '@/components/ui/card';",
+    },
+    {
+      pattern: /import \{ CardCoCard \} from ['"]@\/components\/ui\/card['"];/g,
+      replacement: "import { CardContent } from '@/components/ui/card';",
+    },
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   ];
-  
+
   cardFixes.forEach(fix => {
     content = content.replace(fix.pattern, fix.replacement);
   });
-  
+
   return content;
 }
 
@@ -55,7 +78,7 @@ function fixUseClientDirectives(content) {
   const lines = content.split('\n');
   const newLines = [];
   let foundClient = false;
-  
+
   for (const line of lines) {
     if (line.includes("'use client'") && foundClient) {
       // Skip duplicate 'use client'
@@ -67,16 +90,17 @@ function fixUseClientDirectives(content) {
       newLines.push(line);
     }
   }
-  
+
   return newLines.join('\n');
 }
 
 // Function to fix duplicate imports
 function fixDuplicateImports(content) {
   // Fix duplicate imports from the same module
-  const importRegex = /import \{([^}]+)\} from ['"]([^'"]+)['"];?\s*import \{([^}]+)\} from ['"]\2['"];?/g;
+  const importRegex =
+    /import \{([^}]+)\} from ['"]([^'"]+)['"];?\s*import \{([^}]+)\} from ['"]\2['"];?/g;
   content = content.replace(importRegex, "import { $1, $3 } from '$2';");
-  
+
   return content;
 }
 
@@ -87,13 +111,13 @@ function fixExportIssues(content) {
   if (exportMatches && exportMatches.length > 1) {
     const lines = content.split('\n');
     const exportLines = [];
-    
+
     lines.forEach((line, index) => {
       if (line.includes('export default')) {
         exportLines.push(index);
       }
     });
-    
+
     // Keep only the last export default
     if (exportLines.length > 1) {
       const newLines = lines.filter((line, index) => {
@@ -102,7 +126,7 @@ function fixExportIssues(content) {
       content = newLines.join('\n');
     }
   }
-  
+
   return content;
 }
 
@@ -111,12 +135,12 @@ function fixImportOrder(content) {
   if (!content.includes("'use client'")) {
     return content;
   }
-  
+
   const lines = content.split('\n');
   const newLines = [];
   let useClientFound = false;
   const importsBeforeClient = [];
-  
+
   for (const line of lines) {
     if (line.includes("'use client'")) {
       useClientFound = true;
@@ -132,7 +156,7 @@ function fixImportOrder(content) {
       newLines.push(line);
     }
   }
-  
+
   return newLines.join('\n');
 }
 
@@ -141,7 +165,7 @@ function processFile(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
     const originalContent = content;
-    
+
     // Apply all fixes
     content = fixReactImports(content);
     content = fixComponentImports(content);
@@ -149,14 +173,14 @@ function processFile(filePath) {
     content = fixDuplicateImports(content);
     content = fixExportIssues(content);
     content = fixImportOrder(content);
-    
+
     // Only write if content changed
     if (content !== originalContent) {
       fs.writeFileSync(filePath, content, 'utf8');
       console.log(`✅ Fixed: ${path.basename(filePath)}`);
       return true;
     }
-    
+
     return false;
   } catch (error) {
     console.error(`❌ Error processing ${filePath}:`, error.message);
@@ -167,15 +191,15 @@ function processFile(filePath) {
 // Function to find all TSX files
 function findTsxFiles(dir) {
   const files = [];
-  
+
   function scanDir(currentDir) {
     try {
       const items = fs.readdirSync(currentDir);
-      
+
       for (const item of items) {
         const fullPath = path.join(currentDir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
           scanDir(fullPath);
         } else if (stat.isFile() && item.endsWith('.tsx')) {
@@ -186,7 +210,7 @@ function findTsxFiles(dir) {
       console.error(`Error scanning ${currentDir}:`, error.message);
     }
   }
-  
+
   scanDir(dir);
   return files;
 }
@@ -194,26 +218,26 @@ function findTsxFiles(dir) {
 // Main execution
 async function main() {
   console.log('🔍 Scanning for TSX files...');
-  
+
   const tsxFiles = findTsxFiles('./app');
   const componentFiles = findTsxFiles('./components');
-  
+
   const allFiles = [...tsxFiles, ...componentFiles];
-  
+
   console.log(`📁 Found ${allFiles.length} TSX files to process`);
-  
+
   let fixedCount = 0;
-  
+
   for (const file of allFiles) {
     if (processFile(file)) {
       fixedCount++;
     }
   }
-  
+
   console.log(`\n🎉 Processing complete!`);
   console.log(`✅ Fixed ${fixedCount} files`);
   console.log(`📋 Total files processed: ${allFiles.length}`);
-  
+
   console.log('\n📝 Summary of fixes applied:');
   console.log('  ✅ Fixed React imports');
   console.log('  ✅ Fixed malformed component imports');
@@ -221,7 +245,7 @@ async function main() {
   console.log('  ✅ Fixed duplicate imports');
   console.log('  ✅ Fixed multiple export defaults');
   console.log('  ✅ Fixed import order (moved imports after "use client")');
-  
+
   console.log('\n🚀 Next steps:');
   console.log('1. Run: npm install --legacy-peer-deps --force');
   console.log('2. Run: npm run build');

@@ -6,7 +6,7 @@ declare global {
       [elemName: string]: any;
     }
   }
-  
+
   namespace React {
     type ReactNode = any;
     type ComponentType<P = {}> = any;
@@ -17,7 +17,7 @@ declare global {
     type FormEvent<T = Element> = any;
     type KeyboardEvent<T = Element> = any;
     type FocusEvent<T = Element> = any;
-    
+
     interface HTMLAttributes<T> {
       [key: string]: any;
       className?: string;
@@ -33,7 +33,7 @@ declare global {
       'aria-label'?: string;
       'data-testid'?: string;
     }
-    
+
     interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
       value?: string | number;
       defaultValue?: string | number;
@@ -61,7 +61,7 @@ declare global {
       checked?: boolean;
       defaultChecked?: boolean;
     }
-    
+
     interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
       disabled?: boolean;
       form?: string;
@@ -74,7 +74,7 @@ declare global {
       type?: 'submit' | 'reset' | 'button';
       value?: string | ReadonlyArray<string> | number;
     }
-    
+
     interface SelectHTMLAttributes<T> extends HTMLAttributes<T> {
       autoComplete?: string;
       autoFocus?: boolean;
@@ -87,9 +87,13 @@ declare global {
       value?: string | ReadonlyArray<string> | number;
       defaultValue?: string | ReadonlyArray<string> | number;
     }
-    
-    function forwardRef<T, P = {}>(render: (props: P, ref: any) => ReactElement | null): ComponentType<P>;
-    function useState<S>(initialState: S | (() => S)): [S, (value: S | ((prevState: S) => S)) => void];
+
+    function forwardRef<T, P = {}>(
+      render: (props: P, ref: any) => ReactElement | null
+    ): ComponentType<P>;
+    function useState<S>(
+      initialState: S | (() => S)
+    ): [S, (value: S | ((prevState: S) => S)) => void];
     function useEffect(effect: () => void | (() => void), deps?: any[]): void;
     function useMemo<T>(factory: () => T, deps: any[]): T;
     function useCallback<T extends (...args: any[]) => any>(callback: T, deps: any[]): T;

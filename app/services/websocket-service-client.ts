@@ -1,6 +1,6 @@
 import React from 'react';
 // Client-side only WebSocket service
-'use client';
+('use client');
 
 import { EventEmitter } from 'events';
 import { io, Socket } from 'socket.io-client';

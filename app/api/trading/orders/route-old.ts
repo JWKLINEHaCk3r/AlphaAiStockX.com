@@ -6,49 +6,72 @@ import { TradingService } from '@/lib/trading/trading-service';
 import { withApiSecurity } from '@/lib/api-security';
 import { z } from 'zod';
 
-const orderSchema = z.object({
-  symbol: z.string().min(1, 'Symbol is required').max(10, 'Symbol too long').regex(/^[A-Z]+$/, 'Invalid symbol format'),
-  side: z.enum(['buy', 'sell']),
-  type: z.enum(['market', 'limit', 'stop', 'stop_limit', 'trailing_stop']),
-  quantity: z.number().positive('Quantity must be positive').max(10000, 'Quantity too large').optional(),
-  notional: z.number().positive('Notional amount must be positive').max(1000000, 'Notional amount too large').optional(),
-  limitPrice: z.number().positive('Limit price must be positive').optional(),
-  stopPrice: z.number().positive('Stop price must be positive').optional(),
-  trailPrice: z.number().positive('Trail price must be positive').optional(),
-  trailPercent: z.number().positive('Trail percent must be positive').max(50, 'Trail percent too large').optional(),
-  timeInForce: z.enum(['day', 'gtc', 'ioc', 'fok']).default('day'),
-  extendedHours: z.boolean().default(false),
-  portfolioId: z.string().optional(),
-  takeProfitPrice: z.number().positive().optional(),
-  stopLossPrice: z.number().positive().optional(),
-  stopLossLimitPrice: z.number().positive().optional(),
-}).refine(data => data.quantity || data.notional, {
-  message: "Either quantity or notional amount is required"
-}).refine(data => {
-  if (data.type === 'limit' && !data.limitPrice) {
-    return false;
-  }
-  return true;
-}, {
-  message: "Limit price is required for limit orders"
-}).refine(data => {
-  if ((data.type === 'stop' || data.type === 'stop_limit') && !data.stopPrice) {
-    return false;
-  }
-  return true;
-}, {
-  message: "Stop price is required for stop orders"
-});
+const orderSchema = z
+  .object({
+    symbol: z
+      .string()
+      .min(1, 'Symbol is required')
+      .max(10, 'Symbol too long')
+      .regex(/^[A-Z]+$/, 'Invalid symbol format'),
+    side: z.enum(['buy', 'sell']),
+    type: z.enum(['market', 'limit', 'stop', 'stop_limit', 'trailing_stop']),
+    quantity: z
+      .number()
+      .positive('Quantity must be positive')
+      .max(10000, 'Quantity too large')
+      .optional(),
+    notional: z
+      .number()
+      .positive('Notional amount must be positive')
+      .max(1000000, 'Notional amount too large')
+      .optional(),
+    limitPrice: z.number().positive('Limit price must be positive').optional(),
+    stopPrice: z.number().positive('Stop price must be positive').optional(),
+    trailPrice: z.number().positive('Trail price must be positive').optional(),
+    trailPercent: z
+      .number()
+      .positive('Trail percent must be positive')
+      .max(50, 'Trail percent too large')
+      .optional(),
+    timeInForce: z.enum(['day', 'gtc', 'ioc', 'fok']).default('day'),
+    extendedHours: z.boolean().default(false),
+    portfolioId: z.string().optional(),
+    takeProfitPrice: z.number().positive().optional(),
+    stopLossPrice: z.number().positive().optional(),
+    stopLossLimitPrice: z.number().positive().optional(),
+  })
+  .refine(data => data.quantity || data.notional, {
+    message: 'Either quantity or notional amount is required',
+  })
+  .refine(
+    data => {
+      if (data.type === 'limit' && !data.limitPrice) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'Limit price is required for limit orders',
+    }
+  )
+  .refine(
+    data => {
+      if ((data.type === 'stop' || data.type === 'stop_limit') && !data.stopPrice) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'Stop price is required for stop orders',
+    }
+  );
 
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -58,17 +81,14 @@ export async function POST(request: NextRequest) {
     let portfolioId = orderData.portfolioId;
     if (!portfolioId) {
       const defaultPortfolio = await prisma.portfolio.findFirst({
-        where: { 
+        where: {
           userId: session.user.id,
           type: 'PERSONAL',
         },
       });
 
       if (!defaultPortfolio) {
-        return NextResponse.json(
-          { error: 'No portfolio found' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'No portfolio found' }, { status: 400 });
       }
 
       portfolioId = defaultPortfolio.id;
@@ -83,22 +103,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (!portfolio) {
-      return NextResponse.json(
-        { error: 'Portfolio not found or unauthorized' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Portfolio not found or unauthorized' }, { status: 403 });
     }
 
     // Get current market price (mock for demo)
-    const currentPrice = orderData.price || (150 + Math.random() * 50);
+    const currentPrice = orderData.price || 150 + Math.random() * 50;
     const orderValue = orderData.quantity * currentPrice;
 
     // Check buying power for BUY orders
     if (orderData.side === 'BUY' && portfolio.cashBalance < orderValue) {
-      return NextResponse.json(
-        { error: 'Insufficient buying power' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Insufficient buying power' }, { status: 400 });
     }
 
     // Check position for SELL orders
@@ -111,10 +125,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (!position || position.quantity < orderData.quantity) {
-        return NextResponse.json(
-          { error: 'Insufficient shares to sell' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Insufficient shares to sell' }, { status: 400 });
       }
     }
 
@@ -149,10 +160,9 @@ export async function POST(request: NextRequest) {
       message: 'Order submitted successfully',
       order,
     });
-
   } catch (error) {
     console.error('Order creation error:', error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
@@ -160,22 +170,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -211,19 +215,15 @@ export async function GET(request: NextRequest) {
       success: true,
       orders,
     });
-
   } catch (error) {
     console.error('Orders fetch error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 // Helper function to execute orders (demo implementation)
 async function executeOrder(orderId: string, executionPrice: number) {
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async tx => {
     const order = await tx.order.findUnique({
       where: { id: orderId },
       include: { portfolio: true },
@@ -243,9 +243,8 @@ async function executeOrder(orderId: string, executionPrice: number) {
     });
 
     // Update portfolio cash balance
-    const cashChange = order.side === 'BUY' 
-      ? -(order.quantity * executionPrice)
-      : (order.quantity * executionPrice);
+    const cashChange =
+      order.side === 'BUY' ? -(order.quantity * executionPrice) : order.quantity * executionPrice;
 
     await tx.portfolio.update({
       where: { id: order.portfolioId },
@@ -265,18 +264,22 @@ async function executeOrder(orderId: string, executionPrice: number) {
     });
 
     if (existingPosition) {
-      const newQuantity = order.side === 'BUY'
-        ? existingPosition.quantity + order.quantity
-        : existingPosition.quantity - order.quantity;
+      const newQuantity =
+        order.side === 'BUY'
+          ? existingPosition.quantity + order.quantity
+          : existingPosition.quantity - order.quantity;
 
       if (newQuantity === 0) {
         await tx.position.delete({
           where: { id: existingPosition.id },
         });
       } else {
-        const newAvgPrice = order.side === 'BUY'
-          ? ((existingPosition.averagePrice * existingPosition.quantity) + (executionPrice * order.quantity)) / newQuantity
-          : existingPosition.averagePrice;
+        const newAvgPrice =
+          order.side === 'BUY'
+            ? (existingPosition.averagePrice * existingPosition.quantity +
+                executionPrice * order.quantity) /
+              newQuantity
+            : existingPosition.averagePrice;
 
         await tx.position.update({
           where: { id: existingPosition.id },

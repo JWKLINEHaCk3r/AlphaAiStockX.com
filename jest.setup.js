@@ -39,18 +39,20 @@ process.env.NEXTAUTH_SECRET = 'test-secret';
 process.env.NEXTAUTH_URL = 'http://localhost:3000';
 
 // Global test utilities
-global.matchMedia = global.matchMedia || function (query) {
-  return {
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+global.matchMedia =
+  global.matchMedia ||
+  function (query) {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    };
   };
-};
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {

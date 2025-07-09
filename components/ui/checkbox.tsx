@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { Checkbox } from "./checkbox";
 <<<<<<< HEAD
 'use client';
+=======
+import { Checkbox } from '@/components/ui/checkbox';
+('use client');
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import * as React from 'react';

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
@@ -16,12 +17,28 @@ import {
   Volume2, 
   VolumeX, 
   Brain, 
+=======
+import { Alert } from '@/components/ui/alert';
+('use client');
+import React from 'react';
+
+import { useState, useEffect, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Mic,
+  MicOff,
+  Volume2,
+  VolumeX,
+  Brain,
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   TrendingUp,
   Activity,
   Zap,
   Settings,
   Play,
-  Pause
+  Pause,
 } from 'lucide-react';
 
 interface VoiceCommand {
@@ -49,10 +66,10 @@ export default function AIVoiceCommandCenter() {
     language: 'en-US',
     sensitivity: 0.7,
     autoExecute: true,
-    voiceFeedback: true
+    voiceFeedback: true,
   });
   const [isSupported, setIsSupported] = useState(false);
-  
+
   const recognitionRef = useRef<any>(null);
   const speechSynthesisRef = useRef<SpeechSynthesis | null>(null);
 
@@ -60,13 +77,14 @@ export default function AIVoiceCommandCenter() {
     // Check for browser support
     const hasWebSpeech = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
     const hasSpeechSynthesis = 'speechSynthesis' in window;
-    
+
     setIsSupported(hasWebSpeech && hasSpeechSynthesis);
 
     if (hasWebSpeech) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const SpeechRecognition =
+        (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      
+
       recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = settings.language;
@@ -77,7 +95,7 @@ export default function AIVoiceCommandCenter() {
           transcript += event.results[i][0].transcript;
         }
         setCurrentTranscript(transcript);
-        
+
         if (event.results[event.results.length - 1].isFinal) {
           processVoiceCommand(transcript, event.results[event.results.length - 1][0].confidence);
         }
@@ -106,7 +124,7 @@ export default function AIVoiceCommandCenter() {
 
   const processVoiceCommand = (transcript: string, confidence: number) => {
     const command = transcript.toLowerCase().trim();
-    
+
     if (confidence < settings.sensitivity) {
       speak("Sorry, I didn't understand that clearly. Please try again.");
       return;
@@ -118,7 +136,7 @@ export default function AIVoiceCommandCenter() {
       action: interpretCommand(command),
       executed: false,
       timestamp: new Date(),
-      confidence
+      confidence,
     };
 
     setCommands(prev => [newCommand, ...prev.slice(0, 9)]);
@@ -153,10 +171,8 @@ export default function AIVoiceCommandCenter() {
   const executeCommand = (command: VoiceCommand) => {
     // Simulate command execution
     setTimeout(() => {
-      setCommands(prev => 
-        prev.map(cmd => 
-          cmd.id === command.id ? { ...cmd, executed: true } : cmd
-        )
+      setCommands(prev =>
+        prev.map(cmd => (cmd.id === command.id ? { ...cmd, executed: true } : cmd))
       );
 
       if (settings.voiceFeedback) {
@@ -208,8 +224,8 @@ export default function AIVoiceCommandCenter() {
         </CardHeader>
         <CardContent>
           <p className="text-gray-400">
-            Voice commands require a modern browser with Web Speech API support.
-            Please use Chrome, Edge, or Safari for the best experience.
+            Voice commands require a modern browser with Web Speech API support. Please use Chrome,
+            Edge, or Safari for the best experience.
           </p>
         </CardContent>
       </Card>
@@ -237,9 +253,7 @@ export default function AIVoiceCommandCenter() {
                 onClick={toggleListening}
                 size="lg"
                 className={`${
-                  isListening 
-                    ? 'bg-red-600 hover:bg-red-700' 
-                    : 'bg-purple-600 hover:bg-purple-700'
+                  isListening ? 'bg-red-600 hover:bg-red-700' : 'bg-purple-600 hover:bg-purple-700'
                 } text-white`}
               >
                 {isListening ? (
@@ -294,30 +308,25 @@ export default function AIVoiceCommandCenter() {
           {isListening && (
             <div className="mb-6 p-4 bg-slate-700/50 rounded-lg border border-purple-500/20">
               <h4 className="text-gray-300 text-sm mb-2">Current Speech:</h4>
-              <p className="text-white">
-                {currentTranscript || 'Listening for voice commands...'}
-              </p>
+              <p className="text-white">{currentTranscript || 'Listening for voice commands...'}</p>
             </div>
           )}
 
           {/* Quick Commands */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
-            {[
-              'Show portfolio',
-              'Get AAPL price',
-              'Buy 100 shares',
-              'Market analysis'
-            ].map((cmd, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="border-purple-500/30 text-gray-300 hover:text-white"
-                onClick={() => processVoiceCommand(cmd, 1.0)}
-              >
-                "{cmd}"
-              </Button>
-            ))}
+            {['Show portfolio', 'Get AAPL price', 'Buy 100 shares', 'Market analysis'].map(
+              (cmd, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-gray-300 hover:text-white"
+                  onClick={() => processVoiceCommand(cmd, 1.0)}
+                >
+                  "{cmd}"
+                </Button>
+              )
+            )}
           </div>
         </CardContent>
       </Card>
@@ -337,8 +346,8 @@ export default function AIVoiceCommandCenter() {
             </p>
           ) : (
             <div className="space-y-3">
-              {commands.map((command) => (
-                <div 
+              {commands.map(command => (
+                <div
                   key={command.id}
                   className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
                 >
@@ -347,16 +356,14 @@ export default function AIVoiceCommandCenter() {
                     <p className="text-gray-400 text-sm">{command.action}</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge 
-                      variant={command.confidence > 0.8 ? "default" : "secondary"}
+                    <Badge
+                      variant={command.confidence > 0.8 ? 'default' : 'secondary'}
                       className="text-xs"
                     >
                       {Math.round(command.confidence * 100)}%
                     </Badge>
                     {command.executed ? (
-                      <Badge className="bg-green-600 text-xs">
-                        ✓ Executed
-                      </Badge>
+                      <Badge className="bg-green-600 text-xs">✓ Executed</Badge>
                     ) : (
                       <Button
                         size="sm"

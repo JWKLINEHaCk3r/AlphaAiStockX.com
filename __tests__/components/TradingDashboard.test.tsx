@@ -1,5 +1,9 @@
 import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
 import React from 'react';
+<<<<<<< HEAD
+=======
+import { TradingDashboard } from '@/components/ui/trading-dashboard-demo';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
 import { ThemeProvider } from '@/components/ui/theme-provider';

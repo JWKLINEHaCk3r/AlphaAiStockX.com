@@ -10,10 +10,16 @@ import { Button } from "../../../components/ui/button";
 import React from 'react';
 
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+=======
+import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import { Palette, Zap, Settings, Eye, Sparkles } from 'lucide-react';
 import { useNeonTheme } from './NeonThemeProvider';
 

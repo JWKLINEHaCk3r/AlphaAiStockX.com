@@ -29,8 +29,8 @@ import {
   Wallet,
   Timer,
 } from 'lucide-react';
-import { 
-  Trade, 
+import {
+  Trade,
   TradeHistoryItem,
   BotStats,
   BotSettings,

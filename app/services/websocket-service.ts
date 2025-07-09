@@ -134,7 +134,7 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   private startHeartbeat(): void {
     if (typeof window === 'undefined') return;
-    
+
     this.heartbeatInterval = setInterval(() => {
       if (this.socket && this.isConnected) {
         this.socket.emit('ping');
@@ -157,9 +157,11 @@ export class EnhancedWebSocketService extends EventEmitter {
 
     this.reconnectAttempts++;
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
-    
+
     setTimeout(async () => {
-      console.log(`Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+      console.log(
+        `Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`
+      );
       await this.connect(userId);
     }, delay);
   }
@@ -187,7 +189,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   // Subscription methods
   subscribeToMarketData(symbols: string[]): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('subscribe-market-data', symbols);
     symbols.forEach(symbol => {
       this.subscriptions.add(`market:${symbol}`);
@@ -196,7 +198,7 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   unsubscribeFromMarketData(symbols: string[]): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('unsubscribe-market-data', symbols);
     symbols.forEach(symbol => {
       this.subscriptions.delete(`market:${symbol}`);
@@ -205,28 +207,28 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   subscribeToAISignals(userId: string): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('subscribe-ai-signals', userId);
     this.subscriptions.add(`signals:${userId}`);
   }
 
   subscribeToPortfolio(userId: string): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('subscribe-portfolio', userId);
     this.subscriptions.add(`portfolio:${userId}`);
   }
 
   subscribeToTradeNotifications(userId: string): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('subscribe-notifications', userId);
     this.subscriptions.add(`notifications:${userId}`);
   }
 
   subscribeToSocialFeed(userId: string): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
-    
+
     this.socket.emit('subscribe-social', userId);
     this.subscriptions.add(`social:${userId}`);
   }
@@ -273,7 +275,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   // Cleanup method
   cleanup(): void {
     if (typeof window === 'undefined') return;
-    
+
     this.disconnect();
     this.removeAllListeners();
     this.marketDataCache.clear();

@@ -11,26 +11,26 @@ if (typeof global !== 'undefined' && typeof window === 'undefined') {
     documentElement: {
       scrollTop: 0,
       scrollHeight: 1000,
-      clientHeight: 800
+      clientHeight: 800,
     },
     body: {
-      className: ''
+      className: '',
     },
     createElement: () => ({
       style: {},
       addEventListener: () => {},
-      removeEventListener: () => {}
+      removeEventListener: () => {},
     }),
     createElementNS: () => ({
       style: {},
       addEventListener: () => {},
-      removeEventListener: () => {}
+      removeEventListener: () => {},
     }),
     addEventListener: () => {},
     removeEventListener: () => {},
     getElementById: () => null,
     querySelector: () => null,
-    querySelectorAll: () => []
+    querySelectorAll: () => [],
   };
   global.navigator = {
     userAgent: 'node.js',

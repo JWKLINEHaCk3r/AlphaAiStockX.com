@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
@@ -11,6 +12,9 @@ import { CardDescription } from "../../../components/ui/card";
 import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
+=======
+import { Alert } from '@/components/ui/alert';
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import {
   AIStockPrediction,
   SportsEvent,
@@ -53,7 +57,7 @@ import {
   MarketPattern,
 } from '../../types/trading-types';
 
-'use client';
+('use client');
 
 <<<<<<< HEAD
 import React, { useState } from 'react';
@@ -353,10 +357,17 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {Object.entries(platformStats).map(([key, value]) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
           const statConfig: Record<string, { icon: React.ComponentType<any>; label: string; color: string }> = {
 =======
           const statConfig: Record<string, { icon: any; label: string; color: string }> = {
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+=======
+          const statConfig: Record<
+            string,
+            { icon: React.ComponentType<any>; label: string; color: string }
+          > = {
+>>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
             totalUsers: { icon: Users, label: 'Active Users', color: 'text-blue-400' },
             successRate: { icon: Target, label: 'Success Rate', color: 'text-green-400' },
             avgReturns: { icon: TrendingUp, label: 'Avg Returns', color: 'text-purple-400' },

@@ -1,6 +1,6 @@
 import { Button } from "./button";
 import React from 'react';
-'use client';
+('use client');
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react';
