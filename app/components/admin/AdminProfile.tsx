@@ -1,30 +1,14 @@
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "../../../components/ui/tabs";
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Switch } from "../../../components/ui/switch";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
-=======
-import { Alert } from '@/components/ui/alert';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   Shield,
   Crown,
@@ -40,15 +24,10 @@ import {
   Save,
 } from 'lucide-react';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import {
   AdminPermissions,
   AdminSettings,
 } from '../../types/trading-types';
-=======
-import { AdminPermissions, AdminSettings } from '../../types/trading-types';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 interface Admin {
   id: string;
@@ -62,20 +41,6 @@ interface Admin {
 interface AdminProfileProps {
   admin: Admin;
   onUpdateAdmin: (admin: Admin) => void;
-=======
-interface AdminData {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  lastLogin: string;
-  permissions: string[];
-}
-
-interface AdminProfileProps {
-  admin: AdminData;
-  onUpdateAdmin: (admin: AdminData) => void;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 export default function AdminProfile({ admin, onUpdateAdmin }: AdminProfileProps) {

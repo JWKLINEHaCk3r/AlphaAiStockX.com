@@ -1,14 +1,8 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Types
 interface ValueAtRisk {
@@ -193,21 +187,13 @@ export default function RiskAnalyzer() {
     });
   }, []);
 
-<<<<<<< HEAD
   const getRiskColor = (score: number): string => {
-=======
-  const getRiskColor = (score: number) => {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     if (score >= 70) return 'text-red-400';
     if (score >= 40) return 'text-yellow-400';
     return 'text-green-400';
   };
 
-<<<<<<< HEAD
   const getRiskBadgeVariant = (level: string): string => {
-=======
-  const getRiskBadgeVariant = (level: string) => {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     switch (level) {
       case 'High':
         return 'bg-red-500/20 text-red-400';

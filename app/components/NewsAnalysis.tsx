@@ -1,42 +1,23 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+import React, { useState, useEffect } from 'react';
 import { Globe, TrendingUp, TrendingDown, Clock, ExternalLink, Brain } from 'lucide-react';
 
 interface NewsArticle {
   id: number;
   title: string;
   summary: string;
-<<<<<<< HEAD
   sentiment: 'bullish' | 'bearish' | 'neutral';
   confidence: number;
   impact: 'low' | 'medium' | 'high';
-=======
-  sentiment: string;
-  confidence: number;
-  impact: string;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   source: string;
   time: string;
   relevantStocks: string[];
 }
 
-<<<<<<< HEAD
 interface SentimentData {
-=======
-interface SentimentSummary {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   bullish: number;
   bearish: number;
   neutral: number;
@@ -45,11 +26,7 @@ interface SentimentSummary {
 
 export default function NewsAnalysis() {
   const [news, setNews] = useState<NewsArticle[]>([]);
-<<<<<<< HEAD
   const [sentimentSummary, setSentimentSummary] = useState<SentimentData | null>(null);
-=======
-  const [sentimentSummary, setSentimentSummary] = useState<SentimentSummary | null>(null);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   useEffect(() => {
     // Mock news data with AI sentiment analysis

@@ -1,24 +1,14 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+import React, { useState, useEffect } from 'react';
 import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
 
 interface AIInsightsProps {
   selectedStock: string;
 }
 
-<<<<<<< HEAD
 interface Sentiment {
   bullish: number;
   bearish: number;
@@ -35,9 +25,7 @@ interface TechnicalAnalysis {
 }
 
 interface FundamentalAnalysis {
-  peRatio: number;
-  pbRatio: number;
-  debtToEquity: number;
+  pe: number;
   roe: number;
   revenueGrowth: number;
 }
@@ -76,50 +64,6 @@ interface AIInsightsData {
 
 export default function AIInsights({ selectedStock }: AIInsightsProps) {
   const [insights, setInsights] = useState<AIInsightsData | null>(null);
-=======
-interface InsightsData {
-  overallScore: number;
-  sentiment: {
-    bullish: number;
-    bearish: number;
-    neutral: number;
-  };
-  technicalAnalysis: {
-    rsi: number;
-    macd: string;
-    support: number;
-    resistance: number;
-    movingAverage: string;
-  };
-  aiPredictions: Array<{
-    timeframe: string;
-    prediction: string;
-    confidence: number;
-    target: number;
-    direction: string;
-    probability: number;
-    priceTarget: number;
-  }>;
-  riskFactors: Array<{
-    factor: string;
-    level: string;
-    impact: number;
-  }>;
-  catalysts: Array<{
-    event: string;
-    impact: string;
-    date: string;
-  }>;
-  fundamentalAnalysis?: {
-    pe: number;
-    roe: number;
-    revenueGrowth: number;
-  };
-}
-
-export default function AIInsights({ selectedStock }: AIInsightsProps) {
-  const [insights, setInsights] = useState<InsightsData | null>(null);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -148,9 +92,6 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
         aiPredictions: [
           {
             timeframe: '1 Week',
-            prediction: 'Strong bullish momentum expected',
-            confidence: 72,
-            target: 182.5,
             direction: 'bullish',
             probability: 72,
             target: 182.5,
@@ -158,9 +99,6 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
           },
           {
             timeframe: '1 Month',
-            prediction: 'Continued upward trend likely',
-            confidence: 68,
-            target: 195.0,
             direction: 'bullish',
             probability: 68,
             target: 195.0,
@@ -168,9 +106,6 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
           },
           {
             timeframe: '3 Months',
-            prediction: 'Market consolidation phase',
-            confidence: 55,
-            target: 175.0,
             direction: 'neutral',
             probability: 55,
             target: 175.0,
@@ -337,11 +272,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-<<<<<<< HEAD
-            {insights.aiPredictions.map((prediction: Prediction, index: number) => (
-=======
             {insights?.aiPredictions.map((prediction, index) => (
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
@@ -370,11 +301,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-<<<<<<< HEAD
-            {insights.riskFactors.map((risk: RiskFactor, index: number) => (
-=======
             {insights?.riskFactors.map((risk, index) => (
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
               <div key={index} className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-white">{risk.factor}</span>
@@ -407,11 +334,7 @@ export default function AIInsights({ selectedStock }: AIInsightsProps) {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-<<<<<<< HEAD
-            {insights.marketCatalysts.map((catalyst: MarketCatalyst, index: number) => (
-=======
-            {insights?.catalysts.map((catalyst, index) => (
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+            {insights?.marketCatalysts.map((catalyst, index) => (
               <div key={index} className="p-4 bg-white/5 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-white font-medium">{catalyst.event}</h4>

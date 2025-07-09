@@ -1,14 +1,8 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface SectorData {

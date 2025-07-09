@@ -30,40 +30,21 @@ function fixComponentImports(content) {
   // Fix malformed Card imports
   const cardFixes = [
     {
-<<<<<<< HEAD
-      pattern: /import \{ Card, CardCoCard, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: ""
-    },
-    {
-      pattern: /import \{ Card, CardCoCard, CardContent \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: ""
-    },
-    {
-      pattern: /import \{ CardCoCard, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: ""
-    },
-    {
-      pattern: /import \{ CardCoCard \} from ['"]@\/components\/ui\/card['"];/g,
-      replacement: ""
-    }
-=======
-      pattern:
-        /import \{ Card, CardCoCard, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
+      pattern: /import \{ Card, CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];?/g,
       replacement: "import { Card, CardContent, $1 } from '@/components/ui/card';",
     },
     {
-      pattern: /import \{ Card, CardCoCard, CardContent \} from ['"]@\/components\/ui\/card['"];/g,
+      pattern: /import \{ Card, CardContent \} from ['"]@\/components\/ui\/card['"];?/g,
       replacement: "import { Card, CardContent } from '@/components/ui/card';",
     },
     {
-      pattern: /import \{ CardCoCard, ([^}]+) \} from ['"]@\/components\/ui\/card['"];/g,
+      pattern: /import \{ CardContent, ([^}]+) \} from ['"]@\/components\/ui\/card['"];?/g,
       replacement: "import { CardContent, $1 } from '@/components/ui/card';",
     },
     {
-      pattern: /import \{ CardCoCard \} from ['"]@\/components\/ui\/card['"];/g,
+      pattern: /import \{ CardContent \} from ['"]@\/components\/ui\/card['"];?/g,
       replacement: "import { CardContent } from '@/components/ui/card';",
-    },
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+    }
   ];
 
   cardFixes.forEach(fix => {

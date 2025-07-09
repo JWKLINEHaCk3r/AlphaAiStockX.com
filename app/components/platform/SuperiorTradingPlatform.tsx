@@ -10,10 +10,6 @@ import { AvatarFallback } from "../../../components/ui/avatar";
 import { Avatar } from "../../../components/ui/avatar";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 // Next-Generation AI Trading Platform - Comprehensive Multi-User Platform
 'use client';
@@ -1345,7 +1341,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
           <TabsContent value="analytics">
             <div className="text-center py-12">
               <BarChart3 className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
+              <h3 className="text-xl font-bold mb-2">Advanced Analytics</h3>
               <p className="text-slate-400">
                 Coming in the next phase - Advanced performance analytics and AI model insights
               </p>

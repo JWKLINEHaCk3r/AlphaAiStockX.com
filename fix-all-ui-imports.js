@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
 import { Advanced3DEffects } from "./components/ui/advanced-3d-effects";
 import { Enhanced3DEffects } from "./components/ui/enhanced-effects";
@@ -57,63 +56,6 @@ import { Card } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 // AlphaAI Stock Trading Platform - UI Import Fixer (Node.js ESM compatible)
 // This script uses only Node.js and npm modules, not Next.js path aliases
-=======
-const { Advanced3DEffects } = require("@/components/ui/advanced-3d-effects");
-const { Enhanced3DEffects } = require("@/components/ui/enhanced-effects");
-const { AnimatedBackground } = require("@/components/ui/animated-background-client");
-const { VoiceControl } = require("@/components/ui/voice-control");
-const { TradingDashboard } = require("@/components/ui/trading-dashboard-demo");
-const { NavigationMenuLink } = require("@/components/ui/navigation");
-const { NavigationMenuItem } = require("@/components/ui/navigation");
-const { NavigationMenuTrigger } = require("@/components/ui/navigation");
-const { NavigationMenuContent } = require("@/components/ui/navigation");
-const { NavigationMenuList } = require("@/components/ui/navigation");
-const { NavigationMenu } = require("@/components/ui/navigation");
-const { Calendar } = require("@/components/ui/calendar");
-const { PopoverTrigger } = require("@/components/ui/popover");
-const { PopoverContent } = require("@/components/ui/popover");
-const { Popover } = require("@/components/ui/popover");
-const { ScrollArea } = require("@/components/ui/scroll-area");
-const { Toaster } = require("@/components/ui/toaster");
-const { Toast } = require("@/components/ui/toast");
-const { TabsTrigger } = require("@/components/ui/tabs");
-const { TabsList } = require("@/components/ui/tabs");
-const { TabsContent } = require("@/components/ui/tabs");
-const { Tabs } = require("@/components/ui/tabs");
-const { AlertTitle } = require("@/components/ui/alert");
-const { AlertDescription } = require("@/components/ui/alert");
-const { Alert } = require("@/components/ui/alert");
-const { DialogTrigger } = require("@/components/ui/dialog");
-const { DialogTitle } = require("@/components/ui/dialog");
-const { DialogHeader } = require("@/components/ui/dialog");
-const { DialogFooter } = require("@/components/ui/dialog");
-const { DialogDescription } = require("@/components/ui/dialog");
-const { DialogContent } = require("@/components/ui/dialog");
-const { Dialog } = require("@/components/ui/dialog");
-const { AvatarImage } = require("@/components/ui/avatar");
-const { AvatarFallback } = require("@/components/ui/avatar");
-const { Avatar } = require("@/components/ui/avatar");
-const { Badge } = require("@/components/ui/badge");
-const { Progress } = require("@/components/ui/progress");
-const { Slider } = require("@/components/ui/slider");
-const { Switch } = require("@/components/ui/switch");
-const { Checkbox } = require("@/components/ui/checkbox");
-const { SelectValue } = require("@/components/ui/select");
-const { SelectTrigger } = require("@/components/ui/select");
-const { SelectItem } = require("@/components/ui/select");
-const { SelectContent } = require("@/components/ui/select");
-const { Select } = require("@/components/ui/select");
-const { Textarea } = require("@/components/ui/textarea");
-const { Label } = require("@/components/ui/label");
-const { Input } = require("@/components/ui/input");
-const { CardTitle } = require("@/components/ui/card");
-const { CardHeader } = require("@/components/ui/card");
-const { CardFooter } = require("@/components/ui/card");
-const { CardDescription } = require("@/components/ui/card");
-const { CardContent } = require("@/components/ui/card");
-const { Card } = require("@/components/ui/card");
-const { Button } = require("@/components/ui/button");
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 import fs from 'fs';
 import path from 'path';

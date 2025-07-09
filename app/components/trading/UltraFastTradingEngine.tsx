@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
 import { SelectValue } from "../../../components/ui/select";
@@ -7,27 +6,11 @@ import { SelectItem } from "../../../components/ui/select";
 import { SelectContent } from "../../../components/ui/select";
 import { Select } from "../../../components/ui/select";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
-=======
-import { SelectValue } from '@/components/ui/select';
-import { SelectTrigger } from '@/components/ui/select';
-import { SelectItem } from '@/components/ui/select';
-import { SelectContent } from '@/components/ui/select';
-import { Select } from '@/components/ui/select';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
-<<<<<<< HEAD
 import { useState, useEffect, useRef, useCallback } from 'react';
-=======
-import { useState, useEffect, useRef } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   Zap,
   Bot,
@@ -42,7 +25,7 @@ import {
   Eye,
   Timer,
 } from 'lucide-react';
-import { TradingSignalData, Trade } from '../../types/trading-types';
+import { TradingSignalData } from '../../types/trading-types';
 
 // Type definitions
 interface User {
@@ -60,6 +43,7 @@ interface Trade {
   timestamp: Date;
   executionTime: number;
   status: 'completed' | 'pending' | 'failed';
+  type?: 'manual' | 'auto'; // Added type property
 }
 
 interface MarketData {
@@ -204,6 +188,7 @@ export default function UltraFastTradingEngine({
         timestamp: new Date(),
         executionTime: getExecutionTime(),
         status: 'completed',
+        type: 'auto', // Mark as auto trade
       };
 
       setRecentTrades((prev: Trade[]) => [autoTrade, ...prev.slice(0, 49)]);
@@ -294,6 +279,7 @@ export default function UltraFastTradingEngine({
       timestamp: new Date(),
       executionTime: execTime,
       status: 'completed',
+      type: 'manual', // Mark as manual trade
     };
 
     setRecentTrades((prev: Trade[]) => [trade, ...prev.slice(0, 49)]);
@@ -598,8 +584,8 @@ export default function UltraFastTradingEngine({
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <Badge variant={signal.action === 'BUY' ? 'default' : 'destructive'}>
-                          {signal.action}
+                        <Badge variant={signal.type === 'buy' ? 'default' : 'destructive'}>
+                          {signal.type.toUpperCase()}
                         </Badge>
                         <span className="text-white font-bold">{signal.symbol}</span>
                         <span className="text-gray-300">${signal.targetPrice.toFixed(2)}</span>

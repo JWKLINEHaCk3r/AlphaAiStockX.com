@@ -1,28 +1,10 @@
-<<<<<<< HEAD
-import { SelectValue } from "./select";
-import { SelectTrigger } from "./select";
-import { SelectItem } from "./select";
-import { SelectContent } from "./select";
-import { Select } from "./select";
-import { Label } from "./label";
-=======
-import { SelectValue } from '@/components/ui/select';
-import { SelectTrigger } from '@/components/ui/select';
-import { SelectItem } from '@/components/ui/select';
-import { SelectContent } from '@/components/ui/select';
-import { Select } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Select = SelectPrimitive.Root;
-
 const SelectGroup = SelectPrimitive.Group;
-
 const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<

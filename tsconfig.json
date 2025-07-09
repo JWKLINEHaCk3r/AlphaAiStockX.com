@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "es2023"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2023"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -19,21 +23,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "@/*": [
-        "./*"
-      ]
-=======
       "@/*": ["./*"],
       "@/components/*": ["./components/*"],
       "@/app/*": ["./app/*"],
       "@/lib/*": ["./lib/*"],
       "@/hooks/*": ["./hooks/*"]
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-=======
-      "@/*": ["./*"]
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
     },
     "target": "ES2022",
     "forceConsistentCasingInFileNames": true,
@@ -44,24 +38,16 @@
     "noImplicitAny": false,
     "strictNullChecks": false
   },
-<<<<<<< HEAD
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "next-env.d.ts",
-    "out/types/**/*.ts",
-    "types/**/*.d.ts"
+    ".next/types/**/*.ts"
   ],
-<<<<<<< HEAD
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "react-demo",
+    "workspaces",
+    "src"
   ]
-=======
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "react-demo", "workspaces", "src"]
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-=======
-  "exclude": ["node_modules"]
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 }

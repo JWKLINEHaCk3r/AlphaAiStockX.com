@@ -1,25 +1,14 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "../../../components/ui/tabs";
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import { User, Alert } from '@/app/types/trading';
+import { User, Alert as TradingAlert } from '@/app/types/trading';
 import {
   Shield,
   Users,
@@ -92,16 +81,11 @@ export default function AdminDashboard() {
     serverLoad: 0,
   });
 
-<<<<<<< HEAD
   const [userProfiles, setUserProfiles] = useState<UserProfile[]>([]);
   const [liveData, setLiveData] = useState<LiveData>({
-=======
-  const [userProfiles, setUserProfiles] = useState<User[]>([]);
-  const [liveData, setLiveData] = useState({
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     realtimeUsers: 0,
     tradesPerSecond: 0,
-    systemAlerts: [] as Alert[],
+    systemAlerts: [] as TradingAlert[],
     performanceMetrics: {
       apiResponseTime: 0,
       databaseConnections: 0,
@@ -293,23 +277,13 @@ export default function AdminDashboard() {
     }
   };
 
-<<<<<<< HEAD
   const suspendUser = (userId: string) => {
-=======
-  const suspendUser = (userId: number) => {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setUserProfiles(prev =>
-      prev.map((user: UserProfile) =>
-        user.id === userId ? { ...user, status: 'suspended' } : user
-      )
+      prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'suspended' } : user))
     );
   };
 
-<<<<<<< HEAD
   const activateUser = (userId: string) => {
-=======
-  const activateUser = (userId: number) => {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     setUserProfiles(prev =>
       prev.map((user: UserProfile) => (user.id === userId ? { ...user, status: 'active' } : user))
     );

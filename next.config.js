@@ -1,9 +1,11 @@
+// Convert to ESM syntax for Next.js config compatibility
+import './global-setup.js';
+import SelfPolyfillPlugin from './scripts/self-polyfill-plugin.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 /** @type {import('next').NextConfig} */
 // Setup global polyfills before anything else
-require('./global-setup.js');
-
-const SelfPolyfillPlugin = require('./scripts/self-polyfill-plugin.js');
-
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
@@ -229,4 +231,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-export default nextConfig;
+export { nextConfig as default };

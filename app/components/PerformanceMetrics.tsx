@@ -1,18 +1,10 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
-import { BotStats, Trade } from '@/app/types/trading';
 
-<<<<<<< HEAD
 interface Trade {
   id: number;
   symbol: string;
@@ -34,25 +26,17 @@ interface BotStats {
   activeTrades: number;
 }
 
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 interface PerformanceMetricsProps {
   botStats: BotStats;
   recentTrades: Trade[];
 }
 
-<<<<<<< HEAD
 interface DailyReturn {
   date: Date;
   return: number;
   cumulative: number;
 }
 
-interface PerformanceData {
-  dailyReturns: DailyReturn[];
-  monthlyReturns: DailyReturn[];
-  drawdownPeriods: DailyReturn[];
-=======
 interface PerformanceData {
   dailyReturns: Array<{
     date: Date;
@@ -68,7 +52,6 @@ interface PerformanceData {
     end: Date;
     depth: number;
   }>;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   bestTrade: Trade | null;
   worstTrade: Trade | null;
   avgHoldTime: string;

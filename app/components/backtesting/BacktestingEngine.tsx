@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Calendar } from "../../../components/ui/calendar";
 import { PopoverTrigger } from "../../../components/ui/popover";
@@ -12,26 +11,11 @@ import { SelectItem } from "../../../components/ui/select";
 import { SelectContent } from "../../../components/ui/select";
 import { Select } from "../../../components/ui/select";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
-=======
-import { SelectValue } from '@/components/ui/select';
-import { SelectTrigger } from '@/components/ui/select';
-import { SelectItem } from '@/components/ui/select';
-import { SelectContent } from '@/components/ui/select';
-import { Select } from '@/components/ui/select';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   CalendarIcon,
   Play,
@@ -44,7 +28,11 @@ import {
 } from 'lucide-react';
 // Import type definitions
 import { format } from 'date-fns';
-import { BacktestResult, BacktestSettings, TradingStrategy } from '../../types/trading-types';
+import {
+  BacktestResult,
+  BacktestSettings,
+  TradingStrategy,
+} from '../../types/trading-types';
 
 export default function BacktestingEngine() {
   const [backtestResults, setBacktestResults] = useState<BacktestResult | null>(null);
