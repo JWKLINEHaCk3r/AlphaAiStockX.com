@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-import { Badge } from "./badge";
-=======
-import { Badge } from '@/components/ui/badge';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
-import type * as React from 'react';
+import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
