@@ -10,10 +10,6 @@ import { Progress } from "../../../components/ui/progress";
 import { Slider } from "../../../components/ui/slider";
 import { Switch } from "../../../components/ui/switch";
 import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 // Next-Generation AI Trading Platform - Surpasses Robinhood by 20 Years
 // The most advanced multi-user social trading platform with AI-powered automation
@@ -21,23 +17,9 @@ import { Button } from "../../../components/ui/button";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-<<<<<<< HEAD
-import { 
-  Brain, 
-  TrendingUp, 
-=======
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Switch } from '@/components/ui/switch';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Brain,
   TrendingUp,
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   TrendingDown,
   DollarSign,
   Users,
@@ -91,9 +73,6 @@ import {
   ChevronUp,
   ChevronDown,
 } from 'lucide-react';
-<<<<<<< HEAD
-=======
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -103,7 +82,6 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 // Advanced Interfaces for Next-Gen Multi-User Trading Platform
 interface User {

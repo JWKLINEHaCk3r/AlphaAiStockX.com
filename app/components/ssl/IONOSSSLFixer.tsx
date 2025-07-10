@@ -1,33 +1,22 @@
-<<<<<<< HEAD
+'use client';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { AlertTitle } from "../../../components/ui/alert";
-import { AlertDescription } from "../../../components/ui/alert";
-import { Alert } from "../../../components/ui/alert";
-import { Progress } from "../../../components/ui/progress";
-import { Select } from "../../../components/ui/select";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-=======
-import { Progress } from '@/components/ui/progress';
-import { Select } from '@/components/ui/select';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+import { Alert, AlertTitle, AlertDescription } from '../../../components/ui/alert';
+import { Progress } from '../../../components/ui/progress';
+import { Select } from '../../../components/ui/select';
+import { Button } from '../../../components/ui/button';
 import {
   AIStockPrediction,
   SportsEvent,
   TradingOpportunity,
   Trade,
   Trader,
-  VisionModel,
   AnalysisResult,
   BankAccount,
   Transaction,
   TradingSignalData,
   ChartPattern,
   TechnicalIndicators,
-  RiskAnalysis,
   SectorPerformance,
   BacktestStrategy,
   AIWhiteLabelMetrics,
@@ -47,7 +36,6 @@ import {
   TradingStrategy,
   ScanResult,
   SiteDiagnostic,
-  Alert,
   NewsAnalysis,
   SocialPlatform,
   Influencer,
@@ -55,14 +43,6 @@ import {
   DeepLearningModel,
   MarketPattern,
 } from '../../types/trading-types';
-
-('use client');
-import React from 'react';
-
-import { useState } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { CheckCircle, AlertTriangle, Shield, Settings, RefreshCw, FileCode } from 'lucide-react';
 
 export default function IONOSSSLFixer() {

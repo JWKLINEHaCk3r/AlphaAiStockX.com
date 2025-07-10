@@ -1,3 +1,5 @@
+'use client';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "../../../components/ui/tabs";
 import { Alert } from "../../../components/ui/alert";
@@ -9,14 +11,12 @@ import {
   TradingOpportunity,
   Trade,
   Trader,
-  VisionModel,
   AnalysisResult,
   BankAccount,
   Transaction,
   TradingSignalData,
   ChartPattern,
   TechnicalIndicators,
-  RiskAnalysis,
   SectorPerformance,
   BacktestStrategy,
   AIWhiteLabelMetrics,
@@ -36,7 +36,6 @@ import {
   TradingStrategy,
   ScanResult,
   SiteDiagnostic,
-  Alert,
   NewsAnalysis,
   SocialPlatform,
   Influencer,
@@ -44,14 +43,6 @@ import {
   DeepLearningModel,
   MarketPattern,
 } from '../../types/trading-types';
-
-'use client';
-
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
-import { useState } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   Brain,
   Rocket,
@@ -59,12 +50,6 @@ import {
   Target,
   TrendingUp,
   BarChart3,
-  GraduationCap,
-  Bot,
-  Eye,
-  Activity,
-  Award,
-  Users,
   Globe,
   CheckCircle,
   Star,
@@ -79,6 +64,12 @@ import {
   Sparkles,
   Server,
   MessageSquare,
+  Users,
+  Activity,
+  Eye,
+  GraduationCap,
+  Award,
+  Bot
 } from 'lucide-react';
 
 export default function AboutContent({ onNavigate }: { onNavigate: (tab: string) => void }) {
@@ -344,11 +335,7 @@ export default function AboutContent({ onNavigate }: { onNavigate: (tab: string)
       {/* Platform Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {Object.entries(platformStats).map(([key, value]) => {
-<<<<<<< HEAD
-          const statConfig: Record<string, { icon: React.ComponentType<any>; label: string; color: string }> = {
-=======
           const statConfig: Record<string, { icon: any; label: string; color: string }> = {
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
             totalUsers: { icon: Users, label: 'Active Users', color: 'text-blue-400' },
             successRate: { icon: Target, label: 'Success Rate', color: 'text-green-400' },
             avgReturns: { icon: TrendingUp, label: 'Avg Returns', color: 'text-purple-400' },
