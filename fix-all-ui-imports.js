@@ -1,9 +1,6 @@
-// AlphaAI Stock Trading Platform - UI Import Fixer (Node.js ESM compatible)
-// This script uses only Node.js and npm modules, not Next.js path aliases
-
-import fs from 'fs';
-import path from 'path';
-import { glob } from 'glob';
+const fs = require('fs');
+const path = require('path');
+const { glob } = require('glob');
 
 console.log('🚀 AlphaAI UI Import Fixer - Powering up the trading platform...');
 
@@ -15,6 +12,15 @@ function getRelativeImportPath(filePath, componentPath) {
   // Remove .tsx/.ts/.js/.jsx extension for import
   relPath = relPath.replace(/\\/g, '/').replace(/\.(tsx|ts|js|jsx)$/, '');
   return relPath;
+}
+
+// Helper: Check if a path is a file
+function isFile(filePath) {
+  try {
+    return fs.statSync(filePath).isFile();
+  } catch (e) {
+    return false;
+  }
 }
 
 // UI Components mapping for automatic import resolution (relative paths)
@@ -70,8 +76,7 @@ const TRADING_COMPONENTS = {
   'TradingDashboard': 'components/ui/trading-dashboard-demo',
   'VoiceControl': 'components/ui/voice-control',
   'AnimatedBackground': 'components/ui/animated-background-client',
-  'Enhanced3DEffects': 'components/ui/enhanced-effects',
-  'Advanced3DEffects': 'components/ui/advanced-3d-effects'
+  'Enhanced3DEffects': 'components/ui/enhanced-effects'
 };
 
 async function fixUIImports() {
