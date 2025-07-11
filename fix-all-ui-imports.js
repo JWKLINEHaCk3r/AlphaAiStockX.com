@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { glob } = require('glob');
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
 
 console.log('🚀 AlphaAI UI Import Fixer - Powering up the trading platform...');
 
@@ -72,11 +72,11 @@ const UI_COMPONENTS = {
   'NavigationMenuLink': 'components/ui/navigation'
 };
 
+// Only include trading components that exist in the codebase
 const TRADING_COMPONENTS = {
   'TradingDashboard': 'components/ui/trading-dashboard-demo',
   'VoiceControl': 'components/ui/voice-control',
-  'AnimatedBackground': 'components/ui/animated-background-client',
-  'Enhanced3DEffects': 'components/ui/enhanced-effects'
+  'AnimatedBackground': 'components/ui/animated-background-client'
 };
 
 async function fixUIImports() {
