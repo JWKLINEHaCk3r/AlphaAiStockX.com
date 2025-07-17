@@ -1,3 +1,7 @@
+import { Badge } from "./components/ui/badge";
+import { Progress } from "./components/ui/progress";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 #!/usr/bin/env node
 
 /**
@@ -9,6 +13,15 @@ import fs from 'fs';
 import path from 'path';
 
 console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components...');
+
+// Helper: Check if a path is a file
+function isFile(filePath) {
+  try {
+    return fs.statSync(filePath).isFile();
+  } catch (e) {
+    return false;
+  }
+}
 
 // Advanced AI Trading Card Components Generator
 function generateMissingCards() {

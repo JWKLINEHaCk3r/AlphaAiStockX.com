@@ -1,56 +1,15 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import { Calendar } from '../../../components/ui/calendar';
-import { Alert } from '../../../components/ui/alert';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
-import { Input } from '../../../components/ui/input';
-import { Button } from '../../../components/ui/button';
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
-
-('use client');
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import { Calendar } from "../../../components/ui/calendar";
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Input } from "../../../components/ui/input";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+'use client';
+import React, { useState, useEffect } from 'react';
 import {
   Brain,
   TrendingUp,
@@ -59,20 +18,93 @@ import {
   AlertTriangle,
   CheckCircle,
   BarChart3,
-  Activity,
-  Zap,
   Search,
   ArrowUp,
   ArrowDown,
   Minus,
   Eye,
-  Calendar,
+  Calendar as LucideCalendar,
   DollarSign,
   Volume2,
+  Zap,
+  Activity
 } from 'lucide-react';
-
 import { advancedStockAnalysisService } from '../../services/advanced-stock-analysis-service';
 import { legalComplianceService } from '../../services/legal-compliance-service';
+
+// Patch StockAnalysis type to match actual service return and avoid missing type errors
+interface StockAnalysis {
+  stock: {
+    symbol: string;
+    name: string;
+    sector: string;
+    marketCap: number;
+    ipoDate: string;
+  };
+  currentPrice: number;
+  historical: Array<{ price: number; volume: number; timestamp: string }>;
+  realTimeData: any;
+  patterns: any[];
+  volumeAnalysis: { currentVolume?: number };
+  metrics: {
+    performance?: { ytd: number; month: number; week: number; day: number };
+    volatility?: { annualized: number; daily: number };
+    levels?: {
+      support: number;
+      resistance: number;
+      year52High: number;
+      year52Low: number;
+      distanceFromHigh: number;
+      distanceFromLow: number;
+    };
+    volume?: { average: number; current: unknown | number; trend: number };
+  };
+  buyScore?: {
+    overall: number;
+    rating: string;
+    components: any;
+  };
+  tradingSignals?: any[];
+  entryExitPoints?: {
+    entry: any[];
+    exit: any[];
+    recommendation?: string;
+  };
+  marketClassification: {
+    classification: string;
+    confidence: number;
+    description: string;
+    bullishFactors: number;
+    bearishFactors: number;
+    trends: {
+      short: string;
+      medium: string;
+      long: string;
+    };
+  };
+  recommendation: {
+    action: string;
+    confidence: number;
+    positionSize: string;
+    stopLoss: number;
+    takeProfit: number;
+    timeframe: string;
+    keyFactors: string[];
+    riskLevel: string;
+  };
+  performanceSinceIPO?: {
+    ipoPrice: number;
+    totalReturn: number;
+    annualizedReturn: number;
+  };
+  priceTargets: {
+    conservative: number;
+    moderate: number;
+    aggressive: number;
+    stopLoss: number;
+    timeframe: string;
+  };
+}
 
 interface AITradingAdvisorProps {
   className?: string;
@@ -114,85 +146,23 @@ interface StockData {
       levels: number;
     };
   };
-  marketClassification: MarketClassification;
-  recommendation: TradingRecommendation;
-  performance: {
-    day: number;
-    week: number;
-    month: number;
-    year: number;
-  };
-}
-
-interface StockAnalysis {
-  stock: {
-    symbol: string;
-    name: string;
-    sector: string;
-    marketCap: number;
-    ipoDate: string;
-  };
-  currentPrice: number;
-  historical: Array<{ price: number; volume: number; timestamp: string }>;
-  realTimeData: RealtimeData;
-  patterns: ChartPattern[];
-  volumeAnalysis: VolumeProfile;
-  metrics: {
-    performance: {
-      day: number;
-      week: number;
-      month: number;
-      year: number;
-    };
-    levels: {
-      year52High: number;
-      year52Low: number;
-    };
-  };
-  buyScore?: {
-    overall: number;
-    rating: string;
-    components: AIAnalysisComponents;
-  };
-  tradingSignals?: TradingSignal[];
-  entryExitPoints?: {
-    entry: EntryExitPoint[];
-    exit: EntryExitPoint[];
-    recommendation?: string;
-  };
-  marketClassification: MarketClassification & {
+  marketClassification: {
     classification: string;
     confidence: number;
     description: string;
     bullishFactors: number;
     bearishFactors: number;
     trends: {
-      short: 'UP' | 'DOWN';
-      medium: 'UP' | 'DOWN';
-      long: 'UP' | 'DOWN';
+      short: string;
+      medium: string;
+      long: string;
     };
   };
-  recommendation: TradingRecommendation & {
-    action: string;
-    confidence: number;
-    positionSize: string;
-    stopLoss: number;
-    takeProfit: number;
-    timeframe: string;
-    keyFactors: string[];
-    riskLevel: 'LOW' | 'MEDIUM' | 'HIGH';
-  };
-  performanceSinceIPO?: {
-    ipoPrice: number;
-    totalReturn: number;
-    annualizedReturn: number;
-  };
-  priceTargets: {
-    conservative: number;
-    moderate: number;
-    aggressive: number;
-    stopLoss: number;
-    timeframe: string;
+  performance: {
+    day: number;
+    week: number;
+    month: number;
+    ytd: number;
   };
 }
 
@@ -352,18 +322,6 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
             <Brain className="h-4 w-4" />
             Stock Analysis
           </TabsTrigger>
-          <TabsTrigger value="signals" className="flex items-center gap-2">
-            <Target className="h-4 w-4" />
-            Trading Signals
-          </TabsTrigger>
-          <TabsTrigger value="scanner" className="flex items-center gap-2">
-            <Search className="h-4 w-4" />
-            Stock Scanner
-          </TabsTrigger>
-        </TabsList>
-
-        {/* Dashboard Tab */}
-        <TabsContent value="dashboard" className="space-y-6">
           {/* Top Stocks */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="bg-slate-800/50 backdrop-blur-sm border-green-500/20">
@@ -839,7 +797,7 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
                 <Card className="bg-slate-800/50 backdrop-blur-sm border-green-500/20">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
-                      <Calendar className="h-6 w-6 text-green-400" />
+                      <LucideCalendar className="h-6 w-6 text-green-400" />
                       Performance Since IPO
                     </CardTitle>
                   </CardHeader>

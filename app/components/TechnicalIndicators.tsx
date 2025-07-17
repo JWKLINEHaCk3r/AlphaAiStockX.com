@@ -1,73 +1,13 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
-'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import { Button } from "../../components/ui/button";
 import { TrendingUp, TrendingDown, Activity, BarChart3 } from 'lucide-react';
-
-<<<<<<< HEAD
-// Type definitions
-interface MACDData {
-  value: number;
-  signal: number;
-  histogram: number;
-  trend: 'bullish' | 'bearish';
-}
-
-interface MovingAverages {
-  sma20: number;
-  sma50: number;
-  sma200: number;
-  currentPrice: number;
-}
-
-interface BollingerBands {
-  upper: number;
-  middle: number;
-  lower: number;
-  position: 'upper' | 'middle' | 'lower';
-}
-
-interface Stochastic {
-  k: number;
-  d: number;
-  signal: 'overbought' | 'oversold' | 'neutral';
-}
-
-interface VolumeData {
-  current: number;
-  average: number;
-  trend: 'above_average' | 'below_average' | 'normal';
-}
-
-interface TechnicalIndicatorsData {
-  rsi: number;
-  macd: MACDData;
-  movingAverages: MovingAverages;
-  bollinger: BollingerBands;
-  stochastic: Stochastic;
-  volume: VolumeData;
-}
+'use client';
+import React, { useState, useEffect } from 'react';
 
 interface TechnicalIndicatorsProps {
-  selectedStock: string;
-}
-
-export default function TechnicalIndicators({ selectedStock }: TechnicalIndicatorsProps) {
-  const [indicators, setIndicators] = useState<TechnicalIndicatorsData | null>(null);
-=======
-interface TechnicalIndicatorsProps {
-  selectedStock: {
-    symbol: string;
-    name: string;
-    price: number;
-  };
+  selectedStock: { symbol: string; name?: string; price?: number };
 }
 
 interface IndicatorData {
@@ -88,7 +28,7 @@ interface IndicatorData {
     upper: number;
     middle: number;
     lower: number;
-    position: number;
+    position: 'upper' | 'middle' | 'lower';
   };
   stochastic: {
     k: number;
@@ -104,10 +44,18 @@ interface IndicatorData {
 
 export default function TechnicalIndicators({ selectedStock }: TechnicalIndicatorsProps) {
   const [indicators, setIndicators] = useState<IndicatorData | null>(null);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+
+  const getBollingerPosition = (current: number, upper: number, lower: number): 'upper' | 'middle' | 'lower' => {
+    if (current >= upper) return 'upper';
+    if (current <= lower) return 'lower';
+    return 'middle';
+  };
 
   useEffect(() => {
     // Simulate technical indicator data
+    const currentPrice = 175.43;
+    const upper = 185.2;
+    const lower = 165.6;
     setIndicators({
       rsi: 65.4,
       macd: {
@@ -120,13 +68,13 @@ export default function TechnicalIndicators({ selectedStock }: TechnicalIndicato
         sma20: 172.45,
         sma50: 168.9,
         sma200: 155.3,
-        currentPrice: 175.43,
+        currentPrice,
       },
       bollinger: {
-        upper: 185.2,
+        upper,
         middle: 175.4,
-        lower: 165.6,
-        position: 0.6,
+        lower,
+        position: getBollingerPosition(currentPrice, upper, lower),
       },
       stochastic: {
         k: 78.5,

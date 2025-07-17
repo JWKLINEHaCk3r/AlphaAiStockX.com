@@ -1,40 +1,13 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+import React, { useState, useEffect } from 'react';
 import {
-  Bot,
-  Play,
-  Pause,
-  Square,
-  Zap,
-  TrendingUp,
-  Activity,
-  Target,
-  Brain,
-  AlertTriangle,
-  BarChart3,
-  Eye,
-  Wallet,
-  Timer,
+  Bot, Play, Pause, Square, Zap, TrendingUp, Activity, Target, Brain, AlertTriangle, BarChart3, Eye, Wallet, Timer,
 } from 'lucide-react';
 import {
-  Trade,
-  TradeHistoryItem,
-  BotStats,
-  BotSettings,
-  MarketAnalysis,
+  Trade, TradeHistoryItem, BotStats, BotSettings, MarketAnalysis,
 } from '../../types/trading-types';
 
 export default function LiveTradingBot() {
@@ -54,7 +27,14 @@ export default function LiveTradingBot() {
     profitFactor: 0,
     tradingDays: 0,
   });
-  const [marketAnalysis, setMarketAnalysis] = useState<MarketAnalysis>({});
+  const [marketAnalysis, setMarketAnalysis] = useState<MarketAnalysis>({
+    marketTrend: 'bullish',
+    volatility: 0,
+    volume: 0,
+    sentiment: 0,
+    opportunities: 0,
+    riskLevel: 'low',
+  });
   const [botSettings, setBotSettings] = useState<BotSettings>({
     maxPositionSize: 5000,
     maxDailyLoss: 1000,
@@ -75,7 +55,7 @@ export default function LiveTradingBot() {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [botStatus, botSettings]);
+  }, [botStatus]);
 
   // Live trading execution logic
   const executeTradeLogic = () => {
@@ -482,7 +462,7 @@ export default function LiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-3">
-              {activeTrades.map((trade: any) => (
+              {activeTrades.map((trade: unknown) => (
                 <div
                   key={trade.id}
                   className="p-4 bg-gray-800/50 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all"
@@ -573,7 +553,7 @@ export default function LiveTradingBot() {
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {tradeHistory.slice(0, 10).map((trade: any) => (
+              {tradeHistory.slice(0, 10).map((trade: unknown) => (
                 <div
                   key={trade.id}
                   className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30"

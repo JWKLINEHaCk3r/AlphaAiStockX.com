@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { Input } from "../components/ui/input";
-=======
-import { Input } from '@/components/ui/input';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
@@ -134,7 +130,7 @@ export class EncryptionUtils {
     try {
       const key = this.getKey();
       const iv = crypto.randomBytes(SECURITY_CONFIG.encryption.ivLength);
-      const cipher = crypto.createCipher(SECURITY_CONFIG.encryption.algorithm, key);
+      const cipher = crypto.createCipheriv(SECURITY_CONFIG.encryption.algorithm, key, iv) as crypto.CipherGCM;
 
       let encrypted = cipher.update(data, 'utf8', 'hex');
       encrypted += cipher.final('hex');
@@ -154,8 +150,7 @@ export class EncryptionUtils {
   static decrypt(encrypted: string, iv: string, tag: string): string {
     try {
       const key = this.getKey();
-      const decipher = crypto.createDecipher(SECURITY_CONFIG.encryption.algorithm, key);
-
+      const decipher = crypto.createDecipheriv(SECURITY_CONFIG.encryption.algorithm, key, Buffer.from(iv, 'hex')) as crypto.DecipherGCM;
       decipher.setAuthTag(Buffer.from(tag, 'hex'));
 
       let decrypted = decipher.update(encrypted, 'hex', 'utf8');

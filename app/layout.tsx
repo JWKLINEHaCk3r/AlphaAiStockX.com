@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { VoiceControl } from "../components/ui/voice-control";
-=======
-import { VoiceControl } from '@/components/ui/voice-control';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 // Import polyfills first to handle global definitions
 import './polyfills';
 import type { Metadata } from 'next';
@@ -37,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AlphaAIStockX - Next-Level AI Trading Revolution',
     description:
-      '🚀 The most advanced AI trading platform with quantum processing, neural networks, and lightning-fast execution. Join 50,000+ elite traders!',
+      '\ud83d\ude80 The most advanced AI trading platform with quantum processing, neural networks, and lightning-fast execution. Join 50,000+ elite traders!',
     url: 'https://alphaaistockx.com',
     siteName: 'AlphaAIStockX',
     images: [
@@ -55,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AlphaAIStockX - Next-Level AI Trading Revolution',
     description:
-      '🚀 The most advanced AI trading platform with quantum processing and neural network intelligence.',
+      '\ud83d\ude80 The most advanced AI trading platform with quantum processing and neural network intelligence.',
     images: ['https://alphaaistockx.com/twitter-image.jpg'],
     site: '@alphaaistockx',
     creator: '@alphaaistockx',
@@ -72,7 +68,6 @@ export const metadata: Metadata = {
   generator: 'Next.js 14 + AlphaAI',
 };
 
-<<<<<<< HEAD
 // Add separate viewport export (Next.js 14+ requirement)
 export const viewport = {
   width: 'device-width',
@@ -85,8 +80,6 @@ export const viewport = {
   ],
 };
 
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">

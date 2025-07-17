@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 import { AvatarImage } from "./avatar";
 import { AvatarFallback } from "./avatar";
 import { Avatar } from "./avatar";
-=======
-import { AvatarImage } from '@/components/ui/avatar';
-import { AvatarFallback } from '@/components/ui/avatar';
-import { Avatar } from '@/components/ui/avatar';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
 import * as React from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { cn } from '@/lib/utils';

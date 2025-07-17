@@ -1,44 +1,13 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+import React, { useState, useEffect } from 'react';
 import {
-  Zap,
-  Activity,
-  Target,
-  AlertTriangle,
-  BarChart3,
-  Eye,
-  Flame,
-  Crown,
-  Sword,
-  Timer,
-  Repeat,
-  DollarSign,
-  Shield,
-  Layers,
-  ChevronDown,
-  Maximize2,
-  Minimize2,
-  Brain,
+  Zap, Activity, Target, AlertTriangle, BarChart3, Eye, Flame, Crown, Sword, Timer, Repeat, DollarSign, Shield, Layers, ChevronDown, Maximize2, Minimize2, Brain,
 } from 'lucide-react';
 import {
-  SportsEvent,
-  TradingOpportunity,
-  ActiveTrade,
-  ProfitStats,
-  ExpandedSections,
+  SportsEvent, TradingOpportunity, ActiveTrade, ProfitStats, ExpandedSections,
 } from '../../types/trading-types';
 
 export default function SportsAlphaTrader() {
@@ -377,7 +346,7 @@ export default function SportsAlphaTrader() {
           {expandedSections.realTime && (
             <CardContent>
               <p className="text-gray-300 mb-4">
-                SMART SP's lightning-fast algorithms enable instant analysis of sports event data,
+                SMART SP&apos;s lightning-fast algorithms enable instant analysis of sports event data,
                 ensuring you never miss a time-sensitive market-spread opportunity.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -426,7 +395,7 @@ export default function SportsAlphaTrader() {
           {expandedSections.adaptive && (
             <CardContent>
               <p className="text-gray-300 mb-4">
-                Stay ahead of market shifts with SMART SP's dynamic strategies that adjust to
+                Stay ahead of market shifts with SMART SP&apos;s dynamic strategies that adjust to
                 changing conditions, maximizing your trading outcomes.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -524,7 +493,7 @@ export default function SportsAlphaTrader() {
           {expandedSections.risk && (
             <CardContent>
               <p className="text-gray-300 mb-4">
-                Prioritize risk assessment with SMART SP's robust risk management protocols,
+                Prioritize risk assessment with SMART SP&apos;s robust risk management protocols,
                 safeguarding your trades against potential losses for enhanced stability.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -616,7 +585,7 @@ export default function SportsAlphaTrader() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {activeEvents.map((event: any) => (
+              {activeEvents.map((event: unknown) => (
                 <div
                   key={event.id}
                   className="p-3 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"
@@ -796,7 +765,7 @@ export default function SportsAlphaTrader() {
             <div className="space-y-3">
               {activeTrades
                 .filter(t => t.status === 'active')
-                .map((trade: any) => (
+                .map((trade: unknown) => (
                   <div
                     key={trade.id}
                     className="p-3 bg-gradient-to-r from-red-800/30 to-orange-800/30 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all"

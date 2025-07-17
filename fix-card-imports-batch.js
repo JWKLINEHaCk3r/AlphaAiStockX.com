@@ -12,6 +12,15 @@ import { Button } from "./components/ui/button";
 const fs = require('fs');
 const path = require('path');
 
+// Helper: Check if a path is a file
+function isFile(filePath) {
+  try {
+    return fs.statSync(filePath).isFile();
+  } catch (e) {
+    return false;
+  }
+}
+
 // Function to search for TypeScript files
 function findTsxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);

@@ -1,5 +1,5 @@
-import { Toaster } from "../../../components/ui/toaster";
 'use client';
+import { Toaster } from "../../../components/ui/toaster";
 import React from 'react';
 
 import { SessionProvider } from 'next-auth/react';

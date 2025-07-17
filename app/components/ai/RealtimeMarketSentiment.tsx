@@ -1,29 +1,35 @@
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+import React, { useState, useEffect } from 'react';
+import {
+  TrendingUp,
+  TrendingDown,
+  MessageSquare,
+  Twitter,
+  Globe,
+  Brain,
+  Activity,
+  Zap,
+  BarChart3,
+  Eye,
+  Heart,
+  ThumbsUp,
+  ThumbsDown,
+  AlertTriangle,
+} from 'lucide-react';
 import {
   AIStockPrediction,
   SportsEvent,
   TradingOpportunity,
   Trade,
   Trader,
-  VisionModel,
   AnalysisResult,
   BankAccount,
   Transaction,
   TradingSignalData,
   ChartPattern,
   TechnicalIndicators,
-  RiskAnalysis,
   SectorPerformance,
   BacktestStrategy,
   AIWhiteLabelMetrics,
@@ -43,38 +49,14 @@ import {
   TradingStrategy,
   ScanResult,
   SiteDiagnostic,
-  Alert,
   NewsAnalysis,
   SocialPlatform,
   Influencer,
   SocialPost,
-  DeepLearningModel,
-  MarketPattern,
 } from '../../types/trading-types';
 
-('use client');
+'use client';
 
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-=======
-import { useState, useEffect } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import {
-  TrendingUp,
-  TrendingDown,
-  MessageSquare,
-  Twitter,
-  Globe,
-  Brain,
-  Activity,
-  Zap,
-  BarChart3,
-  Eye,
-  Heart,
-  ThumbsUp,
-  ThumbsDown,
-  AlertTriangle,
-} from 'lucide-react';
 
 // Type definitions
 interface SentimentData {
@@ -194,7 +176,7 @@ export default function RealtimeMarketSentiment() {
       { name: 'Telegram', icon: MessageSquare, color: 'text-cyan-400' },
     ];
 
-    const data = platforms.map((platform: any) => ({
+    const data = platforms.map((platform: unknown) => ({
       ...platform,
       mentions: Math.floor(Math.random() * 50000) + 5000,
       sentiment: 40 + Math.random() * 60,
@@ -243,7 +225,7 @@ export default function RealtimeMarketSentiment() {
       { name: 'Ray Dalio', followers: '800K', platform: 'LinkedIn' },
     ];
 
-    const data = influencers.map((influencer: any) => ({
+    const data = influencers.map((influencer: unknown) => ({
       ...influencer,
       sentiment: Math.random() > 0.5 ? 'bullish' : 'bearish',
       confidence: 70 + Math.random() * 30,
@@ -509,7 +491,7 @@ export default function RealtimeMarketSentiment() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {newsAnalysis.map((news: any) => (
+            {newsAnalysis.map((news: unknown) => (
               <div
                 key={news.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"

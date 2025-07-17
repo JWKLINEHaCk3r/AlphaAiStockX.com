@@ -1,3 +1,4 @@
+import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
 import TradingDashboardDemo from '../../components/ui/trading-dashboard-demo';
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';

@@ -1,46 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from '../../../components/ui/alert';
 import { Button } from '../../../components/ui/button';
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
 import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from 'lucide-react';
 
 export default function DNSFixGuide() {

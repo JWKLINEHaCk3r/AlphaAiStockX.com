@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { DialogTrigger } from "./dialog";
 import { DialogTitle } from "./dialog";
 import { DialogHeader } from "./dialog";
@@ -6,16 +5,6 @@ import { DialogFooter } from "./dialog";
 import { DialogDescription } from "./dialog";
 import { DialogContent } from "./dialog";
 import { Dialog } from "./dialog";
-=======
-import { DialogTrigger } from '@/components/ui/dialog';
-import { DialogTitle } from '@/components/ui/dialog';
-import { DialogHeader } from '@/components/ui/dialog';
-import { DialogFooter } from '@/components/ui/dialog';
-import { DialogDescription } from '@/components/ui/dialog';
-import { DialogContent } from '@/components/ui/dialog';
-import { Dialog } from '@/components/ui/dialog';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
@@ -65,12 +54,12 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => (
   <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => (
   <div
     className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
     {...props}

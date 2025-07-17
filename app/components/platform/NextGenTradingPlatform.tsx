@@ -1,3 +1,8 @@
+import { SelectValue } from "../../../components/ui/select";
+import { SelectTrigger } from "../../../components/ui/select";
+import { SelectItem } from "../../../components/ui/select";
+import { SelectContent } from "../../../components/ui/select";
+import { Select } from "../../../components/ui/select";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsContent } from "../../../components/ui/tabs";
 import { Tabs } from "../../../components/ui/tabs";
@@ -80,8 +85,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Slider } from '@/components/ui/slider';
 
 // Advanced Interfaces for Next-Gen Multi-User Trading Platform
 interface User {

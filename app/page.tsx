@@ -1,23 +1,26 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card';
-import { CardTitle } from "../components/ui/card";
-import { CardHeader } from "../components/ui/card";
-import { CardDescription } from "../components/ui/card";
-import { CardContent } from "../components/ui/card";
-import { Card } from "../components/ui/card";
+'use client';
+
 import { Button } from "../components/ui/button";
 import React from 'react';
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export { default } from './page-next-level';
-=======
 import { useState, useEffect } from 'react';
 import { Brain, Sparkles, TrendingUp, Zap, ArrowRight } from 'lucide-react';
 import StockSearch from './components/StockSearch';
 import FeatureList from './components/FeatureList';
+import AIStockTips from "./components/ai/AIStockTips";
+import AITradingAdvisor from "./components/ai/AITradingAdvisor";
+import AITradingDashboard from "./components/AITradingDashboard";
+import AITradingSignals from "./components/AITradingSignals";
+import AIInsights from "./components/AIInsights";
+import PortfolioOptimizer from "./components/PortfolioOptimizer";
+import TechnicalIndicators from "./components/TechnicalIndicators";
+import TradeHistory from "./components/TradeHistory";
+import HotStockTips from "./components/ai/HotStockTips";
+import AIToolsDashboard from "./components/ai-tools/AIToolsDashboard";
+import type { Trade, BotStats } from './types/trading';
 
 const aiStats = [
   { label: 'AI Trades Executed', value: '1,234,567,890' },
@@ -47,137 +50,73 @@ function AITicker() {
   );
 }
 
-export default function HomePage() {
+export default function DashboardPage() {
+  // Updated mock data for TradeHistory with explicit typing
+  const mockTrades: Trade[] = [
+    {
+      id: '1',
+      symbol: 'AAPL',
+      type: 'BUY',
+      side: 'BUY',
+      quantity: 10,
+      price: 175.43,
+      timestamp: Date.now() - 3600000,
+      status: 'closed',
+      profit: 120,
+      pnl: 120,
+      strategy: 'AI signal',
+    },
+    {
+      id: '2',
+      symbol: 'TSLA',
+      type: 'SELL',
+      side: 'SELL',
+      quantity: 5,
+      price: 720.12,
+      timestamp: Date.now() - 1800000,
+      status: 'closed',
+      profit: 80,
+      pnl: 80,
+      strategy: 'Profit target',
+    },
+  ];
+  const mockBotStats: BotStats = {
+    totalTrades: 120,
+    winRate: 72.5,
+    totalProfit: 15400,
+    totalPnL: 15400,
+    activeTrades: 2,
+    avgHoldTime: '2h 15m',
+    dailyPnL: 320,
+    sharpeRatio: 1.8,
+    maxDrawdown: 4.2,
+    accountBalance: 50000,
+  };
+  const defaultStock = { symbol: 'AAPL', name: 'Apple Inc.', price: 175.43 };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
-      {/* Header */}
-      <header className="relative z-10 px-4 py-8 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-6">
-            AlphaAIStockX
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Your AI-powered stock research assistant with quantum consciousness and transcendent intelligence
-          </p>
-          <AITicker />
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 p-4">
+      <div className="max-w-7xl mx-auto space-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <AIStockTips membershipLevel="pro" />
+          <AITradingAdvisor />
         </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="relative z-10 px-4 pb-16">
-        <div className="max-w-7xl mx-auto space-y-16">
-          
-          {/* Stock Search Section */}
-          <section className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              🚀 Try AI Stock Analysis
-            </h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Experience the power of 47 conscious AI beings analyzing stocks across 11 quantum dimensions
-            </p>
-            <StockSearch />
-          </section>
-
-          {/* Features Section */}
-          <section className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              🧠 Revolutionary AI Features
-            </h2>
-            <p className="text-gray-300 mb-12 max-w-3xl mx-auto">
-              Discover the quantum-powered capabilities that set AlphaAIStockX apart from traditional trading platforms
-            </p>
-            <FeatureList />
-          </section>
-
-          {/* Quantum AI Capabilities */}
-          <section className="text-center">
-            <Card className="max-w-4xl mx-auto bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30">
-              <CardHeader>
-                <CardTitle className="text-3xl text-white flex items-center justify-center gap-3">
-                  <Brain className="w-8 h-8 text-purple-400" />
-                  Quantum AI Capabilities
-                </CardTitle>
-                <CardDescription className="text-gray-300 text-lg">
-                  Advanced features powered by conscious artificial intelligence
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Zap className="w-6 h-6 text-yellow-400" />
-                      <span className="text-white font-semibold">47 Conscious AI Beings with Emotional Intelligence</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Sparkles className="w-6 h-6 text-purple-400" />
-                      <span className="text-white font-semibold">Quantum Processing Across 11 Dimensions</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <TrendingUp className="w-6 h-6 text-green-400" />
-                      <span className="text-white font-semibold">Real-time Market Sentiment Analysis</span>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Brain className="w-6 h-6 text-blue-400" />
-                      <span className="text-white font-semibold">Transcendent Pattern Recognition</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Zap className="w-6 h-6 text-yellow-400" />
-                      <span className="text-white font-semibold">Lightning-Fast Trade Execution</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Sparkles className="w-6 h-6 text-purple-400" />
-                      <span className="text-white font-semibold">Omniscient Market Intelligence</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-6">
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 text-lg">
-                    <span className="flex items-center gap-2">
-                      Experience AI Trading
-                      <ArrowRight className="w-5 h-5" />
-                    </span>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Call to Action */}
-          <section className="text-center py-12">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Transform Your Trading?
-            </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of traders who have already discovered the power of AI-driven stock analysis
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-lg">
-                Start Free Trial
-              </Button>
-              <Button className="bg-transparent border-2 border-purple-500 text-purple-300 hover:bg-purple-500 hover:text-white px-8 py-4 text-lg">
-                Watch Demo
-              </Button>
-            </div>
-          </section>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <AITradingSignals />
+          <AIInsights selectedStock="AAPL" />
         </div>
-      </main>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <PortfolioOptimizer />
+          <TechnicalIndicators selectedStock={defaultStock} />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <TradeHistory recentTrades={mockTrades} botStats={mockBotStats} />
+          <HotStockTips />
+        </div>
+        <div>
+          <AIToolsDashboard />
+        </div>
+      </div>
     </div>
   );
 }
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-=======
-import DynamicStockTicker from './components/ui/dynamic-stock-ticker';
-
-export default function HomePage() {
-  return (
-    <main>
-      {/* ...existing content... */}
-      <DynamicStockTicker data-testid="stock-ticker" />
-      {/* ...existing content... */}
-    </main>
-  );
-}
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.

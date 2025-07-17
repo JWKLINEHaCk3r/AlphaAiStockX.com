@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import { Textarea } from "./textarea";
-=======
-import { Textarea } from '@/components/ui/textarea';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
-
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
   ({ className, ...props }, ref) => {
     return (
       <textarea

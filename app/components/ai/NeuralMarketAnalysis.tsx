@@ -1,78 +1,15 @@
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+import React, { useState, useEffect } from 'react';
 import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
+  Brain, Network, Eye, Zap, Target, Activity, TrendingUp, BarChart3, Cpu, Database, Layers, GitBranch,
+} from 'lucide-react';
+import {
+  AIStockPrediction, SportsEvent, TradingOpportunity, Trade, Trader, AnalysisResult, BankAccount, Transaction, TradingSignalData, ChartPattern, TechnicalIndicators, SectorPerformance, BacktestStrategy, AIWhiteLabelMetrics, MarketClassification, TradingRecommendation, StockAnalysis, RealtimeData, VolumeProfile, AIAnalysisComponents, CryptoData, DeFiProtocol, NFTCollection, UserProfile, ThemeOption, AccentColor, SubscriptionPlan, TradingStrategy, ScanResult, SiteDiagnostic, NewsAnalysis, SocialPlatform, Influencer, SocialPost,
 } from '../../types/trading-types';
 
-('use client');
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import {
-  Brain,
-  Network,
-  Eye,
-  Zap,
-  Target,
-  Activity,
-  TrendingUp,
-  BarChart3,
-  Cpu,
-  Database,
-  Layers,
-  GitBranch,
-} from 'lucide-react';
+'use client';
 
 interface NeuralAnalysis {
   marketSentiment?: {
@@ -429,7 +366,7 @@ export default function NeuralMarketAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {deepLearningModels.map((model: any) => (
+            {deepLearningModels.map((model: unknown) => (
               <div
                 key={model.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30"
@@ -497,7 +434,7 @@ export default function NeuralMarketAnalysis() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {marketPatterns.map((pattern: any) => (
+            {marketPatterns.map((pattern: unknown) => (
               <div
                 key={pattern.id}
                 className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30"

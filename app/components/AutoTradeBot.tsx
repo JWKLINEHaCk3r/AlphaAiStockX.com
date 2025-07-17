@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+import React from 'react';
 import { TabsTrigger } from "../../components/ui/tabs";
 import { TabsList } from "../../components/ui/tabs";
 import { TabsContent } from "../../components/ui/tabs";
@@ -6,14 +6,8 @@ import { Tabs } from "../../components/ui/tabs";
 import { Badge } from "../../components/ui/badge";
 import { Switch } from "../../components/ui/switch";
 import { Input } from "../../components/ui/input";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-<<<<<<< HEAD
-import React from 'react';
-=======
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -38,34 +32,54 @@ import TradingStrategies from './TradingStrategies';
 import TradeHistory from './TradeHistory';
 import RiskControls from './RiskControls';
 import PerformanceMetrics from './PerformanceMetrics';
-import { Strategy, Trade, BotStats, BotSettings } from '@/app/types/trading';
+
+interface TradingStrategy {
+  id: number;
+  name: string;
+  description: string;
+  winRate: number;
+  avgReturn: number;
+  maxDrawdown: number;
+  riskLevel: string;
+  timeframe: string;
+  allocation: number;
+  status: string;
+}
+
+interface RecentTrade {
+  id: number; // Changed from string to number to match PerformanceMetrics Trade interface
+  symbol: string;
+  side: 'BUY' | 'SELL';
+  quantity: number;
+  price: number;
+  timestamp: number;
+  pnl: number;
+  strategy: string;
+  status?: string;
+  type: string;
+}
 
 export default function AutoTradeBot() {
   const [botStatus, setBotStatus] = useState('stopped'); // stopped, running, paused
-  const [activeStrategies, setActiveStrategies] = useState<Strategy[]>([]);
-  const [botStats, setBotStats] = useState<BotStats>({
+  const [activeStrategies, setActiveStrategies] = useState<TradingStrategy[]>([]);
+  const [botStats, setBotStats] = useState({
     totalTrades: 0,
     winRate: 0,
-    totalProfit: 0,
     totalPnL: 0,
     dailyPnL: 0,
     sharpeRatio: 0,
     maxDrawdown: 0,
     activeTrades: 0,
     accountBalance: 100000,
-    avgHoldTime: '2.5h',
   });
-  const [recentTrades, setRecentTrades] = useState<Trade[]>([]);
-  const [botSettings, setBotSettings] = useState<BotSettings>({
+  const [recentTrades, setRecentTrades] = useState<RecentTrade[]>([]);
+  const [botSettings, setBotSettings] = useState({
     maxPositionSize: 10000,
     maxDailyLoss: 2000,
     maxConcurrentTrades: 5,
     emergencyStop: true,
     riskPerTrade: 2,
-    riskLevel: 'Medium',
-    stopLossPercent: 5,
-    takeProfitPercent: 10,
-    maxLeverage: 2,
+    maxDrawdown: 0.15,
   });
 
   // Simulate real-time bot activity
@@ -76,12 +90,10 @@ export default function AutoTradeBot() {
         const shouldTrade = Math.random() > 0.95; // 5% chance per interval
 
         if (shouldTrade && botStats.activeTrades < botSettings.maxConcurrentTrades) {
-          const tradeType = Math.random() > 0.5 ? 'BUY' : 'SELL';
-          const newTrade: Trade = {
-            id: `trade-${Date.now()}`,
+          const newTrade: RecentTrade = {
+            id: Date.now(), // Changed from Date.now().toString() to match number type
             symbol: ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA'][Math.floor(Math.random() * 5)],
-            type: tradeType,
-            side: tradeType,
+            side: Math.random() > 0.5 ? 'BUY' : 'SELL',
             quantity: Math.floor(Math.random() * 100) + 10,
             price: 100 + Math.random() * 500,
             strategy:
@@ -90,6 +102,7 @@ export default function AutoTradeBot() {
             timestamp: Date.now(),
             status: 'executed',
             pnl: (Math.random() - 0.4) * 1000, // Slight positive bias
+            type: 'market',
           };
 
           setRecentTrades(prev => [newTrade, ...prev.slice(0, 19)]);
@@ -98,10 +111,10 @@ export default function AutoTradeBot() {
             ...prev,
             totalTrades: prev.totalTrades + 1,
             activeTrades: prev.activeTrades + (Math.random() > 0.7 ? 1 : -1),
-            totalPnL: prev.totalPnL + newTrade.pnl,
-            dailyPnL: prev.dailyPnL + newTrade.pnl,
+            totalPnL: prev.totalPnL + (newTrade.pnl || 0),
+            dailyPnL: prev.dailyPnL + (newTrade.pnl || 0),
             winRate: Math.random() * 30 + 60, // 60-90% win rate
-            accountBalance: prev.accountBalance + newTrade.pnl,
+            accountBalance: prev.accountBalance + (newTrade.pnl || 0),
           }));
         }
       }, 3000);
@@ -110,42 +123,75 @@ export default function AutoTradeBot() {
     }
   }, [botStatus, activeStrategies, botStats.activeTrades, botSettings.maxConcurrentTrades]);
 
+  // Convert RecentTrade to Trade for PerformanceMetrics compatibility
+  const convertTradesToPerformanceFormat = (trades: RecentTrade[]) => {
+    return trades.map((trade) => ({
+      id: trade.id, // Use actual trade id now that it's number type
+      symbol: trade.symbol,
+      type: trade.type,
+      side: trade.side, // side is compatible ('BUY' | 'SELL' is assignable to string)
+      quantity: trade.quantity,
+      price: trade.price,
+      pnl: trade.pnl,
+      timestamp: new Date(trade.timestamp).toISOString(), // Convert number to ISO string
+      strategy: trade.strategy,
+    }));
+  };
+
+  // Convert RecentTrade to Trade for TradeHistory compatibility
+  const convertTradesToHistoryFormat = (trades: RecentTrade[]) => {
+    return trades.map((trade) => ({
+      id: trade.id,
+      symbol: trade.symbol,
+      type: trade.type,
+      side: trade.side,
+      quantity: trade.quantity,
+      price: trade.price,
+      pnl: trade.pnl,
+      timestamp: trade.timestamp, // Keep as number for TradeHistory
+      strategy: trade.strategy,
+    }));
+  };
+
   const startBot = () => {
     setBotStatus('running');
     // Initialize with some strategies
     setActiveStrategies([
-      { 
-        id: 1, 
-        name: 'AI Momentum', 
-        description: 'AI-powered momentum strategy',
-        winRate: 72,
-        avgReturn: 2.3,
+      {
+        id: 1,
+        name: 'AI Momentum',
+        description: 'Uses machine learning to identify momentum patterns',
+        winRate: 72.5,
+        avgReturn: 12.5,
         maxDrawdown: 8.5,
         riskLevel: 'Medium',
-        status: 'active', 
-        allocation: 30 
+        timeframe: '1-4 hours',
+        allocation: 30,
+        status: 'active',
       },
-      { 
-        id: 2, 
-        name: 'Mean Reversion', 
-        description: 'Mean reversion strategy',
-        winRate: 65,
-        avgReturn: 1.8,
-        maxDrawdown: 6.2,
+      {
+        id: 2,
+        name: 'Mean Reversion',
+        description: 'Identifies oversold/overbought conditions',
+        winRate: 68.3,
+        avgReturn: 8.3,
+        maxDrawdown: 12.1,
         riskLevel: 'Low',
-        status: 'active', 
-        allocation: 25 
+        timeframe: '2-6 hours',
+        allocation: 25,
+        status: 'active',
       },
-      { 
-        id: 3, 
-        name: 'Breakout Scanner', 
-        description: 'Breakout detection strategy',
-        winRate: 58,
-        avgReturn: 3.1,
-        maxDrawdown: 12.3,
+      {
+        id: 3,
+        name: 'Breakout Scanner',
+        description: 'Detects price breakouts from consolidation',
+        winRate: 76.2,
+        avgReturn: 15.7,
+        maxDrawdown: 14.8,
         riskLevel: 'High',
-        status: 'active', 
-        allocation: 20 
+        timeframe: '30min-2hours',
+        allocation: 20,
+        status: 'active',
       },
     ]);
   };
@@ -331,11 +377,11 @@ export default function AutoTradeBot() {
         </TabsContent>
 
         <TabsContent value="trades">
-          <TradeHistory recentTrades={recentTrades} botStats={botStats} />
+          <TradeHistory recentTrades={convertTradesToHistoryFormat(recentTrades)} botStats={botStats} />
         </TabsContent>
 
         <TabsContent value="performance">
-          <PerformanceMetrics botStats={botStats} recentTrades={recentTrades} />
+          <PerformanceMetrics botStats={botStats} recentTrades={convertTradesToPerformanceFormat(recentTrades)} />
         </TabsContent>
 
         <TabsContent value="risk">
@@ -359,7 +405,7 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxPositionSize}
-                      onChange={e =>
+                      onChange={(e) =>
                         setBotSettings(prev => ({
                           ...prev,
                           maxPositionSize: Number(e.target.value),
@@ -374,7 +420,7 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxDailyLoss}
-                      onChange={e =>
+                      onChange={(e) =>
                         setBotSettings(prev => ({
                           ...prev,
                           maxDailyLoss: Number(e.target.value),
@@ -389,7 +435,7 @@ export default function AutoTradeBot() {
                     <Input
                       type="number"
                       value={botSettings.maxConcurrentTrades}
-                      onChange={e =>
+                      onChange={(e) =>
                         setBotSettings(prev => ({
                           ...prev,
                           maxConcurrentTrades: Number(e.target.value),
@@ -407,7 +453,7 @@ export default function AutoTradeBot() {
                       type="number"
                       step="0.1"
                       value={botSettings.riskPerTrade}
-                      onChange={e =>
+                      onChange={(e) =>
                         setBotSettings(prev => ({
                           ...prev,
                           riskPerTrade: Number(e.target.value),
@@ -426,7 +472,7 @@ export default function AutoTradeBot() {
                     </div>
                     <Switch
                       checked={botSettings.emergencyStop}
-                      onCheckedChange={checked =>
+                      onCheckedChange={(checked) =>
                         setBotSettings(prev => ({
                           ...prev,
                           emergencyStop: checked,
@@ -443,4 +489,3 @@ export default function AutoTradeBot() {
     </div>
   );
 }
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)

@@ -1,14 +1,9 @@
-import { Card } from '../../components/ui/card';
-import { TabsTrigger } from "../../components/ui/tabs";
-import { TabsList } from "../../components/ui/tabs";
-import { TabsContent } from "../../components/ui/tabs";
-import { Tabs } from "../../components/ui/tabs";
-import { Progress } from "../../components/ui/progress";
-import { Card } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
 'use client';
-
 import React, { useState, useEffect, useCallback } from 'react';
+import { Card } from '../../components/ui/card';
+import { TabsTrigger, TabsList, TabsContent, Tabs } from '../../components/ui/tabs';
+import { Progress } from '../../components/ui/progress';
+import { Button } from '../../components/ui/button';
 import { AdvancedAIAutoTrader } from '../services/ai-auto-trader-enhanced';
 
 interface TradingSignal {
@@ -543,9 +538,7 @@ export default function AITradingDashboard() {
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <p className="text-gray-400">Return</p>
-                          <p className="text-green-400">
-                            {strategy.performance?.totalReturn || 0}%
-                          </p>
+                          <p className="text-green-400">{strategy.performance?.totalReturn || 0}%</p>
                         </div>
                         <div>
                           <p className="text-gray-400">Win Rate</p>

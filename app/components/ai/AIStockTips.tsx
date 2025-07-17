@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
@@ -108,10 +108,10 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
     pro: { tips: 25, predictions: 15, insights: 10 },
     ultimate: { tips: 'unlimited', predictions: 'unlimited', insights: 'unlimited' },
   };
-
   const currentLimits = membershipLimits[membershipLevel];
 
-  const generateAITips = () => {
+  // Use useCallback for stable references in useEffect
+  const generateAITips = useCallback(() => {
     setLoading(true);
     const stocks = [
       'AAPL',
@@ -171,12 +171,11 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
     }
     setTopPicks([...tips].sort((a, b) => b.confidence - a.confidence));
     setLoading(false);
-  };
+  }, [currentLimits.tips]);
 
-  const generatePredictions = () => {
+  const generatePredictions = useCallback(() => {
     const predictions: Prediction[] = [];
-    const maxPredictions = currentLimits.predictions === 'unlimited' ? 10 : Number(currentLimits.predictions); // prettier-ignore
-
+    const maxPredictions = currentLimits.predictions === 'unlimited' ? 10 : Number(currentLimits.predictions);
     for (let i = 0; i < maxPredictions; i++) {
       predictions.push({
         id: i + 1,
@@ -205,17 +204,15 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
           'Crypto adoption driving fintech growth',
         ][i % 10],
         probability: 70 + Math.random() * 25,
-        timeframe: ['1-2 weeks', '2-4 weeks', '1-2 months', '2-3 months'][
-          Math.floor(Math.random() * 4)
-        ],
+        timeframe: ['1-2 weeks', '2-4 weeks', '1-2 months', '2-3 months'][Math.floor(Math.random() * 4)],
         impact: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)],
         category: ['Market', 'Sector', 'Individual'][Math.floor(Math.random() * 3)],
       });
     }
     setPredictions(predictions);
-  };
+  }, [currentLimits.predictions]);
 
-  const generateMarketInsights = () => {
+  const generateMarketInsights = useCallback(() => {
     const insights: MarketInsights = {
       marketSentiment: {
         score: 65 + Math.random() * 30,
@@ -239,7 +236,7 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
       },
     };
     setMarketInsights(insights);
-  };
+  }, []);
 
   useEffect(() => {
     const generateAll = () => {

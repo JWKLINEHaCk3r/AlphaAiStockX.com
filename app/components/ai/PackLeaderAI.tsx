@@ -1,82 +1,11 @@
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Switch } from "../../../components/ui/switch";
 import { Textarea } from "../../../components/ui/textarea";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+import React, { useState, useEffect, useRef } from 'react';
 import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
-
-('use client');
-import React from 'react';
-
-import { useState, useEffect, useRef } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-import {
-  Send,
-  Mic,
-  MicOff,
-  Crown,
-  Brain,
-  Target,
-  TrendingUp,
-  Shield,
-  Rocket,
-  Eye,
-  Sparkles,
-  Activity,
-  BarChart3,
-  Flame,
-  Zap,
+  Send, Mic, MicOff, Zap,
 } from 'lucide-react';
 import { aiBrainService } from '../../services/ai-brain-service';
 
@@ -101,8 +30,8 @@ interface AIPersonality {
 // Extend Window interface for speech recognition
 declare global {
   interface Window {
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
+    SpeechRecognition: { new (): SpeechRecognition; prototype: SpeechRecognition };
+    webkitSpeechRecognition: { new (): SpeechRecognition; prototype: SpeechRecognition };
   }
 }
 
@@ -249,9 +178,6 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
 
 **📈 TECHNICAL SIGNALS:**
 ${aiRecommendation.reasoning.map((reason: string) => `• ${reason}`).join('\n')}
-
-**🧠 MARKET PSYCHOLOGY:**
-${aiRecommendation.marketFactors.map((factor: string) => `• ${factor}`).join('\n')}
 
 **⚡ RISK MANAGEMENT:**
 ${aiRecommendation.riskFactors.map((risk: string) => `• ${risk}`).join('\n')}
@@ -431,35 +357,35 @@ My AI brain is currently analyzing market data. While I process the latest intel
 
         <CardContent className="flex flex-col h-full p-0">
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message: any) => (
+            {messages.map((message: unknown) => (
               <div
-                key={message.id}
-                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                key={(message as Message).id}
+                className={`flex ${(message as Message).type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
                   className={`max-w-[85%] p-3 rounded-lg ${
-                    message.type === 'user'
+                    (message as Message).type === 'user'
                       ? 'bg-orange-600 text-white'
                       : 'bg-gray-800 text-gray-100 border border-orange-500/20'
                   }`}
                 >
-                  {message.type === 'ai' && (
+                  {(message as Message).type === 'ai' && (
                     <div className="flex items-center space-x-2 mb-2">
                       <Zap className="h-4 w-4 text-orange-400" />
                       <span className="text-orange-400 font-semibold text-sm">Pack Leader</span>
-                      {message.mood && (
+                      {(message as Message).mood && (
                         <Badge
                           variant="outline"
-                          className={`text-xs ${getMoodColor(message.mood)} bg-transparent border-current`}
+                          className={`text-xs ${getMoodColor((message as Message).mood)} bg-transparent border-current`}
                         >
-                          {message.mood}
+                          {(message as Message).mood}
                         </Badge>
                       )}
                     </div>
                   )}
-                  <div className="text-sm whitespace-pre-wrap">{message.content}</div>
+                  <div className="text-sm whitespace-pre-wrap">{(message as Message).content}</div>
                   <div className="text-xs opacity-70 mt-2">
-                    {message.timestamp.toLocaleTimeString()}
+                    {(message as Message).timestamp.toLocaleTimeString()}
                   </div>
                 </div>
               </div>

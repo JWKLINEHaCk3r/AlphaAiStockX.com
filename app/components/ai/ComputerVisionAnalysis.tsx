@@ -1,65 +1,10 @@
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
 
 ('use client');
-
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
-=======
-import { useState, useEffect, useRef } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import {
   Eye,
   Camera,

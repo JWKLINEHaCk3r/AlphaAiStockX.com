@@ -1,41 +1,11 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
 import React from 'react';
-
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 import { Trade, BotStats } from '@/app/types/trading';
 
-<<<<<<< HEAD
-interface Trade {
-  id: number; // Changed from string to number to match other components
-  symbol: string;
-  type: string;
-  side: 'BUY' | 'SELL';
-  quantity: number;
-  price: number;
-  timestamp: number;
-  pnl: number;
-  strategy?: string;
-}
-
-interface BotStats {
-  totalTrades: number;
-  winRate: number;
-  totalPnL: number;
-  activeTrades: number;
-}
-
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 interface TradeHistoryProps {
   recentTrades: Trade[];
   botStats: BotStats;

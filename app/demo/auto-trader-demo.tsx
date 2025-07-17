@@ -3,7 +3,6 @@ import { TabsTrigger } from "../../components/ui/tabs";
 import { TabsList } from "../../components/ui/tabs";
 import { TabsContent } from "../../components/ui/tabs";
 import { Tabs } from "../../components/ui/tabs";
-import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
 import React, { useState } from 'react';
@@ -27,7 +26,7 @@ export default function AutoTraderDemo() {
 
       const portfolioData = trader.getPortfolio();
       setPortfolio(portfolioData);
-    } catch (e: Error) {
+    } catch (e: any) {
       setError(e.message || 'Unknown error');
     } finally {
       setLoading(false);
