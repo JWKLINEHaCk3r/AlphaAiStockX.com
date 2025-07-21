@@ -16,6 +16,16 @@ function getRelativeImportPath(filePath, componentPath) {
   return relPath;
 }
 
+
+// Helper: Check if a path is a file
+function isFile(filePath) {
+  try {
+    return fs.statSync(filePath).isFile();
+  } catch {
+    return false;
+  }
+}
+
 // Helper: Check if a path is a file or directory
 function isFileOrDir(filePath) {
   try {
