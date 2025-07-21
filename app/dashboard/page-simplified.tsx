@@ -1,11 +1,10 @@
+import Navigation from 'components/ui/navigation/index.tsx';
 <<<<<<< HEAD
 import { Card } from '../../components/ui/card';
 import { Tabs } from "../../components/ui/tabs";
 import { Card } from "../../components/ui/card";
 'use client';
 =======
-import { Tabs } from '@/components/ui/tabs';
-import { Card } from '@/components/ui/card';
 ('use client');
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 

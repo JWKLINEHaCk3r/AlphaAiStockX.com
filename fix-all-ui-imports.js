@@ -122,7 +122,8 @@ async function fixUIImports() {
       let content = fs.readFileSync(filePath, 'utf8');
       let modified = false;
 
-      // Fix missing UI component imports
+      // Group NavigationMenu* components for a single import
+      const navMenuComponents = [];
       for (const [component, relComponentPath] of Object.entries(UI_COMPONENTS)) {
         // Only add import if the component file or directory exists (tsx, ts, or index)
         const absComponentPathTsx = path.join(process.cwd(), relComponentPath + '.tsx');
@@ -137,13 +138,14 @@ async function fixUIImports() {
         const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
         // Remove any existing alias import for this component
         content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
+        // Group NavigationMenu* components
+        if (relComponentPath.startsWith('components/ui/navigation/index')) {
+          if (componentRegex.test(content)) navMenuComponents.push(component);
+          continue;
+        }
         // Prefer .tsx, fallback to .ts
         const absComponentPath = isFile(absComponentPathTsx) ? absComponentPathTsx : absComponentPathTs;
         let importPath = getRelativeImportPath(filePath, absComponentPath);
-        // Always add .tsx extension for navigation imports
-        if (relComponentPath.startsWith('components/ui/navigation')) {
-          importPath = importPath.endsWith('.tsx') ? importPath : importPath + '.tsx';
-        }
         const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
         if (componentRegex.test(content) && !importRegex.test(content)) {
           // Remove duplicate imports for this component
@@ -154,6 +156,16 @@ async function fixUIImports() {
           modified = true;
           console.log(`✅ Added ${component} import to ${file}`);
         }
+      }
+      // Add grouped NavigationMenu* import if needed
+      if (navMenuComponents.length > 0) {
+        // Remove all existing NavigationMenu* imports
+        content = content.replace(/import\s*\{[^}]*NavigationMenu[^}]*\}\s*from\s*['\"][^'\"]*['\"];?\n?/g, '');
+        // Add grouped import at the top
+        const importStatement = `import { ${navMenuComponents.join(", ")} } from "./components/ui/navigation/index";\n`;
+        content = importStatement + content;
+        modified = true;
+        console.log(`✅ Added grouped NavigationMenu imports to ${file}`);
       }
 
       // Fix trading component imports
@@ -209,23 +221,8 @@ async function fixUIImports() {
         }
       }
 
-      // Add NavigationMenu import for navigation usage
-      if (content.includes('NavigationMenu')) {
-        const navigationMenuImport = `import { NavigationMenu } from "components/ui/navigation/index.tsx";\n`;
-        if (!content.includes(navigationMenuImport)) {
-          content = navigationMenuImport + content;
-          modified = true;
-          console.log(`🧭 Added explicit NavigationMenu import to ${file}`);
-        }
-      }
-
-      if (modified) {
-        fs.writeFileSync(filePath, content);
-        console.log(`💾 Updated ${file}`);
-      }
+      // Add NavigationMenu import for navigation usage (handled above, no-op here)
     }
-
-    console.log('🎉 AlphaAI UI Import fixing complete! Trading platform is now powered up!');
   } catch (error) {
     console.error('❌ Error fixing UI imports:', error);
     process.exit(1);

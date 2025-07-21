@@ -72,7 +72,7 @@ export default function DNSFixGuide() {
         </Card>
 
         <div className="grid gap-6">
-          {steps.map((step: any) => (
+          {steps.map((step: { id: number; title: string; description: string; action: string }) => (
             <Card
               key={step.id}
               className={`transition-all duration-300 ${
@@ -158,8 +158,8 @@ export default function DNSFixGuide() {
                 </div>
               </div>
               <div className="bg-white p-3 rounded-lg">
-                <strong>Tell them:</strong> "My domain alphaaistockx.com is not resolving to my
-                hosting package. I need help with DNS configuration."
+                <strong>Tell them:</strong> &quot;My domain alphaaistockx.com is not resolving to my
+                hosting package. I need help with DNS configuration.&quot;
               </div>
             </div>
           </CardContent>

@@ -1,8 +1,6 @@
 <<<<<<< HEAD
-import { VoiceControl } from "./voice-control";
 'use client';
 =======
-import { VoiceControl } from '@/components/ui/voice-control';
 ('use client');
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
@@ -172,6 +170,7 @@ export function QuantumGrid({
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 0.5;
       ctx.globalAlpha = 0.1;
+import { VoiceControl } from "./voice-control";
 
       for (let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();

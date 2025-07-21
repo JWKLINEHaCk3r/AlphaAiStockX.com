@@ -1,9 +1,9 @@
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
-'use client';
 import React from 'react';
 
 import { useState, useEffect } from 'react';

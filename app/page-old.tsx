@@ -1,5 +1,4 @@
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card';
-import { AnimatedBackground } from "../components/ui/animated-background-client";
 import { CardTitle } from "../components/ui/card";
 import { CardFooter } from "../components/ui/card";
 import { CardDescription } from "../components/ui/card";
@@ -108,6 +107,7 @@ function AnimatedBackground() {
       for (const s of stars) {
         ctx.save();
         ctx.globalAlpha = s.alpha;
+import { AnimatedBackground } from "../components/ui/animated-background-client";
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI);
         ctx.fillStyle = '#a78bfa';

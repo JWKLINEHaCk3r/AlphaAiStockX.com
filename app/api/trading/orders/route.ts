@@ -1,3 +1,4 @@
+import { Input } from "../../../../components/ui/input";
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';

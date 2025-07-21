@@ -1,3 +1,4 @@
+import Navigation from 'components/ui/navigation/index.tsx';
 <<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
@@ -20,11 +21,6 @@ import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 =======
-import { SelectValue } from '@/components/ui/select';
-import { SelectTrigger } from '@/components/ui/select';
-import { SelectItem } from '@/components/ui/select';
-import { SelectContent } from '@/components/ui/select';
-import { Select } from '@/components/ui/select';
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 // AI Model Laboratory - Create, Train, and Deploy Custom AI Models
 ('use client');

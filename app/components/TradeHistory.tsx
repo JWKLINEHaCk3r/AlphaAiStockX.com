@@ -1,7 +1,7 @@
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
-'use client';
 import React from 'react';
 import { BarChart3, TrendingUp, ExternalLink, Filter } from 'lucide-react';
 import { Trade, BotStats } from '@/app/types/trading';

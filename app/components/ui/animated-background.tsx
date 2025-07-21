@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-import { AnimatedBackground } from "../../../components/ui/animated-background-client";
 =======
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 'use client';
@@ -93,6 +92,7 @@ export default function AnimatedBackground() {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
         ctx.globalAlpha = particle.opacity;
+import { AnimatedBackground } from "../../../components/ui/animated-background-client";
         ctx.fill();
         // Draw connections to up to 3 nearest particles only
         let connections = 0;

@@ -1,5 +1,6 @@
-import { VoiceControl } from "../components/ui/voice-control";
+import Navigation from 'components/ui/navigation/index.tsx';
 // Import polyfills first to handle global definitions
+import { VoiceControl } from "../components/ui/voice-control";
 import './polyfills';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';

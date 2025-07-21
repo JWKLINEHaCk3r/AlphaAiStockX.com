@@ -1,8 +1,6 @@
 <<<<<<< HEAD
-import { AnimatedBackground } from "./animated-background-client";
 'use client';
 =======
-import { AnimatedBackground } from '@/components/ui/animated-background-client';
 ('use client');
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
@@ -71,6 +69,7 @@ export default function AnimatedBackground() {
 
         ctx.save();
         ctx.globalAlpha = particle.opacity;
+import { AnimatedBackground } from "./animated-background-client";
         ctx.fillStyle = particle.color;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);

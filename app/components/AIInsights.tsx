@@ -1,7 +1,7 @@
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
-'use client';
 import React, { useState, useEffect } from 'react';
 import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'lucide-react';
 

@@ -1,3 +1,4 @@
+import { Card } from "./card";
 import React from 'react';
 import { cn } from '@/lib/utils';
 

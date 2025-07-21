@@ -1,4 +1,3 @@
-import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
 import TradingDashboardDemo from '../../components/ui/trading-dashboard-demo';
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -11,6 +10,7 @@ const mockUseSession = useSession as jest.MockedFunction<typeof useSession>;
 
 // Mock WebSocket
 global.WebSocket = jest.fn(() => ({
+import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
   send: jest.fn(),
   close: jest.fn(),
   addEventListener: jest.fn(),
