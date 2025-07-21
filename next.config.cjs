@@ -229,4 +229,25 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
+// Turbopack configuration for Next.js 15.4.1
+const path = require('path');
+
+module.exports = {
+  ...nextConfig,
+  turbopack: {
+    root: path.resolve(__dirname),
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      underscore: 'lodash',
+      mocha: { browser: 'mocha/browser-entry.js' },
+    },
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+  },
+};
+
 export default nextConfig;

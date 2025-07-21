@@ -1,6 +1,7 @@
+
 [build]
-  command = "./build-netlify.sh"
-  publish = "out"
+  command = "npm run build"
+  publish = ".next"
   functions = "netlify/functions"
 
 # Fallback build configuration

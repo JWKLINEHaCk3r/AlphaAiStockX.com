@@ -1,48 +1,3 @@
-import { NavigationMenuLink } from "./components/ui/navigation";
-import { NavigationMenuItem } from "./components/ui/navigation";
-import { NavigationMenuTrigger } from "./components/ui/navigation";
-import { NavigationMenuContent } from "./components/ui/navigation";
-import { NavigationMenuList } from "./components/ui/navigation";
-import { NavigationMenu } from "./components/ui/navigation";
-import { Calendar } from "./components/ui/calendar";
-import { PopoverTrigger } from "./components/ui/popover";
-import { PopoverContent } from "./components/ui/popover";
-import { Popover } from "./components/ui/popover";
-import { ScrollArea } from "./components/ui/scroll-area";
-import { Toaster } from "./components/ui/toaster";
-import { Toast } from "./components/ui/toast";
-import { TabsTrigger } from "./components/ui/tabs";
-import { TabsList } from "./components/ui/tabs";
-import { TabsContent } from "./components/ui/tabs";
-import { Tabs } from "./components/ui/tabs";
-import { AlertTitle } from "./components/ui/alert";
-import { AlertDescription } from "./components/ui/alert";
-import { Alert } from "./components/ui/alert";
-import { DialogTrigger } from "./components/ui/dialog";
-import { DialogTitle } from "./components/ui/dialog";
-import { DialogHeader } from "./components/ui/dialog";
-import { DialogFooter } from "./components/ui/dialog";
-import { DialogDescription } from "./components/ui/dialog";
-import { DialogContent } from "./components/ui/dialog";
-import { Dialog } from "./components/ui/dialog";
-import { AvatarImage } from "./components/ui/avatar";
-import { AvatarFallback } from "./components/ui/avatar";
-import { Avatar } from "./components/ui/avatar";
-import { Badge } from "./components/ui/badge";
-import { Progress } from "./components/ui/progress";
-import { Slider } from "./components/ui/slider";
-import { Switch } from "./components/ui/switch";
-import { Checkbox } from "./components/ui/checkbox";
-import { SelectValue } from "./components/ui/select";
-import { SelectTrigger } from "./components/ui/select";
-import { SelectItem } from "./components/ui/select";
-import { SelectContent } from "./components/ui/select";
-import { Select } from "./components/ui/select";
-import { Textarea } from "./components/ui/textarea";
-import { Label } from "./components/ui/label";
-import { Input } from "./components/ui/input";
-import { Card } from "./components/ui/card";
-import { Button } from "./components/ui/button";
 // REMOVE ALL STATIC UI COMPONENT IMPORTS ABOVE THIS LINE
 // Only keep fs, path, glob imports for script operation
 import fs from 'fs';
@@ -61,12 +16,20 @@ function getRelativeImportPath(filePath, componentPath) {
   return relPath;
 }
 
-// Helper: Check if a path is a file
-function isFile(filePath) {
+// Helper: Check if a path is a file or directory
+function isFileOrDir(filePath) {
   try {
-    return fs.statSync(filePath).isFile();
-  } catch (e) {
+    const stat = fs.statSync(filePath);
+    return stat.isFile() || stat.isDirectory();
+  } catch {
     return false;
+  }
+}
+
+// Utility: Log missing critical UI components for CI/CD clarity
+function logMissingComponent(componentPath) {
+  if (!isFileOrDir(componentPath)) {
+    console.warn(`⚠️ Missing UI component: ${componentPath}`);
   }
 }
 
@@ -111,12 +74,13 @@ const UI_COMPONENTS = {
   'PopoverContent': 'components/ui/popover',
   'PopoverTrigger': 'components/ui/popover',
   'Calendar': 'components/ui/calendar',
-  'NavigationMenu': 'components/ui/navigation',
-  'NavigationMenuList': 'components/ui/navigation',
-  'NavigationMenuContent': 'components/ui/navigation',
-  'NavigationMenuTrigger': 'components/ui/navigation',
-  'NavigationMenuItem': 'components/ui/navigation',
-  'NavigationMenuLink': 'components/ui/navigation'
+  // Navigation imports must use index for ESM/Netlify compatibility
+  'NavigationMenu': 'components/ui/navigation/index',
+  'NavigationMenuList': 'components/ui/navigation/index',
+  'NavigationMenuContent': 'components/ui/navigation/index',
+  'NavigationMenuTrigger': 'components/ui/navigation/index',
+  'NavigationMenuItem': 'components/ui/navigation/index',
+  'NavigationMenuLink': 'components/ui/navigation/index'
 };
 
 // Only include trading components that exist in the codebase
@@ -150,16 +114,26 @@ async function fixUIImports() {
 
       // Fix missing UI component imports
       for (const [component, relComponentPath] of Object.entries(UI_COMPONENTS)) {
-        // Only add import if the component file exists (tsx or ts)
+        // Only add import if the component file or directory exists (tsx, ts, or index)
         const absComponentPathTsx = path.join(process.cwd(), relComponentPath + '.tsx');
         const absComponentPathTs = path.join(process.cwd(), relComponentPath + '.ts');
-        if (!isFile(absComponentPathTsx) && !isFile(absComponentPathTs)) continue;
+        const absComponentPathDir = path.join(process.cwd(), relComponentPath);
+        const absComponentPathIndexTsx = path.join(absComponentPathDir, 'index.tsx');
+        const absComponentPathIndexTs = path.join(absComponentPathDir, 'index.ts');
+        if (!isFileOrDir(absComponentPathTsx) && !isFileOrDir(absComponentPathTs) && !isFileOrDir(absComponentPathDir) && !isFileOrDir(absComponentPathIndexTsx) && !isFileOrDir(absComponentPathIndexTs)) {
+          logMissingComponent(relComponentPath);
+          continue;
+        }
         const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
         // Remove any existing alias import for this component
         content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
         // Prefer .tsx, fallback to .ts
         const absComponentPath = isFile(absComponentPathTsx) ? absComponentPathTsx : absComponentPathTs;
-        const importPath = getRelativeImportPath(filePath, absComponentPath);
+        let importPath = getRelativeImportPath(filePath, absComponentPath);
+        // Always add .tsx extension for navigation imports
+        if (relComponentPath.startsWith('components/ui/navigation')) {
+          importPath = importPath.endsWith('.tsx') ? importPath : importPath + '.tsx';
+        }
         const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
         if (componentRegex.test(content) && !importRegex.test(content)) {
           // Remove duplicate imports for this component
@@ -183,14 +157,16 @@ async function fixUIImports() {
         content = content.replace(importCleanupRegex, '');
         // Prefer .tsx, fallback to .ts
         const absComponentPath = isFile(absComponentPathTsx) ? absComponentPathTsx : absComponentPathTs;
-        const importPath = getRelativeImportPath(filePath, absComponentPath);
-        // Only add import if the component is actually used in the file
-        const componentUsageRegex = new RegExp(`\b${component}\b`, 'g');
+        let importPath = getRelativeImportPath(filePath, absComponentPath);
+        // Always add .tsx extension for navigation imports
+        if (relComponentPath.startsWith('components/ui/navigation')) {
+          importPath = importPath.endsWith('.tsx') ? importPath : importPath + '.tsx';
+        }
+        const componentUsageRegex = new RegExp(`\\b${component}\\b`, 'g');
         const importStatement = `import { ${component} } from "${importPath}";\n`;
         // Only add if not already present
         if (componentUsageRegex.test(content) && !content.includes(importStatement)) {
-          // Place import at the top, after fs/path/glob imports
-          const importBlockEnd = content.indexOf('\n', content.indexOf('glob')); // after glob import
+          const importBlockEnd = content.indexOf('\n', content.indexOf('glob'));
           content = content.slice(0, importBlockEnd + 1) + importStatement + content.slice(importBlockEnd + 1);
           modified = true;
           console.log(`🤖 Added AI Trading ${component} import to ${file}`);
@@ -202,6 +178,35 @@ async function fixUIImports() {
         content = `import React from 'react';\n` + content;
         modified = true;
         console.log(`⚛️ Added React import to ${file}`);
+      }
+
+      // Import Navigation component explicitly
+      if (content.includes('Navigation')) {
+        // Only add import if navigation file or directory exists
+        const navigationPathFile = path.join(process.cwd(), 'components/ui/navigation.tsx');
+        const navigationPathDir = path.join(process.cwd(), 'components/ui/navigation');
+        const navigationPathIndexTsx = path.join(navigationPathDir, 'index.tsx');
+        if (isFileOrDir(navigationPathFile) || isFileOrDir(navigationPathDir) || isFileOrDir(navigationPathIndexTsx)) {
+          const navigationImport = `import Navigation from 'components/ui/navigation/index.tsx';\n`;
+          if (!content.includes(navigationImport)) {
+            content = navigationImport + content;
+            modified = true;
+            console.log(`🧭 Added explicit Navigation import to ${file}`);
+          }
+        } else {
+          logMissingComponent('components/ui/navigation');
+          console.warn(`⚠️ Navigation import skipped: components/ui/navigation not found for ${file}`);
+        }
+      }
+
+      // Add NavigationMenu import for navigation usage
+      if (content.includes('NavigationMenu')) {
+        const navigationMenuImport = `import { NavigationMenu } from "components/ui/navigation/index.tsx";\n`;
+        if (!content.includes(navigationMenuImport)) {
+          content = navigationMenuImport + content;
+          modified = true;
+          console.log(`🧭 Added explicit NavigationMenu import to ${file}`);
+        }
       }
 
       if (modified) {

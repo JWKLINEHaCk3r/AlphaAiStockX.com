@@ -115,4 +115,24 @@ const nextConfig = {
 };
 ```
 
+# SSR Netlify Deployment: Production-Ready
+
+- SSR enabled via @netlify/plugin-nextjs
+- Build command: npm run build
+- Publish directory: .next
+- All environment variables must be set in Netlify dashboard (see .env.example)
+- Backend API must be reachable at https://alphaaistockx.com/api (update as needed)
+- All frontend API calls use NEXT_PUBLIC_API_URL and NEXT_PUBLIC_WS_URL
+- Security headers and static asset caching are configured
+- For custom domain, set alphaaistockx.com in Netlify domain settings
+
+## Steps to Deploy
+1. Push to main branch on GitHub
+2. Netlify will auto-deploy using these settings
+3. Set all required env vars in Netlify dashboard
+4. Confirm backend is reachable from Netlify build and at runtime
+5. Test all routes and API endpoints after deploy
+
+For any backend changes, redeploy backend separately and update env vars if needed.
+
 The configuration is now complete and ready for Netlify deployment! 🚀
