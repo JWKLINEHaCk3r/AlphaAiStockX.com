@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card.js';
 /**
  * AlphaAI Stock Trading Platform - Card Components Fixer (ESM compatible)
  * Advanced AI-powered card component import and dependency resolver
