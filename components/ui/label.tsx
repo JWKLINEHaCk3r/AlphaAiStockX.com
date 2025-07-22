@@ -1,19 +1,6 @@
-import { Label } from "./label";
 import * as React from 'react';
-import { cn } from '@/lib/utils';
 
-const Label = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
-  ({ className, ...props }, ref) => (
-    <label
-      ref={ref}
-      className={cn(
-        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        className
-      )}
-      {...props}
-    />
-  )
-);
-Label.displayName = 'Label';
-
-export { Label };
+export function Label({ children, className = '', ...props }: React.LabelHTMLAttributes<HTMLLabelElement> & { className?: string }) {
+  return <label className={`block text-sm font-medium text-gray-700 ${className}`} {...props}>{children}</label>;
+// end of file
+}
