@@ -1,29 +1,21 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
+interface TradingStrategiesProps {
+  activeStrategies: TradingStrategy[];
+  setActiveStrategies: (strategies: TradingStrategy[] | ((prev: TradingStrategy[]) => TradingStrategy[])) => void;
+  botStatus: string;
+}
+//
+"use client";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
-import { Badge } from "../../components/ui/badge";
-import { Progress } from "../../components/ui/progress";
-import { Switch } from "../../components/ui/switch";
-import { Select } from "../../components/ui/select";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-'use client';
-import { Select } from '@/components/ui/select';
-('use client');
-import React from 'react';
-
-import { useState } from 'react';
+import { Badge } from '../../components/ui/badge';
+import { Progress } from '../../components/ui/progress';
+import { Switch } from '../../components/ui/switch';
+import { Select } from '../../components/ui/select';
+import { Button } from '../../components/ui/button';
 import { Brain, Activity, Plus, Settings, Play } from 'lucide-react';
 import { Strategy } from '@/app/types/trading';
+
+
 
 interface TradingStrategy {
   id: number;
@@ -38,28 +30,9 @@ interface TradingStrategy {
   status: string;
 }
 
-interface TradingStrategiesProps {
-  activeStrategies?: TradingStrategy[];
-  setActiveStrategies?: (
-    strategies: TradingStrategy[] | ((prev: TradingStrategy[]) => TradingStrategy[])
-  ) => void;
-  botStatus?: string;
-}
-
-export default function TradingStrategies({
-  activeStrategies = [],
-  setActiveStrategies = () => {},
-  botStatus = 'stopped',
-}: TradingStrategiesProps) {
-  const [availableStrategies] = useState<TradingStrategy[]>([
-interface TradingStrategiesProps {
-  activeStrategies: Strategy[];
-  setActiveStrategies: (strategies: Strategy[] | ((prev: Strategy[]) => Strategy[])) => void;
-  botStatus: string;
-}
-
+//
 export default function TradingStrategies({ activeStrategies, setActiveStrategies, botStatus }: TradingStrategiesProps) {
-  const [availableStrategies] = useState([
+  const [availableStrategies] = useState<TradingStrategy[]>([
     {
       id: 1,
       name: 'AI Momentum',
@@ -135,34 +108,19 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
   ]);
 
   const toggleStrategy = (strategyId: number) => {
-<<<<<<< HEAD
-    setActiveStrategies(prev => {
-      const existing = prev.find(s => s.id === strategyId);
-=======
-    setActiveStrategies((prev: Strategy[]) => {
-      const existing = prev.find((s: Strategy) => s.id === strategyId);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+    setActiveStrategies((prev: TradingStrategy[]) => {
+      const existing = prev.find((s: TradingStrategy) => s.id === strategyId);
       if (existing) {
-        return prev.filter((s: Strategy) => s.id !== strategyId);
+        return prev.filter((s: TradingStrategy) => s.id !== strategyId);
       } else {
-<<<<<<< HEAD
-        const strategy = availableStrategies.find(s => s.id === strategyId);
-        if (strategy) {
-          return [...prev, { ...strategy, status: 'active' }];
-        }
-        return prev;
-=======
-        const strategy = availableStrategies.find((s: Strategy) => s.id === strategyId);
+        const strategy = availableStrategies.find((s: TradingStrategy) => s.id === strategyId);
         return strategy ? [...prev, { ...strategy, status: 'active' }] : prev;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
       }
     });
   };
 
-<<<<<<< HEAD
-=======
   const updateAllocation = (strategyId: number, allocation: number) => {
-    setActiveStrategies((prev: Strategy[]) => prev.map((s: Strategy) => (s.id === strategyId ? { ...s, allocation } : s)));
+    setActiveStrategies((prev: TradingStrategy[]) => prev.map((s: TradingStrategy) => (s.id === strategyId ? { ...s, allocation } : s)));
   };
 
   const getRiskColor = (risk: string) => {
@@ -194,8 +152,6 @@ export default function TradingStrategies({ activeStrategies, setActiveStrategie
         return 'outline';
     }
   };
-
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
   return (
     <div className="space-y-6">
       {/* Active Strategies Overview */}

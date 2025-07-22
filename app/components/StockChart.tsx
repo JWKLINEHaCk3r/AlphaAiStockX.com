@@ -1,50 +1,13 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
+
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
-import { CardTitle } from "../../components/ui/card";
-import { CardHeader } from "../../components/ui/card";
-import { CardContent } from "../../components/ui/card";
-import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
-
-interface StockInfo {
-  symbol: string;
-  price: number;
-  change: number;
-  aiScore: number;
-  volume: string;
-  marketCap: string;
-  pe: number;
-  confidence: number;
-  timeframe: string;
-  direction: string;
-  targetPrice: number;
-}
-
-interface AIFrediction {
-  direction: string;
-  confidence: number;
-  targetPrice: number;
-  timeframe: string;
-=======
+import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface StockChartProps {
   selectedStock: string;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 }
 
 interface ChartDataPoint {
@@ -53,36 +16,31 @@ interface ChartDataPoint {
   volume: number;
 }
 
-<<<<<<< HEAD
-interface StockChartProps {
-  selectedStock: string;
-=======
 interface StockInfo {
   symbol: string;
   price: number;
   change: number;
+  aiScore: number;
   volume: string;
   marketCap: string;
-  aiScore: number;
+  confidence: number;
+  timeframe: string;
+  direction: string;
+  targetPrice: number;
 }
 
 interface AIPrediction {
   direction: string;
   confidence: number;
-  timeframe: string;
   targetPrice: number;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
+  timeframe: string;
 }
 
 export default function StockChart({ selectedStock }: StockChartProps) {
   const [timeframe, setTimeframe] = useState('1D');
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [stockInfo, setStockInfo] = useState<StockInfo | null>(null);
-<<<<<<< HEAD
-  const [aiPrediction, setAiPrediction] = useState<AIFrediction | null>(null);
-=======
   const [aiPrediction, setAiPrediction] = useState<AIPrediction | null>(null);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 
   useEffect(() => {
     // Simulate real-time stock data
@@ -99,8 +57,26 @@ export default function StockChart({ selectedStock }: StockChartProps) {
         });
       }
       return data;
-    };
+  const [timeframe, setTimeframe] = useState('1D');
+  const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
+  const [stockInfo, setStockInfo] = useState<StockInfo | null>(null);
+  const [aiPrediction, setAiPrediction] = useState<AIPrediction | null>(null);
 
+  useEffect(() => {
+    // Simulate real-time stock data
+    const generateData = () => {
+      const data = [];
+      let price = 150 + Math.random() * 100;
+      for (let i = 0; i < 100; i++) {
+        price += (Math.random() - 0.5) * 5;
+        data.push({
+          time: i,
+          price: Math.max(price, 50),
+          volume: Math.random() * 1000000,
+        });
+      }
+      return data;
+    };
     setChartData(generateData());
     setStockInfo({
       symbol: selectedStock,
@@ -114,7 +90,6 @@ export default function StockChart({ selectedStock }: StockChartProps) {
       direction: Math.random() > 0.5 ? 'bullish' : 'bearish',
       targetPrice: 180 + Math.random() * 40,
     });
-
     setAiPrediction({
       direction: Math.random() > 0.5 ? 'bullish' : 'bearish',
       confidence: 75 + Math.random() * 20,
@@ -129,38 +104,10 @@ export default function StockChart({ selectedStock }: StockChartProps) {
     <Card className="bg-gray-900/60 border-cyan-500/30 backdrop-blur-xl">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="text-white text-2xl">{stockInfo?.symbol}</CardTitle>
-            <div className="flex items-center space-x-4 mt-2">
-              <span className="text-3xl font-bold text-white">${stockInfo?.price.toFixed(2)}</span>
-              <span
-                className={`flex items-center text-lg font-medium ${
-<<<<<<< HEAD
-                  (stockInfo?.change || 0) > 0 ? 'text-green-400' : 'text-red-400'
-                }`}
-              >
-                {(stockInfo?.change || 0) > 0 ? (
-=======
-                  (stockInfo?.change ?? 0) > 0 ? 'text-green-400' : 'text-red-400'
-                }`}
-              >
-                {(stockInfo?.change ?? 0) > 0 ? (
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-                  <TrendingUp className="h-4 w-4 mr-1" />
-                ) : (
-                  <TrendingDown className="h-4 w-4 mr-1" />
-                )}
-<<<<<<< HEAD
-                {(stockInfo?.change || 0) > 0 ? '+' : ''}
-                {(stockInfo?.change || 0).toFixed(2)}%
-=======
-                {(stockInfo?.change ?? 0) > 0 ? '+' : ''}
-                {(stockInfo?.change ?? 0).toFixed(2)}%
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-              </span>
-            </div>
-          </div>
-
+          <span className={`flex items-center text-lg font-medium ${(stockInfo?.change ?? 0) > 0 ? 'text-green-400' : 'text-red-400'}`}>
+            {(stockInfo?.change ?? 0) > 0 ? <TrendingUp className="h-4 w-4 mr-1" /> : <TrendingDown className="h-4 w-4 mr-1" />}
+            {(stockInfo?.change ?? 0) > 0 ? '+' : ''}{(stockInfo?.change ?? 0).toFixed(2)}%
+          </span>
           <div className="text-right">
             <Badge className="bg-gradient-to-r from-cyan-500 to-blue-500 mb-2">
               <Brain className="h-3 w-3 mr-1" />
@@ -173,7 +120,6 @@ export default function StockChart({ selectedStock }: StockChartProps) {
           </div>
         </div>
       </CardHeader>
-
       <CardContent>
         {/* Timeframe Selector */}
         <div className="flex space-x-2 mb-6">
@@ -193,43 +139,31 @@ export default function StockChart({ selectedStock }: StockChartProps) {
             </Button>
           ))}
         </div>
-
         {/* Chart Visualization */}
         <div className="h-64 bg-gradient-to-b from-cyan-900/20 to-transparent rounded-lg p-4 mb-6">
-          <svg width="100%" height="100%" className="overflow-visible">
-            {/* Chart Grid */}
-            <defs>
-              <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
-                <path
-                  d="M 40 0 L 0 0 0 20"
-                  fill="none"
-                  stroke="rgba(34, 211, 238, 0.1)"
-                  strokeWidth="1"
-                />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-
-            {/* Price Line */}
-            <path
-              d={`M 0 ${200 - (chartData[0]?.price || 150)} ${chartData
-                .map((point, i) => `L ${(i / chartData.length) * 600} ${200 - point.price}`)
-                .join(' ')}`}
-              fill="none"
-              stroke="url(#gradient)"
-              strokeWidth="3"
-            />
-
-            {/* Gradient Definition */}
-            <defs>
-              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#22d3ee" />
-                <stop offset="100%" stopColor="#3b82f6" />
-              </linearGradient>
-            </defs>
-          </svg>
+          {chartData.length > 0 && (
+            <svg width="100%" height="100%" className="overflow-visible">
+              <defs>
+                <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 20" fill="none" stroke="rgba(34, 211, 238, 0.1)" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              <path
+                d={`M 0 ${200 - (chartData[0]?.price || 150)} ${chartData.map((point, i) => `L ${(i / chartData.length) * 600} ${200 - point.price}`).join(' ')}`}
+                fill="none"
+                stroke="url(#gradient)"
+                strokeWidth="3"
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#22d3ee" />
+                  <stop offset="100%" stopColor="#3b82f6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          )}
         </div>
-
         {/* AI Prediction */}
         {aiPrediction && (
           <Card className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border-cyan-500/30">
@@ -261,5 +195,6 @@ export default function StockChart({ selectedStock }: StockChartProps) {
         )}
       </CardContent>
     </Card>
+  );
   );
 }

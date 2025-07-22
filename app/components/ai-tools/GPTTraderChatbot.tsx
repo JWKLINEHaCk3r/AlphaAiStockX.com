@@ -1,66 +1,24 @@
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';\n\n"use client";
+"use client";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-// GPT-Trader Chatbot Component
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Bot,
-  User,
-  Send,
-  MessageCircle,
-  TrendingUp,
-  DollarSign,
-  BarChart3,
-  Brain,
-  Sparkles,
-  Clock,
-  Star,
-  Target,
-  AlertCircle,
-} from 'lucide-react';
+import { Bot, User, Send } from 'lucide-react';
+import { Brain, DollarSign, BarChart3, Clock, Star, Sparkles, AlertCircle } from 'lucide-react';
+interface TradingRecommendation {
+  symbol: string;
+  action: 'buy' | 'sell' | 'hold';
+  quantity: number;
+  reasoning: string;
+  confidence: number;
+  riskLevel: 'low' | 'moderate' | 'high';
+  targetPrice?: number;
+  stopLoss?: number;
+  timeframe: string;
+}
 
+// Local type definitions (no conflict with imported types)
 interface ChatMessage {
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -68,24 +26,15 @@ interface ChatMessage {
   timestamp: string;
   metadata?: {
     symbols?: string[];
-    recommendations?: TradeRecommendation[];
-    analysis?: any;
+    recommendations?: TradingRecommendation[];
+    analysis?: unknown;
   };
 }
 
-interface TradeRecommendation {
-  symbol: string;
-  action: 'BUY' | 'SELL' | 'HOLD';
-  quantity: number;
-  reasoning: string;
-  confidence: number;
-  riskLevel: 'LOW' | 'MODERATE' | 'HIGH';
-  targetPrice?: number;
-  stopLoss?: number;
-  timeframe: string;
-}
+// ...existing code...
 
-interface UserProfile {
+// Rename to avoid conflict with imported UserProfile
+interface GPTUserProfile {
   id: string;
   riskTolerance: 'conservative' | 'moderate' | 'aggressive';
   investmentGoals: string[];
@@ -100,7 +49,7 @@ export default function GPTTraderChatbot() {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [userProfile] = useState<UserProfile>({
+  const [userProfile] = useState<GPTUserProfile>({
     id: 'user_1',
     riskTolerance: 'moderate',
     investmentGoals: ['Growth', 'Income'],
@@ -113,19 +62,7 @@ export default function GPTTraderChatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    initializeChat();
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const initializeChat = async () => {
+  const initializeChat = React.useCallback(async () => {
     try {
       const response = await fetch('/api/ai-tools/gpt-trader', {
         method: 'POST',
@@ -145,7 +82,20 @@ export default function GPTTraderChatbot() {
     } catch (error) {
       console.error('Error initializing chat:', error);
     }
+  }, [userProfile]);
+
+  useEffect(() => {
+    initializeChat();
+  }, [initializeChat]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
 
   const sendMessage = async () => {
     if (!inputMessage.trim() || isLoading) return;
@@ -251,9 +201,9 @@ export default function GPTTraderChatbot() {
                       <div className="flex items-center space-x-2">
                         <Badge
                           variant={
-                            rec.action === 'BUY'
+                            rec.action === 'buy'
                               ? 'default'
-                              : rec.action === 'SELL'
+                              : rec.action === 'sell'
                                 ? 'destructive'
                                 : 'secondary'
                           }
@@ -373,14 +323,8 @@ export default function GPTTraderChatbot() {
                       <div className="bg-gray-100 rounded-lg px-4 py-2">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                          <div
-                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                            style={{ animationDelay: '0.1s' }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                            style={{ animationDelay: '0.2s' }}
-                          />
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
                         </div>
                       </div>
                     </div>

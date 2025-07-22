@@ -1,27 +1,10 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
 import { Progress } from '../../../components/ui/progress';
-import {
-  Brain,
-  TrendingUp,
-  TrendingDown,
-  Target,
-  Star,
-  Zap,
-  Eye,
-  Clock,
-  BarChart3,
-  CheckCircle,
-  Crown,
-} from 'lucide-react';
+import { Brain, TrendingUp, TrendingDown, Target, Star, Zap, Eye, Clock, BarChart3, CheckCircle, Crown } from 'lucide-react';
 
 interface StockTip {
   id: number;

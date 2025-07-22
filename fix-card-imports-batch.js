@@ -1,20 +1,13 @@
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
+
+// Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
-// Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { Progress } from "./components/ui/progress";
-import { CardTitle } from "./components/ui/card";
-import { CardHeader } from "./components/ui/card";
-import { CardDescription } from "./components/ui/card";
-#!/usr/bin/env node
-import { Card } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-#!/usr/bin/env node
-
-const fs = require('fs');
-const path = require('path');
+import fs from "fs";
+import path from "path";
 
 // Helper: Check if a path is a file
 function isFile(filePath) {

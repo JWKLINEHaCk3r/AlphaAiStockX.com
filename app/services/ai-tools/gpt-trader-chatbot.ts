@@ -1,12 +1,5 @@
-import {
-  Position,
-  TechnicalIndicators,
-  VolumeProfile,
-  BollingerBands,
-  SupportResistance,
-  OptimalAllocations,
-  RebalanceAction,
-} from '../types/trading-types';\n\n// GPT-Trader Chatbot - Conversational Trading Assistant
+// import types if available, else remove unused
+// GPT-Trader Chatbot - Conversational Trading Assistant
 import { OpenAI } from 'openai';
 
 interface UserProfile {
@@ -27,7 +20,7 @@ interface ChatMessage {
   metadata?: {
     symbols?: string[];
     recommendations?: TradeRecommendation[];
-    analysis?: any;
+    analysis?: unknown;
   };
 }
 
@@ -280,8 +273,8 @@ What would you like to explore today? You can ask me about specific stocks, requ
   private async generateAIResponse(
     userId: string,
     userMessage: string,
-    intent: any,
-    marketContext: any
+    intent: unknown,
+    marketContext: unknown
   ) {
     const userProfile = this.userProfiles.get(userId);
     const chatHistory = this.conversationHistory.get(userId) || [];
@@ -327,19 +320,31 @@ Use emojis appropriately to make the response engaging.
         'I apologize, but I cannot provide a response at the moment.';
 
       // Generate recommendations if applicable
-      const recommendations =
-        intent.isRecommendationRequest && intent.symbols.length > 0
-          ? await this.generateRecommendations(intent.symbols, userProfile)
-          : [];
+      let recommendations: TradeRecommendation[] = [];
+      if (
+        typeof intent === 'object' &&
+        intent !== null &&
+        'isRecommendationRequest' in intent &&
+        (intent as any).isRecommendationRequest &&
+        'symbols' in intent &&
+        Array.isArray((intent as any).symbols) &&
+        (intent as any).symbols.length > 0
+      ) {
+        recommendations = await this.generateRecommendations((intent as any).symbols, userProfile);
+      }
 
       return {
         content,
         recommendations,
         analysis: marketContext,
       };
-    } catch (error) {
+    } catch {
       return {
-        content: `I understand you're asking about ${intent.symbols.length > 0 ? intent.symbols.join(', ') : 'trading'}. Let me provide some general guidance based on current market conditions.
+        content: `I understand you're asking about ${
+          typeof intent === 'object' && intent !== null && 'symbols' in intent && Array.isArray((intent as any).symbols) && (intent as any).symbols.length > 0
+            ? (intent as any).symbols.join(', ')
+            : 'trading'
+        }. Let me provide some general guidance based on current market conditions.
 
 📊 **Market Analysis**: The current market environment requires careful consideration of risk and diversification.
 
@@ -359,8 +364,8 @@ Would you like me to elaborate on any specific aspect?`,
   private buildContextPrompt(
     userProfile: UserProfile | undefined,
     chatHistory: ChatMessage[],
-    intent: any,
-    marketContext: any
+    intent: unknown,
+    marketContext: unknown
   ): string {
     let context = 'TRADING ASSISTANT CONTEXT:\n\n';
 
@@ -376,10 +381,18 @@ Would you like me to elaborate on any specific aspect?`,
 `;
     }
 
-    if (marketContext && marketContext.length > 0) {
+    if (Array.isArray(marketContext) && marketContext.length > 0) {
       context += 'Current Market Data:\n';
-      marketContext.forEach((stock: any) => {
-        context += `- ${stock.symbol}: $${stock.price.toFixed(2)} (${stock.changePercent.toFixed(2)}%)\n`;
+      marketContext.forEach((stock) => {
+        if (
+          typeof stock === 'object' &&
+          stock !== null &&
+          'symbol' in stock &&
+          'price' in stock &&
+          'changePercent' in stock
+        ) {
+          context += `- ${(stock as any).symbol}: $${(stock as any).price.toFixed(2)} (${(stock as any).changePercent.toFixed(2)}%)\n`;
+        }
       });
       context += '\n';
     }
@@ -423,7 +436,7 @@ Would you like me to elaborate on any specific aspect?`,
     return recommendations;
   }
 
-  async simulatePortfolio(userId: string, holdings: Record<string, unknown>[]): Promise<PortfolioSimulation> {
+  async simulatePortfolio(userId: string, holdings: Array<{ symbol: string; quantity: number; price: number; sector: string }>): Promise<PortfolioSimulation> {
     const userProfile = this.userProfiles.get(userId);
 
     // Calculate portfolio metrics

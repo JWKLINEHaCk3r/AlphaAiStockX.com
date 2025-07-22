@@ -1,70 +1,9 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
+"use client";
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+import { TabsTrigger, TabsList, TabsContent, Tabs } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 
-('use client');
 import React from 'react';
 
 import { useState, useEffect } from 'react';
@@ -147,7 +86,15 @@ export default function QuantumAIEngine() {
     ],
   });
 
-  const [aiInsights, setAiInsights] = useState([
+  type AIInsight = {
+    ticker: string;
+    prediction: string;
+    confidence: number;
+    priceTarget: string;
+    timeFrame: string;
+    reasoning: string;
+  };
+  const [aiInsights, setAiInsights] = useState<AIInsight[]>([
     {
       ticker: 'AAPL',
       prediction: 'Strong Buy',
@@ -239,7 +186,7 @@ export default function QuantumAIEngine() {
     }));
 
     setAiInsights(prev =>
-      prev.map((insight: any) => ({
+      prev.map((insight) => ({
         ...insight,
         confidence: Math.min(100, insight.confidence + (Math.random() - 0.45) * 0.5),
       }))
@@ -359,9 +306,10 @@ export default function QuantumAIEngine() {
                 </div>
                 <div className="h-4 bg-violet-900/30 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500"
+                    className={`h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 quantum-progress-bar`}
                     style={{ width: `${quantumData.modelTraining.progress}%` }}
                   ></div>
+                  {/* TODO: Move dynamic width style to external CSS if required for SSR compliance */}
                 </div>
                 <div className="flex justify-between mt-2 text-sm">
                   <span className="text-gray-400">

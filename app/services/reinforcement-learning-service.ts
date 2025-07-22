@@ -1,22 +1,79 @@
-import {
-  Position,
-  TechnicalIndicators,
-  VolumeProfile,
-  BollingerBands,
-  SupportResistance,
-  OptimalAllocations,
-  RebalanceAction,
-} from '../types/trading-types';
+// Types for RL service
+interface Model {
+  id: string;
+  name: string;
+  type: string;
+  architecture: string;
+  stateSpace: number;
+  actionSpace: number;
+  learningRate: number;
+  epsilon?: number;
+  gamma?: number;
+  batchSize?: number;
+  memorySize?: number;
+  targetUpdateFreq?: number;
+  clipRatio?: number;
+  valueCoeff?: number;
+  entropyCoeff?: number;
+  tau?: number;
+  beta?: number;
+  workers?: number;
+  alpha?: number;
+  policyDelay?: number;
+  noiseClip?: number;
+  performance: {
+    sharpeRatio: number;
+    maxDrawdown: number;
+    winRate: number;
+    totalReturn: number;
+  };
+}
+
+interface Environment {
+  id: string;
+  name: string;
+  assets?: string[] | number;
+  underlyings?: string[];
+  pairs?: string[];
+  [key: string]: unknown;
+}
+
+interface Agent {
+  id: string;
+  name: string;
+  model: string;
+  environment: string;
+  status: string;
+  bestReward: number;
+  averageReward: number;
+  explorationRate: number;
+  lastUpdated?: Date;
+  currentEpisode?: number;
+  trainingEpisodes?: number;
+  performance?: unknown;
+  [key: string]: unknown;
+}
+
 
 // Reinforcement Learning Service for advanced trading strategies
 export class ReinforcementLearningService {
   private static instance: ReinforcementLearningService;
-  private models: Map<string, any> = new Map();
-  private environments: Map<string, any> = new Map();
-  private agents: Map<string, any> = new Map();
-  private trainingHistory: Map<string, any> = new Map();
+  private models: Map<string, Model> = new Map();
+  private environments: Map<string, Environment> = new Map();
+  private agents: Map<string, Agent> = new Map();
+  private trainingHistory: Map<string, Record<string, unknown>> = new Map();
   private isTraining = false;
-  private trainingProgress: Map<string, any> = new Map();
+  private trainingProgress: Map<string, {
+    startTime: Date;
+    targetEpisodes: number;
+    currentEpisode: number;
+    bestReward: number;
+    recentRewards: number[];
+    averageReward: number;
+    explorationRate: number;
+    losses: number[];
+    convergence: boolean;
+  }> = new Map();
 
   static getInstance(): ReinforcementLearningService {
     if (!ReinforcementLearningService.instance) {
@@ -394,7 +451,13 @@ export class ReinforcementLearningService {
     });
   }
 
-  async startTraining(agentId: string, episodes = 1000): Promise<any> {
+  async startTraining(agentId: string, episodes = 1000): Promise<{
+    agentId: string;
+    success: boolean;
+    finalEpisode: number;
+    finalReward: number;
+    trainingTime: number;
+  }> {
     if (this.isTraining) {
       throw new Error('Training is already in progress');
     }
@@ -438,8 +501,8 @@ export class ReinforcementLearningService {
   }
 
   private async simulateTraining(agentId: string, episodes: number): Promise<void> {
-    const progress = this.trainingProgress.get(agentId);
-    const agent = this.agents.get(agentId);
+    const progress = this.trainingProgress.get(agentId)!;
+    const agent = this.agents.get(agentId)!;
 
     for (let episode = 1; episode <= episodes; episode++) {
       // Simulate episode training
@@ -501,10 +564,10 @@ export class ReinforcementLearningService {
     }
   }
 
-  private simulateEpisode(agent: any, episode: number): number {
+  private simulateEpisode(agent: Agent, episode: number): number {
     // Simulate a training episode and return reward
-    const model = this.models.get(agent.model);
-    const environment = this.environments.get(agent.environment);
+    const model = this.models.get(agent.model)!;
+    // environment not used
 
     // Base reward with some randomness and improvement over time
     const baseReward = model.performance.sharpeRatio * (0.8 + Math.random() * 0.4);
@@ -520,29 +583,35 @@ export class ReinforcementLearningService {
     return baseReward * improvementFactor + noise + spike;
   }
 
-  async getAgentPrediction(agentId: string, marketData: any): Promise<any> {
+  async getAgentPrediction(
+    agentId: string,
+    // _marketData: Record<string, unknown>
+  ): Promise<{
+    agentId: string;
+    agentName: string;
+    timestamp: Date;
+    prediction: unknown;
+    modelType: string;
+    environment: string;
+    performance: unknown;
+  }> {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agent ${agentId} not found`);
     }
-
     if (agent.status !== 'trained') {
       throw new Error(`Agent ${agentId} is not trained yet`);
     }
-
     // Simulate agent prediction
-    const model = this.models.get(agent.model);
-    const environment = this.environments.get(agent.environment);
-
+    const model = this.models.get(agent.model)!;
+    const environment = this.environments.get(agent.environment)!;
     // Generate prediction based on agent type
-    let prediction;
-
+    let prediction: unknown;
     if (model.type === 'DQN') {
       // Discrete actions
       const actions = ['STRONG_BUY', 'BUY', 'HOLD', 'SELL', 'STRONG_SELL'];
       const actionProbs = [0.15, 0.25, 0.3, 0.2, 0.1].map(p => p * (0.8 + Math.random() * 0.4));
       const maxIndex = actionProbs.indexOf(Math.max(...actionProbs));
-
       prediction = {
         action: actions[maxIndex],
         confidence: actionProbs[maxIndex],
@@ -557,11 +626,10 @@ export class ReinforcementLearningService {
       };
     } else if (model.type === 'PPO' || model.type === 'A3C') {
       // Portfolio weights or continuous actions
-      const numAssets = environment.assets?.length || 10;
+      const numAssets = (environment.assets as unknown[] | undefined)?.length || 10;
       const weights = Array.from({ length: numAssets }, () => Math.random());
       const sum = weights.reduce((a, b) => a + b, 0);
       const normalizedWeights = weights.map(w => w / sum);
-
       prediction = {
         portfolioWeights: normalizedWeights,
         expectedReturn: 0.08 + Math.random() * 0.12,
@@ -573,7 +641,6 @@ export class ReinforcementLearningService {
       // Continuous actions
       const action = (Math.random() - 0.5) * 2; // -1 to 1
       const position = Math.tanh(action); // Squash to valid range
-
       prediction = {
         position,
         confidence: 0.6 + Math.random() * 0.3,
@@ -582,7 +649,6 @@ export class ReinforcementLearningService {
         actionValue: action,
       };
     }
-
     return {
       agentId,
       agentName: agent.name,
@@ -594,7 +660,7 @@ export class ReinforcementLearningService {
     };
   }
 
-  async runBacktest(agentId: string, startDate: string, endDate: string): Promise<any> {
+  async runBacktest(agentId: string, startDate: string, endDate: string): Promise<unknown> {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agent ${agentId} not found`);
@@ -672,12 +738,11 @@ export class ReinforcementLearningService {
     return backtest;
   }
 
-  async getTrainingProgress(agentId: string): Promise<any> {
+  async getTrainingProgress(agentId: string): Promise<unknown> {
     const progress = this.trainingProgress.get(agentId);
     if (!progress) {
       return null;
     }
-
     return {
       ...progress,
       elapsedTime: Date.now() - progress.startTime.getTime(),
@@ -690,19 +755,19 @@ export class ReinforcementLearningService {
     };
   }
 
-  getModels(): Record<string, unknown>[] {
+  getModels(): Model[] {
     return Array.from(this.models.values());
   }
 
-  getEnvironments(): Record<string, unknown>[] {
+  getEnvironments(): Environment[] {
     return Array.from(this.environments.values());
   }
 
-  getAgents(): Record<string, unknown>[] {
+  getAgents(): Agent[] {
     return Array.from(this.agents.values());
   }
 
-  getAgent(agentId: string): any {
+  getAgent(agentId: string): Agent | undefined {
     return this.agents.get(agentId);
   }
 

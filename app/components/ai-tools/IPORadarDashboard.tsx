@@ -1,9 +1,3 @@
-import { Card, CardContent } from '../../../components/ui/card.tsx';
-import { Card, CardContent } from '../../../components/ui/card.tsx';
-import { Card, CardContent } from '../../../components/ui/card.tsx';
-import { Card, CardContent } from '../../../components/ui/card.tsx';
-import { Card, CardContent } from '../../../components/ui/card.tsx';
-import { Card, CardContent } from '../../../components/ui/card.tsx';
 "use client";
 import { Card, CardContent } from '../../../components/ui/card';
 import { Calendar } from "../../../components/ui/calendar";
@@ -12,20 +6,7 @@ import { Progress } from "../../../components/ui/progress";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import React, { useState, useEffect } from 'react';
-import {
-  TrendingUp,
-  TrendingDown,
-  DollarSign,
-  Calendar as LucideCalendar,
-  Building2,
-  Star,
-  AlertTriangle,
-  Target,
-  Zap,
-  RefreshCw,
-  Search,
-  Filter,
-} from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, Calendar as LucideCalendar, Building2, Star, AlertTriangle, Target, Zap, RefreshCw, Search, Filter } from 'lucide-react';
 
 interface IPO {
   id: string;

@@ -1,9 +1,3 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 "use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
@@ -12,20 +6,7 @@ import { Slider } from "../../../components/ui/slider";
 import { Switch } from "../../../components/ui/switch";
 import { Button } from "../../../components/ui/button";
 import React, { useState, useEffect } from 'react';
-import {
-  PieChart,
-  TrendingUp,
-  TrendingDown,
-  Target,
-  Shield,
-  DollarSign,
-  BarChart3,
-  Zap,
-  RefreshCw,
-  AlertTriangle,
-  CheckCircle,
-  Settings,
-} from 'lucide-react';
+import { PieChart, TrendingUp, Target, Shield, BarChart3, Zap, RefreshCw, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
 
 interface PortfolioPosition {
   symbol: string;
@@ -68,6 +49,7 @@ export default function PortfolioOptimizerDashboard() {
 
   useEffect(() => {
     runOptimization();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const runOptimization = async () => {
@@ -295,6 +277,8 @@ export default function PortfolioOptimizerDashboard() {
                 value={timeHorizon}
                 onChange={e => setTimeHorizon(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                aria-label="Time Horizon"
+                title="Time Horizon"
               >
                 <option value="1">1 Year</option>
                 <option value="3">3 Years</option>

@@ -1,14 +1,7 @@
-import {
-  Position,
-  TechnicalIndicators,
-  VolumeProfile,
-  BollingerBands,
-  SupportResistance,
-  OptimalAllocations,
-  RebalanceAction,
-} from '../types/trading-types';\n\nimport { Select } from "../../../components/ui/select";
-// AI Portfolio Optimizer - Modern Portfolio Theory + GPT Insights
+// Removed unused imports from trading-types
+// Removed unused Select import
 import { OpenAI } from 'openai';
+// AI Portfolio Optimizer - Modern Portfolio Theory + GPT Insights
 
 interface Asset {
   symbol: string;
@@ -843,7 +836,7 @@ export class AIPortfolioOptimizer {
       return {
         reasoning: response.choices[0].message.content || 'Portfolio analysis unavailable',
       };
-    } catch (error) {
+    } catch {
       return {
         reasoning: `This ${constraints.riskTolerance} portfolio achieves a ${(optimization.expectedReturn * 100).toFixed(1)}% expected return with ${(optimization.volatility * 100).toFixed(1)}% volatility. The allocation provides balanced exposure across sectors with emphasis on ${this.getTopSector(optimization.weights, assets)}.`,
       };
@@ -881,7 +874,7 @@ export class AIPortfolioOptimizer {
   // Public API methods
   async getAssetRecommendations(
     riskTolerance: string,
-    investmentGoals: string[]
+    // investmentGoals: string[] // Unused
   ): Promise<Asset[]> {
     const filtered = Array.from(this.assetUniverse.values()).filter(asset => {
       if (riskTolerance === 'conservative') {
@@ -898,7 +891,7 @@ export class AIPortfolioOptimizer {
   async backtestPortfolio(
     allocations: { [symbol: string]: number },
     timeframe: string
-  ): Promise<any> {
+  ): Promise<{ annualReturn: number; maxDrawdown: number; sharpeRatio: number; winRate: number; totalReturn: number }> {
     // Simplified backtest - in production, use historical data
     const annualReturn = Object.entries(allocations).reduce((sum, [symbol, weight]) => {
       const asset = this.assetUniverse.get(symbol);

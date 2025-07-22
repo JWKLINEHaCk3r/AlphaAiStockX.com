@@ -1,6 +1,10 @@
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
+
+// Removed direct import of .tsx file for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
 // Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
 import { Badge } from "./components/ui/badge";

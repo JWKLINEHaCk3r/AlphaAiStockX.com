@@ -1,9 +1,3 @@
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
 "use client";
 import { Card } from '../../components/ui/card';
 import React, { useState, useEffect, useCallback } from 'react';

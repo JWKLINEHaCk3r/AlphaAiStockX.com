@@ -1,33 +1,12 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 "use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
+// import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Switch } from "../../../components/ui/switch";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import React, { useState, useEffect } from 'react';
-import {
-  TrendingUp,
-  TrendingDown,
-  AlertTriangle,
-  Activity,
-  Play,
-  Pause,
-  Settings,
-  Zap,
-  Target,
-  Shield,
-  ArrowUp,
-  ArrowDown,
-  Clock,
-  Star,
-} from 'lucide-react';
+import { TrendingUp, TrendingDown, AlertTriangle, Activity, Play, Pause, Target, Shield, ArrowUp, Clock, Star } from 'lucide-react';
 
 interface StockSignal {
   symbol: string;
@@ -54,6 +33,7 @@ export default function AISignalBotDashboard() {
 
   useEffect(() => {
     loadInitialSignals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadInitialSignals = async () => {
@@ -179,11 +159,6 @@ export default function AISignalBotDashboard() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">AI Signal Bot</h1>
-          <p className="text-gray-600">Real-time AI-powered trading signals</p>
-        </div>
-
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <Switch checked={isStreaming} onCheckedChange={toggleStreaming} disabled={loading} />
@@ -237,34 +212,6 @@ export default function AISignalBotDashboard() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Active Signals</p>
-                <p className="text-2xl font-bold">{signals.length}</p>
-              </div>
-              <Zap className="h-8 w-8 text-blue-500" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Watchlist</p>
-                <p className="text-2xl font-bold">{watchlist.length}</p>
-              </div>
-              <Star className="h-8 w-8 text-yellow-500" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Streaming</p>
-                <p className="text-2xl font-bold">{isStreaming ? 'ON' : 'OFF'}</p>
-              </div>
               {isStreaming ? (
                 <Play className="h-8 w-8 text-green-500" />
               ) : (
@@ -273,7 +220,6 @@ export default function AISignalBotDashboard() {
             </div>
           </CardContent>
         </Card>
-
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -297,7 +243,7 @@ export default function AISignalBotDashboard() {
               <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-600 mb-2">No Signals Generated</h3>
               <p className="text-gray-500 mb-4">
-                Click "Refresh Signals" to generate AI trading signals
+                Click &quot;Refresh Signals&quot; to generate AI trading signals
               </p>
               <Button onClick={loadInitialSignals} disabled={loading}>
                 Generate Signals
@@ -365,8 +311,8 @@ export default function AISignalBotDashboard() {
                     <p className="text-sm text-gray-500 mb-1">Technical Score</p>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${signal.technicalScore}%` }}
+                        className={`bg-blue-600 h-2 rounded-full transition-all duration-300 technical-score-bar`}
+                        data-score={signal.technicalScore}
                       />
                     </div>
                     <p className="text-xs text-gray-600 mt-1">
@@ -378,8 +324,8 @@ export default function AISignalBotDashboard() {
                     <p className="text-sm text-gray-500 mb-1">Sentiment Score</p>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-purple-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${signal.sentimentScore}%` }}
+                        className={`bg-purple-600 h-2 rounded-full transition-all duration-300 sentiment-score-bar`}
+                        data-score={signal.sentimentScore}
                       />
                     </div>
                     <p className="text-xs text-gray-600 mt-1">

@@ -1,18 +1,10 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 "use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
-import React from 'react';
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
 interface PortfolioStock {
@@ -23,13 +15,6 @@ interface PortfolioStock {
   risk: number;
 }
 
-interface Recommendation {
-  action: string;
-  symbol: string;
-  reason: string;
-  suggestedWeight: number;
-  impact: string;
-}
 
 interface OptimizationResult {
   expectedReturn: number;
@@ -345,7 +330,7 @@ export default function PortfolioOptimizer() {
                       <div className="w-20 bg-gray-700 rounded-full h-2">
                         <div
                           className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
-                          style={{ width: `${stock.weight}%` }}
+                          data-weight={stock.weight}
                         ></div>
                       </div>
                       <span className="text-white text-sm w-8">{stock.weight}%</span>

@@ -1,9 +1,3 @@
-import { Card, CardContent } from '../../components/ui/card.tsx';
-import { Card, CardContent } from '../../components/ui/card.tsx';
-import { Card, CardContent } from '../../components/ui/card.tsx';
-import { Card, CardContent } from '../../components/ui/card.tsx';
-import { Card, CardContent } from '../../components/ui/card.tsx';
-import { Card, CardContent } from '../../components/ui/card.tsx';
 "use client";
 import { Card, CardContent } from '../../components/ui/card';
 import { Button } from "../../components/ui/button";

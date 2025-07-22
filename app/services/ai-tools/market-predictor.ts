@@ -1,13 +1,6 @@
-import {
-  Position,
-  TechnicalIndicators,
-  VolumeProfile,
-  BollingerBands,
-  SupportResistance,
-  OptimalAllocations,
-  RebalanceAction,
-} from '../types/trading-types';\n\n// AI Market Predictor - Vision + LLM Fusion for Market Analysis
+// Removed unused imports from trading-types
 import { OpenAI } from 'openai';
+// AI Market Predictor - Vision + LLM Fusion for Market Analysis
 
 interface ChartAnalysis {
   id: string;
@@ -178,17 +171,39 @@ export class AIMarketPredictor {
       const marketContext = await this.getMarketContext();
 
       // Analyze chart using GPT-4 Vision
-      const visualAnalysis = await this.performVisualAnalysis(imageUrl, symbol, timeframe);
+      const visualResult = await this.performVisualAnalysis(imageUrl, symbol, timeframe);
+
+      // Build a minimal ChartAnalysis object for downstream compatibility
+      const minimalAnalysis: ChartAnalysis = {
+        id: `temp_${Date.now()}`,
+        imageUrl,
+        symbol,
+        timeframe,
+        patterns: [],
+        trendDirection: 'NEUTRAL',
+        strength: 5,
+        confidence: visualResult.confidence,
+        keyLevels: [],
+        prediction: {
+          direction: 'SIDEWAYS',
+          timeframe: ['1D', '1W', '1M', '3M'].includes(timeframe) ? (timeframe as '1D' | '1W' | '1M' | '3M') : '1D',
+          probability: visualResult.confidence,
+          keyFactors: [],
+          riskLevel: 'MODERATE',
+        },
+        reasoning: visualResult.reasoning,
+        timestamp: new Date().toISOString(),
+      };
 
       // Enhance with technical pattern recognition
-      const patterns = await this.recognizePatterns(visualAnalysis.description);
+      const patterns = await this.recognizePatterns(visualResult.reasoning || '');
 
       // Generate price levels
-      const keyLevels = this.identifyKeyLevels(visualAnalysis);
+      const keyLevels = this.identifyKeyLevels(minimalAnalysis);
 
       // Create market prediction
       const prediction = await this.generateMarketPrediction(
-        visualAnalysis,
+        minimalAnalysis,
         patterns,
         keyLevels,
         marketContext,
@@ -197,17 +212,13 @@ export class AIMarketPredictor {
       );
 
       const analysis: ChartAnalysis = {
-        id: `analysis_${Date.now()}`,
-        imageUrl,
-        symbol,
-        timeframe,
+        ...minimalAnalysis,
         patterns,
-        trendDirection: this.determineTrendDirection(visualAnalysis, patterns),
-        strength: this.calculateTrendStrength(patterns, visualAnalysis),
+        trendDirection: this.determineTrendDirection(minimalAnalysis, patterns),
+        strength: this.calculateTrendStrength(patterns, minimalAnalysis),
         confidence: prediction.probability,
         keyLevels,
         prediction,
-        reasoning: visualAnalysis.reasoning,
         timestamp: new Date().toISOString(),
       };
 
@@ -215,8 +226,8 @@ export class AIMarketPredictor {
       this.addToHistory(symbol, analysis);
 
       return analysis;
-    } catch (error) {
-      console.error('Chart analysis error:', error);
+    } catch {
+      console.error('Chart analysis error');
       throw new Error(`Failed to analyze chart for ${symbol}`);
     }
   }
@@ -280,7 +291,7 @@ export class AIMarketPredictor {
         reasoning: content,
         confidence: this.extractConfidenceFromText(content),
       };
-    } catch (error) {
+    } catch {
       // Fallback analysis without vision
       return {
         description: `Technical analysis for ${symbol}: Chart shows mixed signals with key levels to watch. Current market conditions suggest cautious optimism with attention to support/resistance zones.`,
@@ -405,13 +416,12 @@ export class AIMarketPredictor {
     return patterns;
   }
 
-  private identifyKeyLevels(visualAnalysis: any): PriceLevel[] {
+  private identifyKeyLevels(visualAnalysis: ChartAnalysis): PriceLevel[] {
     // Extract price levels from AI analysis
     const levels: PriceLevel[] = [];
-
-    // Look for price numbers in the description
-    const priceMatches = visualAnalysis.description.match(/\$?(\d+(?:\.\d{2})?)/g);
-
+    // Look for price numbers in the reasoning (since description does not exist)
+    const reasoning = visualAnalysis.reasoning || '';
+    const priceMatches = reasoning.match(/\$?(\d+(?:\.\d{2})?)/g);
     if (priceMatches) {
       priceMatches.slice(0, 6).forEach((match, index) => {
         const price = parseFloat(match.replace('$', ''));
@@ -423,12 +433,11 @@ export class AIMarketPredictor {
         });
       });
     }
-
     return levels;
   }
 
   private async generateMarketPrediction(
-    visualAnalysis: any,
+    visualAnalysis: ChartAnalysis,
     patterns: TechnicalPattern[],
     keyLevels: PriceLevel[],
     marketContext: MarketContext,
@@ -522,10 +531,10 @@ export class AIMarketPredictor {
   }
 
   private determineTrendDirection(
-    visualAnalysis: any,
+    visualAnalysis: ChartAnalysis,
     patterns: TechnicalPattern[]
   ): ChartAnalysis['trendDirection'] {
-    const description = visualAnalysis.description.toLowerCase();
+    const description = (visualAnalysis.reasoning || '').toLowerCase();
 
     const bullishPatterns = patterns.filter(p => p.type === 'BULLISH');
     const bearishPatterns = patterns.filter(p => p.type === 'BEARISH');
@@ -541,7 +550,7 @@ export class AIMarketPredictor {
     return 'NEUTRAL';
   }
 
-  private calculateTrendStrength(patterns: TechnicalPattern[], visualAnalysis: any): number {
+  private calculateTrendStrength(patterns: TechnicalPattern[], visualAnalysis: ChartAnalysis): number {
     const avgConfidence =
       patterns.length > 0
         ? patterns.reduce((sum, p) => sum + p.confidence, 0) / patterns.length
@@ -550,7 +559,7 @@ export class AIMarketPredictor {
     const baseStrength = avgConfidence * 10;
 
     // Adjust based on description keywords
-    const description = visualAnalysis.description.toLowerCase();
+    const description = (visualAnalysis.reasoning || '').toLowerCase();
     let strengthMultiplier = 1.0;
 
     if (description.includes('strong') || description.includes('clear')) {
@@ -628,21 +637,20 @@ export class AIMarketPredictor {
       // Generate combined analysis using all data points
       const combinedAnalysis = await this.generateCombinedAnalysis(
         visualAnalysis,
-        marketContext,
-        symbol
+        marketContext
       );
 
       return {
         visualAnalysis,
-        fundamentalFactors: this.getFundamentalFactors(symbol),
+        fundamentalFactors: this.getFundamentalFactors(),
         marketContext,
         combinedPrediction: combinedAnalysis.prediction,
         reasoning: combinedAnalysis.reasoning,
         riskFactors: combinedAnalysis.riskFactors,
         opportunities: combinedAnalysis.opportunities,
       };
-    } catch (error) {
-      console.error('Multi-modal analysis error:', error);
+    } catch {
+      console.error('Multi-modal analysis error');
       throw new Error(`Failed to perform multi-modal analysis for ${symbol}`);
     }
   }
@@ -650,7 +658,7 @@ export class AIMarketPredictor {
   private async generateCombinedAnalysis(
     visualAnalysis: ChartAnalysis,
     marketContext: MarketContext,
-    symbol: string
+    // symbol: string // Unused
   ) {
     const prompt = `
     Perform comprehensive market analysis combining technical, fundamental, and macro factors:
@@ -710,7 +718,7 @@ export class AIMarketPredictor {
         riskFactors: this.extractRiskFactors(content),
         opportunities: this.extractOpportunities(content),
       };
-    } catch (error) {
+    } catch {
       return {
         prediction: visualAnalysis.prediction,
         reasoning: 'Combined analysis of technical patterns and market conditions',
@@ -720,7 +728,7 @@ export class AIMarketPredictor {
     }
   }
 
-  private getFundamentalFactors(symbol: string): string[] {
+  private getFundamentalFactors(): string[] {
     // Mock fundamental factors - in production, fetch real data
     return [
       'Strong earnings growth',
@@ -759,23 +767,15 @@ export class AIMarketPredictor {
   }
 
   // Public API methods
-  async getHistoricalAccuracy(symbol: string): Promise<any> {
+  async getHistoricalAccuracy(symbol: string): Promise<number | null> {
     const history = this.predictionHistory.get(symbol) || [];
 
     if (history.length < 5) {
-      return { accuracy: 'Insufficient data', totalPredictions: history.length };
+      return 0;
     }
-
     // Simplified accuracy calculation
     const correctPredictions = Math.floor(history.length * 0.68); // Mock 68% accuracy
-
-    return {
-      accuracy: ((correctPredictions / history.length) * 100).toFixed(1) + '%',
-      totalPredictions: history.length,
-      averageConfidence:
-        ((history.reduce((sum, h) => sum + h.confidence, 0) / history.length) * 100).toFixed(1) +
-        '%',
-    };
+    return Number(((correctPredictions / history.length) * 100).toFixed(1));
   }
 
   async getBulkPredictions(symbols: string[], timeframe: string = '1D'): Promise<ChartAnalysis[]> {

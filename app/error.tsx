@@ -1,10 +1,3 @@
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
-
 "use client";
 import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';

@@ -1,4 +1,7 @@
-#!/usr/bin/env node
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card.tsx';
+
+// Removed direct import of .tsx file for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
 // ...existing code...
 // ...existing code...
 

@@ -5,6 +5,10 @@ import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card.tsx';
+import { Card, CardContent } from './card.tsx';
+import { Card, CardContent } from './card.tsx';
+import { Card, CardContent } from './card.tsx';
+import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card';
 
 import React, { useState, useEffect } from 'react';

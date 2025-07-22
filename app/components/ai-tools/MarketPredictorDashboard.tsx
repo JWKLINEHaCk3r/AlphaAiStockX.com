@@ -1,9 +1,3 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 "use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Badge } from "../../../components/ui/badge";
@@ -11,23 +5,7 @@ import { Progress } from "../../../components/ui/progress";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Target,
-  TrendingUp,
-  TrendingDown,
-  Eye,
-  Camera,
-  Brain,
-  Zap,
-  RefreshCw,
-  Upload,
-  Download,
-  BarChart3,
-  LineChart,
-  Activity,
-  AlertTriangle,
-  CheckCircle,
-} from 'lucide-react';
+import { Target, TrendingUp, TrendingDown, Eye, Camera, Brain, Zap, RefreshCw, Upload, Download, BarChart3, LineChart, CheckCircle } from 'lucide-react';
 
 interface PatternMatch {
   type: string;
@@ -59,6 +37,16 @@ interface PredictionResult {
 }
 
 export default function MarketPredictorDashboard() {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        setUploadedChart(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [symbol, setSymbol] = useState('AAPL');
@@ -66,38 +54,7 @@ export default function MarketPredictorDashboard() {
   const [uploadedChart, setUploadedChart] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    runPrediction();
-  }, []);
-
-  const runPrediction = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/ai-tools/market-predictor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          symbol,
-          timeframe,
-          chartImage: uploadedChart,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setPrediction(data.prediction || mockPrediction);
-      } else {
-        setPrediction(mockPrediction);
-      }
-    } catch (error) {
-      console.error('Failed to run prediction:', error);
-      setPrediction(mockPrediction);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const mockPrediction: PredictionResult = {
+  const mockPrediction = React.useMemo<PredictionResult>(() => ({
     symbol: 'AAPL',
     currentPrice: 185.25,
     predictedPrice: 192.8,
@@ -125,39 +82,58 @@ export default function MarketPredictorDashboard() {
       {
         type: 'Volume Breakout',
         confidence: 68,
-        description: 'Above-average volume supporting price movement',
-        timeframe: '1H',
-        bullishness: 65,
-        historicalAccuracy: 64,
+        description: 'Significant increase in trading volume detected',
+        timeframe: '1D',
+        bullishness: 60,
+        historicalAccuracy: 65,
       },
     ],
     technicalAnalysis: {
-      rsi: 58.3,
-      macd: 2.15,
-      bollinger: 'Upper Band Touch',
+      rsi: 62,
+      macd: 1.8,
+      bollinger: 'Upper band breakout',
       support: 182.5,
-      resistance: 187.2,
+      resistance: 187.0,
     },
     aiInsights: [
-      'Strong institutional buying pressure detected in last 3 trading sessions',
-      'Earnings sentiment analysis shows 78% positive sentiment from recent guidance',
-      'Options flow indicates bullish positioning with high call volume',
-      'Sector rotation favoring technology stocks in current market environment',
-      'Technical momentum aligns with fundamental strength indicators',
+      'AI model predicts continued upward momentum based on recent volume surge.',
+      'Sentiment analysis: Positive news flow and strong earnings report.',
     ],
     recommendation: 'BUY',
-  };
+  }), []);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        setUploadedChart(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+  const runPrediction = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai-tools/market-predictor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          symbol,
+          timeframe,
+          chartImage: uploadedChart,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setPrediction(data.prediction || mockPrediction);
+      } else {
+        setPrediction(mockPrediction);
+      }
+    } catch (error) {
+      console.error('Failed to run prediction:', error);
+      setPrediction(mockPrediction);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [symbol, timeframe, uploadedChart, mockPrediction]);
+
+  useEffect(() => {
+    runPrediction();
+  }, [runPrediction]);
+
+
 
   const getRecommendationColor = (recommendation: string) => {
     switch (recommendation) {
@@ -218,6 +194,7 @@ export default function MarketPredictorDashboard() {
             <div>
               <label className="text-sm font-medium text-gray-700 mb-2 block">Timeframe</label>
               <select
+                title="Select timeframe"
                 value={timeframe}
                 onChange={e => setTimeframe(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -244,6 +221,8 @@ export default function MarketPredictorDashboard() {
                   Upload Chart
                 </Button>
                 <input
+                  placeholder="Enter symbol"
+                  title="Symbol input"
                   ref={fileInputRef}
                   type="file"
                   accept="image/*"
@@ -273,6 +252,7 @@ export default function MarketPredictorDashboard() {
           </CardHeader>
           <CardContent>
             <div className="relative">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={uploadedChart}
                 alt="Uploaded chart"

@@ -1,23 +1,15 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import {
   AIStockPrediction,
   SportsEvent,
   TradingOpportunity,
   Trade,
   Trader,
-  VisionModel,
   AnalysisResult,
   BankAccount,
   Transaction,
   TradingSignalData,
   ChartPattern,
   TechnicalIndicators,
-  RiskAnalysis,
   SectorPerformance,
   BacktestStrategy,
   AIWhiteLabelMetrics,
@@ -37,21 +29,19 @@ import {
   TradingStrategy,
   ScanResult,
   SiteDiagnostic,
-  Alert,
   NewsAnalysis,
   SocialPlatform,
   Influencer,
-  SocialPost,
   DeepLearningModel,
   MarketPattern,
-} from '../../types/trading-types';\n\n"use client";
+  SocialPost,
+} from '../../types/trading-types';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
 import { TabsContent } from "../../../components/ui/tabs";
 import { Tabs } from "../../../components/ui/tabs";
-import { AlertDescription } from "../../../components/ui/alert";
-import { Alert } from "../../../components/ui/alert";
+import { Alert, AlertDescription } from "../../../components/ui/alert";
 import { AvatarImage } from "../../../components/ui/avatar";
 
 import { AvatarFallback } from "../../../components/ui/avatar";
@@ -62,14 +52,13 @@ import { Button } from "../../../components/ui/button";
 // Next-Generation AI Trading Platform - Comprehensive Multi-User Platform
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useTradingContext } from '@/app/contexts/TradingContext';
 import type { AISignal } from '@/app/types/socket';
 import AIToolsDashboard from '@/app/components/ai-tools/AIToolsDashboard';
 import {
   Brain,
   TrendingUp,
-  TrendingDown,
   DollarSign,
   Users,
   Zap,
@@ -77,8 +66,6 @@ import {
   Target,
   Bot,
   Activity,
-  Crown,
-  Sparkles,
   Infinity,
   Globe,
   Star,

@@ -5,6 +5,7 @@ import './polyfills';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import '../styles/animation-delays.css';
 import React from 'react';
 // import NextLevelNavigation from '@/components/ui/navigation';
 import { Providers } from '@/app/components/providers/Providers';

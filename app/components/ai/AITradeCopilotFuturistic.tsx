@@ -1,51 +1,7 @@
-<<<<<<< HEAD
-import { Alert } from "../../../components/ui/alert";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
 
-('use client');
+
+
+"use client";
 
 import React from 'react';
 import { getAccount, getPositions } from '../../services/alpaca-service';
@@ -115,7 +71,7 @@ export default function AITradeCopilotFuturistic() {
             if (strat) setSelectedStrategy(strat);
           }}
         >
-          {strategies.map((s: any) => (
+          {strategies.map((s: AITradingStrategy) => (
             <option key={s.name} value={s.name}>
               {s.name}
             </option>

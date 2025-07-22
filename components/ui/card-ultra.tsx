@@ -5,6 +5,10 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter }
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card';
 
 import * as React from 'react';

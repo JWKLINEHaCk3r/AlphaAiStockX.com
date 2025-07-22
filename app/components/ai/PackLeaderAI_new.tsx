@@ -1,68 +1,11 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Switch } from "../../../components/ui/switch";
-import { Textarea } from "../../../components/ui/textarea";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-=======
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
-('use client');
+
+
 import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
@@ -96,18 +39,13 @@ interface Message {
   confidence?: number;
 }
 
-interface AIPersonality {
-  confidence: number;
-  aggression: number;
-  wisdom: number;
-  loyalty: number;
-}
+
 
 // Extend Window interface for speech recognition
 declare global {
   interface Window {
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
+    SpeechRecognition: unknown;
+    webkitSpeechRecognition: unknown;
   }
 }
 
@@ -120,7 +58,7 @@ export default function PackLeaderAI() {
   const [isTyping, setIsTyping] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<unknown>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
   useEffect(() => {
@@ -159,17 +97,17 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
       recognitionRef.current.interimResults = false;
       recognitionRef.current.lang = 'en-US';
 
-      recognitionRef.current.onresult = (event: any) => {
+      (recognitionRef.current as any).onresult = (event: any) => {
         const transcript = event.results[event.results.length - 1][0].transcript;
         setInputMessage(transcript);
         handleSendMessage(transcript);
       };
 
-      recognitionRef.current.onerror = () => {
+      (recognitionRef.current as any).onerror = () => {
         setIsListening(false);
       };
 
-      recognitionRef.current.onend = () => {
+      (recognitionRef.current as any).onend = () => {
         setIsListening(false);
       };
     }
@@ -253,19 +191,19 @@ I've analyzed 10 million market patterns, studied every legendary trader, and ma
 **💪 Confidence:** ${(aiRecommendation.confidence * 100).toFixed(0)}%
 
 **📈 TECHNICAL SIGNALS:**
-${aiRecommendation.reasoning.map((reason: any) => `• ${reason}`).join('\n')}
+{aiRecommendation.reasoning && aiRecommendation.reasoning.map((reason: string, idx: number) => (
+  <div key={idx}>• {reason}</div>
+))}
 
 **🧠 MARKET PSYCHOLOGY:**
-${aiRecommendation.marketFactors.map((factor: any) => `• ${factor}`).join('\n')}
+{/* Removed: aiRecommendation.marketFactors does not exist */}
 
 **⚡ RISK MANAGEMENT:**
-${aiRecommendation.riskFactors.map((risk: any) => `• ${risk}`).join('\n')}
+{/* Removed: aiRecommendation.riskFactors does not exist */}
 
 **🎯 EXECUTION PLAN:**
 • Entry: Market/Limit order
-• Stop Loss: ${(aiRecommendation.riskManagement.stopLossPercent * 100).toFixed(1)}%
-• Take Profit: ${(aiRecommendation.riskManagement.takeProfitPercent * 100).toFixed(1)}%
-• Position Size: ${aiRecommendation.riskManagement.positionSize}%
+{/* Removed: aiRecommendation.riskManagement does not exist */}
 
 **🌊 MARKET CONDITIONS:**
 • Overall Market: ${marketIntelligence.marketSentiment.direction}
@@ -480,14 +418,8 @@ My AI brain is currently analyzing market data. While I process the latest intel
                     </span>
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
-                        style={{ animationDelay: '0.1s' }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
-                        style={{ animationDelay: '0.2s' }}
-                      ></div>
+                      <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce delay-100"></div>
+                      <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce delay-200"></div>
                     </div>
                   </div>
                 </div>

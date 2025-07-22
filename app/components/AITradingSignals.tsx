@@ -1,69 +1,10 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
-import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
-} from '../../types/trading-types';\n\n"use client";
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
 import { Button } from "../../components/ui/button";
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-import { 
-  Brain, 
-  TrendingUp, 
-  TrendingDown, 
-  Target, 
-  Zap, 
-  Bell, 
-  CheckCircle,
-  AlertTriangle,
-  Clock,
-  Star
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Brain, TrendingUp, TrendingDown, Target, Zap, Bell, CheckCircle, AlertTriangle, Clock, Star } from 'lucide-react';
 
 interface TradingSignal {
   id: string;

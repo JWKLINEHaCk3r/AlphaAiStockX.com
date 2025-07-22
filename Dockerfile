@@ -25,8 +25,15 @@ WORKDIR /app
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
 
-# Copy source code
+# Copy source code and ensure fixer scripts are present in /app
 COPY . .
+# Explicitly copy fixer scripts to /app (for build scripts)
+COPY fix-all-ui-imports.js /app/
+COPY fix-card-imports.js /app/
+COPY fix-missing-cards.js /app/
+COPY fix-missing-ui-imports.js /app/
+COPY fix-nextauth-imports.js /app/
+COPY fix-typescript-errors.js /app/
 
 # Build arguments
 ARG NODE_ENV=production

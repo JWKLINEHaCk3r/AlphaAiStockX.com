@@ -1,40 +1,10 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 "use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "../../../components/ui/tabs";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-// AI Tools Dashboard - Main Interface
 import React, { useState, useEffect } from 'react';
-import {
-  Brain,
-  Zap,
-  TrendingUp,
-  BarChart3,
-  Target,
-  MessageCircle,
-  PieChart,
-  Upload,
-  Settings,
-  Star,
-  Activity,
-  DollarSign,
-  AlertTriangle,
-  Sparkles,
-  ArrowRight,
-  Play,
-  Eye,
-} from 'lucide-react';
-
-// Import AI Tool Components
+import { Brain, Zap, TrendingUp, BarChart3, Target, MessageCircle, PieChart, Upload, Settings, Activity, Sparkles, ArrowRight, Play } from 'lucide-react';
 import AISignalBotDashboard from './AISignalBotDashboard';
 import GPTTraderChatbot from './GPTTraderChatbot';
 import IPORadarDashboard from './IPORadarDashboard';

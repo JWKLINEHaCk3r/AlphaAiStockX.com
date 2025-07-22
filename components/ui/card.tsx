@@ -5,6 +5,10 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './car
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.tsx';
 import * as React from 'react';
 
 export function Card({ children, className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
