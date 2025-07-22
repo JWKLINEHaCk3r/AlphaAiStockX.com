@@ -1,16 +1,16 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
-import { Badge } from "./components/ui/badge";
-import { Progress } from "./components/ui/progress";
-import { Card } from "./components/ui/card";
-import { Button } from "./components/ui/button";
 #!/usr/bin/env node
+// ...existing code...
+// ...existing code...
+
+
+
+
+
 
 /**
  * AlphaAI Stock Trading Platform - Missing Cards Recovery System
  * AI-powered component recovery and generation system
- */
+        return results
 
 import fs from 'fs';
 import path from 'path';
@@ -30,7 +30,7 @@ function isFile(filePath) {
 function generateMissingCards() {
   const components = {
     'trading-cards.tsx': `import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card.tsx';
+
 import { Badge } from './badge';
 import { Button } from './button';
 import { Progress } from './progress';
@@ -248,7 +248,7 @@ export const AIRiskCard = ({
 );`,
 
     'market-overview.tsx': `import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './card.tsx';
+
 import { Badge } from './badge';
 import { Progress } from './progress';
 import { TrendingUp, TrendingDown, Activity, Globe, Zap } from 'lucide-react';
@@ -405,7 +405,7 @@ async function createMissingCards() {
     // Create index file for easy imports
     const indexContent = [
       "export * from './trading-cards';",
-      "export * from './card.tsx';",
+      "export * from './card';",
       "export * from './button';",
       "export * from './badge';",
       "export * from './progress';"
@@ -422,4 +422,4 @@ async function createMissingCards() {
 }
 
 // Run the missing cards creator
-createMissingCards();
+// createMissingCards();

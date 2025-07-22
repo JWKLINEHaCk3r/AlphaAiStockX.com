@@ -1,7 +1,8 @@
 import { Card, CardContent } from './components/ui/card.tsx';
-import { Card, CardContent } from './components/ui/card';
-import { Card, CardContent } from './components/ui/card';
-import { Card, CardContent } from './components/ui/card';
+import { Card, CardContent } from './components/ui/card.tsx';
+import { Card, CardContent } from './components/ui/card.tsx';
+#!/usr/bin/env node
+// Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
 import { CardContent } from "./components/ui/card";
 import { Card } from "./components/ui/card";
 #!/usr/bin/env node

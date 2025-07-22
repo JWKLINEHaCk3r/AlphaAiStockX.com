@@ -1,4 +1,11 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card.tsx';
+#!/usr/bin/env node
+// ...existing code...
+// ...existing code...
+
+
+
+
+
 
 /**
  * AlphaAI Stock Trading Platform - Card Components Fixer (ESM compatible)

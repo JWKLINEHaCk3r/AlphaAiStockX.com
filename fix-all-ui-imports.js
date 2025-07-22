@@ -1,6 +1,10 @@
-// import { Card } from './components/ui/card.tsx'; // Removed to prevent ESM/TSX import error
+#!/usr/bin/env node
+// ...existing code...
+// ...existing code...
+
+
+
 // All static UI component imports removed as per script instructions
-// REMOVE ALL STATIC UI COMPONENT IMPORTS ABOVE THIS LINE
 // Only keep fs, path, glob imports for script operation
 import fs from 'fs';
 import path from 'path';
@@ -182,10 +186,7 @@ async function fixUIImports() {
         // Prefer .tsx, fallback to .ts
         const absComponentPath = isFile(absComponentPathTsx) ? absComponentPathTsx : absComponentPathTs;
         let importPath = getRelativeImportPath(filePath, absComponentPath);
-        // Always add .tsx extension for navigation imports
-        if (relComponentPath.startsWith('components/ui/navigation')) {
-          importPath = importPath.endsWith('.tsx') ? importPath : importPath + '.tsx';
-        }
+
         const componentUsageRegex = new RegExp(`\\b${component}\\b`, 'g');
         const importStatement = `import { ${component} } from "${importPath}";\n`;
         // Only add if not already present
@@ -204,24 +205,10 @@ async function fixUIImports() {
         console.log(`⚛️ Added React import to ${file}`);
       }
 
-      // Import Navigation component explicitly
-      if (content.includes('Navigation')) {
-        // Only add import if navigation file or directory exists
-        const navigationPathFile = path.join(process.cwd(), 'components/ui/navigation.tsx');
-        const navigationPathDir = path.join(process.cwd(), 'components/ui/navigation');
-        const navigationPathIndexTsx = path.join(navigationPathDir, 'index.tsx');
-        if (isFileOrDir(navigationPathFile) || isFileOrDir(navigationPathDir) || isFileOrDir(navigationPathIndexTsx)) {
-          const navigationImport = `import Navigation from 'components/ui/navigation/index.tsx';\n`;
-          if (!content.includes(navigationImport)) {
-            content = navigationImport + content;
-            modified = true;
-            console.log(`🧭 Added explicit Navigation import to ${file}`);
-          }
-        } else {
-          logMissingComponent('components/ui/navigation');
-          console.warn(`⚠️ Navigation import skipped: components/ui/navigation not found for ${file}`);
-        }
-      }
+
+      //     console.warn(`⚠️ Navigation import skipped: components/ui/navigation not found for ${file}`);
+      //   }
+      // }
 
       // Add NavigationMenu import for navigation usage (handled above, no-op here)
     }

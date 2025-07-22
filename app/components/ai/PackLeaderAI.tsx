@@ -1,3 +1,9 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import {
   AIStockPrediction,
   SportsEvent,

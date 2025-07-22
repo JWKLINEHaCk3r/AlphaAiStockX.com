@@ -1,7 +1,8 @@
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
+#!/usr/bin/env node
+// Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
 import { Badge } from "./components/ui/badge";
 import { CardTitle } from "./components/ui/card";
 import { CardHeader } from "./components/ui/card";
@@ -10,7 +11,7 @@ import { CardContent } from "./components/ui/card";
 import { Card } from "./components/ui/card";
 #!/usr/bin/env node
 
-const fs = require('fs');
+#!/usr/bin/env node
 const path = require('path');
 
 console.log('🔍 Starting UI imports fixer...');
