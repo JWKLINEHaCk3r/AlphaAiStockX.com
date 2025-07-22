@@ -78,6 +78,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
+# Ensure fixer scripts are present in the runtime image
+COPY --from=builder /app/fix-all-ui-imports.js ./fix-all-ui-imports.js
+
 # Create logs directory
 RUN mkdir -p /app/logs && chown nextjs:nodejs /app/logs
 
