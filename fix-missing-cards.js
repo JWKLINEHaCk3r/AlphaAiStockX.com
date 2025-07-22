@@ -19,13 +19,7 @@ import path from 'path';
 console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components...');
 
 // Helper: Check if a path is a file
-function isFile(filePath) {
-  try {
-    return fs.statSync(filePath).isFile();
-  } catch (e) {
-    return false;
-  }
-}
+
 
 // Advanced AI Trading Card Components Generator
 function generateMissingCards() {
@@ -385,7 +379,7 @@ export const AIPerformanceCard = ({
 }
 
 // Create missing trading components
-async function createMissingCards() {
+
   try {
     const componentsDir = path.join(process.cwd(), 'components/ui');
     
@@ -420,7 +414,6 @@ async function createMissingCards() {
     console.error('❌ Error creating missing cards:', error);
     process.exit(1);
   }
-}
 
 // Run the missing cards creator
 // createMissingCards();
