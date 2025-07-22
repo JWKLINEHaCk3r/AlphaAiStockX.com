@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';

@@ -508,7 +508,7 @@ export class TradingService {
   }
 
   private buildAlpacaOrder(orderRequest: OrderRequest) {
-    const alpacaOrder: any = {
+    const alpacaOrder: Record<string, unknown> = {
       symbol: orderRequest.symbol.toUpperCase(),
       side: orderRequest.side,
       type: orderRequest.type,

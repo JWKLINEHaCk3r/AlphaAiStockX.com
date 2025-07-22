@@ -23,15 +23,15 @@ export class HighFrequencyTradingService {
     'MEMX',
     'DARK_POOLS',
   ];
-  private strategies: Map<string, any> = new Map();
-  private executionStats: any = {
+  private strategies: Map<string, unknown> = new Map();
+  private executionStats: Record<string, unknown> = {
     ordersPlaced: 0,
     ordersFilled: 0,
     averageLatency: 0,
     slippage: 0,
     pnl: 0,
   };
-  private activeAlgorithms: Map<string, any> = new Map();
+  private activeAlgorithms: Map<string, unknown> = new Map();
 
   static getInstance(): HighFrequencyTradingService {
     if (!HighFrequencyTradingService.instance) {

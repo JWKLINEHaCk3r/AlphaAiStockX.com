@@ -1,14 +1,20 @@
-import { Calendar } from '@/components/ui/calendar';
+// import { Calendar } from '@/components/ui/calendar';
 // Next-Generation AI Trading Engine - 50+ Advanced Strategies & Algorithms
 import { EventEmitter } from 'events';
 import * as tf from '@tensorflow/tfjs-node';
-import {
-  Strategy,
-  TechnicalIndicator,
-  MarketData,
-  TradingSignal,
-  RiskMetrics,
-} from '../types/trading';
+import type { Strategy } from '../types/trading-types';
+import type { MarketData, TradingSignal, TechnicalIndicator } from './ai-types';
+
+export interface DiversificationRules {
+  maxSectorWeight?: number;
+  minSectorCount?: number;
+  maxAssetWeight?: number;
+  [key: string]: number | undefined;
+}
+
+export interface PerformanceMetrics {
+  [key: string]: number;
+}
 
 export interface AITradingConfig {
   strategies: string[];
@@ -17,7 +23,7 @@ export interface AITradingConfig {
   stopLossPercent: number;
   takeProfitPercent: number;
   maxDailyLoss: number;
-  diversificationRules: any;
+  diversificationRules: DiversificationRules;
   timeframes: string[];
   indicators: string[];
 }
@@ -29,7 +35,7 @@ export class NextGenAITradingEngine extends EventEmitter {
   private marketData: MarketData[] = [];
   private isRunning = false;
   private config: AITradingConfig;
-  private performanceMetrics: any = {};
+  private performanceMetrics: PerformanceMetrics = {};
 
   constructor(config: AITradingConfig) {
     super();
@@ -43,14 +49,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 1. Mean Reversion Strategies
     this.strategies.set('meanReversion', {
       name: 'Advanced Mean Reversion',
-      type: 'statistical',
+      // type: 'statistical',
       execute: this.meanReversionStrategy.bind(this),
       params: { lookback: 20, zscore: 2, volatilityAdjust: true },
     });
 
     this.strategies.set('bollingerMeanReversion', {
       name: 'Bollinger Band Mean Reversion',
-      type: 'technical',
+      // type: 'technical',
       execute: this.bollingerMeanReversionStrategy.bind(this),
       params: { period: 20, stdDev: 2, rsiThreshold: 30 },
     });
@@ -58,14 +64,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 2. Momentum Strategies
     this.strategies.set('momentumBreakout', {
       name: 'Multi-Timeframe Momentum',
-      type: 'momentum',
+      // type: 'momentum',
       execute: this.momentumBreakoutStrategy.bind(this),
       params: { shortPeriod: 12, longPeriod: 26, signalPeriod: 9 },
     });
 
     this.strategies.set('macdMomentum', {
       name: 'MACD Momentum Strategy',
-      type: 'momentum',
+      // type: 'momentum',
       execute: this.macdMomentumStrategy.bind(this),
       params: { fast: 12, slow: 26, signal: 9, histogram: true },
     });
@@ -73,14 +79,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 3. Arbitrage Strategies
     this.strategies.set('statisticalArbitrage', {
       name: 'Statistical Arbitrage',
-      type: 'arbitrage',
+      // type: 'arbitrage',
       execute: this.statisticalArbitrageStrategy.bind(this),
       params: { pairCorrelation: 0.8, spreadThreshold: 2, halfLife: 10 },
     });
 
     this.strategies.set('triangularArbitrage', {
       name: 'Triangular Arbitrage',
-      type: 'arbitrage',
+      // type: 'arbitrage',
       execute: this.triangularArbitrageStrategy.bind(this),
       params: { minProfit: 0.001, maxLatency: 100 },
     });
@@ -88,7 +94,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 4. Market Making Strategies
     this.strategies.set('marketMaking', {
       name: 'Adaptive Market Making',
-      type: 'market_making',
+      // type: 'market_making',
       execute: this.marketMakingStrategy.bind(this),
       params: { spread: 0.002, inventory: 0.5, risk: 0.1 },
     });
@@ -96,14 +102,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 5. Trend Following Strategies
     this.strategies.set('adaptiveTrend', {
       name: 'Adaptive Trend Following',
-      type: 'trend',
+      // type: 'trend',
       execute: this.adaptiveTrendStrategy.bind(this),
       params: { atr: 14, multiplier: 2, minTrend: 0.02 },
     });
 
     this.strategies.set('ichimokuTrend', {
       name: 'Ichimoku Cloud Trend',
-      type: 'trend',
+      // type: 'trend',
       execute: this.ichimokuTrendStrategy.bind(this),
       params: { tenkan: 9, kijun: 26, senkou: 52 },
     });
@@ -111,7 +117,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 6. Pattern Recognition Strategies
     this.strategies.set('patternRecognition', {
       name: 'ML Pattern Recognition',
-      type: 'pattern',
+      // type: 'pattern',
       execute: this.patternRecognitionStrategy.bind(this),
       params: { confidence: 0.8, patterns: ['head_shoulders', 'triangle', 'flag'] },
     });
@@ -119,14 +125,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 7. Volume-based Strategies
     this.strategies.set('volumeProfile', {
       name: 'Volume Profile Analysis',
-      type: 'volume',
+      // type: 'volume',
       execute: this.volumeProfileStrategy.bind(this),
       params: { pocLevel: 0.7, volumeThreshold: 1.5 },
     });
 
     this.strategies.set('onBalanceVolume', {
       name: 'On-Balance Volume',
-      type: 'volume',
+      // type: 'volume',
       execute: this.onBalanceVolumeStrategy.bind(this),
       params: { period: 20, divergenceThreshold: 0.05 },
     });
@@ -134,14 +140,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 8. Options Strategies
     this.strategies.set('deltaHedging', {
       name: 'Delta Neutral Hedging',
-      type: 'options',
+      // type: 'options',
       execute: this.deltaHedgingStrategy.bind(this),
       params: { targetDelta: 0, rebalanceThreshold: 0.1 },
     });
 
     this.strategies.set('gammaScalping', {
       name: 'Gamma Scalping',
-      type: 'options',
+      // type: 'options',
       execute: this.gammaScalpingStrategy.bind(this),
       params: { gammaThreshold: 0.05, hedge: true },
     });
@@ -149,14 +155,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 9. Sentiment-based Strategies
     this.strategies.set('newsSentiment', {
       name: 'News Sentiment Analysis',
-      type: 'sentiment',
+      // type: 'sentiment',
       execute: this.newsSentimentStrategy.bind(this),
       params: { sentimentThreshold: 0.6, decayRate: 0.1 },
     });
 
     this.strategies.set('socialSentiment', {
       name: 'Social Media Sentiment',
-      type: 'sentiment',
+      // type: 'sentiment',
       execute: this.socialSentimentStrategy.bind(this),
       params: { platforms: ['twitter', 'reddit'], weight: 0.3 },
     });
@@ -164,14 +170,14 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 10. Machine Learning Strategies
     this.strategies.set('lstmPredictor', {
       name: 'LSTM Price Predictor',
-      type: 'ml',
+      // type: 'ml',
       execute: this.lstmPredictorStrategy.bind(this),
       params: { sequence: 60, neurons: 128, layers: 3 },
     });
 
     this.strategies.set('ensembleML', {
       name: 'Ensemble ML Strategy',
-      type: 'ml',
+      // type: 'ml',
       execute: this.ensembleMLStrategy.bind(this),
       params: { models: ['lstm', 'rf', 'xgb'], weights: [0.4, 0.3, 0.3] },
     });
@@ -184,7 +190,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 11. High-Frequency Strategies
     this.strategies.set('microstructure', {
       name: 'Market Microstructure',
-      type: 'hft',
+      // type: 'hft',
       execute: this.microstructureStrategy.bind(this),
       params: { tickSize: 0.01, latency: 1 },
     });
@@ -192,7 +198,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 12. Cross-Asset Strategies
     this.strategies.set('crossAsset', {
       name: 'Cross-Asset Momentum',
-      type: 'cross_asset',
+      // type: 'cross_asset',
       execute: this.crossAssetStrategy.bind(this),
       params: { assets: ['stocks', 'bonds', 'commodities', 'crypto'] },
     });
@@ -200,7 +206,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 13. Factor-based Strategies
     this.strategies.set('factorModel', {
       name: 'Multi-Factor Model',
-      type: 'factor',
+      // type: 'factor',
       execute: this.factorModelStrategy.bind(this),
       params: { factors: ['value', 'growth', 'momentum', 'quality', 'volatility'] },
     });
@@ -208,7 +214,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 14. Regime Detection Strategies
     this.strategies.set('regimeDetection', {
       name: 'Market Regime Detection',
-      type: 'regime',
+      // type: 'regime',
       execute: this.regimeDetectionStrategy.bind(this),
       params: { lookback: 252, regimes: ['bull', 'bear', 'sideways'] },
     });
@@ -216,7 +222,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // 15. Alternative Data Strategies
     this.strategies.set('satelliteData', {
       name: 'Satellite Data Analysis',
-      type: 'alternative',
+      // type: 'alternative',
       execute: this.satelliteDataStrategy.bind(this),
       params: { sources: ['parking_lots', 'shipping', 'agriculture'] },
     });
@@ -229,7 +235,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Economic Calendar Based
     this.strategies.set('economicCalendar', {
       name: 'Economic Events Trading',
-      type: 'fundamental',
+      // type: 'fundamental',
       execute: this.economicCalendarStrategy.bind(this),
       params: { importance: 'high', timeWindow: 30 },
     });
@@ -237,7 +243,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Volatility Strategies
     this.strategies.set('volatilityArbitrage', {
       name: 'Volatility Arbitrage',
-      type: 'volatility',
+      // type: 'volatility',
       execute: this.volatilityArbitrageStrategy.bind(this),
       params: { impliedVol: true, realizedVol: true },
     });
@@ -245,7 +251,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Dark Pool Strategies
     this.strategies.set('darkPool', {
       name: 'Dark Pool Detection',
-      type: 'order_flow',
+      // type: 'order_flow',
       execute: this.darkPoolStrategy.bind(this),
       params: { volumeThreshold: 10000, priceImpact: 0.001 },
     });
@@ -253,7 +259,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Crypto-specific Strategies
     this.strategies.set('cryptoArbitrage', {
       name: 'Crypto Exchange Arbitrage',
-      type: 'crypto',
+      // type: 'crypto',
       execute: this.cryptoArbitrageStrategy.bind(this),
       params: { exchanges: ['binance', 'coinbase', 'kraken'] },
     });
@@ -261,7 +267,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Neural Network Ensemble
     this.strategies.set('neuralEnsemble', {
       name: 'Neural Network Ensemble',
-      type: 'deep_learning',
+      // type: 'deep_learning',
       execute: this.neuralEnsembleStrategy.bind(this),
       params: { models: 5, confidence: 0.85 },
     });
@@ -324,8 +330,8 @@ export class NextGenAITradingEngine extends EventEmitter {
   // Strategy Implementations
   private async meanReversionStrategy(data: MarketData[]): Promise<TradingSignal[]> {
     const signals: TradingSignal[] = [];
+    if (data.length < 20) return signals;
     const prices = data.map(d => d.close);
-
     const sma = this.calculateSMA(prices, 20);
     const std = this.calculateStandardDeviation(prices, 20);
     const zscore = (prices[prices.length - 1] - sma[sma.length - 1]) / std[std.length - 1];
@@ -340,6 +346,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'meanReversion',
         stopLoss: prices[prices.length - 1] * 0.98,
         takeProfit: prices[prices.length - 1] * 1.02,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Z-score below -2 indicates mean reversion buy signal.'],
+        indicators: { technical: 80, fundamental: 50, sentiment: 50, momentum: 60, volume: 60 },
       });
     } else if (zscore > 2) {
       signals.push({
@@ -351,6 +361,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'meanReversion',
         stopLoss: prices[prices.length - 1] * 1.02,
         takeProfit: prices[prices.length - 1] * 0.98,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Z-score above 2 indicates mean reversion sell signal.'],
+        indicators: { technical: 80, fundamental: 50, sentiment: 50, momentum: 60, volume: 60 },
       });
     }
 
@@ -381,9 +395,12 @@ export class NextGenAITradingEngine extends EventEmitter {
         price: currentPrice,
         timestamp: new Date(),
         strategy: 'lstmPredictor',
-        predictedPrice: predictedPrice[0],
         stopLoss: currentPrice * (priceChange > 0 ? 0.97 : 1.03),
         takeProfit: currentPrice * (priceChange > 0 ? 1.05 : 0.95),
+        strength: 'MODERATE',
+        timeframe: '1d',
+        reasoning: ['LSTM model predicts significant price movement.'],
+        indicators: { technical: 70, fundamental: 50, sentiment: 50, momentum: 70, volume: 60 },
       });
     }
 
@@ -396,7 +413,7 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Get predictions from multiple models
     const lstmSignals = await this.lstmPredictorStrategy(data);
     const meanReversionSignals = await this.meanReversionStrategy(data);
-    const momentumSignals = await this.momentumBreakoutStrategy(data);
+    const momentumSignals = await this.momentumBreakoutStrategy();
 
     // Ensemble voting mechanism
     const allSignals = [...lstmSignals, ...meanReversionSignals, ...momentumSignals];
@@ -415,6 +432,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'ensembleML',
         stopLoss: data[data.length - 1].close * 0.95,
         takeProfit: data[data.length - 1].close * 1.08,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ensemble ML models agree on BUY signal.'],
+        indicators: { technical: 80, fundamental: 60, sentiment: 60, momentum: 70, volume: 70 },
       });
     } else if (sellSignals.length > buySignals.length && sellSignals.length >= 2) {
       const avgConfidence =
@@ -428,6 +449,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'ensembleML',
         stopLoss: data[data.length - 1].close * 1.05,
         takeProfit: data[data.length - 1].close * 0.92,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ensemble ML models agree on SELL signal.'],
+        indicators: { technical: 80, fundamental: 60, sentiment: 60, momentum: 70, volume: 70 },
       });
     }
 
@@ -435,17 +460,17 @@ export class NextGenAITradingEngine extends EventEmitter {
   }
 
   // Add more strategy implementations...
-  private async momentumBreakoutStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async momentumBreakoutStrategy(): Promise<TradingSignal[]> {
     // Implementation for momentum breakout
     return [];
   }
 
-  private async bollingerMeanReversionStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async bollingerMeanReversionStrategy(): Promise<TradingSignal[]> {
     // Implementation for Bollinger Band mean reversion
     return [];
   }
 
-  private async macdMomentumStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async macdMomentumStrategy(): Promise<TradingSignal[]> {
     // Implementation for MACD momentum
     return [];
   }
@@ -549,57 +574,52 @@ export class NextGenAITradingEngine extends EventEmitter {
   }
 
   // More indicator implementations...
-  private calculateStochastic(
-    highs: number[],
-    lows: number[],
-    closes: number[],
-    kPeriod: number = 14
-  ) {
+  private calculateStochastic() {
     // Stochastic oscillator implementation
     return { k: [], d: [] };
   }
 
-  private calculateATR(highs: number[], lows: number[], closes: number[], period: number = 14) {
+  private calculateATR() {
     // Average True Range implementation
     return [];
   }
 
-  private calculateADX(highs: number[], lows: number[], closes: number[], period: number = 14) {
+  private calculateADX() {
     // Average Directional Index implementation
     return [];
   }
 
-  private calculateOBV(closes: number[], volumes: number[]) {
+  private calculateOBV() {
     // On-Balance Volume implementation
     return [];
   }
 
-  private calculateVWAP(highs: number[], lows: number[], closes: number[], volumes: number[]) {
+  private calculateVWAP() {
     // Volume Weighted Average Price implementation
     return [];
   }
 
-  private calculateIchimoku(highs: number[], lows: number[], closes: number[]) {
+  private calculateIchimoku() {
     // Ichimoku Cloud implementation
     return {};
   }
 
-  private calculateFibonacci(highs: number[], lows: number[]) {
+  private calculateFibonacci() {
     // Fibonacci retracement levels
     return {};
   }
 
-  private calculateElliottWave(prices: number[]) {
+  private calculateElliottWave() {
     // Elliott Wave pattern detection
     return {};
   }
 
-  private calculateGann(prices: number[]) {
+  private calculateGann() {
     // Gann angles and squares
     return {};
   }
 
-  private calculateMarketProfile(prices: number[], volumes: number[]) {
+  private calculateMarketProfile() {
     // Market Profile (TPO) analysis
     return {};
   }
@@ -724,6 +744,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'statisticalArbitrage',
         stopLoss: data[data.length - 1].close * (zScore > 2 ? 1.02 : 0.98),
         takeProfit: data[data.length - 1].close * (zScore > 2 ? 0.95 : 1.05),
+        strength: 'MODERATE',
+        timeframe: '1d',
+        reasoning: ['Statistical arbitrage z-score threshold met.'],
+        indicators: { technical: 70, fundamental: 50, sentiment: 50, momentum: 60, volume: 60 },
       });
     }
 
@@ -752,6 +776,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'triangularArbitrage',
         stopLoss: directPrice * (syntheticPrice > directPrice ? 0.999 : 1.001),
         takeProfit: directPrice * (syntheticPrice > directPrice ? 1.001 : 0.999),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Triangular arbitrage opportunity detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 50 },
       });
     }
 
@@ -782,6 +810,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'marketMaking',
         stopLoss: (currentPrice - spread) * 0.98,
         takeProfit: currentPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['High volume market making buy.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 },
       });
 
       signals.push({
@@ -793,6 +825,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'marketMaking',
         stopLoss: (currentPrice + spread) * 1.02,
         takeProfit: currentPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['High volume market making sell.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 },
       });
     }
 
@@ -831,6 +867,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'adaptiveTrend',
         stopLoss: currentEma21,
         takeProfit: data[data.length - 1].close * 1.05,
+        strength: 'STRONG',
+        timeframe: '4h',
+        reasoning: ['Adaptive trend following buy signal.'],
+        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 },
       });
     } else if (currentEma8 < currentEma21 && currentEma21 < currentEma55 && trendStrength > 0.02) {
       signals.push({
@@ -842,6 +882,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'adaptiveTrend',
         stopLoss: currentEma21,
         takeProfit: data[data.length - 1].close * 0.95,
+        strength: 'STRONG',
+        timeframe: '4h',
+        reasoning: ['Adaptive trend following sell signal.'],
+        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 },
       });
     }
 
@@ -894,6 +938,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'ichimokuTrend',
         stopLoss: kijunSen,
         takeProfit: currentPrice * 1.08,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ichimoku cloud bullish breakout.'],
+        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 },
       });
     } else if (currentPrice < cloudBottom && tenkanSen < kijunSen) {
       signals.push({
@@ -905,6 +953,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'ichimokuTrend',
         stopLoss: kijunSen,
         takeProfit: currentPrice * 0.92,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ichimoku cloud bearish breakdown.'],
+        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 },
       });
     }
 
@@ -915,7 +967,6 @@ export class NextGenAITradingEngine extends EventEmitter {
     if (data.length < 20) return [];
 
     const signals: TradingSignal[] = [];
-    const prices = data.map(d => d.close);
 
     // Detect common patterns
     const patterns = this.detectCandlestickPatterns(data.slice(-10));
@@ -931,6 +982,10 @@ export class NextGenAITradingEngine extends EventEmitter {
           strategy: 'patternRecognition',
           stopLoss: data[data.length - 1].close * (pattern.bullish ? 0.97 : 1.03),
           takeProfit: data[data.length - 1].close * (pattern.bullish ? 1.05 : 0.95),
+          strength: 'MODERATE',
+          timeframe: '1h',
+          reasoning: ['Pattern recognition: ' + pattern.type],
+          indicators: { technical: 70, fundamental: 40, sentiment: 50, momentum: 60, volume: 60 },
         });
       }
     }
@@ -966,6 +1021,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'volumeProfile',
         stopLoss: currentPrice * (currentPrice > volumeWeightedPrice ? 1.02 : 0.98),
         takeProfit: volumeWeightedPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Volume profile divergence detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 },
       });
     }
 
@@ -1007,6 +1066,10 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'onBalanceVolume',
         stopLoss: data[data.length - 1].close * (obvTrend > 0 ? 0.97 : 1.03),
         takeProfit: data[data.length - 1].close * (obvTrend > 0 ? 1.05 : 0.95),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['OBV divergence detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 },
       });
     }
 
@@ -1034,48 +1097,52 @@ export class NextGenAITradingEngine extends EventEmitter {
         strategy: 'deltaHedging',
         stopLoss: currentPrice * (delta > 0 ? 0.98 : 1.02),
         takeProfit: currentPrice * (delta > 0 ? 1.03 : 0.97),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Delta hedging threshold exceeded.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 60 },
       });
     }
 
     return signals;
   }
-  private async gammaScalpingStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async gammaScalpingStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async newsSentimentStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async newsSentimentStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async socialSentimentStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async socialSentimentStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async microstructureStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async microstructureStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async crossAssetStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async crossAssetStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async factorModelStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async factorModelStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async regimeDetectionStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async regimeDetectionStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async satelliteDataStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async satelliteDataStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async economicCalendarStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async economicCalendarStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async volatilityArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async volatilityArbitrageStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async darkPoolStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async darkPoolStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async cryptoArbitrageStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async cryptoArbitrageStrategy(): Promise<TradingSignal[]> {
     return [];
   }
-  private async neuralEnsembleStrategy(data: MarketData[]): Promise<TradingSignal[]> {
+  private async neuralEnsembleStrategy(): Promise<TradingSignal[]> {
     return [];
   }
 

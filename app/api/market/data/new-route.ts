@@ -259,7 +259,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Helper functions
-function calculateTechnicalIndicators(bars: any[]): any {
+function calculateTechnicalIndicators(bars: Record<string, unknown>[]): any {
   if (!bars || bars.length < 20) {
     return {};
   }

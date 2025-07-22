@@ -1,3 +1,4 @@
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import * as React from 'react';
 import dynamic from 'next/dynamic';

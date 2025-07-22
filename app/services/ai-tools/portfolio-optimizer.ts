@@ -1,4 +1,12 @@
-import { Select } from "../../../components/ui/select";
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';\n\nimport { Select } from "../../../components/ui/select";
 // AI Portfolio Optimizer - Modern Portfolio Theory + GPT Insights
 import { OpenAI } from 'openai';
 

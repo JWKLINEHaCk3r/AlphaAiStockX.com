@@ -1,4 +1,5 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card.tsx';
+
 /**
  * AlphaAI Stock Trading Platform - Card Components Fixer (ESM compatible)
  * Advanced AI-powered card component import and dependency resolver
@@ -179,8 +180,9 @@ function getRelativeCardImport(filePath) {
   const fromDir = path.dirname(filePath);
   let relPath = path.relative(fromDir, cardPath);
   if (!relPath.startsWith('.')) relPath = './' + relPath;
-  // Remove .tsx extension for import
-  relPath = relPath.replace(/\\/g, '/').replace(/\.tsx$/, '');
+  // Always use .tsx extension for ESM compatibility
+  relPath = relPath.replace(/\\/g, '/');
+  if (!relPath.endsWith('.tsx')) relPath += '.tsx';
   return relPath;
 }
 

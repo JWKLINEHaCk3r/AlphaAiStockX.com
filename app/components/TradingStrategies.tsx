@@ -1,5 +1,5 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import { Badge } from "../../components/ui/badge";
 import { Progress } from "../../components/ui/progress";
@@ -11,20 +11,14 @@ import { CardContent } from "../../components/ui/card";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 'use client';
-=======
 import { Select } from '@/components/ui/select';
 ('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import { useState } from 'react';
-<<<<<<< HEAD
-=======
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
 import { Brain, Activity, Plus, Settings, Play } from 'lucide-react';
 import { Strategy } from '@/app/types/trading';
 
-<<<<<<< HEAD
 interface TradingStrategy {
   id: number;
   name: string;
@@ -52,7 +46,6 @@ export default function TradingStrategies({
   botStatus = 'stopped',
 }: TradingStrategiesProps) {
   const [availableStrategies] = useState<TradingStrategy[]>([
-=======
 interface TradingStrategiesProps {
   activeStrategies: Strategy[];
   setActiveStrategies: (strategies: Strategy[] | ((prev: Strategy[]) => Strategy[])) => void;
@@ -61,7 +54,6 @@ interface TradingStrategiesProps {
 
 export default function TradingStrategies({ activeStrategies, setActiveStrategies, botStatus }: TradingStrategiesProps) {
   const [availableStrategies] = useState([
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
     {
       id: 1,
       name: 'AI Momentum',

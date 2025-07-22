@@ -1,3 +1,4 @@
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import { CardTitle } from "../components/ui/card";
@@ -9,7 +10,6 @@ import { Button } from "../components/ui/button";
 import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
-<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
 import {
   Brain,
@@ -19,7 +19,6 @@ import {
   Shield,
   Atom,
   Infinity,
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
   Sparkles,
   ArrowRight,
   Play,

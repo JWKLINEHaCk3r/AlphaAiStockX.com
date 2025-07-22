@@ -1,14 +1,12 @@
-
 "use client";
-
-// Force dynamic rendering to prevent static generation issues
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Button } from '../../components/ui/button';
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({

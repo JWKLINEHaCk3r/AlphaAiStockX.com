@@ -1,6 +1,9 @@
-import { Card } from '../../components/ui/card';
-import { Button } from "../../components/ui/button";
+
+"use client";
 import React from 'react';
+import { Card } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
+
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;

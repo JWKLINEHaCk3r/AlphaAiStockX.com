@@ -1,5 +1,5 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card';
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card';
 import { TabsTrigger } from "@/components/ui/tabs";
 import { TabsList } from "@/components/ui/tabs";
@@ -11,7 +11,6 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 'use client';
-=======
 import { TabsTrigger } from '@/components/ui/tabs';
 import { TabsList } from '@/components/ui/tabs';
 import { TabsContent } from '@/components/ui/tabs';
@@ -22,7 +21,6 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 ('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 
 // Force dynamic rendering to prevent static generation issues
 export const dynamic = 'force-dynamic';

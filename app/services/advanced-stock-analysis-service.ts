@@ -12,10 +12,10 @@ import { aiBrainService } from './ai-brain-service';
 
 export class AdvancedStockAnalysisService {
   private static instance: AdvancedStockAnalysisService;
-  private stockDatabase: Map<string, any> = new Map();
-  private historicalData: Map<string, any> = new Map();
-  private patternRecognition: Map<string, any> = new Map();
-  private volumeAnalysis: Map<string, any> = new Map();
+  private stockDatabase: Map<string, unknown> = new Map();
+  private historicalData: Map<string, unknown> = new Map();
+  private patternRecognition: Map<string, unknown> = new Map();
+  private volumeAnalysis: Map<string, unknown> = new Map();
 
   static getInstance(): AdvancedStockAnalysisService {
     if (!AdvancedStockAnalysisService.instance) {

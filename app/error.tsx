@@ -1,7 +1,8 @@
+
 "use client";
-import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
-import { Button } from "../components/ui/button";
 import React, { useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 import { RefreshCw, AlertTriangle } from 'lucide-react';
 
 export default function Error({

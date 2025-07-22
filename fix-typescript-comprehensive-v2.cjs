@@ -1,7 +1,4 @@
-import React from 'react';
-import { Alert } from "./components/ui/alert";
-import { Progress } from "./components/ui/progress";
-#!/usr/bin/env node
+// #!/usr/bin/env node
 /**
  * Comprehensive TypeScript fixes for AlphaAiStockX
  * This script fixes 'any' types, unused variables, and other TypeScript issues

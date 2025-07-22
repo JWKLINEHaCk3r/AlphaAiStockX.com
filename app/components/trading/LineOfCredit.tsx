@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Slider } from "../../../components/ui/slider";
@@ -11,20 +12,14 @@ import { Button } from "../../../components/ui/button";
 'use client';
 
 import type React from 'react';
-<<<<<<< HEAD
 import React, { useState } from 'react';
 
-<<<<<<< HEAD
 
-=======
 import { useState } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)
-=======
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import { CheckCheck, CreditCard, Wallet } from 'lucide-react';
 
 interface LineOfCreditProps {

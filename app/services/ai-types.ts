@@ -1,3 +1,6 @@
+export interface TechnicalIndicator {
+  calculate: (...args: any[]) => number | object;
+}
 // Extended types for AI trading engine
 
 export interface HistoricalDataPoint {
@@ -62,6 +65,8 @@ export interface HistoricalDataPoint {
 export interface MarketData {
   symbol: string;
   price: number;
+  high: number;
+  low: number;
   volume: number;
   change: number;
   changePercent: number;
@@ -80,6 +85,7 @@ export interface MarketData {
   timestamp: Date;
   sector?: string;
   industry?: string;
+  close?: number;
 }
 
 export interface TradingSignal {
@@ -88,6 +94,8 @@ export interface TradingSignal {
   confidence: number; // 0-100
   strength: 'WEAK' | 'MODERATE' | 'STRONG' | 'VERY_STRONG';
   timeframe: '1m' | '5m' | '15m' | '1h' | '4h' | '1d' | '1w';
+  strategy?: string;
+  price?: number;
   targetPrice?: number;
   stopLoss?: number;
   takeProfit?: number;

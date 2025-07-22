@@ -1,4 +1,12 @@
-// GPT-Trader Chatbot - Conversational Trading Assistant
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';\n\n// GPT-Trader Chatbot - Conversational Trading Assistant
 import { OpenAI } from 'openai';
 
 interface UserProfile {
@@ -415,7 +423,7 @@ Would you like me to elaborate on any specific aspect?`,
     return recommendations;
   }
 
-  async simulatePortfolio(userId: string, holdings: any[]): Promise<PortfolioSimulation> {
+  async simulatePortfolio(userId: string, holdings: Record<string, unknown>[]): Promise<PortfolioSimulation> {
     const userProfile = this.userProfiles.get(userId);
 
     // Calculate portfolio metrics

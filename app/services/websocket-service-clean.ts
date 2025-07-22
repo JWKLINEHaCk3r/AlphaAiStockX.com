@@ -22,7 +22,7 @@ export interface AISignal {
 export interface TradingUpdate {
   id: string;
   type: 'ORDER' | 'TRADE' | 'PORTFOLIO';
-  data: any;
+  data: unknown;
   timestamp: Date;
 }
 
@@ -34,7 +34,7 @@ export interface SentimentData {
 }
 
 export class EnhancedWebSocketService extends EventEmitter {
-  private socket: any = null;
+  private socket: unknown = null;
   private isConnected = false;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;

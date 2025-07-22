@@ -35,7 +35,7 @@ interface AISignal {
 
 interface TradingUpdate {
   type: 'POSITION' | 'ORDER' | 'EXECUTION' | 'PNL';
-  data: any;
+  data: unknown;
   timestamp: number;
 }
 
@@ -52,7 +52,7 @@ interface SentimentData {
 
 // Server-safe WebSocket service that doesn't import socket.io-client
 export class EnhancedWebSocketService extends EventEmitter {
-  private socket: any = null;
+  private socket: unknown = null;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 10;
   private reconnectDelay = 1000;

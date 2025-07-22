@@ -1,8 +1,13 @@
-<<<<<<< HEAD
-import { Alert } from "../../components/ui/alert";
-=======
+// Strategy interface for NextGenAITradingEngine
+export interface Strategy {
+  name: string;
+  execute: (data: MarketData[]) => Promise<TradingSignal[]>;
+  params: Record<string, unknown>;
+}
 import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+import type { MarketData, TradingSignal } from "../services/ai-types";
+// Strategy interface for NextGenAITradingEngine
+// (Removed duplicate Strategy interface)
 // Comprehensive TypeScript interfaces for the AlphaAiStockX platform
 
 export interface Position {

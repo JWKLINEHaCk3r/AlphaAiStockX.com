@@ -21,7 +21,7 @@ interface User {
   tradingLevel: number;
   aiAccess: boolean;
   preferences: any;
-  portfolios?: any[];
+  portfolios?: Record<string, unknown>[];
   social?: any;
   unreadNotifications?: number;
 }
@@ -108,11 +108,11 @@ interface TradingContextType {
 
   // AI Trading
   aiSignals: AISignal[];
-  aiModels: any[];
+  aiModels: Record<string, unknown>[];
 
   // Social Trading
-  socialFeed: any[];
-  notifications: any[];
+  socialFeed: Record<string, unknown>[];
+  notifications: Record<string, unknown>[];
 
   // Real-time connections
   isConnected: boolean;

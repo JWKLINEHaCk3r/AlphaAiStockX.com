@@ -202,7 +202,7 @@ export class InputValidator {
     } else if (Array.isArray(obj)) {
       return obj.map(item => this.sanitizeJson(item));
     } else if (obj !== null && typeof obj === 'object') {
-      const sanitized: any = {};
+      const sanitized: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(obj)) {
         sanitized[this.sanitizeString(key)] = this.sanitizeJson(value);
       }

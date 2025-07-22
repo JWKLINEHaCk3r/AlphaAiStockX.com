@@ -1,4 +1,12 @@
-// AI Market Predictor - Vision + LLM Fusion for Market Analysis
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';\n\n// AI Market Predictor - Vision + LLM Fusion for Market Analysis
 import { OpenAI } from 'openai';
 
 interface ChartAnalysis {

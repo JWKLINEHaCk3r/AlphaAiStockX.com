@@ -1,3 +1,44 @@
+import {
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
+} from '../../types/trading-types';\n\nimport { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import Navigation from 'components/ui/navigation/index.tsx';
 import { SelectValue } from "../../../components/ui/select";
@@ -119,7 +160,7 @@ interface User {
   copyTraders: number;
   balance: number;
   preferences: any;
-  achievements: any[];
+  achievements: Record<string, unknown>[];
   posts: number;
   lastActive: string;
 }
@@ -346,7 +387,7 @@ interface Portfolio {
   value: number;
   pnl: number;
   pnlPercent: number;
-  positions: any[];
+  positions: Record<string, unknown>[];
   allocation: any;
   riskLevel: string;
 }

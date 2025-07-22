@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-=======
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 'use client';
 import React, { useEffect, useRef } from 'react';
 

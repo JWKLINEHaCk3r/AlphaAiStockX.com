@@ -1,4 +1,12 @@
-import { Alert } from '@/components/ui/alert';
+import {
+  Position,
+  TechnicalIndicators,
+  VolumeProfile,
+  BollingerBands,
+  SupportResistance,
+  OptimalAllocations,
+  RebalanceAction,
+} from '../types/trading-types';\n\nimport { Alert } from '@/components/ui/alert';
 import type {
   MarketData,
   NewsItem,
