@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AlertDescription } from "../../../components/ui/alert";
 import { Alert } from "../../../components/ui/alert";
 import { SelectValue } from "../../../components/ui/select";
@@ -8,11 +8,11 @@ import { SelectContent } from "../../../components/ui/select";
 import { Select } from "../../../components/ui/select";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
-import { Card } from "../../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 
 
-import { useState } from 'react';
+
 import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';
 
 interface PaymentFormProps {
