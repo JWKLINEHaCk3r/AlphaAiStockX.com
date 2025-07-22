@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter, TradingCard, MarketCard, PortfolioCard, AIAnalysisCard, ProfitCard, RiskCard, SignalCard } from './components/ui/card';
 /**
  * AlphaAI Stock Trading Platform - Card Components Fixer (ESM compatible)
  * Advanced AI-powered card component import and dependency resolver
@@ -204,6 +204,8 @@ async function fixCardImports() {
 
     for (const file of files) {
       const filePath = path.join(process.cwd(), file);
+      // Skip directories
+      if (fs.statSync(filePath).isDirectory()) continue;
       let content = fs.readFileSync(filePath, 'utf8');
       let modified = false;
 

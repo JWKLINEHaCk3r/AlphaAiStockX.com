@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card';
 <<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card';
 import { AlertDescription } from "../../../components/ui/alert";
@@ -14,12 +15,6 @@ import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
 =======
-import { CardTitle } from '@/components/ui/card';
-import { CardHeader } from '@/components/ui/card';
-import { CardFooter } from '@/components/ui/card';
-import { CardDescription } from '@/components/ui/card';
-import { CardContent } from '@/components/ui/card';
-import { Card } from '@/components/ui/card';
 ('use client');
 >>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 

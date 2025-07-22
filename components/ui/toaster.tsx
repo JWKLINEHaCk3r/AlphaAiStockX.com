@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import { Toaster } from "./toaster";
-import { Toast } from "./toast";
-'use client';
-=======
-import { Toaster } from '@/components/ui/toaster';
-import { Toast } from '@/components/ui/toast';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 import React from 'react';
 
 import {

@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-import { VoiceControl } from "./voice-control";
 import { Card, CardContent } from './card';
-import { CardContent } from "./card";
-import { Card } from "./card";
-import { Button } from "./button";
-'use client';
-=======
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
 
-import { useState, useEffect } from 'react';
-import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Mic, MicOff, VolumeX } from 'lucide-react';
 
 interface VoiceControlProps {
   className?: string;
@@ -139,7 +130,7 @@ export function VoiceControl({ className }: VoiceControlProps) {
                 {isListening ? 'Listening...' : isSpeaking ? 'Speaking...' : 'Voice AI'}
               </span>
               {transcript && (
-                <span className="text-xs text-neon-cyan max-w-48 truncate">"{transcript}"</span>
+                <span className="text-xs text-neon-cyan max-w-48 truncate">&quot;{transcript}&quot;</span>
               )}
             </div>
           </div>

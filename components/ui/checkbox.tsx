@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import { Checkbox } from "./checkbox";
-<<<<<<< HEAD
-'use client';
-=======
-import { Checkbox } from '@/components/ui/checkbox';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
+
+"use client";
 
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { Check } from 'lucide-react';
-
 import { cn } from '@/lib/utils';
 
 const Checkbox = React.forwardRef<
@@ -34,32 +26,3 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
-=======
-"use client"
-
-import * as React from "react"
-import { Check } from "lucide-react"
-
-interface CheckboxProps {
-  checked?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-  className?: string;
-  children?: React.ReactNode;
-}
-
-export function Checkbox({ checked = false, onCheckedChange, className = "", children }: CheckboxProps) {
-  return (
-    <label className={`flex items-center space-x-2 cursor-pointer ${className}`}>
-      <div
-        className={`w-4 h-4 border border-gray-300 rounded flex items-center justify-center ${
-          checked ? 'bg-purple-500 border-purple-500' : 'bg-white'
-        }`}
-        onClick={() => onCheckedChange?.(!checked)}
-      >
-        {checked && <Check className="h-3 w-3 text-white" />}
-      </div>
-      {children && <span className="text-sm">{children}</span>}
-    </label>
-  )
-}
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)

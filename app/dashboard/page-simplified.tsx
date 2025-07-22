@@ -1,3 +1,4 @@
+import { Card } from '../../components/ui/card';
 import Navigation from 'components/ui/navigation/index.tsx';
 <<<<<<< HEAD
 import { Card } from '../../components/ui/card';

@@ -1,3 +1,5 @@
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card';
 import { Badge } from "./components/ui/badge";
 import { Progress } from "./components/ui/progress";
 import { Card } from "./components/ui/card";

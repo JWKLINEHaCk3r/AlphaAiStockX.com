@@ -1,19 +1,5 @@
-<<<<<<< HEAD
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './card';
-import { CardTitle } from "./card";
-import { CardHeader } from "./card";
-import { CardFooter } from "./card";
-import { CardDescription } from "./card";
-import { CardContent } from "./card";
-import { Card } from "./card";
-=======
-import { CardTitle } from '@/components/ui/card';
-import { CardHeader } from '@/components/ui/card';
-import { CardFooter } from '@/components/ui/card';
-import { CardDescription } from '@/components/ui/card';
-import { CardContent } from '@/components/ui/card';
-import { Card } from '@/components/ui/card';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
+
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
@@ -39,77 +25,6 @@ const cardVariants = cva('glass-card relative overflow-hidden transition-all dur
   },
 });
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>
->(({ className, variant, glow, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      cardVariants({ variant, glow }),
-      'before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/5 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500',
-      className
-    )}
-    {...props}
-  />
-));
-Card.displayName = 'Card';
+// Only use the imported Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter from '@/components/ui/card'
 
-const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('flex flex-col space-y-2 p-8 relative z-10', className)}
-      {...props}
-    />
-  )
-);
-CardHeader.displayName = 'CardHeader';
-
-const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, children, ...props }, ref) => (
-    <h3
-      ref={ref}
-      className={cn(
-        'text-2xl font-bold leading-none tracking-tight text-white relative z-10',
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </h3>
-  )
-);
-CardTitle.displayName = 'CardTitle';
-
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn('text-sm text-muted-foreground relative z-10', className)}
-    {...props}
-  />
-));
-CardDescription.displayName = 'CardDescription';
-
-const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('p-8 pt-0 relative z-10', className)} {...props} />
-  )
-);
-CardContent.displayName = 'CardContent';
-
-const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('flex items-center p-8 pt-0 relative z-10', className)}
-      {...props}
-    />
-  )
-);
-CardFooter.displayName = 'CardFooter';
-
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';

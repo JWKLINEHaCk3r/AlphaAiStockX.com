@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card';
 import { CardTitle } from "../components/ui/card";
 import { CardFooter } from "../components/ui/card";
 import { CardDescription } from "../components/ui/card";

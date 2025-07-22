@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
@@ -6,13 +7,13 @@ import { Tabs } from "../../../components/ui/tabs";
 import { AlertDescription } from "../../../components/ui/alert";
 import { Alert } from "../../../components/ui/alert";
 import { AvatarImage } from "../../../components/ui/avatar";
+
 import { AvatarFallback } from "../../../components/ui/avatar";
 import { Avatar } from "../../../components/ui/avatar";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 // Next-Generation AI Trading Platform - Comprehensive Multi-User Platform
-'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSession, signOut } from 'next-auth/react';

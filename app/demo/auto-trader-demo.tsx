@@ -1,4 +1,5 @@
 import { Card } from '../../components/ui/card';
+import { Card } from '../../components/ui/card';
 import { TabsTrigger } from "../../components/ui/tabs";
 import { TabsList } from "../../components/ui/tabs";
 import { TabsContent } from "../../components/ui/tabs";

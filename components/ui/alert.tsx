@@ -1,62 +1,3 @@
-<<<<<<< HEAD
-import { AlertTitle } from "./alert";
-import { AlertDescription } from "./alert";
-import { Alert } from "./alert";
-<<<<<<< HEAD
-=======
-import { AlertTitle } from '@/components/ui/alert';
-import { AlertDescription } from '@/components/ui/alert';
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
-import * as React from 'react';
-
-export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'destructive';
-  title?: string;
-  description?: string;
-}
-
-export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = 'default', title, description, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={`border rounded-md p-4 ${
-        variant === 'destructive'
-          ? 'bg-red-50 border-red-400 text-red-900'
-          : 'bg-blue-50 border-blue-400 text-blue-900'
-      } ${className || ''}`}
-      role="alert"
-      {...props}
-    >
-      {title && <AlertTitle>{title}</AlertTitle>}
-      {description && <AlertDescription>{description}</AlertDescription>}
-      {props.children}
-    </div>
-  )
-);
-Alert.displayName = 'Alert';
-
-export function AlertTitle({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={`font-bold mb-1 ${className || ''}`}>{children}</div>;
-}
-
-export function AlertDescription({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={`text-sm opacity-80 ${className || ''}`}>{children}</div>;
-}
-=======
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
@@ -119,4 +60,3 @@ const AlertDescription = React.forwardRef<
 AlertDescription.displayName = 'AlertDescription'
 
 export { Alert, AlertTitle, AlertDescription }
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys)

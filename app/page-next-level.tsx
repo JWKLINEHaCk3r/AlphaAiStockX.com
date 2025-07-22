@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
 import { CardTitle } from "../components/ui/card";
 import { CardDescription } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
@@ -9,16 +10,6 @@ import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
 <<<<<<< HEAD
-import { 
-  Brain, 
-  BarChart3, 
-  Zap, 
-  TrendingUp, 
-  Shield, 
-  Atom, 
-  Infinity, 
-=======
-import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   Brain,

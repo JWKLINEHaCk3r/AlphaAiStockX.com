@@ -1,3 +1,5 @@
+"use client";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { Calendar } from "../../../components/ui/calendar";
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
@@ -6,9 +8,7 @@ import { Tabs } from "../../../components/ui/tabs";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";
 import { Input } from "../../../components/ui/input";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Brain,
@@ -187,137 +187,121 @@ export default function AITradingAdvisor({ className = '' }: AITradingAdvisorPro
   }, [selectedStock]);
 
   const initializeServices = async () => {
-    await advancedStockAnalysisService.initialize();
-    await legalComplianceService.initialize();
-  };
-
-  const loadStockData = async () => {
-    try {
-      const stocks = await advancedStockAnalysisService.getAllStocksWithScores();
-      setAllStocks(stocks);
-    } catch (error) {
-      console.error('Error loading stock data:', error);
-    }
-  };
-
-  const loadStockAnalysis = async (symbol: string) => {
-    setLoading(true);
-    try {
-      const analysis = await advancedStockAnalysisService.getComprehensiveStockAnalysis(symbol);
-      setStockAnalysis(analysis);
-    } catch (error) {
-      console.error('Error loading stock analysis:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-400';
-    if (score >= 65) return 'text-blue-400';
-    if (score >= 45) return 'text-yellow-400';
-    if (score >= 30) return 'text-orange-400';
-    return 'text-red-400';
-  };
-
-  const getScoreBadgeColor = (score: number) => {
-    if (score >= 80) return 'bg-green-600';
-    if (score >= 65) return 'bg-blue-600';
-    if (score >= 45) return 'bg-yellow-600';
-    if (score >= 30) return 'bg-orange-600';
-    return 'bg-red-600';
-  };
-
-  const getMarketIcon = (classification: string) => {
-    if (classification.includes('BULL')) return <TrendingUp className="h-5 w-5 text-green-400" />;
-    if (classification.includes('BEAR')) return <TrendingDown className="h-5 w-5 text-red-400" />;
-    return <Minus className="h-5 w-5 text-yellow-400" />;
-  };
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
-
-  const formatVolume = (volume: number) => {
-    if (volume >= 1000000) {
-      return `${(volume / 1000000).toFixed(1)}M`;
-    } else if (volume >= 1000) {
-      return `${(volume / 1000).toFixed(1)}K`;
-    }
-    return volume.toString();
-  };
-
   // Show disclaimer first
   if (!disclaimerAccepted) {
     const disclaimers = legalComplianceService.getRequiredDisclaimer('ai_analysis');
-
     return (
-      <div className={`space-y-6 ${className}`}>
-        <Card className="bg-slate-800/50 backdrop-blur-sm border-yellow-500/30">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-3">
-              <AlertTriangle className="h-6 w-6 text-yellow-400" />
-              Important Disclaimers
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {disclaimers.map((disclaimer, index) => (
-              <div key={index} className="space-y-3">
-                <h3 className="text-white font-semibold">{disclaimer.title}</h3>
-                <div className="text-slate-300 text-sm whitespace-pre-line bg-slate-700/30 p-4 rounded-lg">
-                  {disclaimer.content}
+      <React.Fragment>
+        <div className={`space-y-6 ${className}`}>
+          <Card className="bg-slate-800/50 backdrop-blur-sm border-yellow-500/30">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-3">
+                <AlertTriangle className="h-6 w-6 text-yellow-400" />
+                Important Disclaimers
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {disclaimers.map((disclaimer, index) => (
+                <div key={index} className="space-y-3">
+                  <h3 className="text-white font-semibold">{disclaimer.title}</h3>
+                  <div className="text-slate-300 text-sm whitespace-pre-line bg-slate-700/30 p-4 rounded-lg">
+                    {disclaimer.content}
+                  </div>
                 </div>
+              ))}
+              <div className="flex items-center gap-4 pt-4 border-t border-slate-600">
+                <Button
+                  onClick={() => setDisclaimerAccepted(true)}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  <CheckCircle className="h-4 w-4 mr-2" />I Understand and Accept
+                </Button>
+                <p className="text-slate-400 text-sm">
+                  You must accept these disclaimers to continue
+                </p>
               </div>
-            ))}
-
-            <div className="flex items-center gap-4 pt-4 border-t border-slate-600">
-              <Button
-                onClick={() => setDisclaimerAccepted(true)}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                <CheckCircle className="h-4 w-4 mr-2" />I Understand and Accept
-              </Button>
-              <p className="text-slate-400 text-sm">
-                You must accept these disclaimers to continue
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      </React.Fragment>
     );
   }
-
   return (
-    <div className={`space-y-6 ${className}`}>
-      {/* Header */}
-      <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/30 backdrop-blur-xl">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-3 text-2xl">
-            <Brain className="h-8 w-8 text-blue-400" />
-            AI Trading Advisor
-            <Badge className="bg-gradient-to-r from-green-500 to-blue-500">
-              <Zap className="h-3 w-3 mr-1" />
-              Live Analysis
-            </Badge>
-          </CardTitle>
-          <CardDescription className="text-blue-200">
-            Advanced AI-powered stock analysis with real-time scoring and market classification
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
-      {/* Main Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 bg-slate-800/50 backdrop-blur-sm">
-          <TabsTrigger value="dashboard" className="flex items-center gap-2">
-            <BarChart3 className="h-4 w-4" />
-            Dashboard
-          </TabsTrigger>
+    <React.Fragment>
+      <div className={`space-y-6${className ? ` ${className}` : ''}`}>
+        {/* Header */}
+        <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/30 backdrop-blur-xl">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-3 text-2xl">
+              <Brain className="h-8 w-8 text-blue-400" />
+              AI Trading Advisor
+              <Badge className="bg-gradient-to-r from-green-500 to-blue-500">
+                <Zap className="h-3 w-3 mr-1" />
+                Live Analysis
+              </Badge>
+            </CardTitle>
+            <CardDescription className="text-blue-200">
+              Advanced AI-powered stock analysis with real-time scoring and market classification
+            </CardDescription>
+          </CardHeader>
+        </Card>
+        {/* Main Tabs */}
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-4 bg-slate-800/50 backdrop-blur-sm">
+            <TabsTrigger value="dashboard" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Dashboard
+            </TabsTrigger>
+            <TabsTrigger value="analysis" className="flex items-center gap-2">
+              <Brain className="h-4 w-4" />
+              Stock Analysis
+            </TabsTrigger>
+            {/* Top Stocks */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-slate-800/50 backdrop-blur-sm border-green-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-green-400" />
+                    Top AI Buy Scores
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {allStocks.slice(0, 5).map((stock, index) => (
+                      <div
+                        key={stock.symbol}
+                        className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg cursor-pointer hover:bg-slate-700/50 transition-colors"
+                        onClick={() => setSelectedStock(stock.symbol)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="text-white font-semibold">{index + 1}</div>
+                          <div>
+                            <div className="text-white font-medium">{stock.symbol}</div>
+                            <div className="text-slate-400 text-sm">{stock.name}</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div
+                            className={`text-lg font-bold ${getScoreColor(stock.buyScore.overall)}`}
+                          >
+                            {stock.buyScore.overall}
+                          </div>
+                          <Badge className={getScoreBadgeColor(stock.buyScore.overall)}>
+                            {stock.buyScore.rating}
+                          </Badge>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsList>
+          {/* ...rest of the component... */}
+        </Tabs>
+      </div>
+    </React.Fragment>
+  );
           <TabsTrigger value="analysis" className="flex items-center gap-2">
             <Brain className="h-4 w-4" />
             Stock Analysis

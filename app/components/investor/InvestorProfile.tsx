@@ -1,3 +1,4 @@
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 <<<<<<< HEAD
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";

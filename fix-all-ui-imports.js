@@ -1,3 +1,4 @@
+// All static UI component imports removed as per script instructions
 // REMOVE ALL STATIC UI COMPONENT IMPORTS ABOVE THIS LINE
 // Only keep fs, path, glob imports for script operation
 import fs from 'fs';

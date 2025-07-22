@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-import { Toast } from "./toast";
-'use client';
-=======
-import { Toast } from '@/components/ui/toast';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
-
+"use client";
 import * as React from 'react';
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import { cva, type VariantProps } from 'class-variance-authority';

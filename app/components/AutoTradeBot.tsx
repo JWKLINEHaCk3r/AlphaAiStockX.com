@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card';
 import React from 'react';
 import { TabsTrigger } from "../../components/ui/tabs";
 import { TabsList } from "../../components/ui/tabs";

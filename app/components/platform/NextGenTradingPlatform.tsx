@@ -1,3 +1,4 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import Navigation from 'components/ui/navigation/index.tsx';
 import { SelectValue } from "../../../components/ui/select";
 import { SelectTrigger } from "../../../components/ui/select";

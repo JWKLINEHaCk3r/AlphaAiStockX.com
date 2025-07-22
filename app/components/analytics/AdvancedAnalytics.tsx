@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "../../../components/ui/tabs";
 import { Badge } from "../../../components/ui/badge";
 import { Progress } from "../../../components/ui/progress";

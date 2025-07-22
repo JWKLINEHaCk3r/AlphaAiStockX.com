@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { Card } from '../../components/ui/card';
-import { Card } from "../../components/ui/card";
-=======
-import { Card } from '@/components/ui/card';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
 // Alternative Data Service for unique market insights
 
 interface SatelliteData {

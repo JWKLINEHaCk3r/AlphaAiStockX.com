@@ -1,32 +1,8 @@
-<<<<<<< HEAD
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card';
-import { DialogTrigger } from "../components/ui/dialog";
-import { DialogTitle } from "../components/ui/dialog";
-import { DialogHeader } from "../components/ui/dialog";
-import { DialogContent } from "../components/ui/dialog";
-import { Dialog } from "../components/ui/dialog";
-import { CardTitle } from "../components/ui/card";
-import { CardDescription } from "../components/ui/card";
-import { CardContent } from "../components/ui/card";
-import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-=======
-import { DialogTrigger } from '@/components/ui/dialog';
-import { DialogTitle } from '@/components/ui/dialog';
-import { DialogHeader } from '@/components/ui/dialog';
-import { DialogContent } from '@/components/ui/dialog';
-import { Dialog } from '@/components/ui/dialog';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.
-import React from 'react';
-export { default } from './page-simple';
+import * as React from 'react';
 import dynamic from 'next/dynamic';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { useState, useEffect, useRef } from 'react';
+import { Button } from '@/components/ui/button';
 
 // Dynamic imports for client-side only components
 const FloatingElements = dynamic(() => Promise.resolve(() => <div />), { ssr: false });

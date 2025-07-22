@@ -1,5 +1,5 @@
+"use client";
 import { Switch } from "./switch";
-('use client');
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
