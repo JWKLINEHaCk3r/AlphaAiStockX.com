@@ -1,20 +1,10 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Card components are referenced by name only; no .tsx import for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
 // Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
 import { Badge } from "./components/ui/badge";
-import { CardTitle } from "./components/ui/card";
-import { CardHeader } from "./components/ui/card";
-import { CardDescription } from "./components/ui/card";
-import { CardContent } from "./components/ui/card";
-import { Card } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-#!/usr/bin/env node
 
 const fs = require('fs');
 const path = require('path');
@@ -129,13 +119,13 @@ function fixMissingImports(filePath) {
 
     if (modified) {
       fs.writeFileSync(filePath, content);
-      console.log(`✅ Fixed: ${path.relative(process.cwd(), filePath)}`);
+      console.log('Fixed: ' + path.relative(process.cwd(), filePath));
       return true;
     }
 
     return false;
   } catch (error) {
-    console.error(`❌ Error processing ${filePath}:`, error.message);
+    console.error('Error processing ' + filePath + ': ' + error.message);
     return false;
   }
 }
@@ -146,13 +136,13 @@ function main() {
   const appDir = path.join(projectRoot, 'app', 'components');
 
   if (!fs.existsSync(appDir)) {
-    console.error('❌ app/components directory not found');
+    console.error('app/components directory not found');
     process.exit(1);
   }
 
-  console.log('🔍 Finding TypeScript files with missing UI imports...');
+  console.log('Finding TypeScript files with missing UI imports...');
   const tsxFiles = findTsxFiles(appDir);
-  console.log(`📁 Found ${tsxFiles.length} .tsx files`);
+  console.log('Found ' + tsxFiles.length + ' .tsx files');
 
   let fixedCount = 0;
 
@@ -162,10 +152,10 @@ function main() {
     }
   });
 
-  console.log(`\n✨ Fixed ${fixedCount} files`);
+  console.log('\nFixed ' + fixedCount + ' files');
 
   if (fixedCount > 0) {
-    console.log('🎯 Running TypeScript check to verify fixes...');
+    console.log('Running TypeScript check to verify fixes...');
   }
 }
 

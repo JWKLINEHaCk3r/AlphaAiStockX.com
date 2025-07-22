@@ -1,22 +1,9 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
-
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
+// Removed direct import of .tsx file for Node.js compatibility
 // Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
-import { Badge } from "./components/ui/badge";
-import { CardTitle } from "./components/ui/card";
-import { CardHeader } from "./components/ui/card";
-import { CardDescription } from "./components/ui/card";
-import { CardContent } from "./components/ui/card";
-import { Card } from "./components/ui/card";
-#!/usr/bin/env node
-
-#!/usr/bin/env node
-const path = require('path');
+import path from 'path';
 
 console.log('🔍 Starting UI imports fixer...');
 

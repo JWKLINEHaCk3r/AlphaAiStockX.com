@@ -1,8 +1,11 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './components/ui/card.tsx';
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Card components are referenced by name only; no .tsx import for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
 
 // Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "./components/ui/card";
+// Removed all direct and dynamic imports of card components for Node.js compatibility
 import { Badge } from "./components/ui/badge";
 import { Progress } from "./components/ui/progress";
 import { Button } from "./components/ui/button";
@@ -42,47 +45,7 @@ function fixCardImports(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
-    // Check if file uses Card components but doesn't import them
-    const usesCard =
-      /\bCard\b/.test(content) ||
-      /\bCardContent\b/.test(content) ||
-      /\bCardHeader\b/.test(content) ||
-      /\bCardTitle\b/.test(content);
-    const hasCardImport = /import.*Card.*from.*@\/components\/ui\/card/.test(content);
-
-    if (usesCard && !hasCardImport) {
-      // Find the line with other UI imports
-      const buttonImportMatch = content.match(
-        /import.*Button.*from.*@\/components\/ui\/button.*;\n/
-      );
-      const badgeImportMatch = content.match(/import.*Badge.*from.*@\/components\/ui\/badge.*;\n/);
-      const progressImportMatch = content.match(
-        /import.*Progress.*from.*@\/components\/ui\/progress.*;\n/
-      );
-
-      let insertAfter = null;
-      if (buttonImportMatch) {
-        insertAfter = buttonImportMatch[0];
-      } else if (badgeImportMatch) {
-        insertAfter = badgeImportMatch[0];
-      } else if (progressImportMatch) {
-        insertAfter = progressImportMatch[0];
-      }
-
-      if (insertAfter) {
-        // Determine which Card components are used
-        const cardComponents = [];
-        if (/\bCard\b/.test(content)) cardComponents.push('Card');
-        if (/\bCardContent\b/.test(content)) cardComponents.push('CardContent');
-        if (/\bCardHeader\b/.test(content)) cardComponents.push('CardHeader');
-        if (/\bCardTitle\b/.test(content)) cardComponents.push('CardTitle');
-        if (/\bCardDescription\b/.test(content)) cardComponents.push('CardDescription');
-
-        const cardImport = `\n`;
-        content = content.replace(insertAfter, insertAfter + cardImport);
-        modified = true;
-      }
-    }
+    // Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts
 
     // Fix Badge variant prop issues
     if (/variant="outline"/.test(content)) {
@@ -93,13 +56,13 @@ function fixCardImports(filePath) {
 
     if (modified) {
       fs.writeFileSync(filePath, content);
-      console.log(`✅ Fixed: ${filePath}`);
+      console.log('Fixed: ' + filePath);
       return true;
     }
 
     return false;
   } catch (error) {
-    console.error(`❌ Error processing ${filePath}:`, error.message);
+    console.error('Error processing ' + filePath + ': ' + error.message);
     return false;
   }
 }
@@ -110,13 +73,13 @@ function main() {
   const appDir = path.join(projectRoot, 'app');
 
   if (!fs.existsSync(appDir)) {
-    console.error('❌ app directory not found');
+    console.error('app directory not found');
     process.exit(1);
   }
 
-  console.log('🔍 Finding TypeScript files...');
+  console.log('Finding TypeScript files...');
   const tsxFiles = findTsxFiles(appDir);
-  console.log(`📁 Found ${tsxFiles.length} .tsx files`);
+  console.log('Found ' + tsxFiles.length + ' .tsx files');
 
   let fixedCount = 0;
 
@@ -126,8 +89,8 @@ function main() {
     }
   });
 
-  console.log(`\n✨ Fixed ${fixedCount} files`);
-  console.log('🎯 Run TypeScript check to see error reduction');
+  console.log('\nFixed ' + fixedCount + ' files');
+  console.log('Run TypeScript check to see error reduction');
 }
 
 main();

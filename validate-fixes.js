@@ -1,6 +1,5 @@
-import React from 'react';
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 console.log('🔍 Validating AlphaAI StockX Fixes...');
 console.log('=====================================');
@@ -57,7 +56,7 @@ keyFiles.forEach(filePath => {
   const fullPath = path.resolve(filePath);
 
   if (!fs.existsSync(fullPath)) {
-    console.log(`⚠️  ${filePath} - File not found`);
+    console.log('File not found: ' + filePath);
     return;
   }
 
@@ -87,7 +86,7 @@ keyFiles.forEach(filePath => {
         console.log(`  ❌ ${checkName}`);
       }
     } catch (error) {
-      console.log(`  ⚠️  ${checkName} - Error: ${error.message}`);
+      console.log('Error in ' + checkName + ': ' + error.message);
     }
   });
 

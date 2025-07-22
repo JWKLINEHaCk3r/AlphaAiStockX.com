@@ -1,18 +1,8 @@
-import { Card, CardContent } from './components/ui/card.tsx';
-import { Card, CardContent } from './components/ui/card.tsx';
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-// Removed direct import of .tsx file for Node.js compatibility
-#!/usr/bin/env node
-// Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
-import { CardContent } from "./components/ui/card";
-import { Card } from "./components/ui/card";
-#!/usr/bin/env node
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function processFile(filePath) {
   try {
@@ -76,7 +66,7 @@ function findFiles(dir, extensions = ['.tsx', '.ts']) {
           files.push(fullPath);
         }
       }
-    } catch (error) {
+    } catch {
       // Skip directories we can't read
     }
   }

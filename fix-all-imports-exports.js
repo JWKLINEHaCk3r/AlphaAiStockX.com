@@ -1,4 +1,6 @@
-import { Card, CardContent } from './components/ui/card.tsx';
+
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
 
 // Removed direct import of .tsx file for Node.js compatibility
 // Removed direct import of .tsx file for Node.js compatibility
@@ -7,8 +9,6 @@ import { Card, CardContent } from './components/ui/card.tsx';
 // Removed direct import of .tsx file for Node.js compatibility
 #!/usr/bin/env node
 // Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
-import { CardContent } from "./components/ui/card";
-import { Card } from "./components/ui/card";
 console.log('🔧 Fixing all exports and imports in AlphaAI StockX...');
 
 // Function to fix React imports

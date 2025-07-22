@@ -1,6 +1,6 @@
-import { Card } from './components/ui/card.tsx';
 
-// Removed direct import of .tsx file for Node.js compatibility
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Card component is referenced by name only; no .tsx import for Node.js compatibility
 // ...existing code...
 // ...existing code...
 // ...existing code...
@@ -48,16 +48,17 @@ function isFileOrDir(filePath) {
 // Utility: Log missing critical UI components for CI/CD clarity
 function logMissingComponent(componentPath) {
   if (!isFileOrDir(componentPath)) {
-    console.warn(`⚠️ Missing UI component: ${componentPath}`);
+    console.warn('Missing UI component: ' + componentPath);
   }
 }
 
 // UI Components mapping for automatic import resolution (relative paths)
 const UI_COMPONENTS = {
   'Button': 'components/ui/button',
-  'Card': 'components/ui/card',
-  'Input': 'components/ui/input',
-  'Label': 'components/ui/label',
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Card component is referenced by name only; no .tsx import for Node.js compatibility
   'Textarea': 'components/ui/textarea',
   'Select': 'components/ui/select',
   'SelectContent': 'components/ui/select',
@@ -216,7 +217,7 @@ async function fixUIImports() {
       // Add NavigationMenu import for navigation usage (handled above, no-op here)
     }
   } catch (error) {
-    console.error('❌ Error fixing UI imports:', error);
+    console.error('Error fixing UI imports:', error);
     process.exit(1);
   }
 }

@@ -1,3 +1,9 @@
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';

@@ -1,3 +1,9 @@
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
+import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.tsx';

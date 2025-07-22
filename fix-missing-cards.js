@@ -1,7 +1,5 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from './components/ui/card.tsx';
-
-// Removed direct import of .tsx file for Node.js compatibility
-// ...existing code...
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
 // ...existing code...
 // ...existing code...
 

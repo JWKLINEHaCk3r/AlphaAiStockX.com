@@ -1,3 +1,9 @@
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.tsx';
+import { Card } from '../../components/ui/card.tsx';
+import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';

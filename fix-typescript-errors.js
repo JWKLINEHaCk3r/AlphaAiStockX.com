@@ -1,4 +1,7 @@
-import { Card, CardContent } from './components/ui/card.tsx';
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Removed all direct and dynamic imports of .tsx files for Node.js compatibility
+// Card components are referenced by name only; no .tsx import for Node.js compatibility
+// Removed direct import of .tsx file for Node.js compatibility
 
 // Removed direct import of .tsx file for Node.js compatibility
 // Removed direct import of .tsx file for Node.js compatibility
@@ -105,11 +108,11 @@ function processFile(filePath) {
 
     if (modified) {
       fs.writeFileSync(filePath, content);
-      console.log(`Fixed: ${filePath}`);
+      console.log('Fixed: ' + filePath);
       return true;
     }
   } catch (error) {
-    console.error(`Error processing ${filePath}:`, error.message);
+    console.error('Error processing ' + filePath + ': ' + error.message);
   }
   return false;
 }
@@ -147,4 +150,4 @@ files.forEach(file => {
   }
 });
 
-console.log(`\nProcessed ${files.length} files, fixed ${fixedCount} files.`);
+console.log('\nProcessed ' + files.length + ' files, fixed ' + fixedCount + ' files.');
