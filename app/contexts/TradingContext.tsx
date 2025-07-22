@@ -6,6 +6,7 @@ import { useWebSocket } from '@/app/hooks/useWebSocket';
 import { apiClient } from '@/app/services/api-client';
 
 interface User {
+
   id: string;
   name: string;
   email: string;
@@ -24,9 +25,11 @@ interface User {
   portfolios?: Record<string, unknown>[];
   social?: any;
   unreadNotifications?: number;
+
 }
 
 interface Portfolio {
+
   id: string;
   name: string;
   description: string;
@@ -43,9 +46,11 @@ interface Portfolio {
   positions: Position[];
   positionsCount: number;
   lastUpdated: string;
+
 }
 
 interface Position {
+
   id: string;
   symbol: string;
   quantity: number;
@@ -56,9 +61,11 @@ interface Position {
   unrealizedPnLPercent: number;
   side: 'LONG' | 'SHORT';
   lastUpdated: string;
+
 }
 
 interface Order {
+
   id: string;
   symbol: string;
   side: 'BUY' | 'SELL';
@@ -71,9 +78,11 @@ interface Order {
   filledAt?: string;
   executionPrice?: number;
   executedQuantity?: number;
+
 }
 
 interface AISignal {
+
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
@@ -88,36 +97,38 @@ interface AISignal {
   timestamp: string;
   analysis: any;
   reasoning: string[];
+
 }
 
 interface TradingContextType {
-  // User & Authentication
+
+  // User & Authentication;
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
 
-  // Portfolios & Positions
+  // Portfolios & Positions;
   portfolios: Portfolio[];
   activePortfolio: Portfolio | null;
   positions: Position[];
   orders: Order[];
 
-  // Market Data
+  // Market Data;
   marketData: Record<string, any>;
   subscribedSymbols: string[];
 
-  // AI Trading
+  // AI Trading;
   aiSignals: AISignal[];
   aiModels: Record<string, unknown>[];
 
-  // Social Trading
+  // Social Trading;
   socialFeed: Record<string, unknown>[];
   notifications: Record<string, unknown>[];
 
-  // Real-time connections
+  // Real-time connections;
   isConnected: boolean;
 
-  // Actions
+  // Actions;
   refreshUserData: () => Promise<void>;
   refreshPortfolios: () => Promise<void>;
   refreshOrders: () => Promise<void>;
@@ -127,9 +138,10 @@ interface TradingContextType {
   unsubscribeFromSymbols: (symbols: string[]) => void;
   setActivePortfolio: (portfolio: Portfolio) => void;
 
-  // Real-time subscriptions
+  // Real-time subscriptions;
   subscribeToRealTimeData: () => void;
   unsubscribeFromRealTimeData: () => void;
+
 }
 
 const TradingContext = createContext<TradingContextType | undefined>(undefined);
@@ -143,28 +155,30 @@ export const useTradingContext = () => {
 };
 
 interface TradingProviderProps {
+
   children: ReactNode;
+
 }
 
 export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) => {
   const { data: session, status } = useSession();
   const {
-    socket,
-    isConnected,
-    marketData,
-    aiSignals: wsAISignals,
-    portfolioData: wsPortfolioData,
-    socialPosts,
-    tradeNotifications,
-    subscribeToMarketData,
-    unsubscribeFromMarketData,
-    subscribeToAISignals,
-    subscribeToPortfolio,
-    subscribeToSocialFeed,
-    subscribeToTradeNotifications,
+    socket,;
+    isConnected,;
+    marketData,;
+    aiSignals: wsAISignals,;
+    portfolioData: wsPortfolioData,;
+    socialPosts,;
+    tradeNotifications,;
+    subscribeToMarketData,;
+    unsubscribeFromMarketData,;
+    subscribeToAISignals,;
+    subscribeToPortfolio,;
+    subscribeToSocialFeed,;
+    subscribeToTradeNotifications,;
   } = useWebSocket(session?.user?.id);
 
-  // State
+  // State;
   const [user, setUser] = useState<User | null>(null);
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
   const [activePortfolio, setActivePortfolioState] = useState<Portfolio | null>(null);
@@ -179,7 +193,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
 
   const isAuthenticated = status === 'authenticated' && !!session?.user;
 
-  // Initialize user data
+  // Initialize user data;
   useEffect(() => {
     if (isAuthenticated) {
       refreshUserData();
@@ -194,39 +208,39 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
     }
   }, [isAuthenticated]);
 
-  // Update AI signals from WebSocket
+  // Update AI signals from WebSocket;
   useEffect(() => {
     if (wsAISignals.length > 0) {
       setAISignals(wsAISignals);
     }
   }, [wsAISignals]);
 
-  // Update portfolio data from WebSocket
+  // Update portfolio data from WebSocket;
   useEffect(() => {
     if (wsPortfolioData && activePortfolio) {
-      setActivePortfolioState(prev =>
-        prev
+      setActivePortfolioState(prev =>;
+        prev;
           ? {
-              ...prev,
-              totalValue: wsPortfolioData.totalValue,
-              dailyPnL: wsPortfolioData.dailyPnL,
-              dailyPnLPercent: wsPortfolioData.dailyPnLPercent,
-              cashBalance: wsPortfolioData.cashBalance,
-              lastUpdated: wsPortfolioData.timestamp,
+              ...prev,;
+              totalValue: wsPortfolioData.totalValue,;
+              dailyPnL: wsPortfolioData.dailyPnL,;
+              dailyPnLPercent: wsPortfolioData.dailyPnLPercent,;
+              cashBalance: wsPortfolioData.cashBalance,;
+              lastUpdated: wsPortfolioData.timestamp,;
             }
-          : null
+          : null;
       );
     }
   }, [wsPortfolioData, activePortfolio]);
 
-  // Update social feed from WebSocket
+  // Update social feed from WebSocket;
   useEffect(() => {
     if (socialPosts.length > 0) {
       setSocialFeed(prev => [...socialPosts, ...prev].slice(0, 100));
     }
   }, [socialPosts]);
 
-  // Update notifications from WebSocket
+  // Update notifications from WebSocket;
   useEffect(() => {
     if (tradeNotifications.length > 0) {
       setNotifications(prev => [...tradeNotifications, ...prev].slice(0, 50));
@@ -256,7 +270,7 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
           setActivePortfolioState(response.data.portfolios[0]);
         }
 
-        // Update positions from active portfolio
+        // Update positions from active portfolio;
         const active = activePortfolio || response.data.portfolios[0];
         if (active) {
           setPositions(active.positions || []);
@@ -270,8 +284,8 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   const refreshOrders = async () => {
     try {
       const response = await apiClient.getOrders({
-        portfolioId: activePortfolio?.id,
-        limit: 50,
+        portfolioId: activePortfolio?.id,;
+        limit: 50,;
       });
       if (response.success && response.data) {
         setOrders(response.data.orders);
@@ -295,12 +309,12 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   const placeOrder = async (orderData: any): Promise<boolean> => {
     try {
       const response = await apiClient.placeOrder({
-        ...orderData,
-        portfolioId: orderData.portfolioId || activePortfolio?.id,
+        ...orderData,;
+        portfolioId: orderData.portfolioId || activePortfolio?.id,;
       });
 
       if (response.success) {
-        // Refresh orders and portfolios
+        // Refresh orders and portfolios;
         await Promise.all([refreshOrders(), refreshPortfolios()]);
         return true;
       }
@@ -337,10 +351,10 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   };
 
   const unsubscribeFromRealTimeData = () => {
-    // WebSocket cleanup is handled by the hook
+    // WebSocket cleanup is handled by the hook;
   };
 
-  // Initial data loading
+  // Initial data loading;
   useEffect(() => {
     if (isAuthenticated && !isLoading) {
       Promise.all([refreshPortfolios(), refreshAISignals()]);
@@ -348,46 +362,43 @@ export const TradingProvider: React.FC<TradingProviderProps> = ({ children }) =>
   }, [isAuthenticated, isLoading]);
 
   const contextValue: TradingContextType = {
-    // User & Authentication
-    user,
-    isAuthenticated,
-    isLoading,
-
-    // Portfolios & Positions
-    portfolios,
-    activePortfolio,
-    positions,
-    orders,
-
-    // Market Data
-    marketData,
-    subscribedSymbols,
-
-    // AI Trading
-    aiSignals,
-    aiModels,
-
-    // Social Trading
-    socialFeed,
-    notifications,
-
-    // Real-time connections
-    isConnected,
-
-    // Actions
-    refreshUserData,
-    refreshPortfolios,
-    refreshOrders,
-    refreshAISignals,
-    placeOrder,
-    subscribeToSymbols,
-    unsubscribeFromSymbols,
-    setActivePortfolio,
-    subscribeToRealTimeData,
-    unsubscribeFromRealTimeData,
+    // User & Authentication;
+    user,;
+    isAuthenticated,;
+    isLoading,;
+    // Portfolios & Positions;
+    portfolios,;
+    activePortfolio,;
+    positions,;
+    orders,;
+    // Market Data;
+    marketData,;
+    subscribedSymbols,;
+    // AI Trading;
+    aiSignals,;
+    aiModels,;
+    // Social Trading;
+    socialFeed,;
+    notifications,;
+    // Real-time connections;
+    isConnected,;
+    // Actions;
+    refreshUserData,;
+    refreshPortfolios,;
+    refreshOrders,;
+    refreshAISignals,;
+    placeOrder,;
+    subscribeToSymbols,;
+    unsubscribeFromSymbols,;
+    setActivePortfolio,;
+    subscribeToRealTimeData,;
+    unsubscribeFromRealTimeData,;
   };
 
   return <TradingContext.Provider value={contextValue}>{children}</TradingContext.Provider>;
 };
 
 export default TradingProvider;
+
+
+export default useTradingContext;

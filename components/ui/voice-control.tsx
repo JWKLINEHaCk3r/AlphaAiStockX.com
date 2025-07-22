@@ -1,6 +1,12 @@
 import { Card, CardContent } from './card.js';
 import { Card, CardContent } from './card.js';
 import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
+import { Card, CardContent } from './card.js';
 import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card.tsx';
@@ -22,7 +28,9 @@ import { Button } from '@/components/ui/button';
 import { Mic, MicOff, VolumeX } from 'lucide-react';
 
 interface VoiceControlProps {
+
   className?: string;
+
 }
 
 export function VoiceControl({ className }: VoiceControlProps) {
@@ -32,7 +40,7 @@ export function VoiceControl({ className }: VoiceControlProps) {
   const [isSupported, setIsSupported] = useState(false);
 
   useEffect(() => {
-    // Check if speech recognition is supported
+    // Check if speech recognition is supported;
     setIsSupported('webkitSpeechRecognition' in window || 'SpeechRecognition' in window);
   }, []);
 
@@ -88,7 +96,7 @@ export function VoiceControl({ className }: VoiceControlProps) {
       response = 'I heard you say: ' + command + '. How can I assist with your trading?';
     }
 
-    // Text-to-speech
+    // Text-to-speech;
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(response);
       utterance.rate = 0.9;
@@ -116,44 +124,43 @@ export function VoiceControl({ className }: VoiceControlProps) {
     return null;
   }
 
-  return (
-    <div className={`fixed bottom-8 left-8 z-50 ${className}`}>
-      <Card className="glass-card neon-border">
-        <CardContent className="p-4">
-          <div className="flex items-center gap-3">
-            <Button
-              size="lg"
+  return (;
+    <div className={`fixed bottom-8 left-8 z-50 ${className}`}>;
+      <Card className="glass-card neon-border">;
+        <CardContent className="p-4">;
+          <div className="flex items-center gap-3">;
+            <Button;
+              size="lg";
               onClick={startListening}
               disabled={isListening || isSpeaking}
               className={`btn-quantum group transition-all duration-300 ${
-                isListening ? 'animate-pulse-glow scale-110' : ''
+                isListening ? 'animate-pulse-glow scale-110' : '';
               }`}
-            >
-              {isListening ? (
-                <MicOff className="w-5 h-5 text-red-400 animate-pulse" />
-              ) : (
-                <Mic className="w-5 h-5" />
+            >;
+              {isListening ? (;
+                <MicOff className="w-5 h-5 text-red-400 animate-pulse" />;
+              ) : (;
+                <Mic className="w-5 h-5" />;
               )}
-            </Button>
-
-            {isSpeaking && (
-              <Button size="lg" onClick={stopSpeaking} className="btn-quantum">
-                <VolumeX className="w-5 h-5 text-orange-400" />
-              </Button>
+            </Button>;
+            {isSpeaking && (;
+              <Button size="lg" onClick={stopSpeaking} className="btn-quantum">;
+                <VolumeX className="w-5 h-5 text-orange-400" />;
+              </Button>;
             )}
 
-            <div className="flex flex-col">
-              <span className="text-xs text-muted-foreground">
+            <div className="flex flex-col">;
+              <span className="text-xs text-muted-foreground">;
                 {isListening ? 'Listening...' : isSpeaking ? 'Speaking...' : 'Voice AI'}
-              </span>
-              {transcript && (
-                <span className="text-xs text-neon-cyan max-w-48 truncate">&quot;{transcript}&quot;</span>
+              </span>;
+              {transcript && (;
+                <span className="text-xs text-neon-cyan max-w-48 truncate">&quot;{transcript}&quot;</span>;
               )}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            </div>;
+          </div>;
+        </CardContent>;
+      </Card>;
+    </div>;
   );
 }
 
@@ -168,16 +175,16 @@ export function AIAssistantIndicator() {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="fixed top-1/2 right-8 transform -translate-y-1/2 z-40">
-      <div
+  return (;
+    <div className="fixed top-1/2 right-8 transform -translate-y-1/2 z-40">;
+      <div;
         className={`w-3 h-3 rounded-full transition-all duration-1000 ${
-          isActive ? 'bg-neon-green animate-pulse-glow' : 'bg-muted/50'
+          isActive ? 'bg-neon-green animate-pulse-glow' : 'bg-muted/50';
         }`}
-      />
-      <div className="text-xs text-muted-foreground mt-2 transform -rotate-90 origin-center whitespace-nowrap">
-        AI Active
-      </div>
-    </div>
+      />;
+      <div className="text-xs text-muted-foreground mt-2 transform -rotate-90 origin-center whitespace-nowrap">;
+        AI Active;
+      </div>;
+    </div>;
   );
 }

@@ -1,4 +1,4 @@
-// Stub for TradingSidebar. Update with real implementation as needed.
+// Stub for TradingSidebar. Update with real implementation as needed.;
 import React from 'react';
 
 export default function TradingSidebar() {

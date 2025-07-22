@@ -1,4 +1,4 @@
-// Next-Generation Authentication & User Management System (NextAuth v5)
+// Next-Generation Authentication & User Management System (NextAuth v5);
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -9,6 +9,7 @@ import bcrypt from 'bcryptjs';
 import type { NextAuthConfig } from 'next-auth';
 
 export interface User {
+
   id: string;
   email: string;
   name: string;
@@ -29,9 +30,11 @@ export interface User {
   accountType: 'cash' | 'margin' | 'crypto' | 'institutional';
   createdAt: Date;
   lastActive: Date;
+
 }
 
 export interface UserPreferences {
+
   theme: 'dark' | 'light' | 'auto';
   notifications: {
     email: boolean;
@@ -40,7 +43,8 @@ export interface UserPreferences {
     trading: boolean;
     news: boolean;
     ai: boolean;
-  };
+  
+};
   trading: {
     autoTrade: boolean;
     riskLevel: 'conservative' | 'moderate' | 'aggressive';
@@ -56,29 +60,29 @@ export interface UserPreferences {
 }
 
 export const authConfig: NextAuthConfig = {
-  adapter: PrismaAdapter(prisma),
-  providers: [
+  adapter: PrismaAdapter(prisma),;
+  providers: [;
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+      clientId: process.env.GOOGLE_CLIENT_ID!,;
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,;
+    }),;
     AppleProvider({
-      clientId: process.env.APPLE_ID!,
-      clientSecret: process.env.APPLE_SECRET!,
-    }),
+      clientId: process.env.APPLE_ID!,;
+      clientSecret: process.env.APPLE_SECRET!,;
+    }),;
     CredentialsProvider({
-      name: 'credentials',
+      name: 'credentials',;
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
+        email: { label: 'Email', type: 'email' },;
+        password: { label: 'Password', type: 'password' },;
+      },;
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: credentials.email },;
         });
 
         if (!user?.password) {
@@ -92,15 +96,15 @@ export const authConfig: NextAuthConfig = {
         }
 
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          tier: user.tier,
-          status: user.status,
+          id: user.id,;
+          email: user.email,;
+          name: user.name,;
+          tier: user.tier,;
+          status: user.status,;
         };
-      },
-    }),
-  ],
+      },;
+    }),;
+  ],;
   callbacks: {
     async jwt({ token, user, account }) {
       if (user) {
@@ -109,7 +113,7 @@ export const authConfig: NextAuthConfig = {
         token.userId = user.id;
       }
       return token;
-    },
+    },;
     async session({ session, token }) {
       if (token) {
         session.user.id = token.userId as string;
@@ -117,26 +121,26 @@ export const authConfig: NextAuthConfig = {
         session.user.status = token.status as string;
       }
       return session;
-    },
-  },
+    },;
+  },;
   pages: {
-    signIn: '/auth/signin',
-    signUp: '/auth/signup',
-    error: '/auth/error',
-  },
+    signIn: '/auth/signin',;
+    signUp: '/auth/signup',;
+    error: '/auth/error',;
+  },;
   session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+    strategy: 'jwt',;
+    maxAge: 30 * 24 * 60 * 60, // 30 days;
+  },;
+  secret: process.env.NEXTAUTH_SECRET,;
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
 
-// For backward compatibility, export authOptions
+// For backward compatibility, export authOptions;
 export const authOptions = authConfig;
 
-// Enhanced User Service
+// Enhanced User Service;
 export class UserService {
   static async createUser(data: {
     email: string;
@@ -148,58 +152,58 @@ export class UserService {
 
     const user = await prisma.user.create({
       data: {
-        email: data.email,
-        password: hashedPassword,
-        name: data.name,
-        username: data.username || data.email.split('@')[0],
-        tier: 'free',
-        status: 'pending',
-        balance: 0,
-        portfolioValue: 0,
-        totalPnL: 0,
-        winRate: 0,
-        riskScore: 5,
-        tradingLevel: 1,
-        aiAccess: true,
-        kycStatus: 'pending',
-        accountType: 'cash',
+        email: data.email,;
+        password: hashedPassword,;
+        name: data.name,;
+        username: data.username || data.email.split('@')[0],;
+        tier: 'free',;
+        status: 'pending',;
+        balance: 0,;
+        portfolioValue: 0,;
+        totalPnL: 0,;
+        winRate: 0,;
+        riskScore: 5,;
+        tradingLevel: 1,;
+        aiAccess: true,;
+        kycStatus: 'pending',;
+        accountType: 'cash',;
         preferences: {
-          theme: 'dark',
+          theme: 'dark',;
           notifications: {
-            email: true,
-            push: true,
-            sms: false,
-            trading: true,
-            news: true,
-            ai: true,
-          },
+            email: true,;
+            push: true,;
+            sms: false,;
+            trading: true,;
+            news: true,;
+            ai: true,;
+          },;
           trading: {
-            autoTrade: false,
-            riskLevel: 'moderate',
-            aiAssistance: true,
-            stopLoss: true,
-            takeProfit: true,
-          },
+            autoTrade: false,;
+            riskLevel: 'moderate',;
+            aiAssistance: true,;
+            stopLoss: true,;
+            takeProfit: true,;
+          },;
           privacy: {
-            profileVisible: true,
-            portfolioVisible: false,
-            tradesVisible: false,
-          },
-        },
-      },
+            profileVisible: true,;
+            portfolioVisible: false,;
+            tradesVisible: false,;
+          },;
+        },;
+      },;
     });
 
-    // Create default portfolio
+    // Create default portfolio;
     await prisma.portfolio.create({
       data: {
-        userId: user.id,
-        name: 'Default Portfolio',
-        type: 'personal',
-        balance: 0,
-        totalValue: 0,
-        pnl: 0,
-        allocations: {},
-      },
+        userId: user.id,;
+        name: 'Default Portfolio',;
+        type: 'personal',;
+        balance: 0,;
+        totalValue: 0,;
+        pnl: 0,;
+        allocations: {},;
+      },;
     });
 
     return user;
@@ -207,25 +211,25 @@ export class UserService {
 
   static async getUserById(id: string) {
     return await prisma.user.findUnique({
-      where: { id },
+      where: { id },;
       include: {
-        portfolios: true,
+        portfolios: true,;
         trades: {
-          orderBy: { createdAt: 'desc' },
-          take: 10,
-        },
-        subscriptions: true,
+          orderBy: { createdAt: 'desc' },;
+          take: 10,;
+        },;
+        subscriptions: true,;
         notifications: {
-          where: { read: false },
-        },
-      },
+          where: { read: false },;
+        },;
+      },;
     });
   }
 
   static async updateUser(id: string, data: Partial<User>) {
     return await prisma.user.update({
-      where: { id },
-      data,
+      where: { id },;
+      data,;
     });
   }
 
@@ -233,45 +237,45 @@ export class UserService {
     const permissions = this.getTierPermissions(tier);
 
     return await prisma.user.update({
-      where: { id },
+      where: { id },;
       data: {
-        tier,
-        permissions,
-        aiAccess: tier !== 'free',
-        updatedAt: new Date(),
-      },
+        tier,;
+        permissions,;
+        aiAccess: tier !== 'free',;
+        updatedAt: new Date(),;
+      },;
     });
   }
 
   static getTierPermissions(tier: User['tier']): string[] {
     const permissions: Record<User['tier'], string[]> = {
-      free: ['basic_trading', 'view_portfolio'],
-      basic: ['basic_trading', 'view_portfolio', 'ai_signals', 'basic_analytics'],
-      pro: [
-        'basic_trading',
-        'view_portfolio',
-        'ai_signals',
-        'basic_analytics',
-        'advanced_trading',
-        'auto_trading',
-        'advanced_analytics',
-        'priority_support',
-      ],
-      ultimate: [
-        'basic_trading',
-        'view_portfolio',
-        'ai_signals',
-        'basic_analytics',
-        'advanced_trading',
-        'auto_trading',
-        'advanced_analytics',
-        'priority_support',
-        'unlimited_trades',
-        'ai_autopilot',
-        'custom_algorithms',
-        'api_access',
-      ],
-      owner: ['*'], // All permissions
+      free: ['basic_trading', 'view_portfolio'],;
+      basic: ['basic_trading', 'view_portfolio', 'ai_signals', 'basic_analytics'],;
+      pro: [;
+        'basic_trading',;
+        'view_portfolio',;
+        'ai_signals',;
+        'basic_analytics',;
+        'advanced_trading',;
+        'auto_trading',;
+        'advanced_analytics',;
+        'priority_support',;
+      ],;
+      ultimate: [;
+        'basic_trading',;
+        'view_portfolio',;
+        'ai_signals',;
+        'basic_analytics',;
+        'advanced_trading',;
+        'auto_trading',;
+        'advanced_analytics',;
+        'priority_support',;
+        'unlimited_trades',;
+        'ai_autopilot',;
+        'custom_algorithms',;
+        'api_access',;
+      ],;
+      owner: ['*'], // All permissions;
     };
 
     return permissions[tier] || permissions.free;
@@ -281,17 +285,17 @@ export class UserService {
     if (!token.userId) return false;
 
     const user = await prisma.user.findUnique({
-      where: { id: token.userId },
+      where: { id: token.userId },;
     });
 
     return user?.status === 'active';
   }
 }
 
-// Real-time User Activity Tracking
+// Real-time User Activity Tracking;
 export class ActivityTracker {
-  static async recordActivity(
-    userId: string,
+  static async recordActivity(;
+    userId: string,;
     activity: {
       type: string;
       details: any;
@@ -301,27 +305,27 @@ export class ActivityTracker {
   ) {
     await prisma.userActivity.create({
       data: {
-        userId,
-        type: activity.type,
-        details: activity.details,
-        ip: activity.ip,
-        userAgent: activity.userAgent,
-        timestamp: new Date(),
-      },
+        userId,;
+        type: activity.type,;
+        details: activity.details,;
+        ip: activity.ip,;
+        userAgent: activity.userAgent,;
+        timestamp: new Date(),;
+      },;
     });
 
-    // Update last active
+    // Update last active;
     await prisma.user.update({
-      where: { id: userId },
-      data: { lastActive: new Date() },
+      where: { id: userId },;
+      data: { lastActive: new Date() },;
     });
   }
 
   static async getRecentActivity(userId: string, limit = 50) {
     return await prisma.userActivity.findMany({
-      where: { userId },
-      orderBy: { timestamp: 'desc' },
-      take: limit,
+      where: { userId },;
+      orderBy: { timestamp: 'desc' },;
+      take: limit,;
     });
   }
 }

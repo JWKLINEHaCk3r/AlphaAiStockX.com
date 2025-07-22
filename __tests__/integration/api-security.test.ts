@@ -3,56 +3,56 @@ import { getServerSession } from 'next-auth';
 import { handleTradingOrders, handlePortfolio, handleMarketData } from '@/lib/api-security';
 import { SecurityAudit, RateLimiter } from '@/lib/security';
 
-// Mock next-auth
+// Mock next-auth;
 jest.mock('next-auth');
 const mockGetServerSession = getServerSession;
 
-// Mock security modules
+// Mock security modules;
 jest.mock('@/lib/security', () => ({
   SecurityAudit: {
-    logSecurityEvent: jest.fn(),
-    logDataAccess: jest.fn(),
-  },
+    logSecurityEvent: jest.fn(),;
+    logDataAccess: jest.fn(),;
+  },;
   RateLimiter: {
-    checkLimit: jest.fn(),
-  },
+    checkLimit: jest.fn(),;
+  },;
   InputValidator: {
-    sanitizeJson: jest.fn(obj => obj),
-  },
+    sanitizeJson: jest.fn(obj => obj),;
+  },;
 }));
 
 describe('API Security Integration Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Default session mock
+    // Default session mock;
     mockGetServerSession.mockResolvedValue({
       user: {
-        id: 'user123',
-        email: 'test@example.com',
-        tradingEnabled: true,
-      },
-      expires: '2025-12-31',
+        id: 'user123',;
+        email: 'test@example.com',;
+        tradingEnabled: true,;
+      },;
+      expires: '2025-12-31',;
     });
 
-    // Default rate limit mock
+    // Default rate limit mock;
     (RateLimiter.checkLimit as jest.Mock).mockReturnValue({
-      allowed: true,
-      remaining: 99,
-      resetTime: Date.now() + 60000,
+      allowed: true,;
+      remaining: 99,;
+      resetTime: Date.now() + 60000,;
     });
   });
 
   describe('Trading Orders API', () => {
     it('should place a valid market order', async () => {
       const { req, res } = createMocks({
-        method: 'POST',
+        method: 'POST',;
         body: {
-          symbol: 'AAPL',
-          quantity: 10,
-          side: 'buy',
-          type: 'market',
-        },
+          symbol: 'AAPL',;
+          quantity: 10,;
+          side: 'buy',;
+          type: 'market',;
+        },;
       });
 
       await handleTradingOrders(req, res);
@@ -65,13 +65,13 @@ describe('API Security Integration Tests', () => {
 
     it('should reject invalid order data', async () => {
       const { req, res } = createMocks({
-        method: 'POST',
+        method: 'POST',;
         body: {
-          symbol: 'INVALID_SYMBOL_TOO_LONG',
-          quantity: -5,
-          side: 'invalid_side',
-          type: 'market',
-        },
+          symbol: 'INVALID_SYMBOL_TOO_LONG',;
+          quantity: -5,;
+          side: 'invalid_side',;
+          type: 'market',;
+        },;
       });
 
       await handleTradingOrders(req, res);
@@ -84,14 +84,14 @@ describe('API Security Integration Tests', () => {
 
     it('should require price for limit orders', async () => {
       const { req, res } = createMocks({
-        method: 'POST',
+        method: 'POST',;
         body: {
-          symbol: 'AAPL',
-          quantity: 10,
-          side: 'buy',
-          type: 'limit',
-          // Missing price
-        },
+          symbol: 'AAPL',;
+          quantity: 10,;
+          side: 'buy',;
+          type: 'limit',;
+          // Missing price;
+        },;
       });
 
       await handleTradingOrders(req, res);
@@ -104,21 +104,21 @@ describe('API Security Integration Tests', () => {
     it('should reject orders from users without trading enabled', async () => {
       mockGetServerSession.mockResolvedValue({
         user: {
-          id: 'user123',
-          email: 'test@example.com',
-          tradingEnabled: false,
-        },
-        expires: '2025-12-31',
+          id: 'user123',;
+          email: 'test@example.com',;
+          tradingEnabled: false,;
+        },;
+        expires: '2025-12-31',;
       });
 
       const { req, res } = createMocks({
-        method: 'POST',
+        method: 'POST',;
         body: {
-          symbol: 'AAPL',
-          quantity: 10,
-          side: 'buy',
-          type: 'market',
-        },
+          symbol: 'AAPL',;
+          quantity: 10,;
+          side: 'buy',;
+          type: 'market',;
+        },;
       });
 
       await handleTradingOrders(req, res);
@@ -130,7 +130,7 @@ describe('API Security Integration Tests', () => {
 
     it('should get order history', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handleTradingOrders(req, res);
@@ -143,7 +143,7 @@ describe('API Security Integration Tests', () => {
 
     it('should reject unsupported methods', async () => {
       const { req, res } = createMocks({
-        method: 'DELETE',
+        method: 'DELETE',;
       });
 
       await handleTradingOrders(req, res);
@@ -156,7 +156,7 @@ describe('API Security Integration Tests', () => {
   describe('Portfolio API', () => {
     it('should get portfolio data with default parameters', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -170,12 +170,12 @@ describe('API Security Integration Tests', () => {
 
     it('should handle custom query parameters', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
         query: {
-          period: '1W',
-          includePositions: 'false',
-          includeHistory: 'true',
-        },
+          period: '1W',;
+          includePositions: 'false',;
+          includeHistory: 'true',;
+        },;
       });
 
       await handlePortfolio(req, res);
@@ -188,10 +188,10 @@ describe('API Security Integration Tests', () => {
 
     it('should validate query parameters', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
         query: {
-          period: 'INVALID_PERIOD',
-        },
+          period: 'INVALID_PERIOD',;
+        },;
       });
 
       await handlePortfolio(req, res);
@@ -205,10 +205,10 @@ describe('API Security Integration Tests', () => {
   describe('Market Data API', () => {
     it('should get market data for valid symbols', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
         query: {
-          symbols: 'AAPL,GOOGL,MSFT',
-        },
+          symbols: 'AAPL,GOOGL,MSFT',;
+        },;
       });
 
       await handleMarketData(req, res);
@@ -222,10 +222,10 @@ describe('API Security Integration Tests', () => {
 
     it('should reject invalid symbols', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
         query: {
-          symbols: 'INVALID_SYMBOL_TOO_LONG,123',
-        },
+          symbols: 'INVALID_SYMBOL_TOO_LONG,123',;
+        },;
       });
 
       await handleMarketData(req, res);
@@ -237,7 +237,7 @@ describe('API Security Integration Tests', () => {
 
     it('should require symbols parameter', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handleMarketData(req, res);
@@ -253,17 +253,17 @@ describe('API Security Integration Tests', () => {
       mockGetServerSession.mockResolvedValue(null);
 
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
 
       expect(res._getStatusCode()).toBe(401);
       expect(SecurityAudit.logSecurityEvent).toHaveBeenCalledWith({
-        type: 'failed_login',
-        ip: expect.any(String),
-        userAgent: expect.any(String),
-        details: { endpoint: undefined },
+        type: 'failed_login',;
+        ip: expect.any(String),;
+        userAgent: expect.any(String),;
+        details: { endpoint: undefined },;
       });
     });
   });
@@ -271,13 +271,13 @@ describe('API Security Integration Tests', () => {
   describe('Rate Limiting', () => {
     it('should enforce rate limits', async () => {
       (RateLimiter.checkLimit as jest.Mock).mockReturnValue({
-        allowed: false,
-        remaining: 0,
-        resetTime: Date.now() + 30000,
+        allowed: false,;
+        remaining: 0,;
+        resetTime: Date.now() + 30000,;
       });
 
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -286,16 +286,16 @@ describe('API Security Integration Tests', () => {
       const responseData = JSON.parse(res._getData());
       expect(responseData.error).toBe('Rate limit exceeded');
       expect(SecurityAudit.logSecurityEvent).toHaveBeenCalledWith({
-        type: 'suspicious_activity',
-        userId: 'user123',
-        ip: expect.any(String),
-        details: { reason: 'rate_limit_exceeded', endpoint: undefined },
+        type: 'suspicious_activity',;
+        userId: 'user123',;
+        ip: expect.any(String),;
+        details: { reason: 'rate_limit_exceeded', endpoint: undefined },;
       });
     });
 
     it('should add rate limit headers', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -309,7 +309,7 @@ describe('API Security Integration Tests', () => {
   describe('Security Headers', () => {
     it('should set security headers on all responses', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -323,7 +323,7 @@ describe('API Security Integration Tests', () => {
 
     it('should include response time header', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -334,11 +334,11 @@ describe('API Security Integration Tests', () => {
 
   describe('Error Handling', () => {
     it('should handle internal errors gracefully', async () => {
-      // Mock an error in the session retrieval
+      // Mock an error in the session retrieval;
       mockGetServerSession.mockRejectedValue(new Error('Database error'));
 
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -353,17 +353,17 @@ describe('API Security Integration Tests', () => {
   describe('Audit Logging', () => {
     it('should log successful data access', async () => {
       const { req, res } = createMocks({
-        method: 'GET',
+        method: 'GET',;
       });
 
       await handlePortfolio(req, res);
 
       expect(SecurityAudit.logDataAccess).toHaveBeenCalledWith({
-        userId: 'user123',
-        resource: undefined,
-        action: 'read',
-        ip: expect.any(String),
-        success: true,
+        userId: 'user123',;
+        resource: undefined,;
+        action: 'read',;
+        ip: expect.any(String),;
+        success: true,;
       });
     });
 
@@ -371,17 +371,17 @@ describe('API Security Integration Tests', () => {
       mockGetServerSession.mockRejectedValue(new Error('Session error'));
 
       const { req, res } = createMocks({
-        method: 'POST',
+        method: 'POST',;
       });
 
       await handleTradingOrders(req, res);
 
       expect(SecurityAudit.logDataAccess).toHaveBeenCalledWith({
-        userId: 'unknown',
-        resource: undefined,
-        action: 'write',
-        ip: expect.any(String),
-        success: false,
+        userId: 'unknown',;
+        resource: undefined,;
+        action: 'write',;
+        ip: expect.any(String),;
+        success: false,;
       });
     });
   });

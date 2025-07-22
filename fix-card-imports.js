@@ -1,5 +1,7 @@
 
 
+
+
 // Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
 // Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
 
@@ -217,6 +219,8 @@ async function fixCardImports() {
       const filePath = path.join(process.cwd(), file);
       // Skip directories
       if (fs.statSync(filePath).isDirectory()) continue;
+      // Only add card imports to .ts or .tsx files
+      if (!file.endsWith('.ts') && !file.endsWith('.tsx')) continue;
       let content = fs.readFileSync(filePath, 'utf8');
       let modified = false;
 
@@ -239,7 +243,7 @@ async function fixCardImports() {
 
       if (usedCards.length > 0) {
         // Remove any existing alias import for card
-        content = content.replace(/import.*{[^}]*}.*from.*['"]@\/components\/ui\/card['"];?\n?/g, '');
+        content = content.replace(/import.*{[^}]*}.*from.*['\"]@\/components\/ui\/card['\"];?\n?/g, '');
         // Add correct relative import
         const relImport = getRelativeCardImport(filePath);
         const importStatement = `import { ${usedCards.join(', ')} } from '${relImport}';\n`;

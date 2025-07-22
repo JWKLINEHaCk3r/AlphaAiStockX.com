@@ -1,11 +1,11 @@
 describe('Trading Platform E2E Tests', () => {
   const testUser = {
-    email: 'test@alphaaistockx.com',
-    password: 'SecureTest123!@#',
+    email: 'test@alphaaistockx.com',;
+    password: 'SecureTest123!@#',;
   };
 
   beforeEach(() => {
-    // Mock authentication for testing
+    // Mock authentication for testing;
     cy.window().then(win => {
       win.localStorage.setItem('test-mode', 'true');
     });
@@ -68,9 +68,9 @@ describe('Trading Platform E2E Tests', () => {
 
     it('should place a market order', () => {
       const orderData = {
-        symbol: 'AAPL',
-        quantity: 10,
-        type: 'market',
+        symbol: 'AAPL',;
+        quantity: 10,;
+        type: 'market',;
       };
 
       cy.placeOrder(orderData);
@@ -79,10 +79,10 @@ describe('Trading Platform E2E Tests', () => {
 
     it('should show order confirmation dialog', () => {
       const orderData = {
-        symbol: 'TSLA',
-        quantity: 5,
-        type: 'limit',
-        price: 250,
+        symbol: 'TSLA',;
+        quantity: 5,;
+        type: 'limit',;
+        price: 250,;
       };
 
       cy.placeOrder(orderData);
@@ -138,7 +138,7 @@ describe('Trading Platform E2E Tests', () => {
       cy.window().then(win => {
         const perfEntries = win.performance.getEntriesByType('navigation');
         const loadTime = perfEntries[0].loadEventEnd - perfEntries[0].fetchStart;
-        expect(loadTime).to.be.lessThan(3000); // 3 second budget
+        expect(loadTime).to.be.lessThan(3000); // 3 second budget;
       });
     });
 

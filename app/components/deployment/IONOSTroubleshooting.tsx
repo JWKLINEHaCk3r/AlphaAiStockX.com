@@ -1,6 +1,12 @@
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -29,212 +35,203 @@ import React from 'react';
 import { AlertTriangle, HelpCircle, RefreshCw, Zap } from 'lucide-react';
 
 export default function IONOSTroubleshooting() {
-  return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">🔧 IONOS Deployment Troubleshooting</h1>
-      <p className="text-lg mb-6 text-gray-600">
-        Common issues and solutions for deploying AlphaAIStockX to IONOS
-      </p>
-
-      <div className="space-y-6">
-        <Card className="border-red-500">
-          <CardHeader className="bg-red-50">
-            <CardTitle className="flex items-center gap-2 text-red-700">
-              <AlertTriangle className="h-5 w-5" />
-              SSL Certificate Issues
-            </CardTitle>
-            <CardDescription>Site shows "not secure" or SSL warnings</CardDescription>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="space-y-4">
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                <h4 className="font-semibold text-red-800 mb-2">🚨 Problem:</h4>
-                <p className="text-sm text-red-700">
-                  Browser shows "This site is not secure" or SSL certificate errors
-                </p>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>
-                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">
-                  <li>
-                    <strong>Wait for SSL activation:</strong> Can take up to 24 hours
-                  </li>
-                  <li>
-                    <strong>Check IONOS Control Panel:</strong> Verify SSL status is "Active"
-                  </li>
-                  <li>
-                    <strong>Clear browser cache:</strong> Hard refresh with Ctrl+F5
-                  </li>
-                  <li>
-                    <strong>Try incognito mode:</strong> Test in private browsing
-                  </li>
-                  <li>
-                    <strong>Contact IONOS support:</strong> If SSL still not working after 24 hours
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-orange-500">
-          <CardHeader className="bg-orange-50">
-            <CardTitle className="flex items-center gap-2 text-orange-700">
-              <RefreshCw className="h-5 w-5" />
-              Website Not Loading
-            </CardTitle>
-            <CardDescription>Domain shows errors or doesn't load</CardDescription>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="space-y-4">
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                <h4 className="font-semibold text-orange-800 mb-2">🚨 Common Problems:</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm text-orange-700">
-                  <li>404 Error - Page not found</li>
-                  <li>500 Error - Internal server error</li>
-                  <li>DNS propagation delays</li>
-                  <li>Files uploaded to wrong directory</li>
-                </ul>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>
-                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">
-                  <li>
-                    <strong>Check file location:</strong> Ensure index.html is in domain root folder
-                  </li>
-                  <li>
-                    <strong>Verify file names:</strong> Must be exactly "index.html" (lowercase)
-                  </li>
-                  <li>
-                    <strong>Wait for DNS:</strong> Can take 24-48 hours for full propagation
-                  </li>
-                  <li>
-                    <strong>Check file permissions:</strong> Should be 644 for files, 755 for
-                    folders
-                  </li>
-                  <li>
-                    <strong>Re-upload files:</strong> Delete all and upload again if needed
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-blue-500">
-          <CardHeader className="bg-blue-50">
-            <CardTitle className="flex items-center gap-2 text-blue-700">
-              <HelpCircle className="h-5 w-5" />
-              File Upload Problems
-            </CardTitle>
-            <CardDescription>Issues uploading files to IONOS</CardDescription>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="space-y-4">
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="font-semibold text-blue-800 mb-2">🚨 Upload Issues:</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm text-blue-700">
-                  <li>Upload fails or times out</li>
-                  <li>Files appear corrupted</li>
-                  <li>Large files won't upload</li>
-                  <li>File Manager is slow</li>
-                </ul>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>
-                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">
-                  <li>
-                    <strong>Use FTP instead:</strong> Download FileZilla for more reliable uploads
-                  </li>
-                  <li>
-                    <strong>Upload in batches:</strong> Don't upload everything at once
-                  </li>
-                  <li>
-                    <strong>Check file size limits:</strong> IONOS may have upload restrictions
-                  </li>
-                  <li>
-                    <strong>Stable internet:</strong> Ensure good connection during upload
-                  </li>
-                  <li>
-                    <strong>Zip files:</strong> Upload as ZIP and extract on server
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-purple-500">
-          <CardHeader className="bg-purple-50">
-            <CardTitle className="flex items-center gap-2 text-purple-700">
-              <Zap className="h-5 w-5" />
-              Performance Issues
-            </CardTitle>
-            <CardDescription>Site loads slowly or has performance problems</CardDescription>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="space-y-4">
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                <h4 className="font-semibold text-purple-800 mb-2">🚨 Performance Problems:</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm text-purple-700">
-                  <li>Slow page loading times</li>
-                  <li>Images take forever to load</li>
-                  <li>JavaScript errors in console</li>
-                  <li>Mobile performance issues</li>
-                </ul>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">✅ Optimizations:</h4>
-                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">
-                  <li>
-                    <strong>Enable compression:</strong> Add .htaccess file with GZIP settings
-                  </li>
-                  <li>
-                    <strong>Optimize images:</strong> Ensure images are web-optimized
-                  </li>
-                  <li>
-                    <strong>Check hosting plan:</strong> Upgrade if needed for better performance
-                  </li>
-                  <li>
-                    <strong>Use CDN:</strong> Consider Cloudflare for global performance
-                  </li>
-                  <li>
-                    <strong>Monitor resources:</strong> Check if hitting hosting limits
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Alert className="border-green-500 bg-green-50">
-          <HelpCircle className="h-5 w-5 text-green-500" />
-          <AlertTitle className="text-green-700">Need More Help?</AlertTitle>
-          <AlertDescription className="text-green-600">
-            <div className="space-y-2">
-              <p>If you're still having issues:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>
-                  <strong>IONOS Support:</strong> Contact their 24/7 technical support
-                </li>
-                <li>
-                  <strong>Documentation:</strong> Check IONOS help center for detailed guides
-                </li>
-                <li>
-                  <strong>Community:</strong> Ask in IONOS community forums
-                </li>
-                <li>
-                  <strong>Professional Help:</strong> Consider hiring a web developer
-                </li>
-              </ul>
-            </div>
-          </AlertDescription>
-        </Alert>
-      </div>
-    </div>
+  return (;
+    <div className="container mx-auto px-4 py-8 max-w-4xl">;
+      <h1 className="text-3xl font-bold mb-6">🔧 IONOS Deployment Troubleshooting</h1>;
+      <p className="text-lg mb-6 text-gray-600">;
+        Common issues and solutions for deploying AlphaAIStockX to IONOS;
+      </p>;
+      <div className="space-y-6">;
+        <Card className="border-red-500">;
+          <CardHeader className="bg-red-50">;
+            <CardTitle className="flex items-center gap-2 text-red-700">;
+              <AlertTriangle className="h-5 w-5" />;
+              SSL Certificate Issues;
+            </CardTitle>;
+            <CardDescription>Site shows "not secure" or SSL warnings</CardDescription>;
+          </CardHeader>;
+          <CardContent className="pt-6">;
+            <div className="space-y-4">;
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-red-800 mb-2">🚨 Problem:</h4>;
+                <p className="text-sm text-red-700">;
+                  Browser shows "This site is not secure" or SSL certificate errors;
+                </p>;
+              </div>;
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>;
+                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">;
+                  <li>;
+                    <strong>Wait for SSL activation:</strong> Can take up to 24 hours;
+                  </li>;
+                  <li>;
+                    <strong>Check IONOS Control Panel:</strong> Verify SSL status is "Active";
+                  </li>;
+                  <li>;
+                    <strong>Clear browser cache:</strong> Hard refresh with Ctrl+F5;
+                  </li>;
+                  <li>;
+                    <strong>Try incognito mode:</strong> Test in private browsing;
+                  </li>;
+                  <li>;
+                    <strong>Contact IONOS support:</strong> If SSL still not working after 24 hours;
+                  </li>;
+                </ol>;
+              </div>;
+            </div>;
+          </CardContent>;
+        </Card>;
+        <Card className="border-orange-500">;
+          <CardHeader className="bg-orange-50">;
+            <CardTitle className="flex items-center gap-2 text-orange-700">;
+              <RefreshCw className="h-5 w-5" />;
+              Website Not Loading;
+            </CardTitle>;
+            <CardDescription>Domain shows errors or doesn't load</CardDescription>;
+          </CardHeader>;
+          <CardContent className="pt-6">;
+            <div className="space-y-4">;
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-orange-800 mb-2">🚨 Common Problems:</h4>;
+                <ul className="list-disc pl-5 space-y-1 text-sm text-orange-700">;
+                  <li>404 Error - Page not found</li>;
+                  <li>500 Error - Internal server error</li>;
+                  <li>DNS propagation delays</li>;
+                  <li>Files uploaded to wrong directory</li>;
+                </ul>;
+              </div>;
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>;
+                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">;
+                  <li>;
+                    <strong>Check file location:</strong> Ensure index.html is in domain root folder;
+                  </li>;
+                  <li>;
+                    <strong>Verify file names:</strong> Must be exactly "index.html" (lowercase);
+                  </li>;
+                  <li>;
+                    <strong>Wait for DNS:</strong> Can take 24-48 hours for full propagation;
+                  </li>;
+                  <li>;
+                    <strong>Check file permissions:</strong> Should be 644 for files, 755 for;
+                    folders;
+                  </li>;
+                  <li>;
+                    <strong>Re-upload files:</strong> Delete all and upload again if needed;
+                  </li>;
+                </ol>;
+              </div>;
+            </div>;
+          </CardContent>;
+        </Card>;
+        <Card className="border-blue-500">;
+          <CardHeader className="bg-blue-50">;
+            <CardTitle className="flex items-center gap-2 text-blue-700">;
+              <HelpCircle className="h-5 w-5" />;
+              File Upload Problems;
+            </CardTitle>;
+            <CardDescription>Issues uploading files to IONOS</CardDescription>;
+          </CardHeader>;
+          <CardContent className="pt-6">;
+            <div className="space-y-4">;
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-blue-800 mb-2">🚨 Upload Issues:</h4>;
+                <ul className="list-disc pl-5 space-y-1 text-sm text-blue-700">;
+                  <li>Upload fails or times out</li>;
+                  <li>Files appear corrupted</li>;
+                  <li>Large files won't upload</li>;
+                  <li>File Manager is slow</li>;
+                </ul>;
+              </div>;
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-green-800 mb-2">✅ Solutions:</h4>;
+                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">;
+                  <li>;
+                    <strong>Use FTP instead:</strong> Download FileZilla for more reliable uploads;
+                  </li>;
+                  <li>;
+                    <strong>Upload in batches:</strong> Don't upload everything at once;
+                  </li>;
+                  <li>;
+                    <strong>Check file size limits:</strong> IONOS may have upload restrictions;
+                  </li>;
+                  <li>;
+                    <strong>Stable internet:</strong> Ensure good connection during upload;
+                  </li>;
+                  <li>;
+                    <strong>Zip files:</strong> Upload as ZIP and extract on server;
+                  </li>;
+                </ol>;
+              </div>;
+            </div>;
+          </CardContent>;
+        </Card>;
+        <Card className="border-purple-500">;
+          <CardHeader className="bg-purple-50">;
+            <CardTitle className="flex items-center gap-2 text-purple-700">;
+              <Zap className="h-5 w-5" />;
+              Performance Issues;
+            </CardTitle>;
+            <CardDescription>Site loads slowly or has performance problems</CardDescription>;
+          </CardHeader>;
+          <CardContent className="pt-6">;
+            <div className="space-y-4">;
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-purple-800 mb-2">🚨 Performance Problems:</h4>;
+                <ul className="list-disc pl-5 space-y-1 text-sm text-purple-700">;
+                  <li>Slow page loading times</li>;
+                  <li>Images take forever to load</li>;
+                  <li>JavaScript errors in console</li>;
+                  <li>Mobile performance issues</li>;
+                </ul>;
+              </div>;
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">;
+                <h4 className="font-semibold text-green-800 mb-2">✅ Optimizations:</h4>;
+                <ol className="list-decimal pl-5 space-y-2 text-sm text-green-700">;
+                  <li>;
+                    <strong>Enable compression:</strong> Add .htaccess file with GZIP settings;
+                  </li>;
+                  <li>;
+                    <strong>Optimize images:</strong> Ensure images are web-optimized;
+                  </li>;
+                  <li>;
+                    <strong>Check hosting plan:</strong> Upgrade if needed for better performance;
+                  </li>;
+                  <li>;
+                    <strong>Use CDN:</strong> Consider Cloudflare for global performance;
+                  </li>;
+                  <li>;
+                    <strong>Monitor resources:</strong> Check if hitting hosting limits;
+                  </li>;
+                </ol>;
+              </div>;
+            </div>;
+          </CardContent>;
+        </Card>;
+        <Alert className="border-green-500 bg-green-50">;
+          <HelpCircle className="h-5 w-5 text-green-500" />;
+          <AlertTitle className="text-green-700">Need More Help?</AlertTitle>;
+          <AlertDescription className="text-green-600">;
+            <div className="space-y-2">;
+              <p>If you're still having issues:</p>;
+              <ul className="list-disc pl-5 space-y-1">;
+                <li>;
+                  <strong>IONOS Support:</strong> Contact their 24/7 technical support;
+                </li>;
+                <li>;
+                  <strong>Documentation:</strong> Check IONOS help center for detailed guides;
+                </li>;
+                <li>;
+                  <strong>Community:</strong> Ask in IONOS community forums;
+                </li>;
+                <li>;
+                  <strong>Professional Help:</strong> Consider hiring a web developer;
+                </li>;
+              </ul>;
+            </div>;
+          </AlertDescription>;
+        </Alert>;
+      </div>;
+    </div>;
   );
 }

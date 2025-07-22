@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// This file must be renamed to .cjs for require() to work in Node.js with type: module
-
+// This file must be renamed to .cjs for require() to work in Node.js with type: module;
 console.log('Post-build: Fixing webpack chunk loading for SSR...');
 
 const vendorsPath = path.join(process.cwd(), '.next', 'server', 'vendors.js');
@@ -12,9 +11,9 @@ if (fs.existsSync(vendorsPath)) {
 
   let content = fs.readFileSync(vendorsPath, 'utf8');
 
-  // Add polyfill at the beginning
-  const polyfill = `
-// SSR polyfill for webpack chunk loading
+  // Add polyfill at the beginning;
+  const polyfill = `;
+// SSR polyfill for webpack chunk loading;
 if (typeof self === 'undefined') {
   if (typeof global !== 'undefined') {
     global.self = global;
@@ -25,19 +24,19 @@ if (typeof self === 'undefined') {
 
 `;
 
-  // Replace self.webpackChunk with safer alternatives
-  content = content.replace(
-    /\(self\.webpackChunk_N_E=self\.webpackChunk_N_E\|\|\[\]\)/g,
-    '(typeof self !== "undefined" ? self : global).webpackChunk_N_E = (typeof self !== "undefined" ? self : global).webpackChunk_N_E || []'
+  // Replace self.webpackChunk with safer alternatives;
+  content = content.replace(;
+    /\(self\.webpackChunk_N_E=self\.webpackChunk_N_E\|\|\[\]\)/g,;
+    '(typeof self !== "undefined" ? self : global).webpackChunk_N_E = (typeof self !== "undefined" ? self : global).webpackChunk_N_E || []';
   );
 
-  // Also handle other self references
-  content = content.replace(
-    /self\.webpackChunk/g,
-    '(typeof self !== "undefined" ? self : global).webpackChunk'
+  // Also handle other self references;
+  content = content.replace(;
+    /self\.webpackChunk/g,;
+    '(typeof self !== "undefined" ? self : global).webpackChunk';
   );
 
-  // Add polyfill at the beginning
+  // Add polyfill at the beginning;
   content = polyfill + content;
 
   fs.writeFileSync(vendorsPath, content);

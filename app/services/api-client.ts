@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/react';
 
-// API Base Configuration
+// API Base Configuration;
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 interface ApiResponse<T> {
@@ -20,8 +20,8 @@ class ApiClient {
   private async getAuthHeaders(): Promise<HeadersInit> {
     const session = await getSession();
     return {
-      'Content-Type': 'application/json',
-      ...(session?.user && { Authorization: `Bearer ${session.user.id}` }),
+      'Content-Type': 'application/json',;
+      ...(session?.user && { Authorization: `Bearer ${session.user.id}` }),;
     };
   }
 
@@ -29,11 +29,11 @@ class ApiClient {
     try {
       const headers = await this.getAuthHeaders();
       const response = await fetch(`${this.baseURL}${endpoint}`, {
-        ...options,
+        ...options,;
         headers: {
-          ...headers,
-          ...options.headers,
-        },
+          ...headers,;
+          ...options.headers,;
+        },;
       });
 
       const data = await response.json();
@@ -46,13 +46,13 @@ class ApiClient {
     } catch (error) {
       console.error(`API request failed for ${endpoint}:`, error);
       return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        success: false,;
+        error: error instanceof Error ? error.message : 'Unknown error',;
       };
     }
   }
 
-  // User Authentication & Profile
+  // User Authentication & Profile;
   async registerUser(userData: {
     name: string;
     email: string;
@@ -60,8 +60,8 @@ class ApiClient {
     username?: string;
   }) {
     return this.request('/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(userData),
+      method: 'POST',;
+      body: JSON.stringify(userData),;
     });
   }
 
@@ -71,12 +71,12 @@ class ApiClient {
 
   async updateUserProfile(profileData: any) {
     return this.request('/api/user/profile', {
-      method: 'PUT',
-      body: JSON.stringify(profileData),
+      method: 'PUT',;
+      body: JSON.stringify(profileData),;
     });
   }
 
-  // Portfolio Management
+  // Portfolio Management;
   async getPortfolios(portfolioId?: string) {
     const query = portfolioId ? `?portfolioId=${portfolioId}` : '';
     return this.request(`/api/portfolio${query}`);
@@ -89,12 +89,12 @@ class ApiClient {
     initialDeposit?: number;
   }) {
     return this.request('/api/portfolio', {
-      method: 'POST',
-      body: JSON.stringify(portfolioData),
+      method: 'POST',;
+      body: JSON.stringify(portfolioData),;
     });
   }
 
-  // Trading Orders
+  // Trading Orders;
   async placeOrder(orderData: {
     symbol: string;
     side: 'BUY' | 'SELL';
@@ -106,8 +106,8 @@ class ApiClient {
     portfolioId?: string;
   }) {
     return this.request('/api/trading/orders', {
-      method: 'POST',
-      body: JSON.stringify(orderData),
+      method: 'POST',;
+      body: JSON.stringify(orderData),;
     });
   }
 
@@ -116,30 +116,30 @@ class ApiClient {
     return this.request(`/api/trading/orders${query ? `?${query}` : ''}`);
   }
 
-  // Market Data
+  // Market Data;
   async getMarketData(symbols: string[], interval = '1m', limit = 100) {
     const query = new URLSearchParams({
-      symbols: symbols.join(','),
-      interval,
-      limit: limit.toString(),
+      symbols: symbols.join(','),;
+      interval,;
+      limit: limit.toString(),;
     }).toString();
     return this.request(`/api/market/data?${query}`);
   }
 
   async subscribeToMarketData(symbols: string[]) {
     return this.request('/api/market/data', {
-      method: 'POST',
-      body: JSON.stringify({ action: 'subscribe', symbols }),
+      method: 'POST',;
+      body: JSON.stringify({ action: 'subscribe', symbols }),;
     });
   }
 
-  // AI Trading Signals
+  // AI Trading Signals;
   async getAISignals(filters?: { limit?: number; minConfidence?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/ai/signals${query ? `?${query}` : ''}`);
   }
 
-  // AI Models
+  // AI Models;
   async getAIModels(filters?: { type?: string; public?: boolean; limit?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/ai/models${query ? `?${query}` : ''}`);
@@ -155,24 +155,24 @@ class ApiClient {
     subscriptionPrice?: number;
   }) {
     return this.request('/api/ai/models', {
-      method: 'POST',
-      body: JSON.stringify(modelData),
+      method: 'POST',;
+      body: JSON.stringify(modelData),;
     });
   }
 
   async subscribeToAIModel(modelId: string) {
     return this.request(`/api/ai/models/${modelId}/subscribe`, {
-      method: 'POST',
+      method: 'POST',;
     });
   }
 
   async unsubscribeFromAIModel(modelId: string) {
     return this.request(`/api/ai/models/${modelId}/subscribe`, {
-      method: 'DELETE',
+      method: 'DELETE',;
     });
   }
 
-  // Social Trading
+  // Social Trading;
   async getSocialFeed(filters?: { type?: string; userId?: string; limit?: number }) {
     const query = new URLSearchParams(filters as any).toString();
     return this.request(`/api/social/feed${query ? `?${query}` : ''}`);
@@ -185,24 +185,24 @@ class ApiClient {
     tradingData?: any;
   }) {
     return this.request('/api/social/feed', {
-      method: 'POST',
-      body: JSON.stringify(postData),
+      method: 'POST',;
+      body: JSON.stringify(postData),;
     });
   }
 
   async followUser(userId: string) {
     return this.request(`/api/social/follow/${userId}`, {
-      method: 'POST',
+      method: 'POST',;
     });
   }
 
   async unfollowUser(userId: string) {
     return this.request(`/api/social/follow/${userId}`, {
-      method: 'DELETE',
+      method: 'DELETE',;
     });
   }
 
-  // System Health
+  // System Health;
   async getSystemHealth() {
     return this.request('/api/health');
   }

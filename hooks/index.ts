@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { api, wsManager, storage, debounce } from '@/lib/api';
 import { StockData, Portfolio, AISignal, LoadingState } from '@/types';
 
-// Generic API hook
+// Generic API hook;
 export function useAPI<T>(endpoint: string, dependencies: any[] = []) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<LoadingState>('idle');
@@ -29,7 +29,7 @@ export function useAPI<T>(endpoint: string, dependencies: any[] = []) {
   return { data, loading, error, refetch: fetchData };
 }
 
-// Stock data hook with real-time updates
+// Stock data hook with real-time updates;
 export function useStockData(symbol: string) {
   const [stockData, setStockData] = useState<StockData | null>(null);
   const [loading, setLoading] = useState<LoadingState>('idle');
@@ -53,7 +53,7 @@ export function useStockData(symbol: string) {
 
     fetchStock();
 
-    // Subscribe to real-time updates
+    // Subscribe to real-time updates;
     const handleStockUpdate = (data: StockData) => {
       if (data.symbol === symbol) {
         setStockData(data);
@@ -70,7 +70,7 @@ export function useStockData(symbol: string) {
   return { stockData, loading, error };
 }
 
-// Portfolio hook
+// Portfolio hook;
 export function usePortfolio() {
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState<LoadingState>('idle');
@@ -92,7 +92,7 @@ export function usePortfolio() {
   useEffect(() => {
     fetchPortfolio();
 
-    // Subscribe to portfolio updates
+    // Subscribe to portfolio updates;
     const handlePortfolioUpdate = (data: Portfolio) => {
       setPortfolio(data);
     };
@@ -107,7 +107,7 @@ export function usePortfolio() {
   return { portfolio, loading, error, refetch: fetchPortfolio };
 }
 
-// AI signals hook
+// AI signals hook;
 export function useAISignals(symbol?: string) {
   const [signals, setSignals] = useState<AISignal[]>([]);
   const [loading, setLoading] = useState<LoadingState>('idle');
@@ -130,10 +130,10 @@ export function useAISignals(symbol?: string) {
 
     fetchSignals();
 
-    // Subscribe to new signals
+    // Subscribe to new signals;
     const handleNewSignal = (signal: AISignal) => {
       if (!symbol || signal.symbol === symbol) {
-        setSignals(prev => [signal, ...prev.slice(0, 9)]); // Keep last 10 signals
+        setSignals(prev => [signal, ...prev.slice(0, 9)]); // Keep last 10 signals;
       }
     };
 
@@ -147,13 +147,13 @@ export function useAISignals(symbol?: string) {
   return { signals, loading, error };
 }
 
-// Local storage hook
+// Local storage hook;
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     return storage.get(key, initialValue);
   });
 
-  const setValue = useCallback(
+  const setValue = useCallback(;
     (value: T | ((val: T) => T)) => {
       try {
         const valueToStore = value instanceof Function ? value(storedValue) : value;
@@ -162,21 +162,21 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       } catch (error) {
         console.error(`Error setting localStorage key "${key}":`, error);
       }
-    },
-    [key, storedValue]
+    },;
+    [key, storedValue];
   );
 
   return [storedValue, setValue] as const;
 }
 
-// Debounced search hook
+// Debounced search hook;
 export function useSearch<T>(searchFn: (query: string) => Promise<T[]>, delay: number = 300) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const debouncedSearch = useCallback(
+  const debouncedSearch = useCallback(;
     debounce(async (searchQuery: string) => {
       if (!searchQuery.trim()) {
         setResults([]);
@@ -195,8 +195,8 @@ export function useSearch<T>(searchFn: (query: string) => Promise<T[]>, delay: n
       } finally {
         setLoading(false);
       }
-    }, delay),
-    [searchFn, delay]
+    }, delay),;
+    [searchFn, delay];
   );
 
   useEffect(() => {
@@ -204,19 +204,19 @@ export function useSearch<T>(searchFn: (query: string) => Promise<T[]>, delay: n
   }, [query, debouncedSearch]);
 
   return {
-    query,
-    setQuery,
-    results,
-    loading,
-    error,
+    query,;
+    setQuery,;
+    results,;
+    loading,;
+    error,;
   };
 }
 
-// Window size hook
+// Window size hook;
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
+    width: 0,;
+    height: 0,;
   });
 
   useEffect(() => {
@@ -224,8 +224,8 @@ export function useWindowSize() {
 
     function handleResize() {
       setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.innerWidth,;
+        height: window.innerHeight,;
       });
     }
 
@@ -238,9 +238,9 @@ export function useWindowSize() {
   return windowSize;
 }
 
-// Intersection observer hook
-export function useIntersectionObserver(
-  elementRef: React.RefObject<Element>,
+// Intersection observer hook;
+export function useIntersectionObserver(;
+  elementRef: React.RefObject<Element>,;
   { threshold = 0, root = null, rootMargin = '0%' }: IntersectionObserverInit = {}
 ) {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
@@ -268,7 +268,7 @@ export function useIntersectionObserver(
   return entry;
 }
 
-// Media query hook
+// Media query hook;
 export function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
 
@@ -289,7 +289,7 @@ export function useMediaQuery(query: string) {
   return matches;
 }
 
-// Theme hook
+// Theme hook;
 export function useTheme() {
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('dark');
@@ -315,15 +315,15 @@ export function useTheme() {
   }, [setTheme]);
 
   return {
-    theme,
-    setTheme,
-    effectiveTheme,
-    toggleTheme,
-    systemTheme,
+    theme,;
+    setTheme,;
+    effectiveTheme,;
+    toggleTheme,;
+    systemTheme,;
   };
 }
 
-// Previous value hook
+// Previous value hook;
 export function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T>();
   useEffect(() => {
@@ -332,10 +332,10 @@ export function usePrevious<T>(value: T): T | undefined {
   return ref.current;
 }
 
-// Online status hook
+// Online status hook;
 export function useOnlineStatus() {
-  const [isOnline, setIsOnline] = useState(
-    typeof navigator !== 'undefined' ? navigator.onLine : true
+  const [isOnline, setIsOnline] = useState(;
+    typeof navigator !== 'undefined' ? navigator.onLine : true;
   );
 
   useEffect(() => {
@@ -356,7 +356,7 @@ export function useOnlineStatus() {
   return isOnline;
 }
 
-// Copy to clipboard hook
+// Copy to clipboard hook;
 export function useCopyToClipboard() {
   const [isCopied, setIsCopied] = useState(false);
 

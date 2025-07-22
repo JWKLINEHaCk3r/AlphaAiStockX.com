@@ -4,13 +4,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface FloatingElementsProps {
+
   count?: number;
   className?: string;
+
 }
 
 export function FloatingElements({ count = 20, className }: FloatingElementsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [elements, setElements] = useState<
+  const [elements, setElements] = useState<;
     Array<{
       id: number;
       x: number;
@@ -19,26 +21,26 @@ export function FloatingElements({ count = 20, className }: FloatingElementsProp
       speed: number;
       color: string;
       direction: number;
-    }>
+    }>;
   >([]);
 
   useEffect(() => {
-    const colors = [
-      'hsl(217, 91%, 60%)', // neon-blue
-      'hsl(271, 91%, 65%)', // neon-purple
-      'hsl(322, 85%, 70%)', // neon-pink
-      'hsl(142, 76%, 66%)', // neon-green
-      'hsl(189, 85%, 70%)', // neon-cyan
+    const colors = [;
+      'hsl(217, 91%, 60%)', // neon-blue;
+      'hsl(271, 91%, 65%)', // neon-purple;
+      'hsl(322, 85%, 70%)', // neon-pink;
+      'hsl(142, 76%, 66%)', // neon-green;
+      'hsl(189, 85%, 70%)', // neon-cyan;
     ];
 
     const newElements = Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
-      speed: Math.random() * 0.5 + 0.1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      direction: Math.random() * Math.PI * 2,
+      id: i,;
+      x: Math.random() * 100,;
+      y: Math.random() * 100,;
+      size: Math.random() * 4 + 2,;
+      speed: Math.random() * 0.5 + 0.1,;
+      color: colors[Math.floor(Math.random() * colors.length)],;
+      direction: Math.random() * Math.PI * 2,;
     }));
 
     setElements(newElements);
@@ -46,51 +48,53 @@ export function FloatingElements({ count = 20, className }: FloatingElementsProp
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setElements(prev =>
+      setElements(prev =>;
         prev.map(element => ({
-          ...element,
-          x: (element.x + Math.cos(element.direction) * element.speed + 100) % 100,
-          y: (element.y + Math.sin(element.direction) * element.speed + 100) % 100,
-        }))
+          ...element,;
+          x: (element.x + Math.cos(element.direction) * element.speed + 100) % 100,;
+          y: (element.y + Math.sin(element.direction) * element.speed + 100) % 100,;
+        }));
       );
     }, 50);
 
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div
+  return (;
+    <div;
       ref={containerRef}
       className={cn('absolute inset-0 overflow-hidden pointer-events-none', className)}
-    >
-      {elements.map(element => (
-        <div
+    >;
+      {elements.map(element => (;
+        <div;
           key={element.id}
-          className="absolute rounded-full opacity-30 animate-pulse"
+          className="absolute rounded-full opacity-30 animate-pulse";
           style={{
-            left: `${element.x}%`,
-            top: `${element.y}%`,
-            width: `${element.size}px`,
-            height: `${element.size}px`,
-            backgroundColor: element.color,
-            boxShadow: `0 0 ${element.size * 2}px ${element.color}`,
+            left: `${element.x}%`,;
+            top: `${element.y}%`,;
+            width: `${element.size}px`,;
+            height: `${element.size}px`,;
+            backgroundColor: element.color,;
+            boxShadow: `0 0 ${element.size * 2}px ${element.color}`,;
           }}
-        />
+        />;
       ))}
-    </div>
+    </div>;
   );
 }
 
 interface MorphingBlobProps {
+
   className?: string;
   color?: string;
   size?: number;
+
 }
 
 export function MorphingBlob({
-  className,
-  color = 'hsl(217, 91%, 60%)',
-  size = 200,
+  className,;
+  color = 'hsl(217, 91%, 60%)',;
+  size = 200,;
 }: MorphingBlobProps) {
   const pathRef = useRef<SVGPathElement>(null);
 
@@ -104,7 +108,7 @@ export function MorphingBlob({
     const animate = () => {
       time += 0.02;
 
-      const points = [];
+      const points: any[] = [];
       const numPoints = 6;
       const radius = size / 2;
       const centerX = size / 2;
@@ -118,7 +122,7 @@ export function MorphingBlob({
         points.push({ x, y });
       }
 
-      // Create smooth curve through points
+      // Create smooth curve through points;
       let pathData = `M ${points[0].x} ${points[0].y}`;
 
       for (let i = 0; i < points.length; i++) {
@@ -145,40 +149,42 @@ export function MorphingBlob({
     };
   }, [size]);
 
-  return (
-    <svg
+  return (;
+    <svg;
       width={size}
       height={size}
       className={cn('absolute opacity-20', className)}
       style={{ filter: 'blur(2px)' }}
-    >
-      <defs>
-        <linearGradient id={`gradient-${Math.random()}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.8" />
-          <stop offset="100%" stopColor={color} stopOpacity="0.2" />
-        </linearGradient>
-      </defs>
-      <path
+    >;
+      <defs>;
+        <linearGradient id={`gradient-${Math.random()}`} x1="0%" y1="0%" x2="100%" y2="100%">;
+          <stop offset="0%" stopColor={color} stopOpacity="0.8" />;
+          <stop offset="100%" stopColor={color} stopOpacity="0.2" />;
+        </linearGradient>;
+      </defs>;
+      <path;
         ref={pathRef}
         fill={`url(#gradient-${Math.random()})`}
         stroke={color}
-        strokeWidth="1"
-        strokeOpacity="0.3"
-      />
-    </svg>
+        strokeWidth="1";
+        strokeOpacity="0.3";
+      />;
+    </svg>;
   );
 }
 
 interface QuantumGridProps {
+
   className?: string;
   gridSize?: number;
   lineColor?: string;
+
 }
 
 export function QuantumGrid({
-  className,
-  gridSize = 50,
-  lineColor = 'hsl(217, 91%, 60%)',
+  className,;
+  gridSize = 50,;
+  lineColor = 'hsl(217, 91%, 60%)',;
 }: QuantumGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -204,7 +210,7 @@ export function QuantumGrid({
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 0.5;
 
-      // Draw animated grid
+      // Draw animated grid;
       for (let x = 0; x < canvas.width; x += gridSize) {
         const opacity = (Math.sin(time + x * 0.01) + 1) * 0.1 + 0.05;
         ctx.globalAlpha = opacity;
@@ -223,7 +229,7 @@ export function QuantumGrid({
         ctx.stroke();
       }
 
-      // Draw intersection points
+      // Draw intersection points;
       ctx.fillStyle = lineColor;
       for (let x = 0; x < canvas.width; x += gridSize) {
         for (let y = 0; y < canvas.height; y += gridSize) {
@@ -250,21 +256,23 @@ export function QuantumGrid({
     };
   }, [gridSize, lineColor]);
 
-  return (
-    <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />
+  return (;
+    <canvas ref={canvasRef} className={cn('fixed inset-0 pointer-events-none z-0', className)} />;
   );
 }
 
 interface HolographicDisplayProps {
+
   children: React.ReactNode;
   className?: string;
   intensity?: number;
+
 }
 
 export function HolographicDisplay({
-  children,
-  className,
-  intensity = 1,
+  children,;
+  className,;
+  intensity = 1,;
 }: HolographicDisplayProps) {
   const [scanlinePosition, setScanlinePosition] = useState(0);
 
@@ -276,59 +284,59 @@ export function HolographicDisplay({
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className={cn('relative overflow-hidden', className)}>
+  return (;
+    <div className={cn('relative overflow-hidden', className)}>;
       {/* Holographic scanlines */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10"
+      <div;
+        className="absolute inset-0 pointer-events-none z-10";
         style={{
-          background: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 255, 255, ${0.03 * intensity}) 2px,
-            rgba(0, 255, 255, ${0.03 * intensity}) 4px
-          )`,
+          background: `repeating-linear-gradient(;
+            0deg,;
+            transparent,;
+            transparent 2px,;
+            rgba(0, 255, 255, ${0.03 * intensity}) 2px,;
+            rgba(0, 255, 255, ${0.03 * intensity}) 4px;
+          )`,;
         }}
-      />
-
+      />;
       {/* Moving scanline */}
-      <div
-        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent pointer-events-none z-20 opacity-60"
+      <div;
+        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent pointer-events-none z-20 opacity-60";
         style={{
-          top: `${scanlinePosition}%`,
-          boxShadow: '0 0 10px hsl(189, 85%, 70%)',
+          top: `${scanlinePosition}%`,;
+          boxShadow: '0 0 10px hsl(189, 85%, 70%)',;
         }}
-      />
-
+      />;
       {/* Content with holographic glow */}
-      <div
-        className="relative z-0"
+      <div;
+        className="relative z-0";
         style={{
-          filter: `drop-shadow(0 0 20px hsl(189, 85%, 70%, ${0.3 * intensity}))`,
+          filter: `drop-shadow(0 0 20px hsl(189, 85%, 70%, ${0.3 * intensity}))`,;
         }}
-      >
+      >;
         {children}
-      </div>
-    </div>
+      </div>;
+    </div>;
   );
 }
 
 interface DataStreamProps {
+
   className?: string;
   speed?: number;
   density?: number;
+
 }
 
 export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [streams, setStreams] = useState<
+  const [streams, setStreams] = useState<;
     Array<{
       id: number;
       characters: string[];
       positions: number[];
       column: number;
-    }>
+    }>;
   >([]);
 
   useEffect(() => {
@@ -338,13 +346,13 @@ export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamPr
     const columns = Math.floor(window.innerWidth / 20);
 
     const newStreams = Array.from({ length: Math.floor(columns * density) }, (_, i) => ({
-      id: i,
-      characters: Array.from(
-        { length: 20 },
-        () => characters[Math.floor(Math.random() * characters.length)]
-      ),
-      positions: Array.from({ length: 20 }, (_, j) => -j * 20),
-      column: Math.floor(Math.random() * columns),
+      id: i,;
+      characters: Array.from(;
+        { length: 20 },;
+        () => characters[Math.floor(Math.random() * characters.length)];
+      ),;
+      positions: Array.from({ length: 20 }, (_, j) => -j * 20),;
+      column: Math.floor(Math.random() * columns),;
     }));
 
     setStreams(newStreams);
@@ -354,48 +362,48 @@ export function DataStream({ className, speed = 1, density = 0.1 }: DataStreamPr
     if (typeof window === 'undefined') return;
 
     const interval = setInterval(() => {
-      setStreams(prev =>
+      setStreams(prev =>;
         prev.map(stream => ({
-          ...stream,
-          positions: stream.positions.map(pos =>
-            pos > window.innerHeight ? -20 : pos + speed * 2
-          ),
-          characters: stream.characters.map(char =>
-            Math.random() < 0.05
-              ? '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>'[Math.floor(Math.random() * 44)]
-              : char
-          ),
-        }))
+          ...stream,;
+          positions: stream.positions.map(pos =>;
+            pos > window.innerHeight ? -20 : pos + speed * 2;
+          ),;
+          characters: stream.characters.map(char =>;
+            Math.random() < 0.05;
+              ? '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=|[]{}()<>'[Math.floor(Math.random() * 44)];
+              : char;
+          ),;
+        }));
       );
     }, 100);
 
     return () => clearInterval(interval);
   }, [speed]);
 
-  return (
-    <div
+  return (;
+    <div;
       ref={containerRef}
-      className={cn(
-        'absolute inset-0 overflow-hidden pointer-events-none font-mono text-sm',
-        className
+      className={cn(;
+        'absolute inset-0 overflow-hidden pointer-events-none font-mono text-sm',;
+        className;
       )}
-    >
-      {streams.map(stream => (
-        <div key={stream.id} className="absolute" style={{ left: `${stream.column * 20}px` }}>
-          {stream.characters.map((char, index) => (
-            <div
+    >;
+      {streams.map(stream => (;
+        <div key={stream.id} className="absolute" style={{ left: `${stream.column * 20}px` }}>;
+          {stream.characters.map((char, index) => (;
+            <div;
               key={index}
-              className="absolute text-neon-green opacity-70"
+              className="absolute text-neon-green opacity-70";
               style={{
-                top: `${stream.positions[index]}px`,
-                opacity: Math.max(0, 1 - index * 0.1),
+                top: `${stream.positions[index]}px`,;
+                opacity: Math.max(0, 1 - index * 0.1),;
               }}
-            >
+            >;
               {char}
-            </div>
+            </div>;
           ))}
-        </div>
+        </div>;
       ))}
-    </div>
+    </div>;
   );
 }

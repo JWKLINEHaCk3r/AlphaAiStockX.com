@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface Particle {
+
   x: number;
   y: number;
   vx: number;
@@ -9,6 +10,7 @@ interface Particle {
   size: number;
   color: string;
   opacity: number;
+
 }
 
 export default function AnimatedBackground() {
@@ -38,13 +40,13 @@ export default function AnimatedBackground() {
 
       for (let i = 0; i < 50; i++) {
         particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 3 + 1,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          opacity: Math.random() * 0.5 + 0.3,
+          x: Math.random() * canvas.width,;
+          y: Math.random() * canvas.height,;
+          vx: (Math.random() - 0.5) * 0.5,;
+          vy: (Math.random() - 0.5) * 0.5,;
+          size: Math.random() * 3 + 1,;
+          color: colors[Math.floor(Math.random() * colors.length)],;
+          opacity: Math.random() * 0.5 + 0.3,;
         });
       }
 
@@ -97,11 +99,11 @@ import { AnimatedBackground } from "./animated-background-client";
     };
   }, []);
 
-  return (
-    <canvas
+  return (;
+    <canvas;
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-0";
       style={{ background: 'transparent' }}
-    />
+    />;
   );
 }

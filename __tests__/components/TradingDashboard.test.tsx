@@ -4,30 +4,30 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
 import { ThemeProvider } from '../../../components/theme-provider';
 
-// Mock next-auth
+// Mock next-auth;
 jest.mock('next-auth/react');
 const mockUseSession = useSession as jest.MockedFunction<typeof useSession>;
 
-// Mock WebSocket
+// Mock WebSocket;
 global.WebSocket = jest.fn(() => ({
 import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
-  send: jest.fn(),
-  close: jest.fn(),
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+  send: jest.fn(),;
+  close: jest.fn(),;
+  addEventListener: jest.fn(),;
+  removeEventListener: jest.fn(),;
 }));
 
-// Mock chart library
+// Mock chart library;
 jest.mock('recharts', () => ({
-  LineChart: ({ children }: any) => <div data-testid="line-chart">{children}</div>,
-  Line: () => <div data-testid="line" />,
-  XAxis: () => <div data-testid="x-axis" />,
-  YAxis: () => <div data-testid="y-axis" />,
-  CartesianGrid: () => <div data-testid="cartesian-grid" />,
-  Tooltip: () => <div data-testid="tooltip" />,
-  ResponsiveContainer: ({ children }: any) => (
-    <div data-testid="responsive-container">{children}</div>
-  ),
+  LineChart: ({ children }: any) => <div data-testid="line-chart">{children}</div>,;
+  Line: () => <div data-testid="line" />,;
+  XAxis: () => <div data-testid="x-axis" />,;
+  YAxis: () => <div data-testid="y-axis" />,;
+  CartesianGrid: () => <div data-testid="cartesian-grid" />,;
+  Tooltip: () => <div data-testid="tooltip" />,;
+  ResponsiveContainer: ({ children }: any) => (;
+    <div data-testid="responsive-container">{children}</div>;
+  ),;
 }));
 
 const renderWithProviders = (component: React.ReactElement) => {
@@ -39,32 +39,32 @@ describe('TradingDashboard', () => {
     mockUseSession.mockReturnValue({
       data: {
         user: {
-          id: '1',
-          email: 'test@example.com',
-          name: 'Test User',
-        },
-        expires: '2024-12-31',
-      },
-      status: 'authenticated',
-      update: jest.fn(),
+          id: '1',;
+          email: 'test@example.com',;
+          name: 'Test User',;
+        },;
+        expires: '2024-12-31',;
+      },;
+      status: 'authenticated',;
+      update: jest.fn(),;
     });
 
-    // Mock fetch for API calls
-    global.fetch = jest.fn(() =>
+    // Mock fetch for API calls;
+    global.fetch = jest.fn(() =>;
       Promise.resolve({
-        ok: true,
-        json: () =>
+        ok: true,;
+        json: () =>;
           Promise.resolve({
             portfolio: {
-              totalValue: 100000,
-              dailyPnL: 1500,
-              positions: [],
-            },
+              totalValue: 100000,;
+              dailyPnL: 1500,;
+              positions: [],;
+            },;
             marketData: {
-              indices: [],
-            },
-          }),
-      })
+              indices: [],;
+            },;
+          }),;
+      });
     ) as jest.Mock;
   });
 
@@ -102,16 +102,16 @@ describe('TradingDashboard', () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith('/api/trading/orders', {
-        method: 'POST',
+        method: 'POST',;
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json',;
+        },;
         body: JSON.stringify({
-          symbol: 'AAPL',
-          quantity: 10,
-          type: 'market',
-          side: 'buy',
-        }),
+          symbol: 'AAPL',;
+          quantity: 10,;
+          type: 'market',;
+          side: 'buy',;
+        }),;
       });
     });
   });
@@ -148,27 +148,27 @@ describe('TradingDashboard', () => {
 
   it('updates real-time prices', async () => {
     const mockWebSocket = {
-      send: jest.fn(),
-      close: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      send: jest.fn(),;
+      close: jest.fn(),;
+      addEventListener: jest.fn(),;
+      removeEventListener: jest.fn(),;
     };
 
     global.WebSocket = jest.fn(() => mockWebSocket);
 
     renderWithProviders(<TradingDashboardDemo />);
 
-    // Simulate WebSocket message
-    const messageHandler = mockWebSocket.addEventListener.mock.calls.find(
-      call => call[0] === 'message'
+    // Simulate WebSocket message;
+    const messageHandler = mockWebSocket.addEventListener.mock.calls.find(;
+      call => call[0] === 'message';
     )[1];
 
     messageHandler({
       data: JSON.stringify({
-        type: 'price_update',
-        symbol: 'AAPL',
-        price: 150.25,
-      }),
+        type: 'price_update',;
+        symbol: 'AAPL',;
+        price: 150.25,;
+      }),;
     });
 
     await waitFor(() => {
@@ -178,9 +178,9 @@ describe('TradingDashboard', () => {
 
   it('handles authentication requirement', () => {
     mockUseSession.mockReturnValue({
-      data: null,
-      status: 'unauthenticated',
-      update: jest.fn(),
+      data: null,;
+      status: 'unauthenticated',;
+      update: jest.fn(),;
     });
 
     renderWithProviders(<TradingDashboardDemo />);
@@ -189,4 +189,4 @@ describe('TradingDashboard', () => {
   });
 });
 
-// This file is a test file and does not use module.exports or require, so no changes needed for ESM compatibility.
+// This file is a test file and does not use module.exports or require, so no changes needed for ESM compatibility.;

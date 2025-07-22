@@ -1,4 +1,4 @@
-// Stub for TradingSettingsNotificationsAdvanced. Update with real implementation as needed.
+// Stub for TradingSettingsNotificationsAdvanced. Update with real implementation as needed.;
 import React from 'react';
 
 export default function TradingSettingsNotificationsAdvanced() {

@@ -4,10 +4,10 @@ import { prisma } from '@/app/lib/prisma';
 import { z } from 'zod';
 
 const registerSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  username: z.string().min(3, 'Username must be at least 3 characters').optional(),
+  name: z.string().min(2, 'Name must be at least 2 characters'),;
+  email: z.string().email('Invalid email address'),;
+  password: z.string().min(8, 'Password must be at least 8 characters'),;
+  username: z.string().min(3, 'Username must be at least 3 characters').optional(),;
 });
 
 export async function POST(request: NextRequest) {
@@ -15,19 +15,19 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, email, password, username } = registerSchema.parse(body);
 
-    // Check if user already exists
+    // Check if user already exists;
     const existingUser = await prisma.user.findUnique({
-      where: { email },
+      where: { email },;
     });
 
     if (existingUser) {
       return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
     }
 
-    // Check if username is taken
+    // Check if username is taken;
     if (username) {
       const existingUsername = await prisma.user.findUnique({
-        where: { username },
+        where: { username },;
       });
 
       if (existingUsername) {
@@ -35,87 +35,87 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Hash password
+    // Hash password;
     const hashedPassword = await hash(password, 12);
 
-    // Create user with initial portfolio
+    // Create user with initial portfolio;
     const user = await prisma.user.create({
       data: {
-        name,
-        email,
-        password: hashedPassword,
-        username: username || email.split('@')[0],
-        tier: 'FREE',
-        status: 'PENDING',
-        balance: 10000, // Demo balance
-        portfolioValue: 10000,
-        totalPnL: 0,
-        winRate: 0,
-        riskScore: 5,
-        tradingLevel: 1,
-        aiAccess: true,
-        kycStatus: 'PENDING',
-        accountType: 'CASH',
+        name,;
+        email,;
+        password: hashedPassword,;
+        username: username || email.split('@')[0],;
+        tier: 'FREE',;
+        status: 'PENDING',;
+        balance: 10000, // Demo balance;
+        portfolioValue: 10000,;
+        totalPnL: 0,;
+        winRate: 0,;
+        riskScore: 5,;
+        tradingLevel: 1,;
+        aiAccess: true,;
+        kycStatus: 'PENDING',;
+        accountType: 'CASH',;
         preferences: {
-          theme: 'dark',
+          theme: 'dark',;
           notifications: {
-            email: true,
-            push: true,
-            sms: false,
-            trading: true,
-            news: true,
-            ai: true,
-          },
+            email: true,;
+            push: true,;
+            sms: false,;
+            trading: true,;
+            news: true,;
+            ai: true,;
+          },;
           privacy: {
-            showProfile: true,
-            showTrades: false,
-            showPnL: false,
-          },
+            showProfile: true,;
+            showTrades: false,;
+            showPnL: false,;
+          },;
           trading: {
-            autoTrade: false,
-            riskLevel: 'medium',
-            maxPosition: 0.1,
-          },
-        },
-        // Create default portfolio
+            autoTrade: false,;
+            riskLevel: 'medium',;
+            maxPosition: 0.1,;
+          },;
+        },;
+        // Create default portfolio;
         portfolios: {
           create: {
-            name: 'Main Portfolio',
-            description: 'Primary trading portfolio',
-            type: 'PERSONAL',
-            totalValue: 10000,
-            cashBalance: 10000,
-            dailyPnL: 0,
-            totalPnL: 0,
-            riskLevel: 'MEDIUM',
-            autoTrading: false,
-          },
-        },
-      },
+            name: 'Main Portfolio',;
+            description: 'Primary trading portfolio',;
+            type: 'PERSONAL',;
+            totalValue: 10000,;
+            cashBalance: 10000,;
+            dailyPnL: 0,;
+            totalPnL: 0,;
+            riskLevel: 'MEDIUM',;
+            autoTrading: false,;
+          },;
+        },;
+      },;
       select: {
-        id: true,
-        name: true,
-        email: true,
-        username: true,
-        tier: true,
-        status: true,
-        balance: true,
-        portfolioValue: true,
-        createdAt: true,
-      },
+        id: true,;
+        name: true,;
+        email: true,;
+        username: true,;
+        tier: true,;
+        status: true,;
+        balance: true,;
+        portfolioValue: true,;
+        createdAt: true,;
+      },;
     });
 
     return NextResponse.json({
-      success: true,
-      message: 'User registered successfully',
-      user,
+      success: true,;
+      message: 'User registered successfully',;
+      user,;
     });
   } catch (error) {
     console.error('Registration error:', error);
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+      return NextResponse.json(;
+        { error: 'Validation failed', details: error.errors },;
         { status: 400 }
       );
     }

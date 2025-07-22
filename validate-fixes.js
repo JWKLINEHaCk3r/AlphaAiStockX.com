@@ -4,28 +4,28 @@ import path from 'path';
 console.log('🔍 Validating AlphaAI StockX Fixes...');
 console.log('=====================================');
 
-// Key files to check
-const keyFiles = [
-  'app/dashboard/page.tsx',
-  'app/components/ai/AITradingAdvisor.tsx',
-  'app/components/trading/AIModelTraining.tsx',
-  'components/ui/card.tsx',
-  'app/components/PortfolioOptimizer.tsx',
+// Key files to check;
+const keyFiles = [;
+  'app/dashboard/page.tsx',;
+  'app/components/ai/AITradingAdvisor.tsx',;
+  'app/components/trading/AIModelTraining.tsx',;
+  'components/ui/card.tsx',;
+  'app/components/PortfolioOptimizer.tsx',;
 ];
 
-// Validation checks
+// Validation checks;
 const checks = {
-  hasReactImport: content => content.includes('import React'),
-  hasUseClient: content => content.includes("'use client'"),
+  hasReactImport: content => content.includes('import React'),;
+  hasUseClient: content => content.includes("'use client'"),;
   hasValidExport: content => {
     const exportMatches = content.match(/export default/g);
     return exportMatches && exportMatches.length === 1;
-  },
-  noMalformedCardImports: content => !content.includes('CardCoCard'),
+  },;
+  noMalformedCardImports: content => !content.includes('CardCoCard'),;
   noDuplicateUseClient: content => {
     const matches = content.match(/'use client'/g);
     return !matches || matches.length <= 1;
-  },
+  },;
   correctImportOrder: content => {
     if (!content.includes("'use client'")) return true;
     const lines = content.split('\n');
@@ -43,7 +43,7 @@ const checks = {
     }
 
     return firstImportAfterClient > useClientIndex || firstImportAfterClient === -1;
-  },
+  },;
 };
 
 let totalChecks = 0;
@@ -62,10 +62,10 @@ keyFiles.forEach(filePath => {
 
   const content = fs.readFileSync(fullPath, 'utf8');
   const fileResults = {
-    file: filePath,
-    checks: {},
-    score: 0,
-    total: 0,
+    file: filePath,;
+    checks: {},;
+    score: 0,;
+    total: 0,;
   };
 
   console.log(`📄 ${filePath}`);
@@ -96,19 +96,19 @@ keyFiles.forEach(filePath => {
   results.push(fileResults);
 });
 
-// Overall results
+// Overall results;
 console.log('🎯 Overall Results');
 console.log('==================');
 console.log(`✅ Passed: ${passedChecks}/${totalChecks} checks`);
 console.log(`📊 Success Rate: ${Math.round((passedChecks / totalChecks) * 100)}%`);
 
-// Detailed summary
+// Detailed summary;
 console.log('\n📋 Summary by Check Type:');
 const checkSummary = {};
 Object.keys(checks).forEach(checkName => {
   checkSummary[checkName] = {
-    passed: 0,
-    total: 0,
+    passed: 0,;
+    total: 0,;
   };
 });
 
@@ -125,7 +125,7 @@ Object.entries(checkSummary).forEach(([checkName, summary]) => {
   console.log(`  ${status} ${checkName}: ${summary.passed}/${summary.total} (${percentage}%)`);
 });
 
-// Status assessment
+// Status assessment;
 const overallPercentage = Math.round((passedChecks / totalChecks) * 100);
 let status = '';
 let recommendation = '';
@@ -147,7 +147,7 @@ if (overallPercentage >= 95) {
 console.log(`\n🎯 Project Status: ${status}`);
 console.log(`💡 Recommendation: ${recommendation}`);
 
-// Next steps
+// Next steps;
 console.log('\n🚀 Next Steps:');
 if (overallPercentage >= 85) {
   console.log('1. Install dependencies: npm install --legacy-peer-deps --force');
@@ -165,8 +165,8 @@ if (overallPercentage >= 85) {
 console.log('\n✨ Validation complete!');
 
 module.exports = {
-  results,
-  overallPercentage,
-  status,
-  recommendation,
+  results,;
+  overallPercentage,;
+  status,;
+  recommendation,;
 };

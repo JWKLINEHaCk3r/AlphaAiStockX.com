@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface Particle {
+
   x: number;
   y: number;
   vx: number;
@@ -9,6 +10,7 @@ interface Particle {
   size: number;
   opacity: number;
   color: string;
+
 }
 
 export default function AnimatedBackground() {
@@ -24,15 +26,15 @@ export default function AnimatedBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Debounced resize
+    // Debounced resize;
     const handleResize = () => {
       if (resizeTimeout.current !== null) clearTimeout(resizeTimeout.current);
       resizeTimeout.current = setTimeout(() => {
         resizeCanvas();
-        // Only recreate particles if canvas size actually changed
-        if (
-          canvas.width !== lastCanvasSize.current.width ||
-          canvas.height !== lastCanvasSize.current.height
+        // Only recreate particles if canvas size actually changed;
+        if (;
+          canvas.width !== lastCanvasSize.current.width ||;
+          canvas.height !== lastCanvasSize.current.height;
         ) {
           createParticles();
         }
@@ -47,7 +49,7 @@ export default function AnimatedBackground() {
       canvas.height = height * dpr;
       canvas.style.width = width + 'px';
       canvas.style.height = height + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform;
       ctx.scale(dpr, dpr);
       lastCanvasSize.current = { width: canvas.width, height: canvas.height };
     };
@@ -59,13 +61,13 @@ export default function AnimatedBackground() {
       const height = window.innerHeight;
       for (let i = 0; i < 50; i++) {
         particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 3 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          x: Math.random() * width,;
+          y: Math.random() * height,;
+          vx: (Math.random() - 0.5) * 0.5,;
+          vy: (Math.random() - 0.5) * 0.5,;
+          size: Math.random() * 3 + 1,;
+          opacity: Math.random() * 0.5 + 0.2,;
+          color: colors[Math.floor(Math.random() * colors.length)],;
         });
       }
       particlesRef.current = particles;
@@ -78,20 +80,20 @@ export default function AnimatedBackground() {
       const particles = particlesRef.current;
       for (let i = 0; i < particles.length; i++) {
         const particle = particles[i];
-        // Update position
+        // Update position;
         particle.x += particle.vx;
         particle.y += particle.vy;
-        // Bounce off edges
+        // Bounce off edges;
         if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
         if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
-        // Draw particle
+        // Draw particle;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
         ctx.globalAlpha = particle.opacity;
 import { AnimatedBackground } from "../../../components/ui/animated-background-client";
         ctx.fill();
-        // Draw connections to up to 3 nearest particles only
+        // Draw connections to up to 3 nearest particles only;
         let connections = 0;
         for (let j = 0; j < particles.length && connections < 3; j++) {
           if (i !== j) {
@@ -136,11 +138,11 @@ import { AnimatedBackground } from "../../../components/ui/animated-background-c
     };
   }, []);
 
-  return (
-    <canvas
+  return (;
+    <canvas;
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-0";
       style={{ background: 'transparent' }}
-    />
+    />;
   );
 }

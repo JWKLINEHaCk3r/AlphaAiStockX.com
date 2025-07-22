@@ -3,64 +3,64 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 
-// Security configuration
+// Security configuration;
 export const SECURITY_CONFIG = {
   bcrypt: {
-    rounds: parseInt(process.env.BCRYPT_ROUNDS || '12'),
-  },
+    rounds: parseInt(process.env.BCRYPT_ROUNDS || '12'),;
+  },;
   jwt: {
-    expiry: process.env.JWT_EXPIRY || '1h',
-    refreshExpiry: process.env.REFRESH_TOKEN_EXPIRY || '7d',
-  },
+    expiry: process.env.JWT_EXPIRY || '1h',;
+    refreshExpiry: process.env.REFRESH_TOKEN_EXPIRY || '7d',;
+  },;
   passwords: {
-    minLength: 12,
-    requireSpecialChars: true,
-    requireNumbers: true,
-    requireUppercase: true,
-    requireLowercase: true,
-  },
+    minLength: 12,;
+    requireSpecialChars: true,;
+    requireNumbers: true,;
+    requireUppercase: true,;
+    requireLowercase: true,;
+  },;
   csrf: {
-    tokenLength: 32,
-    headerName: 'x-csrf-token',
-  },
+    tokenLength: 32,;
+    headerName: 'x-csrf-token',;
+  },;
   encryption: {
-    algorithm: 'aes-256-gcm',
-    keyLength: 32,
-    ivLength: 16,
-    tagLength: 16,
-  },
+    algorithm: 'aes-256-gcm',;
+    keyLength: 32,;
+    ivLength: 16,;
+    tagLength: 16,;
+  },;
 };
 
-// Password validation schema
-export const passwordSchema = z
-  .string()
-  .min(
-    SECURITY_CONFIG.passwords.minLength,
-    `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`
-  )
-  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-  .regex(/[0-9]/, 'Password must contain at least one number')
+// Password validation schema;
+export const passwordSchema = z;
+  .string();
+  .min(;
+    SECURITY_CONFIG.passwords.minLength,;
+    `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`;
+  );
+  .regex(/[a-z]/, 'Password must contain at least one lowercase letter');
+  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter');
+  .regex(/[0-9]/, 'Password must contain at least one number');
   .regex(/[^a-zA-Z0-9]/, 'Password must contain at least one special character');
 
-// Email validation schema
-export const emailSchema = z
-  .string()
-  .email('Invalid email format')
-  .max(254, 'Email too long')
+// Email validation schema;
+export const emailSchema = z;
+  .string();
+  .email('Invalid email format');
+  .max(254, 'Email too long');
   .toLowerCase();
 
-// Input sanitization schemas
-export const sanitizedStringSchema = z
-  .string()
-  .trim()
+// Input sanitization schemas;
+export const sanitizedStringSchema = z;
+  .string();
+  .trim();
   .transform(str => str.replace(/[<>\"'&]/g, ''));
 
-export const alphanumericSchema = z
-  .string()
+export const alphanumericSchema = z;
+  .string();
   .regex(/^[a-zA-Z0-9]+$/, 'Only alphanumeric characters allowed');
 
-// Password hashing utilities
+// Password hashing utilities;
 export class PasswordSecurity {
   static async hash(password: string): Promise<string> {
     try {
@@ -97,14 +97,14 @@ export class PasswordSecurity {
       password += allChars[Math.floor(Math.random() * allChars.length)];
     }
 
-    return password
-      .split('')
-      .sort(() => Math.random() - 0.5)
+    return password;
+      .split('');
+      .sort(() => Math.random() - 0.5);
       .join('');
   }
 }
 
-// CSRF protection utilities
+// CSRF protection utilities;
 export class CSRFProtection {
   static generateToken(): string {
     return crypto.randomBytes(SECURITY_CONFIG.csrf.tokenLength).toString('hex');
@@ -116,7 +116,7 @@ export class CSRFProtection {
   }
 }
 
-// Encryption utilities
+// Encryption utilities;
 export class EncryptionUtils {
   private static getKey(): Buffer {
     const key = process.env.ENCRYPTION_KEY;
@@ -138,9 +138,9 @@ export class EncryptionUtils {
       const tag = cipher.getAuthTag();
 
       return {
-        encrypted,
-        iv: iv.toString('hex'),
-        tag: tag.toString('hex'),
+        encrypted,;
+        iv: iv.toString('hex'),;
+        tag: tag.toString('hex'),;
       };
     } catch (error) {
       throw new Error(`Encryption failed: ${error.message}`);
@@ -163,14 +163,14 @@ export class EncryptionUtils {
   }
 }
 
-// Input validation and sanitization
+// Input validation and sanitization;
 export class InputValidator {
   static sanitizeHtml(input: string): string {
-    return input
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#x27;')
+    return input;
+      .replace(/</g, '&lt;');
+      .replace(/>/g, '&gt;');
+      .replace(/"/g, '&quot;');
+      .replace(/'/g, '&#x27;');
       .replace(/\//g, '&#x2F;');
   }
 
@@ -190,12 +190,12 @@ export class InputValidator {
     return alphanumericSchema.parse(input);
   }
 
-  // SQL injection prevention
+  // SQL injection prevention;
   static escapeSqlString(input: string): string {
     return input.replace(/'/g, "''").replace(/;/g, '\\;');
   }
 
-  // XSS prevention for JSON
+  // XSS prevention for JSON;
   static sanitizeJson(obj: any): any {
     if (typeof obj === 'string') {
       return this.sanitizeHtml(obj);
@@ -212,7 +212,7 @@ export class InputValidator {
   }
 }
 
-// Session security utilities
+// Session security utilities;
 export class SessionSecurity {
   static generateSecureSessionId(): string {
     return crypto.randomBytes(32).toString('hex');
@@ -229,14 +229,14 @@ export class SessionSecurity {
   }
 }
 
-// Rate limiting utilities
+// Rate limiting utilities;
 export class RateLimiter {
   private static store = new Map<string, { count: number; resetTime: number }>();
 
-  static checkLimit(
-    key: string,
-    maxRequests: number,
-    windowMs: number
+  static checkLimit(;
+    key: string,;
+    maxRequests: number,;
+    windowMs: number;
   ): { allowed: boolean; remaining: number; resetTime: number } {
     const now = Date.now();
     const current = this.store.get(key);
@@ -253,9 +253,9 @@ export class RateLimiter {
 
     current.count++;
     return {
-      allowed: true,
-      remaining: maxRequests - current.count,
-      resetTime: current.resetTime,
+      allowed: true,;
+      remaining: maxRequests - current.count,;
+      resetTime: current.resetTime,;
     };
   }
 
@@ -269,7 +269,7 @@ export class RateLimiter {
   }
 }
 
-// Security audit logging
+// Security audit logging;
 export class SecurityAudit {
   static logSecurityEvent(event: {
     type: 'login' | 'logout' | 'failed_login' | 'password_change' | 'suspicious_activity';
@@ -279,11 +279,11 @@ export class SecurityAudit {
     details?: any;
   }): void {
     const logEntry = {
-      timestamp: new Date().toISOString(),
-      ...event,
+      timestamp: new Date().toISOString(),;
+      ...event,;
     };
 
-    // In production, send to your security monitoring system
+    // In production, send to your security monitoring system;
     console.log('SECURITY_AUDIT:', JSON.stringify(logEntry));
   }
 
@@ -295,23 +295,27 @@ export class SecurityAudit {
     success: boolean;
   }): void {
     const logEntry = {
-      timestamp: new Date().toISOString(),
-      type: 'data_access',
-      ...access,
+      timestamp: new Date().toISOString(),;
+      type: 'data_access',;
+      ...access,;
     };
 
     console.log('DATA_ACCESS_AUDIT:', JSON.stringify(logEntry));
   }
 }
 
-// Type definitions for better TypeScript support
+// Type definitions for better TypeScript support;
 export interface SecurityHeaders {
+
+
   'X-Content-Type-Options': string;
   'X-Frame-Options': string;
   'X-XSS-Protection': string;
   'Strict-Transport-Security': string;
   'Content-Security-Policy': string;
   'Referrer-Policy': string;
+
+
 }
 
 export interface ValidationResult<T> {
@@ -321,6 +325,8 @@ export interface ValidationResult<T> {
 }
 
 export interface SecurityEvent {
+
+
   type: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
   description: string;
@@ -328,4 +334,6 @@ export interface SecurityEvent {
   ip: string;
   timestamp: Date;
   metadata?: any;
+
+
 }

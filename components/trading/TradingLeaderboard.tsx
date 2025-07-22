@@ -1,4 +1,4 @@
-// Stub for TradingLeaderboard. Update with real implementation as needed.
+// Stub for TradingLeaderboard. Update with real implementation as needed.;
 import React from 'react';
 
 export default function TradingLeaderboard() {

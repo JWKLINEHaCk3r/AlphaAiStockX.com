@@ -1,10 +1,14 @@
 import React from 'react';
-// Global React type definitions for environments without node_modules
+// Global React type definitions for environments without node_modules;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
+
+
       [elemName: string]: any;
-    }
+    
+
+}
   }
 
   namespace React {
@@ -88,11 +92,11 @@ declare global {
       defaultValue?: string | ReadonlyArray<string> | number;
     }
 
-    function forwardRef<T, P = {}>(
-      render: (props: P, ref: any) => ReactElement | null
+    function forwardRef<T, P = {}>(;
+      render: (props: P, ref: any) => ReactElement | null;
     ): ComponentType<P>;
-    function useState<S>(
-      initialState: S | (() => S)
+    function useState<S>(;
+      initialState: S | (() => S);
     ): [S, (value: S | ((prevState: S) => S)) => void];
     function useEffect(effect: () => void | (() => void), deps?: any[]): void;
     function useMemo<T>(factory: () => T, deps: any[]): T;
@@ -106,7 +110,7 @@ declare global {
   }
 }
 
-// Make React globally available as a fallback
+// Make React globally available as a fallback;
 declare const React: {
   useState: typeof React.useState;
   useEffect: typeof React.useEffect;

@@ -1,7 +1,7 @@
-// Custom loader to inject global polyfills
+// Custom loader to inject global polyfills;
 module.exports = function (source) {
-  const polyfillCode = `
-// Global polyfills for SSR compatibility
+  const polyfillCode = `;
+// Global polyfills for SSR compatibility;
 if (typeof global !== 'undefined' && typeof global.self === 'undefined') {
   global.self = global;
 }

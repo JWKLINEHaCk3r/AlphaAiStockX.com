@@ -1,60 +1,58 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-// Enhanced Security configuration for Next.js 15.3.5+
+// Enhanced Security configuration for Next.js 15.3.5+;
 const SECURITY_CONFIG = {
   rateLimit: {
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'), // 15 minutes
-    maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'),
-    // Enhanced rate limiting per endpoint
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'), // 15 minutes;
+    maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'),;
+    // Enhanced rate limiting per endpoint;
     strictEndpoints: {
-      '/api/trading': 20, // Trading endpoints get stricter limits
-      '/api/auth': 10, // Auth endpoints get very strict limits
-      '/api/portfolio': 50, // Portfolio can be more permissive
-    },
-  },
+      '/api/trading': 20, // Trading endpoints get stricter limits;
+      '/api/auth': 10, // Auth endpoints get very strict limits;
+      '/api/portfolio': 50, // Portfolio can be more permissive;
+    },;
+  },;
   csrf: {
-    enabled: process.env.NODE_ENV === 'production',
-    tokenHeader: 'x-csrf-token',
-  },
+    enabled: process.env.NODE_ENV === 'production',;
+    tokenHeader: 'x-csrf-token',;
+  },;
   headers: {
-    csp: process.env.ENABLE_CSP !== 'false', // Default to enabled
-    hsts: process.env.ENABLE_HSTS !== 'false', // Default to enabled
-    frameOptions: process.env.ENABLE_X_FRAME_OPTIONS !== 'false', // Default to enabled
-  },
-  // New security features for 2024/2025
+    csp: process.env.ENABLE_CSP !== 'false', // Default to enabled;
+    hsts: process.env.ENABLE_HSTS !== 'false', // Default to enabled;
+    frameOptions: process.env.ENABLE_X_FRAME_OPTIONS !== 'false', // Default to enabled;
+  },;
+  // New security features for 2024/2025;
   security: {
-    enforceHttps: process.env.NODE_ENV === 'production',
-    originValidation: true,
-    suspiciousActivityDetection: true,
-  },
+    enforceHttps: process.env.NODE_ENV === 'production',;
+    originValidation: true,;
+    suspiciousActivityDetection: true,;
+  },;
 };
 
-// In-memory rate limiting (use Redis in production)
+// In-memory rate limiting (use Redis in production);
 const rateLimitStore = new Map<string, { count: number; resetTime: number; violations: number }>();
-const suspiciousIpStore = new Map<
-  string,
+const suspiciousIpStore = new Map<;
+  string,;
   { violations: number; lastViolation: number; blocked: boolean }
 >();
 
-// Enhanced security headers for 2024/2025 security standards
+// Enhanced security headers for 2024/2025 security standards;
 const securityHeaders = {
-  // Core security headers
-  'X-Content-Type-Options': 'nosniff',
-  'X-XSS-Protection': '0', // Disable as modern browsers handle this better
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
-
-  // New 2024 security headers
-  'Cross-Origin-Embedder-Policy': 'require-corp',
-  'Cross-Origin-Opener-Policy': 'same-origin',
-  'Cross-Origin-Resource-Policy': 'same-origin',
-  'Origin-Agent-Cluster': '?1',
-
-  // Cache control for sensitive data
-  'Cache-Control': 'no-store, no-cache, must-revalidate, private',
-  Pragma: 'no-cache',
-  Expires: '0',
+  // Core security headers;
+  'X-Content-Type-Options': 'nosniff',;
+  'X-XSS-Protection': '0', // Disable as modern browsers handle this better;
+  'Referrer-Policy': 'strict-origin-when-cross-origin',;
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',;
+  // New 2024 security headers;
+  'Cross-Origin-Embedder-Policy': 'require-corp',;
+  'Cross-Origin-Opener-Policy': 'same-origin',;
+  'Cross-Origin-Resource-Policy': 'same-origin',;
+  'Origin-Agent-Cluster': '?1',;
+  // Cache control for sensitive data;
+  'Cache-Control': 'no-store, no-cache, must-revalidate, private',;
+  Pragma: 'no-cache',;
+  Expires: '0',;
 };
 
 if (SECURITY_CONFIG.headers.frameOptions) {
@@ -66,39 +64,39 @@ if (SECURITY_CONFIG.headers.hsts) {
 }
 
 if (SECURITY_CONFIG.headers.csp) {
-  // Enhanced CSP policy for trading platform security
-  securityHeaders['Content-Security-Policy'] = [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://api.alpaca.markets wss://stream.data.alpaca.markets https://paper-api.alpaca.markets wss://stream.data.sandbox.alpaca.markets",
-    "media-src 'self'",
-    "object-src 'none'",
-    "frame-ancestors 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    'upgrade-insecure-requests',
-    'block-all-mixed-content',
+  // Enhanced CSP policy for trading platform security;
+  securityHeaders['Content-Security-Policy'] = [;
+    "default-src 'self'",;
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com",;
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",;
+    "font-src 'self' https://fonts.gstatic.com data:",;
+    "img-src 'self' data: https: blob:",;
+    "connect-src 'self' https://api.alpaca.markets wss://stream.data.alpaca.markets https://paper-api.alpaca.markets wss://stream.data.sandbox.alpaca.markets",;
+    "media-src 'self'",;
+    "object-src 'none'",;
+    "frame-ancestors 'none'",;
+    "base-uri 'self'",;
+    "form-action 'self'",;
+    'upgrade-insecure-requests',;
+    'block-all-mixed-content',;
   ].join('; ');
 }
 
-// Enhanced rate limiting with suspicious activity detection
+// Enhanced rate limiting with suspicious activity detection;
 function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reason?: string } {
   const now = Date.now();
 
-  // Check if IP is blocked for suspicious activity
+  // Check if IP is blocked for suspicious activity;
   const suspicious = suspiciousIpStore.get(ip);
   if (suspicious?.blocked && now - suspicious.lastViolation < 3600000) {
-    // 1 hour block
+    // 1 hour block;
     return { allowed: false, reason: 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' };
   }
 
-  // Get endpoint-specific rate limit
-  const endpointLimit =
-    Object.entries(SECURITY_CONFIG.rateLimit.strictEndpoints).find(([endpoint]) =>
-      pathname.startsWith(endpoint)
+  // Get endpoint-specific rate limit;
+  const endpointLimit =;
+    Object.entries(SECURITY_CONFIG.rateLimit.strictEndpoints).find(([endpoint]) =>;
+      pathname.startsWith(endpoint);
     )?.[1] || SECURITY_CONFIG.rateLimit.maxRequests;
 
   const key = `rate_limit:${ip}:${pathname.split('/').slice(0, 3).join('/')}`;
@@ -106,28 +104,28 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reaso
 
   if (!current || now > current.resetTime) {
     rateLimitStore.set(key, {
-      count: 1,
-      resetTime: now + SECURITY_CONFIG.rateLimit.windowMs,
-      violations: 0,
+      count: 1,;
+      resetTime: now + SECURITY_CONFIG.rateLimit.windowMs,;
+      violations: 0,;
     });
     return { allowed: true };
   }
 
   if (current.count >= endpointLimit) {
-    // Track rate limit violations
+    // Track rate limit violations;
     current.violations++;
 
-    // Escalate to suspicious activity if too many violations
+    // Escalate to suspicious activity if too many violations;
     if (current.violations > 3) {
       const suspiciousData = suspiciousIpStore.get(ip) || {
-        violations: 0,
-        lastViolation: 0,
-        blocked: false,
+        violations: 0,;
+        lastViolation: 0,;
+        blocked: false,;
       };
       suspiciousData.violations++;
       suspiciousData.lastViolation = now;
 
-      // Block IP after 5 violations across different endpoints
+      // Block IP after 5 violations across different endpoints;
       if (suspiciousData.violations >= 5) {
         suspiciousData.blocked = true;
       }
@@ -142,37 +140,36 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; reaso
   return { allowed: true };
 }
 
-// Origin validation for enhanced security
+// Origin validation for enhanced security;
 function validateOrigin(request: NextRequest): boolean {
   if (!SECURITY_CONFIG.security.originValidation) return true;
 
   const origin = request.headers.get('origin');
   const host = request.headers.get('host');
 
-  // Allow same-origin requests
-  if (!origin) return true; // Browser requests without origin (direct navigation)
-
-  const allowedOrigins = [
-    `https://${host}`,
-    `http://${host}`, // For development
-    process.env.NEXT_PUBLIC_APP_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+  // Allow same-origin requests;
+  if (!origin) return true; // Browser requests without origin (direct navigation);
+  const allowedOrigins = [;
+    `https://${host}`,;
+    `http://${host}`, // For development;
+    process.env.NEXT_PUBLIC_APP_URL,;
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,;
   ].filter(Boolean);
 
   return allowedOrigins.includes(origin);
 }
 
-// Enhanced security logging
+// Enhanced security logging;
 function logSecurityEvent(type: string, ip: string, details: any) {
   const logEntry = {
-    timestamp: new Date().toISOString(),
-    type,
-    ip,
-    details,
-    userAgent: details.userAgent || 'unknown',
+    timestamp: new Date().toISOString(),;
+    type,;
+    ip,;
+    details,;
+    userAgent: details.userAgent || 'unknown',;
   };
 
-  // In production, send to your logging service
+  // In production, send to your logging service;
   if (process.env.NODE_ENV === 'production') {
     console.log('[SECURITY]', JSON.stringify(logEntry));
   } else {
@@ -180,15 +177,15 @@ function logSecurityEvent(type: string, ip: string, details: any) {
   }
 }
 
-// Protected routes configuration
-const protectedRoutes = [
-  '/dashboard',
-  '/trading',
-  '/portfolio',
-  '/settings',
-  '/api/trading',
-  '/api/portfolio',
-  '/api/user',
+// Protected routes configuration;
+const protectedRoutes = [;
+  '/dashboard',;
+  '/trading',;
+  '/portfolio',;
+  '/settings',;
+  '/api/trading',;
+  '/api/portfolio',;
+  '/api/user',;
 ];
 
 const publicRoutes = ['/', '/login', '/register', '/api/auth', '/api/health', '/api/public'];
@@ -198,59 +195,59 @@ export async function middleware(request: NextRequest) {
   const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
   const userAgent = request.headers.get('user-agent') || 'unknown';
 
-  // Enhanced HTTPS enforcement for production
-  if (
-    SECURITY_CONFIG.security.enforceHttps &&
-    request.headers.get('x-forwarded-proto') !== 'https' &&
-    process.env.NODE_ENV === 'production'
+  // Enhanced HTTPS enforcement for production;
+  if (;
+    SECURITY_CONFIG.security.enforceHttps &&;
+    request.headers.get('x-forwarded-proto') !== 'https' &&;
+    process.env.NODE_ENV === 'production';
   ) {
     return NextResponse.redirect(`https://${request.headers.get('host')}${pathname}`, 301);
   }
 
-  // Origin validation for sensitive operations
+  // Origin validation for sensitive operations;
   if (!validateOrigin(request)) {
     logSecurityEvent('INVALID_ORIGIN', ip, {
-      origin: request.headers.get('origin'),
-      host: request.headers.get('host'),
-      pathname,
-      userAgent,
+      origin: request.headers.get('origin'),;
+      host: request.headers.get('host'),;
+      pathname,;
+      userAgent,;
     });
     return new NextResponse('Invalid Origin', { status: 403 });
   }
 
-  // Enhanced rate limiting with endpoint-specific limits
+  // Enhanced rate limiting with endpoint-specific limits;
   const rateLimitCheck = checkRateLimit(ip, pathname);
   if (!rateLimitCheck.allowed) {
     logSecurityEvent('RATE_LIMIT_VIOLATION', ip, {
-      reason: rateLimitCheck.reason,
-      pathname,
-      userAgent,
+      reason: rateLimitCheck.reason,;
+      pathname,;
+      userAgent,;
     });
 
     const status = rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' ? 403 : 429;
-    const message =
-      rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY'
-        ? 'Access Denied - Suspicious Activity Detected'
+    const message =;
+      rateLimitCheck.reason === 'IP_BLOCKED_SUSPICIOUS_ACTIVITY';
+        ? 'Access Denied - Suspicious Activity Detected';
         : 'Too Many Requests';
 
     return new NextResponse(message, {
-      status,
+      status,;
       headers: {
-        'Retry-After': Math.ceil(SECURITY_CONFIG.rateLimit.windowMs / 1000).toString(),
-      },
+        'Retry-After': Math.ceil(SECURITY_CONFIG.rateLimit.windowMs / 1000).toString(),;
+      },;
     });
   }
 
-  // Skip authentication for public routes and static assets
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/static') ||
-    pathname.includes('.') ||
-    publicRoutes.some(route => pathname.startsWith(route))
+  // Skip authentication for public routes and static assets;
+  if (;
+    pathname.startsWith('/_next') ||;
+    pathname.startsWith('/static') ||;
+    pathname.includes('.') ||;
+    publicRoutes.some(route => pathname.startsWith(route));
   ) {
     const response = NextResponse.next();
 
-    // Apply security headers to all responses
+    // Apply security headers to all responses;
     Object.entries(securityHeaders).forEach(([key, value]) => {
       response.headers.set(key, value);
     });
@@ -258,11 +255,11 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Check authentication for protected routes
+  // Check authentication for protected routes;
   if (protectedRoutes.some(route => pathname.startsWith(route))) {
     const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
+      req: request,;
+      secret: process.env.NEXTAUTH_SECRET,;
     });
 
     if (!token) {
@@ -277,15 +274,15 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // Additional security checks for sensitive API routes
+    // Additional security checks for sensitive API routes;
     if (pathname.startsWith('/api/trading') || pathname.startsWith('/api/portfolio')) {
-      // Verify user has trading permissions
+      // Verify user has trading permissions;
       if (!token.tradingEnabled) {
         console.warn(`Trading access denied for user ${token.sub} from IP: ${ip}`);
         return new NextResponse('Trading Access Denied', { status: 403 });
       }
 
-      // Check for suspicious activity patterns
+      // Check for suspicious activity patterns;
       if (await detectSuspiciousActivity(token.sub as string, ip)) {
         console.error(`Suspicious activity detected for user ${token.sub} from IP: ${ip}`);
         return new NextResponse('Account Security Check Required', { status: 423 });
@@ -293,45 +290,44 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Apply maintenance mode if enabled
+  // Apply maintenance mode if enabled;
   if (process.env.MAINTENANCE_MODE === 'true' && !pathname.startsWith('/maintenance')) {
     return NextResponse.redirect(new URL('/maintenance', request.url));
   }
 
   const response = NextResponse.next();
 
-  // Apply security headers
+  // Apply security headers;
   Object.entries(securityHeaders).forEach(([key, value]) => {
     response.headers.set(key, value);
   });
 
-  // Add request ID for tracking
+  // Add request ID for tracking;
   const requestId = crypto.randomUUID();
   response.headers.set('X-Request-ID', requestId);
 
   return response;
 }
 
-// Suspicious activity detection (implement based on your requirements)
+// Suspicious activity detection (implement based on your requirements);
 async function detectSuspiciousActivity(userId: string, ip: string): Promise<boolean> {
-  // Implement your suspicious activity detection logic here
-  // Examples:
-  // - Multiple rapid API calls
-  // - Unusual trading patterns
-  // - Access from new geographic locations
-  // - Failed authentication attempts
-
-  return false; // Placeholder
+  // Implement your suspicious activity detection logic here;
+  // Examples:;
+  // - Multiple rapid API calls;
+  // - Unusual trading patterns;
+  // - Access from new geographic locations;
+  // - Failed authentication attempts;
+  return false; // Placeholder;
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: [;
+    /*;
+     * Match all request paths except for the ones starting with:;
+     * - _next/static (static files);
+     * - _next/image (image optimization files);
+     * - favicon.ico (favicon file);
+     */;
+    '/((?!_next/static|_next/image|favicon.ico).*)',;
+  ],;
 };

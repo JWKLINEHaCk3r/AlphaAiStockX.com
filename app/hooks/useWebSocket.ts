@@ -3,21 +3,25 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 interface UseWebSocketOptions {
+
   onOpen?: () => void;
   onMessage?: (data: any) => void;
   onError?: (error: any) => void;
   onClose?: () => void;
   reconnectInterval?: number;
   maxReconnectAttempts?: number;
+
 }
 
 interface WebSocketHook {
+
   sendMessage: (message: any) => void;
   readyState: number;
   isConnected: boolean;
+
 }
 
-// Mock WebSocket states for SSR compatibility
+// Mock WebSocket states for SSR compatibility;
 const CONNECTING = 0;
 const OPEN = 1;
 const CLOSING = 2;
@@ -25,12 +29,12 @@ const CLOSED = 3;
 
 export function useWebSocket(url: string, options: UseWebSocketOptions = {}): WebSocketHook {
   const {
-    onOpen,
-    onMessage,
-    onError,
-    onClose,
-    reconnectInterval = 3000,
-    maxReconnectAttempts = 5,
+    onOpen,;
+    onMessage,;
+    onError,;
+    onClose,;
+    reconnectInterval = 3000,;
+    maxReconnectAttempts = 5,;
   } = options;
 
   const wsRef = useRef<WebSocket | null>(null);
@@ -38,7 +42,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
   const readyStateRef = useRef(CLOSED);
   const isConnectedRef = useRef(false);
 
-  const sendMessage = useCallback(
+  const sendMessage = useCallback(;
     (message: any) => {
       if (typeof window === 'undefined') {
         console.warn('WebSocket: Cannot send message on server side');
@@ -55,8 +59,8 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
       } else {
         console.warn('WebSocket: Connection not ready');
       }
-    },
-    [onError]
+    },;
+    [onError];
   );
 
   const connect = useCallback(() => {
@@ -94,7 +98,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
         isConnectedRef.current = false;
         onClose?.();
 
-        // Attempt to reconnect
+        // Attempt to reconnect;
         if (reconnectAttemptsRef.current < maxReconnectAttempts) {
           reconnectAttemptsRef.current++;
           setTimeout(connect, reconnectInterval);
@@ -122,8 +126,8 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
   }, [connect]);
 
   return {
-    sendMessage,
-    readyState: readyStateRef.current,
-    isConnected: isConnectedRef.current,
+    sendMessage,;
+    readyState: readyStateRef.current,;
+    isConnected: isConnectedRef.current,;
   };
 }

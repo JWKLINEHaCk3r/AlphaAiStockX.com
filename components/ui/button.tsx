@@ -1,3 +1,4 @@
+import React from 'react';
 import * as React from 'react';
 
 export function Button({ children, className = '', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string }) {

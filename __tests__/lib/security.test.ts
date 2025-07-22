@@ -1,10 +1,10 @@
 import {
-  PasswordSecurity,
-  CSRFProtection,
-  EncryptionUtils,
-  InputValidator,
-  RateLimiter,
-  SecurityAudit,
+  PasswordSecurity,;
+  CSRFProtection,;
+  EncryptionUtils,;
+  InputValidator,;
+  RateLimiter,;
+  SecurityAudit,;
 } from '@/lib/security';
 
 describe('Security Utilities', () => {
@@ -30,14 +30,14 @@ describe('Security Utilities', () => {
     });
 
     it('should reject weak passwords', async () => {
-      const weakPasswords = [
-        'password',
-        '123456',
-        'short',
-        'nouppercase123!',
-        'NOLOWERCASE123!',
-        'NoSpecialChars123',
-        'NoNumbers!@#',
+      const weakPasswords = [;
+        'password',;
+        '123456',;
+        'short',;
+        'nouppercase123!',;
+        'NOLOWERCASE123!',;
+        'NoSpecialChars123',;
+        'NoNumbers!@#',;
       ];
 
       for (const weakPassword of weakPasswords) {
@@ -62,7 +62,7 @@ describe('Security Utilities', () => {
       const token2 = CSRFProtection.generateToken();
 
       expect(token1).not.toBe(token2);
-      expect(token1.length).toBe(64); // 32 bytes in hex
+      expect(token1.length).toBe(64); // 32 bytes in hex;
       expect(/^[a-f0-9]+$/.test(token1)).toBe(true);
     });
 
@@ -78,8 +78,8 @@ describe('Security Utilities', () => {
 
   describe('EncryptionUtils', () => {
     beforeEach(() => {
-      // Mock encryption key
-      process.env.ENCRYPTION_KEY =
+      // Mock encryption key;
+      process.env.ENCRYPTION_KEY =;
         '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
     });
 
@@ -159,11 +159,11 @@ describe('Security Utilities', () => {
 
     it('should sanitize JSON objects', () => {
       const maliciousObj = {
-        name: '<script>alert("xss")</script>',
-        items: ['<img src=x onerror=alert(1)>'],
+        name: '<script>alert("xss")</script>',;
+        items: ['<img src=x onerror=alert(1)>'],;
         nested: {
-          field: '<svg onload=alert(1)>',
-        },
+          field: '<svg onload=alert(1)>',;
+        },;
       };
 
       const sanitized = InputValidator.sanitizeJson(maliciousObj);
@@ -176,7 +176,7 @@ describe('Security Utilities', () => {
 
   describe('RateLimiter', () => {
     beforeEach(() => {
-      // Clear rate limiter store
+      // Clear rate limiter store;
       RateLimiter.cleanup();
     });
 
@@ -194,13 +194,13 @@ describe('Security Utilities', () => {
       const maxRequests = 3;
       const windowMs = 60000;
 
-      // Make requests up to the limit
+      // Make requests up to the limit;
       for (let i = 0; i < maxRequests; i++) {
         const result = RateLimiter.checkLimit('test-key', maxRequests, windowMs);
         expect(result.allowed).toBe(true);
       }
 
-      // Next request should be blocked
+      // Next request should be blocked;
       const blockedResult = RateLimiter.checkLimit('test-key', maxRequests, windowMs);
       expect(blockedResult.allowed).toBe(false);
       expect(blockedResult.remaining).toBe(0);
@@ -215,7 +215,7 @@ describe('Security Utilities', () => {
       const result2 = RateLimiter.checkLimit('test-key', 1, 1000);
       expect(result2.allowed).toBe(false);
 
-      // Fast forward time
+      // Fast forward time;
       jest.advanceTimersByTime(1001);
 
       const result3 = RateLimiter.checkLimit('test-key', 1, 1000);
@@ -238,30 +238,30 @@ describe('Security Utilities', () => {
 
     it('should log security events', () => {
       SecurityAudit.logSecurityEvent({
-        type: 'login',
-        userId: 'user123',
-        ip: '192.168.1.1',
-        userAgent: 'Mozilla/5.0...',
+        type: 'login',;
+        userId: 'user123',;
+        ip: '192.168.1.1',;
+        userAgent: 'Mozilla/5.0...',;
       });
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'SECURITY_AUDIT:',
-        expect.stringContaining('"type":"login"')
+      expect(consoleSpy).toHaveBeenCalledWith(;
+        'SECURITY_AUDIT:',;
+        expect.stringContaining('"type":"login"');
       );
     });
 
     it('should log data access events', () => {
       SecurityAudit.logDataAccess({
-        userId: 'user123',
-        resource: '/api/portfolio',
-        action: 'read',
-        ip: '192.168.1.1',
-        success: true,
+        userId: 'user123',;
+        resource: '/api/portfolio',;
+        action: 'read',;
+        ip: '192.168.1.1',;
+        success: true,;
       });
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'DATA_ACCESS_AUDIT:',
-        expect.stringContaining('"action":"read"')
+      expect(consoleSpy).toHaveBeenCalledWith(;
+        'DATA_ACCESS_AUDIT:',;
+        expect.stringContaining('"action":"read"');
       );
     });
   });

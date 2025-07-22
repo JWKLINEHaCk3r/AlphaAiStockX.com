@@ -1,4 +1,4 @@
-// Mock WebSocket Service for SSR compatibility
+// Mock WebSocket Service for SSR compatibility;
 export class WebSocketService {
   private url: string;
   private reconnectAttempts: number = 0;
@@ -14,7 +14,7 @@ export class WebSocketService {
   }
 
   disconnect(): void {
-    // No-op for SSR
+    // No-op for SSR;
   }
 
   send(message: any): void {
@@ -24,15 +24,15 @@ export class WebSocketService {
   }
 
   onMessage(callback: (data: any) => void): void {
-    // No-op for SSR
+    // No-op for SSR;
   }
 
   onError(callback: (error: any) => void): void {
-    // No-op for SSR
+    // No-op for SSR;
   }
 
   onClose(callback: () => void): void {
-    // No-op for SSR
+    // No-op for SSR;
   }
 
   isConnected(): boolean {
@@ -44,5 +44,5 @@ export const createWebSocketService = (url: string) => {
   return new WebSocketService(url);
 };
 
-// Export for compatibility
+// Export for compatibility;
 export default WebSocketService;

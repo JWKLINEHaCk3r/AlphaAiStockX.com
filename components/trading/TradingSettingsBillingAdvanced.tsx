@@ -1,4 +1,4 @@
-// Stub for TradingSettingsBillingAdvanced. Update with real implementation as needed.
+// Stub for TradingSettingsBillingAdvanced. Update with real implementation as needed.;
 import React from 'react';
 
 export default function TradingSettingsBillingAdvanced() {

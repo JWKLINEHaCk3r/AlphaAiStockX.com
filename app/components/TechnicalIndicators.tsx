@@ -1,6 +1,12 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -13,17 +19,21 @@ import { TrendingUp, TrendingDown, Activity, BarChart3 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
 interface TechnicalIndicatorsProps {
-  selectedStock: { symbol: string; name?: string; price?: number };
+
+  selectedStock: { symbol: string; name?: string; price?: number 
+};
 }
 
 interface IndicatorData {
+
   rsi: number;
   macd: {
     value: number;
     signal: number;
     histogram: number;
     trend: string;
-  };
+  
+};
   movingAverages: {
     sma20: number;
     sma50: number;
@@ -58,51 +68,51 @@ export default function TechnicalIndicators({ selectedStock }: TechnicalIndicato
   };
 
   useEffect(() => {
-    // Simulate technical indicator data
+    // Simulate technical indicator data;
     const currentPrice = 175.43;
     const upper = 185.2;
     const lower = 165.6;
     setIndicators({
-      rsi: 65.4,
+      rsi: 65.4,;
       macd: {
-        value: 2.34,
-        signal: 1.89,
-        histogram: 0.45,
-        trend: 'bullish',
-      },
+        value: 2.34,;
+        signal: 1.89,;
+        histogram: 0.45,;
+        trend: 'bullish',;
+      },;
       movingAverages: {
-        sma20: 172.45,
-        sma50: 168.9,
-        sma200: 155.3,
-        currentPrice,
-      },
+        sma20: 172.45,;
+        sma50: 168.9,;
+        sma200: 155.3,;
+        currentPrice,;
+      },;
       bollinger: {
-        upper,
-        middle: 175.4,
-        lower,
-        position: getBollingerPosition(currentPrice, upper, lower),
-      },
+        upper,;
+        middle: 175.4,;
+        lower,;
+        position: getBollingerPosition(currentPrice, upper, lower),;
+      },;
       stochastic: {
-        k: 78.5,
-        d: 75.2,
-        signal: 'overbought',
-      },
+        k: 78.5,;
+        d: 75.2,;
+        signal: 'overbought',;
+      },;
       volume: {
-        current: 45200000,
-        average: 38500000,
-        trend: 'above_average',
-      },
+        current: 45200000,;
+        average: 38500000,;
+        trend: 'above_average',;
+      },;
     });
   }, [selectedStock]);
 
   if (!indicators) {
-    return (
-      <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-        <CardContent className="p-8 text-center">
-          <Activity className="h-12 w-12 text-purple-400 mx-auto mb-4 animate-pulse" />
-          <p className="text-white">Loading technical indicators...</p>
-        </CardContent>
-      </Card>
+    return (;
+      <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
+        <CardContent className="p-8 text-center">;
+          <Activity className="h-12 w-12 text-purple-400 mx-auto mb-4 animate-pulse" />;
+          <p className="text-white">Loading technical indicators...</p>;
+        </CardContent>;
+      </Card>;
     );
   }
 
@@ -118,173 +128,168 @@ export default function TechnicalIndicators({ selectedStock }: TechnicalIndicato
     return 'Neutral';
   };
 
-  return (
-    <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">
-      <CardHeader>
-        <CardTitle className="text-white flex items-center">
-          <BarChart3 className="h-6 w-6 mr-2 text-blue-400" />
+  return (;
+    <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
+      <CardHeader>;
+        <CardTitle className="text-white flex items-center">;
+          <BarChart3 className="h-6 w-6 mr-2 text-blue-400" />;
           Technical Analysis - {selectedStock?.symbol || 'No Stock Selected'}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </CardTitle>;
+      </CardHeader>;
+      <CardContent>;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">;
           {/* RSI */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">RSI (14)</h4>
-            <div className="text-center">
-              <p className={`text-3xl font-bold ${getRSIColor(indicators.rsi)}`}>
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">RSI (14)</h4>;
+            <div className="text-center">;
+              <p className={`text-3xl font-bold ${getRSIColor(indicators.rsi)}`}>;
                 {indicators.rsi.toFixed(1)}
-              </p>
-              <Badge
+              </p>;
+              <Badge;
                 variant={
-                  indicators.rsi > 70
-                    ? 'destructive'
-                    : indicators.rsi < 30
-                      ? 'default'
-                      : 'secondary'
+                  indicators.rsi > 70;
+                    ? 'destructive';
+                    : indicators.rsi < 30;
+                      ? 'default';
+                      : 'secondary';
                 }
-              >
+              >;
                 {getRSISignal(indicators.rsi)}
-              </Badge>
-            </div>
-            <Progress value={indicators.rsi} className="h-3" />
-            <div className="flex justify-between text-xs text-gray-400">
-              <span>Oversold (30)</span>
-              <span>Overbought (70)</span>
-            </div>
-          </div>
-
+              </Badge>;
+            </div>;
+            <Progress value={indicators.rsi} className="h-3" />;
+            <div className="flex justify-between text-xs text-gray-400">;
+              <span>Oversold (30)</span>;
+              <span>Overbought (70)</span>;
+            </div>;
+          </div>;
           {/* MACD */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">MACD</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-300">MACD Line:</span>
-                <span className="text-white font-bold">{indicators.macd.value}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Signal Line:</span>
-                <span className="text-white font-bold">{indicators.macd.signal}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Histogram:</span>
-                <span
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">MACD</h4>;
+            <div className="space-y-2">;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">MACD Line:</span>;
+                <span className="text-white font-bold">{indicators.macd.value}</span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Signal Line:</span>;
+                <span className="text-white font-bold">{indicators.macd.signal}</span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Histogram:</span>;
+                <span;
                   className={`font-bold ${indicators.macd.histogram > 0 ? 'text-green-400' : 'text-red-400'}`}
-                >
+                >;
                   {indicators.macd.histogram}
-                </span>
-              </div>
-            </div>
-            <Badge variant={indicators.macd.trend === 'bullish' ? 'default' : 'destructive'}>
-              {indicators.macd.trend === 'bullish' ? (
-                <TrendingUp className="h-3 w-3 mr-1" />
-              ) : (
-                <TrendingDown className="h-3 w-3 mr-1" />
+                </span>;
+              </div>;
+            </div>;
+            <Badge variant={indicators.macd.trend === 'bullish' ? 'default' : 'destructive'}>;
+              {indicators.macd.trend === 'bullish' ? (;
+                <TrendingUp className="h-3 w-3 mr-1" />;
+              ) : (;
+                <TrendingDown className="h-3 w-3 mr-1" />;
               )}
               {indicators.macd.trend}
-            </Badge>
-          </div>
-
+            </Badge>;
+          </div>;
           {/* Moving Averages */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">Moving Averages</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-300">Current:</span>
-                <span className="text-white font-bold">
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">Moving Averages</h4>;
+            <div className="space-y-2">;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Current:</span>;
+                <span className="text-white font-bold">;
                   ${indicators.movingAverages.currentPrice}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">SMA 20:</span>
-                <span
+                </span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">SMA 20:</span>;
+                <span;
                   className={`font-bold ${indicators.movingAverages.currentPrice > indicators.movingAverages.sma20 ? 'text-green-400' : 'text-red-400'}`}
-                >
+                >;
                   ${indicators.movingAverages.sma20}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">SMA 50:</span>
-                <span
+                </span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">SMA 50:</span>;
+                <span;
                   className={`font-bold ${indicators.movingAverages.currentPrice > indicators.movingAverages.sma50 ? 'text-green-400' : 'text-red-400'}`}
-                >
+                >;
                   ${indicators.movingAverages.sma50}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">SMA 200:</span>
-                <span
+                </span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">SMA 200:</span>;
+                <span;
                   className={`font-bold ${indicators.movingAverages.currentPrice > indicators.movingAverages.sma200 ? 'text-green-400' : 'text-red-400'}`}
-                >
+                >;
                   ${indicators.movingAverages.sma200}
-                </span>
-              </div>
-            </div>
-          </div>
-
+                </span>;
+              </div>;
+            </div>;
+          </div>;
           {/* Bollinger Bands */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">Bollinger Bands</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-300">Upper:</span>
-                <span className="text-red-400 font-bold">${indicators.bollinger.upper}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Middle:</span>
-                <span className="text-yellow-400 font-bold">${indicators.bollinger.middle}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Lower:</span>
-                <span className="text-green-400 font-bold">${indicators.bollinger.lower}</span>
-              </div>
-            </div>
-            <Badge variant="secondary">Position: {indicators.bollinger.position}</Badge>
-          </div>
-
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">Bollinger Bands</h4>;
+            <div className="space-y-2">;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Upper:</span>;
+                <span className="text-red-400 font-bold">${indicators.bollinger.upper}</span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Middle:</span>;
+                <span className="text-yellow-400 font-bold">${indicators.bollinger.middle}</span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Lower:</span>;
+                <span className="text-green-400 font-bold">${indicators.bollinger.lower}</span>;
+              </div>;
+            </div>;
+            <Badge variant="secondary">Position: {indicators.bollinger.position}</Badge>;
+          </div>;
           {/* Stochastic */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">Stochastic</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-300">%K:</span>
-                <span className="text-white font-bold">{indicators.stochastic.k}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">%D:</span>
-                <span className="text-white font-bold">{indicators.stochastic.d}</span>
-              </div>
-            </div>
-            <Badge
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">Stochastic</h4>;
+            <div className="space-y-2">;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">%K:</span>;
+                <span className="text-white font-bold">{indicators.stochastic.k}</span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">%D:</span>;
+                <span className="text-white font-bold">{indicators.stochastic.d}</span>;
+              </div>;
+            </div>;
+            <Badge;
               variant={indicators.stochastic.signal === 'overbought' ? 'destructive' : 'default'}
-            >
+            >;
               {indicators.stochastic.signal}
-            </Badge>
-          </div>
-
+            </Badge>;
+          </div>;
           {/* Volume */}
-          <div className="space-y-3">
-            <h4 className="text-white font-semibold">Volume Analysis</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-300">Current:</span>
-                <span className="text-white font-bold">
-                  {(indicators.volume.current / 1000000).toFixed(1)}M
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Average:</span>
-                <span className="text-gray-400 font-bold">
-                  {(indicators.volume.average / 1000000).toFixed(1)}M
-                </span>
-              </div>
-            </div>
-            <Badge variant={indicators.volume.trend === 'above_average' ? 'default' : 'secondary'}>
+          <div className="space-y-3">;
+            <h4 className="text-white font-semibold">Volume Analysis</h4>;
+            <div className="space-y-2">;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Current:</span>;
+                <span className="text-white font-bold">;
+                  {(indicators.volume.current / 1000000).toFixed(1)}M;
+                </span>;
+              </div>;
+              <div className="flex justify-between">;
+                <span className="text-gray-300">Average:</span>;
+                <span className="text-gray-400 font-bold">;
+                  {(indicators.volume.average / 1000000).toFixed(1)}M;
+                </span>;
+              </div>;
+            </div>;
+            <Badge variant={indicators.volume.trend === 'above_average' ? 'default' : 'secondary'}>;
               {indicators.volume.trend === 'above_average' ? 'Above Average' : 'Below Average'}
-            </Badge>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+            </Badge>;
+          </div>;
+        </div>;
+      </CardContent>;
+    </Card>;
   );
 }

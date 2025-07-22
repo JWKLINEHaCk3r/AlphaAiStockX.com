@@ -1,4 +1,4 @@
-// API Route for AI Signal Bot
+// API Route for AI Signal Bot;
 import { NextRequest, NextResponse } from 'next/server';
 import AISignalBot from '@/app/services/ai-tools/signal-bot';
 
@@ -15,47 +15,46 @@ export async function GET(request: NextRequest) {
     }
 
     if (stream) {
-      // Server-Sent Events for real-time signals
+      // Server-Sent Events for real-time signals;
       const encoder = new TextEncoder();
 
       const stream = new ReadableStream({
         async start(controller) {
-          const signalGenerator = signalBot.streamSignals([symbol], 30000); // 30 seconds
-
+          const signalGenerator = signalBot.streamSignals([symbol], 30000); // 30 seconds;
           for await (const signal of signalGenerator) {
             const data = `data: ${JSON.stringify(signal)}\n\n`;
             controller.enqueue(encoder.encode(data));
 
-            // Add delay to prevent overwhelming
+            // Add delay to prevent overwhelming;
             await new Promise(resolve => setTimeout(resolve, 1000));
           }
-        },
+        },;
       });
 
       return new Response(stream, {
         headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          Connection: 'keep-alive',
-        },
+          'Content-Type': 'text/event-stream',;
+          'Cache-Control': 'no-cache',;
+          Connection: 'keep-alive',;
+        },;
       });
     } else {
-      // Single signal generation
+      // Single signal generation;
       const signal = await signalBot.generateSignal(symbol);
 
       return NextResponse.json({
-        success: true,
-        data: signal,
-        timestamp: new Date().toISOString(),
+        success: true,;
+        data: signal,;
+        timestamp: new Date().toISOString(),;
       });
     }
   } catch (error) {
     console.error('Signal Bot API Error:', error);
-    return NextResponse.json(
+    return NextResponse.json(;
       {
-        error: 'Failed to generate signal',
-        details: error instanceof Error ? error.message : 'Unknown error',
-      },
+        error: 'Failed to generate signal',;
+        details: error instanceof Error ? error.message : 'Unknown error',;
+      },;
       { status: 500 }
     );
   }
@@ -70,7 +69,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Symbols array is required' }, { status: 400 });
     }
 
-    const signals = [];
+    const signals: any[] = [];
     for (const symbol of symbols) {
       try {
         const signal = await signalBot.generateSignal(symbol);
@@ -81,10 +80,10 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      success: true,
-      data: signals,
-      count: signals.length,
-      timestamp: new Date().toISOString(),
+      success: true,;
+      data: signals,;
+      count: signals.length,;
+      timestamp: new Date().toISOString(),;
     });
   } catch (error) {
     console.error('Bulk Signal Generation Error:', error);

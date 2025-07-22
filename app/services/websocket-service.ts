@@ -1,36 +1,44 @@
 import { EventEmitter } from 'events';
 
-// Interface definitions
+// Interface definitions;
 export interface MarketDataPoint {
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
   volume: number;
   timestamp: Date;
+
 }
 
 export interface AISignal {
+
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   confidence: number;
   price: number;
   timestamp: Date;
+
 }
 
 export interface TradingUpdate {
+
   id: string;
   type: 'ORDER' | 'TRADE' | 'PORTFOLIO';
   data: unknown;
   timestamp: Date;
+
 }
 
 export interface SentimentData {
+
   symbol: string;
   sentiment: number;
   volume: number;
   timestamp: Date;
+
 }
 
 export class EnhancedWebSocketService extends EventEmitter {
@@ -42,7 +50,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   private heartbeatInterval: NodeJS.Timeout | null = null;
   private subscriptions = new Set<string>();
 
-  // Data caches
+  // Data caches;
   private marketDataCache = new Map<string, MarketDataPoint>();
   private aiSignalsCache: AISignal[] = [];
   private tradingUpdatesCache: TradingUpdate[] = [];
@@ -54,7 +62,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   async connect(userId?: string): Promise<boolean> {
-    // Server-side guard - return false on server
+    // Server-side guard - return false on server;
     if (typeof window === 'undefined') {
       return false;
     }
@@ -64,7 +72,7 @@ export class EnhancedWebSocketService extends EventEmitter {
     }
 
     try {
-      // Dynamic import for client-side only - temporarily return false since socket.io-client is not installed
+      // Dynamic import for client-side only - temporarily return false since socket.io-client is not installed;
       console.log('WebSocket service disabled until socket.io-client is properly configured');
       return false;
     } catch (error) {
@@ -76,7 +84,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   private setupEventHandlers(userId?: string): void {
     if (!this.socket) return;
 
-    // Connection events
+    // Connection events;
     this.socket.on('disconnect', () => {
       this.isConnected = false;
       this.stopHeartbeat();
@@ -90,13 +98,13 @@ export class EnhancedWebSocketService extends EventEmitter {
       this.resubscribeAll();
     });
 
-    // Market data events
+    // Market data events;
     this.socket.on('market-data', (data: MarketDataPoint) => {
       this.marketDataCache.set(data.symbol, data);
       this.emit('marketData', data);
     });
 
-    // AI signals events
+    // AI signals events;
     this.socket.on('ai-signal', (signal: AISignal) => {
       this.aiSignalsCache.unshift(signal);
       if (this.aiSignalsCache.length > 100) {
@@ -105,7 +113,7 @@ export class EnhancedWebSocketService extends EventEmitter {
       this.emit('aiSignal', signal);
     });
 
-    // Trading updates
+    // Trading updates;
     this.socket.on('trading-update', (update: TradingUpdate) => {
       this.tradingUpdatesCache.unshift(update);
       if (this.tradingUpdatesCache.length > 200) {
@@ -114,18 +122,18 @@ export class EnhancedWebSocketService extends EventEmitter {
       this.emit('tradingUpdate', update);
     });
 
-    // Portfolio updates
+    // Portfolio updates;
     this.socket.on('portfolio-update', (data: any) => {
       this.emit('portfolioUpdate', data);
     });
 
-    // Sentiment updates
+    // Sentiment updates;
     this.socket.on('sentiment-update', (data: SentimentData) => {
       this.sentimentCache.set(data.symbol, data);
       this.emit('sentimentUpdate', data);
     });
 
-    // Error handling
+    // Error handling;
     this.socket.on('error', (error: any) => {
       console.error('WebSocket error:', error);
       this.emit('error', error);
@@ -139,7 +147,7 @@ export class EnhancedWebSocketService extends EventEmitter {
       if (this.socket && this.isConnected) {
         this.socket.emit('ping');
       }
-    }, 30000); // 30 seconds
+    }, 30000); // 30 seconds;
   }
 
   private stopHeartbeat(): void {
@@ -159,8 +167,8 @@ export class EnhancedWebSocketService extends EventEmitter {
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
 
     setTimeout(async () => {
-      console.log(
-        `Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`
+      console.log(;
+        `Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`;
       );
       await this.connect(userId);
     }, delay);
@@ -170,23 +178,23 @@ export class EnhancedWebSocketService extends EventEmitter {
     this.subscriptions.forEach(subscription => {
       const [type, ...params] = subscription.split(':');
       switch (type) {
-        case 'market':
+        case 'market':;
           this.subscribeToMarketData([params.join(':')]);
           break;
-        case 'signals':
+        case 'signals':;
           if (params[0]) this.subscribeToAISignals(params[0]);
           break;
-        case 'portfolio':
+        case 'portfolio':;
           if (params[0]) this.subscribeToPortfolio(params[0]);
           break;
-        case 'notifications':
+        case 'notifications':;
           if (params[0]) this.subscribeToTradeNotifications(params[0]);
           break;
       }
     });
   }
 
-  // Subscription methods
+  // Subscription methods;
   subscribeToMarketData(symbols: string[]): void {
     if (!this.socket || !this.isConnected || typeof window === 'undefined') return;
 
@@ -233,7 +241,7 @@ export class EnhancedWebSocketService extends EventEmitter {
     this.subscriptions.add(`social:${userId}`);
   }
 
-  // Data getters
+  // Data getters;
   getMarketData(symbol?: string): MarketDataPoint | undefined | Map<string, MarketDataPoint> {
     return symbol ? this.marketDataCache.get(symbol) : this.marketDataCache;
   }
@@ -252,12 +260,12 @@ export class EnhancedWebSocketService extends EventEmitter {
 
   getConnectionStatus() {
     return {
-      connected: this.isConnected,
-      subscriptions: this.subscriptions.size,
-      marketData: this.marketDataCache.size,
-      aiSignals: this.aiSignalsCache.length,
-      tradingUpdates: this.tradingUpdatesCache.length,
-      reconnectAttempts: this.reconnectAttempts,
+      connected: this.isConnected,;
+      subscriptions: this.subscriptions.size,;
+      marketData: this.marketDataCache.size,;
+      aiSignals: this.aiSignalsCache.length,;
+      tradingUpdates: this.tradingUpdatesCache.length,;
+      reconnectAttempts: this.reconnectAttempts,;
     };
   }
 
@@ -272,7 +280,7 @@ export class EnhancedWebSocketService extends EventEmitter {
     }
   }
 
-  // Cleanup method
+  // Cleanup method;
   cleanup(): void {
     if (typeof window === 'undefined') return;
 
@@ -285,6 +293,6 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 }
 
-// Singleton instance
+// Singleton instance;
 export const websocketService = new EnhancedWebSocketService();
 export default websocketService;

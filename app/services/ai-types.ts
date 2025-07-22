@@ -1,9 +1,11 @@
 export interface TechnicalIndicator {
-  calculate: (...args: any[]) => number | object;
-}
-// Extended types for AI trading engine
 
+  calculate: (...args: any[]) => number | object;
+
+}
+// Extended types for AI trading engine;
 export interface HistoricalDataPoint {
+
   price: number;
   volume: number;
   timestamp: string | Date;
@@ -13,7 +15,8 @@ export interface HistoricalDataPoint {
       line?: number;
       signal?: number;
       histogram?: number;
-    };
+    
+};
     atr?: number;
     adx?: number;
     bollinger?: {
@@ -63,6 +66,7 @@ export interface HistoricalDataPoint {
 }
 
 export interface MarketData {
+
   symbol: string;
   price: number;
   high: number;
@@ -86,12 +90,14 @@ export interface MarketData {
   sector?: string;
   industry?: string;
   close?: number;
+
 }
 
 export interface TradingSignal {
+
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
-  confidence: number; // 0-100
+  confidence: number; // 0-100;
   strength: 'WEAK' | 'MODERATE' | 'STRONG' | 'VERY_STRONG';
   timeframe: '1m' | '5m' | '15m' | '1h' | '4h' | '1d' | '1w';
   strategy?: string;
@@ -102,26 +108,29 @@ export interface TradingSignal {
   riskReward?: number;
   reasoning: string[];
   indicators: {
-    technical: number; // -100 to 100
+    technical: number; // -100 to 100;
     fundamental: number;
     sentiment: number;
     momentum: number;
     volume: number;
-  };
+  
+};
   timestamp: Date;
   validUntil?: Date;
 }
 
 export interface RiskAnalysis {
+
   symbol: string;
-  riskScore: number; // 0-100 (higher = riskier)
+  riskScore: number; // 0-100 (higher = riskier);
   volatility: number;
   beta: number;
   sharpeRatio?: number;
   maxDrawdown?: number;
-  var95?: number; // Value at Risk 95%
+  var95?: number; // Value at Risk 95%;
   expectedReturn?: number;
-  correlations?: { [symbol: string]: number };
+  correlations?: { [symbol: string]: number 
+};
   sectorRisk?: number;
   liquidityRisk?: number;
   concentrationRisk?: number;
@@ -130,6 +139,7 @@ export interface RiskAnalysis {
 }
 
 export interface PortfolioMetrics {
+
   totalValue: number;
   totalCash: number;
   totalEquity: number;
@@ -145,7 +155,8 @@ export interface PortfolioMetrics {
       averageCost: number;
       unrealizedPnL: number;
       unrealizedPnLPercent: number;
-    };
+    
+};
   };
   diversification: {
     sectorWeights: { [sector: string]: number };
@@ -172,6 +183,7 @@ export interface PortfolioMetrics {
 }
 
 export interface AIModelPrediction {
+
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   confidence: number;
@@ -186,7 +198,8 @@ export interface AIModelPrediction {
     fundamental: number;
     sentiment: number;
     macro: number;
-  };
+  
+};
   probability: {
     up: number;
     down: number;
@@ -197,8 +210,9 @@ export interface AIModelPrediction {
 }
 
 export interface MarketSentiment {
+
   symbol?: string;
-  overall: number; // -1 to 1
+  overall: number; // -1 to 1;
   news: number;
   social: number;
   technical: number;
@@ -210,19 +224,22 @@ export interface MarketSentiment {
     news: number;
     analyst: number;
     insider: number;
-  };
+  
+};
   trending: boolean;
   volume: number;
   timestamp: Date;
 }
 
 export interface TradingStrategy {
+
   id: string;
   name: string;
   description: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ARBITRAGE' | 'TREND_FOLLOWING' | 'PAIRS' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE' | 'BACKTESTING';
-  parameters: { [key: string]: any };
+  parameters: { [key: string]: any 
+};
   performance: {
     totalReturn: number;
     sharpeRatio: number;
@@ -249,6 +266,7 @@ export interface TradingStrategy {
 }
 
 export interface Trade {
+
   id: string;
   symbol: string;
   side: 'BUY' | 'SELL';
@@ -266,10 +284,12 @@ export interface Trade {
   filledPrice?: number;
   filledQuantity?: number;
   reason?: string;
-  metadata?: { [key: string]: any };
+  metadata?: { [key: string]: any 
+};
 }
 
 export interface AlertConfig {
+
   id: string;
   type: 'PRICE' | 'VOLUME' | 'TECHNICAL' | 'NEWS' | 'PORTFOLIO';
   symbol?: string;
@@ -277,7 +297,8 @@ export interface AlertConfig {
     operator: '>' | '<' | '=' | '>=' | '<=';
     value: number;
     field: string;
-  };
+  
+};
   frequency: 'REAL_TIME' | 'DAILY' | 'WEEKLY';
   channels: ('EMAIL' | 'SMS' | 'PUSH' | 'WEBHOOK')[];
   active: boolean;
@@ -287,11 +308,13 @@ export interface AlertConfig {
 }
 
 export interface BacktestResult {
+
   strategyId: string;
   period: {
     start: Date;
     end: Date;
-  };
+  
+};
   performance: {
     totalReturn: number;
     annualizedReturn: number;
@@ -327,6 +350,7 @@ export interface BacktestResult {
 }
 
 export interface NewsArticle {
+
   id: string;
   title: string;
   summary: string;
@@ -335,15 +359,17 @@ export interface NewsArticle {
   author?: string;
   publishedAt: Date;
   symbols: string[];
-  sentiment: number; // -1 to 1
+  sentiment: number; // -1 to 1;
   impact: 'LOW' | 'MEDIUM' | 'HIGH';
   category: string[];
   url: string;
   imageUrl?: string;
   relevanceScore: number;
+
 }
 
 export interface EconomicIndicator {
+
   name: string;
   value: number;
   previousValue?: number;
@@ -356,5 +382,6 @@ export interface EconomicIndicator {
   importance: 'LOW' | 'MEDIUM' | 'HIGH';
   country: string;
   category: string;
-  impact: number; // -1 to 1
+  impact: number; // -1 to 1;
+
 }

@@ -1,7 +1,7 @@
 import { Alert } from "../../components/ui/alert";
-// Common types for the trading application
-
+// Common types for the trading application;
 export interface Strategy {
+
   id: number;
   name: string;
   description: string;
@@ -15,9 +15,11 @@ export interface Strategy {
   allocation?: number;
   timeframe?: string;
   status?: string;
+
 }
 
 export interface Trade {
+
   id: string;
   symbol: string;
   type: 'BUY' | 'SELL';
@@ -29,9 +31,11 @@ export interface Trade {
   profit?: number;
   pnl: number;
   strategy: string;
+
 }
 
 export interface BotStats {
+
   totalTrades: number;
   winRate: number;
   totalProfit: number;
@@ -42,9 +46,11 @@ export interface BotStats {
   sharpeRatio: number;
   maxDrawdown: number;
   accountBalance: number;
+
 }
 
 export interface BotSettings {
+
   maxPositionSize: number;
   maxDailyLoss: number;
   maxConcurrentTrades: number;
@@ -54,9 +60,11 @@ export interface BotSettings {
   stopLossPercent: number;
   takeProfitPercent: number;
   maxLeverage: number;
+
 }
 
 export interface User {
+
   id: number;
   name: string;
   email: string;
@@ -69,12 +77,15 @@ export interface User {
   profitLoss: number;
   accountValue: number;
   totalTrades: number;
+
 }
 
 export interface Alert {
+
   id: number;
   type: string;
   message: string;
   timestamp: Date;
   severity: string;
+
 }

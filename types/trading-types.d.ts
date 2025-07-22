@@ -1,3 +1,11 @@
-// Minimal placeholder for missing trading-types
-declare export interface TradingSignalData {}
-declare export interface TechnicalIndicators {}
+// Minimal placeholder for missing trading-types;
+declare export interface TradingSignalData {
+
+
+
+}
+declare export interface TechnicalIndicators {
+
+
+
+}

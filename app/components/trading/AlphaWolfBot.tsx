@@ -3,24 +3,28 @@
 import type React from 'react';
 import React, { useState, useEffect } from 'react';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  LineChart,;
+  Line,;
+  XAxis,;
+  YAxis,;
+  CartesianGrid,;
+  Tooltip,;
+  Legend,;
+  ResponsiveContainer,;
 } from 'recharts';
 import { ArrowUp, ArrowDown, AlertTriangle, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 
 interface StockData {
+
   time: string;
   price: number;
+
 }
 
 interface AlphaWolfBotProps {
+
   stockSymbol: string;
+
 }
 
 const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
@@ -35,7 +39,7 @@ const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
       setLoading(true);
       setError(null);
       try {
-        // Replace with your actual API endpoint
+        // Replace with your actual API endpoint;
         const response = await fetch(`/api/trading/analyze?symbol=${stockSymbol}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -70,10 +74,10 @@ const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
 
     fetchData();
 
-    // Refresh data every 60 seconds
+    // Refresh data every 60 seconds;
     const intervalId = setInterval(fetchData, 60000);
 
-    return () => clearInterval(intervalId); // Cleanup interval on unmount
+    return () => clearInterval(intervalId); // Cleanup interval on unmount;
   }, [stockSymbol]);
 
   const latestPrice = stockData.length > 0 ? stockData[stockData.length - 1].price : 0;
@@ -101,35 +105,35 @@ const AlphaWolfBot: React.FC<AlphaWolfBotProps> = ({ stockSymbol }) => {
     recommendationText = 'No recommendation';
   }
 
-  return (
-    <div className="bg-white shadow rounded-lg p-4">
-      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+  return (;
+    <div className="bg-white shadow rounded-lg p-4">;
+      <h3 className="text-lg font-semibold text-gray-800 mb-2">;
         AlphaWolf Bot Analysis for {stockSymbol}
-      </h3>
-      <div className="flex items-center mb-2">
+      </h3>;
+      <div className="flex items-center mb-2">;
         {recommendationIcon}
-        <span className="ml-2 text-gray-700">{recommendationText}</span>
-      </div>
-      {loading ? (
-        <div className="flex justify-center items-center h-48">
-          <Loader2 size={32} className="animate-spin text-blue-500" />
-        </div>
-      ) : error ? (
-        <div className="text-red-500">Error: {error}</div>
-      ) : (
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={stockData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="price" stroke="#8884d8" name="Stock Price" />
-          </LineChart>
-        </ResponsiveContainer>
+        <span className="ml-2 text-gray-700">{recommendationText}</span>;
+      </div>;
+      {loading ? (;
+        <div className="flex justify-center items-center h-48">;
+          <Loader2 size={32} className="animate-spin text-blue-500" />;
+        </div>;
+      ) : error ? (;
+        <div className="text-red-500">Error: {error}</div>;
+      ) : (;
+        <ResponsiveContainer width="100%" height={300}>;
+          <LineChart data={stockData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>;
+            <CartesianGrid strokeDasharray="3 3" />;
+            <XAxis dataKey="time" />;
+            <YAxis />;
+            <Tooltip />;
+            <Legend />;
+            <Line type="monotone" dataKey="price" stroke="#8884d8" name="Stock Price" />;
+          </LineChart>;
+        </ResponsiveContainer>;
       )}
-      <div className="mt-4 text-sm text-gray-600">Latest Price: ${latestPrice.toFixed(2)}</div>
-    </div>
+      <div className="mt-4 text-sm text-gray-600">Latest Price: ${latestPrice.toFixed(2)}</div>;
+    </div>;
   );
 };
 

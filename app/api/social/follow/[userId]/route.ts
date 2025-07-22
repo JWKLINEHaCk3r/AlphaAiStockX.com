@@ -16,73 +16,73 @@ export async function POST(request: NextRequest, { params }: { params: { userId:
       return NextResponse.json({ error: 'Cannot follow yourself' }, { status: 400 });
     }
 
-    // Check if target user exists
+    // Check if target user exists;
     const targetUser = await prisma.user.findUnique({
-      where: { id: targetUserId },
-      select: { id: true, name: true, username: true },
+      where: { id: targetUserId },;
+      select: { id: true, name: true, username: true },;
     });
 
     if (!targetUser) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Check if already following
+    // Check if already following;
     const existingFollow = await prisma.userFollow.findUnique({
       where: {
         followerId_followingId: {
-          followerId: session.user.id,
-          followingId: targetUserId,
-        },
-      },
+          followerId: session.user.id,;
+          followingId: targetUserId,;
+        },;
+      },;
     });
 
     if (existingFollow) {
       return NextResponse.json({ error: 'Already following this user' }, { status: 400 });
     }
 
-    // Create follow relationship
+    // Create follow relationship;
     await prisma.userFollow.create({
       data: {
-        followerId: session.user.id,
-        followingId: targetUserId,
-      },
+        followerId: session.user.id,;
+        followingId: targetUserId,;
+      },;
     });
 
-    // Update social profiles
-    await prisma.$transaction([
-      // Update follower's following count
+    // Update social profiles;
+    await prisma.$transaction([;
+      // Update follower's following count;
       prisma.socialProfile.upsert({
-        where: { userId: session.user.id },
-        update: { followingCount: { increment: 1 } },
+        where: { userId: session.user.id },;
+        update: { followingCount: { increment: 1 } },;
         create: {
-          userId: session.user.id,
-          followingCount: 1,
-          followersCount: 0,
-          postsCount: 0,
-          reputation: 0,
-          likesReceived: 0,
-          verified: false,
-        },
-      }),
-      // Update target user's followers count
+          userId: session.user.id,;
+          followingCount: 1,;
+          followersCount: 0,;
+          postsCount: 0,;
+          reputation: 0,;
+          likesReceived: 0,;
+          verified: false,;
+        },;
+      }),;
+      // Update target user's followers count;
       prisma.socialProfile.upsert({
-        where: { userId: targetUserId },
-        update: { followersCount: { increment: 1 } },
+        where: { userId: targetUserId },;
+        update: { followersCount: { increment: 1 } },;
         create: {
-          userId: targetUserId,
-          followingCount: 0,
-          followersCount: 1,
-          postsCount: 0,
-          reputation: 0,
-          likesReceived: 0,
-          verified: false,
-        },
-      }),
+          userId: targetUserId,;
+          followingCount: 0,;
+          followersCount: 1,;
+          postsCount: 0,;
+          reputation: 0,;
+          likesReceived: 0,;
+          verified: false,;
+        },;
+      }),;
     ]);
 
     return NextResponse.json({
-      success: true,
-      message: `Now following ${targetUser.name}`,
+      success: true,;
+      message: `Now following ${targetUser.name}`,;
     });
   } catch (error) {
     console.error('Follow user error:', error);
@@ -100,35 +100,35 @@ export async function DELETE(request: NextRequest, { params }: { params: { userI
 
     const targetUserId = params.userId;
 
-    // Remove follow relationship
+    // Remove follow relationship;
     const deletedFollow = await prisma.userFollow.deleteMany({
       where: {
-        followerId: session.user.id,
-        followingId: targetUserId,
-      },
+        followerId: session.user.id,;
+        followingId: targetUserId,;
+      },;
     });
 
     if (deletedFollow.count === 0) {
       return NextResponse.json({ error: 'Not following this user' }, { status: 400 });
     }
 
-    // Update social profiles
-    await prisma.$transaction([
-      // Update follower's following count
+    // Update social profiles;
+    await prisma.$transaction([;
+      // Update follower's following count;
       prisma.socialProfile.updateMany({
-        where: { userId: session.user.id },
-        data: { followingCount: { decrement: 1 } },
-      }),
-      // Update target user's followers count
+        where: { userId: session.user.id },;
+        data: { followingCount: { decrement: 1 } },;
+      }),;
+      // Update target user's followers count;
       prisma.socialProfile.updateMany({
-        where: { userId: targetUserId },
-        data: { followersCount: { decrement: 1 } },
-      }),
+        where: { userId: targetUserId },;
+        data: { followersCount: { decrement: 1 } },;
+      }),;
     ]);
 
     return NextResponse.json({
-      success: true,
-      message: 'Unfollowed successfully',
+      success: true,;
+      message: 'Unfollowed successfully',;
     });
   } catch (error) {
     console.error('Unfollow user error:', error);

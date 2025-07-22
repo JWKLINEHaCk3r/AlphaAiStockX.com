@@ -1,4 +1,4 @@
-// Stub for TradingSettingsPreferences. Update with real implementation as needed.
+// Stub for TradingSettingsPreferences. Update with real implementation as needed.;
 import React from 'react';
 
 export default function TradingSettingsPreferences() {

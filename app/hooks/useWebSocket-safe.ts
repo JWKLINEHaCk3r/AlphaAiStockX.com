@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-  MarketDataUpdate,
-  AISignal,
-  PortfolioUpdate,
-  SocialPost,
-  TradeNotification,
+  ClientToServerEvents,;
+  ServerToClientEvents,;
+  MarketDataUpdate,;
+  AISignal,;
+  PortfolioUpdate,;
+  SocialPost,;
+  TradeNotification,;
 } from '@/app/types/socket';
 
-type SocketType = any; // We'll use any since we're importing dynamically
-
+type SocketType = any; // We'll use any since we're importing dynamically;
 interface UseWebSocketReturn {
+
   socket: SocketType | null;
   isConnected: boolean;
   marketData: Record<string, MarketDataUpdate>;
@@ -26,6 +26,7 @@ interface UseWebSocketReturn {
   subscribeToSocialFeed: (userId: string) => void;
   subscribeToTradeNotifications: (userId: string) => void;
   clearNotifications: () => void;
+
 }
 
 export const useWebSocket = (userId?: string): UseWebSocketReturn => {
@@ -42,18 +43,18 @@ export const useWebSocket = (userId?: string): UseWebSocketReturn => {
 
     const initializeSocket = async () => {
       try {
-        // Dynamic import for client-side only
+        // Dynamic import for client-side only;
         const { io } = await import('socket.io-client');
 
         await fetch('/api/socketio');
 
-        socketRef.current = io(
-          process.env.NODE_ENV === 'production'
-            ? process.env.NEXT_PUBLIC_APP_URL || ''
-            : 'http://localhost:3000',
+        socketRef.current = io(;
+          process.env.NODE_ENV === 'production';
+            ? process.env.NEXT_PUBLIC_APP_URL || '';
+            : 'http://localhost:3000',;
           {
-            path: '/api/socketio',
-            addTrailingSlash: false,
+            path: '/api/socketio',;
+            addTrailingSlash: false,;
           }
         );
 
@@ -69,36 +70,36 @@ export const useWebSocket = (userId?: string): UseWebSocketReturn => {
           setIsConnected(false);
         });
 
-        // Market data handler
+        // Market data handler;
         socket.on('market-data', (data: MarketDataUpdate) => {
           setMarketData(prev => ({
-            ...prev,
-            [data.symbol]: data,
+            ...prev,;
+            [data.symbol]: data,;
           }));
         });
 
-        // AI signals handlers
+        // AI signals handlers;
         socket.on('ai-signals', (signals: AISignal[]) => {
           setAISignals(signals);
         });
 
         socket.on('new-ai-signal', (signal: AISignal) => {
-          setAISignals(prev => [signal, ...prev].slice(0, 50)); // Keep last 50 signals
+          setAISignals(prev => [signal, ...prev].slice(0, 50)); // Keep last 50 signals;
         });
 
-        // Portfolio updates handler
+        // Portfolio updates handler;
         socket.on('portfolio-update', (data: PortfolioUpdate) => {
           setPortfolioData(data);
         });
 
-        // Social feed handlers
+        // Social feed handlers;
         socket.on('new-social-post', (post: SocialPost) => {
-          setSocialPosts(prev => [post, ...prev].slice(0, 100)); // Keep last 100 posts
+          setSocialPosts(prev => [post, ...prev].slice(0, 100)); // Keep last 100 posts;
         });
 
-        // Trade notifications handler
+        // Trade notifications handler;
         socket.on('trade-notification', (notification: TradeNotification) => {
-          setTradeNotifications(prev => [notification, ...prev].slice(0, 20)); // Keep last 20 notifications
+          setTradeNotifications(prev => [notification, ...prev].slice(0, 20)); // Keep last 20 notifications;
         });
       } catch (error) {
         console.error('Failed to initialize WebSocket:', error);
@@ -155,19 +156,19 @@ export const useWebSocket = (userId?: string): UseWebSocketReturn => {
   };
 
   return {
-    socket: socketRef.current,
-    isConnected,
-    marketData,
-    aiSignals,
-    portfolioData,
-    socialPosts,
-    tradeNotifications,
-    subscribeToMarketData,
-    unsubscribeFromMarketData,
-    subscribeToAISignals,
-    subscribeToPortfolio,
-    subscribeToSocialFeed,
-    subscribeToTradeNotifications,
-    clearNotifications,
+    socket: socketRef.current,;
+    isConnected,;
+    marketData,;
+    aiSignals,;
+    portfolioData,;
+    socialPosts,;
+    tradeNotifications,;
+    subscribeToMarketData,;
+    unsubscribeFromMarketData,;
+    subscribeToAISignals,;
+    subscribeToPortfolio,;
+    subscribeToSocialFeed,;
+    subscribeToTradeNotifications,;
+    clearNotifications,;
   };
 };

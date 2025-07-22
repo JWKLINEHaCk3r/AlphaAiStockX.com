@@ -1,14 +1,19 @@
-// Mock WebSocket service for static export compatibility
-// This service is disabled for static builds but maintains interface compatibility
-
+// Mock WebSocket service for static export compatibility;
+// This service is disabled for static builds but maintains interface compatibility;
 export interface WebSocketMessage {
+
+
   type: string;
   userId?: string;
   data: any;
   timestamp: number;
+
+
 }
 
 export interface MarketDataUpdate {
+
+
   symbol: string;
   price: number;
   change: number;
@@ -20,9 +25,13 @@ export interface MarketDataUpdate {
   high?: number;
   low?: number;
   marketCap?: number;
+
+
 }
 
 export interface PortfolioUpdate {
+
+
   userId: string;
   totalValue: number;
   todaysPnL: number;
@@ -35,20 +44,28 @@ export interface PortfolioUpdate {
     marketValue: number;
     unrealizedPnL: number;
     unrealizedPnLPercent: number;
-  }>;
+  
+
+}>;
   timestamp: number;
 }
 
 export interface AlertMessage {
+
+
   userId: string;
   type: 'info' | 'warning' | 'error' | 'success';
   title: string;
   message: string;
   timestamp: number;
   persistent?: boolean;
+
+
 }
 
 export interface TradingSignal {
+
+
   symbol: string;
   action: 'buy' | 'sell' | 'hold';
   confidence: number;
@@ -56,15 +73,21 @@ export interface TradingSignal {
   reasoning: string;
   timestamp: number;
   timeframe: '1m' | '5m' | '15m' | '1h' | '4h' | '1d';
+
+
 }
 
 export interface WebSocketConfig {
+
+
   port: number;
   cors: {
     origin: string | string[];
     methods: string[];
     credentials: boolean;
-  };
+  
+
+};
   pingTimeout: number;
   pingInterval: number;
   maxConnections: number;
@@ -76,6 +99,8 @@ export interface WebSocketConfig {
 }
 
 export interface WebSocketStats {
+
+
   connectedClients: number;
   totalConnections: number;
   messagesPerSecond: number;
@@ -84,16 +109,22 @@ export interface WebSocketStats {
   uptime: number;
   lastError?: string;
   lastErrorTimestamp?: number;
+
+
 }
 
 export interface SubscriptionTopic {
+
+
   type: 'market_data' | 'portfolio' | 'alerts' | 'trading_signals' | 'news';
   symbols?: string[];
   userId?: string;
   filters?: Record<string, any>;
+
+
 }
 
-// Mock WebSocket service for static builds
+// Mock WebSocket service for static builds;
 export class WebSocketService {
   private isEnabled = false;
 
@@ -115,12 +146,12 @@ export class WebSocketService {
 
   getStats(): WebSocketStats {
     return {
-      connectedClients: 0,
-      totalConnections: 0,
-      messagesPerSecond: 0,
-      avgLatency: 0,
-      errorRate: 0,
-      uptime: 0,
+      connectedClients: 0,;
+      totalConnections: 0,;
+      messagesPerSecond: 0,;
+      avgLatency: 0,;
+      errorRate: 0,;
+      uptime: 0,;
     };
   }
 
@@ -144,9 +175,9 @@ export class WebSocketService {
     console.log('Mock unsubscribe:', socketId, topic);
   }
 
-  authenticateSocket(
-    socketId: string,
-    token: string
+  authenticateSocket(;
+    socketId: string,;
+    token: string;
   ): Promise<{ success: boolean; userId?: string; error?: string }> {
     return Promise.resolve({ success: false, error: 'WebSocket disabled in static build' });
   }
@@ -229,10 +260,10 @@ export class WebSocketService {
 
   getHealthCheck(): { status: 'healthy' | 'unhealthy'; details: any } {
     return {
-      status: 'unhealthy',
+      status: 'unhealthy',;
       details: {
-        reason: 'WebSocket service disabled for static build',
-      },
+        reason: 'WebSocket service disabled for static build',;
+      },;
     };
   }
 
@@ -250,11 +281,11 @@ export class WebSocketService {
 
   exportMetrics(): any {
     return {
-      enabled: false,
-      mode: 'static_build_mock',
+      enabled: false,;
+      mode: 'static_build_mock',;
     };
   }
 }
 
-// Export a singleton instance
+// Export a singleton instance;
 export const webSocketService = new WebSocketService();

@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import { useState, useEffect } from 'react';
 
 interface MarketDataPoint {
+
   symbol: string;
   price: number;
   volume: number;
@@ -16,9 +17,11 @@ interface MarketDataPoint {
   vwap?: number;
   rsi?: number;
   macd?: number;
+
 }
 
 interface AISignal {
+
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
@@ -31,15 +34,19 @@ interface AISignal {
   timestamp: number;
   risk: 'LOW' | 'MEDIUM' | 'HIGH';
   timeframe: string;
+
 }
 
 interface TradingUpdate {
+
   type: 'POSITION' | 'ORDER' | 'EXECUTION' | 'PNL';
   data: unknown;
   timestamp: number;
+
 }
 
 interface SentimentData {
+
   symbol: string;
   overall: number;
   bullish: number;
@@ -48,9 +55,10 @@ interface SentimentData {
   volume: number;
   sources: string[];
   timestamp: number;
+
 }
 
-// Server-safe WebSocket service that doesn't import socket.io-client
+// Server-safe WebSocket service that doesn't import socket.io-client;
 export class EnhancedWebSocketService extends EventEmitter {
   private socket: unknown = null;
   private reconnectAttempts = 0;
@@ -60,7 +68,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   private subscriptions = new Set<string>();
   private heartbeatInterval: NodeJS.Timeout | null = null;
 
-  // Data caches
+  // Data caches;
   private marketDataCache = new Map<string, MarketDataPoint>();
   private aiSignalsCache: AISignal[] = [];
   private tradingUpdatesCache: TradingUpdate[] = [];
@@ -72,7 +80,7 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 
   async connect(userId?: string): Promise<boolean> {
-    // Server-side guard - return false on server
+    // Server-side guard - return false on server;
     if (typeof window === 'undefined') {
       console.log('WebSocket service disabled on server-side');
       return false;
@@ -82,33 +90,33 @@ export class EnhancedWebSocketService extends EventEmitter {
       return true;
     }
 
-    // WebSocket service disabled until socket.io-client is properly configured
+    // WebSocket service disabled until socket.io-client is properly configured;
     console.log('WebSocket service temporarily disabled');
     return false;
   }
 
-  // Stub methods for SSR compatibility
+  // Stub methods for SSR compatibility;
   private setupEventHandlers(userId?: string): void {
-    // No-op for now
+    // No-op for now;
   }
 
   private startHeartbeat(): void {
-    // No-op for now
+    // No-op for now;
   }
 
   private stopHeartbeat(): void {
-    // No-op for now
+    // No-op for now;
   }
 
   private async attemptReconnect(userId?: string): Promise<void> {
-    // No-op for now
+    // No-op for now;
   }
 
   private resubscribeAll(): void {
-    // No-op for now
+    // No-op for now;
   }
 
-  // Subscription methods
+  // Subscription methods;
   subscribeToMarketData(symbols: string[]): void {
     if (typeof window === 'undefined') return;
     console.log('WebSocket subscriptions disabled');
@@ -139,7 +147,7 @@ export class EnhancedWebSocketService extends EventEmitter {
     console.log('WebSocket subscriptions disabled');
   }
 
-  // Data getters
+  // Data getters;
   getMarketData(symbol?: string): MarketDataPoint | undefined | Map<string, MarketDataPoint> {
     return symbol ? this.marketDataCache.get(symbol) : this.marketDataCache;
   }
@@ -156,7 +164,7 @@ export class EnhancedWebSocketService extends EventEmitter {
     return symbol ? this.sentimentCache.get(symbol) : this.sentimentCache;
   }
 
-  // Connection status
+  // Connection status;
   getConnectionStatus(): {
     connected: boolean;
     reconnectAttempts: number;
@@ -169,19 +177,19 @@ export class EnhancedWebSocketService extends EventEmitter {
     };
   } {
     return {
-      connected: this.isConnected,
-      reconnectAttempts: this.reconnectAttempts,
-      subscriptions: this.subscriptions.size,
+      connected: this.isConnected,;
+      reconnectAttempts: this.reconnectAttempts,;
+      subscriptions: this.subscriptions.size,;
       dataPoints: {
-        marketData: this.marketDataCache.size,
-        aiSignals: this.aiSignalsCache.length,
-        tradingUpdates: this.tradingUpdatesCache.length,
-        sentiment: this.sentimentCache.size,
-      },
+        marketData: this.marketDataCache.size,;
+        aiSignals: this.aiSignalsCache.length,;
+        tradingUpdates: this.tradingUpdatesCache.length,;
+        sentiment: this.sentimentCache.size,;
+      },;
     };
   }
 
-  // Cleanup
+  // Cleanup;
   disconnect(): void {
     this.stopHeartbeat();
     if (this.socket && typeof window !== 'undefined') {
@@ -197,16 +205,16 @@ export class EnhancedWebSocketService extends EventEmitter {
   }
 }
 
-// Singleton instance
+// Singleton instance;
 export const websocketService = new EnhancedWebSocketService();
 
-// React hook for easy usage
+// React hook for easy usage;
 export const useEnhancedWebSocket = (userId?: string) => {
   const [isConnected, setIsConnected] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(websocketService.getConnectionStatus());
 
   useEffect(() => {
-    // Client-side only
+    // Client-side only;
     if (typeof window === 'undefined') return;
 
     const handleConnect = () => setIsConnected(true);
@@ -217,7 +225,7 @@ export const useEnhancedWebSocket = (userId?: string) => {
     websocketService.on('disconnected', handleDisconnect);
     websocketService.on('reconnected', handleReconnect);
 
-    // Update connection status periodically
+    // Update connection status periodically;
     const statusInterval = setInterval(() => {
       setConnectionStatus(websocketService.getConnectionStatus());
     }, 5000);
@@ -231,11 +239,11 @@ export const useEnhancedWebSocket = (userId?: string) => {
   }, [userId]);
 
   return {
-    websocketService,
-    isConnected,
-    connectionStatus,
+    websocketService,;
+    isConnected,;
+    connectionStatus,;
   };
 };
 
-// Type exports
+// Type exports;
 export type { MarketDataPoint, AISignal, TradingUpdate, SentimentData };

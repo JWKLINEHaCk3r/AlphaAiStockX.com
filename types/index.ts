@@ -1,7 +1,8 @@
 import React from 'react';
-// Global type definitions for AlphaAIStockX platform
-
+// Global type definitions for AlphaAIStockX platform;
 export interface User {
+
+
   id: string;
   email: string;
   username: string;
@@ -11,11 +12,15 @@ export interface User {
   subscription: SubscriptionTier;
   createdAt: Date;
   lastLogin?: Date;
+
+
 }
 
 export type SubscriptionTier = 'free' | 'pro' | 'enterprise';
 
 export interface StockData {
+
+
   symbol: string;
   name: string;
   price: number;
@@ -27,9 +32,13 @@ export interface StockData {
   eps?: number;
   dividend?: number;
   lastUpdated: Date;
+
+
 }
 
 export interface AISignal {
+
+
   id: string;
   symbol: string;
   action: 'buy' | 'sell' | 'hold';
@@ -40,9 +49,13 @@ export interface AISignal {
   reasoning: string;
   timestamp: Date;
   aiModel: string;
+
+
 }
 
 export interface Portfolio {
+
+
   id: string;
   userId: string;
   name: string;
@@ -55,9 +68,13 @@ export interface Portfolio {
   positions: Position[];
   createdAt: Date;
   updatedAt: Date;
+
+
 }
 
 export interface Position {
+
+
   id: string;
   symbol: string;
   quantity: number;
@@ -69,9 +86,13 @@ export interface Position {
   dayChange: number;
   dayChangePercent: number;
   openedAt: Date;
+
+
 }
 
 export interface Trade {
+
+
   id: string;
   userId: string;
   portfolioId: string;
@@ -85,9 +106,13 @@ export interface Trade {
   orderId?: string;
   executedAt?: Date;
   createdAt: Date;
+
+
 }
 
 export interface AIAnalysis {
+
+
   symbol: string;
   sentiment: 'bullish' | 'bearish' | 'neutral';
   confidence: number;
@@ -99,7 +124,9 @@ export interface AIAnalysis {
       upper: number;
       middle: number;
       lower: number;
-    };
+    
+
+};
     support: number;
     resistance: number;
   };
@@ -111,6 +138,8 @@ export interface AIAnalysis {
 }
 
 export interface MarketData {
+
+
   symbol: string;
   price: number;
   bid: number;
@@ -122,44 +151,62 @@ export interface MarketData {
   open: number;
   previousClose: number;
   timestamp: Date;
+
+
 }
 
 export interface ChartData {
+
+
   timestamp: Date;
   open: number;
   high: number;
   low: number;
   close: number;
   volume: number;
+
+
 }
 
 export interface NewsArticle {
+
+
   id: string;
   title: string;
   summary: string;
   url: string;
   source: string;
   publishedAt: Date;
-  sentiment: number; // -1 to 1
+  sentiment: number; // -1 to 1;
   relevantSymbols: string[];
   aiSummary?: string;
+
+
 }
 
 export interface WatchlistItem {
+
+
   id: string;
   userId: string;
   symbol: string;
   addedAt: Date;
   notes?: string;
   alertRules?: AlertRule[];
+
+
 }
 
 export interface AlertRule {
+
+
   id: string;
   type: 'price_above' | 'price_below' | 'volume_spike' | 'ai_signal';
   value: number;
   isActive: boolean;
   createdAt: Date;
+
+
 }
 
 export interface APIResponse<T = any> {
@@ -181,10 +228,14 @@ export interface PaginatedResponse<T> extends APIResponse<T[]> {
   };
 }
 
-// Component prop types
+// Component prop types;
 export interface BaseComponentProps {
+
+
   className?: string;
   children?: React.ReactNode;
+
+
 }
 
 export interface StockCardProps extends BaseComponentProps {
@@ -201,7 +252,7 @@ export interface ChartProps extends BaseComponentProps {
   height?: number;
 }
 
-// Utility types
+// Utility types;
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
 export type SortDirection = 'asc' | 'desc';
@@ -210,8 +261,10 @@ export type TimeFrame = '1m' | '5m' | '15m' | '30m' | '1h' | '4h' | '1d' | '1w';
 
 export type MarketStatus = 'open' | 'closed' | 'pre_market' | 'after_hours';
 
-// AI Model types
+// AI Model types;
 export interface AIModel {
+
+
   id: string;
   name: string;
   version: string;
@@ -219,23 +272,29 @@ export interface AIModel {
   accuracy: number;
   specialization: string[];
   isActive: boolean;
+
+
 }
 
 export interface AIAgentStatus {
+
+
   id: string;
   name: string;
   status: 'active' | 'inactive' | 'error';
   lastUpdate: Date;
   tasksCompleted: number;
   accuracy: number;
+
+
 }
 
-// Error types
+// Error types;
 export class APIError extends Error {
-  constructor(
-    message: string,
-    public statusCode: number,
-    public code?: string
+  constructor(;
+    message: string,;
+    public statusCode: number,;
+    public code?: string;
   ) {
     super(message);
     this.name = 'APIError';
@@ -243,28 +302,36 @@ export class APIError extends Error {
 }
 
 export class ValidationError extends Error {
-  constructor(
-    message: string,
-    public field?: string
+  constructor(;
+    message: string,;
+    public field?: string;
   ) {
     super(message);
     this.name = 'ValidationError';
   }
 }
 
-// Event types
+// Event types;
 export interface SystemEvent {
+
+
   type: 'trade_executed' | 'signal_generated' | 'alert_triggered' | 'market_status_change';
   data: any;
   timestamp: Date;
   userId?: string;
+
+
 }
 
-// WebSocket message types
+// WebSocket message types;
 export interface WSMessage {
+
+
   type: string;
   data: any;
   timestamp: Date;
+
+
 }
 
 export interface WSStockUpdate extends WSMessage {
@@ -277,8 +344,10 @@ export interface WSTradeUpdate extends WSMessage {
   data: Trade;
 }
 
-// Configuration types
+// Configuration types;
 export interface AppConfig {
+
+
   apiUrl: string;
   wsUrl: string;
   environment: 'development' | 'staging' | 'production';
@@ -287,11 +356,15 @@ export interface AppConfig {
     darkMode: boolean;
     advancedCharts: boolean;
     aiTrading: boolean;
-  };
+  
+
+};
 }
 
-// Theme types
+// Theme types;
 export interface ThemeConfig {
+
+
   colors: {
     primary: string;
     secondary: string;
@@ -300,7 +373,9 @@ export interface ThemeConfig {
     surface: string;
     text: string;
     textSecondary: string;
-  };
+  
+
+};
   fonts: {
     primary: string;
     secondary: string;

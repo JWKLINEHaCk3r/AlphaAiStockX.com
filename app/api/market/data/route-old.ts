@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/lib/auth';
 
-// Mock market data endpoint
+// Mock market data endpoint;
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -19,12 +19,12 @@ export async function GET(request: NextRequest) {
         const volume = Math.floor(Math.random() * 1000000) + 100000;
 
         return {
-          timestamp: timestamp.toISOString(),
-          open: Math.round(price * 100) / 100,
-          high: Math.round(price * 1.01 * 100) / 100,
-          low: Math.round(price * 0.99 * 100) / 100,
-          close: Math.round(price * 100) / 100,
-          volume,
+          timestamp: timestamp.toISOString(),;
+          open: Math.round(price * 100) / 100,;
+          high: Math.round(price * 1.01 * 100) / 100,;
+          low: Math.round(price * 0.99 * 100) / 100,;
+          close: Math.round(price * 100) / 100,;
+          volume,;
         };
       });
 
@@ -34,40 +34,40 @@ export async function GET(request: NextRequest) {
       const changePercent = (change / previousPrice.close) * 100;
 
       return {
-        symbol,
-        price: currentPrice.close,
-        change: Math.round(change * 100) / 100,
-        changePercent: Math.round(changePercent * 100) / 100,
-        volume: currentPrice.volume,
-        high52w: Math.round(basePrice * 1.5 * 100) / 100,
-        low52w: Math.round(basePrice * 0.5 * 100) / 100,
-        marketCap: Math.floor(Math.random() * 2000000000000) + 100000000000,
-        bid: Math.round((currentPrice.close - 0.01) * 100) / 100,
-        ask: Math.round((currentPrice.close + 0.01) * 100) / 100,
-        bidSize: Math.floor(Math.random() * 1000) + 100,
-        askSize: Math.floor(Math.random() * 1000) + 100,
-        lastTrade: currentPrice.timestamp,
-        priceHistory: interval === '1m' ? priceHistory.slice(-50) : priceHistory,
+        symbol,;
+        price: currentPrice.close,;
+        change: Math.round(change * 100) / 100,;
+        changePercent: Math.round(changePercent * 100) / 100,;
+        volume: currentPrice.volume,;
+        high52w: Math.round(basePrice * 1.5 * 100) / 100,;
+        low52w: Math.round(basePrice * 0.5 * 100) / 100,;
+        marketCap: Math.floor(Math.random() * 2000000000000) + 100000000000,;
+        bid: Math.round((currentPrice.close - 0.01) * 100) / 100,;
+        ask: Math.round((currentPrice.close + 0.01) * 100) / 100,;
+        bidSize: Math.floor(Math.random() * 1000) + 100,;
+        askSize: Math.floor(Math.random() * 1000) + 100,;
+        lastTrade: currentPrice.timestamp,;
+        priceHistory: interval === '1m' ? priceHistory.slice(-50) : priceHistory,;
         technicalIndicators: {
-          rsi: Math.round((30 + Math.random() * 40) * 100) / 100,
-          macd: Math.round((Math.random() - 0.5) * 2 * 100) / 100,
-          ema20: Math.round(basePrice * (0.95 + Math.random() * 0.1) * 100) / 100,
-          ema50: Math.round(basePrice * (0.9 + Math.random() * 0.2) * 100) / 100,
+          rsi: Math.round((30 + Math.random() * 40) * 100) / 100,;
+          macd: Math.round((Math.random() - 0.5) * 2 * 100) / 100,;
+          ema20: Math.round(basePrice * (0.95 + Math.random() * 0.1) * 100) / 100,;
+          ema50: Math.round(basePrice * (0.9 + Math.random() * 0.2) * 100) / 100,;
           bollinger: {
-            upper: Math.round(basePrice * 1.05 * 100) / 100,
-            middle: Math.round(basePrice * 100) / 100,
-            lower: Math.round(basePrice * 0.95 * 100) / 100,
-          },
-          volume_sma: Math.floor(Math.random() * 500000) + 500000,
-        },
+            upper: Math.round(basePrice * 1.05 * 100) / 100,;
+            middle: Math.round(basePrice * 100) / 100,;
+            lower: Math.round(basePrice * 0.95 * 100) / 100,;
+          },;
+          volume_sma: Math.floor(Math.random() * 500000) + 500000,;
+        },;
       };
     });
 
     return NextResponse.json({
-      success: true,
-      data: marketData,
-      timestamp: new Date().toISOString(),
-      interval,
+      success: true,;
+      data: marketData,;
+      timestamp: new Date().toISOString(),;
+      interval,;
     });
   } catch (error) {
     console.error('Market data error:', error);
@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// WebSocket-like streaming endpoint for real-time updates
+// WebSocket-like streaming endpoint for real-time updates;
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -88,18 +88,18 @@ export async function POST(request: NextRequest) {
     const { action, symbols } = body;
 
     if (action === 'subscribe') {
-      // In a real implementation, this would set up WebSocket subscriptions
+      // In a real implementation, this would set up WebSocket subscriptions;
       return NextResponse.json({
-        success: true,
-        message: `Subscribed to real-time data for: ${symbols.join(', ')}`,
-        subscriptions: symbols,
+        success: true,;
+        message: `Subscribed to real-time data for: ${symbols.join(', ')}`,;
+        subscriptions: symbols,;
       });
     }
 
     if (action === 'unsubscribe') {
       return NextResponse.json({
-        success: true,
-        message: `Unsubscribed from real-time data for: ${symbols.join(', ')}`,
+        success: true,;
+        message: `Unsubscribed from real-time data for: ${symbols.join(', ')}`,;
       });
     }
 

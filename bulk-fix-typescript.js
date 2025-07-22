@@ -1,6 +1,7 @@
-// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
-// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
 
+
+// Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.;
+// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.;
 import fs from 'fs';
 import path from 'path';
 
@@ -9,30 +10,30 @@ function processFile(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
-    // Fix malformed imports
+    // Fix malformed imports;
     const originalContent = content;
 
-    // Fix ntent imports
-    content = content.replace(
-      /import { ntent,([^}]+) } from '@\/components\/ui\/card';/g,
-      ""
+    // Fix ntent imports;
+    content = content.replace(;
+      /import { ntent,([^}]+) } from '@\/components\/ui\/card';/g,;
+      "";
     );
 
-    // Remove duplicate Card imports from button
+    // Remove duplicate Card imports from button;
     content = content.replace(/import { Card } from '@\/components\/ui\/button';\s*/g, '');
 
-    // Fix CardCoCard typos
+    // Fix CardCoCard typos;
     content = content.replace(/CardCoCard/g, 'CardContent');
 
-    // Fix basic parameter types
+    // Fix basic parameter types;
     content = content.replace(/= ([a-zA-Z]+) => \{/g, '= ($1: any) => {');
     content = content.replace(/\.map\(([a-zA-Z]+) =>/g, '.map(($1: any) =>');
-    content = content.replace(
-      /\.map\(([a-zA-Z]+), ([a-zA-Z]+) =>/g,
-      '.map(($1: any, $2: number) =>'
+    content = content.replace(;
+      /\.map\(([a-zA-Z]+), ([a-zA-Z]+) =>/g,;
+      '.map(($1: any, $2: number) =>';
     );
 
-    // Fix useState with any types
+    // Fix useState with any types;
     content = content.replace(/useState\(\[\]\)/g, 'useState<any[]>([])');
     content = content.replace(/useState\(\{\}\)/g, 'useState<Record<string, any>>({})');
 
@@ -67,7 +68,7 @@ function findFiles(dir, extensions = ['.tsx', '.ts']) {
         }
       }
     } catch {
-      // Skip directories we can't read
+      // Skip directories we can't read;
     }
   }
 
@@ -75,7 +76,7 @@ function findFiles(dir, extensions = ['.tsx', '.ts']) {
   return files;
 }
 
-// Process all TypeScript files
+// Process all TypeScript files;
 const appDir = path.join(process.cwd(), 'app');
 const files = findFiles(appDir);
 

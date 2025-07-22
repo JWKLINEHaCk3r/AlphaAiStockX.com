@@ -15,30 +15,30 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  Dialog,;
+  DialogContent,;
+  DialogHeader,;
+  DialogTitle,;
+  DialogTrigger,;
 } from '@/components/ui/dialog';
 
-// Dynamic imports for client-side only components
+// Dynamic imports for client-side only components;
 const FloatingElements = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const MorphingBlob = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 const QuantumGrid = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
-const HolographicDisplay = dynamic(
-  () => Promise.resolve(({ children }: any) => <div>{children}</div>),
+const HolographicDisplay = dynamic(;
+  () => Promise.resolve(({ children }: any) => <div>{children}</div>),;
   { ssr: false }
 );
 const DataStream = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
 
-const TradingDashboardDemo = dynamic(
-  () =>
-    Promise.resolve(() => (
-      <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center">
-        <span className="text-white">Trading Dashboard Loading...</span>
-      </div>
-    )),
+const TradingDashboardDemo = dynamic(;
+  () =>;
+    Promise.resolve(() => (;
+      <div className="h-64 bg-gradient-to-br from-slate-800 to-blue-900 rounded-lg flex items-center justify-center">;
+        <span className="text-white">Trading Dashboard Loading...</span>;
+      </div>;
+    )),;
   { ssr: false }
 );
 
@@ -50,24 +50,24 @@ const QuantumDataViz = dynamic(() => Promise.resolve(() => <div />), { ssr: fals
 // const SuperiorTradingPlatform = dynamic(() => import('./components/platform/SuperiorTradingPlatform'), { ssr: false });
 // const LearnMoreModal = dynamic(() => import('./components/features/LearnMoreModal'), { ssr: false });
 import {
-  Brain,
-  BarChart3,
-  Zap,
-  TrendingUp,
-  Shield,
-  Atom,
-  Infinity,
-  Sparkles,
-  ArrowRight,
-  Play,
-  ChevronDown,
-  Star,
-  Rocket,
-  Target,
-  Globe,
-  CheckCircle,
-  DollarSign,
-  Users,
+  Brain,;
+  BarChart3,;
+  Zap,;
+  TrendingUp,;
+  Shield,;
+  Atom,;
+  Infinity,;
+  Sparkles,;
+  ArrowRight,;
+  Play,;
+  ChevronDown,;
+  Star,;
+  Rocket,;
+  Target,;
+  Globe,;
+  CheckCircle,;
+  DollarSign,;
+  Users,;
 } from 'lucide-react';
 
-// Rest of the original page content...
+// Rest of the original page content...;

@@ -5,9 +5,10 @@
  * Advanced AI-powered code repair and enhancement system
  */
 
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+
+import fs from 'fs';
+import path from 'path';
+import * as glob from 'glob';
 
 console.log('🔧 AlphaAI Critical Syntax Fixer - Repairing trading platform...');
 
@@ -81,6 +82,10 @@ async function fixCriticalSyntaxErrors() {
 
     for (const file of files) {
       const filePath = path.join(process.cwd(), file);
+      // Skip directories
+      if (fs.statSync(filePath).isDirectory()) {
+        continue;
+      }
       let content = fs.readFileSync(filePath, 'utf8');
       let fileModified = false;
       let fileFixes = 0;
