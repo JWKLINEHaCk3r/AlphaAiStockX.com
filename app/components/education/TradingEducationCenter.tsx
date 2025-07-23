@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -67,11 +72,26 @@ const Lightbulb = ({ className }: { className?: string }) => <span className={cl
 
 interface TradingEducationCenterProps {
 
+
+
+
+
+
   className?: string;
+
+
+
+
+
 
 }
 
 interface TestQuestion {
+
+
+
+
+
 
   id: string;
   question: string;
@@ -79,9 +99,19 @@ interface TestQuestion {
   correct: number;
   explanation: string;
 
+
+
+
+
+
 }
 
 interface TestResults {
+
+
+
+
+
 
   score: number;
   correct: number;
@@ -89,24 +119,49 @@ interface TestResults {
   passed: boolean;
   recommendations: string[];
 
+
+
+
+
+
 }
 
 interface StudyProgress {
+
+
+
+
+
 
   [key: string]: {
     completed: boolean;
     score?: number;
     timeSpent?: number;
   
+
+
+
+
+
 };
 }
 
 interface EducationalTopic {
 
+
+
+
+
+
   id: string;
   title: string;
   description: string;
-  icon: React.ComponentType<{ className?: string 
+  icon: React.ComponentType<{ className?: string;
+
+
+
+
+
 }>;
   lessons: number;
   duration: string;
@@ -115,6 +170,11 @@ interface EducationalTopic {
 
 interface SeriesExam {
 
+
+
+
+
+
   id: string;
   title: string;
   description: string;
@@ -122,6 +182,11 @@ interface SeriesExam {
   timeLimit: number;
   passingScore: number;
   topics: string[];
+
+
+
+
+
 
 }
 

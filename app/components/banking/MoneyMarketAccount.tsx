@@ -1,123 +1,111 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { Input } from "../../../components/ui/input";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-=======;
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+import { Alert } from '../../../components/ui/alert';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Input } from '../../../components/ui/input';
+import { Button } from '../../../components/ui/button';
 import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  VisionModel,;
-  AnalysisResult,;
-  BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  RiskAnalysis,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
-  CryptoData,;
-  DeFiProtocol,;
-  NFTCollection,;
-  UserProfile,;
-  ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  Alert,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
 } from '../../types/trading-types';
 
-('use client');
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// ...existing code...
+// ...existing code...
+// ...existing code...
 import {
-  DollarSign,;
-  TrendingUp,;
-  Wallet,;
-  ArrowUpRight,;
-  ArrowDownLeft,;
-  Star,;
-  Crown,;
-  Zap,;
-  Target,;
-  Activity,;
+  DollarSign,
+  TrendingUp,
+  Wallet,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Star,
+  Crown,
+  Zap,
+  Target,
+  Activity,
 } from 'lucide-react';
 
 interface User {
+
+
+
+
+
 
   id: string | number;
   name: string;
   email: string;
 
+
+
+
+
+
 }
 
 interface MoneyMarketAccountProps {
+
+
+
+
+
 
   user: User;
   balance: number;
   onUpdateBalance: (newBalance: number) => void;
 
+
+
+
+
+
 }
 
 export default function MoneyMarketAccount({
-  user,;
-  balance,;
-  onUpdateBalance,;
+  user,
+  balance,
+  onUpdateBalance,
 }: MoneyMarketAccountProps) {
   const [moneyMarketBalance, setMoneyMarketBalance] = useState(25000);
   const [dailyInterest, setDailyInterest] = useState(0);
@@ -142,9 +130,9 @@ export default function MoneyMarketAccount({
         setTotalInterestEarned(prev => prev + newInterest);
         setCompoundingEffect(prev => prev + newInterest * 0.1); // Compounding bonus;
         // Add to interest history;
-        setInterestHistory(prev => [;
+        setInterestHistory(prev => [
           {
-            id: Date.now(),;
+            id: Date.now(),
             amount: newInterest,;
             balance: moneyMarketBalance + newInterest,;
             timestamp: new Date(),;

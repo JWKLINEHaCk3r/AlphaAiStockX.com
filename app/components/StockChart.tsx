@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -20,19 +25,44 @@ import { TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface StockChartProps {
 
+
+
+
+
+
   selectedStock: string;
+
+
+
+
+
 
 }
 
 interface ChartDataPoint {
 
+
+
+
+
+
   time: number;
   price: number;
   volume: number;
 
+
+
+
+
+
 }
 
 interface StockInfo {
+
+
+
+
+
 
   symbol: string;
   price: number;
@@ -45,14 +75,29 @@ interface StockInfo {
   direction: string;
   targetPrice: number;
 
+
+
+
+
+
 }
 
 interface AIPrediction {
+
+
+
+
+
 
   direction: string;
   confidence: number;
   targetPrice: number;
   timeframe: string;
+
+
+
+
+
 
 }
 

@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -103,14 +108,29 @@ import {
 
 interface User {
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
   balance?: number;
 
+
+
+
+
+
 }
 
 interface PortfolioItem {
+
+
+
+
+
 
   symbol: string;
   name: string;
@@ -123,12 +143,27 @@ interface PortfolioItem {
   price: number;
   totalReturn: number;
 
+
+
+
+
+
 }
 
 interface InvestmentDashboardProps {
 
+
+
+
+
+
   user: User;
   onUpdatePortfolio: (portfolio: PortfolioItem[]) => void;
+
+
+
+
+
 
 }
 

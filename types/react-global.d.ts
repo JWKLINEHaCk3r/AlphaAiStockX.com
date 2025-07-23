@@ -5,8 +5,18 @@ declare global {
     interface IntrinsicElements {
 
 
+
+
+
+
+
       [elemName: string]: any;
     
+
+
+
+
+
 
 }
   }

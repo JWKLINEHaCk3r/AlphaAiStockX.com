@@ -5,11 +5,21 @@ import { useState, useEffect } from 'react';
 interface ViewportSize {
 
 
+
+
+
+
+
   width: number;
   height: number;
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
+
+
+
+
+
 
 
 }

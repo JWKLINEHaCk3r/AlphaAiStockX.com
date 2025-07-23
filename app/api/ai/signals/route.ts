@@ -106,13 +106,11 @@ export async function GET(request: NextRequest) {
         : action === 'SELL';
         ? basePrice * (1 - priceMove);
         : basePrice;
-
       const stopLoss = action === 'BUY';
         ? basePrice * (1 - priceMove * 0.4);
         : action === 'SELL';
         ? basePrice * (1 + priceMove * 0.4);
         : null;
-
       // Generate technical indicators;
       const rsi = 30 + Math.random() * 40;
       const macd = (Math.random() - 0.5) * 4;

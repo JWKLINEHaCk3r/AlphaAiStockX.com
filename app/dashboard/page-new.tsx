@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter }
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../components/ui/card.tsx';
@@ -113,14 +118,29 @@ import TradeHistoryTable from './trade-history/TradeHistoryTable';
 // Type definitions;
 interface MarketStock {
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
 
+
+
+
+
+
 }
 
 interface AIBeing {
+
+
+
+
+
 
   id: number;
   name: string;
@@ -128,6 +148,11 @@ interface AIBeing {
   profits: number;
   accuracy: number;
   trades: number;
+
+
+
+
+
 
 }
 

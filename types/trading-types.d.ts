@@ -3,8 +3,28 @@ declare export interface TradingSignalData {
 
 
 
+
+
+
+
+
+
+
+
+
+
 }
 declare export interface TechnicalIndicators {
+
+
+
+
+
+
+
+
+
+
 
 
 

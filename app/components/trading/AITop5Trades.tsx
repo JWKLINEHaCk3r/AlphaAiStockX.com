@@ -4,9 +4,19 @@ import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface Trade {
 
+
+
+
+
+
   ticker: string;
   direction: 'up' | 'down';
   percentage: number;
+
+
+
+
+
 
 }
 

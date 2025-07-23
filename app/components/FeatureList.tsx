@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -34,9 +39,19 @@ import { Brain, Zap, Target, Star, Eye, Sparkles, GraduationCap, Rocket } from '
 
 interface Feature {
 
+
+
+
+
+
   icon: React.ReactNode;
   title: string;
   description: string;
+
+
+
+
+
 
 }
 

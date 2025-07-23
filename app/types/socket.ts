@@ -12,6 +12,11 @@ export type NextApiResponseServerIO = NextApiResponse & {
 
 export interface ClientToServerEvents {
 
+
+
+
+
+
   'subscribe-market-data': (symbols: string[]) => void;
   'unsubscribe-market-data': (symbols: string[]) => void;
   'subscribe-ai-signals': (userId: string) => void;
@@ -22,9 +27,19 @@ export interface ClientToServerEvents {
   'unsubscribe-social-feed': (userId: string) => void;
   'subscribe-trade-notifications': (userId: string) => void;
 
+
+
+
+
+
 }
 
 export interface ServerToClientEvents {
+
+
+
+
+
 
   'market-data': (data: MarketDataUpdate) => void;
   'ai-signals': (signals: AISignal[]) => void;
@@ -33,9 +48,19 @@ export interface ServerToClientEvents {
   'new-social-post': (post: SocialPost) => void;
   'trade-notification': (notification: TradeNotification) => void;
 
+
+
+
+
+
 }
 
 export interface MarketDataUpdate {
+
+
+
+
+
 
   symbol: string;
   price: number;
@@ -46,9 +71,19 @@ export interface MarketDataUpdate {
   ask: number;
   timestamp: string;
 
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -59,9 +94,19 @@ export interface AISignal {
   strategy: string;
   timestamp: string;
 
+
+
+
+
+
 }
 
 export interface PortfolioUpdate {
+
+
+
+
+
 
   userId: string;
   totalValue: number;
@@ -71,9 +116,19 @@ export interface PortfolioUpdate {
   positions: number;
   timestamp: string;
 
+
+
+
+
+
 }
 
 export interface SocialPost {
+
+
+
+
+
 
   id: string;
   author: {
@@ -81,6 +136,11 @@ export interface SocialPost {
     avatar: string;
     verified: boolean;
   
+
+
+
+
+
 };
   content: string;
   timestamp: string;
@@ -90,10 +150,20 @@ export interface SocialPost {
 
 export interface TradeNotification {
 
+
+
+
+
+
   id: string;
   type: 'ORDER_FILLED' | 'ORDER_CANCELLED' | 'STOP_LOSS_TRIGGERED' | 'TARGET_REACHED';
   symbol: string;
   message: string;
   timestamp: string;
+
+
+
+
+
 
 }

@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
             autoTrading: false,;
           },;
         },;
-      },;
+        },;
       select: {
         id: true,;
         name: true,;
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
         balance: true,;
         portfolioValue: true,;
         createdAt: true,;
-      },;
+      }
     });
 
     return NextResponse.json({

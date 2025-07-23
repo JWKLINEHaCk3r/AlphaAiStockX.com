@@ -5,8 +5,18 @@ import React from 'react';
 
 interface Account {
 
+
+
+
+
+
   portfolio_value?: number | string;
   // Add other account properties as needed;
+
+
+
+
+
 
 }
 
@@ -14,9 +24,19 @@ export default function PortfolioSummary() {
   const [account, setAccount] = React.useState<Account | null>(null);
   interface Position {
 
+
+
+
+
+
     symbol: string;
     // Add other position properties as needed;
   
+
+
+
+
+
 }
 
   const [positions, setPositions] = React.useState<Position[]>([]);

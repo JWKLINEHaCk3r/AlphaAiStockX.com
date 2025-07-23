@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
@@ -48,6 +53,11 @@ import {
 
 interface SystemMetrics {
 
+
+
+
+
+
   cpu: number;
   memory: number;
   disk: number;
@@ -58,14 +68,29 @@ interface SystemMetrics {
   errors: number;
   successRate: number;
 
+
+
+
+
+
 }
 
 interface PerformanceMonitorProps {
+
+
+
+
+
 
   metrics: SystemMetrics;
   isLoading?: boolean;
   onRefresh?: () => void;
   className?: string;
+
+
+
+
+
 
 }
 

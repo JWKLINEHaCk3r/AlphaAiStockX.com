@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -44,7 +49,17 @@ import { Mail, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react';
 
 interface ForgotPasswordFormProps {
 
+
+
+
+
+
   onBack: () => void;
+
+
+
+
+
 
 }
 

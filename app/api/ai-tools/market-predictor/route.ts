@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
         const { imageData, symbol, timeframe } = body;
 
         if (!imageData || !symbol) {
-          return NextResponse.json(;
-            { error: 'Image data and symbol are required' },;
+          return NextResponse.json(
+            { error: 'Image data and symbol are required' },
             { status: 400 }
           );
         }
@@ -23,31 +23,31 @@ export async function POST(request: NextRequest) {
         const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
 
         return NextResponse.json({
-          success: true,;
-          data: analysis,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: analysis,
+          timestamp: new Date().toISOString()
         });
 
       case 'multimodal_analysis':;
         const { imageData: imgData, symbol: sym, timeframe: tf } = body;
 
         if (!imgData || !sym) {
-          return NextResponse.json(;
-            { error: 'Image data and symbol are required' },;
+          return NextResponse.json(
+            { error: 'Image data and symbol are required' },
             { status: 400 }
           );
         }
 
         const multiModalAnalysis = await predictor.performMultiModalAnalysis(;
-          imgData,;
-          sym,;
-          tf || '1D';
+          imgData,
+          sym,
+          tf || '1D'
         );
 
         return NextResponse.json({
-          success: true,;
-          data: multiModalAnalysis,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: multiModalAnalysis,
+          timestamp: new Date().toISOString()
         });
 
       case 'bulk_predictions':;
@@ -60,30 +60,18 @@ export async function POST(request: NextRequest) {
         const bulkPredictions = await predictor.getBulkPredictions(symbols, bulkTimeframe || '1D');
 
         return NextResponse.json({
-          success: true,;
-          data: bulkPredictions,;
-          count: bulkPredictions.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: bulkPredictions,
+          count: bulkPredictions.length,
+          timestamp: new Date().toISOString()
         });
 
       default:;
-        return NextResponse.json(;
-          {
-            error:;
-              'Invalid action. Supported actions: analyze_chart, multimodal_analysis, bulk_predictions',;
-          },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: analyze_chart, multimodal_analysis, bulk_predictions' }, { status: 400 });
     }
   } catch (error) {
     console.error('Market Predictor API Error:', error);
-    return NextResponse.json(;
-      {
-        error: 'Failed to process request',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process request', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
 
@@ -106,7 +94,7 @@ export async function GET(request: NextRequest) {
           data: history,;
           count: history.length,;
           symbol,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'accuracy':;
@@ -123,7 +111,7 @@ export async function GET(request: NextRequest) {
           success: true,;
           data: accuracy,;
           symbol,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'supported_patterns':;
@@ -144,14 +132,14 @@ export async function GET(request: NextRequest) {
           'Pennant',;
           'Diamond',;
           'Rounding Bottom',;
-          'Rounding Top',;
+          'Rounding Top';
         ];
 
         return NextResponse.json({
           success: true,;
           data: patterns,;
           count: patterns.length,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'supported_timeframes':;
@@ -160,17 +148,11 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: timeframes,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       default:;
-        return NextResponse.json(;
-          {
-            error:;
-              'Invalid action. Supported actions: history, accuracy, supported_patterns, supported_timeframes',;
-          },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: history, accuracy, supported_patterns, supported_timeframes' }, { status: 400 });
     }
   } catch (error) {
     console.error('Market Predictor GET API Error:', error);
@@ -192,22 +174,19 @@ export async function DELETE(request: NextRequest) {
             success: true,;
             message: `Prediction history cleared for ${symbol}`,;
             symbol,;
-            timestamp: new Date().toISOString(),;
+            timestamp: new Date().toISOString();
           });
         } else {
           predictor.clearPredictionHistory();
           return NextResponse.json({
             success: true,;
             message: 'All prediction history cleared',;
-            timestamp: new Date().toISOString(),;
+            timestamp: new Date().toISOString();
           });
         }
 
       default:;
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: clear_history' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: clear_history' }, { status: 400 });
     }
   } catch (error) {
     console.error('Market Predictor DELETE API Error:', error);

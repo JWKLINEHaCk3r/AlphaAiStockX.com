@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from './card.js';
 import { Card, CardHeader, CardContent, CardTitle } from './card.js';
 import { Card, CardHeader, CardContent, CardTitle } from './card.js';
 import { Card, CardHeader, CardContent, CardTitle } from './card.js';
+import { Card, CardHeader, CardContent, CardTitle } from './card.js';
+import { Card, CardHeader, CardContent, CardTitle } from './card.js';
+import { Card, CardHeader, CardContent, CardTitle } from './card.js';
+import { Card, CardHeader, CardContent, CardTitle } from './card.js';
+import { Card, CardHeader, CardContent, CardTitle } from './card.js';
 import { Card, CardHeader, CardContent, CardTitle } from './card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from './card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from './card.tsx';
@@ -47,6 +52,11 @@ import { cn } from '@/lib/utils';
 
 interface StockData {
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
@@ -54,14 +64,29 @@ interface StockData {
   volume: number;
   aiScore: number;
 
+
+
+
+
+
 }
 
 interface MarketSentiment {
+
+
+
+
+
 
   bullish: number;
   bearish: number;
   neutral: number;
   aiConfidence: number;
+
+
+
+
+
 
 }
 

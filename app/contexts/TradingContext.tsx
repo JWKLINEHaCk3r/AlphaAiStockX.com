@@ -7,6 +7,11 @@ import { apiClient } from '@/app/services/api-client';
 
 interface User {
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
@@ -26,9 +31,19 @@ interface User {
   social?: any;
   unreadNotifications?: number;
 
+
+
+
+
+
 }
 
 interface Portfolio {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -47,9 +62,19 @@ interface Portfolio {
   positionsCount: number;
   lastUpdated: string;
 
+
+
+
+
+
 }
 
 interface Position {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -62,9 +87,19 @@ interface Position {
   side: 'LONG' | 'SHORT';
   lastUpdated: string;
 
+
+
+
+
+
 }
 
 interface Order {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -79,9 +114,19 @@ interface Order {
   executionPrice?: number;
   executedQuantity?: number;
 
+
+
+
+
+
 }
 
 interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -98,9 +143,19 @@ interface AISignal {
   analysis: any;
   reasoning: string[];
 
+
+
+
+
+
 }
 
 interface TradingContextType {
+
+
+
+
+
 
   // User & Authentication;
   user: User | null;
@@ -142,6 +197,11 @@ interface TradingContextType {
   subscribeToRealTimeData: () => void;
   unsubscribeFromRealTimeData: () => void;
 
+
+
+
+
+
 }
 
 const TradingContext = createContext<TradingContextType | undefined>(undefined);
@@ -156,7 +216,17 @@ export const useTradingContext = () => {
 
 interface TradingProviderProps {
 
+
+
+
+
+
   children: ReactNode;
+
+
+
+
+
 
 }
 

@@ -10,6 +10,11 @@ import type { NextAuthConfig } from 'next-auth';
 
 export interface User {
 
+
+
+
+
+
   id: string;
   email: string;
   name: string;
@@ -31,9 +36,19 @@ export interface User {
   createdAt: Date;
   lastActive: Date;
 
+
+
+
+
+
 }
 
 export interface UserPreferences {
+
+
+
+
+
 
   theme: 'dark' | 'light' | 'auto';
   notifications: {
@@ -44,6 +59,11 @@ export interface UserPreferences {
     news: boolean;
     ai: boolean;
   
+
+
+
+
+
 };
   trading: {
     autoTrade: boolean;

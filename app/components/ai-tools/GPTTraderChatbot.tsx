@@ -8,6 +8,11 @@ import { Bot, User, Send } from 'lucide-react';
 import { Brain, DollarSign, BarChart3, Clock, Star, Sparkles, AlertCircle } from 'lucide-react';
 interface TradingRecommendation {
 
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell' | 'hold';
   quantity: number;
@@ -18,10 +23,20 @@ interface TradingRecommendation {
   stopLoss?: number;
   timeframe: string;
 
+
+
+
+
+
 }
 
 // Local type definitions (no conflict with imported types);
 interface ChatMessage {
+
+
+
+
+
 
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -32,12 +47,22 @@ interface ChatMessage {
     recommendations?: TradingRecommendation[];
     analysis?: unknown;
   
+
+
+
+
+
 };
 }
 
 // ...existing code...;
 // Rename to avoid conflict with imported UserProfile;
 interface GPTUserProfile {
+
+
+
+
+
 
   id: string;
   riskTolerance: 'conservative' | 'moderate' | 'aggressive';
@@ -46,6 +71,11 @@ interface GPTUserProfile {
   experience: 'beginner' | 'intermediate' | 'advanced';
   portfolioValue: number;
   preferredSectors: string[];
+
+
+
+
+
 
 }
 

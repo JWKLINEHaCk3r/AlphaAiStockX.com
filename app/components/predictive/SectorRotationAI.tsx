@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -31,6 +36,11 @@ import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface SectorData {
 
+
+
+
+
+
   name: string;
   symbol: string;
   weight: number;
@@ -44,9 +54,19 @@ interface SectorData {
   volatility: number;
   recommendation: 'overweight' | 'underweight' | 'neutral';
 
+
+
+
+
+
 }
 
 interface RotationSignal {
+
+
+
+
+
 
   from: string;
   to: string;
@@ -56,17 +76,37 @@ interface RotationSignal {
   confidence: number;
   historicalSuccess: number;
 
+
+
+
+
+
 }
 
 interface EconomicIndicator {
+
+
+
+
+
 
   name: string;
   status: string;
   impact: string;
 
+
+
+
+
+
 }
 
 interface EconomicCycle {
+
+
+
+
+
 
   currentPhase: string;
   nextPhase: string;
@@ -75,6 +115,11 @@ interface EconomicCycle {
   keyIndicators?: EconomicIndicator[];
   recommendedSectors?: string[];
   avoidSectors?: string[];
+
+
+
+
+
 
 }
 

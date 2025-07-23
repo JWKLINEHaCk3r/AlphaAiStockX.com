@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'optimize':;
         if (!investmentAmount || !constraints) {
-          return NextResponse.json(;
-            { error: 'Investment amount and constraints are required' },;
+          return NextResponse.json(
+            { error: 'Investment amount and constraints are required' },
             { status: 400 }
           );
         }
@@ -23,14 +23,11 @@ export async function POST(request: NextRequest) {
           'riskTolerance',;
           'minWeight',;
           'maxWeight',;
-          'maxSectorAllocation',;
+          'maxSectorAllocation';
         ];
         for (const field of requiredConstraints) {
           if (constraints[field] === undefined) {
-            return NextResponse.json(;
-              { error: `Missing required constraint: ${field}` },;
-              { status: 400 }
-            );
+            return NextResponse.json({ error: `Missing required constraint: ${field}` }, { status: 400 });
           }
         }
 
@@ -43,14 +40,14 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: optimizedPortfolio,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'backtest':;
         const { allocations, timeframe } = body;
         if (!allocations) {
           return NextResponse.json(;
-            { error: 'Portfolio allocations are required for backtesting' },;
+              { error: 'Portfolio allocations are required for backtesting' },;
             { status: 400 }
           );
         }
@@ -61,14 +58,14 @@ export async function POST(request: NextRequest) {
           success: true,;
           data: backtestResults,;
           timeframe: timeframe || '1Y',;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'recommendations':;
         const { riskTolerance, investmentGoals } = body;
         if (!riskTolerance) {
           return NextResponse.json(;
-            { error: 'Risk tolerance is required for recommendations' },;
+              { error: 'Risk tolerance is required for recommendations' },;
             { status: 400 }
           );
         }
@@ -82,22 +79,22 @@ export async function POST(request: NextRequest) {
           success: true,;
           data: recommendations,;
           count: recommendations.length,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       default:;
         return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },;
+            { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },;
           { status: 400 }
         );
     }
   } catch (error) {
     console.error('Portfolio Optimizer API Error:', error);
     return NextResponse.json(;
-      {
-        error: 'Failed to process request',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
-      },;
+            {
+                error: 'Failed to process request',;
+                details: error instanceof Error ? error.message : 'Unknown error',;
+            },;
       { status: 500 }
     );
   }
@@ -116,18 +113,18 @@ export async function GET(request: NextRequest) {
           success: true,;
           data: availableAssets,;
           count: availableAssets.length,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       case 'sectors':;
         const assets = optimizer.getAvailableAssets();
         const sectors = [...new Set(assets.map(asset => asset.sector))];
 
-        return NextResponse.json({
-          success: true,;
-          data: sectors,;
-          count: sectors.length,;
-          timestamp: new Date().toISOString(),;
+        return NextResponse.json(;
+            { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },;
+          { status: 400 }
+        );
+          timestamp: new Date().toISOString();
         });
 
       case 'asset_classes':;
@@ -141,18 +138,19 @@ export async function GET(request: NextRequest) {
           'REITs',;
           'Commodities',;
           'Sector ETFs',;
-        ];
-
-        return NextResponse.json({
-          success: true,;
-          data: assetClasses,;
-          timestamp: new Date().toISOString(),;
-        });
-
-      default:;
         return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: assets, sectors, asset_classes' },;
-          { status: 400 }
+            { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },
+            { status: 400 }
+        );
+            {
+                error: 'Failed to process request',
+                details: error instanceof Error ? error.message : 'Unknown error'
+            },
+            { status: 500 }
+        );
+        return NextResponse.json(;
+            { error: 'Invalid action. Supported actions: assets, sectors, asset_classes' },
+            { status: 400 }
         );
     }
   } catch (error) {
@@ -179,12 +177,12 @@ export async function PUT(request: NextRequest) {
           'sector',;
           'price',;
           'expectedReturn',;
-          'volatility',;
+          'volatility';
         ];
         for (const field of requiredFields) {
           if (assetData[field] === undefined) {
             return NextResponse.json(;
-              { error: `Missing required field: ${field}` },;
+                { error: `Missing required field: ${field}` },;
               { status: 400 }
             );
           }
@@ -196,12 +194,12 @@ export async function PUT(request: NextRequest) {
           success: true,;
           message: 'Custom asset added successfully',;
           symbol: assetData.symbol,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       default:;
         return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: add_asset' },;
+            { error: 'Invalid action. Supported actions: add_asset' },;
           { status: 400 }
         );
     }

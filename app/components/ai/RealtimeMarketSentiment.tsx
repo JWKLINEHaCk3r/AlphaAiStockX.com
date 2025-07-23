@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -85,6 +90,11 @@ import {
 // Type definitions;
 interface SentimentData {
 
+
+
+
+
+
   [symbol: string]: {
     overall: number;
     bullish: number;
@@ -95,10 +105,20 @@ interface SentimentData {
     momentum: 'increasing' | 'decreasing';
     confidence: number;
   
+
+
+
+
+
 };
 }
 
 interface SocialMediaPlatform {
+
+
+
+
+
 
   name: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -110,9 +130,19 @@ interface SocialMediaPlatform {
   change: number;
   topKeywords: string[];
 
+
+
+
+
+
 }
 
 interface NewsItem {
+
+
+
+
+
 
   id: number;
   headline: string;
@@ -123,9 +153,19 @@ interface NewsItem {
   timestamp: Date;
   relevance: number;
 
+
+
+
+
+
 }
 
 interface InfluencerData {
+
+
+
+
+
 
   name: string;
   followers: string;
@@ -136,9 +176,19 @@ interface InfluencerData {
   engagement: number;
   marketImpact: string;
 
+
+
+
+
+
 }
 
 interface MarketMood {
+
+
+
+
+
 
   dominant: string;
   marketPhase: string;
@@ -147,6 +197,11 @@ interface MarketMood {
   crowdSentiment: number;
   riskAppetite: string;
   institutionalFlow: string;
+
+
+
+
+
 
 }
 

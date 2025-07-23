@@ -1,6 +1,11 @@
 // Types for RL service;
 interface Model {
 
+
+
+
+
+
   id: string;
   name: string;
   type: string;
@@ -28,10 +33,20 @@ interface Model {
     winRate: number;
     totalReturn: number;
   
+
+
+
+
+
 };
 }
 
 interface Environment {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -40,9 +55,19 @@ interface Environment {
   pairs?: string[];
   [key: string]: unknown;
 
+
+
+
+
+
 }
 
 interface Agent {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -57,6 +82,11 @@ interface Agent {
   trainingEpisodes?: number;
   performance?: unknown;
   [key: string]: unknown;
+
+
+
+
+
 
 }
 

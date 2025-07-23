@@ -10,6 +10,11 @@ export type Account = {
 // Type definitions for props and state;
 export interface Trade {
 
+
+
+
+
+
   pnl: number;
   side: string;
   symbol: string;
@@ -17,10 +22,25 @@ export interface Trade {
   price: number;
   strategy: string;
 
+
+
+
+
+
 }
 export interface PerformanceData {
 
-  dailyReturns: { date: Date; return: number; cumulative: number 
+
+
+
+
+
+  dailyReturns: { date: Date; return: number; cumulative: number;
+
+
+
+
+
 }[];
   monthlyReturns: Record<string, unknown>[];
   drawdownPeriods: Record<string, unknown>[];

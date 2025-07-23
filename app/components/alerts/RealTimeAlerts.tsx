@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -97,6 +102,11 @@ import {
 
 interface Alert {
 
+
+
+
+
+
   id: number;
   type: string;
   icon: LucideIcon;
@@ -108,9 +118,19 @@ interface Alert {
   priority: string;
   read: boolean;
 
+
+
+
+
+
 }
 
 interface AlertSettings {
+
+
+
+
+
 
   priceAlerts: boolean;
   volumeAlerts: boolean;
@@ -119,9 +139,19 @@ interface AlertSettings {
   optionsFlow: boolean;
   earnings: boolean;
 
+
+
+
+
+
 }
 
 interface Alert {
+
+
+
+
+
 
   id: number;
   icon: React.ComponentType<any>;
@@ -133,9 +163,19 @@ interface Alert {
   timestamp: Date;
   read: boolean;
 
+
+
+
+
+
 }
 
 interface AlertType {
+
+
+
+
+
 
   type: keyof typeof messages;
   icon: React.ComponentType<any>;
@@ -143,6 +183,11 @@ interface AlertType {
   title: string;
   symbol: string;
   priority: 'high' | 'medium' | 'low';
+
+
+
+
+
 
 }
 

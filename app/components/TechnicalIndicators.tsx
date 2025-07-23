@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -20,11 +25,26 @@ import React, { useState, useEffect } from 'react';
 
 interface TechnicalIndicatorsProps {
 
-  selectedStock: { symbol: string; name?: string; price?: number 
+
+
+
+
+
+  selectedStock: { symbol: string; name?: string; price?: number;
+
+
+
+
+
 };
 }
 
 interface IndicatorData {
+
+
+
+
+
 
   rsi: number;
   macd: {
@@ -33,6 +53,11 @@ interface IndicatorData {
     histogram: number;
     trend: string;
   
+
+
+
+
+
 };
   movingAverages: {
     sma20: number;

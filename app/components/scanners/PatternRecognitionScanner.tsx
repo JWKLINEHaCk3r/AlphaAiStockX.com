@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -99,6 +104,11 @@ import { Brain, Target, Zap, BarChart3, Activity, Star, ArrowUp, ArrowDown } fro
 // Type definitions for pattern recognition scanner;
 interface PatternMatch {
 
+
+
+
+
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -120,9 +130,19 @@ interface PatternMatch {
   successRate?: number;
   timeToTarget?: number;
 
+
+
+
+
+
 }
 
 interface SignalData {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -140,15 +160,30 @@ interface SignalData {
   lastOccurrence: string;
   avgDaysToTarget: number;
 
+
+
+
+
+
 }
 
 interface PatternStats {
+
+
+
+
+
 
   [key: string]: {
     detected: number;
     accuracy: number;
     avgReturn: number;
   
+
+
+
+
+
 };
 }
 

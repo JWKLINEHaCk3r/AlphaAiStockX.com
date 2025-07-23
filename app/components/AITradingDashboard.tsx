@@ -1,15 +1,5 @@
 import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.js';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
-import { Card } from '../../components/ui/card.tsx';
+// import { Card } from '../../components/ui/card';
 "use client";
 import { Card } from '../../components/ui/card';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -20,14 +10,29 @@ import { AdvancedAIAutoTrader } from '../services/ai-auto-trader-enhanced';
 
 interface TradingSignal {
 
+
+
+
+
+
   symbol: string;
   action: string;
   confidence: number;
   reasoning?: string[];
 
+
+
+
+
+
 }
 
 interface Trade {
+
+
+
+
+
 
   symbol: string;
   action: 'buy' | 'sell';
@@ -36,13 +41,28 @@ interface Trade {
   time: string;
   reason: string;
 
+
+
+
+
+
 }
 
 interface Portfolio {
 
+
+
+
+
+
   totalValue: number;
   cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number 
+  holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
 }>;
   trades: Trade[];
   totalReturn?: number;
@@ -61,14 +81,29 @@ interface Portfolio {
 
 interface Performance {
 
+
+
+
+
+
   totalReturn: number;
   dailyPnL: number;
   winRate: number;
   sharpeRatio: number;
 
+
+
+
+
+
 }
 
 interface TradingStrategy {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -82,10 +117,20 @@ interface TradingStrategy {
     profitFactor: number;
     avgTrade: number;
   
+
+
+
+
+
 };
 }
 
 interface Analysis {
+
+
+
+
+
 
   signals?: TradingSignal[];
   marketCondition?: string;
@@ -95,6 +140,11 @@ interface Analysis {
     message: string;
     trades?: Trade[];
   
+
+
+
+
+
 };
   recommendations?: string[];
   riskAnalysis?: {
@@ -106,6 +156,11 @@ interface Analysis {
 
 interface DashboardState {
 
+
+
+
+
+
   trader: AdvancedAIAutoTrader | null;
   portfolio: Portfolio | null;
   isTrading: boolean;
@@ -114,17 +169,22 @@ interface DashboardState {
   loading: boolean;
   error: string | null;
 
+
+
+
+
+
 }
 
 export default function AITradingDashboard() {
   const [state, setState] = useState<DashboardState>({
-    trader: null,;
-    portfolio: null,;
-    isTrading: false,;
-    performance: null,;
-    analysis: null,;
-    loading: true,;
-    error: null,;
+    trader: null,
+    portfolio: null,
+    isTrading: false,
+    performance: null,
+    analysis: null,
+    loading: true,
+    error: null
   });
 
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
@@ -136,16 +196,16 @@ export default function AITradingDashboard() {
       const portfolio = trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,;
-        trader,;
-        portfolio,;
-        loading: false,;
+        ...prev,
+        analysis,
+        portfolio,
+        loading: false
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,;
-        error: 'Failed to initialize AI trader',;
-        loading: false,;
+        ...prev,
+        error: 'Failed to initialize AI trader',
+        loading: false
       }));
     }
   }, [riskLevel]);
@@ -164,16 +224,16 @@ export default function AITradingDashboard() {
       const portfolio = state.trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,;
-        analysis,;
-        portfolio,;
-        loading: false,;
+        ...prev,
+        analysis,
+        portfolio,
+        loading: false
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,;
-        error: 'Analysis failed',;
-        loading: false,;
+        ...prev,
+        error: 'Analysis failed',
+        loading: false
       }));
     }
   };
@@ -188,16 +248,16 @@ export default function AITradingDashboard() {
       const portfolio = state.trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,;
-        portfolio,;
-        isTrading: false,;
-        analysis: { ...prev.analysis, lastTradeResult: result },;
+        ...prev,
+        portfolio,
+        isTrading: false,
+        analysis: { ...prev.analysis, lastTradeResult: result }
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,;
-        error: 'Trading execution failed',;
-        isTrading: false,;
+        ...prev,
+        error: 'Trading execution failed',
+        isTrading: false,
       }));
     }
   };
@@ -222,9 +282,10 @@ export default function AITradingDashboard() {
         </div>;
       </div>;
     );
+    // ...existing code...;
   }
 
-  return (;
+return (;
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-black text-white">;
       <div className="container mx-auto px-4 py-8">;
         {/* Header */}
@@ -270,19 +331,16 @@ export default function AITradingDashboard() {
                 <option value="MEDIUM">Medium Risk</option>;
                 <option value="HIGH">High Risk</option>;
               </select>;
-            </div>;
+            {/* <TabsTrigger value="performance">Performance</TabsTrigger> */}
+            {/* <TabsTrigger value="strategies">Strategies</TabsTrigger> */}
+            <div>Performance Tab Placeholder</div>;
+            <div>Strategies Tab Placeholder</div>;
+          </div>;
           </div>;
         </Card>;
-        <Tabs defaultValue="portfolio" className="space-y-6">;
-          <TabsList className="grid w-full grid-cols-5 bg-gray-800">;
-            <TabsTrigger value="portfolio">Portfolio</TabsTrigger>;
-            <TabsTrigger value="analysis">AI Analysis</TabsTrigger>;
-            <TabsTrigger value="trades">Trade History</TabsTrigger>;
-            <TabsTrigger value="performance">Performance</TabsTrigger>;
-            <TabsTrigger value="strategies">Strategies</TabsTrigger>;
-          </TabsList>;
           {/* Portfolio Tab */}
-          <TabsContent value="portfolio">;
+          {/* <TabsContent value="portfolio"> */}
+          <div className="portfolio-tab-placeholder">;
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
               {/* Portfolio Overview */}
               <Card className="p-6 bg-gray-900/50 border-gray-700">;
@@ -306,9 +364,7 @@ export default function AITradingDashboard() {
                         <p className="text-sm text-gray-400">Total Return</p>;
                         <p;
                           className={`text-xl font-semibold ${
-                            (state.portfolio.totalReturn || 0) >= 0;
-                              ? 'text-green-400';
-                              : 'text-red-400';
+                            (state.portfolio.totalReturn || 0) >= 0 ? 'text-green-400' : 'text-red-400';
                           }`}
                         >;
                           {(state.portfolio.totalReturn || 0).toFixed(2)}%;
@@ -321,7 +377,7 @@ export default function AITradingDashboard() {
                             (state.portfolio.dailyPnL || 0) >= 0 ? 'text-green-400' : 'text-red-400';
                           }`}
                         >;
-                          ${(state.portfolio.dailyPnL || 0).toFixed(2)}
+                          {(state.portfolio.dailyPnL || 0).toFixed(2)}
                         </p>;
                       </div>;
                     </div>;
@@ -354,11 +410,12 @@ export default function AITradingDashboard() {
                 ) : (;
                   <p className="text-gray-400">No current holdings</p>;
                 )}
-              </Card>;
-            </div>;
-          </TabsContent>;
+                </Card>;
+              </div>;
+            {/* </TabsContent> */}
           {/* AI Analysis Tab */}
-          <TabsContent value="analysis">;
+          {/* <TabsContent value="analysis"> */}
+          <div className="analysis-tab-placeholder">;
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
               {/* AI Signals */}
               <Card className="p-6 bg-gray-900/50 border-gray-700">;
@@ -379,7 +436,8 @@ export default function AITradingDashboard() {
                         </div>;
                         <div className="text-sm space-y-1">;
                           <p>Confidence: {(signal.confidence * 100).toFixed(1)}%</p>;
-                          <Progress value={signal.confidence * 100} className="h-2" />;
+                          {/* <Progress value={signal.confidence * 100} className="h-2" /> */}
+                          <div className="progress-placeholder">Progress Bar</div>;
                           <p className="text-gray-400">;
                             {signal.reasoning?.slice(0, 2).join(', ')}
                           </p>;
@@ -410,9 +468,11 @@ export default function AITradingDashboard() {
                 )}
               </Card>;
             </div>;
-          </TabsContent>;
+          {/* </TabsContent> */}
+          </div>;
           {/* Trade History Tab */}
-          <TabsContent value="trades">;
+          {/* <TabsContent value="trades"> */}
+          <div className="trades-tab-placeholder">;
             <Card className="p-6 bg-gray-900/50 border-gray-700">;
               <h3 className="text-xl font-semibold mb-4">Recent Trades</h3>;
               {state.portfolio?.trades?.length ? (;
@@ -461,9 +521,10 @@ export default function AITradingDashboard() {
                 <p className="text-gray-400">No trades executed yet</p>;
               )}
             </Card>;
-          </TabsContent>;
+          {/* </TabsContent> */}
           {/* Performance Tab */}
-          <TabsContent value="performance">;
+          {/* <TabsContent value="performance"> */}
+          <div className="performance-tab-placeholder">;
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
               <Card className="p-6 bg-gray-900/50 border-gray-700">;
                 <h3 className="text-xl font-semibold mb-4">Performance Metrics</h3>;
@@ -507,10 +568,11 @@ export default function AITradingDashboard() {
                     <div>;
                       <p className="text-sm text-gray-400">Risk Score</p>;
                       <div className="flex items-center gap-2">;
-                        <Progress;
+                        {/* <Progress;
                           value={state.analysis.riskAnalysis.riskScore}
                           className="flex-1 h-3";
-                        />;
+                        /> */}
+                        <div className="progress-placeholder">Progress Bar</div>;
                         <span className="text-sm">{state.analysis.riskAnalysis.riskScore}/100</span>;
                       </div>;
                     </div>;
@@ -528,15 +590,17 @@ export default function AITradingDashboard() {
                 )}
               </Card>;
             </div>;
-          </TabsContent>;
+          {/* </TabsContent> */}
+          </div>;
           {/* Strategies Tab */}
-          <TabsContent value="strategies">;
+          {/* <TabsContent value="strategies"> */}
+          <div className="strategies-tab-placeholder">;
             <Card className="p-6 bg-gray-900/50 border-gray-700">;
               <h3 className="text-xl font-semibold mb-4">Active AI Strategies</h3>;
               {state.trader && (;
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">;
-                  {state.trader.getStrategies().map((strategy: TradingStrategy) => (;
-                    <div key={strategy.id} className="p-4 bg-gray-800 rounded">;
+                  {/* {state.trader.getStrategies().map((strategy: TradingStrategy) => ( */}
+                    {/* <div key={strategy.id} className="p-4 bg-gray-800 rounded">;
                       <div className="flex justify-between items-start mb-2">;
                         <h4 className="font-semibold">{strategy.name}</h4>;
                         <span;
@@ -558,12 +622,12 @@ export default function AITradingDashboard() {
                           <p>{strategy.performance?.winRate || 0}%</p>;
                         </div>;
                       </div>;
-                    </div>;
+                    </div> */}
                   ))}
                 </div>;
               )}
             </Card>;
-          </TabsContent>;
+          {/* </TabsContent> */}
         </Tabs>;
       </div>;
     </div>;

@@ -5,7 +5,17 @@ import React, { useState, useEffect } from 'react';
 
 interface BuildValidatorProps {
 
+
+
+
+
+
   onValidationComplete?: (success: boolean) => void;
+
+
+
+
+
 
 }
 

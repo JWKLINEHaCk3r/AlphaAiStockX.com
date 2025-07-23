@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -115,6 +120,11 @@ import {
 // Type definitions for dashboard data;
 interface Processor {
 
+
+
+
+
+
   name: string;
   qubits: number;
   coherenceTime: string;
@@ -123,9 +133,19 @@ interface Processor {
   gateSpeed: string;
   type: string;
 
+
+
+
+
+
 }
 
 interface Agent {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -136,6 +156,11 @@ interface Agent {
     maxDrawdown: number;
     winRate: number;
   
+
+
+
+
+
 };
   trades: number;
   profit: number;
@@ -145,14 +170,29 @@ interface Agent {
 
 interface Capability {
 
+
+
+
+
+
   name: string;
   accuracy: number;
   speed: string;
   description: string;
 
+
+
+
+
+
 }
 
 interface Result {
+
+
+
+
+
 
   type: string;
   accuracy: number;
@@ -163,9 +203,19 @@ interface Result {
   sharpeRatio: number;
   diversificationScore: number;
 
+
+
+
+
+
 }
 
 interface Algorithm {
+
+
+
+
+
 
   name: string;
   type: string;
@@ -175,9 +225,19 @@ interface Algorithm {
   ordersFilled: number;
   currentPnl: number;
 
+
+
+
+
+
 }
 
 interface Strategy {
+
+
+
+
+
 
   name: string;
   type: string;
@@ -187,9 +247,19 @@ interface Strategy {
   sharpeRatio?: number;
   capacity?: number;
 
+
+
+
+
+
 }
 
 interface DataSource {
+
+
+
+
+
 
   name: string;
   type: string;
@@ -197,9 +267,19 @@ interface DataSource {
   latency: string;
   accuracy?: number;
 
+
+
+
+
+
 }
 
 interface Model {
+
+
+
+
+
 
   name: string;
   type: string;
@@ -211,10 +291,20 @@ interface Model {
     avgReturn?: number;
     sharpeRatio?: number;
   
+
+
+
+
+
 };
 }
 
 interface Environment {
+
+
+
+
+
 
   name: string;
   type: string;
@@ -225,42 +315,97 @@ interface Environment {
   lookbackWindow?: number;
   transactionCosts?: number;
 
+
+
+
+
+
 }
 
 interface QuantumData {
+
+
+
+
+
 
   processors?: Processor[];
   capabilities?: Capability[];
   results?: Result[];
 
+
+
+
+
+
 }
 
 interface HFTData {
+
+
+
+
+
 
   stats?: any;
   algorithms?: Algorithm[];
   strategies?: Strategy[];
 
+
+
+
+
+
 }
 
 interface AltData {
 
+
+
+
+
+
   sources?: DataSource[];
   sampleData?: any;
+
+
+
+
+
 
 }
 
 interface RLData {
 
+
+
+
+
+
   agents?: Agent[];
   models?: Model[];
   environments?: Environment[];
+
+
+
+
+
 
 }
 
 interface UltimateAIDashboardProps {
 
+
+
+
+
+
   className?: string;
+
+
+
+
+
 
 }
 

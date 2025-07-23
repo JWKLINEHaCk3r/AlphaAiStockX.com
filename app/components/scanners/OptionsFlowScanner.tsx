@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -41,6 +46,11 @@ import { Activity, AlertTriangle, Zap, BarChart3 } from 'lucide-react';
 // Type definitions;
 interface OptionsFlow {
 
+
+
+
+
+
   symbol: string;
   type: 'CALL' | 'PUT';
   strike: number;
@@ -53,9 +63,19 @@ interface OptionsFlow {
   timestamp: Date;
   notionalValue: number;
 
+
+
+
+
+
 }
 
 interface UnusualActivity {
+
+
+
+
+
 
   symbol: string;
   type: string;
@@ -69,9 +89,19 @@ interface UnusualActivity {
   timeDetected?: string;
   confidence?: number;
 
+
+
+
+
+
 }
 
 interface DarkPoolData {
+
+
+
+
+
 
   symbol: string;
   volume: number;
@@ -83,6 +113,11 @@ interface DarkPoolData {
   price?: number;
   sentiment?: string;
   timeframe?: string;
+
+
+
+
+
 
 }
 

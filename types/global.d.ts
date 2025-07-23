@@ -3,8 +3,18 @@ declare global {
     interface IntrinsicElements {
 
 
+
+
+
+
+
       [elemName: string]: any;
     
+
+
+
+
+
 
 }
   }
@@ -14,15 +24,30 @@ declare global {
 export interface MarketStock {
 
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
 
 
+
+
+
+
+
 }
 
 export interface AIBeing {
+
+
+
+
+
 
 
   id: number;
@@ -33,9 +58,19 @@ export interface AIBeing {
   trades: number;
 
 
+
+
+
+
+
 }
 
 export interface Trade {
+
+
+
+
+
 
 
   id: string;
@@ -47,9 +82,19 @@ export interface Trade {
   profit?: number;
 
 
+
+
+
+
+
 }
 
 export interface Portfolio {
+
+
+
+
+
 
 
   value: number;
@@ -57,9 +102,19 @@ export interface Portfolio {
   positions: Position[];
 
 
+
+
+
+
+
 }
 
 export interface Position {
+
+
+
+
+
 
 
   symbol: string;
@@ -67,6 +122,11 @@ export interface Position {
   avgPrice: number;
   currentPrice: number;
   unrealizedPL: number;
+
+
+
+
+
 
 
 }

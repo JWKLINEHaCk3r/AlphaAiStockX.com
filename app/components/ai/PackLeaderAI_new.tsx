@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -42,6 +47,11 @@ import { aiBrainService } from '../../services/ai-brain-service';
 // Type definitions;
 interface Message {
 
+
+
+
+
+
   id: number;
   type: 'user' | 'ai';
   content: string;
@@ -49,6 +59,11 @@ interface Message {
   mood?: string;
   priority?: string;
   confidence?: number;
+
+
+
+
+
 
 }
 
@@ -58,9 +73,19 @@ interface Message {
 declare global {
   interface Window {
 
+
+
+
+
+
     SpeechRecognition: unknown;
     webkitSpeechRecognition: unknown;
   
+
+
+
+
+
 }
 }
 

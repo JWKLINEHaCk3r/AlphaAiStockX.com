@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -88,8 +93,18 @@ import { X, Check, Star, Zap, Crown, Building } from 'lucide-react';
 
 interface SubscriptionPlansProps {
 
+
+
+
+
+
   currentPlan: string;
   onSelectPlan: (plan: string) => void;
+
+
+
+
+
 
 }
 

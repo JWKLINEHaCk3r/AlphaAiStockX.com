@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -54,13 +59,28 @@ import { TradingSignalData } from '../../types/trading-types';
 // Type definitions;
 interface User {
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
 
+
+
+
+
+
 }
 
 interface Trade {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -72,9 +92,19 @@ interface Trade {
   status: 'completed' | 'pending' | 'failed';
   type?: 'manual' | 'auto'; // Added type property;
 
+
+
+
+
+
 }
 
 interface MarketData {
+
+
+
+
+
 
   [symbol: string]: {
     price: number;
@@ -85,10 +115,20 @@ interface MarketData {
     ask: number;
     timestamp: Date;
   
+
+
+
+
+
 };
 }
 
 interface AISignal {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -99,9 +139,19 @@ interface AISignal {
   reason: string;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 interface PremiumFeatures {
+
+
+
+
+
 
   maxTrades: number | 'unlimited';
   executionSpeed: string;
@@ -110,12 +160,27 @@ interface PremiumFeatures {
   advancedOrders: boolean;
   realTimeData: boolean;
 
+
+
+
+
+
 }
 
 interface UltraFastTradingEngineProps {
 
+
+
+
+
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
+
+
+
 
 }
 

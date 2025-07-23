@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -31,47 +36,102 @@ import React, { useState, useEffect } from 'react';
 // Types;
 interface ValueAtRisk {
 
+
+
+
+
+
   oneDay: number;
   oneWeek: number;
   oneMonth: number;
+
+
+
+
+
 
 }
 
 interface StressTest {
 
+
+
+
+
+
   scenario: string;
   portfolioImpact: number;
   probability: number;
 
+
+
+
+
+
 }
 
 interface CorrelationRisk {
+
+
+
+
+
 
   asset1: string;
   asset2: string;
   correlation: number;
   risk: 'High' | 'Medium' | 'Low';
 
+
+
+
+
+
 }
 
 interface RiskFactor {
+
+
+
+
+
 
   factor: string;
   score: number;
   description: string;
 
+
+
+
+
+
 }
 
 interface HedgingStrategy {
+
+
+
+
+
 
   strategy: string;
   cost: string;
   protection: string;
   effectiveness: number;
 
+
+
+
+
+
 }
 
 interface RiskMetrics {
+
+
+
+
+
 
   overallRisk: number;
   riskLevel: string;
@@ -81,34 +141,74 @@ interface RiskMetrics {
   riskFactors: RiskFactor[];
   hedgingStrategies: HedgingStrategy[];
 
+
+
+
+
+
 }
 
 interface ValueAtRisk {
+
+
+
+
+
 
   oneDay: number;
   oneWeek: number;
   oneMonth: number;
 
+
+
+
+
+
 }
 
 interface StressTest {
+
+
+
+
+
 
   scenario: string;
   portfolioImpact: number;
   probability: number;
 
+
+
+
+
+
 }
 
 interface CorrelationRisk {
+
+
+
+
+
 
   asset1: string;
   asset2: string;
   correlation: number;
   risk: string;
 
+
+
+
+
+
 }
 
 interface RiskFactor {
+
+
+
+
+
 
   factor: string;
   level: string;
@@ -116,9 +216,19 @@ interface RiskFactor {
   description: string;
   score: number;
 
+
+
+
+
+
 }
 
 interface HedgingStrategy {
+
+
+
+
+
 
   strategy: string;
   effectiveness: number;
@@ -126,9 +236,19 @@ interface HedgingStrategy {
   description: string;
   protection: string;
 
+
+
+
+
+
 }
 
 interface RiskMetrics {
+
+
+
+
+
 
   overallRisk: number;
   riskLevel: string;
@@ -138,6 +258,11 @@ interface RiskMetrics {
   riskFactors: RiskFactor[];
   recommendations: string[];
   hedgingStrategies: HedgingStrategy[];
+
+
+
+
+
 
 }
 

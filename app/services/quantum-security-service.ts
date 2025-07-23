@@ -2,6 +2,11 @@ import { quantumCrypto, type QuantumSecurityConfig } from '@/app/lib/quantum-cry
 
 export interface SecurityMetrics {
 
+
+
+
+
+
   securityScore: number;
   quantumThreatLevel: string;
   protectedAssets: number;
@@ -9,6 +14,11 @@ export interface SecurityMetrics {
   lastSecurityAudit: Date;
   vulnerabilities: string[];
   recommendations: string[];
+
+
+
+
+
 
 }
 

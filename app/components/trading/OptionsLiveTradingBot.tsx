@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -50,6 +55,11 @@ import {
 
 interface OptionsLeg {
 
+
+
+
+
+
   symbol: string;
   type: string;
   strike: number;
@@ -70,9 +80,19 @@ interface OptionsLeg {
   vega: number;
   stockPrice?: number;
 
+
+
+
+
+
 }
 
 interface OptionsTrade {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -88,17 +108,37 @@ interface OptionsTrade {
   breakeven: number;
   exitTime?: Date;
 
+
+
+
+
+
 }
 
 interface OptionsStrategy {
+
+
+
+
+
 
   id: string;
   name: string;
   description: string;
 
+
+
+
+
+
 }
 
 interface OptionsChainItem {
+
+
+
+
+
 
   symbol: string;
   expiry: string;
@@ -116,6 +156,11 @@ interface OptionsChainItem {
   theta: number;
   vega: number;
   stockPrice?: number;
+
+
+
+
+
 
 }
 

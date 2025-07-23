@@ -5,7 +5,17 @@ import { getAccount, getPositions } from '../../services/alpaca-service';
 
 interface Position {
 
+
+
+
+
+
   symbol: string;
+
+
+
+
+
 
 }
 

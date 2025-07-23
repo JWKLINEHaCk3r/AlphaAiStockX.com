@@ -16,14 +16,34 @@ import { ArrowUp, ArrowDown, AlertTriangle, CheckCircle, XCircle, Loader2 } from
 
 interface StockData {
 
+
+
+
+
+
   time: string;
   price: number;
+
+
+
+
+
 
 }
 
 interface AlphaWolfBotProps {
 
+
+
+
+
+
   stockSymbol: string;
+
+
+
+
+
 
 }
 

@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -71,6 +76,11 @@ import React, { useState, useEffect } from 'react';
 // Types;
 interface EarningData {
 
+
+
+
+
+
   symbol: string;
   name: string;
   date: string;
@@ -85,9 +95,19 @@ interface EarningData {
   optionsActivity: 'high' | 'medium' | 'low';
   analystRating: 'buy' | 'hold' | 'sell';
 
+
+
+
+
+
 }
 
 interface EarningsAnalysisData {
+
+
+
+
+
 
   symbol: string;
   metric: string;
@@ -96,9 +116,19 @@ interface EarningsAnalysisData {
   confidence: number;
   historicalAccuracy: number;
 
+
+
+
+
+
 }
 
 interface SurprisePrediction {
+
+
+
+
+
 
   symbol: string;
   type: string;
@@ -107,15 +137,30 @@ interface SurprisePrediction {
   reasoning: string;
   riskLevel: 'High' | 'Medium' | 'Low';
 
+
+
+
+
+
 }
 
 // Add interface for company data;
 interface CompanyData {
 
+
+
+
+
+
   symbol: string;
   name: string;
   date: string;
   time: string;
+
+
+
+
+
 
 }
 

@@ -3,6 +3,11 @@ import React from 'react';
 export interface User {
 
 
+
+
+
+
+
   id: string;
   email: string;
   username: string;
@@ -14,11 +19,21 @@ export interface User {
   lastLogin?: Date;
 
 
+
+
+
+
+
 }
 
 export type SubscriptionTier = 'free' | 'pro' | 'enterprise';
 
 export interface StockData {
+
+
+
+
+
 
 
   symbol: string;
@@ -34,9 +49,19 @@ export interface StockData {
   lastUpdated: Date;
 
 
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
 
 
   id: string;
@@ -51,9 +76,19 @@ export interface AISignal {
   aiModel: string;
 
 
+
+
+
+
+
 }
 
 export interface Portfolio {
+
+
+
+
+
 
 
   id: string;
@@ -70,9 +105,19 @@ export interface Portfolio {
   updatedAt: Date;
 
 
+
+
+
+
+
 }
 
 export interface Position {
+
+
+
+
+
 
 
   id: string;
@@ -88,9 +133,19 @@ export interface Position {
   openedAt: Date;
 
 
+
+
+
+
+
 }
 
 export interface Trade {
+
+
+
+
+
 
 
   id: string;
@@ -108,9 +163,19 @@ export interface Trade {
   createdAt: Date;
 
 
+
+
+
+
+
 }
 
 export interface AIAnalysis {
+
+
+
+
+
 
 
   symbol: string;
@@ -126,6 +191,11 @@ export interface AIAnalysis {
       lower: number;
     
 
+
+
+
+
+
 };
     support: number;
     resistance: number;
@@ -138,6 +208,11 @@ export interface AIAnalysis {
 }
 
 export interface MarketData {
+
+
+
+
+
 
 
   symbol: string;
@@ -153,9 +228,19 @@ export interface MarketData {
   timestamp: Date;
 
 
+
+
+
+
+
 }
 
 export interface ChartData {
+
+
+
+
+
 
 
   timestamp: Date;
@@ -166,9 +251,19 @@ export interface ChartData {
   volume: number;
 
 
+
+
+
+
+
 }
 
 export interface NewsArticle {
+
+
+
+
+
 
 
   id: string;
@@ -182,9 +277,19 @@ export interface NewsArticle {
   aiSummary?: string;
 
 
+
+
+
+
+
 }
 
 export interface WatchlistItem {
+
+
+
+
+
 
 
   id: string;
@@ -195,9 +300,19 @@ export interface WatchlistItem {
   alertRules?: AlertRule[];
 
 
+
+
+
+
+
 }
 
 export interface AlertRule {
+
+
+
+
+
 
 
   id: string;
@@ -205,6 +320,11 @@ export interface AlertRule {
   value: number;
   isActive: boolean;
   createdAt: Date;
+
+
+
+
+
 
 
 }
@@ -232,8 +352,18 @@ export interface PaginatedResponse<T> extends APIResponse<T[]> {
 export interface BaseComponentProps {
 
 
+
+
+
+
+
   className?: string;
   children?: React.ReactNode;
+
+
+
+
+
 
 
 }
@@ -265,6 +395,11 @@ export type MarketStatus = 'open' | 'closed' | 'pre_market' | 'after_hours';
 export interface AIModel {
 
 
+
+
+
+
+
   id: string;
   name: string;
   version: string;
@@ -274,9 +409,19 @@ export interface AIModel {
   isActive: boolean;
 
 
+
+
+
+
+
 }
 
 export interface AIAgentStatus {
+
+
+
+
+
 
 
   id: string;
@@ -285,6 +430,11 @@ export interface AIAgentStatus {
   lastUpdate: Date;
   tasksCompleted: number;
   accuracy: number;
+
+
+
+
+
 
 
 }
@@ -315,10 +465,20 @@ export class ValidationError extends Error {
 export interface SystemEvent {
 
 
+
+
+
+
+
   type: 'trade_executed' | 'signal_generated' | 'alert_triggered' | 'market_status_change';
   data: any;
   timestamp: Date;
   userId?: string;
+
+
+
+
+
 
 
 }
@@ -327,9 +487,19 @@ export interface SystemEvent {
 export interface WSMessage {
 
 
+
+
+
+
+
   type: string;
   data: any;
   timestamp: Date;
+
+
+
+
+
 
 
 }
@@ -348,6 +518,11 @@ export interface WSTradeUpdate extends WSMessage {
 export interface AppConfig {
 
 
+
+
+
+
+
   apiUrl: string;
   wsUrl: string;
   environment: 'development' | 'staging' | 'production';
@@ -358,11 +533,21 @@ export interface AppConfig {
     aiTrading: boolean;
   
 
+
+
+
+
+
 };
 }
 
 // Theme types;
 export interface ThemeConfig {
+
+
+
+
+
 
 
   colors: {
@@ -374,6 +559,11 @@ export interface ThemeConfig {
     text: string;
     textSecondary: string;
   
+
+
+
+
+
 
 };
   fonts: {

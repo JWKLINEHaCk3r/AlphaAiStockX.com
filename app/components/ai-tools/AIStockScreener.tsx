@@ -5,10 +5,20 @@ import { useState } from 'react';
 
 interface StockResult {
 
+
+
+
+
+
   symbol: string;
   name: string;
   score: number;
   aiNote: string;
+
+
+
+
+
 
 }
 

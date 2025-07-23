@@ -4,6 +4,11 @@ import { OpenAI } from 'openai';
 
 interface UserProfile {
 
+
+
+
+
+
   id: string;
   riskTolerance: 'conservative' | 'moderate' | 'aggressive';
   investmentGoals: string[];
@@ -12,9 +17,19 @@ interface UserProfile {
   portfolioValue: number;
   preferredSectors: string[];
 
+
+
+
+
+
 }
 
 interface ChatMessage {
+
+
+
+
+
 
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -25,10 +40,20 @@ interface ChatMessage {
     recommendations?: TradeRecommendation[];
     analysis?: unknown;
   
+
+
+
+
+
 };
 }
 
 interface TradeRecommendation {
+
+
+
+
+
 
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
@@ -40,9 +65,19 @@ interface TradeRecommendation {
   stopLoss?: number;
   timeframe: string;
 
+
+
+
+
+
 }
 
 interface PortfolioSimulation {
+
+
+
+
+
 
   currentValue: number;
   projectedValue: number;
@@ -50,6 +85,11 @@ interface PortfolioSimulation {
   risk: number;
   diversificationScore: number;
   recommendations: TradeRecommendation[];
+
+
+
+
+
 
 }
 

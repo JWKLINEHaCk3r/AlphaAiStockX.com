@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -19,19 +24,44 @@ import { Brain, TrendingUp, TrendingDown, Target, AlertTriangle, Clock } from 'l
 
 interface AIInsightsProps {
 
+
+
+
+
+
   selectedStock: string;
+
+
+
+
+
 
 }
 
 interface Sentiment {
 
+
+
+
+
+
   bullish: number;
   bearish: number;
   neutral: number;
 
+
+
+
+
+
 }
 
 interface TechnicalAnalysis {
+
+
+
+
+
 
   rsi: number;
   macd: string;
@@ -40,35 +70,75 @@ interface TechnicalAnalysis {
   resistance: number;
   bollinger?: string;
 
+
+
+
+
+
 }
 
 interface FundamentalAnalysis {
+
+
+
+
+
 
   pe: number;
   roe: number;
   revenueGrowth: number;
 
+
+
+
+
+
 }
 
 interface RiskFactor {
+
+
+
+
+
 
   factor: string;
   severity: string;
   level: string;
   impact: number;
 
+
+
+
+
+
 }
 
 interface MarketCatalyst {
+
+
+
+
+
 
   event: string;
   impact: string;
   probability: number;
   date: string;
 
+
+
+
+
+
 }
 
 interface Prediction {
+
+
+
+
+
 
   timeframe: string;
   direction: string;
@@ -76,9 +146,19 @@ interface Prediction {
   target: number;
   priceTarget: number;
 
+
+
+
+
+
 }
 
 interface AIInsightsData {
+
+
+
+
+
 
   overallScore: number;
   sentiment: Sentiment;
@@ -87,6 +167,11 @@ interface AIInsightsData {
   aiPredictions: Prediction[];
   riskFactors: RiskFactor[];
   marketCatalysts: MarketCatalyst[];
+
+
+
+
+
 
 }
 

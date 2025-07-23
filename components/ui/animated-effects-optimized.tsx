@@ -6,6 +6,11 @@ import { cn } from '@/lib/utils';
 
 interface FloatingElement {
 
+
+
+
+
+
   id: number;
   x: number;
   y: number;
@@ -14,21 +19,46 @@ interface FloatingElement {
   color: string;
   direction: number;
 
+
+
+
+
+
 }
 
 interface MatrixStream {
+
+
+
+
+
 
   id: number;
   characters: string[];
   positions: number[];
   column: number;
 
+
+
+
+
+
 }
 
 interface Point {
 
+
+
+
+
+
   x: number;
   y: number;
+
+
+
+
+
 
 }
 

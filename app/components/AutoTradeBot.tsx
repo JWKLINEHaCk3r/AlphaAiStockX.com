@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -59,6 +64,11 @@ import PerformanceMetrics from './PerformanceMetrics';
 
 interface TradingStrategy {
 
+
+
+
+
+
   id: number;
   name: string;
   description: string;
@@ -70,9 +80,19 @@ interface TradingStrategy {
   allocation: number;
   status: string;
 
+
+
+
+
+
 }
 
 interface RecentTrade {
+
+
+
+
+
 
   id: number; // Changed from string to number to match PerformanceMetrics Trade interface;
   symbol: string;
@@ -84,6 +104,11 @@ interface RecentTrade {
   strategy: string;
   status?: string;
   type: string;
+
+
+
+
+
 
 }
 

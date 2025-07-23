@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -104,6 +109,11 @@ import {
 
 interface AIModel {
 
+
+
+
+
+
   id: string;
   name: string;
   description: string;
@@ -121,9 +131,19 @@ interface AIModel {
   subscribers: number;
   rating: number;
 
+
+
+
+
+
 }
 
 interface BacktestResult {
+
+
+
+
+
 
   totalReturn: number;
   sharpeRatio: number;
@@ -135,9 +155,19 @@ interface BacktestResult {
   alpha: number;
   beta: number;
 
+
+
+
+
+
 }
 
 interface TrainingDataConfig {
+
+
+
+
+
 
   symbols: string[];
   timeframe: string;
@@ -147,9 +177,19 @@ interface TrainingDataConfig {
   lookbackPeriod: number;
   predictionHorizon: number;
 
+
+
+
+
+
 }
 
 interface Hyperparameters {
+
+
+
+
+
 
   learningRate: number;
   batchSize: number;
@@ -158,18 +198,38 @@ interface Hyperparameters {
   dropout: number;
   regularization: number;
 
+
+
+
+
+
 }
 
 interface User {
+
+
+
+
+
 
   id: string;
   username: string;
   avatar: string;
   tier: string;
 
+
+
+
+
+
 }
 
 interface TrainingJob {
+
+
+
+
+
 
   id: string;
   modelId: string;
@@ -181,6 +241,11 @@ interface TrainingJob {
   accuracy: number;
   estimatedTimeRemaining: number;
   startedAt: Date;
+
+
+
+
+
 
 }
 

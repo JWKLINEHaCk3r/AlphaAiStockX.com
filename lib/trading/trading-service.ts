@@ -11,15 +11,21 @@ import { WebSocketService } from './websocket-service';
 export interface TradingServiceConfig {
 
 
+
+
   userId: string;
   portfolioId: string;
   alpacaClient: AlpacaClient;
   wsService?: WebSocketService;
 
 
+
+
 }
 
 export interface OrderRequest {
+
+
 
 
   symbol: string;
@@ -39,9 +45,16 @@ export interface OrderRequest {
   stopLossLimitPrice?: number;
 
 
+
+
 }
 
 export interface PositionSummary {
+
+
+
+
+  
 
 
   symbol: string;
@@ -57,9 +70,19 @@ export interface PositionSummary {
   changeTodayPercent?: number;
 
 
+
+
+
+
+
 }
 
 export interface PortfolioSummary {
+
+
+
+
+  
 
 
   totalValue: number;
@@ -75,9 +98,19 @@ export interface PortfolioSummary {
   shortMarketValue: number;
 
 
+
+
+
+
+
 }
 
 export interface OrderSummary {
+
+
+
+
+  
 
 
   id: string;
@@ -98,6 +131,11 @@ export interface OrderSummary {
   filledAt?: Date;
   canceledAt?: Date;
   expiredAt?: Date;
+
+
+
+
+
 
 
 }
@@ -234,10 +272,10 @@ export class TradingService {
 
   async getOrders(;
     params: {
-      status?: 'open' | 'closed' | 'all';
-      limit?: number;
-      after?: string;
-      until?: string;
+      status?: 'open' | 'closed' | 'all',;
+      limit?: number,;
+      after?: string,;
+      until?: string,;
     } = {}
   ): Promise<OrderSummary[]> {
     try {

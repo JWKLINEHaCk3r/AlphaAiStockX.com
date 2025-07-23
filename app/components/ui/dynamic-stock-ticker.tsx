@@ -5,19 +5,39 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface StockData {
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
 
+
+
+
+
+
 }
 
 interface DynamicStockTickerProps {
+
+
+
+
+
 
   initialStocks?: StockData[];
   animationDurationSeconds?: number;
   className?: string;
   'data-testid'?: string;
+
+
+
+
+
 
 }
 

@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -124,6 +129,11 @@ import {
 // Advanced Interfaces for Next-Gen Trading Platform;
 interface User {
 
+
+
+
+
+
   id: string;
   username: string;
   email: string;
@@ -148,9 +158,19 @@ interface User {
   joinDate: Date;
   lastActive: Date;
 
+
+
+
+
+
 }
 
 interface TradingSignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -173,9 +193,19 @@ interface TradingSignal {
   price: number;
   currentPrice: number;
 
+
+
+
+
+
 }
 
 interface SocialPost {
+
+
+
+
+
 
   id: string;
   author: User;
@@ -192,10 +222,20 @@ interface SocialPost {
     targetPrice: number;
     reasoning: string;
   
+
+
+
+
+
 };
 }
 
 interface Portfolio {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -208,9 +248,19 @@ interface Portfolio {
   pnl: number;
   pnlPercent: number;
 
+
+
+
+
+
 }
 
 interface Position {
+
+
+
+
+
 
   symbol: string;
   quantity: number;
@@ -220,9 +270,19 @@ interface Position {
   pnlPercent: number;
   allocation: number;
 
+
+
+
+
+
 }
 
 interface AIModel {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -234,11 +294,26 @@ interface AIModel {
   subscribers: number;
   price: number;
 
+
+
+
+
+
 }
 
 interface NextGenPlatformProps {
 
+
+
+
+
+
   initialUser?: User;
+
+
+
+
+
 
 }
 

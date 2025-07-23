@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -85,6 +90,11 @@ import {
 
 interface VisionModel {
 
+
+
+
+
+
   id: number;
   name: string;
   type: string;
@@ -94,9 +104,19 @@ interface VisionModel {
   confidence: number;
   processing: string;
 
+
+
+
+
+
 }
 
 interface ChartPattern {
+
+
+
+
+
 
   id: number;
   pattern: string;
@@ -107,6 +127,11 @@ interface ChartPattern {
     width: number;
     height: number;
   
+
+
+
+
+
 };
   direction: string;
   target: number;
@@ -116,6 +141,11 @@ interface ChartPattern {
 
 interface AnalysisResult {
 
+
+
+
+
+
   id: number;
   type: string;
   value?: number;
@@ -124,7 +154,12 @@ interface AnalysisResult {
   confidence: number;
   color: string;
   slope?: number | string;
-  points?: Array<{ x: number; y: number 
+  points?: Array<{ x: number; y: number;
+
+
+
+
+
 }> | number;
   location?: string;
   magnitude?: number;

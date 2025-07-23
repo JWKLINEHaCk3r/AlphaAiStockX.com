@@ -7,8 +7,18 @@ import { TradingProvider } from '@/app/contexts/TradingContext';
 
 interface ProvidersProps {
 
+
+
+
+
+
   children: React.ReactNode;
   session?: any;
+
+
+
+
+
 
 }
 

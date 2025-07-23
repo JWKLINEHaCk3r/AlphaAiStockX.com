@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -21,16 +26,31 @@ import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'luc
 
 interface PortfolioStock {
 
+
+
+
+
+
   symbol: string;
   weight: number;
   currentPrice: number;
   expectedReturn: number;
   risk: number;
 
+
+
+
+
+
 }
 
 
 interface OptimizationResult {
+
+
+
+
+
 
   expectedReturn: number;
   volatility: number;
@@ -45,6 +65,11 @@ interface OptimizationResult {
     reason: string;
     impact: string;
   
+
+
+
+
+
 }>;
   allocations: Array<{
     symbol: string;

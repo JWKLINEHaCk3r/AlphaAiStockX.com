@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -42,12 +47,27 @@ import {
 
 interface MembershipTiersProps {
 
+
+
+
+
+
   currentTier: string;
   onUpgrade: (tierId: string) => void;
+
+
+
+
+
 
 }
 
 interface TierFeatures {
+
+
+
+
+
 
   trades: string;
   executionSpeed: string;
@@ -62,16 +82,31 @@ interface TierFeatures {
   backtesting: boolean | string;
   apiAccess: boolean | string;
 
+
+
+
+
+
 }
 
 interface Tier {
+
+
+
+
+
 
   id: string;
   name: string;
   description: string;
   monthlyPrice: number;
   yearlyPrice: number;
-  icon: React.ComponentType<{ className?: string 
+  icon: React.ComponentType<{ className?: string;
+
+
+
+
+
 }>;
   color: string;
   popular: boolean;

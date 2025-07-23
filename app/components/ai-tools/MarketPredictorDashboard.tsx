@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -21,6 +26,11 @@ import { Target, TrendingUp, TrendingDown, Eye, Camera, Brain, Zap, RefreshCw, U
 
 interface PatternMatch {
 
+
+
+
+
+
   type: string;
   confidence: number;
   description: string;
@@ -28,9 +38,19 @@ interface PatternMatch {
   bullishness: number;
   historicalAccuracy: number;
 
+
+
+
+
+
 }
 
 interface PredictionResult {
+
+
+
+
+
 
   symbol: string;
   currentPrice: number;
@@ -47,6 +67,11 @@ interface PredictionResult {
     support: number;
     resistance: number;
   
+
+
+
+
+
 };
   aiInsights: string[];
   recommendation: 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';

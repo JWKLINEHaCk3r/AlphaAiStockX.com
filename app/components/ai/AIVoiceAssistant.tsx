@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -73,43 +78,93 @@ import { Mic, MicOff, Volume2, VolumeX, Brain, MessageCircle, Zap, Settings } fr
 
 interface ConversationItem {
 
+
+
+
+
+
   id: number;
   role: string;
   message: string;
   timestamp: Date;
+
+
+
+
+
 
 }
 
 declare global {
   interface Window {
 
+
+
+
+
+
     SpeechRecognition: any;
     webkitSpeechRecognition: any;
   
+
+
+
+
+
 }
 }
 
 interface SpeechRecognitionAlternative {
 
+
+
+
+
+
   transcript: string;
   confidence: number;
+
+
+
+
+
 
 }
 
 interface SpeechRecognitionResult {
+
+
+
+
+
 
   readonly length: number;
   item(index: number): SpeechRecognitionAlternative;
   [index: number]: SpeechRecognitionAlternative;
   isFinal: boolean;
 
+
+
+
+
+
 }
 
 interface SpeechRecognitionResultList {
 
+
+
+
+
+
   readonly length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
+
+
+
+
+
 
 }
 

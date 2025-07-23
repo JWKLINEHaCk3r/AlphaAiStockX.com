@@ -16,20 +16,21 @@ export async function GET(request: NextRequest) {
         const allIPOs = await ipoRadar.getAllIPOs();
 
         return NextResponse.json({
-          success: true,;
-          data: allIPOs,;
-          count: allIPOs.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: topRated,
+          count: topRated.length,
+          minScore: scoreThreshold,
+          timestamp: new Date().toISOString()
         });
 
       case 'upcoming':;
         const upcomingIPOs = await ipoRadar.getUpcomingIPOs();
 
         return NextResponse.json({
-          success: true,;
-          data: upcomingIPOs,;
-          count: upcomingIPOs.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: opportunities,
+          count: opportunities.length,
+          timestamp: new Date().toISOString()
         });
 
       case 'analyze':;
@@ -40,9 +41,9 @@ export async function GET(request: NextRequest) {
         const analysis = await ipoRadar.analyzeIPO(ipoId);
 
         return NextResponse.json({
-          success: true,;
-          data: analysis,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: analysis,
+          timestamp: new Date().toISOString()
         });
 
       case 'top_rated':;
@@ -50,38 +51,32 @@ export async function GET(request: NextRequest) {
         const topRated = await ipoRadar.getIPOsByScore(scoreThreshold);
 
         return NextResponse.json({
-          success: true,;
-          data: topRated,;
-          count: topRated.length,;
-          minScore: scoreThreshold,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: topRated,
+          count: topRated.length,
+          minScore: scoreThreshold,
+          timestamp: new Date().toISOString()
         });
 
       case 'scan':;
         const opportunities = await ipoRadar.scanForIPOOpportunities();
 
         return NextResponse.json({
-          success: true,;
-          data: opportunities,;
-          count: opportunities.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: opportunities,
+          count: opportunities.length,
+          timestamp: new Date().toISOString()
         });
 
       default:;
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: all, upcoming, analyze, top_rated, scan' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: all, upcoming, analyze, top_rated, scan' }, { status: 400 });
     }
   } catch (error) {
     console.error('IPO Radar API Error:', error);
-    return NextResponse.json(;
-      {
-        error: 'Failed to process request',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to process request',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }
 
@@ -100,8 +95,8 @@ export async function POST(request: NextRequest) {
         const requiredFields = ['id', 'companyName', 'sector', 'valuation', 'priceRange'];
         for (const field of requiredFields) {
           if (!ipoData[field]) {
-            return NextResponse.json(;
-              { error: `Missing required field: ${field}` },;
+            return NextResponse.json(
+              { error: `Missing required field: ${field}` },
               { status: 400 }
             );
           }
@@ -110,10 +105,10 @@ export async function POST(request: NextRequest) {
         ipoRadar.addIPO(ipoData);
 
         return NextResponse.json({
-          success: true,;
-          message: 'IPO added successfully',;
-          ipoId: ipoData.id,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          message: 'IPO added successfully',
+          ipoId: ipoData.id
+          timestamp: new Date().toISOString();
         });
 
       case 'bulk_analyze':;
@@ -136,14 +131,11 @@ export async function POST(request: NextRequest) {
           success: true,;
           data: analyses,;
           count: analyses.length,;
-          timestamp: new Date().toISOString(),;
+          timestamp: new Date().toISOString();
         });
 
       default:;
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: add, bulk_analyze' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: add, bulk_analyze' }, { status: 400 });
     }
   } catch (error) {
     console.error('IPO Radar POST API Error:', error);
@@ -163,12 +155,7 @@ export async function DELETE(request: NextRequest) {
     const removed = ipoRadar.removeIPO(ipoId);
 
     if (removed) {
-      return NextResponse.json({
-        success: true,;
-        message: 'IPO removed successfully',;
-        ipoId,;
-        timestamp: new Date().toISOString(),;
-      });
+        return NextResponse.json({ error: 'Invalid action. Supported actions: all, upcoming, analyze, top_rated, scan', timestamp: new Date().toISOString() }, { status: 400 });
     } else {
       return NextResponse.json({ error: 'IPO not found' }, { status: 404 });
     }

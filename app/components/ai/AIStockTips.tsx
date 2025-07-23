@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -19,6 +24,11 @@ import { Progress } from '../../../components/ui/progress';
 import { Brain, TrendingUp, TrendingDown, Target, Star, Zap, Eye, Clock, BarChart3, CheckCircle, Crown } from 'lucide-react';
 
 interface StockTip {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -33,9 +43,19 @@ interface StockTip {
   riskLevel: string;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 interface Prediction {
+
+
+
+
+
 
   id: number;
   title: string;
@@ -45,15 +65,30 @@ interface Prediction {
   impact: string;
   category: string;
 
+
+
+
+
+
 }
 
 interface MarketInsights {
+
+
+
+
+
 
   marketSentiment?: {
     score: number;
     trend: string;
     drivers: string[];
   
+
+
+
+
+
 };
   sectorRotation?: {
     inflow: string;
@@ -74,7 +109,17 @@ interface MarketInsights {
 
 interface AIStockTipsProps {
 
+
+
+
+
+
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
+
+
+
 
 }
 

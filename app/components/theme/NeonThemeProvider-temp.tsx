@@ -5,6 +5,11 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface NeonThemeContextType {
 
+
+
+
+
+
   theme: string;
   setTheme: (theme: string) => void;
   glowIntensity: number;
@@ -12,6 +17,11 @@ interface NeonThemeContextType {
   animationSpeed: number;
   setAnimationSpeed: (speed: number) => void;
   themes: Record<string, any>;
+
+
+
+
+
 
 }
 

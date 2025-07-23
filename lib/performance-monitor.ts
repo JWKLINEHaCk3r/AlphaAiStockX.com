@@ -13,6 +13,11 @@ const PERFORMANCE_CONFIG = {
 interface PerformanceMetric {
 
 
+
+
+
+
+
   timestamp: number;
   endpoint: string;
   method: string;
@@ -24,9 +29,19 @@ interface PerformanceMetric {
   cpuUsage?: number;
 
 
+
+
+
+
+
 }
 
 interface APIMetrics {
+
+
+
+
+
 
 
   totalRequests: number;
@@ -36,6 +51,11 @@ interface APIMetrics {
   slowQueries: number;
   errorRate: number;
   lastUpdated: number;
+
+
+
+
+
 
 
 }

@@ -5,15 +5,30 @@ import { SecurityAudit } from '@/lib/security';
 export interface WebSocketMessage {
 
 
+
+
+
+
+
   type: string;
   userId?: string;
   data: any;
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface MarketDataUpdate {
+
+
+
+
+
 
 
   symbol: string;
@@ -29,9 +44,19 @@ export interface MarketDataUpdate {
   open?: number;
 
 
+
+
+
+
+
 }
 
 export interface OrderUpdate {
+
+
+
+
+
 
 
   orderId: string;
@@ -42,9 +67,19 @@ export interface OrderUpdate {
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface PositionUpdate {
+
+
+
+
+
 
 
   symbol: string;
@@ -55,9 +90,19 @@ export interface PositionUpdate {
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface PortfolioUpdate {
+
+
+
+
+
 
 
   totalValue: number;
@@ -68,9 +113,19 @@ export interface PortfolioUpdate {
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface AISignalUpdate {
+
+
+
+
+
 
 
   id: string;
@@ -84,9 +139,19 @@ export interface AISignalUpdate {
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface TradeNotification {
+
+
+
+
+
 
 
   id: string;
@@ -98,6 +163,11 @@ export interface TradeNotification {
   priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
   timestamp: number;
   read: boolean;
+
+
+
+
+
 
 
 }
@@ -558,8 +628,18 @@ declare module 'socket.io' {
   interface Socket {
 
 
+
+
+
+
+
     userId?: string;
   
+
+
+
+
+
 
 }
 }

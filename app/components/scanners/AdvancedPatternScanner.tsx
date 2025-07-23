@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -90,6 +95,11 @@ import {
 // Type definitions for advanced pattern scanner;
 interface PatternMatch {
 
+
+
+
+
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -117,9 +127,19 @@ interface PatternMatch {
   avgMove?: number;
   strength?: number;
 
+
+
+
+
+
 }
 
 interface TradingSignal {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -138,9 +158,19 @@ interface TradingSignal {
   riskReward: number;
   avgDaysToTarget: number;
 
+
+
+
+
+
 }
 
 interface ScanSettings {
+
+
+
+
+
 
   timeframe: string;
   lookbackPeriod: number;
@@ -150,9 +180,19 @@ interface ScanSettings {
   assetClass: string;
   minVolume: number;
 
+
+
+
+
+
 }
 
 interface ChartPattern {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -167,9 +207,19 @@ interface ChartPattern {
   marketConditions: string[];
   tradingStrategy: string;
 
+
+
+
+
+
 }
 
 interface PatternStats {
+
+
+
+
+
 
   [key: string]: {
     totalDetected: number;
@@ -177,6 +227,11 @@ interface PatternStats {
     avgReturn: number;
     avgDaysToTarget: number;
   
+
+
+
+
+
 };
 }
 

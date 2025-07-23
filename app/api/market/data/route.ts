@@ -7,15 +7,30 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 // TypeScript interfaces;
 interface UserSession {
 
+
+
+
+
+
   user: {
     id: string;
     email?: string;
     name?: string;
   
+
+
+
+
+
 };
 }
 
 interface MarketDataParams {
+
+
+
+
+
 
   symbols: string[];
   timeframe: string;
@@ -24,9 +39,19 @@ interface MarketDataParams {
   includeIndicators: boolean;
   includeQuotes: boolean;
 
+
+
+
+
+
 }
 
 interface MarketBarData {
+
+
+
+
+
 
   timestamp: string;
   open: number;
@@ -35,9 +60,19 @@ interface MarketBarData {
   close: number;
   volume: number;
 
+
+
+
+
+
 }
 
 interface TechnicalIndicators {
+
+
+
+
+
 
   sma: number;
   ema: number;
@@ -47,10 +82,20 @@ interface TechnicalIndicators {
     middle: number;
     lower: number;
   
+
+
+
+
+
 };
 }
 
 interface MarketQuote {
+
+
+
+
+
 
   bid: number;
   ask: number;
@@ -58,9 +103,19 @@ interface MarketQuote {
   askSize: number;
   timestamp: string;
 
+
+
+
+
+
 }
 
 interface MarketDataResponse {
+
+
+
+
+
 
   symbol: string;
   currentPrice: number;
@@ -76,6 +131,11 @@ interface MarketDataResponse {
   indicators?: TechnicalIndicators | null;
   lastUpdated: string;
   error?: string;
+
+
+
+
+
 
 }
 

@@ -1,6 +1,11 @@
 // Type definitions for data aggregation service;
 export interface MarketData {
 
+
+
+
+
+
   symbol: string;
   price: number;
   volume: number;
@@ -9,9 +14,19 @@ export interface MarketData {
   timestamp: Date;
   source: string;
 
+
+
+
+
+
 }
 
 export interface NewsItem {
+
+
+
+
+
 
   id: string;
   title: string;
@@ -24,9 +39,19 @@ export interface NewsItem {
   source: string;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface SocialSentiment {
+
+
+
+
+
 
   symbol: string;
   sentiment: number;
@@ -34,9 +59,19 @@ export interface SocialSentiment {
   mentions: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface EconomicData {
+
+
+
+
+
 
   name: string;
   value: number;
@@ -46,9 +81,19 @@ export interface EconomicData {
   impact: 'very_high' | 'high' | 'medium' | 'low';
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface TradingPattern {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -61,9 +106,19 @@ export interface TradingPattern {
   stopLoss: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -74,43 +129,93 @@ export interface AISignal {
   reasoning: string;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface MockWebSocket {
+
+
+
+
+
 
   url: string;
   connected: boolean;
   lastUpdate: Date;
   dataPoints: number;
 
+
+
+
+
+
 }
 
 export interface NewsTemplate {
+
+
+
+
+
 
   title: string;
   category: string;
   impact: string;
   symbols: string[];
 
+
+
+
+
+
 }
 
 export interface SocialSource {
+
+
+
+
+
 
   name: string;
   url: string;
   weight: number;
 
+
+
+
+
+
 }
 
 export interface EconomicIndicator {
+
+
+
+
+
 
   name: string;
   frequency: 'quarterly' | 'monthly' | 'meeting';
   impact: string;
 
+
+
+
+
+
 }
 
 export interface ComprehensiveAnalysis {
+
+
+
+
+
 
   symbol: string;
   sentimentScore: number;
@@ -120,5 +225,10 @@ export interface ComprehensiveAnalysis {
   marketData: MarketData;
   confidence: number;
   timestamp: Date;
+
+
+
+
+
 
 }

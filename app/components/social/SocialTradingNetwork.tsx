@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -108,6 +113,11 @@ import {
 // Type definitions for social trading network;
 interface Trader {
 
+
+
+
+
+
   id: number;
   name: string;
   username: string;
@@ -122,9 +132,19 @@ interface Trader {
   specialty: string;
   badge: string;
 
+
+
+
+
+
 }
 
 interface SocialPost {
+
+
+
+
+
 
   id: number;
   user: {
@@ -133,6 +153,11 @@ interface SocialPost {
     avatar: string;
     verified: boolean;
   
+
+
+
+
+
 };
   content: string;
   timestamp: Date;
@@ -149,14 +174,29 @@ interface SocialPost {
 
 interface LeaderboardEntry {
 
+
+
+
+
+
   rank: number;
   name: string;
   return: number;
   badge: string;
 
+
+
+
+
+
 }
 
 interface SocialStats {
+
+
+
+
+
 
   totalCopiers: number;
   totalVolume: number;
@@ -164,6 +204,11 @@ interface SocialStats {
   activeTraders: number;
   successRate?: number;
   activeTrades?: number;
+
+
+
+
+
 
 }
 

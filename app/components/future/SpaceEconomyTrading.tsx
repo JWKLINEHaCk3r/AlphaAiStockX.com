@@ -1,253 +1,217 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from '../../../components/ui/tabs';
+import { Alert } from '../../../components/ui/alert';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Button } from '../../../components/ui/button';
 'use client';
-=======;
-import { Alert } from '@/components/ui/alert';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
 import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  VisionModel,;
-  AnalysisResult,;
-  BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  RiskAnalysis,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
-  CryptoData,;
-  DeFiProtocol,;
-  NFTCollection,;
-  UserProfile,;
-  ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  Alert,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
+  AIStockPrediction,
+  SportsEvent,
+  TradingOpportunity,
+  Trade,
+  Trader,
+  VisionModel,
+  AnalysisResult,
+  BankAccount,
+  Transaction,
+  TradingSignalData,
+  ChartPattern,
+  TechnicalIndicators,
+  RiskAnalysis,
+  SectorPerformance,
+  BacktestStrategy,
+  AIWhiteLabelMetrics,
+  MarketClassification,
+  TradingRecommendation,
+  StockAnalysis,
+  RealtimeData,
+  VolumeProfile,
+  AIAnalysisComponents,
+  CryptoData,
+  DeFiProtocol,
+  NFTCollection,
+  UserProfile,
+  ThemeOption,
+  AccentColor,
+  SubscriptionPlan,
+  TradingStrategy,
+  ScanResult,
+  SiteDiagnostic,
+  Alert,
+  NewsAnalysis,
+  SocialPlatform,
+  Influencer,
+  SocialPost,
+  DeepLearningModel,
+  MarketPattern,
 } from '../../types/trading-types';
 import {
-  Rocket,;
-  Satellite,;
-  Globe,;
-  Star,;
-  Orbit,;
-  Factory,;
-  Gem,;
-  Fuel,;
-  Radio,;
-  MapPin,;
-  TrendingUp,;
+  Rocket,
+  Satellite,
+  Globe,
+  Star,
+  Orbit,
+  Factory,
+  Gem,
+  Fuel,
+  Radio,
+  MapPin,
+  TrendingUp,
 } from 'lucide-react';
 
 export default function SpaceEconomyTrading() {
   const [spaceData, setSpaceData] = useState({
-    marketCap: 847000000000 + Math.random() * 50000000000,;
-    dailyVolume: 12400000000 + Math.random() * 2000000000,;
-    activeAssets: 1247 + Math.floor(Math.random() * 100),;
-    spaceStations: 47 + Math.floor(Math.random() * 5),;
-    asteroidMines: 124 + Math.floor(Math.random() * 20),;
-    lunarBases: 8 + Math.floor(Math.random() * 3),;
-    marsColonies: 3 + Math.floor(Math.random() * 2),;
+    marketCap: 847000000000 + Math.random() * 50000000000,
+    dailyVolume: 12400000000 + Math.random() * 2000000000,
+    activeAssets: 1247 + Math.floor(Math.random() * 100),
+    spaceStations: 47 + Math.floor(Math.random() * 5),
+    asteroidMines: 124 + Math.floor(Math.random() * 20),
+    lunarBases: 8 + Math.floor(Math.random() * 3),
+    marsColonies: 3 + Math.floor(Math.random() * 2),
   });
 
-  const [spaceAssets, setSpaceAssets] = useState([;
+  const [spaceAssets, setSpaceAssets] = useState([
     {
-      symbol: 'LUNA-H3',;
-      name: 'Lunar Helium-3 Mining',;
-      type: 'Resource Extraction',;
-      location: 'Moon - Mare Imbrium',;
-      price: 2847.5 + Math.random() * 200,;
-      change: 12.7 + Math.random() * 5,;
-      volume: '847M tons',;
-      operator: 'Luna Mining Corp',;
-      yield: '24.7%',;
-      risk: 'Medium',;
-    },;
+      symbol: 'LUNA-H3',
+      name: 'Lunar Helium-3 Mining',
+      type: 'Resource Extraction',
+      location: 'Moon - Mare Imbrium',
+      price: 2847.5 + Math.random() * 200,
+      change: 12.7 + Math.random() * 5,
+      volume: '847M tons',
+      operator: 'Luna Mining Corp',
+      yield: '24.7%',
+      risk: 'Medium',
+    },
     {
-      symbol: 'AST-PLT',;
-      name: 'Asteroid Platinum Mining',;
-      type: 'Precious Metals',;
-      location: 'Asteroid Belt - 16 Psyche',;
-      price: 15247.89 + Math.random() * 1000,;
-      change: 8.9 + Math.random() * 4,;
-      volume: '124K tons',;
-      operator: 'Deep Space Mining Inc',;
-      yield: '47.8%',;
-      risk: 'High',;
-    },;
+      symbol: 'AST-PLT',
+      name: 'Asteroid Platinum Mining',
+      type: 'Precious Metals',
+      location: 'Asteroid Belt - 16 Psyche',
+      price: 15247.89 + Math.random() * 1000,
+      change: 8.9 + Math.random() * 4,
+      volume: '124K tons',
+      operator: 'Deep Space Mining Inc',
+      yield: '47.8%',
+      risk: 'High',
+    },
     {
-      symbol: 'MARS-AG',;
-      name: 'Mars Agricultural Domes',;
-      type: 'Food Production',;
-      location: 'Mars - Chryse Planitia',;
-      price: 4578.23 + Math.random() * 300,;
-      change: 15.4 + Math.random() * 6,;
-      volume: '2.4M units',;
-      operator: 'Red Planet Farms',;
-      yield: '18.9%',;
-      risk: 'Medium',;
-    },;
+      symbol: 'MARS-AG',
+      name: 'Mars Agricultural Domes',
+      type: 'Food Production',
+      location: 'Mars - Chryse Planitia',
+      price: 4578.23 + Math.random() * 300,
+      change: 15.4 + Math.random() * 6,
+      volume: '2.4M units',
+      operator: 'Red Planet Farms',
+      yield: '18.9%',
+      risk: 'Medium',
+    },
     {
-      symbol: 'ORB-PWR',;
-      name: 'Orbital Solar Arrays',;
-      type: 'Energy Generation',;
-      location: 'Earth Orbit - L1 Lagrange',;
-      price: 8947.12 + Math.random() * 500,;
-      change: 6.8 + Math.random() * 3,;
-      volume: '15.7 TWh',;
-      operator: 'Orbital Energy Systems',;
-      yield: '12.4%',;
-      risk: 'Low',;
-    },;
+      symbol: 'ORB-PWR',
+      name: 'Orbital Solar Arrays',
+      type: 'Energy Generation',
+      location: 'Earth Orbit - L1 Lagrange',
+      price: 8947.12 + Math.random() * 500,
+      change: 6.8 + Math.random() * 3,
+      volume: '15.7 TWh',
+      operator: 'Orbital Energy Systems',
+      yield: '12.4%',
+      risk: 'Low',
+    },
     {
-      symbol: 'TIT-ICE',;
-      name: 'Titan Water Ice Harvesting',;
-      type: 'Water Resources',;
-      location: 'Titan - Kraken Mare',;
-      price: 1247.67 + Math.random() * 100,;
-      change: 22.3 + Math.random() * 8,;
-      volume: '847M liters',;
-      operator: 'Outer System Resources',;
-      yield: '34.7%',;
-      risk: 'Very High',;
-    },;
+      symbol: 'TIT-ICE',
+      name: 'Titan Water Ice Harvesting',
+      type: 'Water Resources',
+      location: 'Titan - Kraken Mare',
+      price: 1247.67 + Math.random() * 100,
+      change: 22.3 + Math.random() * 8,
+      volume: '847M liters',
+      operator: 'Outer System Resources',
+      yield: '34.7%',
+      risk: 'Very High',
+    },
   ]);
 
-  const [spaceInfrastructure, setSpaceInfrastructure] = useState([;
+  const [spaceInfrastructure, setSpaceInfrastructure] = useState([
     {
-      name: 'Alpha Station One',;
-      type: 'Manufacturing Hub',;
-      location: 'Earth-Moon L4',;
-      capacity: '2.4M units/year',;
-      utilization: 87 + Math.random() * 10,;
-      revenue: '$847M/year',;
-      status: 'Operational',;
+      name: 'Alpha Station One',
+      type: 'Manufacturing Hub',
+      location: 'Earth-Moon L4',
+      capacity: '2.4M units/year',
+      utilization: 87 + Math.random() * 10,
+      revenue: '$847M/year',
+      status: 'Operational',
+    },
+    {
+      name: 'Ceres Mining Base',
+      type: 'Resource Processing',
+      location: 'Ceres - Occator Crater',
+      capacity: '124K tons/month',
+      utilization: 92 + Math.random() * 5,
+      revenue: '$1.2B/year',
+      status: 'Operational',
     },;
     {
-      name: 'Ceres Mining Base',;
-      type: 'Resource Processing',;
-      location: 'Ceres - Occator Crater',;
-      capacity: '124K tons/month',;
-      utilization: 92 + Math.random() * 5,;
-      revenue: '$1.2B/year',;
-      status: 'Operational',;
-    },;
+      name: 'Europa Research Station',
+      type: 'Scientific Research',
+      location: 'Europa - Subsurface Ocean',
+      capacity: '50 researchers',
+      utilization: 78 + Math.random() * 15,
+      revenue: '$247M/year',
+      status: 'Under Construction',
+    },
     {
-      name: 'Europa Research Station',;
-      type: 'Scientific Research',;
-      location: 'Europa - Subsurface Ocean',;
-      capacity: '50 researchers',;
-      utilization: 78 + Math.random() * 15,;
-      revenue: '$247M/year',;
-      status: 'Under Construction',;
-    },;
-    {
-      name: 'Phobos Fuel Depot',;
-      type: 'Refueling Station',;
-      location: 'Phobos - Stickney Crater',;
-      capacity: '10M liters',;
-      utilization: 65 + Math.random() * 20,;
-      revenue: '$578M/year',;
-      status: 'Operational',;
-    },;
+      name: 'Phobos Fuel Depot',
+      type: 'Refueling Station',
+      location: 'Phobos - Stickney Crater',
+      capacity: '10M liters',
+      utilization: 65 + Math.random() * 20,
+      revenue: '$578M/year',
+      status: 'Operational',
+    },
   ]);
 
-  const [spaceMarkets, setSpaceMarkets] = useState([;
+  const [spaceMarkets, setSpaceMarkets] = useState([
     {
-      market: 'Lunar Resources Exchange',;
-      location: 'Moon - Shackleton Crater',;
-      tradingVolume: '$2.4B',;
-      activeTraders: '1,247',;
-      topCommodity: 'Helium-3',;
-      marketHours: '24/7',;
-    },;
+      market: 'Lunar Resources Exchange',
+      location: 'Moon - Shackleton Crater',
+      tradingVolume: '$2.4B',
+      activeTraders: '1,247',
+      topCommodity: 'Helium-3',
+      marketHours: '24/7',
+    },
     {
-      market: 'Asteroid Belt Commodities',;
-      location: 'Ceres Station',;
-      tradingVolume: '$8.7B',;
-      activeTraders: '3,456',;
-      topCommodity: 'Platinum',;
-      marketHours: '24/7',;
-    },;
+      market: 'Asteroid Belt Commodities',
+      location: 'Ceres Station',
+      tradingVolume: '$8.7B',
+      activeTraders: '3,456',
+      topCommodity: 'Platinum',
+      marketHours: '24/7',
+    },
     {
-      market: 'Mars Colonial Exchange',;
-      location: 'New Olympia, Mars',;
-      tradingVolume: '$1.8B',;
-      activeTraders: '892',;
-      topCommodity: 'Food Supplies',;
-      marketHours: 'Sol-based',;
-    },;
+      market: 'Mars Colonial Exchange',
+      location: 'New Olympia, Mars',
+      tradingVolume: '$1.8B',
+      activeTraders: '892',
+      topCommodity: 'Food Supplies',
+      marketHours: 'Sol-based',
+    },
     {
-      market: 'Orbital Manufacturing Hub',;
-      location: 'L5 Lagrange Point',;
-      tradingVolume: '$4.2B',;
-      activeTraders: '2,134',;
-      topCommodity: 'Zero-G Products',;
-      marketHours: '24/7',;
-    },;
+      market: 'Orbital Manufacturing Hub',
+      location: 'L5 Lagrange Point',
+      tradingVolume: '$4.2B',
+      activeTraders: '2,134',
+      topCommodity: 'Zero-G Products',
+      marketHours: '24/7',
+    },
   ]);
 
   useEffect(() => {
@@ -266,19 +230,19 @@ export default function SpaceEconomyTrading() {
       activeAssets: prev.activeAssets + Math.floor((Math.random() - 0.3) * 5),;
     }));
 
-    setSpaceAssets(prev =>;
+    setSpaceAssets(prev =>
       prev.map((asset: any) => ({
-        ...asset,;
-        price: asset.price * (1 + (Math.random() - 0.45) * 0.02),;
-        change: asset.change * (1 + (Math.random() - 0.45) * 0.1),;
-      }));
+        ...asset,
+        price: asset.price * (1 + (Math.random() - 0.45) * 0.02),
+        change: asset.change * (1 + (Math.random() - 0.45) * 0.1),
+      }))
     );
 
-    setSpaceInfrastructure(prev =>;
+    setSpaceInfrastructure(prev =>
       prev.map((infra: any) => ({
-        ...infra,;
-        utilization: Math.min(100, Math.max(50, infra.utilization + (Math.random() - 0.5) * 3)),;
-      }));
+        ...infra,
+        utilization: Math.min(100, Math.max(50, infra.utilization + (Math.random() - 0.5) * 3)),
+      }))
     );
   };
 

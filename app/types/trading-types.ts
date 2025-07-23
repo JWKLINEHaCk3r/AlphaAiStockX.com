@@ -1,9 +1,19 @@
 // Strategy interface for NextGenAITradingEngine;
 export interface Strategy {
 
+
+
+
+
+
   name: string;
   execute: (data: MarketData[]) => Promise<TradingSignal[]>;
   params: Record<string, unknown>;
+
+
+
+
+
 
 }
 import { Alert } from '@/components/ui/alert';
@@ -12,6 +22,11 @@ import type { MarketData, TradingSignal } from "../services/ai-types";
 // (Removed duplicate Strategy interface);
 // Comprehensive TypeScript interfaces for the AlphaAiStockX platform;
 export interface Position {
+
+
+
+
+
 
   symbol: string;
   quantity: number;
@@ -24,9 +39,19 @@ export interface Position {
   stopLoss?: number;
   takeProfit?: number;
 
+
+
+
+
+
 }
 
 export interface TechnicalIndicators {
+
+
+
+
+
 
   rsi: number;
   macd: {
@@ -34,6 +59,11 @@ export interface TechnicalIndicators {
     signal: number;
     histogram: number;
   
+
+
+
+
+
 };
   bollingerBands: {
     upper: number;
@@ -58,14 +88,29 @@ export interface TechnicalIndicators {
 
 export interface VolumeProfile {
 
+
+
+
+
+
   avgVolume: number;
   volumeTrend: 'increasing' | 'decreasing' | 'stable';
   volumeSpikes: boolean;
   institutionalFlow: number;
 
+
+
+
+
+
 }
 
 export interface BollingerBands {
+
+
+
+
+
 
   upper: number;
   middle: number;
@@ -73,18 +118,38 @@ export interface BollingerBands {
   bandwidth: number;
   percentB: number;
 
+
+
+
+
+
 }
 
 export interface SupportResistance {
+
+
+
+
+
 
   support: number[];
   resistance: number[];
   pivotPoints: number[];
   strength: number;
 
+
+
+
+
+
 }
 
 export interface OptimalAllocations {
+
+
+
+
+
 
   [symbol: string]: {
     currentWeight: number;
@@ -93,10 +158,20 @@ export interface OptimalAllocations {
     shares: number;
     dollarAmount: number;
   
+
+
+
+
+
 };
 }
 
 export interface RebalanceAction {
+
+
+
+
+
 
   symbol: string;
   action: 'buy' | 'sell' | 'hold';
@@ -105,9 +180,19 @@ export interface RebalanceAction {
   priority: 'high' | 'medium' | 'low';
   estimatedImpact: number;
 
+
+
+
+
+
 }
 
 export interface EarningData {
+
+
+
+
+
 
   symbol: string;
   companyName: string;
@@ -119,9 +204,19 @@ export interface EarningData {
   revenue: number;
   revenueEstimate: number;
 
+
+
+
+
+
 }
 
 export interface AdminUser {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -132,9 +227,19 @@ export interface AdminUser {
   lastLogin: Date;
   status: 'active' | 'inactive' | 'suspended';
 
+
+
+
+
+
 }
 
 export interface AdminPermissions {
+
+
+
+
+
 
   canManageUsers: boolean;
   canViewAnalytics: boolean;
@@ -142,9 +247,19 @@ export interface AdminPermissions {
   canAccessLogs: boolean;
   canManageSettings: boolean;
 
+
+
+
+
+
 }
 
 export interface AdminSettings {
+
+
+
+
+
 
   theme: 'light' | 'dark' | 'auto';
   notifications: boolean;
@@ -152,9 +267,19 @@ export interface AdminSettings {
   language: string;
   timezone: string;
 
+
+
+
+
+
 }
 
 export interface AIStockPrediction {
+
+
+
+
+
 
   symbol: string;
   prediction: 'bullish' | 'bearish' | 'neutral';
@@ -166,9 +291,19 @@ export interface AIStockPrediction {
   fundamentalScore: number;
   sentimentScore: number;
 
+
+
+
+
+
 }
 
 export interface SectorPerformance {
+
+
+
+
+
 
   sector: string;
   performance: {
@@ -178,6 +313,11 @@ export interface SectorPerformance {
     '3m': number;
     '1y': number;
   
+
+
+
+
+
 };
   momentum: number;
   outlook: 'positive' | 'negative' | 'neutral';
@@ -185,6 +325,11 @@ export interface SectorPerformance {
 }
 
 export interface BacktestStrategy {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -197,12 +342,22 @@ export interface BacktestStrategy {
     sharpeRatio: number;
     winRate: number;
   
+
+
+
+
+
 };
   trades: number;
   period: string;
 }
 
 export interface PerformanceMetrics {
+
+
+
+
+
 
   totalReturn: number;
   annualizedReturn: number;
@@ -214,9 +369,19 @@ export interface PerformanceMetrics {
   averageWin: number;
   averageLoss: number;
 
+
+
+
+
+
 }
 
 export interface AIWhiteLabelMetrics {
+
+
+
+
+
 
   totalUsers: number;
   activeUsers: number;
@@ -224,17 +389,37 @@ export interface AIWhiteLabelMetrics {
   drawdownPeriods: DrawdownPeriod[];
   performanceStats: PerformanceMetrics;
 
+
+
+
+
+
 }
 
 export interface MonthlyReturn {
+
+
+
+
+
 
   month: string;
   return: number;
   benchmark: number;
 
+
+
+
+
+
 }
 
 export interface DrawdownPeriod {
+
+
+
+
+
 
   start: Date;
   end: Date;
@@ -243,18 +428,38 @@ export interface DrawdownPeriod {
   drawdown: number;
   recovery: Date | null;
 
+
+
+
+
+
 }
 
 export interface MarketClassification {
+
+
+
+
+
 
   trend: 'bullish' | 'bearish' | 'sideways';
   volatility: 'low' | 'medium' | 'high';
   phase: 'accumulation' | 'markup' | 'distribution' | 'markdown';
   strength: number;
 
+
+
+
+
+
 }
 
 export interface TradingRecommendation {
+
+
+
+
+
 
   action: 'buy' | 'sell' | 'hold';
   confidence: number;
@@ -265,9 +470,19 @@ export interface TradingRecommendation {
   reasoning: string[];
   riskLevel: 'low' | 'medium' | 'high';
 
+
+
+
+
+
 }
 
 export interface StockAnalysis {
+
+
+
+
+
 
   symbol: string;
   currentPrice: number;
@@ -277,9 +492,19 @@ export interface StockAnalysis {
   volumeAnalysis: VolumeProfile;
   metrics: TechnicalIndicators;
 
+
+
+
+
+
 }
 
 export interface RealtimeData {
+
+
+
+
+
 
   price: number;
   change: number;
@@ -289,9 +514,19 @@ export interface RealtimeData {
   ask: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface ChartPattern {
+
+
+
+
+
 
   type: string;
   confidence: number;
@@ -300,9 +535,19 @@ export interface ChartPattern {
   status: 'forming' | 'confirmed' | 'broken';
   description: string;
 
+
+
+
+
+
 }
 
 export interface AIAnalysisComponents {
+
+
+
+
+
 
   sentiment: number;
   technical: number;
@@ -310,9 +555,19 @@ export interface AIAnalysisComponents {
   momentum: number;
   risk: number;
 
+
+
+
+
+
 }
 
 export interface TradingSignalData {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -325,9 +580,19 @@ export interface TradingSignalData {
   stopLoss: number;
   timeframe: string;
 
+
+
+
+
+
 }
 
 export interface Trade {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -343,9 +608,19 @@ export interface Trade {
   stopLoss: number;
   takeProfit: number;
 
+
+
+
+
+
 }
 
 export interface TradeHistoryItem {
+
+
+
+
+
 
   id: number;
   symbol: string;
@@ -360,9 +635,19 @@ export interface TradeHistoryItem {
   pnl: number;
   status: 'COMPLETED' | 'STOPPED';
 
+
+
+
+
+
 }
 
 export interface BotStats {
+
+
+
+
+
 
   totalTrades: number;
   winRate: number;
@@ -373,9 +658,19 @@ export interface BotStats {
   profitFactor: number;
   tradingDays: number;
 
+
+
+
+
+
 }
 
 export interface BotSettings {
+
+
+
+
+
 
   maxPositionSize: number;
   maxDailyLoss: number;
@@ -385,9 +680,19 @@ export interface BotSettings {
   tradingHours: boolean;
   emergencyStop: boolean;
 
+
+
+
+
+
 }
 
 export interface MarketAnalysis {
+
+
+
+
+
 
   [symbol: string]: {
     trend: string;
@@ -395,10 +700,20 @@ export interface MarketAnalysis {
     signals: string[];
     priceTarget: number;
   
+
+
+
+
+
 };
 }
 
 export interface SportsEvent {
+
+
+
+
+
 
   id: number;
   type: string;
@@ -408,9 +723,19 @@ export interface SportsEvent {
   volatility: string;
   opportunities: number;
 
+
+
+
+
+
 }
 
 export interface TradingOpportunity {
+
+
+
+
+
 
   id: number;
   eventId: number;
@@ -433,9 +758,19 @@ export interface TradingOpportunity {
   profitPotential: number;
   risk: string;
 
+
+
+
+
+
 }
 
 export interface ActiveTrade {
+
+
+
+
+
 
   id: number;
   eventName: string;
@@ -453,9 +788,19 @@ export interface ActiveTrade {
   expectedPnL: number;
   confidence: number;
 
+
+
+
+
+
 }
 
 export interface ProfitStats {
+
+
+
+
+
 
   totalProfit: number;
   dailyProfit: number;
@@ -464,9 +809,19 @@ export interface ProfitStats {
   maxProfit: number;
   riskRatio: number;
 
+
+
+
+
+
 }
 
 export interface ExpandedSections {
+
+
+
+
+
 
   realTime: boolean;
   adaptive: boolean;
@@ -474,9 +829,19 @@ export interface ExpandedSections {
   risk: boolean;
   interface: boolean;
 
+
+
+
+
+
 }
 
 export interface AIModel {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -486,9 +851,19 @@ export interface AIModel {
   lastUpdated: Date;
   description: string;
 
+
+
+
+
+
 }
 
 export interface AnalysisResult {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -498,9 +873,19 @@ export interface AnalysisResult {
   timestamp: Date;
   model: string;
 
+
+
+
+
+
 }
 
 export interface DeepLearningModel {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -510,9 +895,19 @@ export interface DeepLearningModel {
   status: 'active' | 'training' | 'testing';
   performance: PerformanceMetrics;
 
+
+
+
+
+
 }
 
 export interface MarketPattern {
+
+
+
+
+
 
   id: string;
   type: string;
@@ -522,9 +917,19 @@ export interface MarketPattern {
   description: string;
   probability: number;
 
+
+
+
+
+
 }
 
 export interface NewsAnalysis {
+
+
+
+
+
 
   id: string;
   title: string;
@@ -536,9 +941,19 @@ export interface NewsAnalysis {
   publishedAt: Date;
   summary: string;
 
+
+
+
+
+
 }
 
 export interface SocialPlatform {
+
+
+
+
+
 
   name: string;
   sentiment: number;
@@ -546,9 +961,19 @@ export interface SocialPlatform {
   engagement: number;
   trend: 'up' | 'down' | 'stable';
 
+
+
+
+
+
 }
 
 export interface Influencer {
+
+
+
+
+
 
   name: string;
   platform: string;
@@ -557,9 +982,19 @@ export interface Influencer {
   influence: number;
   recentPosts: number;
 
+
+
+
+
+
 }
 
 export interface Trader {
+
+
+
+
+
 
   id: string;
   username: string;
@@ -570,9 +1005,19 @@ export interface Trader {
   verified: boolean;
   rank: number;
 
+
+
+
+
+
 }
 
 export interface SocialPost {
+
+
+
+
+
 
   id: string;
   author: string;
@@ -584,9 +1029,19 @@ export interface SocialPost {
   symbols: string[];
   sentiment: number;
 
+
+
+
+
+
 }
 
 export interface CryptoData {
+
+
+
+
+
 
   symbol: string;
   name: string;
@@ -597,9 +1052,19 @@ export interface CryptoData {
   rank: number;
   supply: number;
 
+
+
+
+
+
 }
 
 export interface DeFiProtocol {
+
+
+
+
+
 
   name: string;
   tvl: number;
@@ -608,9 +1073,19 @@ export interface DeFiProtocol {
   risk: 'low' | 'medium' | 'high';
   tokens: string[];
 
+
+
+
+
+
 }
 
 export interface NFTCollection {
+
+
+
+
+
 
   name: string;
   floorPrice: number;
@@ -619,9 +1094,19 @@ export interface NFTCollection {
   items: number;
   change24h: number;
 
+
+
+
+
+
 }
 
 export interface BankAccount {
+
+
+
+
+
 
   id: string;
   type: 'checking' | 'savings' | 'money-market';
@@ -631,9 +1116,19 @@ export interface BankAccount {
   interestRate?: number;
   minimumBalance?: number;
 
+
+
+
+
+
 }
 
 export interface Transaction {
+
+
+
+
+
 
   id: string;
   type: 'deposit' | 'withdrawal' | 'transfer';
@@ -644,9 +1139,19 @@ export interface Transaction {
   fromAccount?: string;
   toAccount?: string;
 
+
+
+
+
+
 }
 
 export interface InterestTransaction {
+
+
+
+
+
 
   id: string;
   amount: number;
@@ -655,9 +1160,19 @@ export interface InterestTransaction {
   timestamp: Date;
   compounding: 'daily' | 'monthly' | 'quarterly';
 
+
+
+
+
+
 }
 
 export interface UserProfile {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -668,9 +1183,19 @@ export interface UserProfile {
   watchlist: string[];
   subscriptionTier: 'free' | 'premium' | 'professional';
 
+
+
+
+
+
 }
 
 export interface UserPreferences {
+
+
+
+
+
 
   theme: 'light' | 'dark' | 'auto';
   notifications: boolean;
@@ -680,9 +1205,19 @@ export interface UserPreferences {
   language: string;
   timezone: string;
 
+
+
+
+
+
 }
 
 export interface ThemeOption {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -693,18 +1228,38 @@ export interface ThemeOption {
     accent: string;
     background: string;
   
+
+
+
+
+
 };
 }
 
 export interface AccentColor {
 
+
+
+
+
+
   name: string;
   value: string;
   preview: string;
 
+
+
+
+
+
 }
 
 export interface SubscriptionPlan {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -715,18 +1270,38 @@ export interface SubscriptionPlan {
   description: string;
   stripePriceId?: string;
 
+
+
+
+
+
 }
 
 export interface TradingStrategy {
+
+
+
+
+
 
   id: string;
   name: string;
   type: string;
   winRate: number;
 
+
+
+
+
+
 }
 
 export interface ScanResult {
+
+
+
+
+
 
   symbol: string;
   name: string;
@@ -738,9 +1313,19 @@ export interface ScanResult {
   reason: string;
   confidence: number;
 
+
+
+
+
+
 }
 
 export interface PatternAccuracy {
+
+
+
+
+
 
   [patternType: string]: {
     total: number;
@@ -748,10 +1333,20 @@ export interface PatternAccuracy {
     accuracy: number;
     avgReturn: number;
   
+
+
+
+
+
 };
 }
 
 export interface SiteDiagnostic {
+
+
+
+
+
 
   id: string;
   type: 'error' | 'warning' | 'info';
@@ -761,9 +1356,19 @@ export interface SiteDiagnostic {
   severity: 'high' | 'medium' | 'low';
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface Alert {
+
+
+
+
+
 
   id: string;
   type: 'price' | 'volume' | 'news' | 'technical' | 'system';
@@ -775,9 +1380,19 @@ export interface Alert {
   read: boolean;
   action?: string;
 
+
+
+
+
+
 }
 
 export interface BacktestResult {
+
+
+
+
+
 
   strategy: string;
   period: string;
@@ -813,9 +1428,19 @@ export interface BacktestResult {
   tradingDays: number;
   avgHoldingPeriod: number;
 
+
+
+
+
+
 }
 
 export interface BacktestSettings {
+
+
+
+
+
 
   symbol?: string;
   strategy: string;
@@ -832,5 +1457,10 @@ export interface BacktestSettings {
   riskPerTrade?: number;
   stopLoss?: number;
   takeProfit?: number;
+
+
+
+
+
 
 }

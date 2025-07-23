@@ -1,12 +1,12 @@
 // Mock socket.io-client for SSR compatibility;
-export const io = (url: string, options?: any) => {
+export const io = () => {
   if (typeof window === 'undefined') {
     // Return a mock object for server-side;
     return {
-      on: () => {},;
-      emit: () => {},;
-      disconnect: () => {},;
-      connect: () => {},;
+      on: () => {},
+      emit: () => {},
+      disconnect: () => {},
+      connect: () => {},
     };
   }
 

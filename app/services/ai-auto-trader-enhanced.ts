@@ -24,6 +24,11 @@ const API_CONFIG = {
 
 interface TradeRecord {
 
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell';
   price: number;
@@ -35,12 +40,27 @@ interface TradeRecord {
   stopLoss?: number;
   takeProfit?: number;
 
+
+
+
+
+
 }
 
 interface PortfolioData {
 
+
+
+
+
+
   cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number 
+  holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
 }>;
   trades: TradeRecord[];
   totalValue: number;
@@ -50,14 +70,29 @@ interface PortfolioData {
 
 interface RiskSettings {
 
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
 
+
+
+
+
+
 }
 
 interface PerformanceMetrics {
+
+
+
+
+
 
   totalReturn: number;
   dailyReturn: number;
@@ -67,6 +102,11 @@ interface PerformanceMetrics {
   maxDrawdown: number;
   winRate: number;
   lastUpdated: Date;
+
+
+
+
+
 
 }
 
@@ -558,15 +598,30 @@ export class AdvancedAIAutoTrader {
 // Additional type definitions;
 interface AIAnalysisResult {
 
+
+
+
+
+
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   portfolioAnalysis: PortfolioAnalysis;
   riskAnalysis: RiskAnalysis;
   recommendations: string[];
 
+
+
+
+
+
 }
 
 interface PortfolioAnalysis {
+
+
+
+
+
 
   totalValue: number;
   totalPnL: number;
@@ -575,11 +630,21 @@ interface PortfolioAnalysis {
     sectors: Record<string, number>;
     risk: 'LOW' | 'MEDIUM' | 'HIGH';
   
+
+
+
+
+
 };
   recommendations: string[];
 }
 
 interface PositionAnalysis {
+
+
+
+
+
 
   symbol: string;
   shares: number;
@@ -589,18 +654,38 @@ interface PositionAnalysis {
   pnl: number;
   pnlPercent: number;
 
+
+
+
+
+
 }
 
 interface TradeExecutionResult {
+
+
+
+
+
 
   success: boolean;
   trades?: TradeRecord[];
   portfolioValue?: number;
   message: string;
 
+
+
+
+
+
 }
 
 interface OptimizationResult {
+
+
+
+
+
 
   currentAllocation: Record<string, number>;
   suggestedAllocation: OptimalAllocations;
@@ -610,10 +695,20 @@ interface OptimizationResult {
     riskReduction: number;
     sharpeImprovement: number;
   
+
+
+
+
+
 };
 }
 
 interface RealTimeRiskAssessment {
+
+
+
+
+
 
   symbol: string;
   currentRisk: number;
@@ -622,6 +717,11 @@ interface RealTimeRiskAssessment {
   technicalRisk: 'LOW' | 'MEDIUM' | 'HIGH';
   recommendation: string;
   timestamp: Date;
+
+
+
+
+
 
 }
 

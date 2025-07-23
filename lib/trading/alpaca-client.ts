@@ -3,6 +3,11 @@ import { SecurityAudit } from '@/lib/security';
 export interface AlpacaConfig {
 
 
+
+
+
+
+
   apiKey: string;
   secretKey: string;
   baseUrl: string;
@@ -10,9 +15,19 @@ export interface AlpacaConfig {
   isPaper: boolean;
 
 
+
+
+
+
+
 }
 
 export interface AlpacaPosition {
+
+
+
+
+
 
 
   asset_id: string;
@@ -29,9 +44,19 @@ export interface AlpacaPosition {
   change_today: string;
 
 
+
+
+
+
+
 }
 
 export interface AlpacaOrder {
+
+
+
+
+
 
 
   id: string;
@@ -84,9 +109,19 @@ export interface AlpacaOrder {
   hwm?: string;
 
 
+
+
+
+
+
 }
 
 export interface AlpacaAccount {
+
+
+
+
+
 
 
   id: string;
@@ -122,9 +157,19 @@ export interface AlpacaAccount {
   daytrade_count: number;
 
 
+
+
+
+
+
 }
 
 export interface MarketData {
+
+
+
+
+
 
 
   symbol: string;
@@ -136,6 +181,11 @@ export interface MarketData {
   volume: number;
   trade_count?: number;
   vwap?: number;
+
+
+
+
+
 
 
 }

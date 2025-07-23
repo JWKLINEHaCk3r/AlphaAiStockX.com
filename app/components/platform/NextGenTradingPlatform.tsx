@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -154,6 +159,11 @@ import {
 // Advanced Interfaces for Next-Gen Multi-User Trading Platform;
 interface User {
 
+
+
+
+
+
   id: string;
   username: string;
   email: string;
@@ -187,9 +197,19 @@ interface User {
   posts: number;
   lastActive: string;
 
+
+
+
+
+
 }
 
 interface TradingSignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -215,13 +235,28 @@ interface TradingSignal {
   isLive: boolean;
   price: number;
 
+
+
+
+
+
 }
 
 interface TechnicalData {
 
+
+
+
+
+
   rsi: number;
   macd: number;
-  bollinger: { upper: number; middle: number; lower: number 
+  bollinger: { upper: number; middle: number; lower: number;
+
+
+
+
+
 };
   volume: number;
   support: number;
@@ -231,6 +266,11 @@ interface TechnicalData {
 }
 
 interface SocialPost {
+
+
+
+
+
 
   id: string;
   author: User;
@@ -247,6 +287,11 @@ interface SocialPost {
     followers: number;
     accuracy: number;
   
+
+
+
+
+
 };
   type: 'signal' | 'analysis' | 'education' | 'discussion';
   visibility: 'public' | 'followers' | 'premium';
@@ -263,6 +308,11 @@ interface SocialPost {
 
 interface Comment {
 
+
+
+
+
+
   id: string;
   author: User;
   content: string;
@@ -270,9 +320,19 @@ interface Comment {
   likes: number;
   replies: Comment[];
 
+
+
+
+
+
 }
 
 interface Portfolio {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -296,9 +356,19 @@ interface Portfolio {
   allocation: any;
   riskLevel: string;
 
+
+
+
+
+
 }
 
 interface Position {
+
+
+
+
+
 
   symbol: string;
   quantity: number;
@@ -313,9 +383,19 @@ interface Position {
   marketCap: number;
   aiRating: number;
 
+
+
+
+
+
 }
 
 interface WatchlistItem {
+
+
+
+
+
 
   symbol: string;
   price: number;
@@ -326,9 +406,19 @@ interface WatchlistItem {
   socialMentions: number;
   alerts: Alert[];
 
+
+
+
+
+
 }
 
 interface Alert {
+
+
+
+
+
 
   id: string;
   type: 'price' | 'technical' | 'ai' | 'social';
@@ -336,9 +426,19 @@ interface Alert {
   priority: 'low' | 'medium' | 'high' | 'critical';
   timestamp: Date;
 
+
+
+
+
+
 }
 
 interface AIModel {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -360,9 +460,19 @@ interface AIModel {
   backtestedReturns: number;
   realTimePerformance: number;
 
+
+
+
+
+
 }
 
 interface LiveMarketData {
+
+
+
+
+
 
   symbol: string;
   price: number;
@@ -380,9 +490,19 @@ interface LiveMarketData {
   dividendYield: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 interface TradingRoom {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -394,9 +514,19 @@ interface TradingRoom {
   chat: ChatMessage[];
   tier: 'free' | 'premium' | 'elite';
 
+
+
+
+
+
 }
 
 interface ChatMessage {
+
+
+
+
+
 
   id: string;
   author: User;
@@ -404,22 +534,52 @@ interface ChatMessage {
   timestamp: Date;
   reactions: Reaction[];
 
+
+
+
+
+
 }
 
 interface Reaction {
 
+
+
+
+
+
   emoji: string;
   users: User[];
+
+
+
+
+
 
 }
 
 interface NextGenPlatformProps {
 
+
+
+
+
+
   user: User;
+
+
+
+
+
 
 }
 
 interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -433,9 +593,19 @@ interface AISignal {
   timestamp: Date;
   aiModel: string;
 
+
+
+
+
+
 }
 
 interface Portfolio {
+
+
+
+
+
 
   id: string;
   name: string;
@@ -446,9 +616,19 @@ interface Portfolio {
   allocation: any;
   riskLevel: string;
 
+
+
+
+
+
 }
 
 interface SocialPost {
+
+
+
+
+
 
   id: string;
   user: User;
@@ -466,6 +646,11 @@ interface SocialPost {
     targetPrice: number;
     reasoning: string;
   
+
+
+
+
+
 };
 }
 

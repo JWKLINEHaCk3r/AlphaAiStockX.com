@@ -5,10 +5,20 @@ import { useState } from 'react';
 
 interface Diagnosis {
 
+
+
+
+
+
   risk: string;
   diversification: string;
   aiNote: string;
   suggestions: string[];
+
+
+
+
+
 
 }
 

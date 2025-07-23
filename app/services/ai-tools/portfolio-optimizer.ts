@@ -4,6 +4,11 @@ import { OpenAI } from 'openai';
 // AI Portfolio Optimizer - Modern Portfolio Theory + GPT Insights;
 interface Asset {
 
+
+
+
+
+
   symbol: string;
   name: string;
   sector: string;
@@ -16,9 +21,19 @@ interface Asset {
   peRatio: number;
   expense?: number; // For ETFs;
 
+
+
+
+
+
 }
 
 interface PortfolioConstraints {
+
+
+
+
+
 
   minWeight: number;
   maxWeight: number;
@@ -31,12 +46,27 @@ interface PortfolioConstraints {
   timeHorizon: 'short' | 'medium' | 'long';
   esgPreference?: boolean;
 
+
+
+
+
+
 }
 
 interface OptimizedPortfolio {
 
+
+
+
+
+
   id: string;
-  allocations: { [symbol: string]: number 
+  allocations: { [symbol: string]: number;
+
+
+
+
+
 };
   expectedReturn: number;
   volatility: number;
@@ -53,6 +83,11 @@ interface OptimizedPortfolio {
 
 interface RebalanceRecommendation {
 
+
+
+
+
+
   symbol: string;
   currentWeight: number;
   targetWeight: number;
@@ -60,13 +95,28 @@ interface RebalanceRecommendation {
   amount: number;
   reasoning: string;
 
+
+
+
+
+
 }
 
 interface RiskAnalysis {
 
+
+
+
+
+
   varAtRisk: number; // Value at Risk (95% confidence);
   maxDrawdown: number;
-  correlationMatrix: { [pair: string]: number 
+  correlationMatrix: { [pair: string]: number;
+
+
+
+
+
 };
   sectorConcentration: { [sector: string]: number };
   riskContribution: { [symbol: string]: number };
@@ -74,10 +124,20 @@ interface RiskAnalysis {
 
 interface OptimizationResult {
 
+
+
+
+
+
   weights: number[];
   expectedReturn: number;
   volatility: number;
   sharpeRatio: number;
+
+
+
+
+
 
 }
 

@@ -26,6 +26,11 @@ const ALPACA_API_SECRET = process.env.ALPACA_API_SECRET || 'your_alpaca_api_secr
 // Define local interfaces to avoid conflicts;
 interface TradeData {
 
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell';
   price: number;
@@ -33,12 +38,27 @@ interface TradeData {
   time: string;
   reason: string;
 
+
+
+
+
+
 }
 
 interface PortfolioData {
 
+
+
+
+
+
   cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number 
+  holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
 }>;
   trades: TradeData[];
   totalValue: number;
@@ -48,21 +68,41 @@ interface PortfolioData {
 
 interface RiskSettings {
 
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
 
+
+
+
+
+
 }
 
 interface SimpleStrategy {
+
+
+
+
+
 
   id: string;
   name: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE';
   weight: number;
-  parameters: { [key: string]: any 
+  parameters: { [key: string]: any;
+
+
+
+
+
 };
 }
 
@@ -73,11 +113,21 @@ interface TradingStrategy extends SimpleStrategy {
 
 interface AIAnalysisResult {
 
+
+
+
+
+
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   riskAssessment: RiskAnalysis;
   portfolioAnalysis: PortfolioAnalysis;
   recommendations: string[];
+
+
+
+
+
 
 }
 
@@ -597,14 +647,29 @@ export class AdvancedAIAutoTrader {
 // Type definitions;
 interface RiskSettings {
 
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
 
+
+
+
+
+
 }
 
 interface PerformanceMetrics {
+
+
+
+
+
 
   totalReturn: number;
   dailyReturn: number;
@@ -615,9 +680,19 @@ interface PerformanceMetrics {
   winRate: number;
   lastUpdated: Date;
 
+
+
+
+
+
 }
 
 interface PortfolioAnalysis {
+
+
+
+
+
 
   totalValue: number;
   totalPnL: number;
@@ -638,6 +713,11 @@ interface PortfolioAnalysis {
     avgLoss: number;
     profitFactor: number;
   
+
+
+
+
+
 };
   diversification: {
     sectors: Record<string, number>;
@@ -648,6 +728,11 @@ interface PortfolioAnalysis {
 
 interface PositionAnalysis {
 
+
+
+
+
+
   symbol: string;
   shares: number;
   avgPrice: number;
@@ -656,19 +741,39 @@ interface PositionAnalysis {
   pnl: number;
   pnlPercent: number;
 
+
+
+
+
+
 }
 
 interface TradeExecutionResult {
+
+
+
+
+
 
   success: boolean;
   trades?: Trade[];
   portfolioValue?: number;
   message: string;
 
+
+
+
+
+
 }
 
 // Enhanced Trade interface;
 interface Trade {
+
+
+
+
+
 
   symbol: string;
   action: 'buy' | 'sell';
@@ -681,13 +786,28 @@ interface Trade {
   stopLoss?: number;
   takeProfit?: number;
 
+
+
+
+
+
 }
 
 // Enhanced Portfolio interface;
 interface Portfolio {
 
+
+
+
+
+
   cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number 
+  holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
 }>;
   trades: Trade[];
   totalValue?: number;

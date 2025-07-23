@@ -5,6 +5,11 @@ declare module 'next-auth' {
   interface Session {
 
 
+
+
+
+
+
     user: {
       id: string;
       email: string;
@@ -14,10 +19,20 @@ declare module 'next-auth' {
       status?: string;
     
 
+
+
+
+
+
 };
   }
 
   interface User {
+
+
+
+
+
 
 
     id: string;
@@ -27,6 +42,11 @@ declare module 'next-auth' {
     status?: string;
   
 
+
+
+
+
+
 }
 }
 
@@ -34,10 +54,20 @@ declare module 'next-auth/jwt' {
   interface JWT {
 
 
+
+
+
+
+
     userId?: string;
     tier?: string;
     status?: string;
   
+
+
+
+
+
 
 }
 }

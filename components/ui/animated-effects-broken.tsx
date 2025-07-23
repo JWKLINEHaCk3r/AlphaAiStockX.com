@@ -6,8 +6,18 @@ import { cn } from '@/lib/utils';
 
 interface FloatingElementsProps {
 
+
+
+
+
+
   count?: number;
   className?: string;
+
+
+
+
+
 
 }
 
@@ -86,9 +96,19 @@ export function FloatingElements({ count = 20, className }: FloatingElementsProp
 
 interface MorphingBlobProps {
 
+
+
+
+
+
   className?: string;
   color?: string;
   size?: number;
+
+
+
+
+
 
 }
 
@@ -176,9 +196,19 @@ export function MorphingBlob({
 
 interface QuantumGridProps {
 
+
+
+
+
+
   className?: string;
   gridSize?: number;
   lineColor?: string;
+
+
+
+
+
 
 }
 
@@ -264,9 +294,19 @@ export function QuantumGrid({
 
 interface HolographicDisplayProps {
 
+
+
+
+
+
   children: React.ReactNode;
   className?: string;
   intensity?: number;
+
+
+
+
+
 
 }
 
@@ -323,9 +363,19 @@ export function HolographicDisplay({
 
 interface DataStreamProps {
 
+
+
+
+
+
   className?: string;
   speed?: number;
   density?: number;
+
+
+
+
+
 
 }
 

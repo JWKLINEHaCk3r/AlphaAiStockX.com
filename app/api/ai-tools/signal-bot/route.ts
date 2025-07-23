@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
         headers: {
           'Content-Type': 'text/event-stream',;
           'Cache-Control': 'no-cache',;
-          Connection: 'keep-alive',;
+          Connection: 'keep-alive';
         },;
       });
     } else {
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         success: true,;
         data: signal,;
-        timestamp: new Date().toISOString(),;
+        timestamp: new Date().toISOString();
       });
     }
   } catch (error) {
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(;
       {
         error: 'Failed to generate signal',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
+        details: error instanceof Error ? error.message : 'Unknown error';
       },;
       { status: 500 }
     );

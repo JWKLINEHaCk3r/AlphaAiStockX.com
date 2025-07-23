@@ -4,6 +4,11 @@ import { NextApiRequest, NextApiResponse } from 'next/server';
 interface HealthMetrics {
 
 
+
+
+
+
+
   status: 'healthy' | 'degraded' | 'unhealthy';
   timestamp: string;
   uptime: number;
@@ -15,6 +20,11 @@ interface HealthMetrics {
     externalAPIs: ServiceHealth;
     websocket: ServiceHealth;
   
+
+
+
+
+
 
 };
   performance: {
@@ -33,10 +43,20 @@ interface HealthMetrics {
 interface ServiceHealth {
 
 
+
+
+
+
+
   status: 'up' | 'down' | 'degraded';
   responseTime?: number;
   lastCheck: string;
   error?: string;
+
+
+
+
+
 
 
 }

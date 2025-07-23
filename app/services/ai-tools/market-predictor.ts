@@ -3,6 +3,11 @@ import { OpenAI } from 'openai';
 // AI Market Predictor - Vision + LLM Fusion for Market Analysis;
 interface ChartAnalysis {
 
+
+
+
+
+
   id: string;
   imageUrl: string;
   symbol: string;
@@ -16,9 +21,19 @@ interface ChartAnalysis {
   reasoning: string;
   timestamp: string;
 
+
+
+
+
+
 }
 
 interface TechnicalPattern {
+
+
+
+
+
 
   name: string;
   type: 'BULLISH' | 'BEARISH' | 'NEUTRAL';
@@ -27,18 +42,38 @@ interface TechnicalPattern {
   target?: number;
   stopLoss?: number;
 
+
+
+
+
+
 }
 
 interface PriceLevel {
+
+
+
+
+
 
   level: number;
   type: 'SUPPORT' | 'RESISTANCE' | 'PIVOT';
   strength: number;
   description: string;
 
+
+
+
+
+
 }
 
 interface MarketPrediction {
+
+
+
+
+
 
   direction: 'UP' | 'DOWN' | 'SIDEWAYS';
   timeframe: '1D' | '1W' | '1M' | '3M';
@@ -49,13 +84,28 @@ interface MarketPrediction {
   stopLoss?: number;
   takeProfit?: number;
 
+
+
+
+
+
 }
 
 interface MarketContext {
 
+
+
+
+
+
   vixLevel: number;
   marketSentiment: 'FEAR' | 'GREED' | 'NEUTRAL';
-  sectorRotation: { [sector: string]: number 
+  sectorRotation: { [sector: string]: number;
+
+
+
+
+
 };
   economicIndicators: EconomicIndicator[];
   newsEvents: NewsEvent[];
@@ -63,24 +113,49 @@ interface MarketContext {
 
 interface EconomicIndicator {
 
+
+
+
+
+
   name: string;
   value: number;
   change: number;
   impact: 'POSITIVE' | 'NEGATIVE' | 'NEUTRAL';
   description: string;
 
+
+
+
+
+
 }
 
 interface NewsEvent {
+
+
+
+
+
 
   title: string;
   impact: 'HIGH' | 'MEDIUM' | 'LOW';
   sentiment: number; // -1 to 1;
   timestamp: string;
 
+
+
+
+
+
 }
 
 interface MultiModalAnalysis {
+
+
+
+
+
 
   visualAnalysis: ChartAnalysis;
   fundamentalFactors: string[];
@@ -89,6 +164,11 @@ interface MultiModalAnalysis {
   reasoning: string;
   riskFactors: string[];
   opportunities: string[];
+
+
+
+
+
 
 }
 

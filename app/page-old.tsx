@@ -7,6 +7,11 @@ import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../co
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter } from '../components/ui/card.tsx';
@@ -256,11 +261,26 @@ function FuturisticHoloRings() {
 // Remove if you add @types/web-speech-api or similar in the future;
 interface SpeechRecognitionEventLike {
 
+
+
+
+
+
   resultIndex: number;
-  results: ArrayLike<{ 0: { transcript: string 
+  results: ArrayLike<{ 0: { transcript: string;
+
+
+
+
+
 } }>;
 }
 interface SpeechRecognitionLike {
+
+
+
+
+
 
   continuous: boolean;
   interimResults: boolean;
@@ -269,6 +289,11 @@ interface SpeechRecognitionLike {
   onend: (() => void) | null;
   start: () => void;
   stop: () => void;
+
+
+
+
+
 
 }
 

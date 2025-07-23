@@ -8,16 +8,31 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 // Session interface to avoid type issues;
 interface UserSession {
 
+
+
+
+
+
   user?: {
     id?: string;
     email?: string;
     name?: string;
   
+
+
+
+
+
 };
 }
 
 // Portfolio data interfaces;
 interface PortfolioData {
+
+
+
+
+
 
   totalValue: number;
   cash: number;
@@ -31,9 +46,19 @@ interface PortfolioData {
   longMarketValue: number;
   shortMarketValue: number;
 
+
+
+
+
+
 }
 
 interface PositionData {
+
+
+
+
+
 
   symbol: string;
   quantity: number;
@@ -46,6 +71,11 @@ interface PositionData {
   side: 'LONG' | 'SHORT';
   changeToday: number;
   changeTodayPercent?: number;
+
+
+
+
+
 
 }
 

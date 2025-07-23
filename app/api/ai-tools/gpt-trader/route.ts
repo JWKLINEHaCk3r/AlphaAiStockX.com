@@ -19,9 +19,9 @@ export async function POST(request: NextRequest) {
         const welcomeMessage = await chatbot.initializeChat(userId, userProfile);
 
         return NextResponse.json({
-          success: true,;
-          data: welcomeMessage,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: welcomeMessage,
+          timestamp: new Date().toISOString()
         });
 
       case 'message':;
@@ -32,16 +32,16 @@ export async function POST(request: NextRequest) {
         const response = await chatbot.processMessage(userId, message);
 
         return NextResponse.json({
-          success: true,;
-          data: response,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: response,
+          timestamp: new Date().toISOString()
         });
 
       case 'portfolio_simulation':;
         const { holdings } = body;
         if (!holdings || !Array.isArray(holdings)) {
-          return NextResponse.json(;
-            { error: 'Holdings array is required for portfolio simulation' },;
+          return NextResponse.json(
+            { error: 'Holdings array is required for portfolio simulation' },
             { status: 400 }
           );
         }
@@ -49,26 +49,20 @@ export async function POST(request: NextRequest) {
         const simulation = await chatbot.simulatePortfolio(userId, holdings);
 
         return NextResponse.json({
-          success: true,;
-          data: simulation,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: simulation,
+          timestamp: new Date().toISOString()
         });
 
       default:;
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: initialize, message, portfolio_simulation' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: initialize, message, portfolio_simulation' }, { status: 400 });
     }
   } catch (error) {
     console.error('GPT-Trader Chatbot API Error:', error);
-    return NextResponse.json(;
-      {
-        error: 'Failed to process request',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to process request',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }
 
@@ -87,23 +81,23 @@ export async function GET(request: NextRequest) {
         const history = chatbot.getChatHistory(userId);
 
         return NextResponse.json({
-          success: true,;
-          data: history,;
-          count: history.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: history,
+          count: history.length,
+          timestamp: new Date().toISOString()
         });
 
       case 'clear':;
         chatbot.clearChatHistory(userId);
 
         return NextResponse.json({
-          success: true,;
-          message: 'Chat history cleared',;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          message: 'Chat history cleared',
+          timestamp: new Date().toISOString()
         });
 
       default:;
-        return NextResponse.json(;
+        return NextResponse.json({ error: 'Invalid action. Supported actions: history, clear' }, { status: 400 });
           { error: 'Invalid action. Supported actions: history, clear' },;
           { status: 400 }
         );

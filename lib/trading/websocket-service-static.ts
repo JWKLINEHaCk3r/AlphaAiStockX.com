@@ -3,15 +3,30 @@
 export interface WebSocketMessage {
 
 
+
+
+
+
+
   type: string;
   userId?: string;
   data: any;
   timestamp: number;
 
 
+
+
+
+
+
 }
 
 export interface MarketDataUpdate {
+
+
+
+
+
 
 
   symbol: string;
@@ -27,9 +42,19 @@ export interface MarketDataUpdate {
   marketCap?: number;
 
 
+
+
+
+
+
 }
 
 export interface PortfolioUpdate {
+
+
+
+
+
 
 
   userId: string;
@@ -46,11 +71,21 @@ export interface PortfolioUpdate {
     unrealizedPnLPercent: number;
   
 
+
+
+
+
+
 }>;
   timestamp: number;
 }
 
 export interface AlertMessage {
+
+
+
+
+
 
 
   userId: string;
@@ -61,9 +96,19 @@ export interface AlertMessage {
   persistent?: boolean;
 
 
+
+
+
+
+
 }
 
 export interface TradingSignal {
+
+
+
+
+
 
 
   symbol: string;
@@ -75,9 +120,19 @@ export interface TradingSignal {
   timeframe: '1m' | '5m' | '15m' | '1h' | '4h' | '1d';
 
 
+
+
+
+
+
 }
 
 export interface WebSocketConfig {
+
+
+
+
+
 
 
   port: number;
@@ -86,6 +141,11 @@ export interface WebSocketConfig {
     methods: string[];
     credentials: boolean;
   
+
+
+
+
+
 
 };
   pingTimeout: number;
@@ -101,6 +161,11 @@ export interface WebSocketConfig {
 export interface WebSocketStats {
 
 
+
+
+
+
+
   connectedClients: number;
   totalConnections: number;
   messagesPerSecond: number;
@@ -111,15 +176,30 @@ export interface WebSocketStats {
   lastErrorTimestamp?: number;
 
 
+
+
+
+
+
 }
 
 export interface SubscriptionTopic {
+
+
+
+
+
 
 
   type: 'market_data' | 'portfolio' | 'alerts' | 'trading_signals' | 'news';
   symbols?: string[];
   userId?: string;
   filters?: Record<string, any>;
+
+
+
+
+
 
 
 }

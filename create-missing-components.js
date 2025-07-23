@@ -45,7 +45,17 @@ import React from 'react';
 interface Props {
 
 
+
+
+
+
+
   onSelect: (name: string) => void;
+
+
+
+
+
 
 
 }

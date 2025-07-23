@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -40,11 +45,21 @@ import { CheckCircle, AlertTriangle, XCircle, RefreshCw, Globe, Zap, Shield } fr
 
 interface FixStatus {
 
+
+
+
+
+
   category: string;
   issue: string;
   status: 'checking' | 'fixed' | 'needs_attention' | 'critical';
   description: string;
   solution: string;
+
+
+
+
+
 
 }
 

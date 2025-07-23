@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -100,6 +105,11 @@ import {
 // Type definitions for crypto analyzer;
 interface CryptoData {
 
+
+
+
+
+
   symbol: string;
   name: string;
   price: number;
@@ -112,9 +122,19 @@ interface CryptoData {
   socialVolume: number;
   whaleActivity: string;
 
+
+
+
+
+
 }
 
 interface DefiMetric {
+
+
+
+
+
 
   name: string;
   tvl: number;
@@ -124,9 +144,19 @@ interface DefiMetric {
   users24h: number;
   riskScore: number;
 
+
+
+
+
+
 }
 
 interface NftData {
+
+
+
+
+
 
   name: string;
   floorPrice: number;
@@ -135,9 +165,19 @@ interface NftData {
   sales24h: number;
   holders: number;
 
+
+
+
+
+
 }
 
 interface OnChainMetrics {
+
+
+
+
+
 
   btcHashRate?: number;
   ethGasPrice?: number;
@@ -145,6 +185,11 @@ interface OnChainMetrics {
   activeAddresses?: number;
   exchangeInflows?: number;
   exchangeOutflows?: number;
+
+
+
+
+
 
 }
 

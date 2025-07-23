@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react';
 
 interface MarketDataPoint {
 
+
+
+
+
+
   symbol: string;
   price: number;
   volume: number;
@@ -18,9 +23,19 @@ interface MarketDataPoint {
   rsi?: number;
   macd?: number;
 
+
+
+
+
+
 }
 
 interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -35,17 +50,37 @@ interface AISignal {
   risk: 'LOW' | 'MEDIUM' | 'HIGH';
   timeframe: string;
 
+
+
+
+
+
 }
 
 interface TradingUpdate {
+
+
+
+
+
 
   type: 'POSITION' | 'ORDER' | 'EXECUTION' | 'PNL';
   data: unknown;
   timestamp: number;
 
+
+
+
+
+
 }
 
 interface SentimentData {
+
+
+
+
+
 
   symbol: string;
   overall: number;
@@ -55,6 +90,11 @@ interface SentimentData {
   volume: number;
   sources: string[];
   timestamp: number;
+
+
+
+
+
 
 }
 

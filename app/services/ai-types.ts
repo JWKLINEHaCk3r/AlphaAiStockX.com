@@ -1,10 +1,25 @@
 export interface TechnicalIndicator {
 
+
+
+
+
+
   calculate: (...args: any[]) => number | object;
+
+
+
+
+
 
 }
 // Extended types for AI trading engine;
 export interface HistoricalDataPoint {
+
+
+
+
+
 
   price: number;
   volume: number;
@@ -16,6 +31,11 @@ export interface HistoricalDataPoint {
       signal?: number;
       histogram?: number;
     
+
+
+
+
+
 };
     atr?: number;
     adx?: number;
@@ -67,6 +87,11 @@ export interface HistoricalDataPoint {
 
 export interface MarketData {
 
+
+
+
+
+
   symbol: string;
   price: number;
   high: number;
@@ -91,9 +116,19 @@ export interface MarketData {
   industry?: string;
   close?: number;
 
+
+
+
+
+
 }
 
 export interface TradingSignal {
+
+
+
+
+
 
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
@@ -114,12 +149,22 @@ export interface TradingSignal {
     momentum: number;
     volume: number;
   
+
+
+
+
+
 };
   timestamp: Date;
   validUntil?: Date;
 }
 
 export interface RiskAnalysis {
+
+
+
+
+
 
   symbol: string;
   riskScore: number; // 0-100 (higher = riskier);
@@ -129,7 +174,12 @@ export interface RiskAnalysis {
   maxDrawdown?: number;
   var95?: number; // Value at Risk 95%;
   expectedReturn?: number;
-  correlations?: { [symbol: string]: number 
+  correlations?: { [symbol: string]: number;
+
+
+
+
+
 };
   sectorRisk?: number;
   liquidityRisk?: number;
@@ -139,6 +189,11 @@ export interface RiskAnalysis {
 }
 
 export interface PortfolioMetrics {
+
+
+
+
+
 
   totalValue: number;
   totalCash: number;
@@ -156,6 +211,11 @@ export interface PortfolioMetrics {
       unrealizedPnL: number;
       unrealizedPnLPercent: number;
     
+
+
+
+
+
 };
   };
   diversification: {
@@ -184,6 +244,11 @@ export interface PortfolioMetrics {
 
 export interface AIModelPrediction {
 
+
+
+
+
+
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   confidence: number;
@@ -199,6 +264,11 @@ export interface AIModelPrediction {
     sentiment: number;
     macro: number;
   
+
+
+
+
+
 };
   probability: {
     up: number;
@@ -210,6 +280,11 @@ export interface AIModelPrediction {
 }
 
 export interface MarketSentiment {
+
+
+
+
+
 
   symbol?: string;
   overall: number; // -1 to 1;
@@ -225,6 +300,11 @@ export interface MarketSentiment {
     analyst: number;
     insider: number;
   
+
+
+
+
+
 };
   trending: boolean;
   volume: number;
@@ -233,12 +313,22 @@ export interface MarketSentiment {
 
 export interface TradingStrategy {
 
+
+
+
+
+
   id: string;
   name: string;
   description: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ARBITRAGE' | 'TREND_FOLLOWING' | 'PAIRS' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE' | 'BACKTESTING';
-  parameters: { [key: string]: any 
+  parameters: { [key: string]: any;
+
+
+
+
+
 };
   performance: {
     totalReturn: number;
@@ -267,6 +357,11 @@ export interface TradingStrategy {
 
 export interface Trade {
 
+
+
+
+
+
   id: string;
   symbol: string;
   side: 'BUY' | 'SELL';
@@ -284,11 +379,21 @@ export interface Trade {
   filledPrice?: number;
   filledQuantity?: number;
   reason?: string;
-  metadata?: { [key: string]: any 
+  metadata?: { [key: string]: any;
+
+
+
+
+
 };
 }
 
 export interface AlertConfig {
+
+
+
+
+
 
   id: string;
   type: 'PRICE' | 'VOLUME' | 'TECHNICAL' | 'NEWS' | 'PORTFOLIO';
@@ -298,6 +403,11 @@ export interface AlertConfig {
     value: number;
     field: string;
   
+
+
+
+
+
 };
   frequency: 'REAL_TIME' | 'DAILY' | 'WEEKLY';
   channels: ('EMAIL' | 'SMS' | 'PUSH' | 'WEBHOOK')[];
@@ -309,11 +419,21 @@ export interface AlertConfig {
 
 export interface BacktestResult {
 
+
+
+
+
+
   strategyId: string;
   period: {
     start: Date;
     end: Date;
   
+
+
+
+
+
 };
   performance: {
     totalReturn: number;
@@ -351,6 +471,11 @@ export interface BacktestResult {
 
 export interface NewsArticle {
 
+
+
+
+
+
   id: string;
   title: string;
   summary: string;
@@ -366,9 +491,19 @@ export interface NewsArticle {
   imageUrl?: string;
   relevanceScore: number;
 
+
+
+
+
+
 }
 
 export interface EconomicIndicator {
+
+
+
+
+
 
   name: string;
   value: number;
@@ -383,5 +518,10 @@ export interface EconomicIndicator {
   country: string;
   category: string;
   impact: number; // -1 to 1;
+
+
+
+
+
 
 }

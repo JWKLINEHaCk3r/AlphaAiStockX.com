@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -104,13 +109,28 @@ import {
 // Type definitions;
 interface User {
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
 
+
+
+
+
+
 }
 
 interface Trade {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -131,9 +151,19 @@ interface Trade {
   pnl?: number;
   positionSize?: number;
 
+
+
+
+
+
 }
 
 interface SystemSettings {
+
+
+
+
+
 
   maxRiskPerTrade: number;
   maxDailyRisk: number;
@@ -144,9 +174,19 @@ interface SystemSettings {
   moneyMarketTransfer: boolean;
   minProfitForTransfer: number;
 
+
+
+
+
+
 }
 
 interface AIAnalysis {
+
+
+
+
+
 
   marketCondition?: string;
   sentiment?: string;
@@ -156,9 +196,19 @@ interface AIAnalysis {
   opportunityScore?: number;
   nextTradeETA?: number;
 
+
+
+
+
+
 }
 
 interface ExecutionMetrics {
+
+
+
+
+
 
   totalTrades: number;
   winRate: number;
@@ -170,9 +220,19 @@ interface ExecutionMetrics {
   avgWin: number;
   avgLoss: number;
 
+
+
+
+
+
 }
 
 interface MarketConditions {
+
+
+
+
+
 
   symbol: string;
   confidence: number;
@@ -182,12 +242,27 @@ interface MarketConditions {
   signal: string;
   riskLevel: string;
 
+
+
+
+
+
 }
 
 interface AutomatedTradingSystemProps {
 
+
+
+
+
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
+
+
+
 
 }
 

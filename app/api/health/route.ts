@@ -15,6 +15,11 @@ const HEALTH_CONFIG = {
 
 interface HealthStatus {
 
+
+
+
+
+
   status: 'healthy' | 'warning' | 'critical' | 'down';
   timestamp: string;
   uptime: number;
@@ -24,9 +29,19 @@ interface HealthStatus {
   performance: PerformanceHealth;
   dependencies: DependencyHealth[];
 
+
+
+
+
+
 }
 
 interface ServiceHealth {
+
+
+
+
+
 
   name: string;
   status: 'healthy' | 'warning' | 'critical' | 'down';
@@ -34,15 +49,30 @@ interface ServiceHealth {
   lastCheck: string;
   error?: string;
 
+
+
+
+
+
 }
 
 interface PerformanceHealth {
+
+
+
+
+
 
   memory: {
     used: number;
     total: number;
     percentage: number;
   
+
+
+
+
+
 };
   cpu?: {
     usage: number;
@@ -58,10 +88,20 @@ interface PerformanceHealth {
 
 interface DependencyHealth {
 
+
+
+
+
+
   name: string;
   status: 'healthy' | 'warning' | 'critical' | 'down';
   latency?: number;
   error?: string;
+
+
+
+
+
 
 }
 

@@ -2,6 +2,11 @@ import { Alert } from "../../components/ui/alert";
 // Common types for the trading application;
 export interface Strategy {
 
+
+
+
+
+
   id: number;
   name: string;
   description: string;
@@ -16,9 +21,19 @@ export interface Strategy {
   timeframe?: string;
   status?: string;
 
+
+
+
+
+
 }
 
 export interface Trade {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -32,9 +47,19 @@ export interface Trade {
   pnl: number;
   strategy: string;
 
+
+
+
+
+
 }
 
 export interface BotStats {
+
+
+
+
+
 
   totalTrades: number;
   winRate: number;
@@ -47,9 +72,19 @@ export interface BotStats {
   maxDrawdown: number;
   accountBalance: number;
 
+
+
+
+
+
 }
 
 export interface BotSettings {
+
+
+
+
+
 
   maxPositionSize: number;
   maxDailyLoss: number;
@@ -61,9 +96,19 @@ export interface BotSettings {
   takeProfitPercent: number;
   maxLeverage: number;
 
+
+
+
+
+
 }
 
 export interface User {
+
+
+
+
+
 
   id: number;
   name: string;
@@ -78,14 +123,29 @@ export interface User {
   accountValue: number;
   totalTrades: number;
 
+
+
+
+
+
 }
 
 export interface Alert {
+
+
+
+
+
 
   id: number;
   type: string;
   message: string;
   timestamp: Date;
   severity: string;
+
+
+
+
+
 
 }

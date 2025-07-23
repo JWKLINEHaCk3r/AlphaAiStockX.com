@@ -1,4 +1,3 @@
-import { Input } from "../../../../components/ui/input";
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';
@@ -22,6 +21,11 @@ const ORDER_VALIDATION = {
 // Order data interface for validation;
 interface OrderInputData {
 
+
+
+
+
+
   symbol: string;
   quantity: number;
   side: 'buy' | 'sell';
@@ -29,6 +33,11 @@ interface OrderInputData {
   timeInForce: 'day' | 'gtc' | 'ioc' | 'fok';
   limitPrice?: number;
   stopPrice?: number;
+
+
+
+
+
 
 }
 
@@ -211,18 +220,15 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('[Error][GET Orders]:', error);
 
-    return NextResponse.json(;
-      {
-        error: 'Failed to fetch orders',;
-        message:;
-          process.env.NODE_ENV === 'development';
-            ? error instanceof Error;
-              ? error.message;
-              : 'Unknown error';
-            : 'Internal server error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to fetch orders',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? error instanceof Error;
+            ? error.message;
+            : 'Unknown error';
+          : 'Internal server error',;
+    }, { status: 500 });
   }
 }
 
@@ -256,13 +262,10 @@ export async function POST(request: NextRequest) {
     const validation = validateOrderData(requestData);
     if (!validation.valid || !validation.data) {
       console.log(`[OrderValidation] Invalid order data from user ${userId}:`, validation.errors);
-      return NextResponse.json(;
-        {
-          error: 'Invalid order data',;
-          details: validation.errors,;
-        },;
-        { status: 400 }
-      );
+      return NextResponse.json({
+        error: 'Invalid order data',;
+        details: validation.errors,;
+      }, { status: 400 });
     }
 
     const orderData = validation.data;
@@ -284,9 +287,7 @@ export async function POST(request: NextRequest) {
     // Create order through trading service;
     const order = await tradingService.placeOrder(orderRequest);
 
-    console.log(;
-      `[OrderCreated] User ${userId}: ${order.id} - ${orderData.symbol} ${orderData.side} ${orderData.quantity}`;
-    );
+    console.log(`[OrderCreated] User ${userId}: ${order.id} - ${orderData.symbol} ${orderData.side} ${orderData.quantity}`);
 
     return NextResponse.json({
       success: true,;
@@ -311,18 +312,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json(;
-      {
-        error: 'Failed to create order',;
-        message:;
-          process.env.NODE_ENV === 'development';
-            ? error instanceof Error;
-              ? error.message || 'Unknown error';
-              : 'Unknown error';
-            : 'Internal server error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to create order',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? error instanceof Error;
+            ? error.message || 'Unknown error';
+            : 'Unknown error';
+          : 'Internal server error',;
+    }, { status: 500 });
   }
 }
 
@@ -370,17 +368,14 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Order not found or already cancelled' }, { status: 404 });
     }
 
-    return NextResponse.json(;
-      {
-        error: 'Failed to cancel order',;
-        message:;
-          process.env.NODE_ENV === 'development';
-            ? error instanceof Error;
-              ? error.message;
-              : 'Unknown error';
-            : 'Internal server error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to cancel order',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? error instanceof Error;
+            ? error.message;
+            : 'Unknown error';
+          : 'Internal server error',;
+    }, { status: 500 });
   }
 }

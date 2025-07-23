@@ -3,6 +3,11 @@ import { OpenAI } from 'openai';
 
 interface TechnicalIndicators {
 
+
+
+
+
+
   rsi: number;
   macd: number;
   sma20: number;
@@ -13,10 +18,20 @@ interface TechnicalIndicators {
     lower: number;
     middle: number;
   
+
+
+
+
+
 };
 }
 
 interface NewsItem {
+
+
+
+
+
 
   title: string;
   summary: string;
@@ -25,9 +40,19 @@ interface NewsItem {
   source: string;
   url: string;
 
+
+
+
+
+
 }
 
 interface StockSignal {
+
+
+
+
+
 
   symbol: string;
   signal: 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
@@ -43,6 +68,11 @@ interface StockSignal {
   indicators: TechnicalIndicators;
   news: NewsItem[];
   timestamp: string;
+
+
+
+
+
 
 }
 

@@ -7,14 +7,29 @@ interface SpeechRecognitionEvent extends Event {
 interface SpeechRecognitionResultList {
 
 
+
+
+
+
+
   length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
 
 
+
+
+
+
+
 }
 
 interface SpeechRecognitionResult {
+
+
+
+
+
 
 
   length: number;
@@ -23,13 +38,28 @@ interface SpeechRecognitionResult {
   isFinal: boolean;
 
 
+
+
+
+
+
 }
 
 interface SpeechRecognitionAlternative {
 
 
+
+
+
+
+
   transcript: string;
   confidence: number;
+
+
+
+
+
 
 
 }
@@ -62,8 +92,18 @@ declare var webkitSpeechRecognition: {
 interface Window {
 
 
+
+
+
+
+
   SpeechRecognition: typeof SpeechRecognition;
   webkitSpeechRecognition: typeof webkitSpeechRecognition;
+
+
+
+
+
 
 
 }

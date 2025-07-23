@@ -3,6 +3,11 @@ import { EventEmitter } from 'events';
 // Interface definitions;
 export interface MarketDataPoint {
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
@@ -10,9 +15,19 @@ export interface MarketDataPoint {
   volume: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
 
   id: string;
   symbol: string;
@@ -21,23 +36,48 @@ export interface AISignal {
   price: number;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface TradingUpdate {
+
+
+
+
+
 
   id: string;
   type: 'ORDER' | 'TRADE' | 'PORTFOLIO';
   data: unknown;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 export interface SentimentData {
+
+
+
+
+
 
   symbol: string;
   sentiment: number;
   volume: number;
   timestamp: Date;
+
+
+
+
+
 
 }
 

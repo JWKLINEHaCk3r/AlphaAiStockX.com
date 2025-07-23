@@ -1,31 +1,66 @@
 // Comprehensive Trading Education Service - Series 6 & 7 Test Prep;
 interface TestQuestion {
 
+
+
+
+
+
   id: string;
   question: string;
   options: string[];
   correct: number;
   explanation: string;
 
+
+
+
+
+
 }
 
 interface UserAnswer {
+
+
+
+
+
 
   questionId: string;
   answer: number;
   correct: boolean;
   timestamp: Date;
 
+
+
+
+
+
 }
 
 interface UserProgress {
 
+
+
+
+
+
   answers: UserAnswer[];
   score: number;
+
+
+
+
+
 
 }
 
 interface StudyPlan {
+
+
+
+
+
 
   targetExam: string;
   weakAreas: string[];
@@ -33,21 +68,46 @@ interface StudyPlan {
   weeklyPlan: WeeklyPlan[];
   practiceTests: PracticeTest[];
 
+
+
+
+
+
 }
 
 interface WeeklyPlan {
+
+
+
+
+
 
   week: number;
   topic: string;
   tasks: string[];
 
+
+
+
+
+
 }
 
 interface PracticeTest {
 
+
+
+
+
+
   name: string;
   difficulty: string;
   questions: number;
+
+
+
+
+
 
 }
 

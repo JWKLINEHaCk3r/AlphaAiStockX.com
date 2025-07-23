@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -52,6 +57,11 @@ import {
 // Type definitions;
 interface ModelPerformance {
 
+
+
+
+
+
   precision: number;
   recall: number;
   f1Score: number;
@@ -59,9 +69,19 @@ interface ModelPerformance {
   maxDrawdown: number;
   winRate: number;
 
+
+
+
+
+
 }
 
 interface AIModel {
+
+
+
+
+
 
   id: number;
   name: string;
@@ -76,9 +96,19 @@ interface AIModel {
   profitability: number;
   progress?: number;
 
+
+
+
+
+
 }
 
 interface TrainingConfig {
+
+
+
+
+
 
   modelType: string;
   datasetSize: string;
@@ -91,22 +121,47 @@ interface TrainingConfig {
   timeframe: string;
   lookbackPeriod: number;
 
+
+
+
+
+
 }
 
 interface ModelType {
+
+
+
+
+
 
   id: string;
   name: string;
   accuracy: string;
   speed: string;
 
+
+
+
+
+
 }
 
 interface PredictionTarget {
 
+
+
+
+
+
   id: string;
   name: string;
   type: string;
+
+
+
+
+
 
 }
 

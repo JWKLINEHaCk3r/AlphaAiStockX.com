@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -22,6 +27,11 @@ import { PieChart, TrendingUp, Target, Shield, BarChart3, Zap, RefreshCw, AlertT
 
 interface PortfolioPosition {
 
+
+
+
+
+
   symbol: string;
   name: string;
   currentAllocation: number;
@@ -32,9 +42,19 @@ interface PortfolioPosition {
   beta: number;
   sharpeRatio: number;
 
+
+
+
+
+
 }
 
 interface OptimizationResult {
+
+
+
+
+
 
   expectedReturn: number;
   volatility: number;
@@ -45,15 +65,30 @@ interface OptimizationResult {
   riskScore: number;
   diversificationScore: number;
 
+
+
+
+
+
 }
 
 interface RebalanceAction {
+
+
+
+
+
 
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   currentShares: number;
   targetShares: number;
   dollarAmount: number;
+
+
+
+
+
 
 }
 

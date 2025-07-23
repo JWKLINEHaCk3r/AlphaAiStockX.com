@@ -1,44 +1,12 @@
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
-import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardDescription } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-=======;
-import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+import { TabsTrigger, TabsList, TabsContent, Tabs } from '../../../components/ui/tabs';
+import { Alert } from '../../../components/ui/alert';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Button } from '../../../components/ui/button';
 import {
   AIStockPrediction,;
   SportsEvent,;
@@ -106,8 +74,18 @@ import ComplianceCenter from '../compliance/ComplianceCenter';
 
 interface InvestorProfileProps {
 
+
+
+
+
+
   onSwitchToOwner?: () => void;
   onSwitchToAdmin?: () => void;
+
+
+
+
+
 
 }
 

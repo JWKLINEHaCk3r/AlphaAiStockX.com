@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -58,6 +63,11 @@ import {
 
 interface UserProfile {
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
@@ -73,9 +83,19 @@ interface UserProfile {
   location?: string;
   winRate?: number;
 
+
+
+
+
+
 }
 
 interface SystemAlert {
+
+
+
+
+
 
   id: string;
   type: string;
@@ -83,9 +103,19 @@ interface SystemAlert {
   severity: string;
   timestamp: string;
 
+
+
+
+
+
 }
 
 interface LiveData {
+
+
+
+
+
 
   realtimeUsers: number;
   tradesPerSecond: number;
@@ -96,6 +126,11 @@ interface LiveData {
     memoryUsage?: number;
     cpuUsage?: number;
   
+
+
+
+
+
 };
 }
 

@@ -4,6 +4,11 @@ import { useEffect, useRef, useCallback } from 'react';
 
 interface UseWebSocketOptions {
 
+
+
+
+
+
   onOpen?: () => void;
   onMessage?: (data: any) => void;
   onError?: (error: any) => void;
@@ -11,13 +16,28 @@ interface UseWebSocketOptions {
   reconnectInterval?: number;
   maxReconnectAttempts?: number;
 
+
+
+
+
+
 }
 
 interface WebSocketHook {
 
+
+
+
+
+
   sendMessage: (message: any) => void;
   readyState: number;
   isConnected: boolean;
+
+
+
+
+
 
 }
 

@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -37,6 +42,11 @@ import {
 
 interface NeuralAnalysis {
 
+
+
+
+
+
   marketSentiment?: {
     overall: number;
     bullish: number;
@@ -44,6 +54,11 @@ interface NeuralAnalysis {
     neutral: number;
     confidence: number;
   
+
+
+
+
+
 };
   volatilityPrediction?: {
     current: number;
@@ -67,6 +82,11 @@ interface NeuralAnalysis {
 
 interface DeepLearningModel {
 
+
+
+
+
+
   id: number;
   name: string;
   type: string;
@@ -77,9 +97,19 @@ interface DeepLearningModel {
   status: string;
   processing: string;
 
+
+
+
+
+
 }
 
 interface MarketPattern {
+
+
+
+
+
 
   id: number;
   name: string;
@@ -91,9 +121,19 @@ interface MarketPattern {
   target: number;
   probability: number;
 
+
+
+
+
+
 }
 
 interface NeuralPrediction {
+
+
+
+
+
 
   symbol: string;
   neuralScore: number;
@@ -104,6 +144,11 @@ interface NeuralPrediction {
   volatility: number;
   momentum: number;
   riskLevel: string;
+
+
+
+
+
 
 }
 
