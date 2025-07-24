@@ -22,18 +22,16 @@ RUN pnpm install --frozen-lockfile --prod=false
 FROM base AS builder
 WORKDIR /app
 
-# Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
 
-# Copy source code and ensure fixer scripts are present in /app
+# Copy source code and fixer scripts to /app
 COPY . .
-# Explicitly copy fixer scripts to /app (for build scripts)
-COPY fix-all-ui-imports.js /app/
-COPY fix-card-imports.js /app/
-COPY fix-missing-cards.js /app/
-COPY fix-missing-ui-imports.js /app/
-COPY fix-nextauth-imports.js /app/
-COPY fix-typescript-errors.js /app/
+COPY fix-all-ui-imports.js /app/fix-all-ui-imports.js
+COPY fix-card-imports.js /app/fix-card-imports.js
+COPY fix-missing-cards.js /app/fix-missing-cards.js
+COPY fix-missing-ui-imports.js /app/fix-missing-ui-imports.js
+COPY fix-nextauth-imports.js /app/fix-nextauth-imports.js
+COPY fix-typescript-errors.js /app/fix-typescript-errors.js
 
 # Build arguments
 ARG NODE_ENV=production
@@ -78,8 +76,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
-# Ensure fixer scripts are present in the runtime image
 COPY --from=builder /app/fix-all-ui-imports.js ./fix-all-ui-imports.js
+COPY --from=builder /app/fix-card-imports.js ./fix-card-imports.js
+COPY --from=builder /app/fix-missing-cards.js ./fix-missing-cards.js
+COPY --from=builder /app/fix-missing-ui-imports.js ./fix-missing-ui-imports.js
+COPY --from=builder /app/fix-nextauth-imports.js ./fix-nextauth-imports.js
+COPY --from=builder /app/fix-typescript-errors.js ./fix-typescript-errors.js
 
 # Create logs directory
 RUN mkdir -p /app/logs && chown nextjs:nodejs /app/logs
