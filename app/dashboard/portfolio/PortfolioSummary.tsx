@@ -10,8 +10,10 @@ interface Account {
 
 
 
+
   portfolio_value?: number | string;
   // Add other account properties as needed;
+
 
 
 
@@ -29,9 +31,11 @@ export default function PortfolioSummary() {
 
 
 
+
     symbol: string;
     // Add other position properties as needed;
   
+
 
 
 

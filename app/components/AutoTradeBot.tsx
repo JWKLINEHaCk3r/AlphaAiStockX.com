@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -69,6 +70,7 @@ interface TradingStrategy {
 
 
 
+
   id: number;
   name: string;
   description: string;
@@ -85,9 +87,11 @@ interface TradingStrategy {
 
 
 
+
 }
 
 interface RecentTrade {
+
 
 
 
@@ -104,6 +108,7 @@ interface RecentTrade {
   strategy: string;
   status?: string;
   type: string;
+
 
 
 

@@ -21,8 +21,10 @@ interface StockData {
 
 
 
+
   time: string;
   price: number;
+
 
 
 
@@ -38,7 +40,9 @@ interface AlphaWolfBotProps {
 
 
 
+
   stockSymbol: string;
+
 
 
 

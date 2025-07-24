@@ -11,6 +11,7 @@ interface FloatingElement {
 
 
 
+
   id: number;
   x: number;
   y: number;
@@ -24,9 +25,11 @@ interface FloatingElement {
 
 
 
+
 }
 
 interface MatrixStream {
+
 
 
 
@@ -43,6 +46,7 @@ interface MatrixStream {
 
 
 
+
 }
 
 interface Point {
@@ -52,8 +56,10 @@ interface Point {
 
 
 
+
   x: number;
   y: number;
+
 
 
 

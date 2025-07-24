@@ -12,6 +12,7 @@ import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
@@ -35,8 +36,10 @@ interface SatelliteData {
 
 
 
+
   yearOverYearChange: number;
   confidence: number;
+
 
 
 
@@ -52,7 +55,9 @@ interface CreditCardData {
 
 
 
+
   yearOverYearChange: number;
+
 
 
 
@@ -68,7 +73,9 @@ interface WebTrafficData {
 
 
 
+
   yearOverYearChange: number;
+
 
 
 
@@ -84,7 +91,9 @@ interface SocialSentimentData {
 
 
 
+
   overallSentiment: number;
+
 
 
 
@@ -100,7 +109,9 @@ interface MobileAppData {
 
 
 
+
   yearOverYearGrowth: number;
+
 
 
 
@@ -116,7 +127,9 @@ interface GeolocationData {
 
 
 
+
   yearOverYearChange: number;
+
 
 
 

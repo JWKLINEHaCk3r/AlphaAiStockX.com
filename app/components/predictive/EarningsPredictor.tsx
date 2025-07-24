@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -81,6 +82,7 @@ interface EarningData {
 
 
 
+
   symbol: string;
   name: string;
   date: string;
@@ -100,9 +102,11 @@ interface EarningData {
 
 
 
+
 }
 
 interface EarningsAnalysisData {
+
 
 
 
@@ -121,9 +125,11 @@ interface EarningsAnalysisData {
 
 
 
+
 }
 
 interface SurprisePrediction {
+
 
 
 
@@ -142,6 +148,7 @@ interface SurprisePrediction {
 
 
 
+
 }
 
 // Add interface for company data;
@@ -152,10 +159,12 @@ interface CompanyData {
 
 
 
+
   symbol: string;
   name: string;
   date: string;
   time: string;
+
 
 
 

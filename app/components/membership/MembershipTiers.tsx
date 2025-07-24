@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -52,8 +53,10 @@ interface MembershipTiersProps {
 
 
 
+
   currentTier: string;
   onUpgrade: (tierId: string) => void;
+
 
 
 
@@ -63,6 +66,7 @@ interface MembershipTiersProps {
 }
 
 interface TierFeatures {
+
 
 
 
@@ -87,9 +91,11 @@ interface TierFeatures {
 
 
 
+
 }
 
 interface Tier {
+
 
 
 
@@ -102,6 +108,7 @@ interface Tier {
   monthlyPrice: number;
   yearlyPrice: number;
   icon: React.ComponentType<{ className?: string;
+
 
 
 

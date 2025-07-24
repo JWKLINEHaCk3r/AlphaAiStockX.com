@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -95,6 +96,7 @@ interface SentimentData {
 
 
 
+
   [symbol: string]: {
     overall: number;
     bullish: number;
@@ -110,10 +112,12 @@ interface SentimentData {
 
 
 
+
 };
 }
 
 interface SocialMediaPlatform {
+
 
 
 
@@ -135,9 +139,11 @@ interface SocialMediaPlatform {
 
 
 
+
 }
 
 interface NewsItem {
+
 
 
 
@@ -158,9 +164,11 @@ interface NewsItem {
 
 
 
+
 }
 
 interface InfluencerData {
+
 
 
 
@@ -181,9 +189,11 @@ interface InfluencerData {
 
 
 
+
 }
 
 interface MarketMood {
+
 
 
 
@@ -197,6 +207,7 @@ interface MarketMood {
   crowdSentiment: number;
   riskAppetite: string;
   institutionalFlow: string;
+
 
 
 

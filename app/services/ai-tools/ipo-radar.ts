@@ -8,6 +8,7 @@ interface IPOData {
 
 
 
+
   id: string;
   companyName: string;
   symbol?: string;
@@ -17,6 +18,7 @@ interface IPOData {
     low: number;
     high: number;
   
+
 
 
 
@@ -48,6 +50,7 @@ interface IPOAnalysis {
 
 
 
+
   ipoId: string;
   successProbability: number;
   riskScore: number;
@@ -68,9 +71,11 @@ interface IPOAnalysis {
 
 
 
+
 }
 
 interface MarketConditions {
+
 
 
 
@@ -81,6 +86,7 @@ interface MarketConditions {
   ipoMarketSentiment: 'BULLISH' | 'NEUTRAL' | 'BEARISH';
   recentIpoPerformance: number;
   sectorPerformance: { [sector: string]: number;
+
 
 
 

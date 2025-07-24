@@ -1,3 +1,54 @@
+// ...existing code...
+export class NextGenAITradingEngine extends EventEmitter {
+  // Strategy stubs
+  private bollingerMeanReversionStrategy() { return []; }
+  private momentumBreakoutStrategy() { return []; }
+  private macdMomentumStrategy() { return []; }
+  private statisticalArbitrageStrategy() { return []; }
+  private triangularArbitrageStrategy() { return []; }
+  private marketMakingStrategy() { return []; }
+  private adaptiveTrendStrategy() { return []; }
+  private ichimokuTrendStrategy() { return []; }
+  private patternRecognitionStrategy() { return []; }
+  private volumeProfileStrategy() { return []; }
+  private onBalanceVolumeStrategy() { return []; }
+  private deltaHedgingStrategy() { return []; }
+  private gammaScalpingStrategy() { return []; }
+  private newsSentimentStrategy() { return []; }
+  private socialSentimentStrategy() { return []; }
+  private lstmPredictorStrategy() { return []; }
+  private ensembleMLStrategy() { return []; }
+  private microstructureStrategy() { return []; }
+  private crossAssetStrategy() { return []; }
+  private factorModelStrategy() { return []; }
+  private regimeDetectionStrategy() { return []; }
+  private satelliteDataStrategy() { return []; }
+  private economicCalendarStrategy() { return []; }
+  private volatilityArbitrageStrategy() { return []; }
+  private darkPoolStrategy() { return []; }
+  private cryptoArbitrageStrategy() { return []; }
+  private neuralEnsembleStrategy() { return []; }
+  // Indicator stubs
+  private calculateSMA() { return []; }
+  private calculateEMA() { return []; }
+  private calculateRSI() { return []; }
+  private calculateMACD() { return []; }
+  private calculateBollingerBands() { return []; }
+  private calculateStochastic() { return []; }
+  private calculateATR() { return []; }
+  private calculateADX() { return []; }
+  private calculateOBV() { return []; }
+  private calculateVWAP() { return []; }
+  private calculateIchimoku() { return []; }
+  private calculateFibonacci() { return []; }
+  private calculateElliottWave() { return []; }
+  private calculateGann() { return []; }
+  private calculateMarketProfile() { return []; }
+  // Helper stubs
+  private calculateStandardDeviation() { return []; }
+  private buildTransformerModel() { return Promise.resolve({}); }
+  private buildEnsembleModel() { return Promise.resolve({}); }
+// ...existing code...
 // import { Calendar } from '@/components/ui/calendar';
 // Next-Generation AI Trading Engine - 50+ Advanced Strategies & Algorithms;
 import { EventEmitter } from 'events';
@@ -6,6 +57,7 @@ import type { Strategy } from '../types/trading-types';
 import type { MarketData, TradingSignal, TechnicalIndicator } from './ai-types';
 
 export interface DiversificationRules {
+
 
 
 
@@ -22,6 +74,7 @@ export interface DiversificationRules {
 
 
 
+
 }
 
 export interface PerformanceMetrics {
@@ -31,7 +84,9 @@ export interface PerformanceMetrics {
 
 
 
+
   [key: string]: number;
+
 
 
 
@@ -47,6 +102,7 @@ export interface AITradingConfig {
 
 
 
+
   strategies: string[];
   riskLevel: 'conservative' | 'moderate' | 'aggressive' | 'ultra_aggressive';
   maxPositionSize: number;
@@ -56,6 +112,7 @@ export interface AITradingConfig {
   diversificationRules: DiversificationRules;
   timeframes: string[];
   indicators: string[];
+
 
 
 
@@ -97,7 +154,7 @@ export class NextGenAITradingEngine extends EventEmitter {
       params: { period: 20, stdDev: 2, rsiThreshold: 30 }
     });
 
-    // 2. Momentum Strategies;
+    // 2. Momentum Strategies
     this.strategies.set('momentumBreakout', {
       name: 'Multi-Timeframe Momentum',
       // type: 'momentum',
@@ -135,7 +192,7 @@ export class NextGenAITradingEngine extends EventEmitter {
       params: { spread: 0.002, inventory: 0.5, risk: 0.1 }
     });
 
-    // 5. Trend Following Strategies;
+    // 5. Trend Following Strategies
     this.strategies.set('adaptiveTrend', {
       name: 'Adaptive Trend Following',
       // type: 'trend',
@@ -203,7 +260,7 @@ export class NextGenAITradingEngine extends EventEmitter {
       params: { platforms: ['twitter', 'reddit'], weight: 0.3 }
     });
 
-    // 10. Machine Learning Strategies
+    // 10. Machine Learning Strategies;
     this.strategies.set('lstmPredictor', {
       name: 'LSTM Price Predictor',
       // type: 'ml',
@@ -752,8 +809,8 @@ export class NextGenAITradingEngine extends EventEmitter {
     }
 
     const meanReturn = returns.reduce((a, b) => a + b, 0) / returns.length;
-    const stdReturn = Math.sqrt(;
-      returns.reduce((sum, r) => sum + Math.pow(r - meanReturn, 2), 0) / returns.length;
+    const stdReturn = Math.sqrt(
+      returns.reduce((sum, r) => sum + Math.pow(r - meanReturn, 2), 0) / returns.length
     );
     const zScore = (returns[returns.length - 1] - meanReturn) / stdReturn;
 
@@ -761,18 +818,18 @@ export class NextGenAITradingEngine extends EventEmitter {
 
     if (Math.abs(zScore) > 2) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: zScore > 2 ? 'SELL' : 'BUY',;
-        confidence: Math.min(0.95, Math.abs(zScore) / 3),;
-        price: data[data.length - 1].close,;
-        timestamp: new Date(),;
-        strategy: 'statisticalArbitrage',;
-        stopLoss: data[data.length - 1].close * (zScore > 2 ? 1.02 : 0.98),;
-        takeProfit: data[data.length - 1].close * (zScore > 2 ? 0.95 : 1.05),;
-        strength: 'MODERATE',;
-        timeframe: '1d',;
-        reasoning: ['Statistical arbitrage z-score threshold met.'],;
-        indicators: { technical: 70, fundamental: 50, sentiment: 50, momentum: 60, volume: 60 },;
+        symbol: data[0].symbol,
+        action: zScore > 2 ? 'SELL' : 'BUY',
+        confidence: Math.min(0.95, Math.abs(zScore) / 3),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'statisticalArbitrage',
+        stopLoss: data[data.length - 1].close * (zScore > 2 ? 1.02 : 0.98),
+        takeProfit: data[data.length - 1].close * (zScore > 2 ? 0.95 : 1.05),
+        strength: 'MODERATE',
+        timeframe: '1d',
+        reasoning: ['Statistical arbitrage z-score threshold met.'],
+        indicators: { technical: 70, fundamental: 50, sentiment: 50, momentum: 60, volume: 60 }
       });
     }
 
@@ -792,18 +849,18 @@ export class NextGenAITradingEngine extends EventEmitter {
 
     if (arbitrageOpportunity > threshold) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: syntheticPrice > directPrice ? 'BUY' : 'SELL',;
-        confidence: Math.min(0.9, arbitrageOpportunity * 100),;
-        price: directPrice,;
-        timestamp: new Date(),;
-        strategy: 'triangularArbitrage',;
-        stopLoss: directPrice * (syntheticPrice > directPrice ? 0.999 : 1.001),;
-        takeProfit: directPrice * (syntheticPrice > directPrice ? 1.001 : 0.999),;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['Triangular arbitrage opportunity detected.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 50 },;
+        symbol: data[0].symbol,
+        action: syntheticPrice > directPrice ? 'BUY' : 'SELL',
+        confidence: Math.min(0.9, arbitrageOpportunity * 100),
+        price: directPrice,
+        timestamp: new Date(),
+        strategy: 'triangularArbitrage',
+        stopLoss: directPrice * (syntheticPrice > directPrice ? 0.999 : 1.001),
+        takeProfit: directPrice * (syntheticPrice > directPrice ? 1.001 : 0.999),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Triangular arbitrage opportunity detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 50 }
       });
     }
 
@@ -826,33 +883,33 @@ export class NextGenAITradingEngine extends EventEmitter {
       const spread = currentPrice * (volatility / 100) * 0.5;
 
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'BUY',;
-        confidence: 0.7,;
-        price: currentPrice - spread,;
-        timestamp: new Date(),;
-        strategy: 'marketMaking',;
-        stopLoss: (currentPrice - spread) * 0.98,;
-        takeProfit: currentPrice,;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['High volume market making buy.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 },;
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: 0.7,
+        price: currentPrice - spread,
+        timestamp: new Date(),
+        strategy: 'marketMaking',
+        stopLoss: (currentPrice - spread) * 0.98,
+        takeProfit: currentPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['High volume market making buy.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 }
       });
 
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'SELL',;
-        confidence: 0.7,;
-        price: currentPrice + spread,;
-        timestamp: new Date(),;
-        strategy: 'marketMaking',;
-        stopLoss: (currentPrice + spread) * 1.02,;
-        takeProfit: currentPrice,;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['High volume market making sell.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 },;
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: 0.7,
+        price: currentPrice + spread,
+        timestamp: new Date(),
+        strategy: 'marketMaking',
+        stopLoss: (currentPrice + spread) * 1.02,
+        takeProfit: currentPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['High volume market making sell.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 80 }
       });
     }
 
@@ -883,33 +940,33 @@ export class NextGenAITradingEngine extends EventEmitter {
 
     if (currentEma8 > currentEma21 && currentEma21 > currentEma55 && trendStrength > 0.02) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'BUY',;
-        confidence: Math.min(0.95, trendStrength * 10),;
-        price: data[data.length - 1].close,;
-        timestamp: new Date(),;
-        strategy: 'adaptiveTrend',;
-        stopLoss: currentEma21,;
-        takeProfit: data[data.length - 1].close * 1.05,;
-        strength: 'STRONG',;
-        timeframe: '4h',;
-        reasoning: ['Adaptive trend following buy signal.'],;
-        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 },;
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: Math.min(0.95, trendStrength * 10),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'adaptiveTrend',
+        stopLoss: currentEma21,
+        takeProfit: data[data.length - 1].close * 1.05,
+        strength: 'STRONG',
+        timeframe: '4h',
+        reasoning: ['Adaptive trend following buy signal.'],
+        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 }
       });
     } else if (currentEma8 < currentEma21 && currentEma21 < currentEma55 && trendStrength > 0.02) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'SELL',;
-        confidence: Math.min(0.95, trendStrength * 10),;
-        price: data[data.length - 1].close,;
-        timestamp: new Date(),;
-        strategy: 'adaptiveTrend',;
-        stopLoss: currentEma21,;
-        takeProfit: data[data.length - 1].close * 0.95,;
-        strength: 'STRONG',;
-        timeframe: '4h',;
-        reasoning: ['Adaptive trend following sell signal.'],;
-        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 },;
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: Math.min(0.95, trendStrength * 10),
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'adaptiveTrend',
+        stopLoss: currentEma21,
+        takeProfit: data[data.length - 1].close * 0.95,
+        strength: 'STRONG',
+        timeframe: '4h',
+        reasoning: ['Adaptive trend following sell signal.'],
+        indicators: { technical: 85, fundamental: 50, sentiment: 50, momentum: 90, volume: 70 }
       });
     }
 
@@ -954,33 +1011,33 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Generate signals based on Ichimoku;
     if (currentPrice > cloudTop && tenkanSen > kijunSen) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'BUY',;
-        confidence: 0.85,;
-        price: currentPrice,;
-        timestamp: new Date(),;
-        strategy: 'ichimokuTrend',;
-        stopLoss: kijunSen,;
-        takeProfit: currentPrice * 1.08,;
-        strength: 'STRONG',;
-        timeframe: '1d',;
-        reasoning: ['Ichimoku cloud bullish breakout.'],;
-        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 },;
+        symbol: data[0].symbol,
+        action: 'BUY',
+        confidence: 0.85,
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'ichimokuTrend',
+        stopLoss: kijunSen,
+        takeProfit: currentPrice * 1.08,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ichimoku cloud bullish breakout.'],
+        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 }
       });
     } else if (currentPrice < cloudBottom && tenkanSen < kijunSen) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: 'SELL',;
-        confidence: 0.85,;
-        price: currentPrice,;
-        timestamp: new Date(),;
-        strategy: 'ichimokuTrend',;
-        stopLoss: kijunSen,;
-        takeProfit: currentPrice * 0.92,;
-        strength: 'STRONG',;
-        timeframe: '1d',;
-        reasoning: ['Ichimoku cloud bearish breakdown.'],;
-        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 },;
+        symbol: data[0].symbol,
+        action: 'SELL',
+        confidence: 0.85,
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'ichimokuTrend',
+        stopLoss: kijunSen,
+        takeProfit: currentPrice * 0.92,
+        strength: 'STRONG',
+        timeframe: '1d',
+        reasoning: ['Ichimoku cloud bearish breakdown.'],
+        indicators: { technical: 90, fundamental: 50, sentiment: 50, momentum: 80, volume: 70 }
       });
     }
 
@@ -998,18 +1055,18 @@ export class NextGenAITradingEngine extends EventEmitter {
     for (const pattern of patterns) {
       if (pattern.type === 'hammer' || pattern.type === 'doji') {
         signals.push({
-          symbol: data[0].symbol,;
-          action: pattern.bullish ? 'BUY' : 'SELL',;
-          confidence: pattern.strength,;
-          price: data[data.length - 1].close,;
-          timestamp: new Date(),;
-          strategy: 'patternRecognition',;
-          stopLoss: data[data.length - 1].close * (pattern.bullish ? 0.97 : 1.03),;
-          takeProfit: data[data.length - 1].close * (pattern.bullish ? 1.05 : 0.95),;
-          strength: 'MODERATE',;
-          timeframe: '1h',;
-          reasoning: ['Pattern recognition: ' + pattern.type],;
-          indicators: { technical: 70, fundamental: 40, sentiment: 50, momentum: 60, volume: 60 },;
+          symbol: data[0].symbol,
+          action: pattern.bullish ? 'BUY' : 'SELL',
+          confidence: pattern.strength,
+          price: data[data.length - 1].close,
+          timestamp: new Date(),
+          strategy: 'patternRecognition',
+          stopLoss: data[data.length - 1].close * (pattern.bullish ? 0.97 : 1.03),
+          takeProfit: data[data.length - 1].close * (pattern.bullish ? 1.05 : 0.95),
+          strength: 'MODERATE',
+          timeframe: '1h',
+          reasoning: ['Pattern recognition: ' + pattern.type],
+          indicators: { technical: 70, fundamental: 40, sentiment: 50, momentum: 60, volume: 60 }
         });
       }
     }
@@ -1025,30 +1082,30 @@ export class NextGenAITradingEngine extends EventEmitter {
     const prices = data.map(d => d.close);
 
     // Volume profile analysis;
-    const volumeWeightedPrice =;
+    const volumeWeightedPrice =
       data.reduce((sum, d) => sum + d.close * d.volume, 0) / volumes.reduce((sum, v) => sum + v, 0);
 
     const currentPrice = prices[prices.length - 1];
-    const volumeRatio =;
+    const volumeRatio =
       volumes[volumes.length - 1] / (volumes.reduce((a, b) => a + b, 0) / volumes.length);
 
-    if (;
-      volumeRatio > 2 &&;
-      Math.abs(currentPrice - volumeWeightedPrice) / volumeWeightedPrice > 0.02;
+    if (
+      volumeRatio > 2 &&
+      Math.abs(currentPrice - volumeWeightedPrice) / volumeWeightedPrice > 0.02
     ) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: currentPrice > volumeWeightedPrice ? 'SELL' : 'BUY',;
-        confidence: Math.min(0.9, volumeRatio / 3),;
-        price: currentPrice,;
-        timestamp: new Date(),;
-        strategy: 'volumeProfile',;
-        stopLoss: currentPrice * (currentPrice > volumeWeightedPrice ? 1.02 : 0.98),;
-        takeProfit: volumeWeightedPrice,;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['Volume profile divergence detected.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 },;
+        symbol: data[0].symbol,
+        action: currentPrice > volumeWeightedPrice ? 'SELL' : 'BUY',
+        confidence: Math.min(0.9, volumeRatio / 3),
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'volumeProfile',
+        stopLoss: currentPrice * (currentPrice > volumeWeightedPrice ? 1.02 : 0.98),
+        takeProfit: volumeWeightedPrice,
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Volume profile divergence detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 }
       });
     }
 
@@ -1082,18 +1139,18 @@ export class NextGenAITradingEngine extends EventEmitter {
     // Divergence detection;
     if ((obvTrend > 0 && priceTrend < 0) || (obvTrend < 0 && priceTrend > 0)) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: obvTrend > 0 ? 'BUY' : 'SELL',;
-        confidence: 0.75,;
-        price: data[data.length - 1].close,;
-        timestamp: new Date(),;
-        strategy: 'onBalanceVolume',;
-        stopLoss: data[data.length - 1].close * (obvTrend > 0 ? 0.97 : 1.03),;
-        takeProfit: data[data.length - 1].close * (obvTrend > 0 ? 1.05 : 0.95),;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['OBV divergence detected.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 },;
+        symbol: data[0].symbol,
+        action: obvTrend > 0 ? 'BUY' : 'SELL',
+        confidence: 0.75,
+        price: data[data.length - 1].close,
+        timestamp: new Date(),
+        strategy: 'onBalanceVolume',
+        stopLoss: data[data.length - 1].close * (obvTrend > 0 ? 0.97 : 1.03),
+        takeProfit: data[data.length - 1].close * (obvTrend > 0 ? 1.05 : 0.95),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['OBV divergence detected.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 90 }
       });
     }
 
@@ -1113,18 +1170,18 @@ export class NextGenAITradingEngine extends EventEmitter {
 
     if (Math.abs(delta) > 0.5) {
       signals.push({
-        symbol: data[0].symbol,;
-        action: delta > 0 ? 'BUY' : 'SELL',;
-        confidence: Math.min(0.8, Math.abs(delta)),;
-        price: currentPrice,;
-        timestamp: new Date(),;
-        strategy: 'deltaHedging',;
-        stopLoss: currentPrice * (delta > 0 ? 0.98 : 1.02),;
-        takeProfit: currentPrice * (delta > 0 ? 1.03 : 0.97),;
-        strength: 'MODERATE',;
-        timeframe: '1h',;
-        reasoning: ['Delta hedging threshold exceeded.'],;
-        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 60 },;
+        symbol: data[0].symbol,
+        action: delta > 0 ? 'BUY' : 'SELL',
+        confidence: Math.min(0.8, Math.abs(delta)),
+        price: currentPrice,
+        timestamp: new Date(),
+        strategy: 'deltaHedging',
+        stopLoss: currentPrice * (delta > 0 ? 0.98 : 1.02),
+        takeProfit: currentPrice * (delta > 0 ? 1.03 : 0.97),
+        strength: 'MODERATE',
+        timeframe: '1h',
+        reasoning: ['Delta hedging threshold exceeded.'],
+        indicators: { technical: 60, fundamental: 40, sentiment: 40, momentum: 60, volume: 60 }
       });
     }
 

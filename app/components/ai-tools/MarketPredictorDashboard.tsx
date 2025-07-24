@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -31,6 +32,7 @@ interface PatternMatch {
 
 
 
+
   type: string;
   confidence: number;
   description: string;
@@ -43,9 +45,11 @@ interface PatternMatch {
 
 
 
+
 }
 
 interface PredictionResult {
+
 
 
 
@@ -67,6 +71,7 @@ interface PredictionResult {
     support: number;
     resistance: number;
   
+
 
 
 

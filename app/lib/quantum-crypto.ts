@@ -7,9 +7,11 @@ export interface QuantumSecurityConfig {
 
 
 
+
   algorithm: 'CRYSTALS-Kyber' | 'CRYSTALS-Dilithium' | 'SPHINCS+' | 'FALCON';
   keySize: number;
   securityLevel: 1 | 3 | 5;
+
 
 
 
@@ -25,11 +27,13 @@ export interface QuantumKeyPair {
 
 
 
+
   publicKey: string;
   privateKey: string;
   algorithm: string;
   createdAt: Date;
   expiresAt: Date;
+
 
 
 

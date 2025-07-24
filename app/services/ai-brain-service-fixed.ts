@@ -23,11 +23,13 @@ interface MarketSentiment {
 
 
 
+
   overall: number; // -1 to 1;
   news: number;
   social: number;
   technical: number;
   institutional: number;
+
 
 
 

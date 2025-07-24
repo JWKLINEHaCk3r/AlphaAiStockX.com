@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -52,6 +53,7 @@ interface Message {
 
 
 
+
   id: number;
   type: 'user' | 'ai';
   content: string;
@@ -59,6 +61,7 @@ interface Message {
   mood?: string;
   priority?: string;
   confidence?: number;
+
 
 
 
@@ -78,9 +81,11 @@ declare global {
 
 
 
+
     SpeechRecognition: unknown;
     webkitSpeechRecognition: unknown;
   
+
 
 
 

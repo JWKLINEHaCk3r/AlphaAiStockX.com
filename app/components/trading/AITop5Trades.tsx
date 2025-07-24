@@ -9,9 +9,11 @@ interface Trade {
 
 
 
+
   ticker: string;
   direction: 'up' | 'down';
   percentage: number;
+
 
 
 

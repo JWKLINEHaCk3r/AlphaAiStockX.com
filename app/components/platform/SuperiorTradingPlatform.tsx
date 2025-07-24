@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -134,6 +135,7 @@ interface User {
 
 
 
+
   id: string;
   username: string;
   email: string;
@@ -163,9 +165,11 @@ interface User {
 
 
 
+
 }
 
 interface TradingSignal {
+
 
 
 
@@ -198,9 +202,11 @@ interface TradingSignal {
 
 
 
+
 }
 
 interface SocialPost {
+
 
 
 
@@ -227,10 +233,12 @@ interface SocialPost {
 
 
 
+
 };
 }
 
 interface Portfolio {
+
 
 
 
@@ -253,9 +261,11 @@ interface Portfolio {
 
 
 
+
 }
 
 interface Position {
+
 
 
 
@@ -275,9 +285,11 @@ interface Position {
 
 
 
+
 }
 
 interface AIModel {
+
 
 
 
@@ -299,6 +311,7 @@ interface AIModel {
 
 
 
+
 }
 
 interface NextGenPlatformProps {
@@ -308,7 +321,9 @@ interface NextGenPlatformProps {
 
 
 
+
   initialUser?: User;
+
 
 
 

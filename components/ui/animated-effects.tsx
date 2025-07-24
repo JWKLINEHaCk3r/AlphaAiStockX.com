@@ -10,8 +10,10 @@ interface FloatingElementsProps {
 
 
 
+
   count?: number;
   className?: string;
+
 
 
 
@@ -100,9 +102,11 @@ interface MorphingBlobProps {
 
 
 
+
   className?: string;
   color?: string;
   size?: number;
+
 
 
 
@@ -200,9 +204,11 @@ interface QuantumGridProps {
 
 
 
+
   className?: string;
   gridSize?: number;
   lineColor?: string;
+
 
 
 
@@ -298,9 +304,11 @@ interface HolographicDisplayProps {
 
 
 
+
   children: React.ReactNode;
   className?: string;
   intensity?: number;
+
 
 
 
@@ -367,9 +375,11 @@ interface DataStreamProps {
 
 
 
+
   className?: string;
   speed?: number;
   density?: number;
+
 
 
 

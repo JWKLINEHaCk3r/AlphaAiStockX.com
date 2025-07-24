@@ -12,6 +12,7 @@ interface User {
 
 
 
+
   id: string;
   name: string;
   email: string;
@@ -36,9 +37,11 @@ interface User {
 
 
 
+
 }
 
 interface Portfolio {
+
 
 
 
@@ -67,9 +70,11 @@ interface Portfolio {
 
 
 
+
 }
 
 interface Position {
+
 
 
 
@@ -92,9 +97,11 @@ interface Position {
 
 
 
+
 }
 
 interface Order {
+
 
 
 
@@ -119,9 +126,11 @@ interface Order {
 
 
 
+
 }
 
 interface AISignal {
+
 
 
 
@@ -148,9 +157,11 @@ interface AISignal {
 
 
 
+
 }
 
 interface TradingContextType {
+
 
 
 
@@ -202,6 +213,7 @@ interface TradingContextType {
 
 
 
+
 }
 
 const TradingContext = createContext<TradingContextType | undefined>(undefined);
@@ -221,7 +233,9 @@ interface TradingProviderProps {
 
 
 
+
   children: ReactNode;
+
 
 
 

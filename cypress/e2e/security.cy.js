@@ -77,10 +77,10 @@ describe('AlphaAiStockX Security Tests', () => {
     it('should require CSRF token for state-changing operations', () => {
       // Test CSRF protection on API endpoints;
       cy.request({
-        method: 'POST',
-        url: '/api/user/settings',
-        failOnStatusCode: false,
-        body: { theme: 'dark' },
+        method: 'POST',;
+        url: '/api/user/settings',;
+        failOnStatusCode: false,;
+        body: { theme: 'dark' },;
       }).then(response => {
         expect(response.status).to.be.oneOf([403, 422]); // Should fail without CSRF token;
       });

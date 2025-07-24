@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -47,13 +48,13 @@ import { Button } from "../../../components/ui/button";
 import React from 'react';
 
 import { useState } from 'react';
-// ...existing code...
+// ...existing code...;
 import { Shield, Lock, Key, AlertTriangle, CheckCircle, Cpu, Database, Atom } from 'lucide-react';
 
 // Simple auth mock for demo;
 const useAuth = () => ({
-  user: { id: '1', name: 'Demo User', email: 'demo@example.com' },
-  isAuthenticated: true,
+  user: { id: '1', name: 'Demo User', email: 'demo@example.com' },;
+  isAuthenticated: true,;
 });
 
 export default function QuantumResistantSecurity() {

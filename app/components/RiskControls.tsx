@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -44,12 +45,14 @@ interface BotSettings {
 
 
 
+
   maxDailyLoss: number;
   maxDrawdown: number;
   maxPositionSize: number;
   riskPerTrade: number;
   emergencyStop: boolean;
   maxConcurrentTrades: number;
+
 
 
 
@@ -65,9 +68,11 @@ interface BotStats {
 
 
 
+
   dailyPnL: number;
   accountBalance: number;
   activeTrades: number;
+
 
 
 
@@ -83,9 +88,11 @@ interface RiskControlsProps {
 
 
 
+
   botSettings: BotSettings;
   setBotSettings: (updater: (prev: BotSettings) => BotSettings) => void;
   botStats: BotStats;
+
 
 
 

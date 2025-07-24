@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -114,6 +115,7 @@ interface User {
 
 
 
+
   name?: string;
   bio?: string;
   location?: string;
@@ -134,6 +136,7 @@ interface User {
 
 
 
+
 }
 
 interface CustomizableProfileProps {
@@ -143,8 +146,10 @@ interface CustomizableProfileProps {
 
 
 
+
   user: User;
   onUpdateProfile: (data: any) => void;
+
 
 
 

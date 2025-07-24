@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -114,6 +115,7 @@ interface AIModel {
 
 
 
+
   id: string;
   name: string;
   description: string;
@@ -136,9 +138,11 @@ interface AIModel {
 
 
 
+
 }
 
 interface BacktestResult {
+
 
 
 
@@ -160,9 +164,11 @@ interface BacktestResult {
 
 
 
+
 }
 
 interface TrainingDataConfig {
+
 
 
 
@@ -182,9 +188,11 @@ interface TrainingDataConfig {
 
 
 
+
 }
 
 interface Hyperparameters {
+
 
 
 
@@ -203,9 +211,11 @@ interface Hyperparameters {
 
 
 
+
 }
 
 interface User {
+
 
 
 
@@ -222,9 +232,11 @@ interface User {
 
 
 
+
 }
 
 interface TrainingJob {
+
 
 
 
@@ -241,6 +253,7 @@ interface TrainingJob {
   accuracy: number;
   estimatedTimeRemaining: number;
   startedAt: Date;
+
 
 
 

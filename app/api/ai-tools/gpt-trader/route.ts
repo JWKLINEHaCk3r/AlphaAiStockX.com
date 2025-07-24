@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     switch (action) {
-      case 'initialize':;
+      case 'initialize':
         const { userProfile } = body;
         const welcomeMessage = await chatbot.initializeChat(userId, userProfile);
 
@@ -81,19 +81,19 @@ export async function GET(request: NextRequest) {
         const history = chatbot.getChatHistory(userId);
 
         return NextResponse.json({
-          success: true,
-          data: history,
-          count: history.length,
-          timestamp: new Date().toISOString()
+          success: true,;
+          data: history,;
+          count: history.length,;
+          timestamp: new Date().toISOString();
         });
 
       case 'clear':;
         chatbot.clearChatHistory(userId);
 
         return NextResponse.json({
-          success: true,
-          message: 'Chat history cleared',
-          timestamp: new Date().toISOString()
+          success: true,;
+          message: 'Chat history cleared',;
+          timestamp: new Date().toISOString();
         });
 
       default:;

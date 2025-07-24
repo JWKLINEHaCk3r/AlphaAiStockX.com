@@ -10,8 +10,10 @@ declare global {
 
 
 
+
       [elemName: string]: any;
     
+
 
 
 

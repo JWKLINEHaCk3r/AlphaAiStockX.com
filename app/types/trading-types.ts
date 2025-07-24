@@ -6,9 +6,11 @@ export interface Strategy {
 
 
 
+
   name: string;
   execute: (data: MarketData[]) => Promise<TradingSignal[]>;
   params: Record<string, unknown>;
+
 
 
 
@@ -22,6 +24,7 @@ import type { MarketData, TradingSignal } from "../services/ai-types";
 // (Removed duplicate Strategy interface);
 // Comprehensive TypeScript interfaces for the AlphaAiStockX platform;
 export interface Position {
+
 
 
 
@@ -44,9 +47,11 @@ export interface Position {
 
 
 
+
 }
 
 export interface TechnicalIndicators {
+
 
 
 
@@ -59,6 +64,7 @@ export interface TechnicalIndicators {
     signal: number;
     histogram: number;
   
+
 
 
 
@@ -93,6 +99,7 @@ export interface VolumeProfile {
 
 
 
+
   avgVolume: number;
   volumeTrend: 'increasing' | 'decreasing' | 'stable';
   volumeSpikes: boolean;
@@ -103,9 +110,11 @@ export interface VolumeProfile {
 
 
 
+
 }
 
 export interface BollingerBands {
+
 
 
 
@@ -123,9 +132,11 @@ export interface BollingerBands {
 
 
 
+
 }
 
 export interface SupportResistance {
+
 
 
 
@@ -142,9 +153,11 @@ export interface SupportResistance {
 
 
 
+
 }
 
 export interface OptimalAllocations {
+
 
 
 
@@ -163,10 +176,12 @@ export interface OptimalAllocations {
 
 
 
+
 };
 }
 
 export interface RebalanceAction {
+
 
 
 
@@ -185,9 +200,11 @@ export interface RebalanceAction {
 
 
 
+
 }
 
 export interface EarningData {
+
 
 
 
@@ -209,9 +226,11 @@ export interface EarningData {
 
 
 
+
 }
 
 export interface AdminUser {
+
 
 
 
@@ -232,9 +251,11 @@ export interface AdminUser {
 
 
 
+
 }
 
 export interface AdminPermissions {
+
 
 
 
@@ -252,9 +273,11 @@ export interface AdminPermissions {
 
 
 
+
 }
 
 export interface AdminSettings {
+
 
 
 
@@ -272,9 +295,11 @@ export interface AdminSettings {
 
 
 
+
 }
 
 export interface AIStockPrediction {
+
 
 
 
@@ -296,9 +321,11 @@ export interface AIStockPrediction {
 
 
 
+
 }
 
 export interface SectorPerformance {
+
 
 
 
@@ -318,6 +345,7 @@ export interface SectorPerformance {
 
 
 
+
 };
   momentum: number;
   outlook: 'positive' | 'negative' | 'neutral';
@@ -325,6 +353,7 @@ export interface SectorPerformance {
 }
 
 export interface BacktestStrategy {
+
 
 
 
@@ -347,12 +376,14 @@ export interface BacktestStrategy {
 
 
 
+
 };
   trades: number;
   period: string;
 }
 
 export interface PerformanceMetrics {
+
 
 
 
@@ -374,9 +405,11 @@ export interface PerformanceMetrics {
 
 
 
+
 }
 
 export interface AIWhiteLabelMetrics {
+
 
 
 
@@ -394,9 +427,11 @@ export interface AIWhiteLabelMetrics {
 
 
 
+
 }
 
 export interface MonthlyReturn {
+
 
 
 
@@ -412,9 +447,11 @@ export interface MonthlyReturn {
 
 
 
+
 }
 
 export interface DrawdownPeriod {
+
 
 
 
@@ -433,9 +470,11 @@ export interface DrawdownPeriod {
 
 
 
+
 }
 
 export interface MarketClassification {
+
 
 
 
@@ -452,9 +491,11 @@ export interface MarketClassification {
 
 
 
+
 }
 
 export interface TradingRecommendation {
+
 
 
 
@@ -475,9 +516,11 @@ export interface TradingRecommendation {
 
 
 
+
 }
 
 export interface StockAnalysis {
+
 
 
 
@@ -497,9 +540,11 @@ export interface StockAnalysis {
 
 
 
+
 }
 
 export interface RealtimeData {
+
 
 
 
@@ -519,9 +564,11 @@ export interface RealtimeData {
 
 
 
+
 }
 
 export interface ChartPattern {
+
 
 
 
@@ -540,9 +587,11 @@ export interface ChartPattern {
 
 
 
+
 }
 
 export interface AIAnalysisComponents {
+
 
 
 
@@ -560,9 +609,11 @@ export interface AIAnalysisComponents {
 
 
 
+
 }
 
 export interface TradingSignalData {
+
 
 
 
@@ -585,9 +636,11 @@ export interface TradingSignalData {
 
 
 
+
 }
 
 export interface Trade {
+
 
 
 
@@ -613,9 +666,11 @@ export interface Trade {
 
 
 
+
 }
 
 export interface TradeHistoryItem {
+
 
 
 
@@ -640,9 +695,11 @@ export interface TradeHistoryItem {
 
 
 
+
 }
 
 export interface BotStats {
+
 
 
 
@@ -663,9 +720,11 @@ export interface BotStats {
 
 
 
+
 }
 
 export interface BotSettings {
+
 
 
 
@@ -685,9 +744,11 @@ export interface BotSettings {
 
 
 
+
 }
 
 export interface MarketAnalysis {
+
 
 
 
@@ -705,10 +766,12 @@ export interface MarketAnalysis {
 
 
 
+
 };
 }
 
 export interface SportsEvent {
+
 
 
 
@@ -728,9 +791,11 @@ export interface SportsEvent {
 
 
 
+
 }
 
 export interface TradingOpportunity {
+
 
 
 
@@ -763,9 +828,11 @@ export interface TradingOpportunity {
 
 
 
+
 }
 
 export interface ActiveTrade {
+
 
 
 
@@ -793,9 +860,11 @@ export interface ActiveTrade {
 
 
 
+
 }
 
 export interface ProfitStats {
+
 
 
 
@@ -814,9 +883,11 @@ export interface ProfitStats {
 
 
 
+
 }
 
 export interface ExpandedSections {
+
 
 
 
@@ -834,9 +905,11 @@ export interface ExpandedSections {
 
 
 
+
 }
 
 export interface AIModel {
+
 
 
 
@@ -856,9 +929,11 @@ export interface AIModel {
 
 
 
+
 }
 
 export interface AnalysisResult {
+
 
 
 
@@ -878,9 +953,11 @@ export interface AnalysisResult {
 
 
 
+
 }
 
 export interface DeepLearningModel {
+
 
 
 
@@ -900,9 +977,11 @@ export interface DeepLearningModel {
 
 
 
+
 }
 
 export interface MarketPattern {
+
 
 
 
@@ -922,9 +1001,11 @@ export interface MarketPattern {
 
 
 
+
 }
 
 export interface NewsAnalysis {
+
 
 
 
@@ -946,9 +1027,11 @@ export interface NewsAnalysis {
 
 
 
+
 }
 
 export interface SocialPlatform {
+
 
 
 
@@ -966,9 +1049,11 @@ export interface SocialPlatform {
 
 
 
+
 }
 
 export interface Influencer {
+
 
 
 
@@ -987,9 +1072,11 @@ export interface Influencer {
 
 
 
+
 }
 
 export interface Trader {
+
 
 
 
@@ -1010,9 +1097,11 @@ export interface Trader {
 
 
 
+
 }
 
 export interface SocialPost {
+
 
 
 
@@ -1034,9 +1123,11 @@ export interface SocialPost {
 
 
 
+
 }
 
 export interface CryptoData {
+
 
 
 
@@ -1057,9 +1148,11 @@ export interface CryptoData {
 
 
 
+
 }
 
 export interface DeFiProtocol {
+
 
 
 
@@ -1078,9 +1171,11 @@ export interface DeFiProtocol {
 
 
 
+
 }
 
 export interface NFTCollection {
+
 
 
 
@@ -1099,9 +1194,11 @@ export interface NFTCollection {
 
 
 
+
 }
 
 export interface BankAccount {
+
 
 
 
@@ -1121,9 +1218,11 @@ export interface BankAccount {
 
 
 
+
 }
 
 export interface Transaction {
+
 
 
 
@@ -1144,9 +1243,11 @@ export interface Transaction {
 
 
 
+
 }
 
 export interface InterestTransaction {
+
 
 
 
@@ -1165,9 +1266,11 @@ export interface InterestTransaction {
 
 
 
+
 }
 
 export interface UserProfile {
+
 
 
 
@@ -1188,9 +1291,11 @@ export interface UserProfile {
 
 
 
+
 }
 
 export interface UserPreferences {
+
 
 
 
@@ -1210,9 +1315,11 @@ export interface UserPreferences {
 
 
 
+
 }
 
 export interface ThemeOption {
+
 
 
 
@@ -1233,10 +1340,12 @@ export interface ThemeOption {
 
 
 
+
 };
 }
 
 export interface AccentColor {
+
 
 
 
@@ -1252,9 +1361,11 @@ export interface AccentColor {
 
 
 
+
 }
 
 export interface SubscriptionPlan {
+
 
 
 
@@ -1275,9 +1386,11 @@ export interface SubscriptionPlan {
 
 
 
+
 }
 
 export interface TradingStrategy {
+
 
 
 
@@ -1294,9 +1407,11 @@ export interface TradingStrategy {
 
 
 
+
 }
 
 export interface ScanResult {
+
 
 
 
@@ -1318,9 +1433,11 @@ export interface ScanResult {
 
 
 
+
 }
 
 export interface PatternAccuracy {
+
 
 
 
@@ -1338,10 +1455,12 @@ export interface PatternAccuracy {
 
 
 
+
 };
 }
 
 export interface SiteDiagnostic {
+
 
 
 
@@ -1361,9 +1480,11 @@ export interface SiteDiagnostic {
 
 
 
+
 }
 
 export interface Alert {
+
 
 
 
@@ -1385,9 +1506,11 @@ export interface Alert {
 
 
 
+
 }
 
 export interface BacktestResult {
+
 
 
 
@@ -1433,9 +1556,11 @@ export interface BacktestResult {
 
 
 
+
 }
 
 export interface BacktestSettings {
+
 
 
 
@@ -1457,6 +1582,7 @@ export interface BacktestSettings {
   riskPerTrade?: number;
   stopLoss?: number;
   takeProfit?: number;
+
 
 
 

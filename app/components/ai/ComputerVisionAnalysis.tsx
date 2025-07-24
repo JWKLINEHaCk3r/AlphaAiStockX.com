@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -95,6 +96,7 @@ interface VisionModel {
 
 
 
+
   id: number;
   name: string;
   type: string;
@@ -109,9 +111,11 @@ interface VisionModel {
 
 
 
+
 }
 
 interface ChartPattern {
+
 
 
 
@@ -132,6 +136,7 @@ interface ChartPattern {
 
 
 
+
 };
   direction: string;
   target: number;
@@ -140,6 +145,7 @@ interface ChartPattern {
 }
 
 interface AnalysisResult {
+
 
 
 
@@ -155,6 +161,7 @@ interface AnalysisResult {
   color: string;
   slope?: number | string;
   points?: Array<{ x: number; y: number;
+
 
 
 

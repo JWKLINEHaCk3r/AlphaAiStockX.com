@@ -6,6 +6,7 @@ export interface MarketData {
 
 
 
+
   symbol: string;
   price: number;
   volume: number;
@@ -19,9 +20,11 @@ export interface MarketData {
 
 
 
+
 }
 
 export interface NewsItem {
+
 
 
 
@@ -44,9 +47,11 @@ export interface NewsItem {
 
 
 
+
 }
 
 export interface SocialSentiment {
+
 
 
 
@@ -64,9 +69,11 @@ export interface SocialSentiment {
 
 
 
+
 }
 
 export interface EconomicData {
+
 
 
 
@@ -86,9 +93,11 @@ export interface EconomicData {
 
 
 
+
 }
 
 export interface TradingPattern {
+
 
 
 
@@ -111,9 +120,11 @@ export interface TradingPattern {
 
 
 
+
 }
 
 export interface AISignal {
+
 
 
 
@@ -134,9 +145,11 @@ export interface AISignal {
 
 
 
+
 }
 
 export interface MockWebSocket {
+
 
 
 
@@ -153,9 +166,11 @@ export interface MockWebSocket {
 
 
 
+
 }
 
 export interface NewsTemplate {
+
 
 
 
@@ -172,9 +187,11 @@ export interface NewsTemplate {
 
 
 
+
 }
 
 export interface SocialSource {
+
 
 
 
@@ -190,9 +207,11 @@ export interface SocialSource {
 
 
 
+
 }
 
 export interface EconomicIndicator {
+
 
 
 
@@ -208,9 +227,11 @@ export interface EconomicIndicator {
 
 
 
+
 }
 
 export interface ComprehensiveAnalysis {
+
 
 
 
@@ -225,6 +246,7 @@ export interface ComprehensiveAnalysis {
   marketData: MarketData;
   confidence: number;
   timestamp: Date;
+
 
 
 

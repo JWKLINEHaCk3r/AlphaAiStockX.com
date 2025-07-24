@@ -10,6 +10,7 @@ export interface WebSocketMessage {
 
 
 
+
   type: string;
   userId?: string;
   data: any;
@@ -21,9 +22,11 @@ export interface WebSocketMessage {
 
 
 
+
 }
 
 export interface MarketDataUpdate {
+
 
 
 
@@ -49,9 +52,11 @@ export interface MarketDataUpdate {
 
 
 
+
 }
 
 export interface OrderUpdate {
+
 
 
 
@@ -72,9 +77,11 @@ export interface OrderUpdate {
 
 
 
+
 }
 
 export interface PositionUpdate {
+
 
 
 
@@ -95,9 +102,11 @@ export interface PositionUpdate {
 
 
 
+
 }
 
 export interface PortfolioUpdate {
+
 
 
 
@@ -118,9 +127,11 @@ export interface PortfolioUpdate {
 
 
 
+
 }
 
 export interface AISignalUpdate {
+
 
 
 
@@ -144,9 +155,11 @@ export interface AISignalUpdate {
 
 
 
+
 }
 
 export interface TradeNotification {
+
 
 
 
@@ -163,6 +176,7 @@ export interface TradeNotification {
   priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
   timestamp: number;
   read: boolean;
+
 
 
 
@@ -633,8 +647,10 @@ declare module 'socket.io' {
 
 
 
+
     userId?: string;
   
+
 
 
 

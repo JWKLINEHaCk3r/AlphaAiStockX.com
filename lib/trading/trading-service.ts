@@ -13,6 +13,7 @@ export interface TradingServiceConfig {
 
 
 
+
   userId: string;
   portfolioId: string;
   alpacaClient: AlpacaClient;
@@ -21,9 +22,11 @@ export interface TradingServiceConfig {
 
 
 
+
 }
 
 export interface OrderRequest {
+
 
 
 
@@ -47,9 +50,11 @@ export interface OrderRequest {
 
 
 
+
 }
 
 export interface PositionSummary {
+
 
 
 
@@ -75,9 +80,11 @@ export interface PositionSummary {
 
 
 
+
 }
 
 export interface PortfolioSummary {
+
 
 
 
@@ -103,9 +110,11 @@ export interface PortfolioSummary {
 
 
 
+
 }
 
 export interface OrderSummary {
+
 
 
 
@@ -131,6 +140,7 @@ export interface OrderSummary {
   filledAt?: Date;
   canceledAt?: Date;
   expiredAt?: Date;
+
 
 
 

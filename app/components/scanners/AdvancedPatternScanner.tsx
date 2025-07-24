@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -100,6 +101,7 @@ interface PatternMatch {
 
 
 
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -132,9 +134,11 @@ interface PatternMatch {
 
 
 
+
 }
 
 interface TradingSignal {
+
 
 
 
@@ -163,9 +167,11 @@ interface TradingSignal {
 
 
 
+
 }
 
 interface ScanSettings {
+
 
 
 
@@ -185,9 +191,11 @@ interface ScanSettings {
 
 
 
+
 }
 
 interface ChartPattern {
+
 
 
 
@@ -212,9 +220,11 @@ interface ChartPattern {
 
 
 
+
 }
 
 interface PatternStats {
+
 
 
 
@@ -227,6 +237,7 @@ interface PatternStats {
     avgReturn: number;
     avgDaysToTarget: number;
   
+
 
 
 

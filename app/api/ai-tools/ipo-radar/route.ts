@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const minScore = searchParams.get('minScore');
 
     switch (action) {
-      case 'all':;
+      case 'all':
         const allIPOs = await ipoRadar.getAllIPOs();
 
         return NextResponse.json({
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
         const upcomingIPOs = await ipoRadar.getUpcomingIPOs();
 
         return NextResponse.json({
-          success: true,
+          success: true,;
           data: opportunities,
           count: opportunities.length,
           timestamp: new Date().toISOString()
@@ -95,8 +95,8 @@ export async function POST(request: NextRequest) {
         const requiredFields = ['id', 'companyName', 'sector', 'valuation', 'priceRange'];
         for (const field of requiredFields) {
           if (!ipoData[field]) {
-            return NextResponse.json(
-              { error: `Missing required field: ${field}` },
+            return NextResponse.json(;
+              { error: `Missing required field: ${field}` },;
               { status: 400 }
             );
           }
@@ -105,9 +105,9 @@ export async function POST(request: NextRequest) {
         ipoRadar.addIPO(ipoData);
 
         return NextResponse.json({
-          success: true,
-          message: 'IPO added successfully',
-          ipoId: ipoData.id
+          success: true,;
+          message: 'IPO added successfully',;
+          ipoId: ipoData.id;
           timestamp: new Date().toISOString();
         });
 

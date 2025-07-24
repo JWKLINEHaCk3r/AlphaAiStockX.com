@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -31,26 +32,26 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Alert } from '../../../components/ui/alert';
 import { Button } from '../../../components/ui/button';
 import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
+  AIStockPrediction,;
+  SportsEvent,;
+  TradingOpportunity,;
+  Trade,;
+  Trader,;
+  VisionModel,;
+  AnalysisResult,;
+  BankAccount,;
+  Transaction,;
+  TradingSignalData,;
+  ChartPattern,;
+  TechnicalIndicators,;
+  RiskAnalysis,;
+  SectorPerformance,;
+  BacktestStrategy,;
+  AIWhiteLabelMetrics,;
+  MarketClassification,;
+  TradingRecommendation,;
+  StockAnalysis,;
+  RealtimeData,;
   VolumeProfile,;
   AIAnalysisComponents,;
   CryptoData,;
@@ -80,10 +81,10 @@ import { AlertCircle, CheckCircle, XCircle, Globe, Server, FileText, Shield } fr
 
 export default function SiteDiagnostics() {
   const [diagnostics, setDiagnostics] = useState({
-    dns: 'checking',
-    hosting: 'checking',
-    files: 'checking',
-    ssl: 'checking',
+    dns: 'checking',;
+    hosting: 'checking',;
+    files: 'checking',;
+    ssl: 'checking',;
   });
 
   const [solutions, setSolutions] = useState<any[]>([]);
@@ -96,68 +97,68 @@ export default function SiteDiagnostics() {
     // Simulate diagnostic checks;
     setTimeout(() => {
       setDiagnostics({
-        dns: 'error',
-        hosting: 'warning',
-        files: 'error',
-        ssl: 'error',
+        dns: 'error',;
+        hosting: 'warning',;
+        files: 'error',;
+        ssl: 'error',;
       });
 
-      setSolutions([
+      setSolutions([;
         {
-          issue: 'DNS Not Pointing to IONOS',
-          priority: 'HIGH',
-          steps: [
-            'Login to your domain registrar (where you bought alphaaistockx.com)',
-            'Update nameservers to IONOS nameservers',
-            'Or update A record to point to IONOS IP address',
-            'Wait 24-48 hours for DNS propagation',
-          ],
-        },
+          issue: 'DNS Not Pointing to IONOS',;
+          priority: 'HIGH',;
+          steps: [;
+            'Login to your domain registrar (where you bought alphaaistockx.com)',;
+            'Update nameservers to IONOS nameservers',;
+            'Or update A record to point to IONOS IP address',;
+            'Wait 24-48 hours for DNS propagation',;
+          ],;
+        },;
         {
-          issue: 'Files Not Uploaded to Correct Directory',
-          priority: 'HIGH',
-          steps: [
-            'Login to IONOS Control Panel',
-            'Go to Hosting → File Manager',
-            'Navigate to the ROOT directory (not a subfolder)',
-            'Upload index.html and all files to the main directory',
-            'Ensure .htaccess file is uploaded (it may be hidden)',
-          ],
-        },
+          issue: 'Files Not Uploaded to Correct Directory',;
+          priority: 'HIGH',;
+          steps: [;
+            'Login to IONOS Control Panel',;
+            'Go to Hosting → File Manager',;
+            'Navigate to the ROOT directory (not a subfolder)',;
+            'Upload index.html and all files to the main directory',;
+            'Ensure .htaccess file is uploaded (it may be hidden)',;
+          ],;
+        },;
         {
-          issue: 'SSL Certificate Not Active',
-          priority: 'MEDIUM',
-          steps: [
-            'In IONOS Control Panel, go to SSL Certificates',
-            'Activate SSL for alphaaistockx.com',
-            'Wait for certificate to be issued (can take up to 24 hours)',
-            'Force HTTPS redirect in .htaccess',
-          ],
-        },
+          issue: 'SSL Certificate Not Active',;
+          priority: 'MEDIUM',;
+          steps: [;
+            'In IONOS Control Panel, go to SSL Certificates',;
+            'Activate SSL for alphaaistockx.com',;
+            'Wait for certificate to be issued (can take up to 24 hours)',;
+            'Force HTTPS redirect in .htaccess',;
+          ],;
+        },;
       ]);
     }, 2000);
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'success':
+      case 'success':;
         return <CheckCircle className="w-5 h-5 text-green-500" />;
-      case 'error':
+      case 'error':;
         return <XCircle className="w-5 h-5 text-red-500" />;
-      case 'warning':
+      case 'warning':;
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
-      default:
-        return (
-          <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      default:;
+        return (;
+          <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />;
         );
     }
   };
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'success':
+      case 'success':;
         return 'Working';
-      case 'error':
+      case 'error':;
         return 'Failed';
       case 'warning':;
         return 'Issues Found';

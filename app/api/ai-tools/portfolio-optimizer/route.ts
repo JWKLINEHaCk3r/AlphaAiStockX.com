@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'optimize':;
         if (!investmentAmount || !constraints) {
-          return NextResponse.json(
-            { error: 'Investment amount and constraints are required' },
+          return NextResponse.json(;
+            { error: 'Investment amount and constraints are required' },;
             { status: 400 }
           );
         }
@@ -139,17 +139,17 @@ export async function GET(request: NextRequest) {
           'Commodities',;
           'Sector ETFs',;
         return NextResponse.json(;
-            { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },
+            { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },;
             { status: 400 }
         );
             {
-                error: 'Failed to process request',
-                details: error instanceof Error ? error.message : 'Unknown error'
-            },
+                error: 'Failed to process request',;
+                details: error instanceof Error ? error.message : 'Unknown error';
+            },;
             { status: 500 }
         );
         return NextResponse.json(;
-            { error: 'Invalid action. Supported actions: assets, sectors, asset_classes' },
+            { error: 'Invalid action. Supported actions: assets, sectors, asset_classes' },;
             { status: 400 }
         );
     }

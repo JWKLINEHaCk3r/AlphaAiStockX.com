@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -114,6 +115,7 @@ interface User {
 
 
 
+
   id: string;
   name: string;
   email: string;
@@ -123,9 +125,11 @@ interface User {
 
 
 
+
 }
 
 interface Trade {
+
 
 
 
@@ -156,9 +160,11 @@ interface Trade {
 
 
 
+
 }
 
 interface SystemSettings {
+
 
 
 
@@ -179,9 +185,11 @@ interface SystemSettings {
 
 
 
+
 }
 
 interface AIAnalysis {
+
 
 
 
@@ -201,9 +209,11 @@ interface AIAnalysis {
 
 
 
+
 }
 
 interface ExecutionMetrics {
+
 
 
 
@@ -225,9 +235,11 @@ interface ExecutionMetrics {
 
 
 
+
 }
 
 interface MarketConditions {
+
 
 
 
@@ -247,6 +259,7 @@ interface MarketConditions {
 
 
 
+
 }
 
 interface AutomatedTradingSystemProps {
@@ -256,8 +269,10 @@ interface AutomatedTradingSystemProps {
 
 
 
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
 
 
 

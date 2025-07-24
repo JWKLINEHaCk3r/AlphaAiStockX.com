@@ -12,6 +12,7 @@ interface SpeechRecognitionResultList {
 
 
 
+
   length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
@@ -22,9 +23,11 @@ interface SpeechRecognitionResultList {
 
 
 
+
 }
 
 interface SpeechRecognitionResult {
+
 
 
 
@@ -43,6 +46,7 @@ interface SpeechRecognitionResult {
 
 
 
+
 }
 
 interface SpeechRecognitionAlternative {
@@ -53,8 +57,10 @@ interface SpeechRecognitionAlternative {
 
 
 
+
   transcript: string;
   confidence: number;
+
 
 
 
@@ -97,8 +103,10 @@ interface Window {
 
 
 
+
   SpeechRecognition: typeof SpeechRecognition;
   webkitSpeechRecognition: typeof webkitSpeechRecognition;
+
 
 
 

@@ -9,12 +9,14 @@ interface UseWebSocketOptions {
 
 
 
+
   onOpen?: () => void;
   onMessage?: (data: any) => void;
   onError?: (error: any) => void;
   onClose?: () => void;
   reconnectInterval?: number;
   maxReconnectAttempts?: number;
+
 
 
 
@@ -30,9 +32,11 @@ interface WebSocketHook {
 
 
 
+
   sendMessage: (message: any) => void;
   readyState: number;
   isConnected: boolean;
+
 
 
 

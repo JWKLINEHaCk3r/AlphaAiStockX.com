@@ -8,6 +8,7 @@ export interface AlpacaConfig {
 
 
 
+
   apiKey: string;
   secretKey: string;
   baseUrl: string;
@@ -20,9 +21,11 @@ export interface AlpacaConfig {
 
 
 
+
 }
 
 export interface AlpacaPosition {
+
 
 
 
@@ -49,9 +52,11 @@ export interface AlpacaPosition {
 
 
 
+
 }
 
 export interface AlpacaOrder {
+
 
 
 
@@ -114,9 +119,11 @@ export interface AlpacaOrder {
 
 
 
+
 }
 
 export interface AlpacaAccount {
+
 
 
 
@@ -162,9 +169,11 @@ export interface AlpacaAccount {
 
 
 
+
 }
 
 export interface MarketData {
+
 
 
 
@@ -181,6 +190,7 @@ export interface MarketData {
   volume: number;
   trade_count?: number;
   vwap?: number;
+
 
 
 

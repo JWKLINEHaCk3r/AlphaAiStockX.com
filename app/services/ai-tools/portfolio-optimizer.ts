@@ -9,6 +9,7 @@ interface Asset {
 
 
 
+
   symbol: string;
   name: string;
   sector: string;
@@ -26,9 +27,11 @@ interface Asset {
 
 
 
+
 }
 
 interface PortfolioConstraints {
+
 
 
 
@@ -51,6 +54,7 @@ interface PortfolioConstraints {
 
 
 
+
 }
 
 interface OptimizedPortfolio {
@@ -60,8 +64,10 @@ interface OptimizedPortfolio {
 
 
 
+
   id: string;
   allocations: { [symbol: string]: number;
+
 
 
 
@@ -88,12 +94,14 @@ interface RebalanceRecommendation {
 
 
 
+
   symbol: string;
   currentWeight: number;
   targetWeight: number;
   action: 'BUY' | 'SELL' | 'HOLD';
   amount: number;
   reasoning: string;
+
 
 
 
@@ -109,9 +117,11 @@ interface RiskAnalysis {
 
 
 
+
   varAtRisk: number; // Value at Risk (95% confidence);
   maxDrawdown: number;
   correlationMatrix: { [pair: string]: number;
+
 
 
 
@@ -129,10 +139,12 @@ interface OptimizationResult {
 
 
 
+
   weights: number[];
   expectedReturn: number;
   volatility: number;
   sharpeRatio: number;
+
 
 
 

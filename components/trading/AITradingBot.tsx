@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
@@ -58,6 +59,7 @@ interface AITradingBotProps {
 
 
 
+
   id: string;
   name: string;
   strategy: string;
@@ -69,6 +71,7 @@ interface AITradingBotProps {
     maxDrawdown: number;
     trades: number;
   
+
 
 
 

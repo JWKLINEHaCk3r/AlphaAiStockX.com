@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -83,10 +84,12 @@ interface ConversationItem {
 
 
 
+
   id: number;
   role: string;
   message: string;
   timestamp: Date;
+
 
 
 
@@ -103,9 +106,11 @@ declare global {
 
 
 
+
     SpeechRecognition: any;
     webkitSpeechRecognition: any;
   
+
 
 
 
@@ -121,8 +126,10 @@ interface SpeechRecognitionAlternative {
 
 
 
+
   transcript: string;
   confidence: number;
+
 
 
 
@@ -132,6 +139,7 @@ interface SpeechRecognitionAlternative {
 }
 
 interface SpeechRecognitionResult {
+
 
 
 
@@ -148,6 +156,7 @@ interface SpeechRecognitionResult {
 
 
 
+
 }
 
 interface SpeechRecognitionResultList {
@@ -157,9 +166,11 @@ interface SpeechRecognitionResultList {
 
 
 
+
   readonly length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
+
 
 
 

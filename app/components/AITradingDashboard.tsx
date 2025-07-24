@@ -1,4 +1,5 @@
 import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
 // import { Card } from '../../components/ui/card';
 "use client";
 import { Card } from '../../components/ui/card';
@@ -15,6 +16,7 @@ interface TradingSignal {
 
 
 
+
   symbol: string;
   action: string;
   confidence: number;
@@ -25,9 +27,11 @@ interface TradingSignal {
 
 
 
+
 }
 
 interface Trade {
+
 
 
 
@@ -46,6 +50,7 @@ interface Trade {
 
 
 
+
 }
 
 interface Portfolio {
@@ -55,9 +60,11 @@ interface Portfolio {
 
 
 
+
   totalValue: number;
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
 
 
 
@@ -86,6 +93,7 @@ interface Performance {
 
 
 
+
   totalReturn: number;
   dailyPnL: number;
   winRate: number;
@@ -96,9 +104,11 @@ interface Performance {
 
 
 
+
 }
 
 interface TradingStrategy {
+
 
 
 
@@ -122,10 +132,12 @@ interface TradingStrategy {
 
 
 
+
 };
 }
 
 interface Analysis {
+
 
 
 
@@ -140,6 +152,7 @@ interface Analysis {
     message: string;
     trades?: Trade[];
   
+
 
 
 
@@ -161,6 +174,7 @@ interface DashboardState {
 
 
 
+
   trader: AdvancedAIAutoTrader | null;
   portfolio: Portfolio | null;
   isTrading: boolean;
@@ -174,17 +188,18 @@ interface DashboardState {
 
 
 
+
 }
 
 export default function AITradingDashboard() {
   const [state, setState] = useState<DashboardState>({
-    trader: null,
-    portfolio: null,
-    isTrading: false,
-    performance: null,
-    analysis: null,
-    loading: true,
-    error: null
+    trader: null,;
+    portfolio: null,;
+    isTrading: false,;
+    performance: null,;
+    analysis: null,;
+    loading: true,;
+    error: null;
   });
 
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
@@ -196,16 +211,16 @@ export default function AITradingDashboard() {
       const portfolio = trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,
-        analysis,
-        portfolio,
-        loading: false
+        ...prev,;
+        analysis,;
+        portfolio,;
+        loading: false;
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,
-        error: 'Failed to initialize AI trader',
-        loading: false
+        ...prev,;
+        error: 'Failed to initialize AI trader',;
+        loading: false;
       }));
     }
   }, [riskLevel]);
@@ -224,16 +239,16 @@ export default function AITradingDashboard() {
       const portfolio = state.trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,
-        analysis,
-        portfolio,
-        loading: false
+        ...prev,;
+        analysis,;
+        portfolio,;
+        loading: false;
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,
-        error: 'Analysis failed',
-        loading: false
+        ...prev,;
+        error: 'Analysis failed',;
+        loading: false;
       }));
     }
   };
@@ -248,16 +263,16 @@ export default function AITradingDashboard() {
       const portfolio = state.trader.getPortfolio();
 
       setState(prev => ({
-        ...prev,
-        portfolio,
-        isTrading: false,
+        ...prev,;
+        portfolio,;
+        isTrading: false,;
         analysis: { ...prev.analysis, lastTradeResult: result }
       }));
     } catch (error) {
       setState(prev => ({
-        ...prev,
-        error: 'Trading execution failed',
-        isTrading: false,
+        ...prev,;
+        error: 'Trading execution failed',;
+        isTrading: false,;
       }));
     }
   };

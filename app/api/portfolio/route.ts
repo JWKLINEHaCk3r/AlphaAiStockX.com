@@ -13,6 +13,7 @@ interface UserSession {
 
 
 
+
   user?: {
     id?: string;
     email?: string;
@@ -23,11 +24,13 @@ interface UserSession {
 
 
 
+
 };
 }
 
 // Portfolio data interfaces;
 interface PortfolioData {
+
 
 
 
@@ -51,9 +54,11 @@ interface PortfolioData {
 
 
 
+
 }
 
 interface PositionData {
+
 
 
 
@@ -71,6 +76,7 @@ interface PositionData {
   side: 'LONG' | 'SHORT';
   changeToday: number;
   changeTodayPercent?: number;
+
 
 
 

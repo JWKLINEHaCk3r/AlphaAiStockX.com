@@ -8,6 +8,7 @@ interface Particle {
 
 
 
+
   x: number;
   y: number;
   vx: number;
@@ -15,6 +16,7 @@ interface Particle {
   size: number;
   color: string;
   opacity: number;
+
 
 
 

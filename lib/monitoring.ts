@@ -9,6 +9,7 @@ interface HealthMetrics {
 
 
 
+
   status: 'healthy' | 'degraded' | 'unhealthy';
   timestamp: string;
   uptime: number;
@@ -20,6 +21,7 @@ interface HealthMetrics {
     externalAPIs: ServiceHealth;
     websocket: ServiceHealth;
   
+
 
 
 
@@ -48,10 +50,12 @@ interface ServiceHealth {
 
 
 
+
   status: 'up' | 'down' | 'degraded';
   responseTime?: number;
   lastCheck: string;
   error?: string;
+
 
 
 
