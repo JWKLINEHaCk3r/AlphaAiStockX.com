@@ -13,6 +13,14 @@ import { Card, CardContent } from '../../../components/ui/card.js';
 import { Card, CardContent } from '../../../components/ui/card.js';
 import { Card, CardContent } from '../../../components/ui/card.js';
 import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
+import { Card, CardContent } from '../../../components/ui/card.js';
 import { Card, CardContent } from '../../../components/ui/card.tsx';
 import { Card, CardContent } from '../../../components/ui/card.tsx';
 import { Card, CardContent } from '../../../components/ui/card.tsx';
@@ -27,6 +35,14 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, DollarSign, Calendar as LucideCalendar, Building2, Star, AlertTriangle, Target, Zap, RefreshCw, Search, Filter } from 'lucide-react';
 
 interface IPO {
+
+
+
+
+
+
+
+
 
 
 
@@ -51,6 +67,14 @@ interface IPO {
     profitMargin: number;
     debtToEquity: number;
   
+
+
+
+
+
+
+
+
 
 
 

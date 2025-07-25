@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -49,6 +57,14 @@ interface NeuralAnalysis {
 
 
 
+
+
+
+
+
+
+
+
   marketSentiment?: {
     overall: number;
     bullish: number;
@@ -56,6 +72,14 @@ interface NeuralAnalysis {
     neutral: number;
     confidence: number;
   
+
+
+
+
+
+
+
+
 
 
 
@@ -91,6 +115,14 @@ interface DeepLearningModel {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   name: string;
   type: string;
@@ -107,9 +139,25 @@ interface DeepLearningModel {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MarketPattern {
+
+
+
+
+
+
+
+
 
 
 
@@ -133,9 +181,25 @@ interface MarketPattern {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface NeuralPrediction {
+
+
+
+
+
+
+
+
 
 
 
@@ -152,6 +216,14 @@ interface NeuralPrediction {
   volatility: number;
   momentum: number;
   riskLevel: string;
+
+
+
+
+
+
+
+
 
 
 

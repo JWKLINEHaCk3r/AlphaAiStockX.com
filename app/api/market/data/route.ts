@@ -13,6 +13,14 @@ interface UserSession {
 
 
 
+
+
+
+
+
+
+
+
   user: {
     id: string;
     email?: string;
@@ -24,10 +32,26 @@ interface UserSession {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface MarketDataParams {
+
+
+
+
+
+
+
+
 
 
 
@@ -48,9 +72,25 @@ interface MarketDataParams {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MarketBarData {
+
+
+
+
+
+
+
+
 
 
 
@@ -71,9 +111,25 @@ interface MarketBarData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface TechnicalIndicators {
+
+
+
+
+
+
+
+
 
 
 
@@ -95,10 +151,26 @@ interface TechnicalIndicators {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface MarketQuote {
+
+
+
+
+
+
+
+
 
 
 
@@ -118,9 +190,25 @@ interface MarketQuote {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MarketDataResponse {
+
+
+
+
+
+
+
+
 
 
 
@@ -142,6 +230,14 @@ interface MarketDataResponse {
   indicators?: TechnicalIndicators | null;
   lastUpdated: string;
   error?: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -447,9 +543,7 @@ export async function GET(request: NextRequest) {
         error: 'Failed to fetch market data',;
         message:;
           process.env.NODE_ENV === 'development';
-            ? error instanceof Error;
-              ? error.message;
-              : 'Unknown error';
+            ? (error instanceof Error ? error.message : 'Unknown error');
             : 'Internal server error',;
       },;
       { status: 500 }
@@ -541,9 +635,7 @@ export async function POST(request: NextRequest) {
         error: 'Failed to manage market data subscription',;
         message:;
           process.env.NODE_ENV === 'development';
-            ? error instanceof Error;
-              ? error.message;
-              : 'Unknown error';
+            ? (error instanceof Error ? error.message : 'Unknown error');
             : 'Internal server error',;
       },;
       { status: 500 }

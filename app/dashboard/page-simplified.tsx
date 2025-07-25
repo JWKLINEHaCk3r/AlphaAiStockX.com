@@ -13,6 +13,14 @@ import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
 import { Card } from '../../components/ui/card.tsx';
@@ -56,10 +64,26 @@ interface MarketStock {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -77,12 +101,28 @@ interface AIBeing {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   name: string;
   status: 'active' | 'idle' | 'analyzing';
   profits: number;
   accuracy: number;
   trades: number;
+
+
+
+
+
+
+
+
 
 
 

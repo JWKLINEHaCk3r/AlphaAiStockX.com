@@ -7,6 +7,14 @@ interface Model {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   name: string;
   type: string;
@@ -40,10 +48,26 @@ interface Model {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface Environment {
+
+
+
+
+
+
+
+
 
 
 
@@ -64,9 +88,25 @@ interface Environment {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Agent {
+
+
+
+
+
+
+
+
 
 
 
@@ -87,6 +127,14 @@ interface Agent {
   trainingEpisodes?: number;
   performance?: unknown;
   [key: string]: unknown;
+
+
+
+
+
+
+
+
 
 
 

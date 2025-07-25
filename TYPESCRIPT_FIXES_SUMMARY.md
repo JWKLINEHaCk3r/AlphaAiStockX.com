@@ -143,3 +143,11 @@ Created `fix-typescript-comprehensive-v2.js` with patterns for:
 - **Professional code quality** meeting industry standards
 
 The AlphaAiStockX platform now has a solid TypeScript foundation with proper type definitions and significantly reduced technical debt.
+export default function AITradingAdvisor({ className = '' }: AITradingAdvisorProps) {
+  return (
+    <div className={className}>
+      <h2>AI Trading Advisor</h2>
+      {/* Minimal placeholder. Add your UI here. */}
+    </div>
+  );
+}

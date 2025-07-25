@@ -9,6 +9,14 @@ export interface User {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   email: string;
   username: string;
@@ -26,11 +34,27 @@ export interface User {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export type SubscriptionTier = 'free' | 'pro' | 'enterprise';
 
 export interface StockData {
+
+
+
+
+
+
+
+
 
 
 
@@ -58,9 +82,25 @@ export interface StockData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
+
+
+
 
 
 
@@ -87,9 +127,25 @@ export interface AISignal {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface Portfolio {
+
+
+
+
+
+
+
+
 
 
 
@@ -118,9 +174,25 @@ export interface Portfolio {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface Position {
+
+
+
+
+
+
+
+
 
 
 
@@ -148,9 +220,25 @@ export interface Position {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface Trade {
+
+
+
+
+
+
+
+
 
 
 
@@ -180,9 +268,25 @@ export interface Trade {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface AIAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -210,6 +314,14 @@ export interface AIAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 };
     support: number;
     resistance: number;
@@ -222,6 +334,14 @@ export interface AIAnalysis {
 }
 
 export interface MarketData {
+
+
+
+
+
+
+
+
 
 
 
@@ -249,9 +369,25 @@ export interface MarketData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface ChartData {
+
+
+
+
+
+
+
+
 
 
 
@@ -274,9 +410,25 @@ export interface ChartData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface NewsArticle {
+
+
+
+
+
+
+
+
 
 
 
@@ -302,9 +454,25 @@ export interface NewsArticle {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface WatchlistItem {
+
+
+
+
+
+
+
+
 
 
 
@@ -327,9 +495,25 @@ export interface WatchlistItem {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface AlertRule {
+
+
+
+
+
+
+
+
 
 
 
@@ -343,6 +527,14 @@ export interface AlertRule {
   value: number;
   isActive: boolean;
   createdAt: Date;
+
+
+
+
+
+
+
+
 
 
 
@@ -382,8 +574,24 @@ export interface BaseComponentProps {
 
 
 
+
+
+
+
+
+
+
+
   className?: string;
   children?: React.ReactNode;
+
+
+
+
+
+
+
+
 
 
 
@@ -427,6 +635,14 @@ export interface AIModel {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   name: string;
   version: string;
@@ -434,6 +650,14 @@ export interface AIModel {
   accuracy: number;
   specialization: string[];
   isActive: boolean;
+
+
+
+
+
+
+
+
 
 
 
@@ -453,12 +677,28 @@ export interface AIAgentStatus {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   name: string;
   status: 'active' | 'inactive' | 'error';
   lastUpdate: Date;
   tasksCompleted: number;
   accuracy: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -501,10 +741,26 @@ export interface SystemEvent {
 
 
 
+
+
+
+
+
+
+
+
   type: 'trade_executed' | 'signal_generated' | 'alert_triggered' | 'market_status_change';
   data: any;
   timestamp: Date;
   userId?: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -525,9 +781,25 @@ export interface WSMessage {
 
 
 
+
+
+
+
+
+
+
+
   type: string;
   data: any;
   timestamp: Date;
+
+
+
+
+
+
+
+
 
 
 
@@ -558,6 +830,14 @@ export interface AppConfig {
 
 
 
+
+
+
+
+
+
+
+
   apiUrl: string;
   wsUrl: string;
   environment: 'development' | 'staging' | 'production';
@@ -567,6 +847,14 @@ export interface AppConfig {
     advancedCharts: boolean;
     aiTrading: boolean;
   
+
+
+
+
+
+
+
+
 
 
 
@@ -587,6 +875,14 @@ export interface ThemeConfig {
 
 
 
+
+
+
+
+
+
+
+
   colors: {
     primary: string;
     secondary: string;
@@ -596,6 +892,14 @@ export interface ThemeConfig {
     text: string;
     textSecondary: string;
   
+
+
+
+
+
+
+
+
 
 
 

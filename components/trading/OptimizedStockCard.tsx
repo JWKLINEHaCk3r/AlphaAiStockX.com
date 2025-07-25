@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
@@ -48,6 +56,14 @@ interface StockData {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
@@ -66,6 +82,14 @@ interface StockData {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
@@ -77,10 +101,26 @@ interface OptimizedStockCardProps {
 
 
 
+
+
+
+
+
+
+
+
   stock: StockData;
   onTrade?: (symbol: string, action: 'buy' | 'sell') => void;
   onAnalyze?: (symbol: string) => void;
   className?: string;
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,12 @@
 import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
+import { Card } from '../../components/ui/card.js';
 import { Card } from '../../components/ui/card';
 "use client";
 import React from 'react';

@@ -15,10 +15,26 @@ interface SubscriptionModalProps {
 
 
 
+
+
+
+
+
+
+
+
   isOpen: boolean;
   onClose: () => void;
   currentPlan: string;
   onSubscribe: (planId: string) => void;
+
+
+
+
+
+
+
+
 
 
 

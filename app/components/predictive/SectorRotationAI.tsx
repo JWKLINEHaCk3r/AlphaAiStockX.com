@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -43,6 +51,14 @@ interface SectorData {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   symbol: string;
   weight: number;
@@ -62,9 +78,25 @@ interface SectorData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface RotationSignal {
+
+
+
+
+
+
+
+
 
 
 
@@ -86,9 +118,25 @@ interface RotationSignal {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface EconomicIndicator {
+
+
+
+
+
+
+
+
 
 
 
@@ -106,9 +154,25 @@ interface EconomicIndicator {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface EconomicCycle {
+
+
+
+
+
+
+
+
 
 
 
@@ -123,6 +187,14 @@ interface EconomicCycle {
   keyIndicators?: EconomicIndicator[];
   recommendedSectors?: string[];
   avoidSectors?: string[];
+
+
+
+
+
+
+
+
 
 
 

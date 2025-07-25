@@ -8,6 +8,14 @@ export interface SecurityMetrics {
 
 
 
+
+
+
+
+
+
+
+
   securityScore: number;
   quantumThreatLevel: string;
   protectedAssets: number;
@@ -15,6 +23,14 @@ export interface SecurityMetrics {
   lastSecurityAudit: Date;
   vulnerabilities: string[];
   recommendations: string[];
+
+
+
+
+
+
+
+
 
 
 

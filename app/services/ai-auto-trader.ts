@@ -5,7 +5,7 @@ import {
   BollingerBands,;
   SupportResistance,;
   OptimalAllocations,;
-  RebalanceAction,;
+  RebalanceAction;
 } from '../types/trading-types';
 
 // AI Auto-Trader Service (Demo);
@@ -32,12 +32,28 @@ interface TradeData {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell';
   price: number;
   shares: number;
   time: string;
   reason: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -55,8 +71,24 @@ interface PortfolioData {
 
 
 
+
+
+
+
+
+
+
+
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -78,10 +110,26 @@ interface RiskSettings {
 
 
 
+
+
+
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -99,12 +147,28 @@ interface SimpleStrategy {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   name: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE';
   weight: number;
   parameters: { [key: string]: any;
+
+
+
+
+
+
+
+
 
 
 
@@ -127,11 +191,27 @@ interface AIAnalysisResult {
 
 
 
+
+
+
+
+
+
+
+
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   riskAssessment: RiskAnalysis;
   portfolioAnalysis: PortfolioAnalysis;
   recommendations: string[];
+
+
+
+
+
+
+
+
 
 
 
@@ -157,7 +237,7 @@ export class AdvancedAIAutoTrader {
       trades: [],;
       totalValue: startingCash,;
       dailyPnL: 0,;
-      totalReturn: 0,;
+      totalReturn: 0;
     };
 
     this.riskSettings = this.getRiskSettings(riskLevel);
@@ -178,14 +258,14 @@ export class AdvancedAIAutoTrader {
       diversification: {
         sectorWeights: {},;
         topHoldings: [],;
-        concentration: 0,;
+        concentration: 0;
       },;
       risk: {
         beta: 1,;
         volatility: 0,;
         sharpeRatio: 0,;
         maxDrawdown: 0,;
-        var95: 0,;
+        var95: 0;
       },;
       performance: {
         last1d: 0,;
@@ -194,9 +274,9 @@ export class AdvancedAIAutoTrader {
         last3m: 0,;
         last6m: 0,;
         last1y: 0,;
-        inception: 0,;
+        inception: 0;
       },;
-      timestamp: new Date(),;
+      timestamp: new Date();
     };
   }
 
@@ -663,6 +743,14 @@ interface RiskSettings {
 
 
 
+
+
+
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
@@ -674,9 +762,25 @@ interface RiskSettings {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PerformanceMetrics {
+
+
+
+
+
+
+
+
 
 
 
@@ -699,9 +803,25 @@ interface PerformanceMetrics {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PortfolioAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -734,6 +854,14 @@ interface PortfolioAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 };
   diversification: {
     sectors: Record<string, number>;
@@ -743,6 +871,14 @@ interface PortfolioAnalysis {
 }
 
 interface PositionAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -764,9 +900,25 @@ interface PositionAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface TradeExecutionResult {
+
+
+
+
+
+
+
+
 
 
 
@@ -785,10 +937,26 @@ interface TradeExecutionResult {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 // Enhanced Trade interface;
 interface Trade {
+
+
+
+
+
+
+
+
 
 
 
@@ -813,6 +981,14 @@ interface Trade {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 // Enhanced Portfolio interface;
@@ -824,8 +1000,24 @@ interface Portfolio {
 
 
 
+
+
+
+
+
+
+
+
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
+
+
+
 
 
 

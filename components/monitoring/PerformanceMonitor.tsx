@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../ui/card.tsx';
@@ -60,6 +68,14 @@ interface SystemMetrics {
 
 
 
+
+
+
+
+
+
+
+
   cpu: number;
   memory: number;
   disk: number;
@@ -69,6 +85,14 @@ interface SystemMetrics {
   uptime: number;
   errors: number;
   successRate: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -86,10 +110,26 @@ interface PerformanceMonitorProps {
 
 
 
+
+
+
+
+
+
+
+
   metrics: SystemMetrics;
   isLoading?: boolean;
   onRefresh?: () => void;
   className?: string;
+
+
+
+
+
+
+
+
 
 
 

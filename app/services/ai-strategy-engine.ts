@@ -15,6 +15,14 @@ export interface AITradingStrategy {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   description: string;
   run: (;
@@ -22,6 +30,14 @@ export interface AITradingStrategy {
     portfolio: Record<string, unknown>,;
     context?: Record<string, unknown>;
   ) => Promise<StrategyResult>;
+
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +87,7 @@ export const RiskAdaptiveStrategy: AITradingStrategy = {
     return {
       action: 'buy',;
       confidence: 0.8,;
-      reason: 'Risk within limits, opportunity detected.';
+      reason: 'Risk within limits, opportunity detected.',;
     };
   }
 };
@@ -85,7 +101,7 @@ export const MomentumStrategy: AITradingStrategy = {
     return {
       action: momentum > 0.7 ? 'buy' : momentum < 0.3 ? 'sell' : 'hold',;
       confidence: Math.abs(momentum - 0.5) * 2,;
-      reason: `Momentum score: ${momentum.toFixed(2)}`;
+      reason: `Momentum score: ${momentum.toFixed(2)}`,;
     };
   }
 };
@@ -98,7 +114,7 @@ export const MeanReversionStrategy: AITradingStrategy = {
     return {
       action: zscore < -1 ? 'buy' : zscore > 1 ? 'sell' : 'hold',;
       confidence: Math.abs(zscore) / 2,;
-      reason: `Z-score: ${zscore.toFixed(2)}`;
+      reason: `Z-score: ${zscore.toFixed(2)}`,;
     };
   }
 };
@@ -111,7 +127,7 @@ export const ArbitrageStrategy: AITradingStrategy = {
     return {
       action: arb > 0.8 ? 'buy' : 'hold',;
       confidence: arb,;
-      reason: `Arbitrage opportunity: ${arb > 0.8 ? 'Yes' : 'No'}`;
+      reason: `Arbitrage opportunity: ${arb > 0.8 ? 'Yes' : 'No'}`,;
     };
   }
 };
@@ -124,7 +140,7 @@ export const SentimentStrategy: AITradingStrategy = {
     return {
       action: sentiment > 0.5 ? 'buy' : sentiment < -0.5 ? 'sell' : 'hold',;
       confidence: Math.abs(sentiment),;
-      reason: `Sentiment score: ${sentiment.toFixed(2)}`;
+      reason: `Sentiment score: ${sentiment.toFixed(2)}`,;
     };
   }
 };
@@ -137,7 +153,7 @@ export const IndexFundStrategy: AITradingStrategy = {
     return {
       action: indexTrend > 0.6 ? 'buy' : indexTrend < 0.4 ? 'sell' : 'hold',;
       confidence: Math.abs(indexTrend - 0.5) * 2,;
-      reason: `Index trend: ${indexTrend.toFixed(2)}`;
+      reason: `Index trend: ${indexTrend.toFixed(2)}`,;
     };
   }
 };
@@ -150,7 +166,7 @@ export const PatternRecognitionStrategy: AITradingStrategy = {
     return {
       action: pattern === 'breakout' ? 'buy' : 'hold',;
       confidence: pattern === 'breakout' ? 0.9 : 0.5,;
-      reason: `Pattern detected: ${pattern}`;
+      reason: `Pattern detected: ${pattern}`,;
     };
   }
 };

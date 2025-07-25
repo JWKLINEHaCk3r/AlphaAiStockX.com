@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -120,6 +128,14 @@ interface Trader {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   name: string;
   username: string;
@@ -140,9 +156,25 @@ interface Trader {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface SocialPost {
+
+
+
+
+
+
+
+
 
 
 
@@ -157,6 +189,14 @@ interface SocialPost {
     avatar: string;
     verified: boolean;
   
+
+
+
+
+
+
+
+
 
 
 
@@ -185,10 +225,26 @@ interface LeaderboardEntry {
 
 
 
+
+
+
+
+
+
+
+
   rank: number;
   name: string;
   return: number;
   badge: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -206,12 +262,28 @@ interface SocialStats {
 
 
 
+
+
+
+
+
+
+
+
   totalCopiers: number;
   totalVolume: number;
   averageReturn: number;
   activeTraders: number;
   successRate?: number;
   activeTrades?: number;
+
+
+
+
+
+
+
+
 
 
 

@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -62,11 +70,27 @@ interface UserData {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   name: string;
   email: string;
   subscription: string;
   role: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -84,10 +108,26 @@ interface AuthModalProps {
 
 
 
+
+
+
+
+
+
+
+
   isOpen: boolean;
   onClose: () => void;
 <<<<<<< HEAD;
   onLogin: (userData: { email: string; name?: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -107,6 +147,14 @@ interface FormErrors {
 
 
 
+
+
+
+
+
+
+
+
   email?: string;
   password?: string;
   name?: string;
@@ -114,6 +162,14 @@ interface FormErrors {
   agreeToTerms?: string;
   general?: string;
 >>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+
+
+
+
+
+
+
+
 
 
 

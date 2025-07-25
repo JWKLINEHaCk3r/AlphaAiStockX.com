@@ -7,14 +7,12 @@ const socialPostSchema = z.object({
   content: z.string().min(1).max(500),;
   type: z.enum(['POST', 'TRADE_IDEA', 'MARKET_ANALYSIS', 'NEWS_SHARE']),;
   attachments: z.array(z.string()).optional(),;
-  tradingData: z;
-    .object({
-      symbol: z.string().optional(),;
-      action: z.enum(['BUY', 'SELL', 'HOLD']).optional(),;
-      price: z.number().optional(),;
-      confidence: z.number().optional(),;
-    });
-    .optional(),;
+  tradingData: z.object({
+    symbol: z.string().optional(),;
+    action: z.enum(['BUY', 'SELL', 'HOLD']).optional(),;
+    price: z.number().optional(),;
+    confidence: z.number().optional(),;
+  }).optional(),;
 });
 
 export async function GET(request: NextRequest) {

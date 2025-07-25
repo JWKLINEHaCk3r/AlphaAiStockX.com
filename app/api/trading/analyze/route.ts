@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
         'Volume analysis suggests positive sentiment',;
         'AI algorithm detected favorable patterns',;
       ],;
-    };
+    }
 
     return NextResponse.json({
       symbol,;

@@ -21,6 +21,14 @@ interface HealthStatus {
 
 
 
+
+
+
+
+
+
+
+
   status: 'healthy' | 'warning' | 'critical' | 'down';
   timestamp: string;
   uptime: number;
@@ -36,9 +44,25 @@ interface HealthStatus {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface ServiceHealth {
+
+
+
+
+
+
+
+
 
 
 
@@ -58,9 +82,25 @@ interface ServiceHealth {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PerformanceHealth {
+
+
+
+
+
+
+
+
 
 
 
@@ -73,6 +113,14 @@ interface PerformanceHealth {
     total: number;
     percentage: number;
   
+
+
+
+
+
+
+
+
 
 
 
@@ -100,10 +148,26 @@ interface DependencyHealth {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   status: 'healthy' | 'warning' | 'critical' | 'down';
   latency?: number;
   error?: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -133,7 +197,7 @@ class HealthChecker {
 
       return {
         name: 'database',;
-        status: 'healthy',;
+         status: 'healthy',;
         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
       };
@@ -141,9 +205,13 @@ class HealthChecker {
       return {
         name: 'database',;
         status: 'critical',;
+         status: 'critical',;
         responseTime: Date.now() - startTime,;
+         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
+         lastCheck: new Date().toISOString(),;
         error: error instanceof Error ? error.message : 'Database connection failed',;
+         error: error instanceof Error ? error.message : 'Database connection failed',;
       };
     }
   }
@@ -168,6 +236,7 @@ class HealthChecker {
 
       return {
         name: 'trading_api',;
+         name: 'trading_api',;
         status: 'healthy',;
         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
@@ -178,10 +247,15 @@ class HealthChecker {
 
       return {
         name: 'trading_api',;
+         name: 'trading_api',;
         status,;
+         status,;
         responseTime,;
+         responseTime,;
         lastCheck: new Date().toISOString(),;
+         lastCheck: new Date().toISOString(),;
         error: error instanceof Error ? error.message : 'Trading API connection failed',;
+         error: error instanceof Error ? error.message : 'Trading API connection failed',;
       };
     }
   }
@@ -200,17 +274,26 @@ class HealthChecker {
 
       return {
         name: 'authentication',;
+         name: 'authentication',;
         status: 'healthy',;
+         status: 'healthy',;
         responseTime: Date.now() - startTime,;
+         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
+         lastCheck: new Date().toISOString(),;
       };
     } catch (error) {
       return {
         name: 'authentication',;
+         name: 'authentication',;
         status: 'critical',;
+         status: 'critical',;
         responseTime: Date.now() - startTime,;
+         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
+         lastCheck: new Date().toISOString(),;
         error: error instanceof Error ? error.message : 'Authentication service failed',;
+         error: error instanceof Error ? error.message : 'Authentication service failed',;
       };
     }
   }
@@ -223,10 +306,15 @@ class HealthChecker {
       if (!this.alpacaClient) {
         return {
           name: 'market_data',;
+           name: 'market_data',;
           status: 'warning',;
+           status: 'warning',;
           responseTime: Date.now() - startTime,;
+           responseTime: Date.now() - startTime,;
           lastCheck: new Date().toISOString(),;
+           lastCheck: new Date().toISOString(),;
           error: 'Market data API credentials not configured',;
+           error: 'Market data API credentials not configured',;
         };
       }
 
@@ -235,7 +323,9 @@ class HealthChecker {
 
       return {
         name: 'market_data',;
+         name: 'market_data',;
         status: 'healthy',;
+         status: 'healthy',;
         responseTime: Date.now() - startTime,;
         lastCheck: new Date().toISOString(),;
       };
@@ -245,10 +335,15 @@ class HealthChecker {
 
       return {
         name: 'market_data',;
+         name: 'market_data',;
         status,;
+         status,;
         responseTime,;
+         responseTime,;
         lastCheck: new Date().toISOString(),;
+         lastCheck: new Date().toISOString(),;
         error: error instanceof Error ? error.message : 'Market data service failed',;
+         error: error instanceof Error ? error.message : 'Market data service failed',;
       };
     }
   }
@@ -265,10 +360,10 @@ class HealthChecker {
         percentage: Math.round((memoryUsage.heapUsed / memoryUsage.heapTotal) * 100),;
       },;
       responseTime: {
-        average: stats.averageResponseTime,;
-        p95: 0, // Would need to calculate from detailed metrics;
-        p99: 0, // Would need to calculate from detailed metrics;
-      },;
+         average: stats.averageResponseTime,;
+         p95: 0, // Would need to calculate from detailed metrics;
+         p99: 0, // Would need to calculate from detailed metrics;
+       },;
       errorRate: stats.errorRate,;
       requestCount: stats.totalRequests,;
     };

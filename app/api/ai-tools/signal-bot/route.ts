@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
             // Add delay to prevent overwhelming;
             await new Promise(resolve => setTimeout(resolve, 1000));
           }
-        },;
+        }
       });
 
       return new Response(stream, {
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
           'Content-Type': 'text/event-stream',;
           'Cache-Control': 'no-cache',;
           Connection: 'keep-alive';
-        },;
+        }
       });
     } else {
       // Single signal generation;

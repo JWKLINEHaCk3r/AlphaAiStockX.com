@@ -1,11 +1,9 @@
 import React from 'react';
-import { TabsTrigger } from "./tabs";
-import { TabsList } from "./tabs";
-import { TabsContent } from "./tabs";
-import { Tabs } from "./tabs";
 import * as React from 'react';
+// ...existing code...;
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cn } from '@/lib/utils';
+
 
 const Tabs = TabsPrimitive.Root;
 const TabsList = React.forwardRef<;
@@ -51,6 +49,9 @@ const TabsContent = React.forwardRef<;
     {...props}
   />;
 ));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
+
+// Removed duplicate TabsContent definition;
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };

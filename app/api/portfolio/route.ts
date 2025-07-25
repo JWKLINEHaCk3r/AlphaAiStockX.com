@@ -14,6 +14,14 @@ interface UserSession {
 
 
 
+
+
+
+
+
+
+
+
   user?: {
     id?: string;
     email?: string;
@@ -25,11 +33,27 @@ interface UserSession {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 // Portfolio data interfaces;
 interface PortfolioData {
+
+
+
+
+
+
+
+
 
 
 
@@ -55,9 +79,25 @@ interface PortfolioData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PositionData {
+
+
+
+
+
+
+
+
 
 
 
@@ -76,6 +116,14 @@ interface PositionData {
   side: 'LONG' | 'SHORT';
   changeToday: number;
   changeTodayPercent?: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -182,10 +230,8 @@ export async function GET(request: NextRequest) {
       shortMarketValue: portfolioSummary.shortMarketValue,;
     };
 
-    console.log(;
-      `Portfolio retrieved successfully for user ${userId}: $${portfolioSummary.totalValue}`;
-    );
-
+    // Removed malformed console.log;
+      // Portfolio retrieved successfully for user;
     return NextResponse.json({
       success: true,;
       data: portfolioData,;

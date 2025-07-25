@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
           select: {
             metrics: true;
           }
-        },;
+        }
       },;
       orderBy: { createdAt: 'desc' },;
       take: limit;
@@ -98,12 +98,12 @@ export async function GET(request: NextRequest) {
       latestTraining: model.trainingJobs[0] || null,;
       subscribers: model._count.subscriptions,;
       backtests: model._count.backtests,;
-      isSubscribed: model.subscriptions.some(sub => sub.userId === session.user.id);
+      isSubscribed: model.subscriptions.some(sub => sub.userId === session.user.id),;
     }));
 
     return NextResponse.json({
       success: true,;
-      models: modelData;
+      models: modelData,;
     });
   } catch (error) {
     console.error('AI models fetch error:', error);
@@ -118,7 +118,6 @@ export async function POST(request: NextRequest) {
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const body = await request.json();
     const modelData = aiModelSchema.parse(body);
 
@@ -143,7 +142,7 @@ export async function POST(request: NextRequest) {
           maxDrawdown: 0,;
           totalReturn: 0,;
           winRate: 0,;
-        },;
+        }
       },;
       include: {
         creator: {
@@ -153,9 +152,9 @@ export async function POST(request: NextRequest) {
             username: true,;
             avatar: true,;
             tier: true,;
-          },;
-        },;
-      },;
+          }
+        }
+      }
     });
 
     return NextResponse.json({

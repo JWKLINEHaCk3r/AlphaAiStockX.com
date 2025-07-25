@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -109,6 +117,14 @@ interface Alert {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   type: string;
   icon: LucideIcon;
@@ -126,9 +142,25 @@ interface Alert {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface AlertSettings {
+
+
+
+
+
+
+
+
 
 
 
@@ -149,9 +181,25 @@ interface AlertSettings {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Alert {
+
+
+
+
+
+
+
+
 
 
 
@@ -175,9 +223,25 @@ interface Alert {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface AlertType {
+
+
+
+
+
+
+
+
 
 
 
@@ -191,6 +255,14 @@ interface AlertType {
   title: string;
   symbol: string;
   priority: 'high' | 'medium' | 'low';
+
+
+
+
+
+
+
+
 
 
 

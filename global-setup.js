@@ -23,7 +23,7 @@ if (typeof global !== 'undefined' && typeof global.document === 'undefined') {
       clientHeight: 0,;
     },;
     body: {
-      className: '',;
+      className: '';
     },;
     addEventListener: () => {},;
     removeEventListener: () => {},;

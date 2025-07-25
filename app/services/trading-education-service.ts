@@ -7,6 +7,14 @@ interface TestQuestion {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   question: string;
   options: string[];
@@ -19,9 +27,25 @@ interface TestQuestion {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface UserAnswer {
+
+
+
+
+
+
+
+
 
 
 
@@ -40,9 +64,25 @@ interface UserAnswer {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface UserProgress {
+
+
+
+
+
+
+
+
 
 
 
@@ -59,9 +99,25 @@ interface UserProgress {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface StudyPlan {
+
+
+
+
+
+
+
+
 
 
 
@@ -81,9 +137,25 @@ interface StudyPlan {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface WeeklyPlan {
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +173,14 @@ interface WeeklyPlan {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PracticeTest {
@@ -111,9 +191,25 @@ interface PracticeTest {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   difficulty: string;
   questions: number;
+
+
+
+
+
+
+
+
 
 
 

@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -111,6 +119,14 @@ interface PatternMatch {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -138,9 +154,25 @@ interface PatternMatch {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface SignalData {
+
+
+
+
+
+
+
+
 
 
 
@@ -170,9 +202,25 @@ interface SignalData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PatternStats {
+
+
+
+
+
+
+
+
 
 
 
@@ -185,6 +233,14 @@ interface PatternStats {
     accuracy: number;
     avgReturn: number;
   
+
+
+
+
+
+
+
+
 
 
 

@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -43,6 +51,14 @@ interface NewsArticle {
 
 
 
+
+
+
+
+
+
+
+
   id: number;
   title: string;
   summary: string;
@@ -52,6 +68,14 @@ interface NewsArticle {
   source: string;
   time: string;
   relevantStocks: string[];
+
+
+
+
+
+
+
+
 
 
 
@@ -69,10 +93,26 @@ interface SentimentData {
 
 
 
+
+
+
+
+
+
+
+
   bullish: number;
   bearish: number;
   neutral: number;
   avgConfidence: number;
+
+
+
+
+
+
+
+
 
 
 

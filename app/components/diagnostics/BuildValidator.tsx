@@ -11,7 +11,23 @@ interface BuildValidatorProps {
 
 
 
+
+
+
+
+
+
+
+
   onValidationComplete?: (success: boolean) => void;
+
+
+
+
+
+
+
+
 
 
 

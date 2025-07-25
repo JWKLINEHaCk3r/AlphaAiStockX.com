@@ -9,6 +9,14 @@ export interface WebSocketMessage {
 
 
 
+
+
+
+
+
+
+
+
   type: string;
   userId?: string;
   data: any;
@@ -21,9 +29,25 @@ export interface WebSocketMessage {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface MarketDataUpdate {
+
+
+
+
+
+
+
+
 
 
 
@@ -51,9 +75,25 @@ export interface MarketDataUpdate {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface PortfolioUpdate {
+
+
+
+
+
+
+
+
 
 
 
@@ -82,11 +122,27 @@ export interface PortfolioUpdate {
 
 
 
+
+
+
+
+
+
+
+
 }>;
   timestamp: number;
 }
 
 export interface AlertMessage {
+
+
+
+
+
+
+
+
 
 
 
@@ -109,9 +165,25 @@ export interface AlertMessage {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface TradingSignal {
+
+
+
+
+
+
+
+
 
 
 
@@ -135,9 +207,25 @@ export interface TradingSignal {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface WebSocketConfig {
+
+
+
+
+
+
+
+
 
 
 
@@ -152,6 +240,14 @@ export interface WebSocketConfig {
     methods: string[];
     credentials: boolean;
   
+
+
+
+
+
+
+
+
 
 
 
@@ -179,6 +275,14 @@ export interface WebSocketStats {
 
 
 
+
+
+
+
+
+
+
+
   connectedClients: number;
   totalConnections: number;
   messagesPerSecond: number;
@@ -187,6 +291,14 @@ export interface WebSocketStats {
   uptime: number;
   lastError?: string;
   lastErrorTimestamp?: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -206,10 +318,26 @@ export interface SubscriptionTopic {
 
 
 
+
+
+
+
+
+
+
+
   type: 'market_data' | 'portfolio' | 'alerts' | 'trading_signals' | 'news';
   symbols?: string[];
   userId?: string;
   filters?: Record<string, any>;
+
+
+
+
+
+
+
+
 
 
 

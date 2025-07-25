@@ -9,6 +9,14 @@ interface ChartAnalysis {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   imageUrl: string;
   symbol: string;
@@ -28,9 +36,25 @@ interface ChartAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface TechnicalPattern {
+
+
+
+
+
+
+
+
 
 
 
@@ -51,9 +75,25 @@ interface TechnicalPattern {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PriceLevel {
+
+
+
+
+
+
+
+
 
 
 
@@ -72,9 +112,25 @@ interface PriceLevel {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MarketPrediction {
+
+
+
+
+
+
+
+
 
 
 
@@ -97,6 +153,14 @@ interface MarketPrediction {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MarketContext {
@@ -107,9 +171,25 @@ interface MarketContext {
 
 
 
+
+
+
+
+
+
+
+
   vixLevel: number;
   marketSentiment: 'FEAR' | 'GREED' | 'NEUTRAL';
   sectorRotation: { [sector: string]: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -129,6 +209,14 @@ interface EconomicIndicator {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   value: number;
   change: number;
@@ -141,9 +229,25 @@ interface EconomicIndicator {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface NewsEvent {
+
+
+
+
+
+
+
+
 
 
 
@@ -162,9 +266,25 @@ interface NewsEvent {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface MultiModalAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -179,6 +299,14 @@ interface MultiModalAnalysis {
   reasoning: string;
   riskFactors: string[];
   opportunities: string[];
+
+
+
+
+
+
+
+
 
 
 

@@ -16,6 +16,14 @@ export interface User {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   email: string;
   name: string;
@@ -43,9 +51,25 @@ export interface User {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface UserPreferences {
+
+
+
+
+
+
+
+
 
 
 
@@ -62,6 +86,14 @@ export interface UserPreferences {
     news: boolean;
     ai: boolean;
   
+
+
+
+
+
+
+
+
 
 
 

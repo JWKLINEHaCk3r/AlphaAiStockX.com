@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -32,7 +40,23 @@ interface TechnicalIndicatorsProps {
 
 
 
+
+
+
+
+
+
+
+
   selectedStock: { symbol: string; name?: string; price?: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -50,6 +74,14 @@ interface IndicatorData {
 
 
 
+
+
+
+
+
+
+
+
   rsi: number;
   macd: {
     value: number;
@@ -57,6 +89,14 @@ interface IndicatorData {
     histogram: number;
     trend: string;
   
+
+
+
+
+
+
+
+
 
 
 

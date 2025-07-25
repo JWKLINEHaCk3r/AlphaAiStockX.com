@@ -18,6 +18,14 @@ interface UseWebSocketReturn {
 
 
 
+
+
+
+
+
+
+
+
   socket: SocketType | null;
   isConnected: boolean;
   marketData: Record<string, MarketDataUpdate>;
@@ -32,6 +40,14 @@ interface UseWebSocketReturn {
   subscribeToSocialFeed: (userId: string) => void;
   subscribeToTradeNotifications: (userId: string) => void;
   clearNotifications: () => void;
+
+
+
+
+
+
+
+
 
 
 

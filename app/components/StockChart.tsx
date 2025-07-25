@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -32,7 +40,23 @@ interface StockChartProps {
 
 
 
+
+
+
+
+
+
+
+
   selectedStock: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -50,6 +74,14 @@ interface ChartDataPoint {
 
 
 
+
+
+
+
+
+
+
+
   time: number;
   price: number;
   volume: number;
@@ -60,9 +92,25 @@ interface ChartDataPoint {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface StockInfo {
+
+
+
+
+
+
+
+
 
 
 
@@ -87,9 +135,25 @@ interface StockInfo {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface AIPrediction {
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +165,14 @@ interface AIPrediction {
   confidence: number;
   targetPrice: number;
   timeframe: string;
+
+
+
+
+
+
+
+
 
 
 

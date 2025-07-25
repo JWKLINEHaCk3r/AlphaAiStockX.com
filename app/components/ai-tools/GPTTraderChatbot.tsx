@@ -14,6 +14,14 @@ interface TradingRecommendation {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell' | 'hold';
   quantity: number;
@@ -30,10 +38,26 @@ interface TradingRecommendation {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 // Local type definitions (no conflict with imported types);
 interface ChatMessage {
+
+
+
+
+
+
+
+
 
 
 
@@ -56,12 +80,28 @@ interface ChatMessage {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 // ...existing code...;
 // Rename to avoid conflict with imported UserProfile;
 interface GPTUserProfile {
+
+
+
+
+
+
+
+
 
 
 
@@ -76,6 +116,14 @@ interface GPTUserProfile {
   experience: 'beginner' | 'intermediate' | 'advanced';
   portfolioValue: number;
   preferredSectors: string[];
+
+
+
+
+
+
+
+
 
 
 

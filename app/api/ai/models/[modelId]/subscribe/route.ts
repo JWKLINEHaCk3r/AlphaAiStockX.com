@@ -128,33 +128,33 @@ async function simulateTrainingProgress(trainingJobId: string) {
     { progress: 25, status: 'RUNNING', log: 'Loading and preprocessing data' },;
     { progress: 40, status: 'RUNNING', log: 'Training model - Epoch 1/10' },;
     { progress: 55, status: 'RUNNING', log: 'Training model - Epoch 3/10' },;
-        { progress: 70, status: 'RUNNING', log: 'Training model - Epoch 6/10' },;
-        { progress: 85, status: 'RUNNING', log: 'Training model - Epoch 9/10' },;
-        { progress: 95, status: 'RUNNING', log: 'Validating model performance' },;
-        { progress: 100, status: 'COMPLETED', log: 'Training completed successfully' },;
+    { progress: 70, status: 'RUNNING', log: 'Training model - Epoch 6/10' },;
+    { progress: 85, status: 'RUNNING', log: 'Training model - Epoch 9/10' },;
+    { progress: 95, status: 'RUNNING', log: 'Validating model performance' },;
+    { progress: 100, status: 'COMPLETED', log: 'Training completed successfully' }
   ];
 
   for (const stage of stages) {
     await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second delay;
         await prisma.trainingJob.update({
             where: { id: trainingJobId },;
-      data: {
-        progress: stage.progress,;
-        status: stage.status,;
-        logs: {
-          push: stage.log;
-        },;
-        ...(stage.status === 'COMPLETED' && {
-          completedAt: new Date(),;
-          metrics: {
-            accuracy: 0.85 + Math.random() * 0.1,;
-            loss: Math.random() * 0.1,;
-            valAccuracy: 0.82 + Math.random() * 0.1,;
-            valLoss: Math.random() * 0.15,;
-            epochs: 10,;
-            trainingTime: 120 + Math.random() * 60;
-          }
-        });
+            data: {
+                progress: stage.progress,;
+                status: stage.status,;
+                logs: {
+                    push: stage.log;
+                },;
+                ...(stage.status === 'COMPLETED' && {
+                    completedAt: new Date(),;
+                    metrics: {
+                        accuracy: 0.85 + Math.random() * 0.1,;
+                        loss: Math.random() * 0.1,;
+                        valAccuracy: 0.82 + Math.random() * 0.1,;
+                        valLoss: Math.random() * 0.15,;
+                        epochs: 10,;
+                        trainingTime: 120 + Math.random() * 60;
+                    }
+                });
       }
     });
   }

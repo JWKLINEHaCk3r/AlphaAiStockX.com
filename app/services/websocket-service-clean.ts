@@ -9,6 +9,14 @@ export interface MarketDataPoint {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
@@ -22,9 +30,25 @@ export interface MarketDataPoint {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
+
+
+
 
 
 
@@ -45,9 +69,25 @@ export interface AISignal {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface TradingUpdate {
+
+
+
+
+
+
+
+
 
 
 
@@ -66,9 +106,25 @@ export interface TradingUpdate {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 export interface SentimentData {
+
+
+
+
+
+
+
+
 
 
 
@@ -80,6 +136,14 @@ export interface SentimentData {
   sentiment: number;
   volume: number;
   timestamp: Date;
+
+
+
+
+
+
+
+
 
 
 

@@ -47,7 +47,6 @@ export async function POST(request: NextRequest) {
         username: username || email.split('@')[0],;
         tier: 'FREE',;
         status: 'PENDING',;
-        balance: 10000, // Demo balance;
         portfolioValue: 10000,;
         totalPnL: 0,;
         winRate: 0,;
@@ -101,10 +100,9 @@ export async function POST(request: NextRequest) {
         status: true,;
         balance: true,;
         portfolioValue: true,;
-        createdAt: true,;
+        // Create user with initial portfolio;
       }
     });
-
     return NextResponse.json({
       success: true,;
       message: 'User registered successfully',;

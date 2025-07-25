@@ -13,59 +13,33 @@ export async function POST(request: NextRequest) {
       case 'analyze_chart':;
         const { imageData, symbol, timeframe } = body;
 
-        if (!imageData || !symbol) {
-          return NextResponse.json(
-            { error: 'Image data and symbol are required' },
-            { status: 400 }
-          );
-        }
 
+        if (!imageData || !symbol) {
+        return NextResponse.json({
+          success: true,;
+          data: analysis,;
+          timestamp: new Date().toISOString();
+        });
         const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
 
-        return NextResponse.json({
-          success: true,
-          data: analysis,
-          timestamp: new Date().toISOString()
-        });
-
-      case 'multimodal_analysis':;
-        const { imageData: imgData, symbol: sym, timeframe: tf } = body;
-
-        if (!imgData || !sym) {
-          return NextResponse.json(
-            { error: 'Image data and symbol are required' },
-            { status: 400 }
-          );
-        }
-
-        const multiModalAnalysis = await predictor.performMultiModalAnalysis(;
-          imgData,
-          sym,
-          tf || '1D'
-        );
 
         return NextResponse.json({
-          success: true,
-          data: multiModalAnalysis,
-          timestamp: new Date().toISOString()
+          success: true,;
+          data: analysis,;
+          timestamp: new Date().toISOString();
         });
-
-      case 'bulk_predictions':;
-        const { symbols, timeframe: bulkTimeframe } = body;
-
-        if (!symbols || !Array.isArray(symbols)) {
+        break;
           return NextResponse.json({ error: 'Symbols array is required' }, { status: 400 });
         }
 
         const bulkPredictions = await predictor.getBulkPredictions(symbols, bulkTimeframe || '1D');
 
         return NextResponse.json({
-          success: true,
-          data: bulkPredictions,
-          count: bulkPredictions.length,
-          timestamp: new Date().toISOString()
+          success: true,;
+          data: bulkPredictions,;
+          count: bulkPredictions.length,;
+          timestamp: new Date().toISOString();
         });
-
       default:;
         return NextResponse.json({ error: 'Invalid action. Supported actions: analyze_chart, multimodal_analysis, bulk_predictions' }, { status: 400 });
     }
@@ -114,7 +88,7 @@ export async function GET(request: NextRequest) {
           timestamp: new Date().toISOString();
         });
 
-      case 'supported_patterns':;
+      case 'supported_patterns': {
         const patterns = [;
           'Double Bottom',;
           'Double Top',;
@@ -141,16 +115,15 @@ export async function GET(request: NextRequest) {
           count: patterns.length,;
           timestamp: new Date().toISOString();
         });
-
-      case 'supported_timeframes':;
+      }
+      case 'supported_timeframes': {
         const timeframes = ['1m', '5m', '15m', '30m', '1H', '4H', '1D', '1W', '1M'];
-
         return NextResponse.json({
           success: true,;
           data: timeframes,;
           timestamp: new Date().toISOString();
         });
-
+      }
       default:;
         return NextResponse.json({ error: 'Invalid action. Supported actions: history, accuracy, supported_patterns, supported_timeframes' }, { status: 400 });
     }

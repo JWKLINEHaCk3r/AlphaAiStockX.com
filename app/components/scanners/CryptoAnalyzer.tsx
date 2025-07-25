@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -112,6 +120,14 @@ interface CryptoData {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   name: string;
   price: number;
@@ -130,9 +146,25 @@ interface CryptoData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface DefiMetric {
+
+
+
+
+
+
+
+
 
 
 
@@ -154,9 +186,25 @@ interface DefiMetric {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface NftData {
+
+
+
+
+
+
+
+
 
 
 
@@ -177,9 +225,25 @@ interface NftData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface OnChainMetrics {
+
+
+
+
+
+
+
+
 
 
 
@@ -193,6 +257,14 @@ interface OnChainMetrics {
   activeAddresses?: number;
   exchangeInflows?: number;
   exchangeOutflows?: number;
+
+
+
+
+
+
+
+
 
 
 

@@ -20,47 +20,47 @@ export async function GET(request: NextRequest) {
 
     // Advanced AI strategies with different characteristics;
     const aiModels = [;
-      { 
+      {
         name: 'Neural Ensemble v4.1',;
         accuracy: 0.947,;
         specialty: 'momentum',;
         timeframe: 'intraday',;
-        confidenceRange: [0.85, 0.98];
+        confidenceRange: [0.85, 0.98],;
       },;
       { 
         name: 'LSTM Deep Learning',;
         accuracy: 0.923,;
         specialty: 'trend',;
         timeframe: 'swing',;
-        confidenceRange: [0.75, 0.95];
+        confidenceRange: [0.75, 0.95],;
       },;
       { 
         name: 'Transformer GPT-Finance',;
         accuracy: 0.891,;
         specialty: 'sentiment',;
         timeframe: 'news_driven',;
-        confidenceRange: [0.70, 0.92];
+        confidenceRange: [0.70, 0.92],;
       },;
       { 
         name: 'Quantum Computing Model',;
         accuracy: 0.962,;
         specialty: 'arbitrage',;
         timeframe: 'scalping',;
-        confidenceRange: [0.90, 0.99];
+        confidenceRange: [0.90, 0.99],;
       },;
       { 
         name: 'Reinforcement Learning Agent',;
         accuracy: 0.879,;
         specialty: 'adaptive',;
         timeframe: 'multi_timeframe',;
-        confidenceRange: [0.72, 0.89];
+        confidenceRange: [0.72, 0.89],;
       },;
       { 
         name: 'GAN Pattern Recognition',;
         accuracy: 0.934,;
         specialty: 'patterns',;
         timeframe: 'technical',;
-        confidenceRange: [0.80, 0.96];
+        confidenceRange: [0.80, 0.96],;
       }
     ];
 
@@ -148,7 +148,7 @@ export async function GET(request: NextRequest) {
           momentum: Math.round((Math.random() - 0.5) * 200) / 100,;
           support: Math.round(basePrice * 0.95 * 100) / 100,;
           resistance: Math.round(basePrice * 1.05 * 100) / 100;
-        },;
+      },;
         marketCondition: marketConditions[Math.floor(Math.random() * marketConditions.length)],;
         reasoning: generateSignalReasoning(action, confidence, model, rsi, macd),;
         timestamp: new Date(Date.now() - Math.random() * 3600000).toISOString(), // Within last hour;
@@ -172,12 +172,12 @@ export async function GET(request: NextRequest) {
         riskDistribution: {
           low: signals.filter(s => s.riskLevel === 'LOW').length,;
           medium: signals.filter(s => s.riskLevel === 'MEDIUM').length,;
-          high: signals.filter(s => s.riskLevel === 'HIGH').length;
-        },;
+          high: signals.filter(s => s.riskLevel === 'HIGH').length,;
+      },;
         actionDistribution: {
           buy: signals.filter(s => s.action === 'BUY').length,;
           sell: signals.filter(s => s.action === 'SELL').length,;
-          hold: signals.filter(s => s.action === 'HOLD').length;
+          hold: signals.filter(s => s.action === 'HOLD').length,;
         },;
         generatedAt: new Date().toISOString(),;
         engineVersion: '4.1.0',;

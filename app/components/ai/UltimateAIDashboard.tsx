@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -127,6 +135,14 @@ interface Processor {
 
 
 
+
+
+
+
+
+
+
+
   name: string;
   qubits: number;
   coherenceTime: string;
@@ -141,9 +157,25 @@ interface Processor {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Agent {
+
+
+
+
+
+
+
+
 
 
 
@@ -166,6 +198,14 @@ interface Agent {
 
 
 
+
+
+
+
+
+
+
+
 };
   trades: number;
   profit: number;
@@ -174,6 +214,14 @@ interface Agent {
 }
 
 interface Capability {
+
+
+
+
+
+
+
+
 
 
 
@@ -192,9 +240,25 @@ interface Capability {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Result {
+
+
+
+
+
+
+
+
 
 
 
@@ -217,9 +281,25 @@ interface Result {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Algorithm {
+
+
+
+
+
+
+
+
 
 
 
@@ -241,9 +321,25 @@ interface Algorithm {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Strategy {
+
+
+
+
+
+
+
+
 
 
 
@@ -265,9 +361,25 @@ interface Strategy {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface DataSource {
+
+
+
+
+
+
+
+
 
 
 
@@ -287,9 +399,25 @@ interface DataSource {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface Model {
+
+
+
+
+
+
+
+
 
 
 
@@ -313,10 +441,26 @@ interface Model {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface Environment {
+
+
+
+
+
+
+
+
 
 
 
@@ -339,9 +483,25 @@ interface Environment {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface QuantumData {
+
+
+
+
+
+
+
+
 
 
 
@@ -359,9 +519,25 @@ interface QuantumData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface HFTData {
+
+
+
+
+
+
+
+
 
 
 
@@ -379,6 +555,14 @@ interface HFTData {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface AltData {
@@ -389,8 +573,24 @@ interface AltData {
 
 
 
+
+
+
+
+
+
+
+
   sources?: DataSource[];
   sampleData?: any;
+
+
+
+
+
+
+
+
 
 
 
@@ -408,9 +608,25 @@ interface RLData {
 
 
 
+
+
+
+
+
+
+
+
   agents?: Agent[];
   models?: Model[];
   environments?: Environment[];
+
+
+
+
+
+
+
+
 
 
 
@@ -428,7 +644,23 @@ interface UltimateAIDashboardProps {
 
 
 
+
+
+
+
+
+
+
+
   className?: string;
+
+
+
+
+
+
+
+
 
 
 

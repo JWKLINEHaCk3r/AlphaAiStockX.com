@@ -1,48 +1,55 @@
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import {
-  AIStockPrediction,
-  SportsEvent,
-  TradingOpportunity,
-  Trade,
-  Trader,
-  VisionModel,
-  AnalysisResult,
-  BankAccount,
-  Transaction,
-  TradingSignalData,
-  ChartPattern,
-  TechnicalIndicators,
-  RiskAnalysis,
-  SectorPerformance,
-  BacktestStrategy,
-  AIWhiteLabelMetrics,
-  MarketClassification,
-  TradingRecommendation,
-  StockAnalysis,
-  RealtimeData,
-  VolumeProfile,
-  AIAnalysisComponents,
-  CryptoData,
-  DeFiProtocol,
-  NFTCollection,
-  UserProfile,
-  ThemeOption,
-  AccentColor,
-  SubscriptionPlan,
-  TradingStrategy,
-  ScanResult,
-  SiteDiagnostic,
-  Alert,
-  NewsAnalysis,
-  SocialPlatform,
-  Influencer,
-  SocialPost,
-  DeepLearningModel,
-  MarketPattern,
+  AIStockPrediction,;
+  SportsEvent,;
+  TradingOpportunity,;
+  Trade,;
+  Trader,;
+  VisionModel,;
+  AnalysisResult,;
+  BankAccount,;
+  Transaction,;
+  TradingSignalData,;
+  ChartPattern,;
+  TechnicalIndicators,;
+  RiskAnalysis,;
+  SectorPerformance,;
+  BacktestStrategy,;
+  AIWhiteLabelMetrics,;
+  MarketClassification,;
+  TradingRecommendation,;
+  StockAnalysis,;
+  RealtimeData,;
+  VolumeProfile,;
+  AIAnalysisComponents,;
+  CryptoData,;
+  DeFiProtocol,;
+  NFTCollection,;
+  UserProfile,;
+  ThemeOption,;
+  AccentColor,;
+  SubscriptionPlan,;
+  TradingStrategy,;
+  ScanResult,;
+  SiteDiagnostic,;
+  Alert,;
+  NewsAnalysis,;
+  SocialPlatform,;
+  Influencer,;
+  SocialPost,;
+  DeepLearningModel,;
+  MarketPattern,;
 } from '../../types/trading-types';
 
 ('use client');

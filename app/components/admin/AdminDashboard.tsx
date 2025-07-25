@@ -13,6 +13,14 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -70,6 +78,14 @@ interface UserProfile {
 
 
 
+
+
+
+
+
+
+
+
   id: string;
   name: string;
   email: string;
@@ -91,9 +107,25 @@ interface UserProfile {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface SystemAlert {
+
+
+
+
+
+
+
+
 
 
 
@@ -113,9 +145,25 @@ interface SystemAlert {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface LiveData {
+
+
+
+
+
+
+
+
 
 
 
@@ -132,6 +180,14 @@ interface LiveData {
     memoryUsage?: number;
     cpuUsage?: number;
   
+
+
+
+
+
+
+
+
 
 
 

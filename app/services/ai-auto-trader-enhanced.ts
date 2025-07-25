@@ -30,6 +30,14 @@ interface TradeRecord {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   action: 'buy' | 'sell';
   price: number;
@@ -47,6 +55,14 @@ interface TradeRecord {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PortfolioData {
@@ -57,8 +73,24 @@ interface PortfolioData {
 
 
 
+
+
+
+
+
+
+
+
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -80,10 +112,26 @@ interface RiskSettings {
 
 
 
+
+
+
+
+
+
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +149,14 @@ interface PerformanceMetrics {
 
 
 
+
+
+
+
+
+
+
+
   totalReturn: number;
   dailyReturn: number;
   weeklyReturn: number;
@@ -109,6 +165,14 @@ interface PerformanceMetrics {
   maxDrawdown: number;
   winRate: number;
   lastUpdated: Date;
+
+
+
+
+
+
+
+
 
 
 
@@ -612,6 +676,14 @@ interface AIAnalysisResult {
 
 
 
+
+
+
+
+
+
+
+
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   portfolioAnalysis: PortfolioAnalysis;
@@ -624,9 +696,25 @@ interface AIAnalysisResult {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface PortfolioAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -647,11 +735,27 @@ interface PortfolioAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 };
   recommendations: string[];
 }
 
 interface PositionAnalysis {
+
+
+
+
+
+
+
+
 
 
 
@@ -673,9 +777,25 @@ interface PositionAnalysis {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface TradeExecutionResult {
+
+
+
+
+
+
+
+
 
 
 
@@ -694,9 +814,25 @@ interface TradeExecutionResult {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface OptimizationResult {
+
+
+
+
+
+
+
+
 
 
 
@@ -718,10 +854,26 @@ interface OptimizationResult {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface RealTimeRiskAssessment {
+
+
+
+
+
+
+
+
 
 
 
@@ -736,6 +888,14 @@ interface RealTimeRiskAssessment {
   technicalRisk: 'LOW' | 'MEDIUM' | 'HIGH';
   recommendation: string;
   timestamp: Date;
+
+
+
+
+
+
+
+
 
 
 

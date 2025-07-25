@@ -27,6 +27,14 @@ interface OrderInputData {
 
 
 
+
+
+
+
+
+
+
+
   symbol: string;
   quantity: number;
   side: 'buy' | 'sell';
@@ -34,6 +42,14 @@ interface OrderInputData {
   timeInForce: 'day' | 'gtc' | 'ioc' | 'fok';
   limitPrice?: number;
   stopPrice?: number;
+
+
+
+
+
+
+
+
 
 
 
@@ -123,7 +139,7 @@ const validateOrderData = (data: unknown): {
   if (;
     !orderData.type ||;
     typeof orderData.type !== 'string' ||;
-    !ORDER_VALIDATION.type(orderData.type);
+    !ORDER_VALIDATION.type(orderData.type as string);
   ) {
     errors.push('Invalid order type. Must be market, limit, stop, or stop_limit.');
   }
@@ -131,7 +147,7 @@ const validateOrderData = (data: unknown): {
   if (;
     !orderData.timeInForce ||;
     typeof orderData.timeInForce !== 'string' ||;
-    !ORDER_VALIDATION.timeInForce(orderData.timeInForce);
+    !ORDER_VALIDATION.timeInForce(orderData.timeInForce as string);
   ) {
     errors.push('Invalid time in force. Must be day, gtc, ioc, or fok.');
   }
@@ -141,7 +157,7 @@ const validateOrderData = (data: unknown): {
     if (;
       orderData.limitPrice === undefined ||;
       typeof orderData.limitPrice !== 'number' ||;
-      !ORDER_VALIDATION.limitPrice(orderData.limitPrice);
+      !ORDER_VALIDATION.limitPrice(orderData.limitPrice as number);
     ) {
       errors.push('Limit price required for limit orders and must be positive.');
     }
@@ -151,7 +167,7 @@ const validateOrderData = (data: unknown): {
     if (;
       orderData.stopPrice === undefined ||;
       typeof orderData.stopPrice !== 'number' ||;
-      !ORDER_VALIDATION.stopPrice(orderData.stopPrice);
+      !ORDER_VALIDATION.stopPrice(orderData.stopPrice as number);
     ) {
       errors.push('Stop price required for stop orders and must be positive.');
     }
@@ -226,9 +242,9 @@ export async function GET(request: NextRequest) {
       error: 'Failed to fetch orders',;
       message:;
         process.env.NODE_ENV === 'development';
-          ? error instanceof Error;
-            ? error.message;
-            : 'Unknown error';
+          ? (error instanceof Error;
+              ? error.message || 'Unknown error';
+              : 'Unknown error');
           : 'Internal server error',;
     }, { status: 500 });
   }
@@ -318,9 +334,9 @@ export async function POST(request: NextRequest) {
       error: 'Failed to create order',;
       message:;
         process.env.NODE_ENV === 'development';
-          ? error instanceof Error;
-            ? error.message || 'Unknown error';
-            : 'Unknown error';
+          ? (error instanceof Error;
+              ? error.message || 'Unknown error';
+              : 'Unknown error');
           : 'Internal server error',;
     }, { status: 500 });
   }
@@ -374,9 +390,9 @@ export async function DELETE(request: NextRequest) {
       error: 'Failed to cancel order',;
       message:;
         process.env.NODE_ENV === 'development';
-          ? error instanceof Error;
-            ? error.message;
-            : 'Unknown error';
+          ? (error instanceof Error;
+              ? error.message;
+              : 'Unknown error');
           : 'Internal server error',;
     }, { status: 500 });
   }

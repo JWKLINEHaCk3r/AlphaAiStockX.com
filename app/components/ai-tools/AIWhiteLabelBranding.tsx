@@ -16,12 +16,28 @@ export interface Trade {
 
 
 
+
+
+
+
+
+
+
+
   pnl: number;
   side: string;
   symbol: string;
   quantity: number;
   price: number;
   strategy: string;
+
+
+
+
+
+
+
+
 
 
 
@@ -38,7 +54,23 @@ export interface PerformanceData {
 
 
 
+
+
+
+
+
+
+
+
   dailyReturns: { date: Date; return: number; cumulative: number;
+
+
+
+
+
+
+
+
 
 
 

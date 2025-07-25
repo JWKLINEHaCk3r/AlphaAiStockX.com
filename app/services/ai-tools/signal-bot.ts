@@ -9,6 +9,14 @@ interface TechnicalIndicators {
 
 
 
+
+
+
+
+
+
+
+
   rsi: number;
   macd: number;
   sma20: number;
@@ -25,10 +33,26 @@ interface TechnicalIndicators {
 
 
 
+
+
+
+
+
+
+
+
 };
 }
 
 interface NewsItem {
+
+
+
+
+
+
+
+
 
 
 
@@ -49,9 +73,25 @@ interface NewsItem {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 interface StockSignal {
+
+
+
+
+
+
+
+
 
 
 
@@ -73,6 +113,14 @@ interface StockSignal {
   indicators: TechnicalIndicators;
   news: NewsItem[];
   timestamp: string;
+
+
+
+
+
+
+
+
 
 
 
