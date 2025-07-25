@@ -1,97 +1,76 @@
-// Removed duplicate import
-"use client";
-import { Card } from '../../components/ui/card';
 import React, { useState, useEffect, useCallback } from 'react';
-import { TabsTrigger, TabsList, TabsContent, Tabs } from '../../components/ui/tabs';
-import { Progress } from '../../components/ui/progress';
-
+import { Card } from '../../components/ui/card';
+import { Tabs } from '../../components/ui/tabs';
 import { Button } from '../../components/ui/button';
-import { AdvancedAIAutoTrader } from '../../services/ai-auto-trader';
 
-
-// ...existing code...
-// Trading interfaces
+// Minimal interface for the trader object
+interface Trader {
+  runAIAnalysis: (symbols: string[]) => Promise<Analysis>;
+  getPortfolio: () => Portfolio;
+  executeAITrading: (symbols: string[]) => Promise<unknown>;
+  emergencyStop: () => void;
+}
+// Trading interfaces;
 interface TradingSignal {
-
-
   symbol: string;
   action: string;
   confidence: number;
-  reasoning?: string[]
-
-
+  reasoning?: string[];
 }
 
 interface Trade {
-
-
   symbol: string;
   action: string;
   shares: number;
   price: number;
   time: string;
-  reason: string
-
-
+  reason: string;
 }
 
 interface Performance {
-
-
   totalReturn: number;
   dailyPnL: number;
   winRate: number;
   sharpeRatio: number;
-  maxDrawdown?: number
-
-
+  maxDrawdown?: number;
 }
 
 interface Portfolio {
-
-
   totalValue: number;
   cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number }>
-
-}>;
+  holdings: Record<string, { shares: number; avgPrice: number }>;
   trades: Trade[];
   totalReturn?: number;
   dailyPnL?: number;
-  performance?: Performance
+  performance?: Performance;
 }
 
 interface Analysis {
-
-
-  signals?: TradingSignal[]
-  marketCondition?: string
-  volatility?: number
+  signals?: TradingSignal[];
+  marketCondition?: string;
+  volatility?: number;
   lastTradeResult?: {
-    success: boolean
-    message: string
-    trades?: Trade[]
-  }
-  recommendations?: string[]
+    success: boolean;
+    message: string;
+    trades?: Trade[];
+  };
+  recommendations?: string[];
   riskAnalysis?: {
-    riskScore: number
-    volatility: number
-    beta?: number
-  }
+    riskScore: number;
+    volatility: number;
+    beta?: number;
+  };
 }
 
+
 interface DashboardState {
-
-
-  trader: AdvancedAIAutoTrader | null
-  portfolio: Portfolio | null
-  isTrading: boolean
-  performance: Performance | null
-  analysis: Analysis | null
-  loading: boolean
-  error: string | null
-
-
+  trader: Trader | null;
+  portfolio: Portfolio | null;
+  isTrading: boolean;
+  performance: Performance | null;
+  analysis: Analysis | null;
+  loading: boolean;
+  error: string | null;
 }
 
 export default function AITradingDashboard() {
@@ -104,62 +83,53 @@ export default function AITradingDashboard() {
     loading: true,
     error: null,
   });
-
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
   const [riskLevel, setRiskLevel] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
 
   const initializeTrader = useCallback(async () => {
     // TODO: Add implementation logic for initializeTrader
-  }, [riskLevel]);
-
+  }, []);
   useEffect(() => {
     initializeTrader();
   }, [initializeTrader]);
-
   const runAIAnalysis = async () => {
     if (!state.trader) return;
-
     setState(prev => ({ ...prev, loading: true }));
-
     try {
       const analysis = await state.trader.runAIAnalysis(selectedSymbols);
       const portfolio = state.trader.getPortfolio();
-
       setState(prev => ({
         ...prev,
         analysis,
         portfolio,
         loading: false,
       }));
-    } catch (error) {
+    } catch {
       setState(prev => ({
         ...prev,
         error: 'Analysis failed',
-        loading: false
+        loading: false,
       }));
     }
   };
 
   const executeAITrading = async () => {
     if (!state.trader) return;
-
     setState(prev => ({ ...prev, isTrading: true }));
-
     try {
       const result = await state.trader.executeAITrading(selectedSymbols);
       const portfolio = state.trader.getPortfolio();
-
       setState(prev => ({
         ...prev,
         portfolio,
         isTrading: false,
-        analysis: { ...prev.analysis, lastTradeResult: result }
+        analysis: prev.analysis ? { ...prev.analysis, lastTradeResult: result as Analysis['lastTradeResult'] } : { lastTradeResult: result as Analysis['lastTradeResult'] },
       }));
-    } catch (error) {
+    } catch {
       setState(prev => ({
         ...prev,
         error: 'Trading execution failed',
-        isTrading: false
+        isTrading: false,
       }));
     }
   };
@@ -223,43 +193,29 @@ export default function AITradingDashboard() {
               </Button>
             </div>
             <div className="flex gap-4 items-center">
+              <label htmlFor="riskLevelSelect" className="sr-only">Select Risk Level</label>
               <select
+                id="riskLevelSelect"
                 value={riskLevel}
                 onChange={e => setRiskLevel(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')}
                 className="px-3 py-2 bg-gray-800 border border-gray-600 rounded text-white"
+                aria-label="Select Risk Level"
               >
                 <option value="LOW">Low Risk</option>
                 <option value="MEDIUM">Medium Risk</option>
                 <option value="HIGH">High Risk</option>
               </select>
-              {/* <TabsTrigger value="performance">Performance</TabsTrigger> */}
-              {/* <TabsTrigger value="strategies">Strategies</TabsTrigger> */}
               <div>Performance Tab Placeholder</div>
               <div>Strategies Tab Placeholder</div>
             </div>
           </div>
         </Card>
         <Tabs>
-          {/* Portfolio Tab */}
-          <div className="portfolio-tab-placeholder">
-            {/* ...existing code for portfolio tab... */}
-          </div>
-          {/* AI Analysis Tab */}
-          <div className="analysis-tab-placeholder">
-            {/* ...existing code for analysis tab... */}
-          </div>
-          {/* Trade History Tab */}
-          <div className="trades-tab-placeholder">
-            {/* ...existing code for trades tab... */}
-          </div>
-          {/* Performance Tab */}
-          <div className="performance-tab-placeholder">
-            {/* ...existing code for performance tab... */}
-          </div>
-          {/* Strategies Tab */}
-          <div className="strategies-tab-placeholder">
-            {/* ...existing code for strategies tab... */}
-          </div>
+          <div className="portfolio-tab-placeholder" />
+          <div className="analysis-tab-placeholder" />
+          <div className="trades-tab-placeholder" />
+          <div className="performance-tab-placeholder" />
+          <div className="strategies-tab-placeholder" />
         </Tabs>
       </div>
     </div>

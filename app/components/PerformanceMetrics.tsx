@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -44,6 +49,11 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Target, BarChart3, Activity, DollarSign } from 'lucide-react';
 
 interface Trade {
+
+
+
+
+
 
 
 
@@ -83,9 +93,19 @@ interface Trade {
 
 
 
+
+
+
+
+
 }
 
 interface BotStats {
+
+
+
+
+
 
 
 
@@ -122,6 +142,11 @@ interface BotStats {
 
 
 
+
+
+
+
+
 }
 
 interface PerformanceMetricsProps {
@@ -140,8 +165,18 @@ interface PerformanceMetricsProps {
 
 
 
+
+
+
+
+
   botStats: BotStats;
   recentTrades: Trade[];
+
+
+
+
+
 
 
 
@@ -175,9 +210,19 @@ interface DailyReturn {
 
 
 
+
+
+
+
+
   date: Date;
   return: number;
   cumulative: number;
+
+
+
+
+
 
 
 
@@ -211,11 +256,21 @@ interface PerformanceData {
 
 
 
+
+
+
+
+
   dailyReturns: Array<{
     date: Date;
     return: number;
     cumulative: number;
   
+
+
+
+
+
 
 
 

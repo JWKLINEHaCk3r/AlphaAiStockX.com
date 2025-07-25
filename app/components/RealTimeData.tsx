@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -74,6 +79,11 @@ interface MarketData {
 
 
 
+
+
+
+
+
   symbol: string;
   price: number;
   change: number;
@@ -82,6 +92,11 @@ interface MarketData {
   marketCap: string;
   aiScore: number;
   sentiment: 'bullish' | 'bearish' | 'neutral';
+
+
+
+
+
 
 
 
@@ -115,12 +130,22 @@ interface MarketStats {
 
 
 
+
+
+
+
+
   totalMarketCap: string;
   activeTraders: number;
   dailyVolume: string;
   fearGreedIndex: number;
   volatilityIndex: number;
   aiConfidence: number;
+
+
+
+
+
 
 
 

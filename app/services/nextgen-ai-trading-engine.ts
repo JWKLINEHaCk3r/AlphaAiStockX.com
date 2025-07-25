@@ -12,9 +12,19 @@ export interface DiversificationRules {
 
 
 
+
+
+
+
+
   maxSectorWeight?: number;
   minSectorCount?: number;
   maxAssetWeight?: number;
+
+
+
+
+
 
 
 
@@ -34,7 +44,17 @@ export interface PerformanceMetrics {
 
 
 
+
+
+
+
+
   [key: string]: number;
+
+
+
+
+
 
 
 
@@ -54,6 +74,11 @@ export interface AITradingConfig {
 
 
 
+
+
+
+
+
   strategies: string[];
   riskLevel: 'conservative' | 'moderate' | 'aggressive' | 'ultra_aggressive';
   maxPositionSize: number;
@@ -63,6 +88,11 @@ export interface AITradingConfig {
   diversificationRules: DiversificationRules;
   timeframes: string[];
   indicators: string[];
+
+
+
+
+
 
 
 

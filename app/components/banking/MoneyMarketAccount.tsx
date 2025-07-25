@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Alert } from '../../../components/ui/alert';
 import { Badge } from '../../../components/ui/badge';
@@ -91,9 +96,19 @@ interface User {
 
 
 
+
+
+
+
+
   id: string | number;
   name: string;
   email: string;
+
+
+
+
+
 
 
 
@@ -127,9 +142,19 @@ interface MoneyMarketAccountProps {
 
 
 
+
+
+
+
+
   user: User;
   balance: number;
   onUpdateBalance: (newBalance: number) => void;
+
+
+
+
+
 
 
 

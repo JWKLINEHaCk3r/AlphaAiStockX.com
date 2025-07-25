@@ -1,55 +1,16 @@
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-'use client';
+"use client";
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { CheckCircle, AlertTriangle, Globe, Clock, Phone } from 'lucide-react';
-
 export default function DNSFixGuide() {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-
   const toggleStep = (stepNumber: number) => {
     setCompletedSteps(prev =>;
       prev.includes(stepNumber) ? prev.filter(n => n !== stepNumber) : [...prev, stepNumber];
     );
-  };
+  }
 
   const steps = [;
     {
@@ -83,7 +44,6 @@ export default function DNSFixGuide() {
       action: 'Monitor progress with DNS checker tools',;
     },;
   ];
-
   return (;
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 p-6">;
       <div className="max-w-4xl mx-auto">;

@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -78,6 +83,11 @@ interface OptionsLeg {
 
 
 
+
+
+
+
+
   symbol: string;
   type: string;
   strike: number;
@@ -112,9 +122,19 @@ interface OptionsLeg {
 
 
 
+
+
+
+
+
 }
 
 interface OptionsTrade {
+
+
+
+
+
 
 
 
@@ -158,9 +178,19 @@ interface OptionsTrade {
 
 
 
+
+
+
+
+
 }
 
 interface OptionsStrategy {
+
+
+
+
+
 
 
 
@@ -194,9 +224,19 @@ interface OptionsStrategy {
 
 
 
+
+
+
+
+
 }
 
 interface OptionsChainItem {
+
+
+
+
+
 
 
 
@@ -228,6 +268,11 @@ interface OptionsChainItem {
   theta: number;
   vega: number;
   stockPrice?: number;
+
+
+
+
+
 
 
 

@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -182,6 +187,11 @@ interface User {
 
 
 
+
+
+
+
+
   id: string;
   username: string;
   email: string;
@@ -229,9 +239,19 @@ interface User {
 
 
 
+
+
+
+
+
 }
 
 interface TradingSignal {
+
+
+
+
+
 
 
 
@@ -285,9 +305,19 @@ interface TradingSignal {
 
 
 
+
+
+
+
+
 }
 
 interface TechnicalData {
+
+
+
+
+
 
 
 
@@ -320,6 +350,11 @@ interface TechnicalData {
 
 
 
+
+
+
+
+
 };
   volume: number;
   support: number;
@@ -329,6 +364,11 @@ interface TechnicalData {
 }
 
 interface SocialPost {
+
+
+
+
+
 
 
 
@@ -373,6 +413,11 @@ interface SocialPost {
 
 
 
+
+
+
+
+
 };
   type: 'signal' | 'analysis' | 'education' | 'discussion';
   visibility: 'public' | 'followers' | 'premium';
@@ -388,6 +433,11 @@ interface SocialPost {
 }
 
 interface Comment {
+
+
+
+
+
 
 
 
@@ -424,9 +474,19 @@ interface Comment {
 
 
 
+
+
+
+
+
 }
 
 interface Portfolio {
+
+
+
+
+
 
 
 
@@ -478,9 +538,19 @@ interface Portfolio {
 
 
 
+
+
+
+
+
 }
 
 interface Position {
+
+
+
+
+
 
 
 
@@ -523,9 +593,19 @@ interface Position {
 
 
 
+
+
+
+
+
 }
 
 interface WatchlistItem {
+
+
+
+
+
 
 
 
@@ -564,9 +644,19 @@ interface WatchlistItem {
 
 
 
+
+
+
+
+
 }
 
 interface Alert {
+
+
+
+
+
 
 
 
@@ -602,9 +692,19 @@ interface Alert {
 
 
 
+
+
+
+
+
 }
 
 interface AIModel {
+
+
+
+
+
 
 
 
@@ -654,9 +754,19 @@ interface AIModel {
 
 
 
+
+
+
+
+
 }
 
 interface LiveMarketData {
+
+
+
+
+
 
 
 
@@ -702,9 +812,19 @@ interface LiveMarketData {
 
 
 
+
+
+
+
+
 }
 
 interface TradingRoom {
+
+
+
+
+
 
 
 
@@ -744,9 +864,19 @@ interface TradingRoom {
 
 
 
+
+
+
+
+
 }
 
 interface ChatMessage {
+
+
+
+
+
 
 
 
@@ -782,6 +912,11 @@ interface ChatMessage {
 
 
 
+
+
+
+
+
 }
 
 interface Reaction {
@@ -800,8 +935,18 @@ interface Reaction {
 
 
 
+
+
+
+
+
   emoji: string;
   users: User[];
+
+
+
+
+
 
 
 
@@ -835,7 +980,17 @@ interface NextGenPlatformProps {
 
 
 
+
+
+
+
+
   user: User;
+
+
+
+
+
 
 
 
@@ -854,6 +1009,11 @@ interface NextGenPlatformProps {
 }
 
 interface AISignal {
+
+
+
+
+
 
 
 
@@ -895,9 +1055,19 @@ interface AISignal {
 
 
 
+
+
+
+
+
 }
 
 interface Portfolio {
+
+
+
+
+
 
 
 
@@ -936,9 +1106,19 @@ interface Portfolio {
 
 
 
+
+
+
+
+
 }
 
 interface SocialPost {
+
+
+
+
+
 
 
 
@@ -970,6 +1150,11 @@ interface SocialPost {
     targetPrice: number;
     reasoning: string;
   
+
+
+
+
+
 
 
 

@@ -19,10 +19,20 @@ interface StockResult {
 
 
 
+
+
+
+
+
   symbol: string;
   name: string;
   score: number;
   aiNote: string;
+
+
+
+
+
 
 
 

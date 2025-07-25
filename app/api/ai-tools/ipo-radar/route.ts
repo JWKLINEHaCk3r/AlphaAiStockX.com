@@ -1,6 +1,6 @@
 // API Route for AI IPO Radar;
 import { NextRequest, NextResponse } from 'next/server';
-import AIIPORadar from '@/app/services/ai-tools/ipo-radar';
+import { AIIPORadar } from '@/app/services/ai-tools/ipo-radar';
 
 const ipoRadar = new AIIPORadar();
 
@@ -88,20 +88,15 @@ export async function POST(request: NextRequest) {
         const requiredFields = ['id', 'companyName', 'sector', 'valuation', 'priceRange'];
         for (const field of requiredFields) {
           if (!ipoData[field]) {
-            return NextResponse.json(;
-              { error: `Missing required field: ${field}` },;
-              { status: 400 }
-            );
+            return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
           }
         }
 
         ipoRadar.addIPO(ipoData);
 
-        return NextResponse.json({
-          success: true,;
-          message: 'IPO added successfully',;
+            return NextResponse.json({ error: `Missing required field: ${field}` });
           ipoId: ipoData.id,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
 
         const analyses: any[] = [];
@@ -118,7 +113,7 @@ export async function POST(request: NextRequest) {
           success: true,;
           data: analyses,;
           count: analyses.length,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
 
       default:;

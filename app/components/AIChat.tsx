@@ -21,6 +21,11 @@ import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -65,10 +70,20 @@ interface ChatMessage {
 
 
 
+
+
+
+
+
   id: number;
   type: 'user' | 'ai';
   content: string;
   timestamp: Date;
+
+
+
+
+
 
 
 

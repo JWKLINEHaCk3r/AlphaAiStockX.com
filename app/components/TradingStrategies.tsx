@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -40,9 +45,19 @@ interface TradingStrategiesProps {
 
 
 
+
+
+
+
+
   activeStrategies: TradingStrategy[];
   setActiveStrategies: (strategies: TradingStrategy[] | ((prev: TradingStrategy[]) => TradingStrategy[])) => void;
   botStatus: string;
+
+
+
+
+
 
 
 
@@ -89,6 +104,11 @@ interface TradingStrategy {
 
 
 
+
+
+
+
+
   id: number;
   name: string;
   description: string;
@@ -99,6 +119,11 @@ interface TradingStrategy {
   timeframe: string;
   allocation: number;
   status: string;
+
+
+
+
+
 
 
 

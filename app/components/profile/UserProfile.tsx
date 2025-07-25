@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -36,7 +41,7 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
+// Conflict marker removed;
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { Calendar } from "../../../components/ui/calendar";
 import { TabsTrigger } from "../../../components/ui/tabs";
@@ -54,16 +59,16 @@ import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 'use client';
-=======;
+// Conflict marker removed;
 import { Calendar } from '@/components/ui/calendar';
 ('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+// Conflict marker removed;
 import React from 'react';
 
 import { useState } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
+// Conflict marker removed;
+// Conflict marker removed;
 import {
   User,;
   Settings,;
@@ -97,8 +102,18 @@ interface UserProfileProps {
 
 
 
+
+
+
+
+
   user: any;
   onUpdate: (user: any) => void;
+
+
+
+
+
 
 
 

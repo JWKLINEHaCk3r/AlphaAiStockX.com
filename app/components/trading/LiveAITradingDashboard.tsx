@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -119,6 +124,11 @@ interface TradingSignal {
 
 
 
+
+
+
+
+
   symbol: string;
   signal: string;
   confidence: number;
@@ -144,10 +154,20 @@ interface TradingSignal {
 
 
 
+
+
+
+
+
 };
 }
 
 interface PortfolioStatus {
+
+
+
+
+
 
 
 
@@ -184,9 +204,19 @@ interface PortfolioStatus {
 
 
 
+
+
+
+
+
 }
 
 interface Position {
+
+
+
+
+
 
 
 
@@ -223,9 +253,19 @@ interface Position {
 
 
 
+
+
+
+
+
 }
 
 interface PerformanceMetrics {
+
+
+
+
+
 
 
 
@@ -249,6 +289,11 @@ interface PerformanceMetrics {
   total_pnl: number;
   runtime_hours: number;
   signals_per_hour: number;
+
+
+
+
+
 
 
 

@@ -18,6 +18,11 @@ interface UserProfile {
 
 
 
+
+
+
+
+
   id: string;
   riskTolerance: 'conservative' | 'moderate' | 'aggressive';
   investmentGoals: string[];
@@ -40,9 +45,19 @@ interface UserProfile {
 
 
 
+
+
+
+
+
 }
 
 interface ChatMessage {
+
+
+
+
+
 
 
 
@@ -81,10 +96,20 @@ interface ChatMessage {
 
 
 
+
+
+
+
+
 };
 }
 
 interface TradeRecommendation {
+
+
+
+
+
 
 
 
@@ -124,9 +149,19 @@ interface TradeRecommendation {
 
 
 
+
+
+
+
+
 }
 
 interface PortfolioSimulation {
+
+
+
+
+
 
 
 
@@ -148,6 +183,11 @@ interface PortfolioSimulation {
   risk: number;
   diversificationScore: number;
   recommendations: TradeRecommendation[];
+
+
+
+
+
 
 
 

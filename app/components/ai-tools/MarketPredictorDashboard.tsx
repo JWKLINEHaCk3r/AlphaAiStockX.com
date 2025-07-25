@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -34,6 +39,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Target, TrendingUp, TrendingDown, Eye, Camera, Brain, Zap, RefreshCw, Upload, Download, BarChart3, LineChart, CheckCircle } from 'lucide-react';
 
 interface PatternMatch {
+
+
+
+
+
 
 
 
@@ -70,9 +80,19 @@ interface PatternMatch {
 
 
 
+
+
+
+
+
 }
 
 interface PredictionResult {
+
+
+
+
+
 
 
 
@@ -103,6 +123,11 @@ interface PredictionResult {
     support: number;
     resistance: number;
   
+
+
+
+
+
 
 
 

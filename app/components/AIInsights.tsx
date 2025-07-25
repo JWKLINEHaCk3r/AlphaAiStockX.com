@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -47,7 +52,17 @@ interface AIInsightsProps {
 
 
 
+
+
+
+
+
   selectedStock: string;
+
+
+
+
+
 
 
 
@@ -81,6 +96,11 @@ interface Sentiment {
 
 
 
+
+
+
+
+
   bullish: number;
   bearish: number;
   neutral: number;
@@ -99,9 +119,19 @@ interface Sentiment {
 
 
 
+
+
+
+
+
 }
 
 interface TechnicalAnalysis {
+
+
+
+
+
 
 
 
@@ -138,9 +168,19 @@ interface TechnicalAnalysis {
 
 
 
+
+
+
+
+
 }
 
 interface FundamentalAnalysis {
+
+
+
+
+
 
 
 
@@ -174,9 +214,19 @@ interface FundamentalAnalysis {
 
 
 
+
+
+
+
+
 }
 
 interface RiskFactor {
+
+
+
+
+
 
 
 
@@ -211,9 +261,19 @@ interface RiskFactor {
 
 
 
+
+
+
+
+
 }
 
 interface MarketCatalyst {
+
+
+
+
+
 
 
 
@@ -248,9 +308,19 @@ interface MarketCatalyst {
 
 
 
+
+
+
+
+
 }
 
 interface Prediction {
+
+
+
+
+
 
 
 
@@ -286,9 +356,19 @@ interface Prediction {
 
 
 
+
+
+
+
+
 }
 
 interface AIInsightsData {
+
+
+
+
+
 
 
 
@@ -311,6 +391,11 @@ interface AIInsightsData {
   aiPredictions: Prediction[];
   riskFactors: RiskFactor[];
   marketCatalysts: MarketCatalyst[];
+
+
+
+
+
 
 
 

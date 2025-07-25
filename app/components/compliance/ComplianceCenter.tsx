@@ -21,13 +21,17 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
+'use client';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
+// Removed merge conflict markers;
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -36,26 +40,10 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import { Badge } from "../../../components/ui/badge";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardDescription } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 'use client';
 import React from 'react';
-
-
-<<<<<<< HEAD;
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
-=======;
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
 import {
   Shield,;
   Lock,;
@@ -89,30 +77,28 @@ export default function ComplianceCenter() {
         { name: 'Regulation SHO', status: 'compliant', description: 'Short sale regulations' },;
         {
           name: 'Rule 606 Order Routing',;
-          status: 'compliant',;
-          description: 'Order execution disclosure',;
+          status: 'compliant';
         },;
       ],;
     },;
-    {
       category: 'FINRA Rules',;
       items: [;
         {
           name: 'Rule 3110 Supervision',;
           status: 'compliant',;
-          description: 'Supervisory procedures',;
+          description: 'Supervisory procedures';
         },;
         {
           name: 'Rule 2111 Suitability',;
           status: 'compliant',;
-          description: 'Investment suitability',;
+          description: 'Investment suitability';
         },;
         {
           name: 'Rule 4512 Customer Account',;
           status: 'compliant',;
-          description: 'Account information',;
+          description: 'Account information';
         },;
-        { name: 'Rule 3240 Borrowing', status: 'compliant', description: 'Borrowing arrangements' },;
+        { name: 'Rule 606 Order Routing', status: 'compliant', description: 'Order routing disclosure' }
       ],;
     },;
     {
@@ -120,9 +106,8 @@ export default function ComplianceCenter() {
       items: [;
         { name: 'GDPR Compliance', status: 'compliant', description: 'EU data protection' },;
         { name: 'CCPA Compliance', status: 'compliant', description: 'California privacy rights' },;
-        { name: 'SOC 2 Type II', status: 'certified', description: 'Security controls audit' },;
-        { name: 'ISO 27001', status: 'certified', description: 'Information security management' },;
-      ],;
+        { name: 'SOC 2 Type II', status: 'certified', description: 'Security controls audit' }
+      ];
     },;
     {
       category: 'Risk Management',;
@@ -133,10 +118,10 @@ export default function ComplianceCenter() {
         {
           name: 'Emergency Procedures',;
           status: 'active',;
-          description: 'Crisis management protocols',;
-        },;
-      ],;
-    },;
+          description: 'Crisis management protocols';
+        }
+      ];
+    }
   ];
 
   const disclaimers = [;
@@ -145,29 +130,28 @@ export default function ComplianceCenter() {
       content:;
         'All investments involve risk, including potential loss of principal. Past performance does not guarantee future results. AI predictions are based on historical data and market analysis but cannot guarantee accuracy.',;
       icon: AlertTriangle,;
-      type: 'warning',;
+      type: 'warning';
     },;
     {
       title: 'AI Technology Limitations',;
       content:;
         'Our AI systems provide analysis and recommendations based on available data. Market conditions can change rapidly, and AI predictions should be considered alongside other factors when making investment decisions.',;
       icon: Info,;
-      type: 'info',;
+      type: 'info';
     },;
     {
       title: 'Not Licensed Investment Advice',;
       content:;
         'AlphaAIStockX provides educational tools and analysis. This platform does not provide personalized investment advice. Users should consult with licensed financial advisors for investment guidance.',;
       icon: BookOpen,;
-      type: 'educational',;
+      type: 'educational';
     },;
     {
       title: 'Data Security & Privacy',;
       content:;
         'We employ bank-level security measures including 256-bit AES encryption, multi-factor authentication, and regular security audits to protect your personal and financial information.',;
-      icon: Lock,;
-      type: 'security',;
-    },;
+      type: 'security';
+    }
   ];
 
   return (;

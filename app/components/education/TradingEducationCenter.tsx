@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -95,7 +100,17 @@ interface TradingEducationCenterProps {
 
 
 
+
+
+
+
+
   className?: string;
+
+
+
+
+
 
 
 
@@ -114,6 +129,11 @@ interface TradingEducationCenterProps {
 }
 
 interface TestQuestion {
+
+
+
+
+
 
 
 
@@ -149,9 +169,19 @@ interface TestQuestion {
 
 
 
+
+
+
+
+
 }
 
 interface TestResults {
+
+
+
+
+
 
 
 
@@ -187,9 +217,19 @@ interface TestResults {
 
 
 
+
+
+
+
+
 }
 
 interface StudyProgress {
+
+
+
+
+
 
 
 
@@ -224,6 +264,11 @@ interface StudyProgress {
 
 
 
+
+
+
+
+
 };
 }
 
@@ -243,10 +288,20 @@ interface EducationalTopic {
 
 
 
+
+
+
+
+
   id: string;
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string;
+
+
+
+
+
 
 
 
@@ -283,6 +338,11 @@ interface SeriesExam {
 
 
 
+
+
+
+
+
   id: string;
   title: string;
   description: string;
@@ -290,6 +350,11 @@ interface SeriesExam {
   timeLimit: number;
   passingScore: number;
   topics: string[];
+
+
+
+
+
 
 
 

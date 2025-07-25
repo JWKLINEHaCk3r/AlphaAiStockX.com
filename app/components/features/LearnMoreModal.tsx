@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -95,12 +100,22 @@ interface FeatureDetails {
 
 
 
+
+
+
+
+
   overview: string;
   features: string[];
   benefits: string[];
   stats: {
     [key: string]: string | undefined;
   
+
+
+
+
+
 
 
 
@@ -146,6 +161,11 @@ interface LearnMoreModalProps {
 
 
 
+
+
+
+
+
   feature: {
     title: string;
     desc: string;
@@ -153,6 +173,11 @@ interface LearnMoreModalProps {
     gradient: string;
     details: FeatureDetails;
   
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 // API Route for GPT-Trader Chatbot;
 import { NextRequest, NextResponse } from 'next/server';
-import GPTTraderChatbot from '@/app/services/ai-tools/gpt-trader-chatbot';
+import { GPTTraderChatbot } from '@/app/services/ai-tools/gpt-trader-chatbot';
 
 const chatbot = new GPTTraderChatbot();
 
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
         const welcomeMessage = await chatbot.initializeChat(userId, userProfile);
         return NextResponse.json({
           success: true,;
-          data: welcomeMessage,;
+          message: welcomeMessage,;
           timestamp: new Date().toISOString();
         });
       }
@@ -37,10 +37,7 @@ export async function POST(request: NextRequest) {
       case 'portfolio_simulation': {
         const { holdings } = body;
         if (!holdings || !Array.isArray(holdings)) {
-          return NextResponse.json(;
-            { error: 'Holdings array is required for portfolio simulation' },;
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Holdings array is required for portfolio simulation' }, { status: 400 });
         }
         const simulation = await chatbot.simulatePortfolio(userId, holdings);
         return NextResponse.json({
@@ -78,7 +75,7 @@ export async function GET(request: NextRequest) {
           success: true,;
           data: history,;
           count: history.length,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       case 'clear': {

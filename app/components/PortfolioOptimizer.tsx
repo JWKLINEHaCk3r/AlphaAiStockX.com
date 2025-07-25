@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/ca
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../components/ui/card.tsx';
@@ -34,6 +39,11 @@ import React, { useState, useEffect } from 'react';
 import { DollarSign, TrendingUp, Target, PieChart, Zap, Plus, Trash2 } from 'lucide-react';
 
 interface PortfolioStock {
+
+
+
+
+
 
 
 
@@ -69,10 +79,20 @@ interface PortfolioStock {
 
 
 
+
+
+
+
+
 }
 
 
 interface OptimizationResult {
+
+
+
+
+
 
 
 
@@ -101,6 +121,11 @@ interface OptimizationResult {
     reason: string;
     impact: string;
   
+
+
+
+
+
 
 
 

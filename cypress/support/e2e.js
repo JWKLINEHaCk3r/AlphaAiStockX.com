@@ -23,6 +23,11 @@ import '@testing-library/cypress/add-commands';
 
 
 
+
+
+
+
+
 //       login(email: string, password: string): Chainable<Element>;
 //       logout(): Chainable<Element>;
 //       navigateToTrading(): Chainable<Element>;
@@ -30,6 +35,11 @@ import '@testing-library/cypress/add-commands';
 //       checkSecurityHeaders(): Chainable<Element>;
 //       byTestId(testId: string): Chainable<Element>;
 //;
+
+
+
+
+
 
 
 

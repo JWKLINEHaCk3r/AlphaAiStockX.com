@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -35,6 +40,11 @@ import React, { useState, useEffect } from 'react';
 import { PieChart, TrendingUp, Target, Shield, BarChart3, Zap, RefreshCw, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
 
 interface PortfolioPosition {
+
+
+
+
+
 
 
 
@@ -74,9 +84,19 @@ interface PortfolioPosition {
 
 
 
+
+
+
+
+
 }
 
 interface OptimizationResult {
+
+
+
+
+
 
 
 
@@ -115,9 +135,19 @@ interface OptimizationResult {
 
 
 
+
+
+
+
+
 }
 
 interface RebalanceAction {
+
+
+
+
+
 
 
 
@@ -138,6 +168,11 @@ interface RebalanceAction {
   currentShares: number;
   targetShares: number;
   dollarAmount: number;
+
+
+
+
+
 
 
 

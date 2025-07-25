@@ -7,6 +7,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
@@ -21,6 +26,11 @@ import { Settings, BarChart3, Eye, Target, Shield, Zap, PieChart, Activity, Arro
 // Advanced Trading Interface - Professional Chart & Order Entry;
 // Type definitions;
 interface MarketData {
+
+
+
+
+
 
 
 
@@ -61,9 +71,19 @@ interface MarketData {
 
 
 
+
+
+
+
+
 }
 
 interface ChartData {
+
+
+
+
+
 
 
 
@@ -85,6 +105,11 @@ interface ChartData {
   low: number;
   close: number;
   volume: number;
+
+
+
+
+
 
 
 
@@ -161,12 +186,22 @@ interface ChartData {
 
 
 
+
+
+
+
+
   timestamp: number;
   open: number;
   high: number;
   low: number;
   close: number;
   volume: number;
+
+
+
+
+
 
 
 

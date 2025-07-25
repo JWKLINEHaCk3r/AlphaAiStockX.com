@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -91,11 +96,11 @@ import {
 'use client';
 import React from 'react';
 
-<<<<<<< HEAD;
+// Conflict marker removed;
 import { useState, useEffect } from 'react';
-=======;
+// Conflict marker removed;
 import React, { useState, useEffect } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
 import { 
   Bell,;
   AlertTriangle,;
@@ -110,6 +115,11 @@ import {
 ,  LucideIcon  } from 'lucide-react';
 
 interface Alert {
+
+
+
+
+
 
 
 
@@ -150,9 +160,19 @@ interface Alert {
 
 
 
+
+
+
+
+
 }
 
 interface AlertSettings {
+
+
+
+
+
 
 
 
@@ -189,9 +209,19 @@ interface AlertSettings {
 
 
 
+
+
+
+
+
 }
 
 interface Alert {
+
+
+
+
+
 
 
 
@@ -231,9 +261,19 @@ interface Alert {
 
 
 
+
+
+
+
+
 }
 
 interface AlertType {
+
+
+
+
+
 
 
 
@@ -255,6 +295,11 @@ interface AlertType {
   title: string;
   symbol: string;
   priority: 'high' | 'medium' | 'low';
+
+
+
+
+
 
 
 
@@ -302,11 +347,11 @@ const messages = {
 
 export default function RealTimeAlerts() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
-<<<<<<< HEAD;
+// Conflict marker removed;
   const [alertSettings, setAlertSettings] = useState<AlertSettings>({
-=======;
+// Conflict marker removed;
   const [alertSettings, setAlertSettings] = useState({
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
     priceAlerts: true,;
     volumeAlerts: true,;
     newsAlerts: true,;
@@ -314,13 +359,13 @@ export default function RealTimeAlerts() {
     optionsFlow: true,;
     earnings: true,;
   });
-<<<<<<< HEAD;
+// Conflict marker removed;
   const [customAlerts] = useState<Alert[]>([]);
-=======;
+// Conflict marker removed;
   const [customAlerts, setCustomAlerts] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
   useEffect(() => {
     // Simulate real-time alerts;
     const interval = setInterval(() => {
@@ -426,13 +471,13 @@ export default function RealTimeAlerts() {
   };
 
   const markAsRead = (alertId: number) => {
-<<<<<<< HEAD;
+// Conflict marker removed;
     setAlerts(prev =>;
       prev.map((alert: any) => (alert.id === alertId ? { ...alert, read: true } : alert));
     );
-=======;
+// Conflict marker removed;
     setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
   };
 
   const getPriorityColor = (priority: string) => {

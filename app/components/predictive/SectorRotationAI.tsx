@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -44,6 +49,11 @@ import React, { useState, useEffect } from 'react';
 import { BarChart3, TrendingUp, TrendingDown, Brain, Zap } from 'lucide-react';
 
 interface SectorData {
+
+
+
+
+
 
 
 
@@ -86,9 +96,19 @@ interface SectorData {
 
 
 
+
+
+
+
+
 }
 
 interface RotationSignal {
+
+
+
+
+
 
 
 
@@ -126,9 +146,19 @@ interface RotationSignal {
 
 
 
+
+
+
+
+
 }
 
 interface EconomicIndicator {
+
+
+
+
+
 
 
 
@@ -162,9 +192,19 @@ interface EconomicIndicator {
 
 
 
+
+
+
+
+
 }
 
 interface EconomicCycle {
+
+
+
+
+
 
 
 
@@ -187,6 +227,11 @@ interface EconomicCycle {
   keyIndicators?: EconomicIndicator[];
   recommendedSectors?: string[];
   avoidSectors?: string[];
+
+
+
+
+
 
 
 

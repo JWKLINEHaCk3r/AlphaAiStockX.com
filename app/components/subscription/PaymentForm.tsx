@@ -1,41 +1,7 @@
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import React from 'react';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';
@@ -61,10 +27,20 @@ interface PaymentFormProps {
 
 
 
+
+
+
+
+
   plan: string | null;
   billingCycle: string;
   onBack: () => void;
   onSuccess?: (planId: string) => void;
+
+
+
+
+
 
 
 
@@ -148,22 +124,22 @@ export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }: P
         return {
           name: 'Basic Plan',;
           price: billingCycle === 'yearly' ? '$199.99/year' : '$19.99/month',;
-        };
+        }
       case 'pro':;
         return {
           name: 'Pro Plan',;
           price: billingCycle === 'yearly' ? '$499.99/year' : '$49.99/month',;
-        };
+        }
       case 'ultimate':;
         return {
           name: 'Ultimate Plan',;
           price: billingCycle === 'yearly' ? '$999.99/year' : '$99.99/month',;
-        };
+        }
       default:;
         return {
           name: 'Unknown Plan',;
           price: 'Unknown',;
-        };
+        }
     }
   };
 

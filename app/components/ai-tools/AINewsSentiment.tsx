@@ -19,10 +19,20 @@ interface NewsItem {
 
 
 
+
+
+
+
+
   headline: string;
   impact: string;
   sentiment: string;
   aiNote: string;
+
+
+
+
+
 
 
 

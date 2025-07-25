@@ -168,5 +168,5 @@ module.exports = {
   results,;
   overallPercentage,;
   status,;
-  recommendation,;
+  recommendation;
 };

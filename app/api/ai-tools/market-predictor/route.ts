@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: analysis,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
         const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
 
@@ -67,7 +67,6 @@ export async function GET(request: NextRequest) {
           success: true,;
           data: history,;
           count: history.length,;
-          symbol,;
           timestamp: new Date().toISOString();
         });
 
@@ -146,7 +145,6 @@ export async function DELETE(request: NextRequest) {
           return NextResponse.json({
             success: true,;
             message: `Prediction history cleared for ${symbol}`,;
-            symbol,;
             timestamp: new Date().toISOString();
           });
         } else {

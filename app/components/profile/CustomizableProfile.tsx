@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -132,6 +137,11 @@ interface User {
 
 
 
+
+
+
+
+
   name?: string;
   bio?: string;
   location?: string;
@@ -146,6 +156,11 @@ interface User {
   accentColor?: string;
   avatar?: string;
   subscription?: string;
+
+
+
+
+
 
 
 
@@ -179,8 +194,18 @@ interface CustomizableProfileProps {
 
 
 
+
+
+
+
+
   user: User;
   onUpdateProfile: (data: any) => void;
+
+
+
+
+
 
 
 

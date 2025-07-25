@@ -322,12 +322,22 @@ export interface SecurityHeaders {
 
 
 
+
+
+
+
+
   'X-Content-Type-Options': string;
   'X-Frame-Options': string;
   'X-XSS-Protection': string;
   'Strict-Transport-Security': string;
   'Content-Security-Policy': string;
   'Referrer-Policy': string;
+
+
+
+
+
 
 
 
@@ -369,6 +379,11 @@ export interface SecurityEvent {
 
 
 
+
+
+
+
+
   type: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
   description: string;
@@ -376,6 +391,11 @@ export interface SecurityEvent {
   ip: string;
   timestamp: Date;
   metadata?: any;
+
+
+
+
+
 
 
 

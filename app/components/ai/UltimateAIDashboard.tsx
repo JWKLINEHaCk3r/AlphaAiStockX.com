@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -36,7 +41,7 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
+// ...existing code...;
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger } from "../../../components/ui/tabs";
 import { TabsList } from "../../../components/ui/tabs";
@@ -51,9 +56,9 @@ import { CardDescription } from "../../../components/ui/card";
 import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-=======;
+// ...existing code...;
 import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+// ...existing code...;
 import {
   AIStockPrediction,;
   SportsEvent,;
@@ -100,9 +105,9 @@ import {
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// ...existing code...;
+// ...existing code...;
+// ...existing code...;
 import {
   Brain,;
   Zap,;
@@ -143,6 +148,11 @@ interface Processor {
 
 
 
+
+
+
+
+
   name: string;
   qubits: number;
   coherenceTime: string;
@@ -165,9 +175,19 @@ interface Processor {
 
 
 
+
+
+
+
+
 }
 
 interface Agent {
+
+
+
+
+
 
 
 
@@ -206,6 +226,11 @@ interface Agent {
 
 
 
+
+
+
+
+
 };
   trades: number;
   profit: number;
@@ -214,6 +239,11 @@ interface Agent {
 }
 
 interface Capability {
+
+
+
+
+
 
 
 
@@ -248,9 +278,19 @@ interface Capability {
 
 
 
+
+
+
+
+
 }
 
 interface Result {
+
+
+
+
+
 
 
 
@@ -289,9 +329,19 @@ interface Result {
 
 
 
+
+
+
+
+
 }
 
 interface Algorithm {
+
+
+
+
+
 
 
 
@@ -329,9 +379,19 @@ interface Algorithm {
 
 
 
+
+
+
+
+
 }
 
 interface Strategy {
+
+
+
+
+
 
 
 
@@ -369,9 +429,19 @@ interface Strategy {
 
 
 
+
+
+
+
+
 }
 
 interface DataSource {
+
+
+
+
+
 
 
 
@@ -407,9 +477,19 @@ interface DataSource {
 
 
 
+
+
+
+
+
 }
 
 interface Model {
+
+
+
+
+
 
 
 
@@ -449,10 +529,20 @@ interface Model {
 
 
 
+
+
+
+
+
 };
 }
 
 interface Environment {
+
+
+
+
+
 
 
 
@@ -491,9 +581,19 @@ interface Environment {
 
 
 
+
+
+
+
+
 }
 
 interface QuantumData {
+
+
+
+
+
 
 
 
@@ -527,9 +627,19 @@ interface QuantumData {
 
 
 
+
+
+
+
+
 }
 
 interface HFTData {
+
+
+
+
+
 
 
 
@@ -563,6 +673,11 @@ interface HFTData {
 
 
 
+
+
+
+
+
 }
 
 interface AltData {
@@ -581,8 +696,18 @@ interface AltData {
 
 
 
+
+
+
+
+
   sources?: DataSource[];
   sampleData?: any;
+
+
+
+
+
 
 
 
@@ -616,9 +741,19 @@ interface RLData {
 
 
 
+
+
+
+
+
   agents?: Agent[];
   models?: Model[];
   environments?: Environment[];
+
+
+
+
+
 
 
 
@@ -652,7 +787,17 @@ interface UltimateAIDashboardProps {
 
 
 
+
+
+
+
+
   className?: string;
+
+
+
+
+
 
 
 

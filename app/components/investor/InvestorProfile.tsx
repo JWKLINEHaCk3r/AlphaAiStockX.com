@@ -10,6 +10,11 @@ import { Card, CardContent, CardDescription, CardTitle } from '../../../componen
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { TabsTrigger, TabsList, TabsContent, Tabs } from '../../../components/ui/tabs';
 import { Alert } from '../../../components/ui/alert';
@@ -97,8 +102,18 @@ interface InvestorProfileProps {
 
 
 
+
+
+
+
+
   onSwitchToOwner?: () => void;
   onSwitchToAdmin?: () => void;
+
+
+
+
+
 
 
 

@@ -21,6 +21,11 @@ interface SpeechRecognitionResultList {
 
 
 
+
+
+
+
+
   length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
@@ -40,9 +45,19 @@ interface SpeechRecognitionResultList {
 
 
 
+
+
+
+
+
 }
 
 interface SpeechRecognitionResult {
+
+
+
+
+
 
 
 
@@ -79,6 +94,11 @@ interface SpeechRecognitionResult {
 
 
 
+
+
+
+
+
 }
 
 interface SpeechRecognitionAlternative {
@@ -98,8 +118,18 @@ interface SpeechRecognitionAlternative {
 
 
 
+
+
+
+
+
   transcript: string;
   confidence: number;
+
+
+
+
+
 
 
 
@@ -138,7 +168,7 @@ declare var SpeechRecognition: {
   new (): SpeechRecognition;
 };
 
-declare var webkitSpeechRecognition: {
+declare let webkitSpeechRecognition: {
   prototype: SpeechRecognition;
   new (): SpeechRecognition;
 };
@@ -160,8 +190,18 @@ interface Window {
 
 
 
+
+
+
+
+
   SpeechRecognition: typeof SpeechRecognition;
   webkitSpeechRecognition: typeof webkitSpeechRecognition;
+
+
+
+
+
 
 
 

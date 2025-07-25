@@ -22,6 +22,11 @@ interface MarketDataPoint {
 
 
 
+
+
+
+
+
   symbol: string;
   price: number;
   volume: number;
@@ -50,9 +55,19 @@ interface MarketDataPoint {
 
 
 
+
+
+
+
+
 }
 
 interface AISignal {
+
+
+
+
+
 
 
 
@@ -95,9 +110,19 @@ interface AISignal {
 
 
 
+
+
+
+
+
 }
 
 interface TradingUpdate {
+
+
+
+
+
 
 
 
@@ -131,9 +156,19 @@ interface TradingUpdate {
 
 
 
+
+
+
+
+
 }
 
 interface SentimentData {
+
+
+
+
+
 
 
 
@@ -157,6 +192,11 @@ interface SentimentData {
   volume: number;
   sources: string[];
   timestamp: number;
+
+
+
+
+
 
 
 

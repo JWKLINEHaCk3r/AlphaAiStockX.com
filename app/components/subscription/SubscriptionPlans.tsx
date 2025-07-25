@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
@@ -36,7 +41,7 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../..
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
+// Conflict marker removed;
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
@@ -46,9 +51,9 @@ import { CardDescription } from "../../../components/ui/card";
 import { CardContent } from "../../../components/ui/card";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-=======;
+// Conflict marker removed;
 import { Alert } from '@/components/ui/alert';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+// Conflict marker removed;
 import {
   AIStockPrediction,;
   SportsEvent,;
@@ -95,9 +100,9 @@ import {
 import React from 'react';
 
 import { useState } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
+// Conflict marker removed;
+// Conflict marker removed;
+// Conflict marker removed;
 import { X, Check, Star, Zap, Crown, Building } from 'lucide-react';
 
 interface SubscriptionPlansProps {
@@ -116,8 +121,18 @@ interface SubscriptionPlansProps {
 
 
 
+
+
+
+
+
   currentPlan: string;
   onSelectPlan: (plan: string) => void;
+
+
+
+
+
 
 
 

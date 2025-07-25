@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -82,6 +87,11 @@ interface User {
 
 
 
+
+
+
+
+
   id: string;
   name: string;
   email: string;
@@ -100,9 +110,19 @@ interface User {
 
 
 
+
+
+
+
+
 }
 
 interface Trade {
+
+
+
+
+
 
 
 
@@ -142,9 +162,19 @@ interface Trade {
 
 
 
+
+
+
+
+
 }
 
 interface MarketData {
+
+
+
+
+
 
 
 
@@ -183,10 +213,20 @@ interface MarketData {
 
 
 
+
+
+
+
+
 };
 }
 
 interface AISignal {
+
+
+
+
+
 
 
 
@@ -225,9 +265,19 @@ interface AISignal {
 
 
 
+
+
+
+
+
 }
 
 interface PremiumFeatures {
+
+
+
+
+
 
 
 
@@ -264,6 +314,11 @@ interface PremiumFeatures {
 
 
 
+
+
+
+
+
 }
 
 interface UltraFastTradingEngineProps {
@@ -282,8 +337,18 @@ interface UltraFastTradingEngineProps {
 
 
 
+
+
+
+
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
+
+
+
 
 
 

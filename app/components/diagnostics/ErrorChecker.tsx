@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter }
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from '../../../components/ui/card.tsx';
@@ -50,14 +55,14 @@ import { Button } from "../../../components/ui/button";
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD;
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
-=======;
+// ...existing code...;
+// ...existing code...;
+// ...existing code...;
+// ...existing code...;
+// ...existing code...;
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
+// ...existing code...;
 import {
   CheckCircle,;
   AlertTriangle,;
@@ -85,11 +90,21 @@ interface ErrorCheck {
 
 
 
+
+
+
+
+
   category: string;
   name: string;
   status: 'pass' | 'warning' | 'error' | 'checking';
   message: string;
   fix?: string;
+
+
+
+
+
 
 
 

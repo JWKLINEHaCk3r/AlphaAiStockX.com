@@ -13,10 +13,7 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'optimize': {
         if (!investmentAmount || !constraints) {
-          return NextResponse.json(;
-            { error: 'Investment amount and constraints are required' },;
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Investment amount and constraints are required' }, { status: 400 });
         }
         // Validate constraints;
         const requiredConstraints = [;
@@ -44,10 +41,7 @@ export async function POST(request: NextRequest) {
       case 'backtest': {
         const { allocations, timeframe } = body;
         if (!allocations) {
-          return NextResponse.json(;
-            { error: 'Portfolio allocations are required for backtesting' },;
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Portfolio allocations are required for backtesting' }, { status: 400 });
         }
         const backtestResults = await optimizer.backtestPortfolio(allocations, timeframe || '1Y');
         return NextResponse.json({
@@ -60,10 +54,7 @@ export async function POST(request: NextRequest) {
       case 'recommendations': {
         const { riskTolerance, investmentGoals } = body;
         if (!riskTolerance) {
-          return NextResponse.json(;
-            { error: 'Risk tolerance is required for recommendations' },;
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Risk tolerance is required for recommendations' }, { status: 400 });
         }
         const recommendations = await optimizer.getAssetRecommendations(;
           riskTolerance,;
@@ -77,21 +68,15 @@ export async function POST(request: NextRequest) {
         });
       }
       default: {
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: optimize, backtest, recommendations' },;
-          { status: 400 }
-    );
-    }
+        return NextResponse.json({ error: 'Invalid action. Supported actions: optimize, backtest, recommendations' }, { status: 400 });
+      }
 }
   } catch (error) {
     console.error('Portfolio Optimizer API Error:', error);
-    return NextResponse.json(;
-      {
-        error: 'Failed to process request',;
-        details: error instanceof Error ? error.message : 'Unknown error',;
-      },;
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: 'Failed to process request',;
+      details: error instanceof Error ? error.message : 'Unknown error';
+    }, { status: 500 });
   }
 
 export async function GET(request: NextRequest) {
@@ -129,7 +114,7 @@ export async function GET(request: NextRequest) {
           'Bonds',;
           'REITs',;
           'Commodities',;
-          'Sector ETFs',;
+          'Sector ETFs';
         ];
         return NextResponse.json({
           success: true,;
@@ -139,10 +124,7 @@ export async function GET(request: NextRequest) {
         });
       }
       default: {
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: assets, sectors, asset_classes' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: assets, sectors, asset_classes' }, { status: 400 });
       }
     }
   } catch (error) {
@@ -173,10 +155,7 @@ export async function PUT(request: NextRequest) {
         ];
         for (const field of requiredFields) {
           if (assetData[field] === undefined) {
-            return NextResponse.json(;
-              { error: `Missing required field: ${field}` },;
-              { status: 400 }
-            );
+            return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
           }
         }
         optimizer.addCustomAsset(assetData);
@@ -188,10 +167,7 @@ export async function PUT(request: NextRequest) {
         });
       }
       default: {
-        return NextResponse.json(;
-          { error: 'Invalid action. Supported actions: add_asset' },;
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action. Supported actions: add_asset' }, { status: 400 });
       }
     }
   } catch (error) {

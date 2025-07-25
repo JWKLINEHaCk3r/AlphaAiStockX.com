@@ -5,23 +5,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -36,21 +19,10 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 'use client';
-
-<<<<<<< HEAD;
 import React, { useState, useEffect } from 'react';
-
-=======;
-import { useState, useEffect } from 'react';
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
 import {
   TrendingUp,;
   TrendingDown,;
@@ -82,6 +54,11 @@ interface Optimization {
 
 
 
+
+
+
+
+
   category: string;
   title: string;
   description: string;
@@ -89,6 +66,11 @@ interface Optimization {
   status: string;
   priority: string;
   icon: React.ComponentType<{ className?: string;
+
+
+
+
+
 
 
 

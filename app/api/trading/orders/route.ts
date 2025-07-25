@@ -35,6 +35,11 @@ interface OrderInputData {
 
 
 
+
+
+
+
+
   symbol: string;
   quantity: number;
   side: 'buy' | 'sell';
@@ -42,6 +47,11 @@ interface OrderInputData {
   timeInForce: 'day' | 'gtc' | 'ioc' | 'fok';
   limitPrice?: number;
   stopPrice?: number;
+
+
+
+
+
 
 
 

@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -80,6 +85,11 @@ interface ModelPerformance {
 
 
 
+
+
+
+
+
   precision: number;
   recall: number;
   f1Score: number;
@@ -101,9 +111,19 @@ interface ModelPerformance {
 
 
 
+
+
+
+
+
 }
 
 interface AIModel {
+
+
+
+
+
 
 
 
@@ -146,9 +166,19 @@ interface AIModel {
 
 
 
+
+
+
+
+
 }
 
 interface TrainingConfig {
+
+
+
+
+
 
 
 
@@ -189,9 +219,19 @@ interface TrainingConfig {
 
 
 
+
+
+
+
+
 }
 
 interface ModelType {
+
+
+
+
+
 
 
 
@@ -226,6 +266,11 @@ interface ModelType {
 
 
 
+
+
+
+
+
 }
 
 interface PredictionTarget {
@@ -244,9 +289,19 @@ interface PredictionTarget {
 
 
 
+
+
+
+
+
   id: string;
   name: string;
   type: string;
+
+
+
+
+
 
 
 

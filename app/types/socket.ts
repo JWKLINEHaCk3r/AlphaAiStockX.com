@@ -26,6 +26,11 @@ export interface ClientToServerEvents {
 
 
 
+
+
+
+
+
   'subscribe-market-data': (symbols: string[]) => void;
   'unsubscribe-market-data': (symbols: string[]) => void;
   'subscribe-ai-signals': (userId: string) => void;
@@ -50,9 +55,19 @@ export interface ClientToServerEvents {
 
 
 
+
+
+
+
+
 }
 
 export interface ServerToClientEvents {
+
+
+
+
+
 
 
 
@@ -89,9 +104,19 @@ export interface ServerToClientEvents {
 
 
 
+
+
+
+
+
 }
 
 export interface MarketDataUpdate {
+
+
+
+
+
 
 
 
@@ -130,9 +155,19 @@ export interface MarketDataUpdate {
 
 
 
+
+
+
+
+
 }
 
 export interface AISignal {
+
+
+
+
+
 
 
 
@@ -171,9 +206,19 @@ export interface AISignal {
 
 
 
+
+
+
+
+
 }
 
 export interface PortfolioUpdate {
+
+
+
+
+
 
 
 
@@ -211,9 +256,19 @@ export interface PortfolioUpdate {
 
 
 
+
+
+
+
+
 }
 
 export interface SocialPost {
+
+
+
+
+
 
 
 
@@ -235,6 +290,11 @@ export interface SocialPost {
     avatar: string;
     verified: boolean;
   
+
+
+
+
+
 
 
 
@@ -272,11 +332,21 @@ export interface TradeNotification {
 
 
 
+
+
+
+
+
   id: string;
   type: 'ORDER_FILLED' | 'ORDER_CANCELLED' | 'STOP_LOSS_TRIGGERED' | 'TARGET_REACHED';
   symbol: string;
   message: string;
   timestamp: string;
+
+
+
+
+
 
 
 

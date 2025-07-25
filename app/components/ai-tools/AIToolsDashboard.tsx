@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -38,6 +43,11 @@ import PortfolioOptimizerDashboard from './PortfolioOptimizerDashboard';
 import MarketPredictorDashboard from './MarketPredictorDashboard';
 
 interface AIToolStats {
+
+
+
+
+
 
 
 
@@ -73,9 +83,19 @@ interface AIToolStats {
 
 
 
+
+
+
+
+
 }
 
 interface QuickAction {
+
+
+
+
+
 
 
 
@@ -97,6 +117,11 @@ interface QuickAction {
   icon: React.ReactNode;
   action: () => void;
   badge?: string;
+
+
+
+
+
 
 
 

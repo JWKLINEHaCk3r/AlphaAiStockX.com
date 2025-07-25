@@ -21,6 +21,11 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
@@ -116,6 +121,11 @@ interface EnterprisePlan {
 
 
 
+
+
+
+
+
   id: string;
   name: string;
   price: string;
@@ -124,6 +134,11 @@ interface EnterprisePlan {
   features: string[];
   color: string;
   popular: boolean;
+
+
+
+
+
 
 
 
@@ -157,9 +172,19 @@ interface CustomQuote {
 
 
 
+
+
+
+
+
   users: number;
   volume: number;
   features: string[];
+
+
+
+
+
 
 
 
@@ -193,9 +218,19 @@ interface WhitelabelFeature {
 
 
 
+
+
+
+
+
   title: string;
   description: string;
   icon: React.ComponentType<any>;
+
+
+
+
+
 
 
 
@@ -229,9 +264,19 @@ interface ComplianceFeature {
 
 
 
+
+
+
+
+
   title: string;
   status: string;
   icon: React.ComponentType<any>;
+
+
+
+
+
 
 
 
