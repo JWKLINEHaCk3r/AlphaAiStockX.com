@@ -101,9 +101,13 @@ interface User {
 
 
 
+
+
   id: string | number;
   name: string;
   email: string;
+
+
 
 
 
@@ -147,9 +151,13 @@ interface MoneyMarketAccountProps {
 
 
 
+
+
   user: User;
   balance: number;
   onUpdateBalance: (newBalance: number) => void;
+
+
 
 
 

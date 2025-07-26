@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           message: welcomeMessage,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       case 'message': {
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: response,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       case 'portfolio_simulation': {
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: simulation,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       default:;
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     console.error('GPT-Trader Chatbot API Error:', error);
     return NextResponse.json({
       error: 'Failed to process request',;
-      details: error instanceof Error ? error.message : 'Unknown error';
+      details: error instanceof Error ? error.message : 'Unknown error',;
     }, { status: 500 });
   }
 }
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           message: 'Chat history cleared',;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       default:;

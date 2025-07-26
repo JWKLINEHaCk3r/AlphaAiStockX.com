@@ -37,11 +37,15 @@ interface MarketSentiment {
 
 
 
+
+
   overall: number; // -1 to 1;
   news: number;
   social: number;
   technical: number;
   institutional: number;
+
+
 
 
 
@@ -962,7 +966,7 @@ class AIBrainService {
   }
 
   private getRebalanceActions(positions: Position[]): RebalanceAction[] {
-    return positions.map(position => ({
+    return positions.map((position: any) => ({
       symbol: position.symbol,;
       action: 'hold' as const,;
       quantity: 0,;

@@ -1,3 +1,7 @@
+import { Badge } from "./components/ui/badge";
+import { Progress } from "./components/ui/progress";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 
 
 // Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.

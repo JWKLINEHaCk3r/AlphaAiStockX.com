@@ -100,10 +100,14 @@ interface User {
 
 
 
+
+
   id: string | number;
   name: string;
   email: string;
   balance?: number;
+
+
 
 
 
@@ -147,8 +151,12 @@ interface BankingDashboardProps {
 
 
 
+
+
   user: User;
   onUpdateBalance: (newBalance: number) => void;
+
+
 
 
 

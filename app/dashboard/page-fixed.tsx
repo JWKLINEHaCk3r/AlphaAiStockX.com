@@ -151,10 +151,14 @@ interface MarketStock {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
+
+
 
 
 
@@ -198,12 +202,16 @@ interface AIBeing {
 
 
 
+
+
   id: number;
   name: string;
   status: 'active' | 'idle' | 'analyzing';
   profits: number;
   accuracy: number;
   trades: number;
+
+
 
 
 

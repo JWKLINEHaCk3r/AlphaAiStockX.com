@@ -1,3 +1,6 @@
+import { PopoverTrigger } from "./popover";
+import { PopoverContent } from "./popover";
+import { Popover } from "./popover";
 import React from 'react';
 
 import * as React from 'react';

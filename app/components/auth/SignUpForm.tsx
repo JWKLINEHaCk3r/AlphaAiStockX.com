@@ -87,7 +87,11 @@ interface SignUpFormProps {
 
 
 
+
+
   onSignUp: (data: { name: string; email: string; password: string;
+
+
 
 
 

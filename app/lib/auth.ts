@@ -29,6 +29,8 @@ export interface User {
 
 
 
+
+
   id: string;
   email: string;
   name: string;
@@ -49,6 +51,8 @@ export interface User {
   accountType: 'cash' | 'margin' | 'crypto' | 'institutional';
   createdAt: Date;
   lastActive: Date;
+
+
 
 
 
@@ -92,6 +96,8 @@ export interface UserPreferences {
 
 
 
+
+
   theme: 'dark' | 'light' | 'auto';
   notifications: {
     email: boolean;
@@ -101,6 +107,8 @@ export interface UserPreferences {
     news: boolean;
     ai: boolean;
   
+
+
 
 
 
@@ -265,7 +273,7 @@ export class UserService {
             portfolioVisible: false,;
             tradesVisible: false,;
           },;
-        },;
+            },;
       },;
     });
 

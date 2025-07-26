@@ -1,3 +1,8 @@
+import { SelectValue } from "./select";
+import { SelectTrigger } from "./select";
+import { SelectItem } from "./select";
+import { SelectContent } from "./select";
+import { Select } from "./select";
 import React from 'react';
 import * as React from 'react';
 

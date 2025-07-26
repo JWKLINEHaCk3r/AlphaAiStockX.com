@@ -91,6 +91,10 @@ async function fixUIImports() {
 
     for (const file of files) {
       const filePath = path.join(process.cwd(), file);
+      // Skip directories
+      if (!isFile(filePath)) {
+        continue;
+      }
       let content = fs.readFileSync(filePath, 'utf8');
       let modified = false;
 

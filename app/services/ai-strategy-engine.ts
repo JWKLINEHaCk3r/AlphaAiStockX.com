@@ -28,6 +28,8 @@ export interface AITradingStrategy {
 
 
 
+
+
   name: string;
   description: string;
   run: (;
@@ -35,6 +37,8 @@ export interface AITradingStrategy {
     portfolio: Record<string, unknown>,;
     context?: Record<string, unknown>;
   ) => Promise<StrategyResult>;
+
+
 
 
 

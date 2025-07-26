@@ -135,6 +135,8 @@ interface Alert {
 
 
 
+
+
   id: number;
   type: string;
   icon: LucideIcon;
@@ -165,9 +167,13 @@ interface Alert {
 
 
 
+
+
 }
 
 interface AlertSettings {
+
+
 
 
 
@@ -214,9 +220,13 @@ interface AlertSettings {
 
 
 
+
+
 }
 
 interface Alert {
+
+
 
 
 
@@ -266,9 +276,13 @@ interface Alert {
 
 
 
+
+
 }
 
 interface AlertType {
+
+
 
 
 
@@ -295,6 +309,8 @@ interface AlertType {
   title: string;
   symbol: string;
   priority: 'high' | 'medium' | 'low';
+
+
 
 
 
@@ -362,7 +378,7 @@ export default function RealTimeAlerts() {
 // Conflict marker removed;
   const [customAlerts] = useState<Alert[]>([]);
 // Conflict marker removed;
-  const [customAlerts, setCustomAlerts] = useState([]);
+  const [customAlerts, setCustomAlerts] = useState<any[]>([]);
   const [showAll, setShowAll] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
 // Conflict marker removed;
@@ -476,7 +492,7 @@ export default function RealTimeAlerts() {
       prev.map((alert: any) => (alert.id === alertId ? { ...alert, read: true } : alert));
     );
 // Conflict marker removed;
-    setAlerts(prev => prev.map(alert => (alert.id === alertId ? { ...alert, read: true } : alert)));
+    setAlerts(prev => prev.map((alert: any) => (alert.id === alertId ? { ...alert, read: true } : alert)));
 // Conflict marker removed;
   };
 

@@ -1,3 +1,7 @@
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import React from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -5,92 +9,24 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  VisionModel,;
-  AnalysisResult,;
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
   BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  RiskAnalysis,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
+import {
+  VolumeX,;
+  Brain,;
+  TrendingUp,;
+  Activity,;
+  Zap,;
+  Settings,;
+  Play,;
+  Pause;
+} from 'lucide-react';
   CryptoData,;
   DeFiProtocol,;
   NFTCollection,;
   UserProfile,;
   ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  Alert,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
-} from '../../types/trading-types';\n\nimport { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-"use client";
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  Mic,;
-  MicOff,;
-  Volume2,;
+} from 'lucide-react';
   VolumeX,;
   Brain,;
   TrendingUp,;
@@ -102,6 +38,8 @@ import {
 } from 'lucide-react';
 
 interface VoiceCommand {
+
+
 
 
 
@@ -148,9 +86,13 @@ interface VoiceCommand {
 
 
 
+
+
 }
 
 interface VoiceSettings {
+
+
 
 
 
@@ -175,6 +117,8 @@ interface VoiceSettings {
   sensitivity: number;
   autoExecute: boolean;
   voiceFeedback: boolean;
+
+
 
 
 
@@ -312,7 +256,7 @@ export default function AIVoiceCommandCenter() {
     // Simulate command execution;
     setTimeout(() => {
       setCommands(prev =>;
-        prev.map(cmd => (cmd.id === command.id ? { ...cmd, executed: true } : cmd));
+        prev.map((cmd: any) => (cmd.id === command.id ? { ...cmd, executed: true } : cmd));
       );
 
       if (settings.voiceFeedback) {
@@ -482,7 +426,7 @@ export default function AIVoiceCommandCenter() {
             </p>;
           ) : (;
             <div className="space-y-3">;
-              {commands.map(command => (;
+              {commands.map((command: any) => (;
                 <div;
                   key={command.id}
                   className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg";

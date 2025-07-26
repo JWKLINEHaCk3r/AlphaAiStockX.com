@@ -72,6 +72,8 @@ interface StockData {
 
 
 
+
+
   symbol: string;
   price: string;
   change: string;
@@ -79,6 +81,8 @@ interface StockData {
   quantumInsight: string;
   consciousness: string;
   prediction: string;
+
+
 
 
 
@@ -122,7 +126,11 @@ interface StockResultProps {
 
 
 
+
+
   data: StockData;
+
+
 
 
 

@@ -45,12 +45,16 @@ interface TradeData {
 
 
 
+
+
   symbol: string;
   action: 'buy' | 'sell';
   price: number;
   shares: number;
   time: string;
   reason: string;
+
+
 
 
 
@@ -94,8 +98,12 @@ interface PortfolioData {
 
 
 
+
+
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
+
 
 
 
@@ -143,10 +151,14 @@ interface RiskSettings {
 
 
 
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
   maxDailyLoss: number;
+
+
 
 
 
@@ -190,12 +202,16 @@ interface SimpleStrategy {
 
 
 
+
+
   id: string;
   name: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE';
   weight: number;
   parameters: { [key: string]: any;
+
+
 
 
 
@@ -244,11 +260,15 @@ interface AIAnalysisResult {
 
 
 
+
+
   predictions: AIModelPrediction[];
   signals: TradingSignal[];
   riskAssessment: RiskAnalysis;
   portfolioAnalysis: PortfolioAnalysis;
   recommendations: string[];
+
+
 
 
 
@@ -806,6 +826,8 @@ interface RiskSettings {
 
 
 
+
+
   maxPositionSize: number;
   stopLoss: number;
   takeProfit: number;
@@ -830,9 +852,13 @@ interface RiskSettings {
 
 
 
+
+
 }
 
 interface PerformanceMetrics {
+
+
 
 
 
@@ -881,9 +907,13 @@ interface PerformanceMetrics {
 
 
 
+
+
 }
 
 interface PortfolioAnalysis {
+
+
 
 
 
@@ -942,6 +972,8 @@ interface PortfolioAnalysis {
 
 
 
+
+
 };
   diversification: {
     sectors: Record<string, number>;
@@ -951,6 +983,8 @@ interface PortfolioAnalysis {
 }
 
 interface PositionAnalysis {
+
+
 
 
 
@@ -998,9 +1032,13 @@ interface PositionAnalysis {
 
 
 
+
+
 }
 
 interface TradeExecutionResult {
+
+
 
 
 
@@ -1045,10 +1083,14 @@ interface TradeExecutionResult {
 
 
 
+
+
 }
 
 // Enhanced Trade interface;
 interface Trade {
+
+
 
 
 
@@ -1099,6 +1141,8 @@ interface Trade {
 
 
 
+
+
 }
 
 // Enhanced Portfolio interface;
@@ -1123,8 +1167,12 @@ interface Portfolio {
 
 
 
+
+
   cash: number;
   holdings: Record<string, { shares: number; avgPrice: number;
+
+
 
 
 

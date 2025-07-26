@@ -26,7 +26,6 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # Copy source code and fixer scripts to /app
 COPY . .
-COPY fix-all-ui-imports.js /app/fix-all-ui-imports.js
 COPY fix-card-imports.js /app/fix-card-imports.js
 COPY fix-missing-cards.js /app/fix-missing-cards.js
 COPY fix-missing-ui-imports.js /app/fix-missing-ui-imports.js

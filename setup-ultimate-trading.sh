@@ -50,7 +50,6 @@ echo ""
 echo "🔧 Running AI-Powered Code Fixes..."
 
 # Make scripts executable
-chmod +x fix-all-ui-imports.js
 chmod +x fix-card-imports.js
 chmod +x fix-missing-cards.js
 chmod +x fix-critical-syntax-errors.js

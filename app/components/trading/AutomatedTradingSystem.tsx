@@ -142,6 +142,8 @@ interface User {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
@@ -165,9 +167,13 @@ interface User {
 
 
 
+
+
 }
 
 interface Trade {
+
+
 
 
 
@@ -226,9 +232,13 @@ interface Trade {
 
 
 
+
+
 }
 
 interface SystemSettings {
+
+
 
 
 
@@ -277,9 +287,13 @@ interface SystemSettings {
 
 
 
+
+
 }
 
 interface AIAnalysis {
+
+
 
 
 
@@ -327,9 +341,13 @@ interface AIAnalysis {
 
 
 
+
+
 }
 
 interface ExecutionMetrics {
+
+
 
 
 
@@ -379,9 +397,13 @@ interface ExecutionMetrics {
 
 
 
+
+
 }
 
 interface MarketConditions {
+
+
 
 
 
@@ -429,6 +451,8 @@ interface MarketConditions {
 
 
 
+
+
 }
 
 interface AutomatedTradingSystemProps {
@@ -452,8 +476,12 @@ interface AutomatedTradingSystemProps {
 
 
 
+
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
 
 
 

@@ -26,6 +26,8 @@ interface UserSession {
 
 
 
+
+
   user: {
     id: string;
     email?: string;
@@ -50,10 +52,14 @@ interface UserSession {
 
 
 
+
+
 };
 }
 
 interface MarketDataParams {
+
+
 
 
 
@@ -100,9 +106,13 @@ interface MarketDataParams {
 
 
 
+
+
 }
 
 interface MarketBarData {
+
+
 
 
 
@@ -149,9 +159,13 @@ interface MarketBarData {
 
 
 
+
+
 }
 
 interface TechnicalIndicators {
+
+
 
 
 
@@ -199,10 +213,14 @@ interface TechnicalIndicators {
 
 
 
+
+
 };
 }
 
 interface MarketQuote {
+
+
 
 
 
@@ -248,9 +266,13 @@ interface MarketQuote {
 
 
 
+
+
 }
 
 interface MarketDataResponse {
+
+
 
 
 
@@ -285,6 +307,8 @@ interface MarketDataResponse {
   indicators?: TechnicalIndicators | null;
   lastUpdated: string;
   error?: string;
+
+
 
 
 

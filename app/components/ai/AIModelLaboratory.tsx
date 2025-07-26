@@ -1,3 +1,19 @@
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Slider } from "../../../components/ui/slider";
+import { SelectValue } from "../../../components/ui/select";
+import { SelectTrigger } from "../../../components/ui/select";
+import { SelectItem } from "../../../components/ui/select";
+import { SelectContent } from "../../../components/ui/select";
+import { Select } from "../../../components/ui/select";
+import { Textarea } from "../../../components/ui/textarea";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -82,14 +98,6 @@ import {
 } from '../../types/trading-types';\n\nimport { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import Navigation from '@/components/ui/navigation';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 // AI Model Laboratory - Create, Train, and Deploy Custom AI Models;
 ('use client');
 
@@ -122,6 +130,8 @@ import {
 } from 'lucide-react';
 
 interface AIModel {
+
+
 
 
 
@@ -178,9 +188,13 @@ interface AIModel {
 
 
 
+
+
 }
 
 interface BacktestResult {
+
+
 
 
 
@@ -230,9 +244,13 @@ interface BacktestResult {
 
 
 
+
+
 }
 
 interface TrainingDataConfig {
+
+
 
 
 
@@ -280,9 +298,13 @@ interface TrainingDataConfig {
 
 
 
+
+
 }
 
 interface Hyperparameters {
+
+
 
 
 
@@ -329,9 +351,13 @@ interface Hyperparameters {
 
 
 
+
+
 }
 
 interface User {
+
+
 
 
 
@@ -376,9 +402,13 @@ interface User {
 
 
 
+
+
 }
 
 interface TrainingJob {
+
+
 
 
 
@@ -409,6 +439,8 @@ interface TrainingJob {
   accuracy: number;
   estimatedTimeRemaining: number;
   startedAt: Date;
+
+
 
 
 
@@ -665,7 +697,7 @@ export default function AIModelLaboratory() {
 
       if (response.ok) {
         setModels(prev =>;
-          prev.map(model => (model.id === modelId ? { ...model, status: 'deployed' } : model));
+          prev.map((model: any) => (model.id === modelId ? { ...model, status: 'deployed' } : model));
         );
       }
     } catch (error) {
@@ -975,7 +1007,7 @@ export default function AIModelLaboratory() {
           </CardHeader>;
           <CardContent>;
             <div className="space-y-4">;
-              {trainingJobs.map(job => (;
+              {trainingJobs.map((job: any) => (;
                 <div key={job.id} className="bg-slate-700/50 rounded-lg p-4">;
                   <div className="flex items-center justify-between mb-3">;
                     <div>;
@@ -1019,7 +1051,7 @@ export default function AIModelLaboratory() {
 
       {/* Models Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-        {models.map(model => (;
+        {models.map((model: any) => (;
           <Card;
             key={model.id}
             className="bg-slate-800 border-slate-700 hover:border-slate-600 transition-colors";

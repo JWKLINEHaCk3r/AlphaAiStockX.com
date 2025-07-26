@@ -1,3 +1,8 @@
+import { Badge } from "../../../components/ui/badge";
+import { Switch } from "../../../components/ui/switch";
+import { Textarea } from "../../../components/ui/textarea";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -29,10 +34,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 
 
 
@@ -80,6 +81,8 @@ interface Message {
 
 
 
+
+
   id: number;
   type: 'user' | 'ai';
   content: string;
@@ -87,6 +90,8 @@ interface Message {
   mood?: string;
   priority?: string;
   confidence?: number;
+
+
 
 
 
@@ -134,9 +139,13 @@ declare global {
 
 
 
+
+
     SpeechRecognition: unknown;
     webkitSpeechRecognition: unknown;
   
+
+
 
 
 

@@ -19,12 +19,11 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
         creator: {
           select: {
             id: true,;
-            name: true;
+                name: true;
           }
         }
-      }
+      },;
     });
-
     if (!model) {
       return NextResponse.json({ error: 'Model not found' }, { status: 404 });
     }
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
       data: {
         userId: session.user.id,;
         modelId: modelId,;
-        isActive: true;
+        isActive: true,;
       }
     });
 
@@ -64,7 +63,7 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
         status: 'QUEUED',;
         progress: 0,;
         logs: ['Training job queued'],;
-        config: model.parameters;
+        config: model.parameters,;
       }
     });
 

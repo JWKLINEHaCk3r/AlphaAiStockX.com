@@ -57,7 +57,11 @@ interface AIInsightsProps {
 
 
 
+
+
   selectedStock: string;
+
+
 
 
 
@@ -101,6 +105,8 @@ interface Sentiment {
 
 
 
+
+
   bullish: number;
   bearish: number;
   neutral: number;
@@ -124,9 +130,13 @@ interface Sentiment {
 
 
 
+
+
 }
 
 interface TechnicalAnalysis {
+
+
 
 
 
@@ -173,9 +183,13 @@ interface TechnicalAnalysis {
 
 
 
+
+
 }
 
 interface FundamentalAnalysis {
+
+
 
 
 
@@ -219,9 +233,13 @@ interface FundamentalAnalysis {
 
 
 
+
+
 }
 
 interface RiskFactor {
+
+
 
 
 
@@ -266,9 +284,13 @@ interface RiskFactor {
 
 
 
+
+
 }
 
 interface MarketCatalyst {
+
+
 
 
 
@@ -313,9 +335,13 @@ interface MarketCatalyst {
 
 
 
+
+
 }
 
 interface Prediction {
+
+
 
 
 
@@ -361,9 +387,13 @@ interface Prediction {
 
 
 
+
+
 }
 
 interface AIInsightsData {
+
+
 
 
 
@@ -391,6 +421,8 @@ interface AIInsightsData {
   aiPredictions: Prediction[];
   riskFactors: RiskFactor[];
   marketCatalysts: MarketCatalyst[];
+
+
 
 
 

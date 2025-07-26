@@ -60,6 +60,8 @@ interface IPO {
 
 
 
+
+
   id: string;
   company: string;
   symbol: string;
@@ -77,6 +79,8 @@ interface IPO {
     profitMargin: number;
     debtToEquity: number;
   
+
+
 
 
 
@@ -261,7 +265,7 @@ export default function IPORadarDashboard() {
             className="px-3 py-2 border border-gray-300 rounded-md";
           >;
             <option value="all">All Sectors</option>;
-            {sectors.map(sector => (;
+            {sectors.map((sector: any) => (;
               <option key={sector} value={sector}>;
                 {sector}
               </option>;
@@ -332,7 +336,7 @@ export default function IPORadarDashboard() {
       </div>;
       {/* IPO List */}
       <div className="space-y-4">;
-        {filteredIPOs.map(ipo => (;
+        {filteredIPOs.map((ipo: any) => (;
           <Card key={ipo.id} className="hover:shadow-lg transition-shadow">;
             <CardContent className="p-6">;
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">;

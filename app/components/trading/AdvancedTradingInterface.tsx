@@ -1,3 +1,15 @@
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Switch } from "../../../components/ui/switch";
+import { SelectValue } from "../../../components/ui/select";
+import { SelectTrigger } from "../../../components/ui/select";
+import { SelectItem } from "../../../components/ui/select";
+import { SelectContent } from "../../../components/ui/select";
+import { Select } from "../../../components/ui/select";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -16,16 +28,13 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Settings, BarChart3, Eye, Target, Shield, Zap, PieChart, Activity, ArrowUp, ArrowDown } from 'lucide-react';
 
 // Advanced Trading Interface - Professional Chart & Order Entry;
 // Type definitions;
 interface MarketData {
+
+
 
 
 
@@ -76,9 +85,13 @@ interface MarketData {
 
 
 
+
+
 }
 
 interface ChartData {
+
+
 
 
 
@@ -125,6 +138,8 @@ interface ChartData {
 
 
 
+
+
 }
 
 // Implementation code moved into the main component below;
@@ -135,11 +150,6 @@ const AdvancedTradingInterface: React.FC = () => {
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardContent, CardTitle } from "../../../components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Settings, BarChart3, Eye, Target, Shield, Zap, PieChart, Activity, ArrowUp, ArrowDown } from "lucide-react";
   return (;
     <div className="advanced-trading-interface-root">;
@@ -191,12 +201,16 @@ interface ChartData {
 
 
 
+
+
   timestamp: number;
   open: number;
   high: number;
   low: number;
   close: number;
   volume: number;
+
+
 
 
 

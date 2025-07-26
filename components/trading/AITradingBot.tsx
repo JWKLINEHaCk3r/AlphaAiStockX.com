@@ -86,6 +86,8 @@ interface AITradingBotProps {
 
 
 
+
+
   id: string;
   name: string;
   strategy: string;
@@ -97,6 +99,8 @@ interface AITradingBotProps {
     maxDrawdown: number;
     trades: number;
   
+
+
 
 
 

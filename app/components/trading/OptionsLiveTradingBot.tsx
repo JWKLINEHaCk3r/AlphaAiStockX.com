@@ -88,6 +88,8 @@ interface OptionsLeg {
 
 
 
+
+
   symbol: string;
   type: string;
   strike: number;
@@ -127,9 +129,13 @@ interface OptionsLeg {
 
 
 
+
+
 }
 
 interface OptionsTrade {
+
+
 
 
 
@@ -183,9 +189,13 @@ interface OptionsTrade {
 
 
 
+
+
 }
 
 interface OptionsStrategy {
+
+
 
 
 
@@ -229,9 +239,13 @@ interface OptionsStrategy {
 
 
 
+
+
 }
 
 interface OptionsChainItem {
+
+
 
 
 
@@ -268,6 +282,8 @@ interface OptionsChainItem {
   theta: number;
   vega: number;
   stockPrice?: number;
+
+
 
 
 

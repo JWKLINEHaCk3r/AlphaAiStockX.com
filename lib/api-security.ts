@@ -7,11 +7,7 @@ import { z } from 'zod';
 
 // API request validation schemas;
 const orderSchema = z.object({
-  symbol: z;
-    .string();
-    .min(1);
-    .max(10);
-    .regex(/^[A-Z]+$/, 'Invalid symbol format'),;
+  symbol: z.string().min(1).max(10).regex(/^[A-Z]+$/, 'Invalid symbol format'),;
   quantity: z.number().positive().max(10000),;
   side: z.enum(['buy', 'sell']),;
   type: z.enum(['market', 'limit', 'stop', 'stop_limit']),;

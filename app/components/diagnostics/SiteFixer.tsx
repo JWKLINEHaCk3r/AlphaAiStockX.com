@@ -78,11 +78,15 @@ interface FixStatus {
 
 
 
+
+
   category: string;
   issue: string;
   status: 'checking' | 'fixed' | 'needs_attention' | 'critical';
   description: string;
   solution: string;
+
+
 
 
 

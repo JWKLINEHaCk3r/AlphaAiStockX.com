@@ -1,3 +1,4 @@
+import { Card } from "./components/ui/card";
 
 
 #!/usr/bin/env node
@@ -8,8 +9,8 @@
 import { Badge } from "./components/ui/badge";
 import { Button } from "./components/ui/button";
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Function to search for TypeScript files
 function findTsxFiles(dir, fileList = []) {

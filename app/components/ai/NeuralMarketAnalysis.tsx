@@ -75,6 +75,8 @@ interface NeuralAnalysis {
 
 
 
+
+
   marketSentiment?: {
     overall: number;
     bullish: number;
@@ -82,6 +84,8 @@ interface NeuralAnalysis {
     neutral: number;
     confidence: number;
   
+
+
 
 
 
@@ -143,6 +147,8 @@ interface DeepLearningModel {
 
 
 
+
+
   id: number;
   name: string;
   type: string;
@@ -172,9 +178,13 @@ interface DeepLearningModel {
 
 
 
+
+
 }
 
 interface MarketPattern {
+
+
 
 
 
@@ -224,9 +234,13 @@ interface MarketPattern {
 
 
 
+
+
 }
 
 interface NeuralPrediction {
+
+
 
 
 
@@ -256,6 +270,8 @@ interface NeuralPrediction {
   volatility: number;
   momentum: number;
   riskLevel: string;
+
+
 
 
 

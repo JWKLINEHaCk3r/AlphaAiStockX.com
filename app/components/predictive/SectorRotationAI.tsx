@@ -69,6 +69,8 @@ interface SectorData {
 
 
 
+
+
   name: string;
   symbol: string;
   weight: number;
@@ -101,9 +103,13 @@ interface SectorData {
 
 
 
+
+
 }
 
 interface RotationSignal {
+
+
 
 
 
@@ -151,9 +157,13 @@ interface RotationSignal {
 
 
 
+
+
 }
 
 interface EconomicIndicator {
+
+
 
 
 
@@ -197,9 +207,13 @@ interface EconomicIndicator {
 
 
 
+
+
 }
 
 interface EconomicCycle {
+
+
 
 
 
@@ -227,6 +241,8 @@ interface EconomicCycle {
   keyIndicators?: EconomicIndicator[];
   recommendedSectors?: string[];
   avoidSectors?: string[];
+
+
 
 
 
@@ -287,7 +303,7 @@ export default function SectorRotationAI() {
       { name: 'Materials', symbol: 'XLB', weight: 2.9 },;
     ];
 
-    const data = sectors.map(sector => ({
+    const data = sectors.map((sector: any) => ({
       ...sector,;
       performance1D: (Math.random() - 0.5) * 4,;
       performance1W: (Math.random() - 0.5) * 8,;

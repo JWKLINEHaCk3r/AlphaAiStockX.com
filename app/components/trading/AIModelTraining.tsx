@@ -90,6 +90,8 @@ interface ModelPerformance {
 
 
 
+
+
   precision: number;
   recall: number;
   f1Score: number;
@@ -116,9 +118,13 @@ interface ModelPerformance {
 
 
 
+
+
 }
 
 interface AIModel {
+
+
 
 
 
@@ -171,9 +177,13 @@ interface AIModel {
 
 
 
+
+
 }
 
 interface TrainingConfig {
+
+
 
 
 
@@ -224,9 +234,13 @@ interface TrainingConfig {
 
 
 
+
+
 }
 
 interface ModelType {
+
+
 
 
 
@@ -271,6 +285,8 @@ interface ModelType {
 
 
 
+
+
 }
 
 interface PredictionTarget {
@@ -294,9 +310,13 @@ interface PredictionTarget {
 
 
 
+
+
   id: string;
   name: string;
   type: string;
+
+
 
 
 

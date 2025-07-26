@@ -1,3 +1,11 @@
+import { Alert } from "../../../components/ui/alert";
+import { AvatarImage } from "../../../components/ui/avatar";
+import { AvatarFallback } from "../../../components/ui/avatar";
+import { Avatar } from "../../../components/ui/avatar";
+import { Badge } from "../../../components/ui/badge";
+import { Textarea } from "../../../components/ui/textarea";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -15,12 +23,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from '@/components/ui/alert';
-import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import {
   AIStockPrediction,;
   SportsEvent,;
@@ -107,6 +109,8 @@ interface Trader {
 
 
 
+
+
   id: number;
   name: string;
   username: string;
@@ -120,6 +124,8 @@ interface Trader {
   riskScore: number;
   specialty: string;
   badge: string;
+
+
 
 
 
@@ -163,6 +169,8 @@ interface SocialPost {
 
 
 
+
+
   id: number;
   user: {
     name: string;
@@ -170,6 +178,8 @@ interface SocialPost {
     avatar: string;
     verified: boolean;
   
+
+
 
 
 
@@ -224,10 +234,14 @@ interface LeaderboardEntry {
 
 
 
+
+
   rank: number;
   name: string;
   return: number;
   badge: string;
+
+
 
 
 
@@ -271,12 +285,16 @@ interface SocialStats {
 
 
 
+
+
   totalCopiers: number;
   totalVolume: number;
   averageReturn: number;
   activeTraders: number;
   successRate?: number;
   activeTrades?: number;
+
+
 
 
 

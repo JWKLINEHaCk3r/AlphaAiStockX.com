@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // This file must be renamed to .cjs for require() to work in Node.js with type: module;
 console.log('Post-build: Fixing webpack chunk loading for SSR...');

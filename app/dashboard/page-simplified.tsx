@@ -82,10 +82,14 @@ interface MarketStock {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
+
+
 
 
 
@@ -129,12 +133,16 @@ interface AIBeing {
 
 
 
+
+
   id: number;
   name: string;
   status: 'active' | 'idle' | 'analyzing';
   profits: number;
   accuracy: number;
   trades: number;
+
+
 
 
 
@@ -190,7 +198,7 @@ export default function Dashboard() {
   useEffect(() => {
     const interval = setInterval(() => {
       setMarketData(prev =>;
-        prev.map(stock => ({
+        prev.map((stock: any) => ({
           ...stock,;
           price: stock.price + (Math.random() - 0.5) * 2,;
           change: stock.change + (Math.random() - 0.5) * 0.5,;
@@ -340,7 +348,7 @@ export default function Dashboard() {
               <Card>;
                 <h3 className="text-xl font-bold text-white mb-4">Market Overview</h3>;
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">;
-                  {marketData.map(stock => (;
+                  {marketData.map((stock: any) => (;
                     <div key={stock.symbol} className="bg-gray-800/50 rounded-lg p-4">;
                       <div className="font-bold text-white text-lg">{stock.symbol}</div>;
                       <div className="text-2xl font-bold text-white">${stock.price.toFixed(2)}</div>;

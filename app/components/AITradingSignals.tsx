@@ -58,6 +58,8 @@ interface TradingSignal {
 
 
 
+
+
   id: string;
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
@@ -72,6 +74,8 @@ interface TradingSignal {
   timestamp: Date;
   status: 'active' | 'triggered' | 'closed';
   pnl?: number;
+
+
 
 
 
@@ -142,7 +146,7 @@ export default function AITradingSignals() {
     
     // Update signals every 10 seconds;
     const interval = setInterval(() => {
-      setSignals(prev => prev.map(signal => ({
+      setSignals(prev => prev.map((signal: any) => ({
         ...signal,;
         confidence: Math.max(50, Math.min(100, signal.confidence + (Math.random() - 0.5) * 5));
       })));

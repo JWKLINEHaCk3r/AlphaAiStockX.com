@@ -1,3 +1,14 @@
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Switch } from "../../../components/ui/switch";
+import { Select } from "../../../components/ui/select";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -15,14 +26,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger, TabsList, TabsContent, Tabs } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Switch } from '@/components/ui/switch';
-import { Select } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 'use client';
 import React, { useState, useEffect } from 'react';
 import {
@@ -65,6 +68,8 @@ interface TradingBot {
 
 
 
+
+
   id: string;
   name: string;
   description: string;
@@ -78,6 +83,8 @@ interface TradingBot {
     sharpeRatio: number;
     maxDrawdown: number;
   
+
+
 
 
 
@@ -350,7 +357,7 @@ export default function AutomatedTradingBotManager() {
             </Button>;
           </div>;
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-            {bots.map(bot => (;
+            {bots.map((bot: any) => (;
               <Card key={bot.id} className="bg-slate-800/50 backdrop-blur-sm border-slate-700">;
                 <CardHeader>;
                   <div className="flex items-center justify-between">;
@@ -397,7 +404,7 @@ export default function AutomatedTradingBotManager() {
                   <div className="space-y-2">;
                     <p className="text-gray-400 text-xs">Active Strategies</p>;
                     <div className="flex flex-wrap gap-1">;
-                      {bot.strategies.map(strategy => (;
+                      {bot.strategies.map((strategy: any) => (;
                         <Badge key={strategy} variant="outline" className="text-xs">;
                           {strategy}
                         </Badge>;
@@ -458,7 +465,7 @@ export default function AutomatedTradingBotManager() {
             </CardHeader>;
             <CardContent>;
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">;
-                {bots.map(bot => (;
+                {bots.map((bot: any) => (;
                   <div key={bot.id} className="space-y-4">;
                     <div className="flex items-center gap-2">;
                       <div className={`w-2 h-2 rounded-full ${getStatusColor(bot.status)}`} />;

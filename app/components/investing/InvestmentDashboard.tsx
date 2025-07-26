@@ -141,6 +141,8 @@ interface User {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
@@ -165,9 +167,13 @@ interface User {
 
 
 
+
+
 }
 
 interface PortfolioItem {
+
+
 
 
 
@@ -218,6 +224,8 @@ interface PortfolioItem {
 
 
 
+
+
 }
 
 interface InvestmentDashboardProps {
@@ -241,8 +249,12 @@ interface InvestmentDashboardProps {
 
 
 
+
+
   user: User;
   onUpdatePortfolio: (portfolio: PortfolioItem[]) => void;
+
+
 
 
 

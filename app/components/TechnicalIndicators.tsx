@@ -58,7 +58,11 @@ interface TechnicalIndicatorsProps {
 
 
 
+
+
   selectedStock: { symbol: string; name?: string; price?: number;
+
+
 
 
 
@@ -102,6 +106,8 @@ interface IndicatorData {
 
 
 
+
+
   rsi: number;
   macd: {
     value: number;
@@ -109,6 +115,8 @@ interface IndicatorData {
     histogram: number;
     trend: string;
   
+
+
 
 
 

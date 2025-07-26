@@ -128,6 +128,8 @@ interface PatternMatch {
 
 
 
+
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -174,9 +176,13 @@ interface PatternMatch {
 
 
 
+
+
 }
 
 interface TradingSignal {
+
+
 
 
 
@@ -233,9 +239,13 @@ interface TradingSignal {
 
 
 
+
+
 }
 
 interface ScanSettings {
+
+
 
 
 
@@ -283,9 +293,13 @@ interface ScanSettings {
 
 
 
+
+
 }
 
 interface ChartPattern {
+
+
 
 
 
@@ -338,9 +352,13 @@ interface ChartPattern {
 
 
 
+
+
 }
 
 interface PatternStats {
+
+
 
 
 
@@ -367,6 +385,8 @@ interface PatternStats {
     avgReturn: number;
     avgDaysToTarget: number;
   
+
+
 
 
 

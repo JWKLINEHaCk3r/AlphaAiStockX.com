@@ -1,3 +1,12 @@
+import { TabsTrigger } from "../../../components/ui/tabs";
+import { TabsList } from "../../../components/ui/tabs";
+import { TabsContent } from "../../../components/ui/tabs";
+import { Tabs } from "../../../components/ui/tabs";
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -13,11 +22,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import React, { useState, useEffect } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
 import {
   AIStockPrediction,;
   SportsEvent,;

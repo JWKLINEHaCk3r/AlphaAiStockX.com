@@ -15,19 +15,18 @@ const aiModelSchema = z.object({
     neurons: z.number().int().positive(),;
     dropout: z.number().min(0).max(1),;
     optimizer: z.string(),;
-    lossFunction: z.string();
+    lossFunction: z.string(),;
   }),;
   trainingData: z.object({
     symbols: z.array(z.string()),;
     timeframe: z.string(),;
     features: z.array(z.string()),;
     startDate: z.string(),;
-    endDate: z.string();
+    endDate: z.string(),;
   }),;
   isPublic: z.boolean().default(false),;
-  subscriptionPrice: z.number().min(0).optional();
+  subscriptionPrice: z.number().min(0).optional(),;
 });
-
 export async function GET(request: NextRequest) {
   try {
     const session = await auth();
@@ -81,7 +80,7 @@ export async function GET(request: NextRequest) {
       take: limit;
     });
 
-    const modelData = models.map(model => ({
+    const modelData = models.map((model: any) => ({
       id: model.id,;
       name: model.name,;
       description: model.description,;

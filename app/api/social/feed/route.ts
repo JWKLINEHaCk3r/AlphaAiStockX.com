@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
       take: limit,;
     });
 
-    const feedPosts = posts.map(post => ({
+    const feedPosts = posts.map((post: any) => ({
       id: post.id,;
       content: post.content,;
       type: post.type,;

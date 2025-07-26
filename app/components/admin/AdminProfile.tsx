@@ -93,12 +93,16 @@ interface Admin {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
   role: string;
   permissions: AdminPermissions;
   settings: AdminSettings;
+
+
 
 
 
@@ -142,8 +146,12 @@ interface AdminProfileProps {
 
 
 
+
+
   admin: Admin;
   onUpdateAdmin: (admin: Admin) => void;
+
+
 
 
 

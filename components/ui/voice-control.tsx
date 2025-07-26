@@ -1,3 +1,5 @@
+import { VoiceControl } from "./voice-control";
+import { Button } from "./button";
 import { Card, CardContent } from './card.js';
 import { Card, CardContent } from './card.js';
 import { Card, CardContent } from './card.js';
@@ -43,7 +45,6 @@ import { Card, CardContent } from './card.tsx';
 import { Card, CardContent } from './card';
 
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Mic, MicOff, VolumeX } from 'lucide-react';
 
 interface VoiceControlProps {
@@ -67,7 +68,11 @@ interface VoiceControlProps {
 
 
 
+
+
   className?: string;
+
+
 
 
 

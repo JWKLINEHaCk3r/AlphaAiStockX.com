@@ -123,6 +123,8 @@ interface SentimentData {
 
 
 
+
+
   [symbol: string]: {
     overall: number;
     bullish: number;
@@ -152,10 +154,14 @@ interface SentimentData {
 
 
 
+
+
 };
 }
 
 interface SocialMediaPlatform {
+
+
 
 
 
@@ -205,9 +211,13 @@ interface SocialMediaPlatform {
 
 
 
+
+
 }
 
 interface NewsItem {
+
+
 
 
 
@@ -256,9 +266,13 @@ interface NewsItem {
 
 
 
+
+
 }
 
 interface InfluencerData {
+
+
 
 
 
@@ -307,9 +321,13 @@ interface InfluencerData {
 
 
 
+
+
 }
 
 interface MarketMood {
+
+
 
 
 
@@ -337,6 +355,8 @@ interface MarketMood {
   crowdSentiment: number;
   riskAppetite: string;
   institutionalFlow: string;
+
+
 
 
 

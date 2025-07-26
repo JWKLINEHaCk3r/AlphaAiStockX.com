@@ -1,3 +1,50 @@
+import { AnimatedBackground } from "./components/ui/animated-background-client";
+import { VoiceControl } from "./components/ui/voice-control";
+import { TradingDashboard } from "./components/ui/trading-dashboard-demo";
+import { NavigationMenuLink } from "./components/ui/navigation";
+import { NavigationMenuItem } from "./components/ui/navigation";
+import { NavigationMenuTrigger } from "./components/ui/navigation";
+import { NavigationMenuContent } from "./components/ui/navigation";
+import { NavigationMenuList } from "./components/ui/navigation";
+import { NavigationMenu } from "./components/ui/navigation";
+import { Calendar } from "./components/ui/calendar";
+import { PopoverTrigger } from "./components/ui/popover";
+import { PopoverContent } from "./components/ui/popover";
+import { Popover } from "./components/ui/popover";
+import { ScrollArea } from "./components/ui/scroll-area";
+import { Toaster } from "./components/ui/toaster";
+import { Toast } from "./components/ui/toast";
+import { TabsTrigger } from "./components/ui/tabs";
+import { TabsList } from "./components/ui/tabs";
+import { TabsContent } from "./components/ui/tabs";
+import { Tabs } from "./components/ui/tabs";
+import { AlertTitle } from "./components/ui/alert";
+import { AlertDescription } from "./components/ui/alert";
+import { Alert } from "./components/ui/alert";
+import { DialogTrigger } from "./components/ui/dialog";
+import { DialogTitle } from "./components/ui/dialog";
+import { DialogHeader } from "./components/ui/dialog";
+import { DialogFooter } from "./components/ui/dialog";
+import { DialogDescription } from "./components/ui/dialog";
+import { DialogContent } from "./components/ui/dialog";
+import { Dialog } from "./components/ui/dialog";
+import { AvatarImage } from "./components/ui/avatar";
+import { AvatarFallback } from "./components/ui/avatar";
+import { Avatar } from "./components/ui/avatar";
+import { Badge } from "./components/ui/badge";
+import { Progress } from "./components/ui/progress";
+import { Slider } from "./components/ui/slider";
+import { Switch } from "./components/ui/switch";
+import { Checkbox } from "./components/ui/checkbox";
+import { SelectValue } from "./components/ui/select";
+import { SelectTrigger } from "./components/ui/select";
+import { SelectItem } from "./components/ui/select";
+// Converted to .cjs for Node.js compatibility. Use require() if needed.
+import { SelectContent } from "./components/ui/select";
+import { Select } from "./components/ui/select";
+import { Textarea } from "./components/ui/textarea";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 
 
 

@@ -82,7 +82,11 @@ interface ForgotPasswordFormProps {
 
 
 
+
+
   onBack: () => void;
+
+
 
 
 

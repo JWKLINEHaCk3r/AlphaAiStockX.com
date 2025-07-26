@@ -109,6 +109,8 @@ interface EarningData {
 
 
 
+
+
   symbol: string;
   name: string;
   date: string;
@@ -142,9 +144,13 @@ interface EarningData {
 
 
 
+
+
 }
 
 interface EarningsAnalysisData {
+
+
 
 
 
@@ -191,9 +197,13 @@ interface EarningsAnalysisData {
 
 
 
+
+
 }
 
 interface SurprisePrediction {
+
+
 
 
 
@@ -240,6 +250,8 @@ interface SurprisePrediction {
 
 
 
+
+
 }
 
 // Add interface for company data;
@@ -264,10 +276,14 @@ interface CompanyData {
 
 
 
+
+
   symbol: string;
   name: string;
   date: string;
   time: string;
+
+
 
 
 

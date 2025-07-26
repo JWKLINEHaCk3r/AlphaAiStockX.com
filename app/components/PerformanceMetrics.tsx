@@ -69,6 +69,8 @@ interface Trade {
 
 
 
+
+
   id: number;
   symbol: string;
   type: string;
@@ -98,9 +100,13 @@ interface Trade {
 
 
 
+
+
 }
 
 interface BotStats {
+
+
 
 
 
@@ -147,6 +153,8 @@ interface BotStats {
 
 
 
+
+
 }
 
 interface PerformanceMetricsProps {
@@ -170,8 +178,12 @@ interface PerformanceMetricsProps {
 
 
 
+
+
   botStats: BotStats;
   recentTrades: Trade[];
+
+
 
 
 
@@ -215,9 +227,13 @@ interface DailyReturn {
 
 
 
+
+
   date: Date;
   return: number;
   cumulative: number;
+
+
 
 
 
@@ -261,11 +277,15 @@ interface PerformanceData {
 
 
 
+
+
   dailyReturns: Array<{
     date: Date;
     return: number;
     cumulative: number;
   
+
+
 
 
 

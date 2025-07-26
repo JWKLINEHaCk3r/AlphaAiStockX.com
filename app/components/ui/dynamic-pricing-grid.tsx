@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -52,6 +52,8 @@ interface PricingTier {
 
 
 
+
+
   name: string;
   price: number;
   originalPrice?: number;
@@ -60,6 +62,8 @@ interface PricingTier {
   features: string[];
   color: string;
   popular?: boolean;
+
+
 
 
 

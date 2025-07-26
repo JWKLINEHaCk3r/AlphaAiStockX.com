@@ -75,10 +75,14 @@ interface ChatMessage {
 
 
 
+
+
   id: number;
   type: 'user' | 'ai';
   content: string;
   timestamp: Date;
+
+
 
 
 

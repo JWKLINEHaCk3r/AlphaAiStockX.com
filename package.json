@@ -30,7 +30,7 @@
     "security:audit": "npm audit --audit-level moderate",
     "security:fix": "npm audit fix",
     "security:check": "npm run security:audit && npm run lint && npm run type-check",
-    "ai:fix-imports": "node fix-all-ui-imports.js",
+    "ai:fix-imports": "node fix-all-ui-imports.cjs",
     "ai:fix-cards": "node fix-card-imports.js",
     "ai:fix-missing": "node fix-missing-cards.js",
     "ai:fix-syntax": "node fix-critical-syntax-errors.js",

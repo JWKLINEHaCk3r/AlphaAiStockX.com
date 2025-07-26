@@ -138,6 +138,8 @@ interface CryptoData {
 
 
 
+
+
   symbol: string;
   name: string;
   price: number;
@@ -169,9 +171,13 @@ interface CryptoData {
 
 
 
+
+
 }
 
 interface DefiMetric {
+
+
 
 
 
@@ -219,9 +225,13 @@ interface DefiMetric {
 
 
 
+
+
 }
 
 interface NftData {
+
+
 
 
 
@@ -268,9 +278,13 @@ interface NftData {
 
 
 
+
+
 }
 
 interface OnChainMetrics {
+
+
 
 
 
@@ -297,6 +311,8 @@ interface OnChainMetrics {
   activeAddresses?: number;
   exchangeInflows?: number;
   exchangeOutflows?: number;
+
+
 
 
 

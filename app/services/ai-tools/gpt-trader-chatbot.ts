@@ -23,6 +23,8 @@ interface UserProfile {
 
 
 
+
+
   id: string;
   riskTolerance: 'conservative' | 'moderate' | 'aggressive';
   investmentGoals: string[];
@@ -50,9 +52,13 @@ interface UserProfile {
 
 
 
+
+
 }
 
 interface ChatMessage {
+
+
 
 
 
@@ -101,10 +107,14 @@ interface ChatMessage {
 
 
 
+
+
 };
 }
 
 interface TradeRecommendation {
+
+
 
 
 
@@ -154,9 +164,13 @@ interface TradeRecommendation {
 
 
 
+
+
 }
 
 interface PortfolioSimulation {
+
+
 
 
 
@@ -183,6 +197,8 @@ interface PortfolioSimulation {
   risk: number;
   diversificationScore: number;
   recommendations: TradeRecommendation[];
+
+
 
 
 
@@ -394,7 +410,7 @@ What would you like to explore today? You can ask me about specific stocks, requ
 
     try {
       // In production, fetch real market data;
-      const marketData = symbols.map(symbol => ({
+      const marketData = symbols.map((symbol: any) => ({
         symbol,;
         price: 150 + Math.random() * 100,;
         change: Math.random() * 10 - 5,;

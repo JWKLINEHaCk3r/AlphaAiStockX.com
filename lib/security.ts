@@ -38,27 +38,37 @@ export const passwordSchema = z;
     SECURITY_CONFIG.passwords.minLength,;
     `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`;
   );
-  .regex(/[a-z]/, 'Password must contain at least one lowercase letter');
-  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter');
-  .regex(/[0-9]/, 'Password must contain at least one number');
-  .regex(/[^a-zA-Z0-9]/, 'Password must contain at least one special character');
+  .refine((val) => /[a-z]/.test(val), {
+    message: 'Password must contain at least one lowercase letter',;
+  });
+  .refine((val) => /[A-Z]/.test(val), {
+    message: 'Password must contain at least one uppercase letter',;
+  });
+  .refine((val) => /[0-9]/.test(val), {
+    message: 'Password must contain at least one number',;
+  });
+  .refine((val) => /[^a-zA-Z0-9]/.test(val), {
+    message: 'Password must contain at least one special character',;
+  });
 
 // Email validation schema;
 export const emailSchema = z;
   .string();
   .email('Invalid email format');
   .max(254, 'Email too long');
-  .toLowerCase();
+  .transform((val) => val.toLowerCase());
 
 // Input sanitization schemas;
 export const sanitizedStringSchema = z;
   .string();
   .trim();
-  .transform(str => str.replace(/[<>\"'&]/g, ''));
+  .transform(str => str.replace(/[<>"'&]/g, ''));
 
 export const alphanumericSchema = z;
   .string();
-  .regex(/^[a-zA-Z0-9]+$/, 'Only alphanumeric characters allowed');
+  .refine((val) => /^[a-zA-Z0-9]+$/.test(val), {
+    message: 'Only alphanumeric characters allowed',;
+  });
 
 // Password hashing utilities;
 export class PasswordSecurity {
@@ -98,9 +108,6 @@ export class PasswordSecurity {
     }
 
     return password;
-      .split('');
-      .sort(() => Math.random() - 0.5);
-      .join('');
   }
 }
 
@@ -327,12 +334,16 @@ export interface SecurityHeaders {
 
 
 
+
+
   'X-Content-Type-Options': string;
   'X-Frame-Options': string;
   'X-XSS-Protection': string;
   'Strict-Transport-Security': string;
   'Content-Security-Policy': string;
   'Referrer-Policy': string;
+
+
 
 
 
@@ -384,6 +395,8 @@ export interface SecurityEvent {
 
 
 
+
+
   type: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
   description: string;
@@ -391,6 +404,8 @@ export interface SecurityEvent {
   ip: string;
   timestamp: Date;
   metadata?: any;
+
+
 
 
 

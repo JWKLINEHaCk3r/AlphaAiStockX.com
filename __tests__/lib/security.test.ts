@@ -79,8 +79,7 @@ describe('Security Utilities', () => {
   describe('EncryptionUtils', () => {
     beforeEach(() => {
       // Mock encryption key;
-      process.env.ENCRYPTION_KEY =;
-        '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+      process.env.ENCRYPTION_KEY = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
     });
 
     it('should encrypt and decrypt data correctly', () => {

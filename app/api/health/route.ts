@@ -34,6 +34,8 @@ interface HealthStatus {
 
 
 
+
+
   status: 'healthy' | 'warning' | 'critical' | 'down';
   timestamp: string;
   uptime: number;
@@ -62,9 +64,13 @@ interface HealthStatus {
 
 
 
+
+
 }
 
 interface ServiceHealth {
+
+
 
 
 
@@ -110,9 +116,13 @@ interface ServiceHealth {
 
 
 
+
+
 }
 
 interface PerformanceHealth {
+
+
 
 
 
@@ -138,6 +148,8 @@ interface PerformanceHealth {
     total: number;
     percentage: number;
   
+
+
 
 
 
@@ -191,10 +203,14 @@ interface DependencyHealth {
 
 
 
+
+
   name: string;
   status: 'healthy' | 'warning' | 'critical' | 'down';
   latency?: number;
   error?: string;
+
+
 
 
 

@@ -79,6 +79,8 @@ interface OptionsFlow {
 
 
 
+
+
   symbol: string;
   type: 'CALL' | 'PUT';
   strike: number;
@@ -110,9 +112,13 @@ interface OptionsFlow {
 
 
 
+
+
 }
 
 interface UnusualActivity {
+
+
 
 
 
@@ -164,9 +170,13 @@ interface UnusualActivity {
 
 
 
+
+
 }
 
 interface DarkPoolData {
+
+
 
 
 
@@ -197,6 +207,8 @@ interface DarkPoolData {
   price?: number;
   sentiment?: string;
   timeframe?: string;
+
+
 
 
 

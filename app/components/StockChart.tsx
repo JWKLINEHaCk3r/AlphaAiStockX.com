@@ -58,7 +58,11 @@ interface StockChartProps {
 
 
 
+
+
   selectedStock: string;
+
+
 
 
 
@@ -102,6 +106,8 @@ interface ChartDataPoint {
 
 
 
+
+
   time: number;
   price: number;
   volume: number;
@@ -125,9 +131,13 @@ interface ChartDataPoint {
 
 
 
+
+
 }
 
 interface StockInfo {
+
+
 
 
 
@@ -178,9 +188,13 @@ interface StockInfo {
 
 
 
+
+
 }
 
 interface AIPrediction {
+
+
 
 
 
@@ -205,6 +219,8 @@ interface AIPrediction {
   confidence: number;
   targetPrice: number;
   timeframe: string;
+
+
 
 
 

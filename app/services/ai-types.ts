@@ -19,7 +19,11 @@ export interface TechnicalIndicator {
 
 
 
+
+
   calculate: (...args: any[]) => number | object;
+
+
 
 
 
@@ -63,6 +67,8 @@ export interface HistoricalDataPoint {
 
 
 
+
+
   price: number;
   volume: number;
   timestamp: string | Date;
@@ -73,6 +79,8 @@ export interface HistoricalDataPoint {
       signal?: number;
       histogram?: number;
     
+
+
 
 
 
@@ -162,6 +170,8 @@ export interface MarketData {
 
 
 
+
+
   symbol: string;
   price: number;
   high: number;
@@ -205,9 +215,13 @@ export interface MarketData {
 
 
 
+
+
 }
 
 export interface TradingSignal {
+
+
 
 
 
@@ -266,12 +280,16 @@ export interface TradingSignal {
 
 
 
+
+
 };
   timestamp: Date;
   validUntil?: Date;
 }
 
 export interface RiskAnalysis {
+
+
 
 
 
@@ -320,6 +338,8 @@ export interface RiskAnalysis {
 
 
 
+
+
 };
   sectorRisk?: number;
   liquidityRisk?: number;
@@ -329,6 +349,8 @@ export interface RiskAnalysis {
 }
 
 export interface PortfolioMetrics {
+
+
 
 
 
@@ -365,6 +387,8 @@ export interface PortfolioMetrics {
       unrealizedPnL: number;
       unrealizedPnLPercent: number;
     
+
+
 
 
 
@@ -431,6 +455,8 @@ export interface AIModelPrediction {
 
 
 
+
+
   symbol: string;
   action: 'BUY' | 'SELL' | 'HOLD';
   confidence: number;
@@ -465,6 +491,8 @@ export interface AIModelPrediction {
 
 
 
+
+
 };
   probability: {
     up: number;
@@ -476,6 +504,8 @@ export interface AIModelPrediction {
 }
 
 export interface MarketSentiment {
+
+
 
 
 
@@ -529,6 +559,8 @@ export interface MarketSentiment {
 
 
 
+
+
 };
   trending: boolean;
   volume: number;
@@ -556,12 +588,16 @@ export interface TradingStrategy {
 
 
 
+
+
   id: string;
   name: string;
   description: string;
   type: 'MOMENTUM' | 'MEAN_REVERSION' | 'ARBITRAGE' | 'TREND_FOLLOWING' | 'PAIRS' | 'ML_BASED';
   status: 'ACTIVE' | 'INACTIVE' | 'BACKTESTING';
   parameters: { [key: string]: any;
+
+
 
 
 
@@ -628,6 +664,8 @@ export interface Trade {
 
 
 
+
+
   id: string;
   symbol: string;
   side: 'BUY' | 'SELL';
@@ -646,6 +684,8 @@ export interface Trade {
   filledQuantity?: number;
   reason?: string;
   metadata?: { [key: string]: any;
+
+
 
 
 
@@ -689,6 +729,8 @@ export interface AlertConfig {
 
 
 
+
+
   id: string;
   type: 'PRICE' | 'VOLUME' | 'TECHNICAL' | 'NEWS' | 'PORTFOLIO';
   symbol?: string;
@@ -697,6 +739,8 @@ export interface AlertConfig {
     value: number;
     field: string;
   
+
+
 
 
 
@@ -746,11 +790,15 @@ export interface BacktestResult {
 
 
 
+
+
   strategyId: string;
   period: {
     start: Date;
     end: Date;
   
+
+
 
 
 
@@ -826,6 +874,8 @@ export interface NewsArticle {
 
 
 
+
+
   id: string;
   title: string;
   summary: string;
@@ -840,6 +890,8 @@ export interface NewsArticle {
   url: string;
   imageUrl?: string;
   relevanceScore: number;
+
+
 
 
 
@@ -883,6 +935,8 @@ export interface EconomicIndicator {
 
 
 
+
+
   name: string;
   value: number;
   previousValue?: number;
@@ -896,6 +950,8 @@ export interface EconomicIndicator {
   country: string;
   category: string;
   impact: number; // -1 to 1;
+
+
 
 
 

@@ -107,8 +107,12 @@ interface InvestorProfileProps {
 
 
 
+
+
   onSwitchToOwner?: () => void;
   onSwitchToAdmin?: () => void;
+
+
 
 
 

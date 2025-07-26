@@ -97,6 +97,8 @@ interface User {
 
 
 
+
+
   id: number;
   name: string;
   email: string;
@@ -112,6 +114,8 @@ interface User {
   location: string;
   phone: string;
   verified: boolean;
+
+
 
 
 
@@ -155,7 +159,11 @@ interface EnhancedAdminDashboardProps {
 
 
 
+
+
   onSwitchToOwner: () => void;
+
+
 
 
 

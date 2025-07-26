@@ -1,3 +1,4 @@
+import { Alert } from "../../components/ui/alert";
 import {
   Position,;
   TechnicalIndicators,;
@@ -6,8 +7,7 @@ import {
   SupportResistance,;
   OptimalAllocations,;
   RebalanceAction,;
-} from '../types/trading-types';\n\nimport { Alert } from '@/components/ui/alert';
-import type {
+} from '../types/trading-types';\n\nimport type {
   MarketData,;
   NewsItem,;
   TradingPattern,;

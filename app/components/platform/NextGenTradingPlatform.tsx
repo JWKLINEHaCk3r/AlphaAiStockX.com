@@ -192,6 +192,8 @@ interface User {
 
 
 
+
+
   id: string;
   username: string;
   email: string;
@@ -244,9 +246,13 @@ interface User {
 
 
 
+
+
 }
 
 interface TradingSignal {
+
+
 
 
 
@@ -310,9 +316,13 @@ interface TradingSignal {
 
 
 
+
+
 }
 
 interface TechnicalData {
+
+
 
 
 
@@ -355,6 +365,8 @@ interface TechnicalData {
 
 
 
+
+
 };
   volume: number;
   support: number;
@@ -364,6 +376,8 @@ interface TechnicalData {
 }
 
 interface SocialPost {
+
+
 
 
 
@@ -418,6 +432,8 @@ interface SocialPost {
 
 
 
+
+
 };
   type: 'signal' | 'analysis' | 'education' | 'discussion';
   visibility: 'public' | 'followers' | 'premium';
@@ -433,6 +449,8 @@ interface SocialPost {
 }
 
 interface Comment {
+
+
 
 
 
@@ -479,9 +497,13 @@ interface Comment {
 
 
 
+
+
 }
 
 interface Portfolio {
+
+
 
 
 
@@ -543,9 +565,13 @@ interface Portfolio {
 
 
 
+
+
 }
 
 interface Position {
+
+
 
 
 
@@ -598,9 +624,13 @@ interface Position {
 
 
 
+
+
 }
 
 interface WatchlistItem {
+
+
 
 
 
@@ -649,9 +679,13 @@ interface WatchlistItem {
 
 
 
+
+
 }
 
 interface Alert {
+
+
 
 
 
@@ -697,9 +731,13 @@ interface Alert {
 
 
 
+
+
 }
 
 interface AIModel {
+
+
 
 
 
@@ -759,9 +797,13 @@ interface AIModel {
 
 
 
+
+
 }
 
 interface LiveMarketData {
+
+
 
 
 
@@ -817,9 +859,13 @@ interface LiveMarketData {
 
 
 
+
+
 }
 
 interface TradingRoom {
+
+
 
 
 
@@ -869,9 +915,13 @@ interface TradingRoom {
 
 
 
+
+
 }
 
 interface ChatMessage {
+
+
 
 
 
@@ -917,6 +967,8 @@ interface ChatMessage {
 
 
 
+
+
 }
 
 interface Reaction {
@@ -940,8 +992,12 @@ interface Reaction {
 
 
 
+
+
   emoji: string;
   users: User[];
+
+
 
 
 
@@ -985,7 +1041,11 @@ interface NextGenPlatformProps {
 
 
 
+
+
   user: User;
+
+
 
 
 
@@ -1009,6 +1069,8 @@ interface NextGenPlatformProps {
 }
 
 interface AISignal {
+
+
 
 
 
@@ -1060,9 +1122,13 @@ interface AISignal {
 
 
 
+
+
 }
 
 interface Portfolio {
+
+
 
 
 
@@ -1111,9 +1177,13 @@ interface Portfolio {
 
 
 
+
+
 }
 
 interface SocialPost {
+
+
 
 
 
@@ -1150,6 +1220,8 @@ interface SocialPost {
     targetPrice: number;
     reasoning: string;
   
+
+
 
 
 
@@ -1369,7 +1441,7 @@ export default function NextGenTradingPlatform() {
     // WebSocket connection for real-time updates;
     const ws = new WebSocket('wss://api.alphaaistockx.com/ws');
 
-    ws.onmessage = event => {
+    ws.onmessage = (event: any) => {
       const data = JSON.parse(event.data);
 
       switch (data.type) {
@@ -1525,7 +1597,7 @@ export default function NextGenTradingPlatform() {
         </CardHeader>;
         <CardContent>;
           <div className="space-y-3">;
-            {tradingSignals.slice(0, 5).map(signal => (;
+            {tradingSignals.slice(0, 5).map((signal: any) => (;
               <div;
                 key={signal.id}
                 className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700/50";
@@ -1581,7 +1653,7 @@ export default function NextGenTradingPlatform() {
           </CardHeader>;
           <CardContent>;
             <div className="space-y-4">;
-              {portfolios.map(portfolio => (;
+              {portfolios.map((portfolio: any) => (;
                 <div key={portfolio.id} className="p-4 bg-gray-800/30 rounded-lg">;
                   <div className="flex items-center justify-between mb-2">;
                     <h4 className="text-white font-medium">{portfolio.name}</h4>;
@@ -1712,7 +1784,7 @@ export default function NextGenTradingPlatform() {
       </Card>;
       {/* Social Feed */}
       <div className="space-y-4">;
-        {socialFeed.map(post => (;
+        {socialFeed.map((post: any) => (;
           <Card key={post.id} className="bg-gray-900/50 border-gray-700/50">;
             <CardContent className="p-6">;
               <div className="flex items-start space-x-4">;
@@ -1735,7 +1807,7 @@ export default function NextGenTradingPlatform() {
                   <p className="text-gray-300 mb-3">{post.content}</p>;
                   {post.symbols.length > 0 && (;
                     <div className="flex flex-wrap gap-2 mb-3">;
-                      {post.symbols.map(symbol => (;
+                      {post.symbols.map((symbol: any) => (;
                         <Badge;
                           key={symbol}
                           variant="outline";

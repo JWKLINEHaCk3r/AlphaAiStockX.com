@@ -72,12 +72,16 @@ interface BotSettings {
 
 
 
+
+
   maxDailyLoss: number;
   maxDrawdown: number;
   maxPositionSize: number;
   riskPerTrade: number;
   emergencyStop: boolean;
   maxConcurrentTrades: number;
+
+
 
 
 
@@ -121,9 +125,13 @@ interface BotStats {
 
 
 
+
+
   dailyPnL: number;
   accountBalance: number;
   activeTrades: number;
+
+
 
 
 
@@ -167,9 +175,13 @@ interface RiskControlsProps {
 
 
 
+
+
   botSettings: BotSettings;
   setBotSettings: (updater: (prev: BotSettings) => BotSettings) => void;
   botStats: BotStats;
+
+
 
 
 

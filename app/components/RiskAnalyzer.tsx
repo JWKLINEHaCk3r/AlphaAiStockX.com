@@ -69,9 +69,13 @@ interface ValueAtRisk {
 
 
 
+
+
   oneDay: number;
   oneWeek: number;
   oneMonth: number;
+
+
 
 
 
@@ -115,6 +119,8 @@ interface StressTest {
 
 
 
+
+
   scenario: string;
   portfolioImpact: number;
   probability: number;
@@ -138,9 +144,13 @@ interface StressTest {
 
 
 
+
+
 }
 
 interface CorrelationRisk {
+
+
 
 
 
@@ -185,9 +195,13 @@ interface CorrelationRisk {
 
 
 
+
+
 }
 
 interface RiskFactor {
+
+
 
 
 
@@ -231,9 +245,13 @@ interface RiskFactor {
 
 
 
+
+
 }
 
 interface HedgingStrategy {
+
+
 
 
 
@@ -278,9 +296,13 @@ interface HedgingStrategy {
 
 
 
+
+
 }
 
 interface RiskMetrics {
+
+
 
 
 
@@ -328,9 +350,13 @@ interface RiskMetrics {
 
 
 
+
+
 }
 
 interface ValueAtRisk {
+
+
 
 
 
@@ -374,9 +400,13 @@ interface ValueAtRisk {
 
 
 
+
+
 }
 
 interface StressTest {
+
+
 
 
 
@@ -420,9 +450,13 @@ interface StressTest {
 
 
 
+
+
 }
 
 interface CorrelationRisk {
+
+
 
 
 
@@ -467,9 +501,13 @@ interface CorrelationRisk {
 
 
 
+
+
 }
 
 interface RiskFactor {
+
+
 
 
 
@@ -515,9 +553,13 @@ interface RiskFactor {
 
 
 
+
+
 }
 
 interface HedgingStrategy {
+
+
 
 
 
@@ -563,9 +605,13 @@ interface HedgingStrategy {
 
 
 
+
+
 }
 
 interface RiskMetrics {
+
+
 
 
 
@@ -594,6 +640,8 @@ interface RiskMetrics {
   riskFactors: RiskFactor[];
   recommendations: string[];
   hedgingStrategies: HedgingStrategy[];
+
+
 
 
 

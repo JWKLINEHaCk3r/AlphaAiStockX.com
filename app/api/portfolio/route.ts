@@ -27,6 +27,8 @@ interface UserSession {
 
 
 
+
+
   user?: {
     id?: string;
     email?: string;
@@ -51,11 +53,15 @@ interface UserSession {
 
 
 
+
+
 };
 }
 
 // Portfolio data interfaces;
 interface PortfolioData {
+
+
 
 
 
@@ -107,9 +113,13 @@ interface PortfolioData {
 
 
 
+
+
 }
 
 interface PositionData {
+
+
 
 
 
@@ -141,6 +151,8 @@ interface PositionData {
   side: 'LONG' | 'SHORT';
   changeToday: number;
   changeTodayPercent?: number;
+
+
 
 
 
@@ -242,7 +254,7 @@ export async function GET(request: NextRequest) {
       dayPnLPercent: portfolioSummary.dayPnLPercent,;
       totalPnL: portfolioSummary.totalPnL,;
       totalPnLPercent: portfolioSummary.totalPnLPercent,;
-      positions: portfolioSummary.positions.map(position => ({
+      positions: portfolioSummary.positions.map((position: any) => ({
         symbol: position.symbol,;
         quantity: position.quantity,;
         marketValue: position.marketValue,;

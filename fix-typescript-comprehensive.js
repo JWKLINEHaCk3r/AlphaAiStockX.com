@@ -1,8 +1,6 @@
-import React from 'react';
-#!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Common interface fixes and type improvements
 const fixes = [

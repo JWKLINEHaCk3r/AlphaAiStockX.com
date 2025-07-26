@@ -32,6 +32,8 @@ interface PerformanceMetric {
 
 
 
+
+
   timestamp: number;
   endpoint: string;
   method: string;
@@ -41,6 +43,8 @@ interface PerformanceMetric {
   error?: string;
   memoryUsage: number;
   cpuUsage?: number;
+
+
 
 
 
@@ -86,6 +90,8 @@ interface APIMetrics {
 
 
 
+
+
   totalRequests: number;
   successfulRequests: number;
   failedRequests: number;
@@ -93,6 +99,8 @@ interface APIMetrics {
   slowQueries: number;
   errorRate: number;
   lastUpdated: number;
+
+
 
 
 

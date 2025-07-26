@@ -1,16 +1,17 @@
+// ...existing code...
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '../../components/ui/card';
 import { Tabs } from '../../components/ui/tabs';
 import { Button } from '../../components/ui/button';
 
-// Minimal interface for the trader object
+// Minimal interface for the trader object;
 interface Trader {
   runAIAnalysis: (symbols: string[]) => Promise<Analysis>;
   getPortfolio: () => Portfolio;
   executeAITrading: (symbols: string[]) => Promise<unknown>;
   emergencyStop: () => void;
 }
-// Trading interfaces;
+// Trading interfaces
 interface TradingSignal {
   symbol: string;
   action: string;
@@ -86,8 +87,43 @@ export default function AITradingDashboard() {
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
   const [riskLevel, setRiskLevel] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
 
+  // Mock implementation for development/demo;
+  // Mock implementation for development/demo;
   const initializeTrader = useCallback(async () => {
-    // TODO: Add implementation logic for initializeTrader
+    try {
+      // Simulate async trader initialization;
+      const mockTrader: Trader = {
+        runAIAnalysis: async (symbols: string[]) => ({
+          signals: symbols.map((symbol: string) => ({ symbol, action: 'BUY', confidence: 0.8 })),
+          marketCondition: 'Bullish',
+          volatility: 0.2,
+          recommendations: ['Diversify portfolio'],
+          riskAnalysis: { riskScore: 3, volatility: 0.2 },
+        }),
+        getPortfolio: () => ({
+          totalValue: 100000,
+          cash: 50000,
+          holdings: { AAPL: { shares: 10, avgPrice: 150 } },
+          trades: [],
+        }),
+        executeAITrading: async (symbols: string[]) => ({
+          success: true,
+          message: 'Trades executed',
+          trades: symbols.map((symbol: string) => ({
+            symbol,
+            action: 'BUY',
+            shares: 1,
+            price: 100,
+            time: new Date().toISOString(),
+            reason: 'AI signal',
+          })),
+        }),
+        emergencyStop: () => {},
+      }
+      setState(prev => ({ ...prev, trader: mockTrader, loading: false }));
+    } catch {
+      setState(prev => ({ ...prev, error: 'Failed to initialize trader', loading: false }));
+    }
   }, []);
   useEffect(() => {
     initializeTrader();
@@ -151,6 +187,18 @@ export default function AITradingDashboard() {
               <h2 className="text-xl font-semibold">Initializing AI Trading Engine...</h2>
             </div>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (state.error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-black text-white">
+        <div className="bg-gray-900 p-8 rounded shadow-lg text-center">
+          <h2 className="text-2xl font-bold mb-4">Error</h2>
+          <p className="mb-4">{state.error}</p>
+          <Button onClick={() => window.location.reload()} className="bg-blue-600 hover:bg-blue-700">Reload</Button>
         </div>
       </div>
     );

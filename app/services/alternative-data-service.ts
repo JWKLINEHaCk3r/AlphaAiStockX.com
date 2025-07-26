@@ -63,8 +63,12 @@ interface SatelliteData {
 
 
 
+
+
   yearOverYearChange: number;
   confidence: number;
+
+
 
 
 
@@ -108,7 +112,11 @@ interface CreditCardData {
 
 
 
+
+
   yearOverYearChange: number;
+
+
 
 
 
@@ -152,7 +160,11 @@ interface WebTrafficData {
 
 
 
+
+
   yearOverYearChange: number;
+
+
 
 
 
@@ -196,7 +208,11 @@ interface SocialSentimentData {
 
 
 
+
+
   overallSentiment: number;
+
+
 
 
 
@@ -240,7 +256,11 @@ interface MobileAppData {
 
 
 
+
+
   yearOverYearGrowth: number;
+
+
 
 
 
@@ -284,7 +304,11 @@ interface GeolocationData {
 
 
 
+
+
   yearOverYearChange: number;
+
+
 
 
 

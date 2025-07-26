@@ -142,6 +142,8 @@ interface User {
 
 
 
+
+
   name?: string;
   bio?: string;
   location?: string;
@@ -156,6 +158,8 @@ interface User {
   accentColor?: string;
   avatar?: string;
   subscription?: string;
+
+
 
 
 
@@ -199,8 +203,12 @@ interface CustomizableProfileProps {
 
 
 
+
+
   user: User;
   onUpdateProfile: (data: any) => void;
+
+
 
 
 

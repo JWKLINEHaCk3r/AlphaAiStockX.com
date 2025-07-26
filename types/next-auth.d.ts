@@ -24,6 +24,8 @@ declare module 'next-auth' {
 
 
 
+
+
     user: {
       id: string;
       email: string;
@@ -52,10 +54,14 @@ declare module 'next-auth' {
 
 
 
+
+
 };
   }
 
   interface User {
+
+
 
 
 
@@ -103,6 +109,8 @@ declare module 'next-auth' {
 
 
 
+
+
 }
 }
 
@@ -129,10 +137,14 @@ declare module 'next-auth/jwt' {
 
 
 
+
+
     userId?: string;
     tier?: string;
     status?: string;
   
+
+
 
 
 

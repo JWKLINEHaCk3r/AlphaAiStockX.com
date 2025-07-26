@@ -137,6 +137,8 @@ interface PatternMatch {
 
 
 
+
+
   symbol: string;
   pattern: string;
   patternId: string;
@@ -177,9 +179,13 @@ interface PatternMatch {
 
 
 
+
+
 }
 
 interface SignalData {
+
+
 
 
 
@@ -235,9 +241,13 @@ interface SignalData {
 
 
 
+
+
 }
 
 interface PatternStats {
+
+
 
 
 
@@ -263,6 +273,8 @@ interface PatternStats {
     accuracy: number;
     avgReturn: number;
   
+
+
 
 
 

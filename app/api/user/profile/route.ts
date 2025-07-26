@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Calculate portfolio metrics;
-    const portfolioMetrics = user.portfolios.map(portfolio => ({
+    const portfolioMetrics = user.portfolios.map((portfolio: any) => ({
       id: portfolio.id,;
       name: portfolio.name,;
       totalValue: portfolio.totalValue,;

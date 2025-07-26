@@ -1,3 +1,4 @@
+import { Alert } from "../../../components/ui/alert";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -111,10 +112,14 @@ interface ConversationItem {
 
 
 
+
+
   id: number;
   role: string;
   message: string;
   timestamp: Date;
+
+
 
 
 
@@ -159,9 +164,13 @@ declare global {
 
 
 
+
+
     SpeechRecognition: any;
     webkitSpeechRecognition: any;
   
+
+
 
 
 
@@ -205,8 +214,12 @@ interface SpeechRecognitionAlternative {
 
 
 
+
+
   transcript: string;
   confidence: number;
+
+
 
 
 
@@ -230,6 +243,8 @@ interface SpeechRecognitionAlternative {
 }
 
 interface SpeechRecognitionResult {
+
+
 
 
 
@@ -274,6 +289,8 @@ interface SpeechRecognitionResult {
 
 
 
+
+
 }
 
 interface SpeechRecognitionResultList {
@@ -297,9 +314,13 @@ interface SpeechRecognitionResultList {
 
 
 
+
+
   readonly length: number;
   item(index: number): SpeechRecognitionResult;
   [index: number]: SpeechRecognitionResult;
+
+
 
 
 
@@ -648,7 +669,7 @@ export default function AIVoiceAssistant() {
                 </div>;
                 <div className="text-purple-400 font-medium">AI Processing...</div>;
                 <div className="flex space-x-1">;
-                  {[0, 1, 2].map(i => (;
+                  {[0, 1, 2].map((i: any) => (;
                     <div;
                       key={i}
                       className="w-2 h-2 bg-purple-400 rounded-full animate-bounce";

@@ -59,11 +59,15 @@ interface PortfolioStock {
 
 
 
+
+
   symbol: string;
   weight: number;
   currentPrice: number;
   expectedReturn: number;
   risk: number;
+
+
 
 
 
@@ -108,6 +112,8 @@ interface OptimizationResult {
 
 
 
+
+
   expectedReturn: number;
   volatility: number;
   risk: number;
@@ -121,6 +127,8 @@ interface OptimizationResult {
     reason: string;
     impact: string;
   
+
+
 
 
 
@@ -216,7 +224,7 @@ export default function PortfolioOptimizer() {
             impact: 'Low',;
           },;
         ],;
-        allocations: portfolio.map(stock => ({
+        allocations: portfolio.map((stock: any) => ({
           symbol: stock.symbol,;
           currentWeight: stock.weight,;
           optimizedWeight: stock.weight, // Placeholder;

@@ -84,6 +84,8 @@ interface MarketData {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
@@ -112,9 +114,13 @@ interface MarketData {
 
 
 
+
+
 }
 
 interface MarketStats {
+
+
 
 
 
@@ -161,6 +167,8 @@ interface MarketStats {
 
 
 
+
+
 }
 
 export default function RealTimeData() {
@@ -181,7 +189,7 @@ export default function RealTimeData() {
       const symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'META', 'NFLX'];
       const sentiments: ('bullish' | 'bearish' | 'neutral')[] = ['bullish', 'bearish', 'neutral'];
       
-      return symbols.map(symbol => ({
+      return symbols.map((symbol: any) => ({
         symbol,;
         price: 100 + Math.random() * 400,;
         change: (Math.random() - 0.5) * 20,;

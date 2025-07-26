@@ -60,6 +60,8 @@ interface StockSignal {
 
 
 
+
+
   symbol: string;
   signal: 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
   confidence: number;
@@ -72,6 +74,8 @@ interface StockSignal {
   riskLevel: 'LOW' | 'MODERATE' | 'HIGH';
   timeframe: string;
   timestamp: string;
+
+
 
 
 
@@ -143,7 +147,7 @@ export default function AISignalBotDashboard() {
       `/api/ai-tools/signal-bot?symbol=${watchlist[0]}&stream=true`;
     );
 
-    eventSource.onmessage = event => {
+    eventSource.onmessage = (event: any) => {
       const newSignal = JSON.parse(event.data);
       setSignals(prev => [newSignal, ...prev.slice(0, 19)]); // Keep last 20 signals;
       setLastUpdate(new Date());
@@ -251,7 +255,7 @@ export default function AISignalBotDashboard() {
         </CardHeader>;
         <CardContent>;
           <div className="flex flex-wrap gap-2 mb-4">;
-            {watchlist.map(symbol => (;
+            {watchlist.map((symbol: any) => (;
               <Badge;
                 key={symbol}
                 variant="outline";

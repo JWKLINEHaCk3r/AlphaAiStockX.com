@@ -50,9 +50,13 @@ interface TradingStrategiesProps {
 
 
 
+
+
   activeStrategies: TradingStrategy[];
   setActiveStrategies: (strategies: TradingStrategy[] | ((prev: TradingStrategy[]) => TradingStrategy[])) => void;
   botStatus: string;
+
+
 
 
 
@@ -109,6 +113,8 @@ interface TradingStrategy {
 
 
 
+
+
   id: number;
   name: string;
   description: string;
@@ -119,6 +125,8 @@ interface TradingStrategy {
   timeframe: string;
   allocation: number;
   status: string;
+
+
 
 
 

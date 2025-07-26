@@ -58,8 +58,12 @@ interface TradeHistoryProps {
 
 
 
+
+
   recentTrades: Trade[];
   botStats: BotStats;
+
+
 
 
 

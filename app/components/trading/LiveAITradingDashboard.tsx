@@ -1,3 +1,4 @@
+import { Alert } from "../../../components/ui/alert";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -92,9 +93,6 @@ import { Button } from "../../../components/ui/button";
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import {
   TrendingUp,;
   TrendingDown,;
@@ -109,6 +107,8 @@ import {
 } from 'lucide-react';
 
 interface TradingSignal {
+
+
 
 
 
@@ -159,10 +159,14 @@ interface TradingSignal {
 
 
 
+
+
 };
 }
 
 interface PortfolioStatus {
+
+
 
 
 
@@ -209,9 +213,13 @@ interface PortfolioStatus {
 
 
 
+
+
 }
 
 interface Position {
+
+
 
 
 
@@ -258,9 +266,13 @@ interface Position {
 
 
 
+
+
 }
 
 interface PerformanceMetrics {
+
+
 
 
 
@@ -309,6 +321,8 @@ interface PerformanceMetrics {
 
 
 
+
+
 }
 
 export default function LiveAITradingDashboard() {
@@ -331,7 +345,7 @@ export default function LiveAITradingDashboard() {
       setError(null);
     };
 
-    ws.onmessage = event => {
+    ws.onmessage = (event: any) => {
       try {
         const data = JSON.parse(event.data);
 
@@ -348,7 +362,7 @@ export default function LiveAITradingDashboard() {
       setIsConnected(false);
     };
 
-    ws.onerror = error => {
+    ws.onerror = (error: any) => {
       setError('WebSocket connection failed');
       setIsConnected(false);
     };

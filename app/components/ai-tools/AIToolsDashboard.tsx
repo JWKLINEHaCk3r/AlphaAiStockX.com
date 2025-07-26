@@ -63,11 +63,15 @@ interface AIToolStats {
 
 
 
+
+
   signalsGenerated: number;
   chatMessages: number;
   iposAnalyzed: number;
   portfoliosOptimized: number;
   predictionsAccuracy: number;
+
+
 
 
 
@@ -111,12 +115,16 @@ interface QuickAction {
 
 
 
+
+
   id: string;
   title: string;
   description: string;
   icon: React.ReactNode;
   action: () => void;
   badge?: string;
+
+
 
 
 
@@ -327,7 +335,7 @@ export default function AIToolsDashboard() {
         </CardHeader>;
         <CardContent>;
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">;
-            {quickActions.map(action => (;
+            {quickActions.map((action: any) => (;
               <div;
                 key={action.id}
                 onClick={action.action}
@@ -364,7 +372,7 @@ export default function AIToolsDashboard() {
         </CardHeader>;
         <CardContent>;
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-            {aiTools.map(tool => (;
+            {aiTools.map((tool: any) => (;
               <div;
                 key={tool.id}
                 className="border rounded-lg p-6 hover:shadow-lg transition-shadow";

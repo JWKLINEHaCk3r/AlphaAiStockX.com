@@ -96,6 +96,8 @@ interface UserProfile {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
@@ -130,9 +132,13 @@ interface UserProfile {
 
 
 
+
+
 }
 
 interface SystemAlert {
+
+
 
 
 
@@ -178,9 +184,13 @@ interface SystemAlert {
 
 
 
+
+
 }
 
 interface LiveData {
+
+
 
 
 
@@ -210,6 +220,8 @@ interface LiveData {
     memoryUsage?: number;
     cpuUsage?: number;
   
+
+
 
 
 

@@ -1,3 +1,4 @@
+import { Select } from "../../../components/ui/select";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -59,6 +60,8 @@ interface PatternMatch {
 
 
 
+
+
   type: string;
   confidence: number;
   description: string;
@@ -85,9 +88,13 @@ interface PatternMatch {
 
 
 
+
+
 }
 
 interface PredictionResult {
+
+
 
 
 
@@ -142,6 +149,8 @@ interface PredictionResult {
 
 
 
+
+
 };
   aiInsights: string[];
   recommendation: 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
@@ -152,7 +161,7 @@ export default function MarketPredictorDashboard() {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e: any) => {
         setUploadedChart(e.target?.result as string);
       };
       reader.readAsDataURL(file);

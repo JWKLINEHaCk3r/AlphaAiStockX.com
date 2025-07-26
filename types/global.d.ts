@@ -22,8 +22,12 @@ declare global {
 
 
 
+
+
       [elemName: string]: any;
     
+
+
 
 
 
@@ -71,6 +75,8 @@ export interface MarketStock {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
@@ -96,9 +102,13 @@ export interface MarketStock {
 
 
 
+
+
 }
 
 export interface AIBeing {
+
+
 
 
 
@@ -147,9 +157,13 @@ export interface AIBeing {
 
 
 
+
+
 }
 
 export interface Trade {
+
+
 
 
 
@@ -199,9 +213,13 @@ export interface Trade {
 
 
 
+
+
 }
 
 export interface Portfolio {
+
+
 
 
 
@@ -247,9 +265,13 @@ export interface Portfolio {
 
 
 
+
+
 }
 
 export interface Position {
+
+
 
 
 
@@ -276,6 +298,8 @@ export interface Position {
   avgPrice: number;
   currentPrice: number;
   unrealizedPL: number;
+
+
 
 
 

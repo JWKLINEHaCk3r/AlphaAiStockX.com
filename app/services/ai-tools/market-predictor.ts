@@ -22,6 +22,8 @@ interface ChartAnalysis {
 
 
 
+
+
   id: string;
   imageUrl: string;
   symbol: string;
@@ -54,9 +56,13 @@ interface ChartAnalysis {
 
 
 
+
+
 }
 
 interface TechnicalPattern {
+
+
 
 
 
@@ -103,9 +109,13 @@ interface TechnicalPattern {
 
 
 
+
+
 }
 
 interface PriceLevel {
+
+
 
 
 
@@ -150,9 +160,13 @@ interface PriceLevel {
 
 
 
+
+
 }
 
 interface MarketPrediction {
+
+
 
 
 
@@ -201,6 +215,8 @@ interface MarketPrediction {
 
 
 
+
+
 }
 
 interface MarketContext {
@@ -224,9 +240,13 @@ interface MarketContext {
 
 
 
+
+
   vixLevel: number;
   marketSentiment: 'FEAR' | 'GREED' | 'NEUTRAL';
   sectorRotation: { [sector: string]: number;
+
+
 
 
 
@@ -272,6 +292,8 @@ interface EconomicIndicator {
 
 
 
+
+
   name: string;
   value: number;
   change: number;
@@ -297,9 +319,13 @@ interface EconomicIndicator {
 
 
 
+
+
 }
 
 interface NewsEvent {
+
+
 
 
 
@@ -344,9 +370,13 @@ interface NewsEvent {
 
 
 
+
+
 }
 
 interface MultiModalAnalysis {
+
+
 
 
 
@@ -394,6 +424,8 @@ interface MultiModalAnalysis {
 
 
 
+
+
 }
 
 export class AIMarketPredictor {
@@ -403,7 +435,7 @@ export class AIMarketPredictor {
 
   constructor() {
     this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,;
+      apiKey: process.env.OPENAI_API_KEY;
     });
     this.initializePatternDatabase();
   }
@@ -416,54 +448,53 @@ export class AIMarketPredictor {
           name: 'Double Bottom',;
           type: 'BULLISH',;
           confidence: 0.8,;
-          description: 'Price forms two low points at similar levels, indicating strong support',;
+          description: 'Price forms two low points at similar levels, indicating strong support';
         },;
         {
           name: 'Ascending Triangle',;
           type: 'BULLISH',;
           confidence: 0.75,;
-          description: 'Series of higher lows with consistent resistance level',;
+          description: 'Series of higher lows with consistent resistance level';
         },;
         {
           name: 'Cup and Handle',;
           type: 'BULLISH',;
           confidence: 0.85,;
-          description: 'U-shaped recovery followed by small consolidation',;
+          description: 'U-shaped recovery followed by small consolidation';
         },;
         {
           name: 'Bull Flag',;
           type: 'BULLISH',;
           confidence: 0.7,;
-          description: 'Strong upward move followed by small consolidation',;
-        },;
+          description: 'Strong upward move followed by small consolidation';
+        }
       ],;
       bearish: [;
         {
           name: 'Double Top',;
           type: 'BEARISH',;
           confidence: 0.8,;
-          description:;
-            'Price forms two high points at similar levels, indicating strong resistance',;
+          description: 'Price forms two high points at similar levels, indicating strong resistance';
         },;
         {
           name: 'Descending Triangle',;
           type: 'BEARISH',;
           confidence: 0.75,;
-          description: 'Series of lower highs with consistent support level',;
+          description: 'Series of lower highs with consistent support level';
         },;
         {
           name: 'Head and Shoulders',;
           type: 'BEARISH',;
           confidence: 0.85,;
-          description: 'Three peaks with middle peak higher than the other two',;
+          description: 'Three peaks with middle peak higher than the other two';
         },;
         {
           name: 'Bear Flag',;
           type: 'BEARISH',;
           confidence: 0.7,;
-          description: 'Strong downward move followed by small consolidation',;
-        },;
-      ],;
+          description: 'Strong downward move followed by small consolidation';
+        }
+      ];
     };
 
     Object.entries(patterns).forEach(([key, patternList]) => {
@@ -508,10 +539,10 @@ export class AIMarketPredictor {
           timeframe: ['1D', '1W', '1M', '3M'].includes(timeframe) ? (timeframe as '1D' | '1W' | '1M' | '3M') : '1D',;
           probability: visualResult.confidence,;
           keyFactors: [],;
-          riskLevel: 'MODERATE',;
+          riskLevel: 'MODERATE';
         },;
         reasoning: visualResult.reasoning,;
-        timestamp: new Date().toISOString(),;
+        timestamp: new Date().toISOString();
       };
 
       // Enhance with technical pattern recognition;
@@ -522,7 +553,7 @@ export class AIMarketPredictor {
 
       // Create market prediction;
       const prediction = await this.generateMarketPrediction(;
-        minimalAnalysis,;
+        minimalAnalysis;
         patterns,;
         keyLevels,;
         marketContext,;

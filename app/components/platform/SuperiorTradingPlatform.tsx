@@ -162,6 +162,8 @@ interface User {
 
 
 
+
+
   id: string;
   username: string;
   email: string;
@@ -205,9 +207,13 @@ interface User {
 
 
 
+
+
 }
 
 interface TradingSignal {
+
+
 
 
 
@@ -268,9 +274,13 @@ interface TradingSignal {
 
 
 
+
+
 }
 
 interface SocialPost {
+
+
 
 
 
@@ -325,10 +335,14 @@ interface SocialPost {
 
 
 
+
+
 };
 }
 
 interface Portfolio {
+
+
 
 
 
@@ -379,9 +393,13 @@ interface Portfolio {
 
 
 
+
+
 }
 
 interface Position {
+
+
 
 
 
@@ -429,9 +447,13 @@ interface Position {
 
 
 
+
+
 }
 
 interface AIModel {
+
+
 
 
 
@@ -481,6 +503,8 @@ interface AIModel {
 
 
 
+
+
 }
 
 interface NextGenPlatformProps {
@@ -504,7 +528,11 @@ interface NextGenPlatformProps {
 
 
 
+
+
   initialUser?: User;
+
+
 
 
 
@@ -1110,7 +1138,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       </Card>;
       {/* Social Feed */}
       <div className="space-y-4">;
-        {displaySocialFeed.map(post => (;
+        {displaySocialFeed.map((post: any) => (;
           <Card key={post.id} className="bg-slate-800/50 border-slate-700">;
             <CardContent className="p-6">;
               <div className="flex items-start space-x-4">;
@@ -1223,7 +1251,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
         </CardHeader>;
         <CardContent>;
           <div className="grid gap-4">;
-            {displaySignals.map(signal => (;
+            {displaySignals.map((signal: any) => (;
               <div key={signal.id} className="bg-slate-700/50 rounded-lg p-6">;
                 <div className="flex items-center justify-between mb-4">;
                   <div className="flex items-center space-x-4">;
@@ -1487,7 +1515,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
             </CardHeader>;
             <CardContent>;
               <div className="space-y-3">;
-                {orders.slice(0, 5).map(order => (;
+                {orders.slice(0, 5).map((order: any) => (;
                   <div;
                     key={order.id}
                     className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg";
@@ -1681,7 +1709,7 @@ export default function SuperiorTradingPlatform({ initialUser }: NextGenPlatform
       {/* Notifications */}
       {notifications.length > 0 && (;
         <div className="fixed top-20 right-4 space-y-2 z-50">;
-          {notifications.slice(0, 3).map(notification => (;
+          {notifications.slice(0, 3).map((notification: any) => (;
             <Alert key={notification.id} className="bg-slate-800 border-slate-600">;
               <CheckCircle className="h-4 w-4" />;
               <AlertDescription className="text-white">{notification.message}</AlertDescription>;

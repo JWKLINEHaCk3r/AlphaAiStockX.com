@@ -92,6 +92,8 @@ interface User {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
@@ -115,9 +117,13 @@ interface User {
 
 
 
+
+
 }
 
 interface Trade {
+
+
 
 
 
@@ -167,9 +173,13 @@ interface Trade {
 
 
 
+
+
 }
 
 interface MarketData {
+
+
 
 
 
@@ -218,10 +228,14 @@ interface MarketData {
 
 
 
+
+
 };
 }
 
 interface AISignal {
+
+
 
 
 
@@ -270,9 +284,13 @@ interface AISignal {
 
 
 
+
+
 }
 
 interface PremiumFeatures {
+
+
 
 
 
@@ -319,6 +337,8 @@ interface PremiumFeatures {
 
 
 
+
+
 }
 
 interface UltraFastTradingEngineProps {
@@ -342,8 +362,12 @@ interface UltraFastTradingEngineProps {
 
 
 
+
+
   user: User;
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
 
 
 

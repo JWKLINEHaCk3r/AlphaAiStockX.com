@@ -69,6 +69,8 @@ interface NewsArticle {
 
 
 
+
+
   id: number;
   title: string;
   summary: string;
@@ -78,6 +80,8 @@ interface NewsArticle {
   source: string;
   time: string;
   relevantStocks: string[];
+
+
 
 
 
@@ -121,10 +125,14 @@ interface SentimentData {
 
 
 
+
+
   bullish: number;
   bearish: number;
   neutral: number;
   avgConfidence: number;
+
+
 
 
 

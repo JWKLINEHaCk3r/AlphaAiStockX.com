@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './card.js';
+import { Card } from "./card";
 import React from 'react';
 
 export function Card({ children, className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {

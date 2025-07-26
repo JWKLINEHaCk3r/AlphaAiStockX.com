@@ -107,8 +107,12 @@ interface UserProfileProps {
 
 
 
+
+
   user: any;
   onUpdate: (user: any) => void;
+
+
 
 
 

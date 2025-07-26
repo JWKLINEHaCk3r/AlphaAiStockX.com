@@ -20,12 +20,16 @@ export interface Trade {
 
 
 
+
+
   symbol: string;
   action: 'buy' | 'sell';
   quantity: number;
   confidence: number; // 0-1;
   expectedReturn: number; // profit/loss estimate;
   price: number;
+
+
 
 
 
@@ -74,6 +78,8 @@ export interface MarketData {
 
 
 
+
+
   symbol: string;
   price: number;
   volume: number;
@@ -98,10 +104,14 @@ export interface MarketData {
 
 
 
+
+
 }>;
 }
 
 export interface RiskProfile {
+
+
 
 
 
@@ -146,6 +156,8 @@ export interface RiskProfile {
 
 
 
+
+
 }
 
 export interface Strategy {
@@ -169,9 +181,13 @@ export interface Strategy {
 
 
 
+
+
   name: string;
   description: string;
   generateSignals: (marketData: MarketData, risk: RiskProfile) => Promise<Trade[]>;
+
+
 
 
 

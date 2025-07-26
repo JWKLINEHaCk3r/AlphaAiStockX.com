@@ -84,9 +84,13 @@ interface LineOfCreditProps {
 
 
 
+
+
   availableCredit: number;
   interestRate: number;
   onBorrow: (amount: number) => void;
+
+
 
 
 

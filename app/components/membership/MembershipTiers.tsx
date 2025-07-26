@@ -80,8 +80,12 @@ interface MembershipTiersProps {
 
 
 
+
+
   currentTier: string;
   onUpgrade: (tierId: string) => void;
+
+
 
 
 
@@ -105,6 +109,8 @@ interface MembershipTiersProps {
 }
 
 interface TierFeatures {
+
+
 
 
 
@@ -157,9 +163,13 @@ interface TierFeatures {
 
 
 
+
+
 }
 
 interface Tier {
+
+
 
 
 
@@ -186,6 +196,8 @@ interface Tier {
   monthlyPrice: number;
   yearlyPrice: number;
   icon: React.ComponentType<{ className?: string;
+
+
 
 
 

@@ -1,3 +1,8 @@
+import { Alert } from "../../../components/ui/alert";
+import { Badge } from "../../../components/ui/badge";
+import { Progress } from "../../../components/ui/progress";
+import { Switch } from "../../../components/ui/switch";
+import { Card } from "../../../components/ui/card";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -11,10 +16,6 @@ import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Switch } from '@/components/ui/switch';
 import {
   AIStockPrediction,;
   SportsEvent,;

@@ -126,8 +126,12 @@ interface SubscriptionPlansProps {
 
 
 
+
+
   currentPlan: string;
   onSelectPlan: (plan: string) => void;
+
+
 
 
 

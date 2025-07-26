@@ -1,4 +1,7 @@
 import { createMocks } from 'node-mocks-http';
+jest.mock('next-auth', () => ({
+  getServerSession: jest.fn(),;
+}));
 import { getServerSession } from 'next-auth';
 import { handleTradingOrders, handlePortfolio, handleMarketData } from '@/lib/api-security';
 import { SecurityAudit, RateLimiter } from '@/lib/security';

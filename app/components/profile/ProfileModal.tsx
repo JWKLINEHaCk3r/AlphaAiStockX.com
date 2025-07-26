@@ -26,10 +26,14 @@ interface User {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
   tier: string;
+
+
 
 
 
@@ -73,11 +77,15 @@ interface ProfileModalProps {
 
 
 
+
+
   isOpen: boolean;
   onClose: () => void;
   user: User;
   onLogout: () => void;
   onOpenSubscription: () => void;
+
+
 
 
 

@@ -105,12 +105,16 @@ interface FeatureDetails {
 
 
 
+
+
   overview: string;
   features: string[];
   benefits: string[];
   stats: {
     [key: string]: string | undefined;
   
+
+
 
 
 
@@ -166,6 +170,8 @@ interface LearnMoreModalProps {
 
 
 
+
+
   feature: {
     title: string;
     desc: string;
@@ -173,6 +179,8 @@ interface LearnMoreModalProps {
     gradient: string;
     details: FeatureDetails;
   
+
+
 
 
 
@@ -446,7 +454,7 @@ export default function LearnMoreModal({ feature, children }: LearnMoreModalProp
                     refund within 30 days.;
                   </p>;
                   <div className="flex justify-center gap-1 mt-4">;
-                    {[1, 2, 3, 4, 5].map(star => (;
+                    {[1, 2, 3, 4, 5].map((star: any) => (;
                       <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />;
                     ))}
                   </div>;

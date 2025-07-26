@@ -1,3 +1,4 @@
+import { Label } from "./label";
 import React from 'react';
 import * as React from 'react';
 

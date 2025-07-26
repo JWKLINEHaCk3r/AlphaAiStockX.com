@@ -74,6 +74,8 @@ interface StockData {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
@@ -86,6 +88,8 @@ interface StockData {
     confidence: number;
     strength: number;
   
+
+
 
 
 
@@ -129,10 +133,14 @@ interface OptimizedStockCardProps {
 
 
 
+
+
   stock: StockData;
   onTrade?: (symbol: string, action: 'buy' | 'sell') => void;
   onAnalyze?: (symbol: string) => void;
   className?: string;
+
+
 
 
 

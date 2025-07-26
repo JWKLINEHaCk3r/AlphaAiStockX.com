@@ -60,6 +60,8 @@ interface PortfolioPosition {
 
 
 
+
+
   symbol: string;
   name: string;
   currentAllocation: number;
@@ -89,9 +91,13 @@ interface PortfolioPosition {
 
 
 
+
+
 }
 
 interface OptimizationResult {
+
+
 
 
 
@@ -140,9 +146,13 @@ interface OptimizationResult {
 
 
 
+
+
 }
 
 interface RebalanceAction {
+
+
 
 
 
@@ -168,6 +178,8 @@ interface RebalanceAction {
   currentShares: number;
   targetShares: number;
   dollarAmount: number;
+
+
 
 
 

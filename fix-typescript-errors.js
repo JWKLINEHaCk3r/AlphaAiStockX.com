@@ -10,14 +10,11 @@
 // Removed direct import of .tsx file for Node.js compatibility
 // Removed direct import of .tsx file for Node.js compatibility
 // Removed direct import of .tsx file for Node.js compatibility
-#!/usr/bin/env node
 // Removed duplicate and extensionful Card imports. All Card imports are now handled dynamically in the script body.
-import { CardContent } from "./components/ui/card";
-import { Card } from "./components/ui/card";
-#!/usr/bin/env node
+// Removed unused CardContent and Card imports
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Common malformed imports to fix
 const importFixes = [
@@ -142,6 +139,9 @@ function findTsxFiles(dir) {
 }
 
 // Process all TypeScript files in the app directory
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const appDir = path.join(__dirname, 'app');
 const files = findTsxFiles(appDir);
 

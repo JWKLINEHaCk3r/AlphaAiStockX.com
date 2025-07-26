@@ -1,3 +1,4 @@
+import { Alert } from "../../../components/ui/alert";
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
 import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
@@ -114,6 +115,8 @@ interface Message {
 
 
 
+
+
   id: number;
   type: 'user' | 'ai';
   content: string;
@@ -121,6 +124,8 @@ interface Message {
   mood?: string;
   priority?: string;
   confidence?: number;
+
+
 
 
 
@@ -164,10 +169,14 @@ interface AIPersonality {
 
 
 
+
+
   confidence: number;
   aggression: number;
   wisdom: number;
   loyalty: number;
+
+
 
 
 
@@ -213,7 +222,11 @@ declare global {
 
 
 
+
+
     SpeechRecognition: { new (): SpeechRecognition; prototype: SpeechRecognition;
+
+
 
 
 

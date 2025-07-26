@@ -23,12 +23,16 @@ interface UseWebSocketOptions {
 
 
 
+
+
   onOpen?: () => void;
   onMessage?: (data: any) => void;
   onError?: (error: any) => void;
   onClose?: () => void;
   reconnectInterval?: number;
   maxReconnectAttempts?: number;
+
+
 
 
 
@@ -72,9 +76,13 @@ interface WebSocketHook {
 
 
 
+
+
   sendMessage: (message: any) => void;
   readyState: number;
   isConnected: boolean;
+
+
 
 
 
@@ -155,7 +163,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
         onOpen?.();
       };
 
-      wsRef.current.onmessage = event => {
+      wsRef.current.onmessage = (event: any) => {
         try {
           const data = JSON.parse(event.data);
           onMessage?.(data);
@@ -164,7 +172,7 @@ export function useWebSocket(url: string, options: UseWebSocketOptions = {}): We
         }
       };
 
-      wsRef.current.onerror = error => {
+      wsRef.current.onerror = (error: any) => {
         console.error('WebSocket error:', error);
         onError?.(error);
       };

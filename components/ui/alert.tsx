@@ -1,3 +1,6 @@
+import { AlertTitle } from "./alert";
+import { AlertDescription } from "./alert";
+import { Alert } from "./alert";
 
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';

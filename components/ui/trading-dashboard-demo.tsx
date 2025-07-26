@@ -85,12 +85,16 @@ interface StockData {
 
 
 
+
+
   symbol: string;
   price: number;
   change: number;
   changePercent: number;
   volume: number;
   aiScore: number;
+
+
 
 
 
@@ -134,10 +138,14 @@ interface MarketSentiment {
 
 
 
+
+
   bullish: number;
   bearish: number;
   neutral: number;
   aiConfidence: number;
+
+
 
 
 

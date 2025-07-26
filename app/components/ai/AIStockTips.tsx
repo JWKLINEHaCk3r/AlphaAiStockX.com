@@ -58,6 +58,8 @@ interface StockTip {
 
 
 
+
+
   id: number;
   symbol: string;
   direction: string;
@@ -90,9 +92,13 @@ interface StockTip {
 
 
 
+
+
 }
 
 interface Prediction {
+
+
 
 
 
@@ -140,9 +146,13 @@ interface Prediction {
 
 
 
+
+
 }
 
 interface MarketInsights {
+
+
 
 
 
@@ -168,6 +178,8 @@ interface MarketInsights {
     trend: string;
     drivers: string[];
   
+
+
 
 
 
@@ -226,7 +238,11 @@ interface AIStockTipsProps {
 
 
 
+
+
   membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
+
+
 
 
 
@@ -554,7 +570,7 @@ export default function AIStockTips({ membershipLevel }: AIStockTipsProps) {
         </CardHeader>;
         <CardContent>;
           <div className="space-y-4">;
-            {predictions.map(prediction => (;
+            {predictions.map((prediction: any) => (;
               <div;
                 key={prediction.id}
                 className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30";

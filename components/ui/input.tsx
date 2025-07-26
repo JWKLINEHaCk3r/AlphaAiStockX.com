@@ -1,3 +1,4 @@
+import { Input } from "./input";
 import React from 'react';
 // Removed duplicate import of React;
 export function Input({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement> & { className?: string }) {

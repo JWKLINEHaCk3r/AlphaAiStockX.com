@@ -21,6 +21,8 @@ export interface Strategy {
 
 
 
+
+
   id: number;
   name: string;
   description: string;
@@ -54,9 +56,13 @@ export interface Strategy {
 
 
 
+
+
 }
 
 export interface Trade {
+
+
 
 
 
@@ -108,9 +114,13 @@ export interface Trade {
 
 
 
+
+
 }
 
 export interface BotStats {
+
+
 
 
 
@@ -161,9 +171,13 @@ export interface BotStats {
 
 
 
+
+
 }
 
 export interface BotSettings {
+
+
 
 
 
@@ -213,9 +227,13 @@ export interface BotSettings {
 
 
 
+
+
 }
 
 export interface User {
+
+
 
 
 
@@ -268,9 +286,13 @@ export interface User {
 
 
 
+
+
 }
 
 export interface Alert {
+
+
 
 
 
@@ -296,6 +318,8 @@ export interface Alert {
   message: string;
   timestamp: Date;
   severity: string;
+
+
 
 
 

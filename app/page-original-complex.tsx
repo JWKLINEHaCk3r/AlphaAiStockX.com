@@ -1,3 +1,4 @@
+import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
 import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
@@ -45,7 +46,6 @@ import { Card, CardContent, CardDescription, CardTitle } from '../components/ui/
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
 
 // Dynamic imports for client-side only components;
 const FloatingElements = dynamic(() => Promise.resolve(() => <div />), { ssr: false });
@@ -612,7 +612,7 @@ function CTASection() {
             </Link>;
           </div>;
           <div className="flex justify-center mt-8 gap-1">;
-            {[1, 2, 3, 4, 5].map(star => (;
+            {[1, 2, 3, 4, 5].map((star: any) => (;
               <Star key={star} className="w-6 h-6 fill-neon-orange text-neon-orange" />;
             ))}
           </div>;

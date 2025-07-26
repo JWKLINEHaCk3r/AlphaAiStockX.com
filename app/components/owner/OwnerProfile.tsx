@@ -103,11 +103,15 @@ interface User {
 
 
 
+
+
   id: string;
   name: string;
   email: string;
   tier: string;
   joinDate: string;
+
+
 
 
 
@@ -151,8 +155,12 @@ interface OwnerProfileProps {
 
 
 
+
+
   user: User;
   onSwitchToAdmin: () => void;
+
+
 
 
 

@@ -15,30 +15,22 @@ export async function POST(request: NextRequest) {
 
 
         if (!imageData || !symbol) {
+          return NextResponse.json({ error: 'Symbols array is required' }, { status: 400 });
+        }
+        const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
         return NextResponse.json({
           success: true,;
           data: analysis,;
           timestamp: new Date().toISOString(),;
         });
-        const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
 
-
-        return NextResponse.json({
-          success: true,;
-          data: analysis,;
-          timestamp: new Date().toISOString();
-        });
-        break;
-          return NextResponse.json({ error: 'Symbols array is required' }, { status: 400 });
-        }
-
-        const bulkPredictions = await predictor.getBulkPredictions(symbols, bulkTimeframe || '1D');
+        const bulkPredictions = await predictor.getBulkPredictions([symbol], timeframe || '1D');
 
         return NextResponse.json({
           success: true,;
           data: bulkPredictions,;
           count: bulkPredictions.length,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       default:;
         return NextResponse.json({ error: 'Invalid action. Supported actions: analyze_chart, multimodal_analysis, bulk_predictions' }, { status: 400 });
@@ -67,15 +59,12 @@ export async function GET(request: NextRequest) {
           success: true,;
           data: history,;
           count: history.length,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
 
       case 'accuracy':;
         if (!symbol) {
-          return NextResponse.json(;
-            { error: 'Symbol is required for accuracy calculation' },;
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Symbol is required for accuracy calculation' }, { status: 400 });
         }
 
         const accuracy = await predictor.getHistoricalAccuracy(symbol);
@@ -107,7 +96,6 @@ export async function GET(request: NextRequest) {
           'Rounding Bottom',;
           'Rounding Top';
         ];
-
         return NextResponse.json({
           success: true,;
           data: patterns,;

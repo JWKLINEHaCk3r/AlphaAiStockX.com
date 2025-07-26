@@ -17,7 +17,6 @@ import { Button } from "../components/ui/button";
 'use client';
 import React from 'react';
 
-import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Brain,;
@@ -411,7 +410,7 @@ function CTASection() {
             </Button>;
           </div>;
           <div className="flex justify-center mt-8 gap-1">;
-            {[1, 2, 3, 4, 5].map(star => (;
+            {[1, 2, 3, 4, 5].map((star: any) => (;
               <Star key={star} className="w-6 h-6 fill-neon-orange text-neon-orange" />;
             ))}
           </div>;

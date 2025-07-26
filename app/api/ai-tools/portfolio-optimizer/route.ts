@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
           'riskTolerance',;
           'minWeight',;
           'maxWeight',;
-          'maxSectorAllocation';
+          'maxSectorAllocation',;
         ];
         for (const field of requiredConstraints) {
           if (constraints[field] === undefined) {
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,;
           data: optimizedPortfolio,;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       case 'backtest': {
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
           success: true,;
           data: backtestResults,;
           timeframe: timeframe || '1Y',;
-          timestamp: new Date().toISOString();
+          timestamp: new Date().toISOString(),;
         });
       }
       case 'recommendations': {
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
       default: {
         return NextResponse.json({ error: 'Invalid action. Supported actions: optimize, backtest, recommendations' }, { status: 400 });
       }
-}
+// ...existing code...;
   } catch (error) {
     console.error('Portfolio Optimizer API Error:', error);
     return NextResponse.json({

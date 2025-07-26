@@ -95,11 +95,15 @@ interface ErrorCheck {
 
 
 
+
+
   category: string;
   name: string;
   status: 'pass' | 'warning' | 'error' | 'checking';
   message: string;
   fix?: string;
+
+
 
 
 

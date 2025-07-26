@@ -1,3 +1,4 @@
+import { Card } from "./components/ui/card";
 
 
 // Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.;

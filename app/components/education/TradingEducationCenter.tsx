@@ -105,7 +105,11 @@ interface TradingEducationCenterProps {
 
 
 
+
+
   className?: string;
+
+
 
 
 
@@ -129,6 +133,8 @@ interface TradingEducationCenterProps {
 }
 
 interface TestQuestion {
+
+
 
 
 
@@ -174,9 +180,13 @@ interface TestQuestion {
 
 
 
+
+
 }
 
 interface TestResults {
+
+
 
 
 
@@ -222,9 +232,13 @@ interface TestResults {
 
 
 
+
+
 }
 
 interface StudyProgress {
+
+
 
 
 
@@ -269,6 +283,8 @@ interface StudyProgress {
 
 
 
+
+
 };
 }
 
@@ -293,10 +309,14 @@ interface EducationalTopic {
 
 
 
+
+
   id: string;
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string;
+
+
 
 
 
@@ -343,6 +363,8 @@ interface SeriesExam {
 
 
 
+
+
   id: string;
   title: string;
   description: string;
@@ -350,6 +372,8 @@ interface SeriesExam {
   timeLimit: number;
   passingScore: number;
   topics: string[];
+
+
 
 
 
@@ -569,7 +593,7 @@ export default function TradingEducationCenter({ className = '' }: TradingEducat
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">;
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">;
-            {educationalTopics.map(topic => (;
+            {educationalTopics.map((topic: any) => (;
               <Card;
                 key={topic.id}
                 className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 hover:border-blue-400/40 transition-all cursor-pointer";
@@ -753,7 +777,7 @@ export default function TradingEducationCenter({ className = '' }: TradingEducat
         {/* Series Exams Tab */}
         <TabsContent value="series" className="space-y-6">;
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-            {seriesExams.map(exam => (;
+            {seriesExams.map((exam: any) => (;
               <Card key={exam.id} className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20">;
                 <CardHeader>;
                   <CardTitle className="text-white flex items-center gap-2">;

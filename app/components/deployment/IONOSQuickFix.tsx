@@ -160,7 +160,7 @@ export default function IONOSQuickFix() {
         </div>;
         {/* Steps */}
         <div className="space-y-6">;
-          {steps.map(step => (;
+          {steps.map((step: any) => (;
             <Card key={step.id} className="bg-gray-800/50 border-gray-700">;
               <CardHeader>;
                 <CardTitle className="flex items-center gap-3">;
