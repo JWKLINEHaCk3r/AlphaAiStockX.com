@@ -2,14 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { performanceMonitor } from '@/lib/performance-monitor';
 import { AlpacaClient, createAlpacaClientSafe } from '@/lib/trading/alpaca-client';
 
-// Health check configuration;
+// Health check configuration
 const HEALTH_CONFIG = {
-  timeout: 5000, // 5 seconds;
-  criticalServices: ['database', 'trading_api', 'authentication', 'market_data'],;
+  timeout: 5000, // 5 seconds
+  criticalServices: ['database', 'trading_api', 'authentication', 'market_data'],
   warningThresholds: {
-    responseTime: 1000, // 1 second;
-    memoryUsage: 80, // 80%;
-    errorRate: 5, // 5%;
+    responseTime: 1000, // 1 second
+    memoryUsage: 80, // 80%
+    errorRate: 5, // 5%
   },;
 };
 
@@ -414,12 +414,12 @@ class HealthChecker {
         used: memoryUsage.heapUsed,;
         total: memoryUsage.heapTotal,;
         percentage: Math.round((memoryUsage.heapUsed / memoryUsage.heapTotal) * 100),;
-      },;
+  },
       responseTime: {
          average: stats.averageResponseTime,;
          p95: 0, // Would need to calculate from detailed metrics;
          p99: 0, // Would need to calculate from detailed metrics;
-       },;
+  },
       errorRate: stats.errorRate,;
       requestCount: stats.totalRequests,;
     };
@@ -519,7 +519,7 @@ export async function GET(request: NextRequest) {
         memory: {
           used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),;
           total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),;
-        },;
+  },
       };
 
       return NextResponse.json(basicHealth, { status: 200 });

@@ -4,28 +4,29 @@ import { prisma } from '@/app/lib/prisma';
 import { z } from 'zod';
 
 const aiModelSchema = z.object({
-  name: z.string().min(1, 'Model name is required'),;
-  description: z.string().min(1, 'Description is required'),;
-  type: z.enum(['LSTM', 'TRANSFORMER', 'GAN', 'ENSEMBLE', 'CNN', 'RNN']),;
+  name: z.string().min(1, 'Model name is required'),
+  description: z.string().min(1, 'Description is required'),
+  type: z.enum(['LSTM', 'TRANSFORMER', 'GAN', 'ENSEMBLE', 'CNN', 'RNN']),
   parameters: z.object({
-    learningRate: z.number().positive(),;
-    epochs: z.number().int().positive(),;
-    batchSize: z.number().int().positive(),;
-    layers: z.number().int().positive(),;
-    neurons: z.number().int().positive(),;
-    dropout: z.number().min(0).max(1),;
-    optimizer: z.string(),;
-    lossFunction: z.string(),;
-  }),;
+    learningRate: z.number().positive(),
+    epochs: z.number().int().positive(),
+    batchSize: z.number().int().positive(),
+    layers: z.number().int().positive(),
+    neurons: z.number().int().positive(),
+    dropout: z.number().min(0).max(1),
+    optimizer: z.string(),
+    lossFunction: z.string(),
+  }),
   trainingData: z.object({
-    symbols: z.array(z.string()),;
-    timeframe: z.string(),;
-    features: z.array(z.string()),;
-    startDate: z.string(),;
-    endDate: z.string(),;
-  }),;
-  isPublic: z.boolean().default(false),;
-  subscriptionPrice: z.number().min(0).optional(),;
+    symbols: z.array(z.string()),
+    timeframe: z.string(),
+    features: z.array(z.string()),
+    startDate: z.string(),
+    endDate: z.string(),
+  }),
+  }),
+  isPublic: z.boolean().default(false)
+  subscriptionPrice: z.number().min(0).optional()
 });
 export async function GET(request: NextRequest) {
   try {
@@ -42,25 +43,25 @@ export async function GET(request: NextRequest) {
 
     const models = await prisma.aIModel.findMany({
       where: {
-        ...(type && { type: type as any }),;
+        ...(type && { type: type as any }),
         ...(isPublic ? { isPublic: true } : { creatorId: session.user.id });
       },;
       include: {
         creator: {
           select: {
-            id: true,;
-            name: true,;
-            username: true,;
-            avatar: true,;
-            tier: true;
+                id: true,
+                name: true,
+                username: true,
+                avatar: true,
+                tier: true
           }
         },;
         latestTraining: {
           orderBy: { createdAt: 'desc' },;
-          take: 1,;
+              take: 1,
           select: {
             status: true,;
-            progress: true,;
+                progress: true,
             metrics: true,;
             completedAt: true;
           }
@@ -76,33 +77,33 @@ export async function GET(request: NextRequest) {
           }
         }
       },;
-      orderBy: { createdAt: 'desc' },;
+          orderBy: { createdAt: 'desc' },
       take: limit;
     });
 
     const modelData = models.map((model: any) => ({
       id: model.id,;
-      name: model.name,;
-      description: model.description,;
-      type: model.type,;
-      parameters: model.parameters,;
-      trainingData: model.trainingData,;
-      performance: model.performance,;
-      status: model.status,;
-      isPublic: model.isPublic,;
-      subscriptionPrice: model.subscriptionPrice,;
-      createdAt: model.createdAt,;
-      lastUpdated: model.lastUpdated,;
-      creator: model.creator,;
-      latestTraining: model.trainingJobs[0] || null,;
-      subscribers: model._count.subscriptions,;
-      backtests: model._count.backtests,;
-      isSubscribed: model.subscriptions.some(sub => sub.userId === session.user.id),;
+        name: model.name,
+        description: model.description,
+        type: model.type,
+        parameters: model.parameters,
+        trainingData: model.trainingData,
+        performance: model.performance,
+        status: model.status,
+        isPublic: model.isPublic,
+        subscriptionPrice: model.subscriptionPrice,
+        createdAt: model.createdAt,
+        lastUpdated: model.lastUpdated,
+        creator: model.creator,
+        latestTraining: model.trainingJobs[0] || null,
+        subscribers: model._count.subscriptions,
+        backtests: model._count.backtests,
+        isSubscribed: model.subscriptions.some(sub => sub.userId === session.user.id),
     }));
 
     return NextResponse.json({
       success: true,;
-      models: modelData,;
+        models: modelData,
     });
   } catch (error) {
     console.error('AI models fetch error:', error);
@@ -130,8 +131,8 @@ export async function POST(request: NextRequest) {
         parameters: modelData.parameters,;
         trainingData: modelData.trainingData,;
         status: 'DRAFT',;
-        isPublic: modelData.isPublic,;
-        subscriptionPrice: modelData.subscriptionPrice,;
+        isPublic: modelData.isPublic,
+        subscriptionPrice: modelData.subscriptionPrice,
         performance: {
           accuracy: 0,;
           precision: 0,;

@@ -1,62 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';
+import { createAlpacaClient } from '@/lib/trading/alpaca-client';
+import { WebSocketService } from '@/lib/trading/websocket-service';
 
 // Rate limiting storage (in production, use Redis or similar);
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 // Session interface to avoid type issues;
-interface UserSession {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  user?: {
-    id?: string;
-    email?: string;
-    name?: string;
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-};
-}
+// Removed unused UserSession interface
 
 // Portfolio data interfaces;
 interface PortfolioData {
@@ -239,45 +191,54 @@ export async function GET(request: NextRequest) {
 
     console.log(`Portfolio access request from user: ${userId}`);
 
-    // Create trading service instance;
-    const tradingService = await TradingService.create(userId);
+
+    // Create trading service instance using constructor;
+    const alpacaClient = createAlpacaClient();
+    const wsService = new WebSocketService('wss://example.com'); // TODO: Replace with actual WebSocket URL if needed
+    // PortfolioId is not available here, so pass empty string or fetch if needed
+    const tradingService = new TradingService({
+      userId,
+      portfolioId: '', // TODO: fetch actual portfolioId if needed
+      alpacaClient,
+      wsService
+    });
 
     // Get portfolio summary from trading service;
     const portfolioSummary = await tradingService.getPortfolioSummary();
 
     // Format response data;
     const portfolioData: PortfolioData = {
-      totalValue: portfolioSummary.totalValue,;
-      cash: portfolioSummary.cash,;
-      buyingPower: portfolioSummary.buyingPower,;
-      dayPnL: portfolioSummary.dayPnL,;
-      dayPnLPercent: portfolioSummary.dayPnLPercent,;
-      totalPnL: portfolioSummary.totalPnL,;
-      totalPnLPercent: portfolioSummary.totalPnLPercent,;
-      positions: portfolioSummary.positions.map((position: any) => ({
-        symbol: position.symbol,;
-        quantity: position.quantity,;
-        marketValue: position.marketValue,;
-        costBasis: position.costBasis,;
-        unrealizedPnL: position.unrealizedPnL,;
-        unrealizedPnLPercent: position.unrealizedPnLPercent,;
-        averageEntryPrice: position.averageEntryPrice,;
-        currentPrice: position.currentPrice,;
-        side: position.side,;
-        changeToday: position.changeToday,;
-        changeTodayPercent: position.changeTodayPercent,;
-      })),;
-      equity: portfolioSummary.equity,;
-      longMarketValue: portfolioSummary.longMarketValue,;
-      shortMarketValue: portfolioSummary.shortMarketValue,;
+      totalValue: portfolioSummary.totalValue,
+      cash: portfolioSummary.cash,
+      buyingPower: portfolioSummary.buyingPower,
+      dayPnL: portfolioSummary.dayPnL,
+      dayPnLPercent: portfolioSummary.dayPnLPercent,
+      totalPnL: portfolioSummary.totalPnL,
+      totalPnLPercent: portfolioSummary.totalPnLPercent,
+      positions: portfolioSummary.positions.map((position: PositionData) => ({
+        symbol: position.symbol,
+        quantity: position.quantity,
+        marketValue: position.marketValue,
+        costBasis: position.costBasis,
+        unrealizedPnL: position.unrealizedPnL,
+        unrealizedPnLPercent: position.unrealizedPnLPercent,
+        averageEntryPrice: position.averageEntryPrice,
+        currentPrice: position.currentPrice,
+        side: position.side,
+        changeToday: position.changeToday,
+        changeTodayPercent: position.changeTodayPercent
+      })),
+      equity: portfolioSummary.equity,
+      longMarketValue: portfolioSummary.longMarketValue,
+      shortMarketValue: portfolioSummary.shortMarketValue
     };
 
     // Removed malformed console.log;
       // Portfolio retrieved successfully for user;
     return NextResponse.json({
-      success: true,;
-      data: portfolioData,;
-      timestamp: new Date().toISOString(),;
+      success: true,
+      data: portfolioData,
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
     console.error('Error fetching portfolio:', error);
@@ -285,11 +246,11 @@ export async function GET(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(;
+    return NextResponse.json(
       {
-        error: 'Failed to fetch portfolio',;
-        message: isDevelopment ? errorMessage : 'Internal server error',;
-      },;
+        error: 'Failed to fetch portfolio',
+        message: isDevelopment ? errorMessage : 'Internal server error'
+      },
       { status: 500 }
     );
   }
@@ -325,9 +286,9 @@ export async function POST(request: NextRequest) {
     // For now, return a placeholder response;
     // In the future, implement portfolio configuration updates;
     return NextResponse.json({
-      success: true,;
-      message: 'Portfolio update functionality is not yet implemented',;
-      data: updateData,;
+      success: true,
+      message: 'Portfolio update functionality is not yet implemented',
+      data: updateData
     });
   } catch (error) {
     console.error('Error updating portfolio:', error);
@@ -335,11 +296,11 @@ export async function POST(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(;
+    return NextResponse.json(
       {
-        error: 'Failed to update portfolio',;
-        message: isDevelopment ? errorMessage : 'Internal server error',;
-      },;
+        error: 'Failed to update portfolio',
+        message: isDevelopment ? errorMessage : 'Internal server error'
+      },
       { status: 500 }
     );
   }
@@ -375,9 +336,9 @@ export async function PUT(request: NextRequest) {
     // For now, return a placeholder response;
     // In the future, implement portfolio rebalancing;
     return NextResponse.json({
-      success: true,;
-      message: 'Portfolio rebalancing functionality is not yet implemented',;
-      data: rebalanceData,;
+      success: true,
+      message: 'Portfolio rebalancing functionality is not yet implemented',
+      data: rebalanceData
     });
   } catch (error) {
     console.error('Error rebalancing portfolio:', error);
@@ -385,11 +346,11 @@ export async function PUT(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(;
+    return NextResponse.json(
       {
-        error: 'Failed to rebalance portfolio',;
-        message: isDevelopment ? errorMessage : 'Internal server error',;
-      },;
+        error: 'Failed to rebalance portfolio',
+        message: isDevelopment ? errorMessage : 'Internal server error'
+      },
       { status: 500 }
     );
   }

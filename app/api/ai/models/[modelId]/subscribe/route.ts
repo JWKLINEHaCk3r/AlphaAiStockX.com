@@ -14,15 +14,16 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
 
     // Check if model exists and is public;
     const model = await prisma.aIModel.findUnique({
-      where: { id: modelId },;
+      where: { id: modelId },
       include: {
         creator: {
           select: {
-            id: true,;
-                name: true;
+            id: true,
+            name: true
           }
         }
-      },;
+      }
+      }
     });
     if (!model) {
       return NextResponse.json({ error: 'Model not found' }, { status: 404 });
@@ -36,8 +37,8 @@ export async function POST(request: NextRequest, { params }: { params: { modelId
     const existingSubscription = await prisma.aIModelSubscription.findUnique({
       where: {
         userId_modelId: {
-          userId: session.user.id,;
-          modelId: modelId;
+          userId: session.user.id,
+          modelId: modelId
         }
       }
     });
@@ -103,7 +104,6 @@ export async function DELETE(request: NextRequest, { params }: { params: { model
       where: {
         userId: session.user.id,;
         modelId: modelId;
-      }
     });
 
     if (deletedSubscription.count === 0) {
@@ -154,7 +154,7 @@ async function simulateTrainingProgress(trainingJobId: string) {
                         trainingTime: 120 + Math.random() * 60;
                     }
                 });
-      }
+    }
     });
   }
 }

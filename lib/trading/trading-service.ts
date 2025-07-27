@@ -1,8 +1,8 @@
 import {
-  createAlpacaClient,;
-  AlpacaClient,;
-  formatOrderForDatabase,;
-  formatPositionForDatabase,;
+createAlpacaClient,
+AlpacaClient,
+formatOrderForDatabase,
+formatPositionForDatabase,
 } from './alpaca-client';
 import { prisma } from '@/app/lib/prisma';
 import { SecurityAudit } from '@/lib/security';
@@ -318,9 +318,9 @@ export class TradingService {
     if (!resolvedPortfolioId) {
       const defaultPortfolio = await prisma.portfolio.findFirst({
         where: {
-          userId,;
-          type: 'PERSONAL',;
-        },;
+          userId,
+          type: 'PERSONAL'
+        }
       });
 
       if (!defaultPortfolio) {
@@ -330,64 +330,64 @@ export class TradingService {
       resolvedPortfolioId = defaultPortfolio.id;
     }
 
-    const wsService = new WebSocketService();
+    const wsService = new WebSocketService('wss://example.com'); // TODO: Replace with actual WebSocket URL
 
     return new TradingService({
-      userId,;
-      portfolioId: resolvedPortfolioId,;
-      alpacaClient,;
-      wsService,;
+      userId,
+      portfolioId: resolvedPortfolioId,
+      alpacaClient,
+      wsService
     });
   }
 
   // Order management;
   async placeOrder(orderRequest: OrderRequest): Promise<OrderSummary> {
     try {
-      // Validate order request;
+      // Validate order request
       this.validateOrderRequest(orderRequest);
 
-      // Check account and buying power;
+      // Check account and buying power
       await this.validateTradingPermissions(orderRequest);
 
-      // Create Alpaca order;
+      // Create Alpaca order
       const alpacaOrderData = this.buildAlpacaOrder(orderRequest);
       const alpacaOrder = await this.alpaca.placeOrder(alpacaOrderData);
 
-      // Save order to database;
+      // Save order to database
       const dbOrder = await this.saveOrderToDatabase(alpacaOrder);
 
-      // Update portfolio cash balance for buy orders;
+      // Update portfolio cash balance for buy orders
       if (orderRequest.side === 'buy' && orderRequest.type === 'market') {
         await this.updatePortfolioCash(orderRequest);
       }
 
-      // Notify via WebSocket;
+      // Notify via WebSocket
       this.notifyOrderUpdate(dbOrder);
 
-      // Log security event;
+      // Log security event
       SecurityAudit.logSecurityEvent({
-        type: 'trading_activity',;
-        userId: this.config.userId,;
+        type: 'trading_activity',
+        userId: this.config.userId,
         details: {
-          action: 'order_placed',;
-          orderId: alpacaOrder.id,;
-          symbol: orderRequest.symbol,;
-          side: orderRequest.side,;
-          quantity: orderRequest.quantity,;
-          type: orderRequest.type,;
-        },;
+          action: 'order_placed',
+          orderId: alpacaOrder.id,
+          symbol: orderRequest.symbol,
+          side: orderRequest.side,
+          quantity: orderRequest.quantity,
+          type: orderRequest.type
+        }
       });
 
       return this.formatOrderSummary(dbOrder);
     } catch (error) {
       SecurityAudit.logSecurityEvent({
-        type: 'trading_error',;
-        userId: this.config.userId,;
+        type: 'trading_error',
+        userId: this.config.userId,
         details: {
-          action: 'order_placement_failed',;
-          symbol: orderRequest.symbol,;
-          error: error instanceof Error ? error.message : 'Unknown error',;
-        },;
+          action: 'order_placement_failed',
+          symbol: orderRequest.symbol,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        }
       });
       throw error;
     }
@@ -400,31 +400,31 @@ export class TradingService {
 
       // Update order status in database;
       await prisma.order.update({
-        where: { id: orderId },;
+        where: { id: orderId },
         data: {
-          status: 'CANCELED',;
-          canceledAt: new Date(),;
-          updatedAt: new Date(),;
-        },;
+          status: 'CANCELED',
+          canceledAt: new Date(),
+          updatedAt: new Date()
+        }
       });
 
       SecurityAudit.logSecurityEvent({
-        type: 'trading_activity',;
-        userId: this.config.userId,;
+        type: 'trading_activity',
+        userId: this.config.userId,
         details: {
-          action: 'order_canceled',;
-          orderId,;
-        },;
+          action: 'order_canceled',
+          orderId
+        }
       });
     } catch (error) {
       SecurityAudit.logSecurityEvent({
-        type: 'trading_error',;
-        userId: this.config.userId,;
+        type: 'trading_error',
+        userId: this.config.userId,
         details: {
-          action: 'order_cancellation_failed',;
-          orderId,;
-          error: error instanceof Error ? error.message : 'Unknown error',;
-        },;
+          action: 'order_cancellation_failed',
+          orderId,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        }
       });
       throw error;
     }

@@ -10,13 +10,13 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 // Input validation schemas;
 const ORDER_VALIDATION = {
-  symbol: (value: string): boolean => /^[A-Z]{1,5}$/.test(value),;
-  quantity: (value: number): boolean => value > 0 && value <= 10000,;
-  side: (value: string): boolean => ['buy', 'sell'].includes(value),;
-  type: (value: string): boolean => ['market', 'limit', 'stop', 'stop_limit'].includes(value),;
-  timeInForce: (value: string): boolean => ['day', 'gtc', 'ioc', 'fok'].includes(value),;
-  limitPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),;
-  stopPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),;
+  symbol: (value: string): boolean => /^[A-Z]{1,5}$/.test(value),
+  quantity: (value: number): boolean => value > 0 && value <= 10000,
+  side: (value: string): boolean => ['buy', 'sell'].includes(value),
+  type: (value: string): boolean => ['market', 'limit', 'stop', 'stop_limit'].includes(value),
+  timeInForce: (value: string): boolean => ['day', 'gtc', 'ioc', 'fok'].includes(value),
+  limitPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
+  stopPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
 };
 
 // Order data interface for validation;

@@ -18,9 +18,9 @@ export async function POST(request: NextRequest) {
         const { userProfile } = body;
         const welcomeMessage = await chatbot.initializeChat(userId, userProfile);
         return NextResponse.json({
-          success: true,;
-          message: welcomeMessage,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          message: welcomeMessage,
+          timestamp: new Date().toISOString(),
         });
       }
       case 'message': {
@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
         }
         const response = await chatbot.processMessage(userId, message);
         return NextResponse.json({
-          success: true,;
-          data: response,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: response,
+          timestamp: new Date().toISOString(),
         });
       }
       case 'portfolio_simulation': {
@@ -41,9 +41,9 @@ export async function POST(request: NextRequest) {
         }
         const simulation = await chatbot.simulatePortfolio(userId, holdings);
         return NextResponse.json({
-          success: true,;
-          data: simulation,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: simulation,
+          timestamp: new Date().toISOString(),
         });
       }
       default:;
@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('GPT-Trader Chatbot API Error:', error);
     return NextResponse.json({
-      error: 'Failed to process request',;
-      details: error instanceof Error ? error.message : 'Unknown error',;
+      error: 'Failed to process request',
+      details: error instanceof Error ? error.message : 'Unknown error',
     }, { status: 500 });
   }
 }
@@ -72,18 +72,18 @@ export async function GET(request: NextRequest) {
       case 'history': {
         const history = chatbot.getChatHistory(userId);
         return NextResponse.json({
-          success: true,;
-          data: history,;
-          count: history.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: history,
+          count: history.length,
+          timestamp: new Date().toISOString(),
         });
       }
       case 'clear': {
         chatbot.clearChatHistory(userId);
         return NextResponse.json({
-          success: true,;
-          message: 'Chat history cleared',;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          message: 'Chat history cleared',
+          timestamp: new Date().toISOString(),
         });
       }
       default:;

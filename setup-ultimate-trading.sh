@@ -56,8 +56,6 @@ chmod +x fix-critical-syntax-errors.js
 
 # Run AI fixes
 echo "🤖 Running UI import fixes..."
-if [ -f "fix-all-ui-imports.js" ]; then
-    node fix-all-ui-imports.js
 fi
 
 echo "🤖 Running card import fixes..."

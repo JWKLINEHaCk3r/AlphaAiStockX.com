@@ -13,24 +13,14 @@ export async function POST(request: NextRequest) {
       case 'analyze_chart':;
         const { imageData, symbol, timeframe } = body;
 
-
         if (!imageData || !symbol) {
           return NextResponse.json({ error: 'Symbols array is required' }, { status: 400 });
         }
         const analysis = await predictor.analyzeChart(imageData, symbol, timeframe || '1D');
         return NextResponse.json({
-          success: true,;
-          data: analysis,;
-          timestamp: new Date().toISOString(),;
-        });
-
-        const bulkPredictions = await predictor.getBulkPredictions([symbol], timeframe || '1D');
-
-        return NextResponse.json({
-          success: true,;
-          data: bulkPredictions,;
-          count: bulkPredictions.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: analysis,
+          timestamp: new Date().toISOString(),
         });
       default:;
         return NextResponse.json({ error: 'Invalid action. Supported actions: analyze_chart, multimodal_analysis, bulk_predictions' }, { status: 400 });
@@ -56,10 +46,10 @@ export async function GET(request: NextRequest) {
         const history = predictor.getPredictionHistory(symbol);
 
         return NextResponse.json({
-          success: true,;
-          data: history,;
-          count: history.length,;
-          timestamp: new Date().toISOString(),;
+          success: true,
+          data: history,
+          count: history.length,
+          timestamp: new Date().toISOString(),
         });
 
       case 'accuracy':;
@@ -70,45 +60,45 @@ export async function GET(request: NextRequest) {
         const accuracy = await predictor.getHistoricalAccuracy(symbol);
 
         return NextResponse.json({
-          success: true,;
-          data: accuracy,;
-          symbol,;
-          timestamp: new Date().toISOString();
+          success: true,
+          data: accuracy,
+          symbol,
+          timestamp: new Date().toISOString(),
         });
 
       case 'supported_patterns': {
-        const patterns = [;
-          'Double Bottom',;
-          'Double Top',;
-          'Head and Shoulders',;
-          'Inverse Head and Shoulders',;
-          'Ascending Triangle',;
-          'Descending Triangle',;
-          'Symmetrical Triangle',;
-          'Bull Flag',;
-          'Bear Flag',;
-          'Cup and Handle',;
-          'Falling Wedge',;
-          'Rising Wedge',;
-          'Rectangle',;
-          'Pennant',;
-          'Diamond',;
-          'Rounding Bottom',;
-          'Rounding Top';
+        const patterns = [
+          'Double Bottom',
+          'Double Top',
+          'Head and Shoulders',
+          'Inverse Head and Shoulders',
+          'Ascending Triangle',
+          'Descending Triangle',
+          'Symmetrical Triangle',
+          'Bull Flag',
+          'Bear Flag',
+          'Cup and Handle',
+          'Falling Wedge',
+          'Rising Wedge',
+          'Rectangle',
+          'Pennant',
+          'Diamond',
+          'Rounding Bottom',
+          'Rounding Top'
         ];
         return NextResponse.json({
-          success: true,;
-          data: patterns,;
-          count: patterns.length,;
-          timestamp: new Date().toISOString();
+          success: true,
+          data: patterns,
+          count: patterns.length,
+          timestamp: new Date().toISOString(),
         });
       }
       case 'supported_timeframes': {
         const timeframes = ['1m', '5m', '15m', '30m', '1H', '4H', '1D', '1W', '1M'];
         return NextResponse.json({
-          success: true,;
-          data: timeframes,;
-          timestamp: new Date().toISOString();
+          success: true,
+          data: timeframes,
+          timestamp: new Date().toISOString(),
         });
       }
       default:;
@@ -131,16 +121,16 @@ export async function DELETE(request: NextRequest) {
         if (symbol) {
           predictor.clearPredictionHistory(symbol);
           return NextResponse.json({
-            success: true,;
-            message: `Prediction history cleared for ${symbol}`,;
-            timestamp: new Date().toISOString();
+            success: true,
+            message: `Prediction history cleared for ${symbol}`,
+            timestamp: new Date().toISOString(),
           });
         } else {
           predictor.clearPredictionHistory();
           return NextResponse.json({
-            success: true,;
-            message: 'All prediction history cleared',;
-            timestamp: new Date().toISOString();
+            success: true,
+            message: 'All prediction history cleared',
+            timestamp: new Date().toISOString(),
           });
         }
 

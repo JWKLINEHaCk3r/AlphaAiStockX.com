@@ -1,77 +1,78 @@
-// ...existing code...
-import React, { useState, useEffect, useCallback } from 'react';
-import { Card } from '../../components/ui/card';
-import { Tabs } from '../../components/ui/tabs';
-import { Button } from '../../components/ui/button';
+import { Select } from "../../components/ui/select";
+import { Card } from "../../components/ui/card";
+import React, { useState, useEffect, useCallback } from 'react'
+import { Card } from '../../components/ui/card.js'
+import { Tabs } from '../../components/ui/tabs'
+import { Button } from '../../components/ui/button'
 
-// Minimal interface for the trader object;
+// Minimal interface for the trader object
 interface Trader {
-  runAIAnalysis: (symbols: string[]) => Promise<Analysis>;
-  getPortfolio: () => Portfolio;
-  executeAITrading: (symbols: string[]) => Promise<unknown>;
-  emergencyStop: () => void;
+  runAIAnalysis: (symbols: string[]) => Promise<Analysis>
+  getPortfolio: () => Portfolio
+  executeAITrading: (symbols: string[]) => Promise<unknown>
+  emergencyStop: () => void
 }
 // Trading interfaces
 interface TradingSignal {
-  symbol: string;
-  action: string;
-  confidence: number;
-  reasoning?: string[];
+  symbol: string
+  action: string
+  confidence: number
+  reasoning?: string[]
 }
 
 interface Trade {
-  symbol: string;
-  action: string;
-  shares: number;
-  price: number;
-  time: string;
-  reason: string;
+  symbol: string
+  action: string
+  shares: number
+  price: number
+  time: string
+  reason: string
 }
 
 interface Performance {
-  totalReturn: number;
-  dailyPnL: number;
-  winRate: number;
-  sharpeRatio: number;
-  maxDrawdown?: number;
+  totalReturn: number
+  dailyPnL: number
+  winRate: number
+  sharpeRatio: number
+  maxDrawdown?: number
 }
 
 interface Portfolio {
-  totalValue: number;
-  cash: number;
-  holdings: Record<string, { shares: number; avgPrice: number }>;
-  trades: Trade[];
-  totalReturn?: number;
-  dailyPnL?: number;
-  performance?: Performance;
+  totalValue: number
+  cash: number
+  holdings: Record<string, { shares: number; avgPrice: number }>
+  trades: Trade[]
+  totalReturn?: number
+  dailyPnL?: number
+  performance?: Performance
 }
 
 interface Analysis {
-  signals?: TradingSignal[];
-  marketCondition?: string;
-  volatility?: number;
+  signals?: TradingSignal[]
+  marketCondition?: string
+  volatility?: number
   lastTradeResult?: {
-    success: boolean;
-    message: string;
-    trades?: Trade[];
-  };
-  recommendations?: string[];
+    success: boolean
+    message: string
+    trades?: Trade[]
+  }
+  recommendations?: string[]
   riskAnalysis?: {
-    riskScore: number;
-    volatility: number;
-    beta?: number;
-  };
+    riskScore: number
+    volatility: number
+    beta?: number
+  }
 }
 
 
 interface DashboardState {
-  trader: Trader | null;
-  portfolio: Portfolio | null;
-  isTrading: boolean;
-  performance: Performance | null;
-  analysis: Analysis | null;
-  loading: boolean;
-  error: string | null;
+  trader: Trader | null
+  portfolio: Portfolio | null
+  isTrading: boolean
+  performance: Performance | null
+  analysis: Analysis | null
+  loading: boolean
+  error: string | null
 }
 
 export default function AITradingDashboard() {
@@ -87,8 +88,8 @@ export default function AITradingDashboard() {
   const [selectedSymbols] = useState(['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'AMZN']);
   const [riskLevel, setRiskLevel] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
 
-  // Mock implementation for development/demo;
-  // Mock implementation for development/demo;
+  // Mock implementation for development/demo
+  // Mock implementation for development/demo
   const initializeTrader = useCallback(async () => {
     try {
       // Simulate async trader initialization;

@@ -75,7 +75,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
-COPY --from=builder /app/fix-all-ui-imports.js ./fix-all-ui-imports.js
 COPY --from=builder /app/fix-card-imports.js ./fix-card-imports.js
 COPY --from=builder /app/fix-missing-cards.js ./fix-missing-cards.js
 COPY --from=builder /app/fix-missing-ui-imports.js ./fix-missing-ui-imports.js
