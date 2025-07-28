@@ -6,68 +6,68 @@ import { z } from 'zod';
 // Security configuration;
 export const SECURITY_CONFIG = {
   bcrypt: {
-    rounds: parseInt(process.env.BCRYPT_ROUNDS || '12'),;
+    rounds: parseInt(process.env.BCRYPT_ROUNDS || '12'),
   },;
   jwt: {
-    expiry: process.env.JWT_EXPIRY || '1h',;
-    refreshExpiry: process.env.REFRESH_TOKEN_EXPIRY || '7d',;
+    expiry: process.env.JWT_EXPIRY || '1h',
+    refreshExpiry: process.env.REFRESH_TOKEN_EXPIRY || '7d',
   },;
   passwords: {
-    minLength: 12,;
-    requireSpecialChars: true,;
-    requireNumbers: true,;
-    requireUppercase: true,;
-    requireLowercase: true,;
+    minLength: 12,
+    requireSpecialChars: true,
+    requireNumbers: true,
+    requireUppercase: true,
+    requireLowercase: true,
   },;
   csrf: {
-    tokenLength: 32,;
-    headerName: 'x-csrf-token',;
+    tokenLength: 32,
+    headerName: 'x-csrf-token',
   },;
   encryption: {
-    algorithm: 'aes-256-gcm',;
-    keyLength: 32,;
-    ivLength: 16,;
-    tagLength: 16,;
+    algorithm: 'aes-256-gcm',
+    keyLength: 32,
+    ivLength: 16,
+    tagLength: 16,
   },;
 };
 
 // Password validation schema;
 export const passwordSchema = z;
-  .string();
-  .min(;
-    SECURITY_CONFIG.passwords.minLength,;
-    `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`;
+  .string()
+  .min(
+    SECURITY_CONFIG.passwords.minLength,
+    `Password must be at least ${SECURITY_CONFIG.passwords.minLength} characters`
   );
   .refine((val) => /[a-z]/.test(val), {
-    message: 'Password must contain at least one lowercase letter',;
-  });
+    message: 'Password must contain at least one lowercase letter',
+  })
   .refine((val) => /[A-Z]/.test(val), {
-    message: 'Password must contain at least one uppercase letter',;
-  });
+    message: 'Password must contain at least one uppercase letter',
+  })
   .refine((val) => /[0-9]/.test(val), {
-    message: 'Password must contain at least one number',;
-  });
+    message: 'Password must contain at least one number',
+  })
   .refine((val) => /[^a-zA-Z0-9]/.test(val), {
-    message: 'Password must contain at least one special character',;
-  });
+    message: 'Password must contain at least one special character',
+  })
 
 // Email validation schema;
 export const emailSchema = z;
-  .string();
-  .email('Invalid email format');
-  .max(254, 'Email too long');
+  .string()
+  .email('Invalid email format')
+  .max(254, 'Email too long')
   .transform((val) => val.toLowerCase());
 
 // Input sanitization schemas;
 export const sanitizedStringSchema = z;
-  .string();
-  .trim();
+  .string()
+  .trim()
   .transform(str => str.replace(/[<>"'&]/g, ''));
 
 export const alphanumericSchema = z;
-  .string();
+  .string()
   .refine((val) => /^[a-zA-Z0-9]+$/.test(val), {
-    message: 'Only alphanumeric characters allowed',;
+    message: 'Only alphanumeric characters allowed',
   });
 
 // Password hashing utilities;
@@ -145,9 +145,9 @@ export class EncryptionUtils {
       const tag = cipher.getAuthTag();
 
       return {
-        encrypted,;
-        iv: iv.toString('hex'),;
-        tag: tag.toString('hex'),;
+        encrypted,
+        iv: iv.toString('hex'),
+        tag: tag.toString('hex'),
       };
     } catch (error) {
       throw new Error(`Encryption failed: ${error.message}`);
@@ -173,11 +173,11 @@ export class EncryptionUtils {
 // Input validation and sanitization;
 export class InputValidator {
   static sanitizeHtml(input: string): string {
-    return input;
-      .replace(/</g, '&lt;');
-      .replace(/>/g, '&gt;');
-      .replace(/"/g, '&quot;');
-      .replace(/'/g, '&#x27;');
+    return input
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
       .replace(/\//g, '&#x2F;');
   }
 
@@ -240,10 +240,10 @@ export class SessionSecurity {
 export class RateLimiter {
   private static store = new Map<string, { count: number; resetTime: number }>();
 
-  static checkLimit(;
-    key: string,;
-    maxRequests: number,;
-    windowMs: number;
+  static checkLimit(
+    key: string,
+    maxRequests: number,
+    windowMs: number
   ): { allowed: boolean; remaining: number; resetTime: number } {
     const now = Date.now();
     const current = this.store.get(key);
@@ -260,9 +260,9 @@ export class RateLimiter {
 
     current.count++;
     return {
-      allowed: true,;
-      remaining: maxRequests - current.count,;
-      resetTime: current.resetTime,;
+      allowed: true,
+      remaining: maxRequests - current.count,
+      resetTime: current.resetTime,
     };
   }
 

@@ -1,3 +1,4 @@
+import { Card } from "./components/ui/card";
 import { AnimatedBackground } from "./components/ui/animated-background-client";
 import { VoiceControl } from "./components/ui/voice-control";
 import { TradingDashboard } from "./components/ui/trading-dashboard-demo";
@@ -43,7 +44,7 @@ import { SelectItem } from "./components/ui/select";
 import { SelectContent } from "./components/ui/select";
 import { Select } from "./components/ui/select";
 import { Textarea } from "./components/ui/textarea";
-import { Card } from "./components/ui/card";
+import { Card } from "./components/ui/card.js";
 import { Button } from "./components/ui/button";
 
 

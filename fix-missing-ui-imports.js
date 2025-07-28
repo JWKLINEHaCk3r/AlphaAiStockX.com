@@ -1,4 +1,5 @@
 import { Card } from "./components/ui/card";
+import { Card } from "./components/ui/card.js";
 
 
 #!/usr/bin/env node

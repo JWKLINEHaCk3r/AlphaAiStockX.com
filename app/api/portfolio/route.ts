@@ -1,14 +1,62 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/app/lib/auth';
 import { TradingService } from '@/lib/trading/trading-service';
-import { createAlpacaClient } from '@/lib/trading/alpaca-client';
-import { WebSocketService } from '@/lib/trading/websocket-service';
 
 // Rate limiting storage (in production, use Redis or similar);
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 // Session interface to avoid type issues;
-// Removed unused UserSession interface
+interface UserSession {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  user?: {
+    id?: string;
+    email?: string;
+    name?: string;
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+};
+}
 
 // Portfolio data interfaces;
 interface PortfolioData {
@@ -191,17 +239,8 @@ export async function GET(request: NextRequest) {
 
     console.log(`Portfolio access request from user: ${userId}`);
 
-
-    // Create trading service instance using constructor;
-    const alpacaClient = createAlpacaClient();
-    const wsService = new WebSocketService('wss://example.com'); // TODO: Replace with actual WebSocket URL if needed
-    // PortfolioId is not available here, so pass empty string or fetch if needed
-    const tradingService = new TradingService({
-      userId,
-      portfolioId: '', // TODO: fetch actual portfolioId if needed
-      alpacaClient,
-      wsService
-    });
+    // Create trading service instance;
+    const tradingService = await TradingService.create(userId);
 
     // Get portfolio summary from trading service;
     const portfolioSummary = await tradingService.getPortfolioSummary();
@@ -215,7 +254,7 @@ export async function GET(request: NextRequest) {
       dayPnLPercent: portfolioSummary.dayPnLPercent,
       totalPnL: portfolioSummary.totalPnL,
       totalPnLPercent: portfolioSummary.totalPnLPercent,
-      positions: portfolioSummary.positions.map((position: PositionData) => ({
+      positions: portfolioSummary.positions.map((position: any) => ({
         symbol: position.symbol,
         quantity: position.quantity,
         marketValue: position.marketValue,
@@ -226,11 +265,11 @@ export async function GET(request: NextRequest) {
         currentPrice: position.currentPrice,
         side: position.side,
         changeToday: position.changeToday,
-        changeTodayPercent: position.changeTodayPercent
+        changeTodayPercent: position.changeTodayPercent,
       })),
       equity: portfolioSummary.equity,
       longMarketValue: portfolioSummary.longMarketValue,
-      shortMarketValue: portfolioSummary.shortMarketValue
+      shortMarketValue: portfolioSummary.shortMarketValue,
     };
 
     // Removed malformed console.log;
@@ -238,7 +277,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: portfolioData,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     console.error('Error fetching portfolio:', error);
@@ -249,7 +288,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to fetch portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error'
+        message: isDevelopment ? errorMessage : 'Internal server error',
       },
       { status: 500 }
     );
@@ -288,7 +327,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Portfolio update functionality is not yet implemented',
-      data: updateData
+      data: updateData,
     });
   } catch (error) {
     console.error('Error updating portfolio:', error);
@@ -299,7 +338,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to update portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error'
+        message: isDevelopment ? errorMessage : 'Internal server error',
       },
       { status: 500 }
     );
@@ -338,7 +377,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Portfolio rebalancing functionality is not yet implemented',
-      data: rebalanceData
+      data: rebalanceData,
     });
   } catch (error) {
     console.error('Error rebalancing portfolio:', error);
@@ -349,7 +388,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to rebalance portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error'
+        message: isDevelopment ? errorMessage : 'Internal server error',
       },
       { status: 500 }
     );

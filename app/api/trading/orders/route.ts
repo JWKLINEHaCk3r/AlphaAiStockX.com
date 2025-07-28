@@ -17,7 +17,7 @@ const ORDER_VALIDATION = {
   timeInForce: (value: string): boolean => ['day', 'gtc', 'ioc', 'fok'].includes(value),
   limitPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
   stopPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
-};
+}
 
 // Order data interface for validation;
 interface OrderInputData {
@@ -43,8 +43,8 @@ interface OrderInputData {
 
 
 
-  symbol: string;
-  quantity: number;
+  symbol: string,
+  quantity: number,
   side: 'buy' | 'sell';
   type: 'market' | 'limit' | 'stop' | 'stop_limit';
   timeInForce: 'day' | 'gtc' | 'ioc' | 'fok';

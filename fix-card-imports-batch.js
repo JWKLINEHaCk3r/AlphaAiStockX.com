@@ -1,4 +1,5 @@
 import { Card } from "./components/ui/card";
+import { Card } from "./components/ui/card.js";
 
 
 // Removed all direct and dynamic imports of .tsx files for Node.js compatibility
