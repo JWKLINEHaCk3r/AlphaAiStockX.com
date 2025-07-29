@@ -1,7 +1,7 @@
 import { Select } from "../../components/ui/select";
 import { Card } from "../../components/ui/card";
 import React, { useState, useEffect, useCallback } from 'react'
-import { Card } from '../../components/ui/card.js'
+// Removed duplicate import of Card to fix identifier error
 import { Tabs } from '../../components/ui/tabs'
 import { Button } from '../../components/ui/button'
 

@@ -118,10 +118,10 @@ export async function GET(request: NextRequest) {
           'Sector ETFs'
         ];
         return NextResponse.json({
-          success: true,
-          data: assetClasses,
-          count: assetClasses.length,
-          timestamp: new Date().toISOString()
+          success: true,;
+          data: assetClasses,;
+          count: assetClasses.length,;
+          timestamp: new Date().toISOString();
         });
       }
       default: {
@@ -132,7 +132,8 @@ export async function GET(request: NextRequest) {
     console.error('Portfolio Optimizer GET API Error:', error);
     return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
-// ...existing code...
+}
+}
 
 export async function PUT(request: NextRequest) {
   try {
@@ -144,14 +145,14 @@ export async function PUT(request: NextRequest) {
         if (!assetData) {
           return NextResponse.json({ error: 'Asset data is required' }, { status: 400 });
         }
-        // Validate required fields
-        const requiredFields = [
-          'symbol',
-          'name',
-          'sector',
-          'price',
-          'expectedReturn',
-          'volatility'
+        // Validate required fields;
+        const requiredFields = [;
+          'symbol',;
+          'name',;
+          'sector',;
+          'price',;
+          'expectedReturn',;
+          'volatility';
         ];
         for (const field of requiredFields) {
           if (assetData[field] === undefined) {
@@ -160,10 +161,10 @@ export async function PUT(request: NextRequest) {
         }
         optimizer.addCustomAsset(assetData);
         return NextResponse.json({
-          success: true,
-          message: 'Custom asset added successfully',
-          symbol: assetData.symbol,
-          timestamp: new Date().toISOString()
+          success: true,;
+          message: 'Custom asset added successfully',;
+          symbol: assetData.symbol,;
+          timestamp: new Date().toISOString();
         });
       }
       default: {

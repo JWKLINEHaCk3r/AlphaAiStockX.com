@@ -26,10 +26,10 @@ export interface WebSocketMessage {
 
 
 
-  type: string,
-  userId?: string,
-  data: any,
-  timestamp: number,
+  type: string;
+  userId?: string;
+  data: any;
+  timestamp: number;
 
 
 
@@ -140,7 +140,7 @@ export interface OrderUpdate {
 
 
   orderId: string;
-  symbol: string,
+  symbol: string;
   status: string;
   filledQuantity: number;
   filledPrice?: number;

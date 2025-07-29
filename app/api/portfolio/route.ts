@@ -21,14 +21,6 @@ interface UserSession {
 
 
 
-
-
-
-
-
-
-
-
   user?: {
     id?: string;
     email?: string;
@@ -47,27 +39,11 @@ interface UserSession {
 
 
 
-
-
-
-
-
-
-
-
 };
 }
 
 // Portfolio data interfaces;
 interface PortfolioData {
-
-
-
-
-
-
-
-
 
 
 
@@ -107,25 +83,9 @@ interface PortfolioData {
 
 
 
-
-
-
-
-
-
-
-
 }
 
 interface PositionData {
-
-
-
-
-
-
-
-
 
 
 
@@ -151,14 +111,6 @@ interface PositionData {
   side: 'LONG' | 'SHORT';
   changeToday: number;
   changeTodayPercent?: number;
-
-
-
-
-
-
-
-
 
 
 
@@ -247,37 +199,39 @@ export async function GET(request: NextRequest) {
 
     // Format response data;
     const portfolioData: PortfolioData = {
-      totalValue: portfolioSummary.totalValue,
-      cash: portfolioSummary.cash,
-      buyingPower: portfolioSummary.buyingPower,
-      dayPnL: portfolioSummary.dayPnL,
-      dayPnLPercent: portfolioSummary.dayPnLPercent,
-      totalPnL: portfolioSummary.totalPnL,
-      totalPnLPercent: portfolioSummary.totalPnLPercent,
+      totalValue: portfolioSummary.totalValue,;
+      cash: portfolioSummary.cash,;
+      buyingPower: portfolioSummary.buyingPower,;
+      dayPnL: portfolioSummary.dayPnL,;
+      dayPnLPercent: portfolioSummary.dayPnLPercent,;
+      totalPnL: portfolioSummary.totalPnL,;
+      totalPnLPercent: portfolioSummary.totalPnLPercent,;
       positions: portfolioSummary.positions.map((position: any) => ({
-        symbol: position.symbol,
-        quantity: position.quantity,
-        marketValue: position.marketValue,
-        costBasis: position.costBasis,
-        unrealizedPnL: position.unrealizedPnL,
-        unrealizedPnLPercent: position.unrealizedPnLPercent,
-        averageEntryPrice: position.averageEntryPrice,
-        currentPrice: position.currentPrice,
-        side: position.side,
-        changeToday: position.changeToday,
-        changeTodayPercent: position.changeTodayPercent,
-      })),
-      equity: portfolioSummary.equity,
-      longMarketValue: portfolioSummary.longMarketValue,
-      shortMarketValue: portfolioSummary.shortMarketValue,
+        symbol: position.symbol,;
+        quantity: position.quantity,;
+        marketValue: position.marketValue,;
+        costBasis: position.costBasis,;
+        unrealizedPnL: position.unrealizedPnL,;
+        unrealizedPnLPercent: position.unrealizedPnLPercent,;
+        averageEntryPrice: position.averageEntryPrice,;
+        currentPrice: position.currentPrice,;
+        side: position.side,;
+        changeToday: position.changeToday,;
+        changeTodayPercent: position.changeTodayPercent,;
+      })),;
+      equity: portfolioSummary.equity,;
+      longMarketValue: portfolioSummary.longMarketValue,;
+      shortMarketValue: portfolioSummary.shortMarketValue,;
     };
 
-    // Removed malformed console.log;
-      // Portfolio retrieved successfully for user;
+    console.log(;
+      `Portfolio retrieved successfully for user ${userId}: $${portfolioSummary.totalValue}`;
+    );
+
     return NextResponse.json({
-      success: true,
-      data: portfolioData,
-      timestamp: new Date().toISOString(),
+      success: true,;
+      data: portfolioData,;
+      timestamp: new Date().toISOString(),;
     });
   } catch (error) {
     console.error('Error fetching portfolio:', error);
@@ -285,11 +239,11 @@ export async function GET(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(
+    return NextResponse.json(;
       {
-        error: 'Failed to fetch portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error',
-      },
+        error: 'Failed to fetch portfolio',;
+        message: isDevelopment ? errorMessage : 'Internal server error',;
+      },;
       { status: 500 }
     );
   }
@@ -325,9 +279,9 @@ export async function POST(request: NextRequest) {
     // For now, return a placeholder response;
     // In the future, implement portfolio configuration updates;
     return NextResponse.json({
-      success: true,
-      message: 'Portfolio update functionality is not yet implemented',
-      data: updateData,
+      success: true,;
+      message: 'Portfolio update functionality is not yet implemented',;
+      data: updateData,;
     });
   } catch (error) {
     console.error('Error updating portfolio:', error);
@@ -335,11 +289,11 @@ export async function POST(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(
+    return NextResponse.json(;
       {
-        error: 'Failed to update portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error',
-      },
+        error: 'Failed to update portfolio',;
+        message: isDevelopment ? errorMessage : 'Internal server error',;
+      },;
       { status: 500 }
     );
   }
@@ -375,9 +329,9 @@ export async function PUT(request: NextRequest) {
     // For now, return a placeholder response;
     // In the future, implement portfolio rebalancing;
     return NextResponse.json({
-      success: true,
-      message: 'Portfolio rebalancing functionality is not yet implemented',
-      data: rebalanceData,
+      success: true,;
+      message: 'Portfolio rebalancing functionality is not yet implemented',;
+      data: rebalanceData,;
     });
   } catch (error) {
     console.error('Error rebalancing portfolio:', error);
@@ -385,11 +339,11 @@ export async function PUT(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    return NextResponse.json(
+    return NextResponse.json(;
       {
-        error: 'Failed to rebalance portfolio',
-        message: isDevelopment ? errorMessage : 'Internal server error',
-      },
+        error: 'Failed to rebalance portfolio',;
+        message: isDevelopment ? errorMessage : 'Internal server error',;
+      },;
       { status: 500 }
     );
   }
