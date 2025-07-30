@@ -1,3 +1,4 @@
+// ...existing code...
 import TradingDashboard from "../../components/ui/trading-dashboard-demo";
 import TradingDashboardDemo from '../../components/ui/trading-dashboard-demo';
 import React from 'react';
@@ -28,8 +29,7 @@ jest.mock('recharts', () => ({
   ResponsiveContainer: ({ children }: any) => (
     <div data-testid="responsive-container">{children}</div>
   ),
-}));
-
+  });
 const renderWithProviders = (component: React.ReactElement) => {
   // return render(<ThemeProvider defaultTheme="dark">{component}</ThemeProvider>);
   return render(component);
@@ -181,14 +181,10 @@ describe('TradingDashboard', () => {
       update: jest.fn(),
       data: null,
       status: 'loading',
-    // Removed misplaced closing parenthesis
-      update: jest.fn(),
     });
 
     renderWithProviders(<TradingDashboardDemo />);
 
     expect(screen.getByText('Please log in to access trading')).toBeTruthy();
   });
-// Remove misplaced closing brace
-
 }
