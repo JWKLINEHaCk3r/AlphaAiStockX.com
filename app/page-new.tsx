@@ -46,7 +46,7 @@ import { CardTitle } from "../components/ui/card";
 import { CardHeader } from "../components/ui/card";
 import { CardDescription } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
-import { Card } from "../components/ui/card";
+import { Card } from "../components/ui/card.tsx";
 import { Button } from "../components/ui/button";
 import React from 'react';
 'use client';
@@ -56,12 +56,12 @@ import { Brain, Sparkles, TrendingUp, Zap, ArrowRight } from 'lucide-react';
 import StockSearch from './components/StockSearch';
 import FeatureList from './components/FeatureList';
 
-const aiStats = [;
-  { label: 'AI Trades Executed', value: '1,234,567,890' },;
-  { label: 'Avg. ROI (YTD)', value: '+38.2%' },;
-  { label: 'Active AI Agents', value: '47' },;
-  { label: 'Quantum Backtests', value: '8,900,000+' },;
-  { label: 'Uptime', value: '99.9999%' },;
+const aiStats = [
+  { label: 'AI Trades Executed', value: '1,234,567,890' },
+  { label: 'Avg. ROI (YTD)', value: '+38.2%' },
+  { label: 'Active AI Agents', value: '47' },
+  { label: 'Quantum Backtests', value: '8,900,000+' },
+  { label: 'Uptime', value: '99.9999%' },
 ];
 
 function AITicker() {

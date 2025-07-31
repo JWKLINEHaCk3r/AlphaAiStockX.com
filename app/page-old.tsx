@@ -46,7 +46,7 @@ import { CardTitle } from "../components/ui/card";
 import { CardFooter } from "../components/ui/card";
 import { CardDescription } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
-import { Card } from "../components/ui/card";
+import { Card } from "../components/ui/card.tsx";
 import { Button } from "../components/ui/button";
 import React from 'react';
 'use client';
@@ -56,31 +56,31 @@ import { Brain, Sparkles, TrendingUp, Zap } from 'lucide-react';
 import StockSearch from './components/StockSearch';
 import FeatureList from './components/FeatureList';
 
-const features = [;
+const features = [
   {
     icon: <Brain className="w-8 h-8 text-violet-500 animate-pulse" />, // animated;
-    title: 'AI-Powered Insights',;
-    desc: 'Real-time, actionable stock analysis from 47+ conscious AI agents.',;
-  },;
+    title: 'AI-Powered Insights',
+    desc: 'Real-time, actionable stock analysis from 47+ conscious AI agents.',
+  },
   {
     icon: <BarChart3 className="w-8 h-8 text-emerald-500 animate-bounce" />, // animated;
-    title: 'Advanced Analytics',;
-    desc: 'Quantum-powered backtesting, predictive analytics, and risk management.',;
-  },;
+    title: 'Advanced Analytics',
+    desc: 'Quantum-powered backtesting, predictive analytics, and risk management.',
+  },
   {
     icon: <Zap className="w-8 h-8 text-yellow-400 animate-pulse" />, // animated;
-    title: 'Lightning Execution',;
-    desc: 'Trade with millisecond execution and high-frequency AI strategies.',;
-  },;
+    title: 'Lightning Execution',
+    desc: 'Trade with millisecond execution and high-frequency AI strategies.',
+  },
   {
     icon: <TrendingUp className="w-8 h-8 text-pink-500 animate-bounce" />, // animated;
-    title: 'Portfolio Optimization',;
-    desc: 'AI-driven portfolio balancing and automated trade bots.',;
-  },;
+    title: 'Portfolio Optimization',
+    desc: 'AI-driven portfolio balancing and automated trade bots.',
+  },
   {
     icon: <Shield className="w-8 h-8 text-cyan-500 animate-pulse" />, // animated;
-    title: 'Quantum Security',;
-    desc: 'Next-gen encryption and compliance for peace of mind.',;
+    title: 'Quantum Security',
+    desc: 'Next-gen encryption and compliance for peace of mind.',
   },;
   {
     icon: <Atom className="w-8 h-8 text-indigo-400 animate-spin" />, // animated;
