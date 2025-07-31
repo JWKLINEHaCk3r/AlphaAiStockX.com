@@ -1,4 +1,4 @@
-// Removed invalid import to fix unsupported directory import error
+import { Card } from "./card";
 // ...existing code...
 // Removed invalid import to fix unsupported directory import error
 import React from 'react';

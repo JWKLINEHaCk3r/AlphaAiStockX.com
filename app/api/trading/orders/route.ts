@@ -10,13 +10,13 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 // Input validation schemas;
 const ORDER_VALIDATION = {
-  symbol: (value: string): boolean => /^[A-Z]{1,5}$/.test(value),
-  quantity: (value: number): boolean => value > 0 && value <= 10000,
-  side: (value: string): boolean => ['buy', 'sell'].includes(value),
-  type: (value: string): boolean => ['market', 'limit', 'stop', 'stop_limit'].includes(value),
-  timeInForce: (value: string): boolean => ['day', 'gtc', 'ioc', 'fok'].includes(value),
-  limitPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
-  stopPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),
+  symbol: (value: string): boolean => /^[A-Z]{1,5}$/.test(value),;
+  quantity: (value: number): boolean => value > 0 && value <= 10000,;
+  side: (value: string): boolean => ['buy', 'sell'].includes(value),;
+  type: (value: string): boolean => ['market', 'limit', 'stop', 'stop_limit'].includes(value),;
+  timeInForce: (value: string): boolean => ['day', 'gtc', 'ioc', 'fok'].includes(value),;
+  limitPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),;
+  stopPrice: (value?: number): boolean => !value || (value > 0 && value <= 100000),;
 };
 
 // Order data interface for validation;
@@ -127,62 +127,62 @@ const validateOrderData = (data: unknown): {
 
   const orderData = data as Record<string, unknown>;
 
-  if (
-    !orderData.symbol ||
-    typeof orderData.symbol !== 'string' ||
-    !ORDER_VALIDATION.symbol(orderData.symbol)
+  if (;
+    !orderData.symbol ||;
+    typeof orderData.symbol !== 'string' ||;
+    !ORDER_VALIDATION.symbol(orderData.symbol);
   ) {
     errors.push('Invalid symbol format. Must be 1-5 uppercase letters.');
   }
 
-  if (
-    !orderData.quantity ||
-    typeof orderData.quantity !== 'number' ||
-    !ORDER_VALIDATION.quantity(orderData.quantity)
+  if (;
+    !orderData.quantity ||;
+    typeof orderData.quantity !== 'number' ||;
+    !ORDER_VALIDATION.quantity(orderData.quantity);
   ) {
     errors.push('Invalid quantity. Must be between 1 and 10,000.');
   }
 
-  if (
-    !orderData.side ||
-    typeof orderData.side !== 'string' ||
-    !ORDER_VALIDATION.side(orderData.side)
+  if (;
+    !orderData.side ||;
+    typeof orderData.side !== 'string' ||;
+    !ORDER_VALIDATION.side(orderData.side);
   ) {
     errors.push('Invalid side. Must be "buy" or "sell".');
   }
 
-  if (
-    !orderData.type ||
-    typeof orderData.type !== 'string' ||
-    !ORDER_VALIDATION.type(orderData.type as string)
+  if (;
+    !orderData.type ||;
+    typeof orderData.type !== 'string' ||;
+    !ORDER_VALIDATION.type(orderData.type as string);
   ) {
     errors.push('Invalid order type. Must be market, limit, stop, or stop_limit.');
   }
 
-  if (
-    !orderData.timeInForce ||
-    typeof orderData.timeInForce !== 'string' ||
-    !ORDER_VALIDATION.timeInForce(orderData.timeInForce as string)
+  if (;
+    !orderData.timeInForce ||;
+    typeof orderData.timeInForce !== 'string' ||;
+    !ORDER_VALIDATION.timeInForce(orderData.timeInForce as string);
   ) {
     errors.push('Invalid time in force. Must be day, gtc, ioc, or fok.');
   }
 
   // Conditional validation for limit and stop orders;
   if (orderData.type === 'limit' || orderData.type === 'stop_limit') {
-    if (
-      orderData.limitPrice === undefined ||
-      typeof orderData.limitPrice !== 'number' ||
-      !ORDER_VALIDATION.limitPrice(orderData.limitPrice as number)
+    if (;
+      orderData.limitPrice === undefined ||;
+      typeof orderData.limitPrice !== 'number' ||;
+      !ORDER_VALIDATION.limitPrice(orderData.limitPrice as number);
     ) {
       errors.push('Limit price required for limit orders and must be positive.');
     }
   }
 
   if (orderData.type === 'stop' || orderData.type === 'stop_limit') {
-    if (
-      orderData.stopPrice === undefined ||
-      typeof orderData.stopPrice !== 'number' ||
-      !ORDER_VALIDATION.stopPrice(orderData.stopPrice as number)
+    if (;
+      orderData.stopPrice === undefined ||;
+      typeof orderData.stopPrice !== 'number' ||;
+      !ORDER_VALIDATION.stopPrice(orderData.stopPrice as number);
     ) {
       errors.push('Stop price required for stop orders and must be positive.');
     }
@@ -190,18 +190,18 @@ const validateOrderData = (data: unknown): {
 
   if (errors.length === 0) {
     return {
-      valid: true,
-      errors: [],
+      valid: true,;
+      errors: [],;
       data: {
-        symbol: orderData.symbol as string,
-        quantity: orderData.quantity as number,
-        side: orderData.side as 'buy' | 'sell',
-        type: orderData.type as 'market' | 'limit' | 'stop' | 'stop_limit',
-        timeInForce: orderData.timeInForce as 'day' | 'gtc' | 'ioc' | 'fok',
-        limitPrice: orderData.limitPrice as number | undefined,
-        stopPrice: orderData.stopPrice as number | undefined,
-      },
-    }
+        symbol: orderData.symbol as string,;
+        quantity: orderData.quantity as number,;
+        side: orderData.side as 'buy' | 'sell',;
+        type: orderData.type as 'market' | 'limit' | 'stop' | 'stop_limit',;
+        timeInForce: orderData.timeInForce as 'day' | 'gtc' | 'ioc' | 'fok',;
+        limitPrice: orderData.limitPrice as number | undefined,;
+        stopPrice: orderData.stopPrice as number | undefined,;
+      },;
+    };
   }
 
   return { valid: false, errors };
@@ -236,31 +236,31 @@ export async function GET(request: NextRequest) {
 
     // Fetch orders;
     const orders = await tradingService.getOrders({
-      status: status ?? undefined,
-      limit,
+      status: status ?? undefined,;
+      limit,;
     });
 
     console.log(`[Orders] User ${userId} accessed ${orders.length} orders`);
 
     return NextResponse.json({
-      success: true,
-      data: orders,
+      success: true,;
+      data: orders,;
       pagination: {
-        limit,
-        count: orders.length,
-      },
+        limit,;
+        count: orders.length,;
+      },;
     });
   } catch (error) {
     console.error('[Error][GET Orders]:', error);
 
     return NextResponse.json({
-      error: 'Failed to fetch orders',
-      message:
-        process.env.NODE_ENV === 'development'
-          ? (error instanceof Error
-              ? error.message || 'Unknown error'
-              : 'Unknown error')
-          : 'Internal server error',
+      error: 'Failed to fetch orders',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? (error instanceof Error;
+              ? error.message || 'Unknown error';
+              : 'Unknown error');
+          : 'Internal server error',;
     }, { status: 500 });
   }
 }
@@ -296,8 +296,8 @@ export async function POST(request: NextRequest) {
     if (!validation.valid || !validation.data) {
       console.log(`[OrderValidation] Invalid order data from user ${userId}:`, validation.errors);
       return NextResponse.json({
-        error: 'Invalid order data',
-        details: validation.errors,
+        error: 'Invalid order data',;
+        details: validation.errors,;
       }, { status: 400 });
     }
 
@@ -308,13 +308,13 @@ export async function POST(request: NextRequest) {
 
     // Build order request;
     const orderRequest: OrderRequest = {
-      symbol: orderData.symbol,
-      quantity: orderData.quantity,
-      side: orderData.side,
-      type: orderData.type,
-      timeInForce: orderData.timeInForce,
-      limitPrice: orderData.limitPrice,
-      stopPrice: orderData.stopPrice,
+      symbol: orderData.symbol,;
+      quantity: orderData.quantity,;
+      side: orderData.side,;
+      type: orderData.type,;
+      timeInForce: orderData.timeInForce,;
+      limitPrice: orderData.limitPrice,;
+      stopPrice: orderData.stopPrice,;
     };
 
     // Create order through trading service;
@@ -323,9 +323,9 @@ export async function POST(request: NextRequest) {
     console.log(`[OrderCreated] User ${userId}: ${order.id} - ${orderData.symbol} ${orderData.side} ${orderData.quantity}`);
 
     return NextResponse.json({
-      success: true,
-      data: order,
-      message: 'Order created successfully',
+      success: true,;
+      data: order,;
+      message: 'Order created successfully',;
     });
   } catch (error) {
     console.error('[Error][POST Order]:', error);
@@ -346,13 +346,13 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      error: 'Failed to create order',
-      message:
-        process.env.NODE_ENV === 'development'
-          ? (error instanceof Error
-              ? error.message || 'Unknown error'
-              : 'Unknown error')
-          : 'Internal server error',
+      error: 'Failed to create order',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? (error instanceof Error;
+              ? error.message || 'Unknown error';
+              : 'Unknown error');
+          : 'Internal server error',;
     }, { status: 500 });
   }
 }
@@ -391,8 +391,8 @@ export async function DELETE(request: NextRequest) {
     console.log(`[OrderCancelled] User ${userId}: ${orderId}`);
 
     return NextResponse.json({
-      success: true,
-      message: 'Order cancelled successfully',
+      success: true,;
+      message: 'Order cancelled successfully',;
     });
   } catch (error) {
     console.error('[Error][DELETE Order]:', error);
@@ -402,13 +402,13 @@ export async function DELETE(request: NextRequest) {
     }
 
     return NextResponse.json({
-      error: 'Failed to cancel order',
-      message:
-        process.env.NODE_ENV === 'development'
-          ? (error instanceof Error
-              ? error.message
-              : 'Unknown error')
-          : 'Internal server error',
+      error: 'Failed to cancel order',;
+      message:;
+        process.env.NODE_ENV === 'development';
+          ? (error instanceof Error;
+              ? error.message;
+              : 'Unknown error');
+          : 'Internal server error',;
     }, { status: 500 });
   }
 }

@@ -1,6 +1,5 @@
-import { Card } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
-import { Card } from "./components/ui/card.js";
+import { Card } from "./components/ui/card";
 
 
 #!/usr/bin/env node

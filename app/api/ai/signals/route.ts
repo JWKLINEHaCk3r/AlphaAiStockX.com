@@ -4,19 +4,19 @@ import { auth } from '@/app/lib/auth';
 // Enhanced AI trading signals with advanced analytics
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await auth()
     
     if (!session?.user?.id) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
-      );
+      )
     }
 
-    const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const minConfidence = parseFloat(searchParams.get('minConfidence') || '0.7');
-    const symbols = searchParams.get('symbols')?.split(',') || ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'NVDA', 'META', 'NFLX', 'AMD', 'CRM'];
+    const { searchParams } = new URL(request.url)
+    const limit = parseInt(searchParams.get('limit') || '10')
+    const minConfidence = parseFloat(searchParams.get('minConfidence') || '0.7')
+    const symbols = searchParams.get('symbols')?.split(',') || ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'NVDA', 'META', 'NFLX', 'AMD', 'CRM']
 
     // Advanced AI strategies with different characteristics
     const aiModels = [
@@ -62,30 +62,30 @@ export async function GET(request: NextRequest) {
         timeframe: 'technical',
         confidenceRange: [0.80, 0.96],
       }
-    ];
+    ]
 
-    const marketConditions = ['bullish', 'bearish', 'neutral', 'volatile', 'trending'];
-    const signals: any[] = [];
+    const marketConditions = ['bullish', 'bearish', 'neutral', 'volatile', 'trending']
+    const signals: any[] = []
     
     for (let i = 0; i < limit; i++) {
-      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-      const model = aiModels[Math.floor(Math.random() * aiModels.length)];
+      const symbol = symbols[Math.floor(Math.random() * symbols.length)]
+      const model = aiModels[Math.floor(Math.random() * aiModels.length)]
       
       // Type guard to ensure model is defined
       if (!model) continue;
       
       const basePrice = 50 + Math.random() * 400;
       
-      // Generate confidence within model's range;
+      // Generate confidence within model's range,
       const confidence = model.confidenceRange[0] +
         Math.random() * (model.confidenceRange[1] - model.confidenceRange[0]);
       
-      // Only include signals above minimum confidence;
+      // Only include signals above minimum confidence,
       if (confidence < minConfidence) {
         continue;
       }
 
-      // Determine action based on model specialty and market conditions;
+      // Determine action based on model specialty and market conditions,
       let action: 'BUY' | 'SELL' | 'HOLD';
       const marketBias = Math.random();
       
@@ -99,8 +99,8 @@ export async function GET(request: NextRequest) {
         action = ['BUY', 'SELL', 'HOLD'][Math.floor(Math.random() * 3)] as 'BUY' | 'SELL' | 'HOLD';
       }
 
-      // Calculate prices based on action and confidence;
-      const priceMove = confidence * 0.1 * (Math.random() * 0.2 + 0.05); // 5-25% move potential;
+      // Calculate prices based on action and confidence,
+      const priceMove = confidence * 0.1 * (Math.random() * 0.2 + 0.05); // 5-25% move potential
       const targetPrice = action === 'BUY'
         ? basePrice * (1 + priceMove)
         : action === 'SELL'
@@ -108,14 +108,14 @@ export async function GET(request: NextRequest) {
         : basePrice;
       const stopLoss = action === 'BUY'
         ? basePrice * (1 - priceMove * 0.4)
-        : basePrice * (1 + priceMove * 0.4)
-      // Generate technical indicators;
+        : basePrice * (1 + priceMove * 0.4);
+      // Generate technical indicators
       const rsi = 30 + Math.random() * 40;
       const macd = (Math.random() - 0.5) * 4;
       const volume = Math.floor(Math.random() * 10000000) + 100000;
       const volatility = Math.random() * 0.5 + 0.1;
 
-      // Risk assessment;
+      // Risk assessment
       const riskScore = Math.max(0, Math.min(100,
         (100 - confidence * 100) +
         (volatility * 30) +
@@ -158,7 +158,7 @@ export async function GET(request: NextRequest) {
           sharpeRatio: Math.round((Math.random() * 2 + 1) * 100) / 100,
           maxDrawdown: Math.round((Math.random() * 0.15 + 0.05) * 1000) / 10
         }
-      });
+      })
     }
 
     return NextResponse.json({
@@ -181,54 +181,54 @@ export async function GET(request: NextRequest) {
       engineVersion: '4.1.0',
       processingTime: Math.round(Math.random() * 50 + 10) + 'ms'
       }
-    });
+    })
 
   } catch (error) {
-    console.error('AI signals error:', error);
+    console.error('AI signals error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },;
+      { error: 'Internal server error' },
       { status: 500 }
-    );
+    )
   }
 }
 
-// Helper function to generate human-readable reasoning;
-function generateSignalReasoning(;
-  action: string,;
-  confidence: number,;
-  model: { name: string; specialty: string },;
-  rsi: number,;
-  macd: number;
+// Helper function to generate human-readable reasoning,
+function generateSignalReasoning(
+  action: string,
+  confidence: number,
+  model: { name: string; specialty: string },
+  rsi: number,
+  macd: number,
 ): string[] {
-  const reasons: any[] = [];
+  const reasons: any[] = []
   
   if (confidence > 0.9) {
-    reasons.push(`High confidence ${model.name} prediction with ${Math.round(confidence * 100)}% accuracy`);
+    reasons.push(`High confidence ${model.name} prediction with ${Math.round(confidence * 100)}% accuracy`)
   }
   
   if (model.specialty === 'momentum' && action === 'BUY') {
-    reasons.push('Strong momentum patterns detected by neural ensemble');
+    reasons.push('Strong momentum patterns detected by neural ensemble')
   }
   
   if (rsi < 30 && action === 'BUY') {
-    reasons.push(`Oversold conditions (RSI: ${Math.round(rsi)}) indicate potential reversal`);
+    reasons.push(`Oversold conditions (RSI: ${Math.round(rsi)}) indicate potential reversal`)
   } else if (rsi > 70 && action === 'SELL') {
-    reasons.push(`Overbought conditions (RSI: ${Math.round(rsi)}) suggest potential decline`);
+    reasons.push(`Overbought conditions (RSI: ${Math.round(rsi)}) suggest potential decline`)
   }
   
   if (macd > 0 && action === 'BUY') {
-    reasons.push('MACD bullish crossover supports upward momentum');
+    reasons.push('MACD bullish crossover supports upward momentum')
   } else if (macd < 0 && action === 'SELL') {
-    reasons.push('MACD bearish divergence indicates downward pressure');
+    reasons.push('MACD bearish divergence indicates downward pressure')
   }
   
   if (model.specialty === 'sentiment') {
-    reasons.push('News sentiment analysis shows ' + (action === 'BUY' ? 'positive' : 'negative') + ' market perception');
+    reasons.push('News sentiment analysis shows ' + (action === 'BUY' ? 'positive' : 'negative') + ' market perception')
   }
   
   if (model.specialty === 'patterns') {
-    reasons.push('Advanced pattern recognition identified ' + (action === 'BUY' ? 'bullish' : 'bearish') + ' formation');
+    reasons.push('Advanced pattern recognition identified ' + (action === 'BUY' ? 'bullish' : 'bearish') + ' formation')
   }
   
-  return reasons.length > 0 ? reasons : ['AI model prediction based on comprehensive market analysis'];
+  return reasons.length > 0 ? reasons : ['AI model prediction based on comprehensive market analysis']
 }
