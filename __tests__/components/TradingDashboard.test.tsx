@@ -1,4 +1,4 @@
-// ...existing code...
+});
 import TradingDashboard from "../../components/ui/trading-dashboard-demo";
 import TradingDashboardDemo from '../../components/ui/trading-dashboard-demo';
 import React from 'react';
@@ -29,7 +29,7 @@ jest.mock('recharts', () => ({
   ResponsiveContainer: ({ children }: any) => (
     <div data-testid="responsive-container">{children}</div>
   ),
-  });
+}));
 const renderWithProviders = (component: React.ReactElement) => {
   // return render(<ThemeProvider defaultTheme="dark">{component}</ThemeProvider>);
   return render(component);
@@ -187,4 +187,4 @@ describe('TradingDashboard', () => {
 
     expect(screen.getByText('Please log in to access trading')).toBeTruthy();
   });
-}
+// ...existing code...

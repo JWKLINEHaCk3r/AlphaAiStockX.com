@@ -1,3 +1,4 @@
+import { Card } from "../../components/ui/card";
 // ...existing code...
 // This file does not contain a local Card component declaration.;
 // Ensure to import Card from ui/card if needed.;

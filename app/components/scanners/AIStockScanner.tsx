@@ -1,5 +1,5 @@
+import { Card, CardHeader, CardContent, CardTitle } from "../../../components/ui/card";
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Brain, DollarSign } from 'lucide-react';
 
 interface Stock {
@@ -22,7 +22,6 @@ export default function AIStockScanner() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Simulate loading new data
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
@@ -37,15 +36,13 @@ export default function AIStockScanner() {
         {stocks.map((stock) => {
           const isPositive = stock.change >= 0;
           const confidenceColor = stock.aiConfidence > 80 ? 'green' : stock.aiConfidence > 60 ? 'yellow' : 'red';
+          let cardClass = 'relative overflow-hidden transition-all duration-500 hover:scale-105 shadow-lg';
+          if (loading) cardClass += ' animate-pulse';
+          if (stock.aiRecommendation === 'BUY') cardClass += ' border-green-500/50 shadow-green-500/25';
+          else if (stock.aiRecommendation === 'SELL') cardClass += ' border-red-500/50 shadow-red-500/25';
+          else cardClass += ' border-yellow-500/50 shadow-yellow-500/25';
           return (
-            <Card key={stock.symbol} className={[
-              'relative overflow-hidden transition-all duration-500 hover:scale-105',
-              loading ? 'animate-pulse' : '',
-              stock.aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : 
-              stock.aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 
-              'border-yellow-500/50 shadow-yellow-500/25',
-              'shadow-lg'
-            ].join(' ')}>
+            <Card key={stock.symbol} className={cardClass}>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg font-bold">{stock.symbol}</CardTitle>
@@ -61,17 +58,16 @@ export default function AIStockScanner() {
                     </span>
                   </div>
                 </div>
-                <CardDescription className="flex items-center gap-2">
+                <p className="text-sm text-gray-500 flex items-center gap-2">
                   <DollarSign className="w-4 h-4" />
                   {'$' + stock.price.toFixed(2)}
-                  <span className={[
-                    'flex items-center',
-                    isPositive ? 'text-green-500' : 'text-red-500'
-                  ].join(' ')}>
+                  <span className={
+                    'flex items-center ' + (isPositive ? 'text-green-500' : 'text-red-500')
+                  }>
                     {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                     {stock.change > 0 ? '+' : ''}{stock.change.toFixed(2)}%
                   </span>
-                </CardDescription>
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -83,8 +79,7 @@ export default function AIStockScanner() {
                     <div className="w-full h-2 bg-gray-200 rounded-full">
                       <div
                         className={
-                          `h-2 rounded-full ${stock.aiConfidence > 80 ? 'bg-green-500' : stock.aiConfidence > 60 ? 'bg-yellow-500' : 'bg-red-500'} ` +
-                          `w-[${Math.max(5, Math.min(stock.aiConfidence, 100))}%]`
+                          `h-2 rounded-full ${stock.aiConfidence > 80 ? 'bg-green-500' : stock.aiConfidence > 60 ? 'bg-yellow-500' : 'bg-red-500'} w-[${Math.max(5, Math.min(stock.aiConfidence, 100))}%]`
                         }
                       />
                     </div>
@@ -106,13 +101,11 @@ export default function AIStockScanner() {
                 </div>
               </CardContent>
               <div className="absolute top-2 right-2">
-                <div className={[
-                  'w-2 h-2 rounded-full',
-                  confidenceColor === 'green' ? 'bg-green-500' : 
-                  confidenceColor === 'yellow' ? 'bg-yellow-500' : 
-                  'bg-red-500',
-                  'animate-pulse'
-                ].join(' ')}></div>
+                <div className={
+                  'w-2 h-2 rounded-full ' +
+                  (confidenceColor === 'green' ? 'bg-green-500' : confidenceColor === 'yellow' ? 'bg-yellow-500' : 'bg-red-500') +
+                  ' animate-pulse'
+                }></div>
               </div>
             </Card>
           );
