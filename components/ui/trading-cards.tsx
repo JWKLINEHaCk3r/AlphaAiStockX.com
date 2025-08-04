@@ -1,3 +1,7 @@
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Card } from "./card.js";
 import React from 'react';
 import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "./card.js"; import { Badge } from './badge'; import { Button } from './button'; import { Progress } from './progress';

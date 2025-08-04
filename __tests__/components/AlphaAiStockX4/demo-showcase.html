@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 AlphaAI StockX - Live Demo Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .slide-in { animation: slideIn 0.5s ease-out; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="gradient-bg py-6 px-4">
+        <div class="container mx-auto">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-2">🚀 AlphaAI StockX</h1>
+                <p class="text-xl opacity-90">Enterprise AI Trading Platform - Live Demo</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm pulse">🟢 LIVE</span>
+                    <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">💎 ENTERPRISE</span>
+                    <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm">🤖 AI POWERED</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 py-4 px-4 sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-center space-x-6">
+                <button onclick="showSection('dashboard')" class="nav-btn bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition-colors">📊 Dashboard</button>
+                <button onclick="showSection('trading')" class="nav-btn bg-green-600 hover:bg-green-700 px-4 py-2 rounded transition-colors">💹 Trading</button>
+                <button onclick="showSection('portfolio')" class="nav-btn bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition-colors">📈 Portfolio</button>
+                <button onclick="showSection('analytics')" class="nav-btn bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded transition-colors">🔍 Analytics</button>
+                <button onclick="showSection('admin')" class="nav-btn bg-red-600 hover:bg-red-700 px-4 py-2 rounded transition-colors">⚙️ Admin</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4">
+        
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section">
+            <h2 class="text-3xl font-bold mb-6 text-center">📊 AI Trading Dashboard</h2>
+            
+            <!-- Live Market Data -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg card-hover transition-all">
+                    <h3 class="text-lg font-semibold mb-2">📈 S&P 500</h3>
+                    <div class="text-2xl font-bold text-green-400" id="sp500">5,427.34</div>
+                    <div class="text-sm text-green-400">+0.75% ↗</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover transition-all">
+                    <h3 class="text-lg font-semibold mb-2">🚀 NASDAQ</h3>
+                    <div class="text-2xl font-bold text-green-400" id="nasdaq">17,133.13</div>
+                    <div class="text-sm text-green-400">+1.24% ↗</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover transition-all">
+                    <h3 class="text-lg font-semibold mb-2">💰 Portfolio</h3>
+                    <div class="text-2xl font-bold text-blue-400" id="portfolio">$847,293</div>
+                    <div class="text-sm text-green-400">+$12,847 today</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover transition-all">
+                    <h3 class="text-lg font-semibold mb-2">🤖 AI Score</h3>
+                    <div class="text-2xl font-bold text-purple-400" id="aiscore">94.7</div>
+                    <div class="text-sm text-green-400">Excellent ⭐</div>
+                </div>
+            </div>
+
+            <!-- Market Chart -->
+            <div class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">📈 Real-Time Market Trends</h3>
+                <canvas id="marketChart" width="800" height="300"></canvas>
+            </div>
+
+            <!-- AI Insights -->
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">🤖 AI Market Insights</h3>
+                <div class="space-y-4">
+                    <div class="bg-green-900 p-4 rounded border-l-4 border-green-500">
+                        <p class="font-semibold">🟢 BULLISH SIGNAL</p>
+                        <p>AAPL showing strong upward momentum. AI confidence: 87%</p>
+                    </div>
+                    <div class="bg-blue-900 p-4 rounded border-l-4 border-blue-500">
+                        <p class="font-semibold">🔵 NEUTRAL</p>
+                        <p>TSLA consolidating in current range. Watch for breakout signals.</p>
+                    </div>
+                    <div class="bg-orange-900 p-4 rounded border-l-4 border-orange-500">
+                        <p class="font-semibold">🟡 OPPORTUNITY</p>
+                        <p>Tech sector rotation detected. Consider diversification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Section -->
+        <div id="trading" class="section hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center">💹 AI-Powered Trading</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Trading Interface -->
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">🎯 Quick Trade</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Symbol</label>
+                            <input type="text" value="AAPL" class="w-full bg-gray-700 p-3 rounded border border-gray-600 focus:border-blue-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Shares</label>
+                                <input type="number" value="100" class="w-full bg-gray-700 p-3 rounded border border-gray-600 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Price</label>
+                                <input type="number" value="233.47" class="w-full bg-gray-700 p-3 rounded border border-gray-600 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-green-600 hover:bg-green-700 py-3 rounded font-semibold transition-colors">🚀 BUY</button>
+                            <button class="flex-1 bg-red-600 hover:bg-red-700 py-3 rounded font-semibold transition-colors">📉 SELL</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Recommendations -->
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">🤖 AI Recommendations</h3>
+                    <div class="space-y-4">
+                        <div class="bg-green-900 p-4 rounded">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">NVDA</span>
+                                <span class="text-green-400">🔥 Strong Buy</span>
+                            </div>
+                            <p class="text-sm">AI confidence: 92% | Target: $1,200</p>
+                        </div>
+                        <div class="bg-blue-900 p-4 rounded">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">MSFT</span>
+                                <span class="text-blue-400">📈 Buy</span>
+                            </div>
+                            <p class="text-sm">AI confidence: 78% | Target: $485</p>
+                        </div>
+                        <div class="bg-yellow-900 p-4 rounded">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">META</span>
+                                <span class="text-yellow-400">⚖️ Hold</span>
+                            </div>
+                            <p class="text-sm">AI confidence: 65% | Monitor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Orders -->
+            <div class="bg-gray-800 p-6 rounded-lg mt-8">
+                <h3 class="text-xl font-semibold mb-4">📋 Active Orders</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left p-2">Symbol</th>
+                                <th class="text-left p-2">Type</th>
+                                <th class="text-left p-2">Shares</th>
+                                <th class="text-left p-2">Price</th>
+                                <th class="text-left p-2">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2">AAPL</td>
+                                <td class="p-2 text-green-400">BUY</td>
+                                <td class="p-2">50</td>
+                                <td class="p-2">$230.00</td>
+                                <td class="p-2"><span class="bg-yellow-600 px-2 py-1 rounded text-xs">PENDING</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2">TSLA</td>
+                                <td class="p-2 text-red-400">SELL</td>
+                                <td class="p-2">25</td>
+                                <td class="p-2">$418.50</td>
+                                <td class="p-2"><span class="bg-green-600 px-2 py-1 rounded text-xs">FILLED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div id="portfolio" class="section hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center">📈 Portfolio Management</h2>
+            
+            <!-- Portfolio Overview -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">💰 Total Value</h3>
+                    <div class="text-3xl font-bold text-green-400">$847,293</div>
+                    <div class="text-sm text-green-400">+1.54% today</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">📊 Day's Gain</h3>
+                    <div class="text-3xl font-bold text-green-400">+$12,847</div>
+                    <div class="text-sm">Best performer: NVDA</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">🎯 Total Return</h3>
+                    <div class="text-3xl font-bold text-green-400">+23.4%</div>
+                    <div class="text-sm">Since inception</div>
+                </div>
+            </div>
+
+            <!-- Holdings -->
+            <div class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">📋 Current Holdings</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left p-2">Symbol</th>
+                                <th class="text-left p-2">Shares</th>
+                                <th class="text-left p-2">Avg Cost</th>
+                                <th class="text-left p-2">Current Price</th>
+                                <th class="text-left p-2">Market Value</th>
+                                <th class="text-left p-2">Gain/Loss</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2 font-semibold">AAPL</td>
+                                <td class="p-2">500</td>
+                                <td class="p-2">$195.40</td>
+                                <td class="p-2">$233.47</td>
+                                <td class="p-2">$116,735</td>
+                                <td class="p-2 text-green-400">+$19,035</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2 font-semibold">NVDA</td>
+                                <td class="p-2">200</td>
+                                <td class="p-2">$890.20</td>
+                                <td class="p-2">$1,157.89</td>
+                                <td class="p-2">$231,578</td>
+                                <td class="p-2 text-green-400">+$53,538</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2 font-semibold">MSFT</td>
+                                <td class="p-2">300</td>
+                                <td class="p-2">$380.15</td>
+                                <td class="p-2">$442.67</td>
+                                <td class="p-2">$132,801</td>
+                                <td class="p-2 text-green-400">+$18,756</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Allocation Chart -->
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">🥧 Portfolio Allocation</h3>
+                <canvas id="allocationChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analytics" class="section hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center">🔍 Advanced Analytics</h2>
+            
+            <!-- Performance Metrics -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">📈 Sharpe Ratio</h3>
+                    <div class="text-2xl font-bold text-green-400">2.34</div>
+                    <div class="text-sm">Excellent</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">📊 Beta</h3>
+                    <div class="text-2xl font-bold text-blue-400">0.87</div>
+                    <div class="text-sm">Low volatility</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">🎯 Alpha</h3>
+                    <div class="text-2xl font-bold text-purple-400">5.2%</div>
+                    <div class="text-sm">Outperforming</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">📉 Max Drawdown</h3>
+                    <div class="text-2xl font-bold text-orange-400">-8.7%</div>
+                    <div class="text-sm">Low risk</div>
+                </div>
+            </div>
+
+            <!-- Risk Analysis -->
+            <div class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">⚠️ Risk Analysis</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span>Market Risk</span>
+                        <div class="w-32 bg-gray-700 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 65%"></div>
+                        </div>
+                        <span class="text-green-400">Low</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Concentration Risk</span>
+                        <div class="w-32 bg-gray-700 rounded-full h-2">
+                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 45%"></div>
+                        </div>
+                        <span class="text-yellow-400">Medium</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Liquidity Risk</span>
+                        <div class="w-32 bg-gray-700 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <span class="text-green-400">Very Low</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Predictions -->
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">🔮 AI Predictions (Next 30 Days)</h3>
+                <canvas id="predictionsChart" width="800" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Admin Section -->
+        <div id="admin" class="section hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center">⚙️ Admin Panel</h2>
+            
+            <!-- System Status -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">🖥️ System Status</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>API Status</span>
+                            <span class="text-green-400">🟢 Online</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Database</span>
+                            <span class="text-green-400">🟢 Connected</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Trading Engine</span>
+                            <span class="text-green-400">🟢 Active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">👥 Active Users</h3>
+                    <div class="text-3xl font-bold text-blue-400">1,247</div>
+                    <div class="text-sm">+12% from yesterday</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">💹 Daily Volume</h3>
+                    <div class="text-3xl font-bold text-purple-400">$2.4M</div>
+                    <div class="text-sm">+8% from yesterday</div>
+                </div>
+            </div>
+
+            <!-- User Management -->
+            <div class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">👥 User Management</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left p-2">User ID</th>
+                                <th class="text-left p-2">Email</th>
+                                <th class="text-left p-2">Plan</th>
+                                <th class="text-left p-2">Last Login</th>
+                                <th class="text-left p-2">Status</th>
+                                <th class="text-left p-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2">#1001</td>
+                                <td class="p-2">trader1@example.com</td>
+                                <td class="p-2"><span class="bg-purple-600 px-2 py-1 rounded text-xs">Pro</span></td>
+                                <td class="p-2">2 hours ago</td>
+                                <td class="p-2"><span class="bg-green-600 px-2 py-1 rounded text-xs">Active</span></td>
+                                <td class="p-2">
+                                    <button class="text-blue-400 hover:text-blue-300 mr-2">Edit</button>
+                                    <button class="text-red-400 hover:text-red-300">Block</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-2">#1002</td>
+                                <td class="p-2">investor@example.com</td>
+                                <td class="p-2"><span class="bg-blue-600 px-2 py-1 rounded text-xs">Basic</span></td>
+                                <td class="p-2">1 day ago</td>
+                                <td class="p-2"><span class="bg-green-600 px-2 py-1 rounded text-xs">Active</span></td>
+                                <td class="p-2">
+                                    <button class="text-blue-400 hover:text-blue-300 mr-2">Edit</button>
+                                    <button class="text-red-400 hover:text-red-300">Block</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- System Settings -->
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">⚙️ System Settings</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Trading Hours</label>
+                        <select class="w-full bg-gray-700 p-3 rounded border border-gray-600">
+                            <option>Market Hours (9:30 AM - 4:00 PM ET)</option>
+                            <option>Extended Hours (4:00 AM - 8:00 PM ET)</option>
+                            <option>24/7 Trading</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Risk Level</label>
+                        <select class="w-full bg-gray-700 p-3 rounded border border-gray-600">
+                            <option>Conservative</option>
+                            <option>Moderate</option>
+                            <option>Aggressive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex space-x-4">
+                    <button class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded transition-colors">Save Settings</button>
+                    <button class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded transition-colors">Reset</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">© 2025 AlphaAI StockX - Enterprise Trading Platform</p>
+            <div class="mt-4 space-x-4">
+                <span class="text-sm bg-gray-700 px-3 py-1 rounded">🔒 Bank-Level Security</span>
+                <span class="text-sm bg-gray-700 px-3 py-1 rounded">📊 Real-Time Data</span>
+                <span class="text-sm bg-gray-700 px-3 py-1 rounded">🤖 AI-Powered</span>
+                <span class="text-sm bg-gray-700 px-3 py-1 rounded">☁️ Cloud Ready</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Live data simulation
+        function updateLiveData() {
+            const sp500 = document.getElementById('sp500');
+            const nasdaq = document.getElementById('nasdaq');
+            const portfolio = document.getElementById('portfolio');
+            const aiscore = document.getElementById('aiscore');
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                const sp500Value = parseFloat(sp500.textContent.replace(',', ''));
+                const change = (Math.random() - 0.5) * 10;
+                sp500.textContent = (sp500Value + change).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                const nasdaqValue = parseFloat(nasdaq.textContent.replace(',', ''));
+                const nasdaqChange = (Math.random() - 0.5) * 50;
+                nasdaq.textContent = (nasdaqValue + nasdaqChange).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                const portfolioValue = parseInt(portfolio.textContent.replace(/[$,]/g, ''));
+                const portfolioChange = (Math.random() - 0.5) * 1000;
+                portfolio.textContent = '$' + (portfolioValue + portfolioChange).toLocaleString();
+                
+                const aiValue = parseFloat(aiscore.textContent);
+                const aiChange = (Math.random() - 0.5) * 2;
+                aiscore.textContent = Math.max(0, Math.min(100, aiValue + aiChange)).toFixed(1);
+            }, 3000);
+        }
+
+        // Section navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('slide-in');
+            
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-white');
+            });
+            event.target.classList.add('ring-2', 'ring-white');
+        }
+
+        // Initialize charts
+        function initCharts() {
+            // Market Chart
+            const marketCtx = document.getElementById('marketChart').getContext('2d');
+            new Chart(marketCtx, {
+                type: 'line',
+                data: {
+                    labels: ['9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00'],
+                    datasets: [{
+                        label: 'S&P 500',
+                        data: [5420, 5425, 5418, 5432, 5428, 5435, 5441, 5438, 5445, 5442, 5448, 5445, 5450, 5427],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Portfolio Allocation Chart
+            const allocationCtx = document.getElementById('allocationChart').getContext('2d');
+            new Chart(allocationCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AAPL', 'NVDA', 'MSFT', 'GOOGL', 'AMZN', 'TSLA'],
+                    datasets: [{
+                        data: [25, 30, 20, 10, 8, 7],
+                        backgroundColor: [
+                            '#3B82F6',
+                            '#10B981',
+                            '#8B5CF6',
+                            '#F59E0B',
+                            '#EF4444',
+                            '#06B6D4'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Predictions Chart
+            const predictionsCtx = document.getElementById('predictionsChart').getContext('2d');
+            new Chart(predictionsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Today', '+5d', '+10d', '+15d', '+20d', '+25d', '+30d'],
+                    datasets: [{
+                        label: 'Portfolio Value',
+                        data: [847293, 852000, 859000, 863000, 871000, 878000, 885000],
+                        borderColor: '#8B5CF6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Conservative Estimate',
+                        data: [847293, 849000, 851000, 854000, 857000, 860000, 863000],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#fff',
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize demo
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLiveData();
+            initCharts();
+            
+            // Show dashboard by default
+            showSection('dashboard');
+        });
+    </script>
+</body>
+</html>

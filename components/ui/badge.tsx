@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import React from 'react';
 import { Badge } from "./badge";
 import * as React from 'react';

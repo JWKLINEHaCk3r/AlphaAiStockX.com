@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import React from 'react';
 import { Toaster } from "./toaster";
 // Removed circular import;

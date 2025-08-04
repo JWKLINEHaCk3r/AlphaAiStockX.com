@@ -1,3 +1,4 @@
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import React from 'react';
 'use client';
 import {  Card ,  Card, CardContent, CardTitle  } from "../../components/ui/card";

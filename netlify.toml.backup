@@ -1,24 +1,23 @@
+
 [build]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "npm run build"
   publish = ".next"
   functions = "netlify/functions"
 
+# Fallback build configuration
 [build.processing]
   skip_processing = false
 
 [build.environment]
-  NODE_VERSION = "18.20.2"
-  PNPM_VERSION = "10.13.1"
-  # Enable pnpm properly
-  PNPM_HOME = "/opt/buildhome/.pnpm"
-  # Disable npm package-lock conflicts
-  NPM_CONFIG_PACKAGE_LOCK = "false"
-  # Enable legacy peer deps for compatibility
+  NODE_VERSION = "18.20.8"
+  NPM_VERSION = "10.8.2"
+  # Force npm usage over pnpm
+  NPM_CONFIG_PACKAGE_LOCK = "true"
   NPM_CONFIG_LEGACY_PEER_DEPS = "true"
-  # Disable telemetry
-  NEXT_TELEMETRY_DISABLED = "1"
-  # Production environment
-  NODE_ENV = "production"
+  # Disable pnpm if detected
+  PNPM_HOME = ""
+  # Disable Python/pip processing
+  PYTHON_VERSION = ""
 
 [[redirects]]
   from = "/*"
@@ -26,7 +25,7 @@
   status = 200
 
 [dev]
-  command = "pnpm run dev"
+  command = "npm run dev"
   port = 3000
   publish = "out"
 
@@ -50,12 +49,6 @@
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# API routes - no cache
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

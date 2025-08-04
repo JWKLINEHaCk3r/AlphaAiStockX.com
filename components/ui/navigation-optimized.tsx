@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 'use client';
 import React from 'react';
  import Navigation from '../components/ui/navigation/index';

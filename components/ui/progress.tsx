@@ -1,3 +1,4 @@
+import { Progress } from "@/components/ui/progress";
 import { Progress } from "./progress";
 import React from 'react'; // Removed circular import; import * as ProgressPrimitive from '@radix-ui/react-progress'; import { cn } from '@/lib/utils';
 

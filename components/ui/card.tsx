@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Card } from "./card.js";
 import { Card } from "./card.js";
 // ...existing code...
