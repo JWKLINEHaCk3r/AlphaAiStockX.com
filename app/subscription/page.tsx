@@ -1,70 +1,53 @@
-import { Label } from "../../components/ui/label";
-'use client';
-
-// Force dynamic rendering to prevent static generation issues;
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-import React from 'react';
-
-const plans = [;
-	{
-		name: 'Starter',;
-		price: 49,;
-		features: [;
-			'AI Hot Stock Tips',;
-			'Basic AutoTrade Bot',;
-			'Sportsbook AI Picks',;
-			'Community Access',;
-		],;
-	},;
-	{
-		name: 'Pro',;
-		price: 149,;
-		features: [;
-			'All Starter Features',;
-			'Advanced AutoTrade Bot',;
-			'Smart Mode & Risk Controls',;
-			'Priority Support',;
-		],;
-	},;
-	{
-		name: 'Elite',;
-		price: 499,;
-		features: [;
-			'All Pro Features',;
-			'Full API Access',;
-			'White-Label Branding',;
-			'Early Access to New AI',;
-		],;
-	},;
-];
+'use client'; import React from 'react';
 
 export default function SubscriptionPage() {
-	return (;
-		<main className="max-w-4xl mx-auto p-8 glassmorphic rounded-xl shadow-2xl mt-8 animate-fade-in">;
-			<h1 className="text-4xl font-bold text-fuchsia-400 mb-4 drop-shadow">;
-				Choose Your Plan;
-			</h1>;
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">;
-				{plans.map((plan) => (;
-					<div key={plan.name} className="bg-black/30 rounded-xl p-6 flex flex-col gap-4 shadow-lg">;
-						<h2 className="text-2xl font-bold text-fuchsia-300">{plan.name}</h2>;
-						<div className="text-4xl font-extrabold text-fuchsia-200 mb-2">${plan.price}/mo</div>;
-						<ul className="text-left text-fuchsia-100 space-y-1 mb-4">;
-							{plan.features.map((f, i) => (;
-								<li key={i}>• {f}</li>;
-							))}
-						</ul>;
-						<button className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold py-3 px-6 rounded-lg transition-colors mt-2">;
-							Subscribe;
-						</button>;
-					</div>;
-				))}
-			</div>;
-			<div className="text-xs text-fuchsia-300 mt-6 italic">;
-				* All plans auto-renew monthly. Cancel anytime. Payment integration coming soon.;
-			</div>;
-		</main>;
-	);
+  const plans = [ { name: 'Starter',
+      price: 49, features: [ 'AI Hot Stock Tips', 'Basic AutoTrade Bot', 'Sportsbook AI Picks', 'Community Access'
+      ]
+    }, { name: 'Pro',
+      price: 99, features: [ 'Advanced AI Analytics', 'Multiple Trading Bots', 'Risk Management Tools', 'Priority Support', 'API Access'
+      ]
+    }, { name: 'Enterprise',
+      price: 199, features: [ 'Custom AI Models', 'Institutional Features', 'Dedicated Support', 'White Label Options', 'Advanced Reporting'
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-black text-white">
+      <div className="container mx-auto px-4 py-20">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Subscription Plans
+          </h1>
+          <p className="text-xl text-gray-300">
+            Choose the perfect plan for your trading needs
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <div key={index} className="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+              <div className="text-4xl font-bold text-blue-400 mb-6">
+                ${plan.price}
+                <span className="text-lg text-gray-400">/month</span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="text-gray-300">
+                    ✓ {feature}
+                  </li>
+                ))}
+              </ul>
+              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover: from-blue-600,
+      hover: to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                Choose Plan
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,7 +1,6 @@
-import React from 'react';
-('use client');
+import React from 'react'; ('use client');
 
-export default function CDNOptimization() {
-  // Temporarily disabled for build;
-  return null;
-}
+export default function CDNOptimization() { // Temporarily disabled for build
+               return,
+      null
+    }

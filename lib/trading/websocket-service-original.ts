@@ -26,10 +26,12 @@ export interface WebSocketMessage {
 
 
 
+
   type: string;
   userId?: string;
-  data: any;
-  timestamp: number;
+  data: any,
+    timestamp: number
+
 
 
 
@@ -79,17 +81,19 @@ export interface MarketDataUpdate {
 
 
 
-  symbol: string;
-  price: number;
-  change: number;
-  changePercent: number;
-  volume: number;
-  timestamp: number;
+
+  symbol: string,
+    price: number,
+  change: number,
+    changePercent: number,
+  volume: number,
+    timestamp: number;
   bid?: number;
   ask?: number;
   high?: number;
   low?: number;
   open?: number;
+
 
 
 
@@ -139,12 +143,14 @@ export interface OrderUpdate {
 
 
 
-  orderId: string;
-  symbol: string;
-  status: string;
-  filledQuantity: number;
+
+  orderId: string,
+    symbol: string,
+  status: string,
+    filledQuantity: number;
   filledPrice?: number;
-  timestamp: number;
+  timestamp: number
+
 
 
 
@@ -194,12 +200,14 @@ export interface PositionUpdate {
 
 
 
-  symbol: string;
-  quantity: number;
-  marketValue: number;
-  unrealizedPnL: number;
-  unrealizedPnLPercent: number;
-  timestamp: number;
+
+  symbol: string,
+    quantity: number,
+  marketValue: number,
+    unrealizedPnL: number,
+  unrealizedPnLPercent: number,
+    timestamp: number
+
 
 
 
@@ -249,12 +257,14 @@ export interface PortfolioUpdate {
 
 
 
-  totalValue: number;
-  dayPnL: number;
-  dayPnLPercent: number;
-  buyingPower: number;
-  positions: PositionUpdate[];
-  timestamp: number;
+
+  totalValue: number,
+    dayPnL: number,
+  dayPnLPercent: number,
+    buyingPower: number,
+  positions: PositionUpdate[],
+    timestamp: number
+
 
 
 
@@ -304,15 +314,15 @@ export interface AISignalUpdate {
 
 
 
-  id: string;
-  symbol: string;
-  action: 'BUY' | 'SELL' | 'HOLD';
-  confidence: number;
+
+  id: string, symbol: string, action: 'BUY' | 'SELL' | 'HOLD',
+    confidence: number,
   reasoning: string;
   targetPrice?: number;
   stopLoss?: number;
-  timeframe: string;
-  timestamp: number;
+  timeframe: string,
+    timestamp: number
+
 
 
 
@@ -362,15 +372,13 @@ export interface TradeNotification {
 
 
 
-  id: string;
-  type: 'ORDER_FILLED' | 'ORDER_CANCELED' | 'POSITION_CLOSED' | 'ALERT' | 'NEWS';
-  title: string;
-  message: string;
-  symbol?: string;
-  orderId?: string;
-  priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
-  timestamp: number;
-  read: boolean;
+ id: string, type: 'ORDER_FILLED' | 'ORDER_CANCELED' | 'POSITION_CLOSED' | 'ALERT' | 'NEWS',
+  title: string,
+    message: string;
+  symbol?: string, orderId?: string, priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT',
+    timestamp: number,
+  read: boolean
+
 
 
 
@@ -397,8 +405,9 @@ export interface TradeNotification {
 }
 
 export class WebSocketService {
-  private io: SocketIOServer | null = null;
-  private connectedClients: Map<string, Set<string>> = new Map(); // userId -> socketIds;
+  private io: SocketIOServer | null = null
+              
+  private, connectedClients: Map<string, Set<string>> = new Map(); // userId -> socketIds;
   private subscriptions: Map<string, Set<string>> = new Map(); // subscription -> userIds;
   private marketDataSubscriptions: Map<string, Set<string>> = new Map(); // symbol -> userIds;
   private isInitialized = false;
@@ -414,167 +423,91 @@ export class WebSocketService {
     const httpServer = server || createServer();
 
     this.io = new SocketIOServer(httpServer, {
-      cors: {
-        origin:;
-          process.env.NODE_ENV === 'production';
-            ? [process.env.NEXT_PUBLIC_APP_URL!];
-            : ['http://localhost:3000'],;
-        methods: ['GET', 'POST'],;
-        credentials: true,;
-      },;
-      path: '/api/socketio',;
-      transports: ['websocket', 'polling'],;
+      cors: { origin: process.env.NODE_ENV === 'production', ? [process.env.NEXT_PUBLIC_APP_URL!]; : ['http://localhost:3000'], methods: ['GET', 'POST'];
+        credentials: true }, path: '/api/socketio', transports: ['websocket', 'polling'];
     });
 
     this.setupEventHandlers();
     this.isInitialized = true;
-
-    SecurityAudit.logSecurityEvent({
-      type: 'system_event',;
-      details: { action: 'websocket_service_initialized' },;
+ SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_initialized' },
     });
   }
 
   private setupEventHandlers(): void {
-    if (!this.io) return;
-
-    this.io.on('connection', socket => {
+    if (!this.io) return; this.io.on('connection', socket => {
       console.log(`Client connected: ${socket.id}`);
-
-      // Handle authentication;
-      socket.on('authenticate', async (data: { userId: string; token: string }) => {
+ // Handle authentication; socket.on('authenticate', async (data: {
+      userId: string, token: string }) => {
         try {
           // Validate token (implement your token validation logic);
           const isValid = await this.validateToken(data.token, data.userId);
 
           if (isValid) {
-            socket.userId = data.userId;
-            this.addClientConnection(data.userId, socket.id);
-            socket.emit('authenticated', { success: true });
-
-            SecurityAudit.logSecurityEvent({
-              type: 'websocket_auth',;
-              userId: data.userId,;
-              details: { action: 'authenticated', socketId: socket.id },;
-            });
-          } else {
-            socket.emit('authentication_error', { error: 'Invalid token' });
+            socket.userId = data.userId; this.addClientConnection(data.userId, socket.id); socket.emit('authenticated', { success: true });
+ SecurityAudit.logSecurityEvent({ type: 'websocket_auth',
+    userId: data.userId, details: { action: 'authenticated', socketId: socket.id },
+            }); } else { socket.emit('authentication_error', { error: 'Invalid token' });
             socket.disconnect();
-          }
-        } catch (error) {
-          socket.emit('authentication_error', { error: 'Authentication failed' });
+          } } catch (error) { socket.emit('authentication_error', { error: 'Authentication failed' });
           socket.disconnect();
         }
       });
-
-      // Handle market data subscriptions;
-      socket.on('subscribe_market_data', (symbols: string[]) => {
+ // Handle market data subscriptions; socket.on('subscribe_market_data', (symbols: string[]) => {
         if (!socket.userId) return;
 
         symbols.forEach(symbol => {
           this.addMarketDataSubscription(symbol, socket.userId!);
-        });
+        }); socket.emit('subscribed_market_data', { symbols });
 
-        socket.emit('subscribed_market_data', { symbols });
-
-        SecurityAudit.logDataAccess({
-          userId: socket.userId,;
-          resource: 'market_data',;
-          action: 'subscribe',;
-          ip: socket.handshake.address,;
-          success: true,;
-        });
-      });
-
-      socket.on('unsubscribe_market_data', (symbols: string[]) => {
+        SecurityAudit.logDataAccess({ userId: socket.userId, resource: 'market_data', action: 'subscribe',
+    ip: socket.handshake.address,
+          success: true
+        })
+      }); socket.on('unsubscribe_market_data', (symbols: string[]) => {
         if (!socket.userId) return;
 
         symbols.forEach(symbol => {
           this.removeMarketDataSubscription(symbol, socket.userId!);
-        });
-
-        socket.emit('unsubscribed_market_data', { symbols });
+        }); socket.emit('unsubscribed_market_data', { symbols });
       });
+ // Handle portfolio subscriptions; socket.on('subscribe_portfolio', () => {
+        if (!socket.userId) return; this.addSubscription('portfolio', socket.userId); socket.emit('subscribed_portfolio');
 
-      // Handle portfolio subscriptions;
-      socket.on('subscribe_portfolio', () => {
-        if (!socket.userId) return;
-
-        this.addSubscription('portfolio', socket.userId);
-        socket.emit('subscribed_portfolio');
-
-        SecurityAudit.logDataAccess({
-          userId: socket.userId,;
-          resource: 'portfolio',;
-          action: 'subscribe',;
-          ip: socket.handshake.address,;
-          success: true,;
-        });
+        SecurityAudit.logDataAccess({ userId: socket.userId, resource: 'portfolio', action: 'subscribe',
+    ip: socket.handshake.address,
+          success: true
+        })
+      }); socket.on('unsubscribe_portfolio', () => {
+        if (!socket.userId) return; this.removeSubscription('portfolio', socket.userId); socket.emit('unsubscribed_portfolio');
       });
+ // Handle AI signals subscriptions; socket.on('subscribe_ai_signals', () => {
+        if (!socket.userId) return; this.addSubscription('ai_signals', socket.userId); socket.emit('subscribed_ai_signals');
 
-      socket.on('unsubscribe_portfolio', () => {
-        if (!socket.userId) return;
-
-        this.removeSubscription('portfolio', socket.userId);
-        socket.emit('unsubscribed_portfolio');
+        SecurityAudit.logDataAccess({ userId: socket.userId, resource: 'ai_signals', action: 'subscribe',
+    ip: socket.handshake.address,
+          success: true
+        })
+      }); socket.on('unsubscribe_ai_signals', () => {
+        if (!socket.userId) return; this.removeSubscription('ai_signals', socket.userId); socket.emit('unsubscribed_ai_signals');
       });
-
-      // Handle AI signals subscriptions;
-      socket.on('subscribe_ai_signals', () => {
-        if (!socket.userId) return;
-
-        this.addSubscription('ai_signals', socket.userId);
-        socket.emit('subscribed_ai_signals');
-
-        SecurityAudit.logDataAccess({
-          userId: socket.userId,;
-          resource: 'ai_signals',;
-          action: 'subscribe',;
-          ip: socket.handshake.address,;
-          success: true,;
-        });
+ // Handle trade notifications subscriptions; socket.on('subscribe_notifications', () => {
+        if (!socket.userId) return; this.addSubscription('notifications', socket.userId); socket.emit('subscribed_notifications');
+      }); socket.on('unsubscribe_notifications', () => {
+        if (!socket.userId) return; this.removeSubscription('notifications', socket.userId); socket.emit('unsubscribed_notifications');
       });
-
-      socket.on('unsubscribe_ai_signals', () => {
-        if (!socket.userId) return;
-
-        this.removeSubscription('ai_signals', socket.userId);
-        socket.emit('unsubscribed_ai_signals');
-      });
-
-      // Handle trade notifications subscriptions;
-      socket.on('subscribe_notifications', () => {
-        if (!socket.userId) return;
-
-        this.addSubscription('notifications', socket.userId);
-        socket.emit('subscribed_notifications');
-      });
-
-      socket.on('unsubscribe_notifications', () => {
-        if (!socket.userId) return;
-
-        this.removeSubscription('notifications', socket.userId);
-        socket.emit('unsubscribed_notifications');
-      });
-
-      // Handle disconnect;
-      socket.on('disconnect', () => {
+ // Handle disconnect; socket.on('disconnect', () => {
         console.log(`Client disconnected: ${socket.id}`);
 
         if (socket.userId) {
           this.removeClientConnection(socket.userId, socket.id);
-
-          SecurityAudit.logSecurityEvent({
-            type: 'websocket_disconnect',;
-            userId: socket.userId,;
-            details: { socketId: socket.id },;
+ SecurityAudit.logSecurityEvent({ type: 'websocket_disconnect',
+    userId: socket.userId,
+            details: {
+      socketId: socket.id },
           });
         }
       });
-
-      // Handle ping/pong for connection health;
-      socket.on('ping', () => {
-        socket.emit('pong', { timestamp: Date.now() });
+ // Handle ping/pong for connection health; socket.on('ping', () => { socket.emit('pong', { timestamp: Date.now() }),
       });
     });
   }
@@ -588,9 +521,7 @@ export class WebSocketService {
 
     subscribedUsers.forEach(userId => {
       const socketIds = this.connectedClients.get(userId);
-      if (socketIds) {
-        socketIds.forEach(socketId => {
-          this.io!.to(socketId).emit('market_data_update', data);
+      if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('market_data_update', data);
         });
       }
     });
@@ -600,102 +531,74 @@ export class WebSocketService {
     if (!this.io) return;
 
     const socketIds = this.connectedClients.get(userId);
-    if (socketIds) {
-      socketIds.forEach(socketId => {
-        this.io!.to(socketId).emit('order_update', order);
+    if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('order_update', order);
       });
     }
 
-    SecurityAudit.logDataAccess({
-      userId,;
-      resource: 'order_update',;
-      action: 'notify',;
-      success: true,;
-    });
+    SecurityAudit.logDataAccess({ userId; resource: 'order_update', action: 'notify',
+      success: true
+    }),
   }
 
   public notifyPositionUpdate(userId: string, position: PositionUpdate): void {
     if (!this.io) return;
 
     const socketIds = this.connectedClients.get(userId);
-    if (socketIds) {
-      socketIds.forEach(socketId => {
-        this.io!.to(socketId).emit('position_update', position);
+    if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('position_update', position);
       });
     }
   }
 
   public notifyPortfolioUpdate(userId: string, portfolio: PortfolioUpdate): void {
-    if (!this.io) return;
-
-    const subscribedUsers = this.subscriptions.get('portfolio');
+    if (!this.io) return; const subscribedUsers = this.subscriptions.get('portfolio');
     if (!subscribedUsers?.has(userId)) return;
 
     const socketIds = this.connectedClients.get(userId);
-    if (socketIds) {
-      socketIds.forEach(socketId => {
-        this.io!.to(socketId).emit('portfolio_update', portfolio);
+    if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('portfolio_update', portfolio);
       });
     }
   }
 
   public notifyAISignal(signal: AISignalUpdate): void {
-    if (!this.io) return;
-
-    const subscribedUsers = this.subscriptions.get('ai_signals');
+    if (!this.io) return; const subscribedUsers = this.subscriptions.get('ai_signals');
     if (!subscribedUsers || subscribedUsers.size === 0) return;
 
     subscribedUsers.forEach(userId => {
       const socketIds = this.connectedClients.get(userId);
-      if (socketIds) {
-        socketIds.forEach(socketId => {
-          this.io!.to(socketId).emit('ai_signal', signal);
+      if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('ai_signal', signal);
         });
       }
     });
   }
 
   public notifyTradeNotification(userId: string, notification: TradeNotification): void {
-    if (!this.io) return;
-
-    const subscribedUsers = this.subscriptions.get('notifications');
+    if (!this.io) return; const subscribedUsers = this.subscriptions.get('notifications');
     if (!subscribedUsers?.has(userId)) return;
 
     const socketIds = this.connectedClients.get(userId);
-    if (socketIds) {
-      socketIds.forEach(socketId => {
-        this.io!.to(socketId).emit('trade_notification', notification);
+    if (socketIds) { socketIds.forEach(socketId => { this.io!.to(socketId).emit('trade_notification', notification);
       });
     }
   }
-
-  public broadcastSystemNotification(notification: {
-    type: 'MAINTENANCE' | 'OUTAGE' | 'UPDATE' | 'SECURITY';
-    title: string;
-    message: string;
-    priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+ public broadcastSystemNotification(notification: { type: 'MAINTENANCE' | 'OUTAGE' | 'UPDATE' | 'SECURITY',
+    title: string, message: string, priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT'
   }): void {
-    if (!this.io) return;
-
-    this.io.emit('system_notification', {
-      ...notification,;
-      timestamp: Date.now(),;
+    if (!this.io) return; this.io.emit('system_notification', {
+      ...notification;
+      timestamp: Date.now()
     });
-
-    SecurityAudit.logSecurityEvent({
-      type: 'system_notification',;
-      details: {
-        action: 'broadcast',;
-        type: notification.type,;
-        priority: notification.priority,;
-      },;
+ SecurityAudit.logSecurityEvent({ type: 'system_notification', details: { action: 'broadcast',
+    type: notification.type,
+        priority: notification.priority
+      }
     });
   }
 
   // Connection management;
   private addClientConnection(userId: string, socketId: string): void {
     if (!this.connectedClients.has(userId)) {
-      this.connectedClients.set(userId, new Set());
+      this.connectedClients.set(userId
+               new Set());
     }
     this.connectedClients.get(userId)!.add(socketId);
   }
@@ -714,7 +617,8 @@ export class WebSocketService {
 
   private addSubscription(type: string, userId: string): void {
     if (!this.subscriptions.has(type)) {
-      this.subscriptions.set(type, new Set());
+      this.subscriptions.set(type
+               new Set());
     }
     this.subscriptions.get(type)!.add(userId);
   }
@@ -731,7 +635,8 @@ export class WebSocketService {
 
   private addMarketDataSubscription(symbol: string, userId: string): void {
     if (!this.marketDataSubscriptions.has(symbol)) {
-      this.marketDataSubscriptions.set(symbol, new Set());
+      this.marketDataSubscriptions.set(symbol
+               new Set());
     }
     this.marketDataSubscriptions.get(symbol)!.add(userId);
   }
@@ -767,21 +672,17 @@ export class WebSocketService {
   private async validateToken(token: string, userId: string): Promise<boolean> {
     try {
       // Implement your token validation logic here;
-      // This could involve JWT verification, database lookup, etc.;
-      // For now, we'll return true as a placeholder;
-      // Example: JWT verification;
+      // This could involve JWT verification database lookup, etc. // For now, we'll return true as a placeholder;
+      // Example: JWT verification,
       // const decoded = jwt.verify(token, process.env.JWT_SECRET!);
       // return decoded.userId === userId;
 
       return true; // Placeholder;
     } catch (error) {
       SecurityAudit.logSecurityEvent({
-        type: 'authentication_error',;
-        userId,;
-        details: {
-          action: 'token_validation_failed',;
-          error: error instanceof Error ? error.message : 'Unknown error',;
-        },;
+        type: 'authentication_error';
+        userId; details: { action: 'token_validation_failed', error: error instanceof Error ? error.message : 'Unknown error'
+        },
       });
       return false;
     }
@@ -789,11 +690,11 @@ export class WebSocketService {
 
   // Health check methods;
   public getConnectionStats(): {
-    totalConnections: number;
-    totalUsers: number;
+    totalConnections: number,
+    totalUsers: number,
     subscriptionCounts: Record<string, number>;
     marketDataSubscriptions: Record<string, number>;
-  } {
+  },{
     const subscriptionCounts: Record<string, number> = {};
     this.subscriptions.forEach((subscribers, type) => {
       subscriptionCounts[type] = subscribers.size;
@@ -805,13 +706,13 @@ export class WebSocketService {
     });
 
     return {
-      totalConnections: Array.from(this.connectedClients.values()).reduce(;
-        (sum, sockets) => sum + sockets.size,;
+      totalConnections: Array.from(this.connectedClients.values()).reduce(
+        (sum, sockets) => sum + sockets.size;
         0;
-      ),;
-      totalUsers: this.connectedClients.size,;
-      subscriptionCounts,;
-      marketDataSubscriptions,;
+      );
+      totalUsers: this.connectedClients.size;
+      subscriptionCounts;
+      marketDataSubscriptions;
     };
   }
 
@@ -829,16 +730,14 @@ export class WebSocketService {
     this.subscriptions.clear();
     this.marketDataSubscriptions.clear();
     this.isInitialized = false;
-
-    SecurityAudit.logSecurityEvent({
-      type: 'system_event',;
-      details: { action: 'websocket_service_shutdown' },;
+ SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_shutdown' },
     });
   }
 }
 
 // Singleton instance;
-let webSocketService: WebSocketService | null = null;
+let webSocketService: WebSocketService | null = null
+              
 
 export function getWebSocketService(): WebSocketService {
   if (!webSocketService) {
@@ -846,10 +745,9 @@ export function getWebSocketService(): WebSocketService {
   }
   return webSocketService;
 }
-
-// Types for socket extensions;
-declare module 'socket.io' {
+ // Types for socket extensions; declare module 'socket.io' {
   interface Socket {
+
 
 
 
@@ -875,6 +773,7 @@ declare module 'socket.io' {
 
     userId?: string;
   
+
 
 
 

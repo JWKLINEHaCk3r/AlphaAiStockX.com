@@ -1,7 +1,7 @@
 // Speech Recognition API types;
 interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList;
-  resultIndex: number;
+  results: SpeechRecognitionResultList,
+    resultIndex: number
 }
 
 interface SpeechRecognitionResultList {
@@ -28,9 +28,11 @@ interface SpeechRecognitionResultList {
 
 
 
+
   length: number;
-  item(index: number): SpeechRecognitionResult;
-  [index: number]: SpeechRecognitionResult;
+  item(index: number): SpeechRecognitionResult,
+  [index: number]: SpeechRecognitionResult
+
 
 
 
@@ -80,10 +82,12 @@ interface SpeechRecognitionResult {
 
 
 
+
   length: number;
-  item(index: number): SpeechRecognitionAlternative;
-  [index: number]: SpeechRecognitionAlternative;
-  isFinal: boolean;
+  item(index: number): SpeechRecognitionAlternative,
+  [index: number]: SpeechRecognitionAlternative,
+    isFinal: boolean
+
 
 
 
@@ -133,8 +137,10 @@ interface SpeechRecognitionAlternative {
 
 
 
-  transcript: string;
-  confidence: number;
+
+  transcript: string,
+    confidence: number
+
 
 
 
@@ -161,28 +167,30 @@ interface SpeechRecognitionAlternative {
 }
 
 interface SpeechRecognition extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  maxAlternatives: number;
+  continuous: boolean,
+    interimResults: boolean,
+  lang: string,
+    maxAlternatives: number,
   serviceURI: string;
-  start(): void;
-  stop(): void;
-  abort(): void;
-  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onerror: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  start(): void,
+  stop(): void,
+  abort(): void,
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null,
+    onend: ((this: SpeechRecognition, ev: Event) => any) | null,
+    onerror: ((this: SpeechRecognition, ev: Event) => any) | null,
+    onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null
 }
 
-declare var SpeechRecognition: {
-  prototype: SpeechRecognition;
-  new (): SpeechRecognition;
+declare var, SpeechRecognition: {
+      prototype: SpeechRecognition
+              
+  new (): SpeechRecognition,
 };
 
 declare let webkitSpeechRecognition: {
-  prototype: SpeechRecognition;
-  new (): SpeechRecognition;
+      prototype: SpeechRecognition
+              
+  new (): SpeechRecognition,
 };
 
 interface Window {
@@ -209,29 +217,8 @@ interface Window {
 
 
 
-  SpeechRecognition: typeof SpeechRecognition;
-  webkitSpeechRecognition: typeof webkitSpeechRecognition;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+  SpeechRecognition: typeof SpeechRecognition,
+    webkitSpeechRecognition: typeof;
+      webkitSpeechRecognition
+    }

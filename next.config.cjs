@@ -1,40 +1,57 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  output: 'standalone',
-  trailingSlash: true,
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Bypass ESLint during production builds
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Bypass TypeScript errors during production builds
   },
+  swcMinify: true,
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    webVitalsAttribution: ['CLS', 'LCP'],
+    forceSwcTransforms: true,
   },
-  serverExternalPackages: ['sharp'],
-  generateBuildId: async () => 'development-build',
-  output: undefined,
+  // Production optimizations
+  poweredByHeader: false,
+  compress: true,
+  
+  // Handle static file optimization
   images: {
-    domains: ['alphaaistockx.com', 'cdn.alphaaistockx.com'],
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    unoptimized: true,
+    domains: ['localhost', 'via.placeholder.com'],
+    unoptimized: false,
   },
+  
+  // Output configuration for deployment
+  output: 'standalone',
+  trailingSlash: false,
+  
+  // Webpack configuration to handle module resolution
+  webpack: (config, { dev, isServer }) => {
+    // Production optimizations
+    if (!dev) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
+    return config;
+  },
+  
+  // Environment variables
   env: {
     CUSTOM_KEY: 'my-value',
   },
-  poweredByHeader: false,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  webpack: (config, { isServer }) => {
-    // ...existing webpack config from next.config.js...
-    if (isServer) {
-      // ...server-specific config...
-    }
-    return config;
+  
+  // Redirects and rewrites for production
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/:path*',
+      },
+    ];
   },
 };
 

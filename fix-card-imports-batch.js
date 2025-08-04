@@ -32,9 +32,7 @@ function findTsxFiles(dir, fileList = []) {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
-    if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') {
-      findTsxFiles(filePath, fileList);
-    } else if (file.endsWith('.tsx')) {
+    if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList); } else if (file.endsWith('.tsx')) {
       fileList.push(filePath);
     }
   });
@@ -43,46 +41,30 @@ function findTsxFiles(dir, fileList = []) {
 }
 
 // Function to fix Card imports in a file
-function fixCardImports(filePath) {
-  try {
-    let content = fs.readFileSync(filePath, 'utf8');
+function fixCardImports(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts
 
-    // Fix Badge variant prop issues
-    if (/variant="outline"/.test(content)) {
-      // For now, just remove the variant prop as it's causing issues
+    // Fix Badge variant prop issues if (/variant="outline"/.test(content)) { // For now, just remove the variant prop as it's causing issues
       content = content.replace(/variant="outline"\s*/g, '');
       modified = true;
     }
 
-    if (modified) {
-      fs.writeFileSync(filePath, content);
-      console.log('Fixed: ' + filePath);
+    if (modified) { fs.writeFileSync(filePath, content); console.log('Fixed: ' + filePath),
       return true;
     }
 
-    return false;
-  } catch (error) {
-    console.error('Error processing ' + filePath + ': ' + error.message);
+    return false; } catch (error) { console.error('Error processing ' + filePath + ': ' + error.message);
     return false;
   }
 }
 
 // Main execution
-function main() {
-  const projectRoot = process.cwd();
-  const appDir = path.join(projectRoot, 'app');
-
-  if (!fs.existsSync(appDir)) {
-    console.error('app directory not found');
+function main() { const projectRoot = process.cwd(); const appDir = path.join(projectRoot, 'app');
+ if (!fs.existsSync(appDir)) { console.error('app directory not found');
     process.exit(1);
-  }
-
-  console.log('Finding TypeScript files...');
-  const tsxFiles = findTsxFiles(appDir);
-  console.log('Found ' + tsxFiles.length + ' .tsx files');
+  } console.log('Finding TypeScript files...'); const tsxFiles = findTsxFiles(appDir); console.log('Found ' + tsxFiles.length + ' .tsx files');
 
   let fixedCount = 0;
 
@@ -90,10 +72,7 @@ function main() {
     if (fixCardImports(filePath)) {
       fixedCount++;
     }
-  });
-
-  console.log('\nFixed ' + fixedCount + ' files');
-  console.log('Run TypeScript check to see error reduction');
+  }); console.log('\nFixed ' + fixedCount + ' files'); console.log('Run TypeScript check to see error reduction');
 }
 
 main();

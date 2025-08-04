@@ -1,329 +1,365 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-'use client';
-import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert, AlertTitle, AlertDescription } from '../../../components/ui/alert';
-import { Progress } from '../../../components/ui/progress';
-import { Select } from '../../../components/ui/select';
-import { Button } from '../../../components/ui/button';
-import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  AnalysisResult,;
-  BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
-  CryptoData,;
-  DeFiProtocol,;
-  NFTCollection,;
-  UserProfile,;
-  ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
-} from '../../types/trading-types';
-import { CheckCircle, AlertTriangle, Shield, Settings, RefreshCw, FileCode } from 'lucide-react';
+'use client'; import React, { useState } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
+import { Alert, AlertDescription } from "../../../components/ui/alert";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
+import { Badge } from "../../../components/ui/badge";
+import { 
+  Shield, 
+  CheckCircle, 
+  AlertTriangle, 
+  Clock, 
+  Globe, 
+  Lock, 
+  RefreshCw, 
+  Settings, 
+  Eye, 
+  Download,
+  Server,
+  Zap,
+  FileText, Search } from 'lucide-react';
+
+interface SSLCertificate { domain: string, status: 'valid' | 'expiring' | 'expired' | 'invalid',
+  expiryDate: string, issuer: string, type: 'DV' | 'OV' | 'EV',
+    keySize: number,
+  daysUntilExpiry: number
+}
+ interface SSLIssue { type: 'certificate' | 'configuration' | 'renewal' | 'security', severity: 'low' | 'medium' | 'high' | 'critical',
+  description: string,
+    solution: string,
+  autoFixable: boolean
+}
 
 export default function IONOSSSLFixer() {
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [isScanning, setIsScanning] = useState(false); const [isFixing, setIsFixing] = useState(false); const [domain, setDomain] = useState('alphaaidemo.stockx.com');
+  const [certificates, setCertificates] = useState<SSLCertificate[]>([]);
+  const [issues, setIssues] = useState<SSLIssue[]>([]);
+  const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
-  const toggleStep = (stepNumber: number) => {
-    setCompletedSteps(prev =>;
-      prev.includes(stepNumber) ? prev.filter(n => n !== stepNumber) : [...prev, stepNumber];
-    );
-  };
-
-  const steps = [;
-    {
-      id: 1,;
-      title: 'Verify SSL Certificate Installation',;
-      icon: <Shield className="w-6 h-6" />,;
-      priority: 'CRITICAL',;
-      description: 'Check if SSL is properly installed on IONOS',;
-      actions: [;
-        'Login to IONOS Control Panel',;
-        "Go to 'Domains & SSL' → 'SSL Certificates'",;
-        "Check if alphaaistockx.com has an 'Active' certificate",;
-        "If not active, click 'Order SSL Certificate' or 'Activate Free SSL'",;
-        "Choose 'DV Certificate' (Domain Validation) - it's FREE",;
-        'Wait for certificate activation (typically 5-30 minutes)',;
-      ],;
-    },;
-    {
-      id: 2,;
-      title: 'Assign SSL Certificate to Domain',;
-      icon: <Settings className="w-6 h-6" />,;
-      priority: 'CRITICAL',;
-      description: 'Ensure SSL certificate is properly assigned',;
-      actions: [;
-        "In IONOS Control Panel, go to 'Domains & SSL' → 'SSL Certificates'",;
-        "Find your domain and click 'Assign'",;
-        'Select the hosting package where your website is hosted',;
-        'Save the changes',;
-        'Wait for the SSL configuration to complete (usually a few minutes)',;
-      ],;
-    },;
-    {
-      id: 3,;
-      title: 'Add HTTPS Redirect in .htaccess',;
-      icon: <FileCode className="w-6 h-6" />,;
-      priority: 'HIGH',;
-      description: 'Force all traffic to use HTTPS',;
-      actions: [;
-        'Go to IONOS File Manager',;
-        "Navigate to your domain's root directory",;
-        'Create or edit the .htaccess file',;
-        'Add the following code:',;
-        `# Force HTTPS;
-RewriteEngine On;
-RewriteCond %{HTTPS} off;
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`,;
-        'Save the file and upload it to the root directory',;
-      ],;
-    },;
-    {
-      id: 4,;
-      title: 'Clear Browser Cache & Test',;
-      icon: <RefreshCw className="w-6 h-6" />,;
-      priority: 'MEDIUM',;
-      description: 'Clear your browser cache and test the site',;
-      actions: [;
-        'Press Ctrl+Shift+Delete (Windows) or Cmd+Shift+Delete (Mac)',;
-        "Select 'Cached images and files' and clear them",;
-        'Try accessing https://alphaaistockx.com in a private/incognito window',;
-        'Test on a different browser or device',;
-      ],;
-    },;
+  const mockCertificates: SSLCertificate[] = [ { domain: 'alphaaidemo.stockx.com', status: 'valid', expiryDate: '2024-12-15', issuer: 'IONOS SSL', type: 'DV',
+      keySize: 2048,
+      daysUntilExpiry: 329 },{ domain: '*.stockx.com', status: 'expiring', expiryDate: '2024-02-28', issuer: 'IONOS SSL', type: 'OV',
+      keySize: 2048,
+      daysUntilExpiry: 38 },{ domain: 'api.stockx.com', status: 'valid', expiryDate: '2024-11-20', issuer: 'IONOS SSL', type: 'DV',
+      keySize: 4096,
+      daysUntilExpiry: 304
+    }
   ];
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'CRITICAL':;
-        return 'bg-red-500/20 text-red-300 border-red-500/50';
-      case 'HIGH':;
-        return 'bg-orange-500/20 text-orange-300 border-orange-500/50';
-      case 'MEDIUM':;
-        return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/50';
-      default:;
-        return 'bg-blue-500/20 text-blue-300 border-blue-500/50';
+  const mockIssues: SSLIssue[] = [ { type: 'renewal', severity: 'medium', description: 'Wildcard certificate expires in 38 days', solution: 'Auto-renew certificate through IONOS API',
+      autoFixable: true },{ type: 'configuration', severity: 'low', description: 'Mixed content warnings on some pages', solution: 'Update HTTP resources to HTTPS',
+      autoFixable: true },{ type: 'security', severity: 'low', description: 'Certificate chain optimization available', solution: 'Update certificate chain configuration',
+      autoFixable: true
+    }
+  ];
+
+  const scanSSL = async () => {
+    setIsScanning(true);
+    setTimeout(() => {
+      setCertificates(mockCertificates);
+      setIssues(mockIssues);
+      setLastScanTime(new Date());
+      setIsScanning(false);
+    }, 3000);
+  };
+
+  const fixAllIssues = async () => {
+    setIsFixing(true);
+    setTimeout(() => {
+      setIssues(issues.filter(issue => !issue.autoFixable));
+      setIsFixing(false);
+    }, 5000);
+  };
+
+  const getStatusColor = (status: string) => { switch (status) { case 'valid': return 'text-green-400 bg-green-900/30'; case 'expiring': return 'text-yellow-400 bg-yellow-900/30'; case 'expired': return 'text-red-400 bg-red-900/30'; case 'invalid': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
     }
   };
 
-  return (;
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-6">;
-      <div className="max-w-4xl mx-auto">;
-        <div className="text-center mb-8">;
-          <h1 className="text-4xl font-bold text-white mb-4">🔒 SSL Protocol Error Fix</h1>;
-          <p className="text-gray-300 text-lg">;
-            Follow these steps to fix ERR_SSL_PROTOCOL_ERROR on alphaaistockx.com;
-          </p>;
-        </div>;
-        <Alert className="mb-6 border-amber-500 bg-amber-950/50">;
-          <AlertTriangle className="h-5 w-5 text-amber-500" />;
-          <AlertTitle className="text-amber-300">What's Happening?</AlertTitle>;
-          <AlertDescription className="text-amber-200">;
-            ERR_SSL_PROTOCOL_ERROR means your SSL certificate isn't properly configured. This guide;
-            will fix it!;
-          </AlertDescription>;
-        </Alert>;
-        {/* Progress Bar */}
-        <div className="mb-8">;
-          <div className="flex justify-between items-center mb-2">;
-            <span className="text-white font-semibold">Fix Progress</span>;
-            <span className="text-white">;
-              {completedSteps.length}/{steps.length} completed;
-            </span>;
-          </div>;
-          <div className="w-full bg-gray-700 rounded-full h-3">;
-            <div;
-              className="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-300";
-              style={{ width: `${(completedSteps.length / steps.length) * 100}%` }}
-            />;
-          </div>;
-        </div>;
-        {/* Steps */}
-        <div className="space-y-6">;
-          {steps.map((step: any) => (;
-            <Card key={step.id} className="bg-gray-800/50 border-gray-700">;
-              <CardHeader>;
-                <CardTitle className="flex items-center gap-3">;
-                  <div className="flex items-center gap-3">;
-                    <Button;
-                      variant="outline";
-                      size="sm";
-                      onClick={() => toggleStep(step.id)}
-                      className={`w-8 h-8 p-0 ${
-                        completedSteps.includes(step.id);
-                          ? 'bg-green-600 border-green-600 text-white';
-                          : 'bg-gray-700 border-gray-600 text-gray-300';
-                      }`}
-                    >;
-                      {completedSteps.includes(step.id) ? (;
-                        <CheckCircle className="w-4 h-4" />;
-                      ) : (;
-                        step.id;
+  const getSeverityColor = (severity: string) => { switch (severity) { case 'low': return 'text-blue-400 bg-blue-900/30'; case 'medium': return 'text-yellow-400 bg-yellow-900/30'; case 'high': return 'text-orange-400 bg-orange-900/30'; case 'critical': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+    }
+  };
+
+  const getIssueIcon = (type: string) => { switch (type) { case 'certificate': return Shield case 'configuration': return Settings case 'renewal': return Clock case 'security': return Lock;
+      default: return;
+      AlertTriangle
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-6">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <Shield className="w-16 h-16 text-blue-400 mr-4" />
+            <h1 className="text-5xl font-bold text-white">
+              IONOS SSL Fixer
+            </h1>
+          </div>
+          <p className="text-2xl text-gray-300 max-w-4xl mx-auto mb-8">
+            Automated SSL certificate management and issue resolution for IONOS hosted domains
+          </p>
+        </div>
+
+        {/* SSL Status Overview */}
+        <div className="grid lg:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-white/10 border-green-500/30 backdrop-blur">
+            <CardContent className="p-6 text-white text-center">
+              <CheckCircle className="w-12 h-12 mx-auto mb-4 text-green-400" /> <h3 className="text-3xl font-bold mb-2"> {certificates.filter(c => c.status === 'valid').length}
+              </h3>
+              <p className="text-green-200">Valid Certificates</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white/10 border-yellow-500/30 backdrop-blur">
+            <CardContent className="p-6 text-white text-center">
+              <Clock className="w-12 h-12 mx-auto mb-4 text-yellow-400" /> <h3 className="text-3xl font-bold mb-2"> {certificates.filter(c => c.status === 'expiring').length}
+              </h3>
+              <p className="text-yellow-200">Expiring Soon</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white/10 border-red-500/30 backdrop-blur">
+            <CardContent className="p-6 text-white text-center">
+              <AlertTriangle className="w-12 h-12 mx-auto mb-4 text-red-400" />
+              <h3 className="text-3xl font-bold mb-2">{issues.length}</h3>
+              <p className="text-red-200">SSL Issues</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white/10 border-purple-500/30 backdrop-blur">
+            <CardContent className="p-6 text-white text-center">
+              <Zap className="w-12 h-12 mx-auto mb-4 text-purple-400" />
+              <h3 className="text-3xl font-bold mb-2">
+                {issues.filter(i => i.autoFixable).length}
+              </h3>
+              <p className="text-purple-200">Auto-Fixable</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Scanner Controls */}
+        <Card className="mb-8 bg-white/10 border-blue-500/30 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <Settings className="w-6 h-6 text-blue-400" />
+              SSL Scanner & Fixer
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Domain to Scan
+                    </label>
+                    <div className="flex gap-2">
+                      <Input
+                        value={domain}
+                        onChange={(e) => setDomain(e.target.value)}
+                        placeholder="Enter domain name..."
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                      />
+                      <Button
+                        onClick={scanSSL}
+                        disabled={isScanning}
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        {isScanning ? (
+                          <RefreshCw className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <Search className="w-4 h-4" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <Button
+                      onClick={fixAllIssues}
+                      disabled={isFixing || issues.filter(i => i.autoFixable).length === 0}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      {isFixing ? (
+                        <>
+                          <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                          Fixing Issues...
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="w-4 h-4 mr-2" />
+                          Auto-Fix All
+                        </>
                       )}
-                    </Button>;
-                    {step.icon}
-                    <div>;
-                      <div className="text-white">{step.title}</div>;
-                      <div;
-                        className={`text-xs px-2 py-1 rounded border inline-block mt-1 ${getPriorityColor(step.priority)}`}
-                      >;
-                        {step.priority}
-                      </div>;
-                    </div>;
-                  </div>;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent>;
-                <p className="text-gray-300 mb-4">{step.description}</p>;
-                <ol className="space-y-2">;
-                  {step.actions.map((action: string, index: number) => (;
-                    <li key={index} className="flex items-start gap-3 text-gray-300">;
-                      <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">;
-                        {index + 1}
-                      </span>;
-                      {action.startsWith('# Force') ||;
-                      action.startsWith('RewriteEngine') ||;
-                      action.startsWith('RewriteCond') ||;
-                      action.startsWith('RewriteRule') ? (;
-                        <pre className="bg-gray-900 text-gray-100 p-2 rounded-md font-mono text-sm whitespace-pre-wrap">;
-                          {action}
-                        </pre>;
-                      ) : (;
-                        action;
-                      )}
-                    </li>;
-                  ))}
-                </ol>;
-              </CardContent>;
-            </Card>;
-          ))}
-        </div>;
-        {/* Advanced Troubleshooting */}
-        <Card className="bg-gradient-to-r from-blue-900 to-indigo-900 border-0 mt-8">;
-          <CardHeader>;
-            <CardTitle className="text-white flex items-center gap-2">;
-              <AlertTriangle className="w-6 h-6" />;
-              Still Not Working? Advanced Troubleshooting;
-            </CardTitle>;
-          </CardHeader>;
-          <CardContent>;
-            <div className="space-y-4">;
-              <div className="p-4 bg-white/10 rounded-lg">;
-                <h4 className="text-white font-semibold mb-2">🔍 Check SSL Certificate Status:</h4>;
-                <p className="text-white/90 mb-2">;
-                  Use this online tool to check your SSL certificate status:;
-                </p>;
-                <Button;
-                  className="bg-white/20 hover:bg-white/30 text-white border-white/30";
-                  onClick={() =>;
-                    window.open(;
-                      'https://www.ssllabs.com/ssltest/analyze.html?d=alphaaistockx.com',;
-                      '_blank';
-                    );
-                  }
-                >;
-                  Check SSL Status;
-                </Button>;
-              </div>;
-              <div className="p-4 bg-white/10 rounded-lg">;
-                <h4 className="text-white font-semibold mb-2">📞 Contact IONOS Support:</h4>;
-                <p className="text-white/90">Phone: 1-484-254-5555</p>;
-                <p className="text-white/90">Live Chat: Available in IONOS Control Panel</p>;
-                <p className="text-white/90">;
-                  Tell them: "I'm getting ERR_SSL_PROTOCOL_ERROR on my site alphaaistockx.com and;
-                  need help with SSL configuration";
-                </p>;
-              </div>;
-            </div>;
-          </CardContent>;
-        </Card>;
-        {/* Success Message */}
-        {completedSteps.length === steps.length && (;
-          <Card className="bg-gradient-to-r from-green-600 to-emerald-600 border-0 mt-6">;
-            <CardContent className="text-center py-8">;
-              <CheckCircle className="w-16 h-16 text-white mx-auto mb-4" />;
-              <h3 className="text-2xl font-bold text-white mb-2">All Steps Completed! 🎉</h3>;
-              <p className="text-white/90 mb-4">;
-                Your SSL should now be working correctly. It may take a few minutes for changes to;
-                take effect.;
-              </p>;
-              <Button;
-                className="bg-white/20 hover:bg-white/30 text-white border-white/30";
-                onClick={() => window.open('https://alphaaistockx.com', '_blank')}
-              >;
-                Test Your Site;
-              </Button>;
-            </CardContent>;
-          </Card>;
-        )}
-      </div>;
-    </div>;
+                    </Button>
+                    
+                    <Button
+                      variant="outline"
+                      className="border-white/20 text-gray-300 hover:bg-white/10"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Export Report
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-white">
+                {lastScanTime && (
+                  <div>
+                    <p className="text-sm text-gray-300">Last Scan:</p>
+                    <p className="font-semibold">{lastScanTime.toLocaleString()}</p>
+                  </div>
+                )}
+                <div className="mt-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-blue-400" />
+                    <span className="text-blue-400 text-sm">IONOS Connected</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Server className="w-4 h-4 text-green-400" />
+                    <span className="text-green-400 text-sm">API Active</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* SSL Certificates */}
+        <Card className="mb-8 bg-white/10 border-white/20 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <Shield className="w-6 h-6 text-green-400" />
+              SSL Certificates
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {certificates.length === 0 ? (
+              <div className="text-center py-12">
+                <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-400 text-xl">No certificates scanned</p>
+                <p className="text-gray-500 mt-2">Enter a domain and click scan to begin</p>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {certificates.map((cert, index) => (
+                  <div key={index} className="bg-white/5 rounded-lg p-4">
+                    <div className="grid lg:grid-cols-6 gap-4 items-center">
+                      <div className="lg:col-span-2">
+                        <div className="flex items-center gap-3">
+                          <Globe className="w-8 h-8 text-blue-400" />
+                          <div>
+                            <h3 className="text-white font-semibold">{cert.domain}</h3>
+                            <p className="text-gray-400 text-sm">{cert.issuer}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <Badge className={getStatusColor(cert.status)}>
+                          {cert.status.toUpperCase()}
+                        </Badge>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-white font-semibold">{cert.expiryDate}</p>
+                        <p className="text-gray-400 text-sm">{cert.daysUntilExpiry} days left</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <Badge variant="outline" className="text-purple-300 border-purple-300/50">
+                          {cert.type}
+                        </Badge>
+                        <p className="text-gray-400 text-sm mt-1">{cert.keySize}-bit</p>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline" className="border-gray-500 text-gray-300">
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="outline" className="border-gray-500 text-gray-300">
+                          <RefreshCw className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* SSL Issues */}
+        <Card className="bg-white/10 border-white/20 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <AlertTriangle className="w-6 h-6 text-yellow-400" />
+              SSL Issues & Fixes
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {issues.length === 0 ? (
+              <div className="text-center py-12">
+                <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-4" />
+                <p className="text-green-400 text-xl">No issues found</p>
+                <p className="text-gray-500 mt-2">All SSL certificates are properly configured</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {issues.map((issue, index) => {
+                  const Icon = getIssueIcon(issue.type);
+                  return (
+                    <Alert key={index} className="bg-white/5 border-white/10">
+                      <div className="flex items-start gap-4">
+                        <Icon className="w-6 h-6 text-yellow-400 mt-1" />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="text-white font-semibold">{issue.description}</h3>
+                            <Badge className={getSeverityColor(issue.severity)}>
+                              {issue.severity.toUpperCase()}
+                            </Badge>
+                            {issue.autoFixable && (
+                              <Badge className="text-green-400 bg-green-900/30">
+                                AUTO-FIXABLE
+                              </Badge>
+                            )}
+                          </div>
+                          <AlertDescription className="text-gray-300 mb-3">
+                            {issue.solution}
+                          </AlertDescription>
+                          <div className="flex gap-2">
+                            {issue.autoFixable ? (
+                              <Button size="sm" className="bg-green-600 hover: bg-green-700">
+                                <Zap className="w-4 h-4 mr-2" />
+                                Auto-Fix
+                              </Button>
+                            ) : (
+                              <Button size="sm" variant="outline" className="border-gray-500 text-gray-300">
+                                <FileText className="w-4 h-4 mr-2" />
+                                Manual Fix
+                              </Button>
+                            )}
+                            <Button size="sm" variant="outline" className="border-gray-500 text-gray-300">
+                              <Eye className="w-4 h-4 mr-2" />
+                              Details
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </Alert>
+                  ),
+                })}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        
+      </div>
+    </div>
   );
 }

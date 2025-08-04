@@ -1,422 +1,367 @@
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
+'use client'; import React, { useState } from 'react';
+import { Card, CardHeader, CardContent, CardDescription,
+      CardTitle
+    } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
-import { Progress } from "../../../components/ui/progress";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardDescription } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-'use client';
-import React from 'react';
+import { 
+  Brain, 
+  Zap, 
+  Target, 
+  TrendingUp, 
+  Shield, 
+  BarChart3,
+  Bot,
+  Cpu,
+  LineChart,
+  Activity, CheckCircle } from 'lucide-react';
 
-import { useState } from 'react';
-<<<<<<< HEAD;
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
-=======;
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
-import {
-  Brain,;
-  Cpu,;
-  Database,;
-  Eye,;
-  Radar,;
-  Settings,;
-  Target,;
-  Zap,;
-  Activity,;
-  BarChart3,;
-  TrendingUp,;
-  Shield,;
-  CheckCircle,;
-  Clock,;
-} from 'lucide-react';
+interface AIModel {
+  id: string,
+    name: string,
+  description: string, accuracy: number, status: 'active' | 'training' | 'offline',
+    predictions: number,
+  successRate: number
+}
 
-export default function AdvancedAIFeatures() {
-  const [activeFeature, setActiveFeature] = useState('quantum-ai');
-  const [isProcessing, setIsProcessing] = useState(false);
+interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold',
+  confidence: number,
+    targetPrice: number,
+  timeframe: string,
+    reasoning: string[]
+}
+ export default function AdvancedAIFeatures() { const [selectedModel, setSelectedModel] = useState<string>('neural-prophet');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const runFeatureDemo = (feature: string) => {
-    setActiveFeature(feature);
-    setIsProcessing(true);
-    setTimeout(() => setIsProcessing(false), 3000);
-  };
-
-  const aiFeatures = [;
-    {
-      id: 'quantum-ai',;
-      title: 'Quantum AI Engine',;
-      description: '247M parameter neural network with quantum processing',;
-      icon: Brain,;
-      accuracy: 94.7,;
-      speed: '5-15ms',;
-      status: 'active',;
-      color: 'blue',;
-    },;
-    {
-      id: 'neural-network',;
-      title: 'Deep Neural Networks',;
-      description: '50-layer deep learning with real-time adaptation',;
-      icon: Cpu,;
-      accuracy: 92.3,;
-      speed: '10-25ms',;
-      status: 'active',;
-      color: 'purple',;
-    },;
-    {
-      id: 'pattern-recognition',;
-      title: 'Pattern Recognition',;
-      description: 'Advanced pattern detection with 96.8% confidence',;
-      icon: Eye,;
-      accuracy: 96.8,;
-      speed: '8-20ms',;
-      status: 'active',;
-      color: 'green',;
-    },;
-    {
-      id: 'sentiment-analysis',;
-      title: 'Market Sentiment AI',;
-      description: 'Real-time sentiment analysis across 10,000+ sources',;
-      icon: Activity,;
-      accuracy: 89.4,;
-      speed: '15-30ms',;
-      status: 'active',;
-      color: 'yellow',;
-    },;
-    {
-      id: 'risk-analyzer',;
-      title: 'Quantum Risk Analysis',;
-      description: 'Multi-dimensional risk assessment with quantum tunneling',;
-      icon: Shield,;
-      accuracy: 91.7,;
-      speed: '12-28ms',;
-      status: 'active',;
-      color: 'red',;
-    },;
-    {
-      id: 'prediction-engine',;
-      title: 'Predictive Analytics',;
-      description: 'Future market prediction with 94.2% accuracy',;
-      icon: Target,;
-      accuracy: 94.2,;
-      speed: '6-18ms',;
-      status: 'active',;
-      color: 'indigo',;
-    },;
+  const aiModels: AIModel[] = [ { id: 'neural-prophet', name: 'Neural Prophet v3.2', description: 'Advanced time series forecasting with neural networks', accuracy: 89.7, status: 'active',
+      predictions: 15420,
+      successRate: 87.3 },{ id: 'lstm-ensemble', name: 'LSTM Ensemble', description: 'Long Short-Term Memory networks for pattern recognition', accuracy: 85.2, status: 'active',
+      predictions: 12890,
+      successRate: 82.1 },{ id: 'transformer-alpha', name: 'Transformer Alpha', description: 'Attention-based model for market sentiment analysis', accuracy: 92.1, status: 'training',
+      predictions: 8750,
+      successRate: 90.4 },{ id: 'quantum-ml', name: 'Quantum ML Beta', description: 'Quantum machine learning for complex market dynamics', accuracy: 94.8, status: 'offline',
+      predictions: 3200,
+      successRate: 94.2
+    }
   ];
 
-  const liveMetrics = {
-    totalPredictions: 2847392,;
-    successfulTrades: 2694847,;
-    activeModels: 247,;
-    dataPointsPerSecond: 15847392,;
-    quantumStates: 1024,;
-    neuralConnections: 247000000,;
+  const recentPredictions: PredictionResult[] = [ { symbol: 'AAPL', prediction: 'buy',
+      confidence: 87.2, targetPrice: 195.50, timeframe: '5 days', reasoning: [ 'Strong earnings momentum', 'Positive analyst sentiment', 'Technical breakout pattern'
+      ] },{ symbol: 'TSLA', prediction: 'hold',
+      confidence: 72.8, targetPrice: 242.10, timeframe: '7 days', reasoning: [ 'Mixed market signals', 'Volatility concerns', 'Awaiting production data'
+      ] },{ symbol: 'NVDA', prediction: 'buy',
+      confidence: 91.5, targetPrice: 520.00, timeframe: '3 days', reasoning: [ 'AI sector growth', 'Strong technical indicators', 'Institutional buying pressure'
+      ]
+    }
+  ];
+
+  const handleAnalyze = () => {
+    setIsAnalyzing(true);
+    setTimeout(() => {
+      setIsAnalyzing(false);
+    }, 3000);
   };
 
-  return (;
-    <div className="space-y-8">;
-      {/* AI Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">;
-        {aiFeatures.map(feature => {
-          const IconComponent = feature.icon;
-          return (;
-            <Card;
-              key={feature.id}
-              className={`bg-black/20 border-${feature.color}-500/30 backdrop-blur-xl hover:border-${feature.color}-400/50 transition-all cursor-pointer ${
-                activeFeature === feature.id ? `ring-2 ring-${feature.color}-400/50` : '';
-              }`}
-              onClick={() => setActiveFeature(feature.id)}
-            >;
-              <CardHeader>;
-                <div className="flex items-center justify-between">;
-                  <IconComponent className={`h-8 w-8 text-${feature.color}-400`} />;
-                  <Badge;
-                    variant="outline";
-                    className={`border-${feature.color}-500/30 text-${feature.color}-400`}
-                  >;
-                    {feature.status.toUpperCase()}
-                  </Badge>;
-                </div>;
-                <CardTitle className="text-white">{feature.title}</CardTitle>;
-                <CardDescription>{feature.description}</CardDescription>;
-              </CardHeader>;
-              <CardContent>;
-                <div className="space-y-3">;
-                  <div className="flex justify-between items-center">;
-                    <span className="text-gray-400 text-sm">Accuracy</span>;
-                    <span className={`text-${feature.color}-400 font-bold`}>;
-                      {feature.accuracy}%;
-                    </span>;
-                  </div>;
-                  <Progress value={feature.accuracy} className="h-2" />;
-                  <div className="flex justify-between items-center">;
-                    <span className="text-gray-400 text-sm">Speed</span>;
-                    <span className={`text-${feature.color}-400 font-bold`}>{feature.speed}</span>;
-                  </div>;
-                  <Button;
-                    onClick={e => {
-                      e.stopPropagation();
-                      runFeatureDemo(feature.id);
-                    }}
-                    className={`w-full bg-gradient-to-r from-${feature.color}-500 to-${feature.color}-600 hover:from-${feature.color}-600 hover:to-${feature.color}-700`}
-                    disabled={isProcessing && activeFeature === feature.id}
-                  >;
-                    {isProcessing && activeFeature === feature.id ? (;
-                      <>;
-                        <Cpu className="h-4 w-4 mr-2 animate-spin" />;
-                        Processing...;
-                      </>;
-                    ) : (;
-                      <>;
-                        <Zap className="h-4 w-4 mr-2" />;
-                        Run Demo;
-                      </>;
-                    )}
-                  </Button>;
-                </div>;
-              </CardContent>;
-            </Card>;
-          );
-        })}
-      </div>;
-      {/* Live AI Metrics */}
-      <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-500/30">;
-        <CardHeader>;
-          <CardTitle className="flex items-center text-white">;
-            <Database className="h-6 w-6 mr-3 text-purple-400" />;
-            Live AI Processing Metrics;
-          </CardTitle>;
-          <CardDescription>Real-time quantum AI performance data</CardDescription>;
-        </CardHeader>;
-        <CardContent>;
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">;
-            <div className="text-center">;
-              <p className="text-purple-400 text-3xl font-bold">;
-                {liveMetrics.totalPredictions.toLocaleString()}
-              </p>;
-              <p className="text-gray-400 text-sm">Total Predictions</p>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-green-400 text-3xl font-bold">;
-                {liveMetrics.successfulTrades.toLocaleString()}
-              </p>;
-              <p className="text-gray-400 text-sm">Successful Trades</p>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-blue-400 text-3xl font-bold">{liveMetrics.activeModels}</p>;
-              <p className="text-gray-400 text-sm">Active AI Models</p>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-yellow-400 text-3xl font-bold">;
-                {(liveMetrics.dataPointsPerSecond / 1000000).toFixed(1)}M;
-              </p>;
-              <p className="text-gray-400 text-sm">Data Points/sec</p>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-indigo-400 text-3xl font-bold">{liveMetrics.quantumStates}</p>;
-              <p className="text-gray-400 text-sm">Quantum States</p>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-pink-400 text-3xl font-bold">;
-                {(liveMetrics.neuralConnections / 1000000).toFixed(0)}M;
-              </p>;
-              <p className="text-gray-400 text-sm">Neural Connections</p>;
-            </div>;
-          </div>;
-        </CardContent>;
-      </Card>;
-      {/* Active Feature Demo */}
-      {activeFeature && (;
-        <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-          <CardHeader>;
-            <CardTitle className="flex items-center text-white">;
-              <Radar className="h-6 w-6 mr-3 text-purple-400" />;
-              {aiFeatures.find(f => f.id === activeFeature)?.title} - Live Demo;
-            </CardTitle>;
-            <CardDescription>Real-time AI processing demonstration</CardDescription>;
-          </CardHeader>;
-          <CardContent>;
-            <div className="space-y-6">;
-              {/* Demo Visualization */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-                <div className="space-y-4">;
-                  <h4 className="text-white font-semibold">Processing Pipeline</h4>;
-                  <div className="space-y-3">;
-                    {[;
-                      { step: 'Data Ingestion', status: 'complete', time: '2ms' },;
-                      {
-                        step: 'Neural Processing',;
-                        status: isProcessing ? 'processing' : 'complete',;
-                        time: '8ms',;
-                      },;
-                      {
-                        step: 'Quantum Analysis',;
-                        status: isProcessing ? 'processing' : 'complete',;
-                        time: '12ms',;
-                      },;
-                      {
-                        step: 'Pattern Recognition',;
-                        status: isProcessing ? 'pending' : 'complete',;
-                        time: '15ms',;
-                      },;
-                      {
-                        step: 'Prediction Output',;
-                        status: isProcessing ? 'pending' : 'complete',;
-                        time: '18ms',;
-                      },;
-                    ].map((item, index) => (;
-                      <div;
-                        key={index}
-                        className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg";
-                      >;
-                        <div className="flex items-center space-x-3">;
-                          {item.status === 'complete' && (;
-                            <CheckCircle className="h-5 w-5 text-green-400" />;
-                          )}
-                          {item.status === 'processing' && (;
-                            <Clock className="h-5 w-5 text-yellow-400 animate-spin" />;
-                          )}
-                          {item.status === 'pending' && <Clock className="h-5 w-5 text-gray-400" />}
-                          <span className="text-white">{item.step}</span>;
-                        </div>;
-                        <span className="text-gray-400 text-sm">{item.time}</span>;
-                      </div>;
-                    ))}
-                  </div>;
-                </div>;
-                <div className="space-y-4">;
-                  <h4 className="text-white font-semibold">Live Results</h4>;
-                  <div className="space-y-3">;
-                    <div className="p-4 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg border border-green-500/30">;
-                      <div className="flex items-center justify-between">;
-                        <span className="text-green-400 font-semibold">Prediction Confidence</span>;
-                        <span className="text-green-400 text-xl font-bold">94.7%</span>;
-                      </div>;
-                      <Progress value={94.7} className="mt-2" />;
-                    </div>;
-                    <div className="p-4 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg border border-blue-500/30">;
-                      <div className="flex items-center justify-between">;
-                        <span className="text-blue-400 font-semibold">Market Signal</span>;
-                        <Badge className="bg-green-500 text-white">STRONG BUY</Badge>;
-                      </div>;
-                      <p className="text-gray-400 text-sm mt-2">;
-                        AI recommends immediate position entry;
-                      </p>;
-                    </div>;
-                    <div className="p-4 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/30">;
-                      <div className="flex items-center justify-between">;
-                        <span className="text-purple-400 font-semibold">Risk Assessment</span>;
-                        <span className="text-yellow-400 font-bold">LOW</span>;
-                      </div>;
-                      <p className="text-gray-400 text-sm mt-2">;
-                        Quantum risk analysis: 12% volatility expected;
-                      </p>;
-                    </div>;
-                  </div>;
-                </div>;
-              </div>;
-              {/* Action Buttons */}
-              <div className="flex space-x-4">;
-                <Button className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600">;
-                  <TrendingUp className="h-4 w-4 mr-2" />;
-                  Execute AI Trade;
-                </Button>;
-                <Button variant="outline" className="border-purple-500/30">;
-                  <Settings className="h-4 w-4 mr-2" />;
-                  Adjust Parameters;
-                </Button>;
-                <Button variant="outline" className="border-blue-500/30">;
-                  <BarChart3 className="h-4 w-4 mr-2" />;
-                  View Analytics;
-                </Button>;
-              </div>;
-            </div>;
-          </CardContent>;
-        </Card>;
-      )}
+  const getStatusColor = (status: string) => { switch (status) { case 'active': return 'bg-green-600'; case 'training': return 'bg-yellow-600'; case 'offline': return 'bg-gray-600'; default: return 'bg-gray-600';
+    }
+  };
 
-      {/* AI Technology Stack */}
-      <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <CardTitle className="flex items-center text-white">;
-            <Cpu className="h-6 w-6 mr-3 text-purple-400" />;
-            Advanced AI Technology Stack;
-          </CardTitle>;
-          <CardDescription>Cutting-edge technologies powering AlphaAIStockX</CardDescription>;
-        </CardHeader>;
-        <CardContent>;
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">;
-            {[;
-              { name: 'Quantum Computing', version: 'v2.1', status: 'Operational', icon: Cpu },;
-              { name: 'Neural Networks', version: 'v3.7', status: 'Optimized', icon: Brain },;
-              { name: 'Deep Learning', version: 'v4.2', status: 'Enhanced', icon: Database },;
-              { name: 'Pattern Recognition', version: 'v2.9', status: 'Advanced', icon: Eye },;
-            ].map((tech, index) => (;
-              <div key={index} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">;
-                <div className="flex items-center space-x-3 mb-3">;
-                  <tech.icon className="h-6 w-6 text-purple-400" />;
-                  <div>;
-                    <p className="text-white font-semibold">{tech.name}</p>;
-                    <p className="text-gray-400 text-sm">{tech.version}</p>;
-                  </div>;
-                </div>;
-                <Badge variant="outline" className="border-green-500/30 text-green-400">;
-                  {tech.status}
-                </Badge>;
-              </div>;
-            ))}
-          </div>;
-        </CardContent>;
-      </Card>;
-    </div>;
-  );
+  const getPredictionColor = (prediction: string) => { switch (prediction) { case 'buy': return 'text-green-400'; case 'sell': return 'text-red-400'; case 'hold': return 'text-yellow-400'; default: return 'text-gray-400';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-6">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-4">
+            <Brain className="w-12 h-12 text-blue-400 mr-4" />
+            <h1 className="text-4xl font-bold text-white">
+              Advanced AI Features
+            </h1>
+          </div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Cutting-edge artificial intelligence models for sophisticated trading analysis and predictions
+          </p>
+        </div>
+
+        {/* AI Models Overview */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          <Card className="bg-white/5 border-gray-600">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Cpu className="w-6 h-6 text-blue-400" />
+                AI Model Performance
+              </CardTitle>
+              <CardDescription className="text-gray-300">
+                Real-time status and performance metrics of our AI models
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {aiModels.map((model) => (
+                  <div 
+                    key={model.id}
+                    className={`p-4 rounded-lg border cursor-pointer transition-all ${ selectedModel === model.id  ? 'border-blue-500 bg-blue-500/10'  : 'border-gray-600 bg-white/5 hover:bg-white/10'
+                    }`}
+                    onClick={() => setSelectedModel(model.id)}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-white font-semibold">{model.name}</h4>
+                      <Badge className={getStatusColor(model.status)}>
+                        {model.status}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-3">{model.description}</p>
+                    
+                    <div className="grid grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="text-gray-400">Accuracy</span>
+                        <div className="text-white font-semibold">{model.accuracy}%</div>
+                        <div className="w-full bg-gray-600 rounded-full h-2 mt-1">
+                          <div className={`bg-blue-600 h-2 rounded-full`} style={{width: `${model.accuracy}%`}}></div>
+                        </div>
+                      </div>
+                      <div>
+                        <span className="text-gray-400">Predictions</span>
+                        <div className="text-white font-semibold">{model.predictions.toLocaleString()}</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-400">Success Rate</span>
+                        <div className="text-white font-semibold">{model.successRate}%</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* AI Analysis Control */}
+          <Card className="bg-white/5 border-gray-600">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Zap className="w-6 h-6 text-yellow-400" />
+                Real-Time Analysis
+              </CardTitle>
+              <CardDescription className="text-gray-300">
+                Generate AI-powered predictions and market analysis
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div>
+                  <label className="text-white text-sm font-medium mb-2 block">
+                    Selected Model
+                  </label>
+                  <div className="p-3 bg-blue-500/20 border border-blue-500 rounded-lg">
+                    <div className="text-white font-semibold">
+                      {aiModels.find(m => m.id === selectedModel)?.name}
+                    </div>
+                    <div className="text-blue-300 text-sm">
+                      Accuracy: {aiModels.find(m => m.id === selectedModel)?.accuracy}%
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-white/5 rounded-lg">
+                    <div className="text-2xl font-bold text-green-400">
+                      {aiModels.find(m => m.id === selectedModel)?.predictions.toLocaleString()}
+                    </div>
+                    <div className="text-gray-300 text-sm">Total Predictions</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/5 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-400">
+                      {aiModels.find(m => m.id === selectedModel)?.successRate}%
+                    </div>
+                    <div className="text-gray-300 text-sm">Success Rate</div>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleAnalyze}
+                  disabled={isAnalyzing}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700,
+      hover:to-purple-700"
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <Activity className="w-4 h-4 mr-2 animate-spin" />
+                      Analyzing Market Data...
+                    </>
+                  ) : (
+                    <>
+                      <Brain className="w-4 h-4 mr-2" />
+                      Generate AI Analysis
+                    </>
+                  )}
+                </Button>
+
+                {isAnalyzing && (
+                  <div className="space-y-2">
+                    <div className="text-gray-300 text-sm">Processing market data...</div>
+                    <div className="w-full bg-gray-600 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full w-1/3"></div>
+                    </div>
+                    <div className="text-gray-300 text-sm">Running neural network inference...</div>
+                    <div className="w-full bg-gray-600 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full w-2/3"></div>
+                    </div>
+                    <div className="text-gray-300 text-sm">Generating predictions...</div>
+                    <div className="w-full bg-gray-600 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full w-full"></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Recent Predictions */}
+        <Card className="mb-12 bg-white/5 border-gray-600">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <Target className="w-6 h-6 text-green-400" />
+              Recent AI Predictions
+            </CardTitle>
+            <CardDescription className="text-gray-300">
+              Latest predictions generated by our AI models
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-6">
+              {recentPredictions.map((prediction, index) => (
+                <div key={index} className="p-4 bg-white/5 border border-gray-600 rounded-lg">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="text-white font-bold text-lg">{prediction.symbol}</h4>
+                      <div className={`font-semibold text-sm uppercase ${getPredictionColor(prediction.prediction)}`}>
+                        {prediction.prediction}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-white font-semibold">${prediction.targetPrice}</div>
+                      <div className="text-gray-400 text-sm">{prediction.timeframe}</div>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <div className="flex items-center justify-between text-sm mb-1">
+                      <span className="text-gray-400">Confidence</span>
+                      <span className="text-white">{prediction.confidence}%</span>
+                    </div>
+                    <div className="w-full bg-gray-600 rounded-full h-2">
+                      <div className={`bg-green-600 h-2 rounded-full`} style={{width: `${prediction.confidence}%`}}></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-gray-400 text-sm mb-2">AI Reasoning:</div>
+                    <ul className="space-y-1">
+                      {prediction.reasoning.map((reason, reasonIndex) => (
+                        <li key={reasonIndex} className="flex items-center text-sm text-gray-300">
+                          <CheckCircle className="w-3 h-3 mr-2 text-green-400" />
+                          {reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* AI Features Grid */}
+        <div className="grid md: grid-cols-2,
+      lg:grid-cols-4 gap-6 mb-12">
+          <Card className="bg-gradient-to-br from-blue-600 to-blue-800 border-0">
+            <CardContent className="p-6 text-white text-center">
+              <BarChart3 className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Pattern Recognition</h3>
+              <p className="text-blue-100 text-sm">
+                Advanced algorithms detect complex market patterns and trends
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-600 to-purple-800 border-0">
+            <CardContent className="p-6 text-white text-center">
+              <LineChart className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Sentiment Analysis</h3>
+              <p className="text-purple-100 text-sm">
+                Real-time analysis of news and social media sentiment
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-green-600 to-green-800 border-0">
+            <CardContent className="p-6 text-white text-center">
+              <TrendingUp className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Trend Prediction</h3>
+              <p className="text-green-100 text-sm">
+                Forecast future price movements with high accuracy
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-yellow-600 to-orange-600 border-0">
+            <CardContent className="p-6 text-white text-center">
+              <Shield className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Risk Assessment</h3>
+              <p className="text-yellow-100 text-sm">
+                Intelligent risk analysis and portfolio optimization
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Performance Metrics */}
+        <Card className="bg-white/5 border-gray-600">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <Bot className="w-6 h-6 text-purple-400" />
+              AI Performance Metrics
+            </CardTitle>
+            <CardDescription className="text-gray-300">
+              Comprehensive performance analytics for our AI systems
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md: grid-cols-2,
+      lg:grid-cols-4 gap-6">
+              <div className="text-center p-4 bg-white/5 rounded-lg">
+                <div className="text-3xl font-bold text-green-400 mb-2">94.2%</div>
+                <div className="text-gray-300">Overall Accuracy</div>
+                <div className="text-sm text-gray-400 mt-1">Last 30 days</div>
+              </div>
+              
+              <div className="text-center p-4 bg-white/5 rounded-lg">
+                <div className="text-3xl font-bold text-blue-400 mb-2">47K</div>
+                <div className="text-gray-300">Predictions Made</div>
+                <div className="text-sm text-gray-400 mt-1">This month</div>
+              </div>
+              
+              <div className="text-center p-4 bg-white/5 rounded-lg">
+                <div className="text-3xl font-bold text-purple-400 mb-2">23.7%</div>
+                <div className="text-gray-300">Avg. Return</div>
+                <div className="text-sm text-gray-400 mt-1">AI-guided trades</div>
+              </div>
+              
+              <div className="text-center p-4 bg-white/5 rounded-lg">
+                <div className="text-3xl font-bold text-yellow-400 mb-2">99.9%</div>
+                <div className="text-gray-300">Uptime</div>
+                <div className="text-sm text-gray-400 mt-1">System availability</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
+  )
 }

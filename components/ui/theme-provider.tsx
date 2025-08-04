@@ -1,6 +1,6 @@
-// Stub for theme-provider. Update with real implementation as needed.;
+// Stub for theme-provider. Update with real implementation as needed.
 import React from 'react';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <>{children}</>
 }

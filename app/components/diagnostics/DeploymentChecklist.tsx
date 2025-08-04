@@ -1,50 +1,55 @@
 import React from 'react';
 const DeploymentChecklist = () => {
-  return (;
-    <div>;
-      <h2>Deployment Checklist</h2>;
-      <ol>;
-        <li>;
-          <strong>Code Repository:</strong> Ensure your code is pushed to a remote repository (e.g.,;
-          GitHub, GitLab).;
-        </li>;
-        <li>;
-          <strong>Environment Variables:</strong> Configure necessary environment variables on the;
-          deployment server.;
-        </li>;
-        <li>;
-          <strong>Install Dependencies:</strong> Run <code>npm install</code> to install project;
-          dependencies.;
-        </li>;
-        <li>;
-          <strong>Build Application:</strong> Execute <code>npm run build</code> to create a;
-          production-ready build.;
-        </li>;
-        <li>;
-          <strong>Start Application:</strong> Use <code>npm run start</code> to launch the;
-          application.;
-        </li>;
-        <li>;
-          <strong>Database Configuration:</strong> Configure the database connection string and;
-          ensure the database is accessible.;
-        </li>;
-        <li>;
-          <strong>SSL Certificate:</strong> Install an SSL certificate for secure HTTPS connections.;
-        </li>;
-        <li>;
-          <strong>Domain Name:</strong> Configure the domain name to point to the deployment;
-          server's IP address.;
-        </li>;
-        <li>;
-          <strong>Monitoring:</strong> Set up monitoring tools to track application performance and;
-          uptime.;
-        </li>;
-        <li>;
-          <strong>Logging:</strong> Configure logging to capture application errors and events.;
-        </li>;
-      </ol>;
-    </div>;
-  );
+  return (
+    <div>
+      <h2>Deployment Checklist</h2>
+      <ol>
+        <li>
+          <strong>Code Repository:</strong> Ensure your code is pushed to a remote repository (e.g
+          GitHub, GitLab).
+        </li>
+        <li>
+          <strong>Environment Variables: </strong> Configure necessary environment variables on the
+              
+          deployment server
+        </li>
+        <li>
+          <strong>Install Dependencies:</strong> Run <code>npm install</code> to install project
+              
+          dependencies
+        </li>
+        <li>
+          <strong>Build Application:</strong> Execute <code>npm run build</code> to create a
+              
+          production-ready build
+        </li>
+        <li>
+          <strong>Start Application:</strong> Use <code>npm run start</code> to launch the
+              
+          application
+        </li>
+        <li>
+          <strong>Database Configuration:</strong> Configure the database connection string and
+              
+          ensure the database is accessible
+        </li>
+        <li>
+          <strong>SSL, Certificate:</strong> Install an SSL certificate for secure HTTPS connections
+        </li>
+        <li>
+          <strong>Domain Nam, e:</strong> Configure the domain name to point to the deployment, server's IP address
+        </li>
+        <li>
+          <strong>Monitoring:</strong> Set up monitoring tools to track application performance and
+              
+          uptime
+        </li>
+        <li>
+          <strong>Logging:</strong> Configure logging to capture application errors and events
+        </li>
+      </ol>
+    </div>
+  )
 };
 
 export default DeploymentChecklist;

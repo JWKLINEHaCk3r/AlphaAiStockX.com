@@ -24,8 +24,10 @@ declare global {
 
 
 
-      [elemName: string]: any;
+
+      [elemName: string]: any
     
+
 
 
 
@@ -77,10 +79,12 @@ export interface MarketStock {
 
 
 
-  symbol: string;
-  price: number;
-  change: number;
-  changePercent: number;
+
+  symbol: string,
+    price: number,
+  change: number,
+    changePercent: number
+
 
 
 
@@ -130,12 +134,14 @@ export interface AIBeing {
 
 
 
-  id: number;
-  name: string;
-  status: 'active' | 'idle' | 'analyzing';
-  profits: number;
-  accuracy: number;
-  trades: number;
+
+  id: number,
+    name: string,
+  status: 'active' | 'idle' | 'analyzing',
+    profits: number,
+  accuracy: number,
+    trades: number
+
 
 
 
@@ -185,13 +191,13 @@ export interface Trade {
 
 
 
-  id: string;
-  symbol: string;
-  side: 'buy' | 'sell';
-  quantity: number;
-  price: number;
-  timestamp: Date;
+
+  id: string, symbol: string, side: 'buy' | 'sell',
+    quantity: number,
+  price: number,
+    timestamp: Date;
   profit?: number;
+
 
 
 
@@ -241,9 +247,11 @@ export interface Portfolio {
 
 
 
-  value: number;
-  dailyPnL: number;
-  positions: Position[];
+
+  value: number,
+    dailyPnL: number,
+  positions: Position[]
+
 
 
 
@@ -293,11 +301,13 @@ export interface Position {
 
 
 
-  symbol: string;
-  quantity: number;
-  avgPrice: number;
-  currentPrice: number;
-  unrealizedPL: number;
+
+  symbol: string,
+    quantity: number,
+  avgPrice: number,
+    currentPrice: number,
+  unrealizedPL: number
+
 
 
 

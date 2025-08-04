@@ -22,9 +22,11 @@ export interface Prediction {
 
 
 
-  direction: 'BUY' | 'SELL';
-  confidence: number;
-  [key: string]: unknown;
+
+  direction: 'BUY' | 'SELL',
+    confidence: number;
+  [key: string]: unknown
+
 
 
 

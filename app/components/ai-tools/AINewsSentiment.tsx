@@ -1,112 +1,76 @@
-'use client';
-import React from 'react';
-
-import { useState } from 'react';
+'use client'; import React, { useState } from 'react';
 
 interface NewsItem {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  headline: string;
-  impact: string;
-  sentiment: string;
-  aiNote: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  headline: string,
+    impact: string,
+  sentiment: string,
+    aiNote: string
 }
 
 export default function AINewsSentiment() {
   const [loading, setLoading] = useState(false);
   const [news, setNews] = useState<NewsItem[]>([]);
 
-  // Placeholder: Replace with real AI API call;
-  const fetchNews = () => {
+  const fetchSentiment = () => {
     setLoading(true);
     setTimeout(() => {
-      setNews([;
-        {
-          headline: 'Fed Hints at Rate Pause, Markets Surge',;
-          impact: '+2.1%',;
-          sentiment: 'Bullish',;
-          aiNote: 'AI: Macro event, positive for tech.',;
-        },;
-        {
-          headline: 'Major Hack at Oil Giant',;
-          impact: '-1.7%',;
-          sentiment: 'Bearish',;
-          aiNote: 'AI: Negative for energy sector.',;
-        },;
-        {
-          headline: 'AI Startups See Record Funding',;
-          impact: '+3.4%',;
-          sentiment: 'Bullish',;
-          aiNote: 'AI: Strong for AI/tech stocks.',;
-        },;
+      setNews([ {  headline: 'Fed Hints at Rate Pause',  impact: '+2.1%',  sentiment: 'Bullish',  aiNote: 'AI: Macro event positive for tech sectors.' 
+        }, {  headline: 'Major Hack at Oil Giant',  impact: '-1.7%',  sentiment: 'Bearish',  aiNote: 'AI: Cybersecurity concerns affecting energy sector.' 
+        }, {  headline: 'AI Chip Breakthrough Announced',  impact: '+4.3%',  sentiment: 'Very Bullish',  aiNote: 'AI: Revolutionary tech could disrupt semiconductor industry.' 
+        }, {  headline: 'Trade Tensions Escalate',  impact: '-0.8%',  sentiment: 'Bearish',  aiNote: 'AI: Global supply chain concerns affecting manufacturing.' 
+        }
       ]);
       setLoading(false);
-    }, 1200);
+    }, 1000);
   };
 
-  return (;
-    <div className="futuristic-card holo-shimmer p-6 mb-8">;
-      <h2 className="text-2xl font-bold neon-text mb-2">AI News & Sentiment Engine</h2>;
-      <p className="text-slate-300 mb-4">;
-        Live news, social, and global event impact scoring for every stock.;
-      </p>;
-      <button className="holo-btn px-6 py-2 font-bold mb-4" onClick={fetchNews} disabled={loading}>;
-        {loading ? 'Fetching...' : 'Get News & Sentiment'}
-      </button>;
-      {news.length > 0 && (;
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">;
-          {news.map((n: NewsItem, i) => (;
-            <div key={i} className="futuristic-card p-4 animated-neon-border">;
-              <div className="text-lg font-bold neon-text mb-1">{n.headline}</div>;
-              <div className="text-emerald-300 font-bold">Impact: {n.impact}</div>;
-              <div className="text-fuchsia-300">Sentiment: {n.sentiment}</div>;
-              <div className="text-xs text-cyan-300 mt-2">{n.aiNote}</div>;
-            </div>;
+  const getSentimentColor = (sentiment: string) => {
+    switch (sentiment) {
+      case 'Very Bullish': return 'text-green-500';
+      case 'Bullish': return 'text-green-400';
+      case 'Bearish': return 'text-red-400';
+      case 'Very Bearish': return 'text-red-500';
+      default: return 'text-gray-400';
+    }
+  };
+  
+  const getImpactColor = (impact: string) => {
+    return impact.startsWith('+') ? 'text-green-400' : 'text-red-400';
+  };
+
+  return (
+    <div className="futuristic-card holo-shimmer p-6 mb-8">
+      <h2 className="text-2xl font-bold neon-text mb-2">AI News Sentiment</h2>
+      <p className="text-slate-300 mb-4">
+        Real-time AI analysis of breaking news and market sentiment impact
+      </p>
+      
+      <button 
+        onClick={fetchSentiment}
+        disabled={loading}
+        className="holo-button mb-4" > {loading ? 'Analyzing Market News...' : 'Get AI Sentiment Analysis'}
+      </button>
+
+      {news.length > 0 && (
+        <div className="space-y-4">
+          {news.map((item, index) => (
+            <div key={index} className="ai-insight-card p-4">
+              <div className="mb-3">
+                <h3 className="font-semibold text-blue-300 mb-2">{item.headline}</h3>
+                <div className="flex justify-between items-center mb-2">
+                  <span className={`font-semibold ${getSentimentColor(item.sentiment)}`}>
+                    {item.sentiment}
+                  </span>
+                  <span className={`font-bold ${getImpactColor(item.impact)}`}>
+                    {item.impact}
+                  </span>
+                </div>
+              </div>
+              <p className="text-sm text-slate-300">{item.aiNote}</p>
+            </div>
           ))}
-        </div>;
+        </div>
       )}
-    </div>;
+    </div>
   );
 }

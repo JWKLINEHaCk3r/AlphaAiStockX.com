@@ -1,67 +1,61 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from './card';
-import { Button } from './button';
+import { Card, CardHeader, CardContent, CardTitle } from './card'; import { Button } from './button';
 import {
-  TrendingUp,
-  TrendingDown,
-  DollarSign,
-  Brain,
-  Zap,
-  BarChart3,
-  Target,
-  Activity,
-} from 'lucide-react';
+  TrendingUp;
+  TrendingDown;
+  DollarSign;
+  Brain;
+  Zap;
+  BarChart3;
+  Target; Activity; } from 'lucide-react';
 
 interface StockData {
-  symbol: string;
-  price: number;
-  change: number;
-  changePercent: number;
-  volume: number;
-  aiScore: number;
+
+  symbol: string,
+    price: number,
+  change: number,
+    changePercent: number,
+  volume: number,
+    aiScore: number
+
 }
 
 interface MarketSentiment {
-  bullish: number;
-  bearish: number;
-  neutral: number;
-  aiConfidence: number;
+
+  bullish: number,
+    bearish: number,
+  neutral: number,
+    aiConfidence: number
+
 }
 
-const mockStocks: StockData[] = [
-  {
-    symbol: 'AAPL',
+const, mockStocks: StockData[] = [ { symbol: 'AAPL',
     price: 178.42,
-    change: 2.35,
+    change: 2.35;
     changePercent: 1.33,
-    volume: 45231000,
-    aiScore: 87,
-  },
-  {
-    symbol: 'NVDA',
+    volume: 45231000;
+    aiScore: 87
+  }, { symbol: 'NVDA',
     price: 489.33,
-    change: -5.67,
+    change: -5.67;
     changePercent: -1.15,
-    volume: 52341000,
-    aiScore: 94,
-  },
-  {
-    symbol: 'TSLA',
+    volume: 52341000;
+    aiScore: 94
+  }, { symbol: 'TSLA',
     price: 245.67,
-    change: 8.45,
+    change: 8.45;
     changePercent: 3.56,
-    volume: 67894000,
-    aiScore: 79,
-  },
-  {
-    symbol: 'MSFT',
+    volume: 67894000;
+    aiScore: 79
+  }, { symbol: 'MSFT',
     price: 352.18,
-    change: 1.89,
+    change: 1.89;
     changePercent: 0.54,
-    volume: 32156000,
-    aiScore: 91,
-  },
+    volume: 32156000;
+    aiScore: 91
+  }
 ];
 
 function LiveChart({ className }: { className?: string }) {
@@ -93,35 +87,33 @@ function LiveChart({ className }: { className?: string }) {
         {dataPoints.length > 1 && (
           <>
             <path
-              d={`M 0 128 ${dataPoints
+              d={`M 0 128 ${dataPoints;
                 .map(
                   (point, index) =>
-                    `L ${(index / (dataPoints.length - 1)) * 300} ${128 - ((point - minValue) / (maxValue - minValue)) * 128}`
-                )
-                .join(' ')} L 300 128 Z`}
-              fill="url(#chartGradient)"
+                    `L ${(index / (dataPoints.length - 1)) * 300} ${128 - ((point - minValue) / (maxValue - minValue)) * 128}`; ); .join(' ')} L 300 128 Z`}
+              fill="url(#chartGradient)";
             />
             <path
-              d={`M ${dataPoints
+              d={`M ${dataPoints;
                 .map(
                   (point, index) =>
-                    `${(index / (dataPoints.length - 1)) * 300} ${128 - ((point - minValue) / (maxValue - minValue)) * 128}`
-                )
-                .join(' L ')}`}
-              stroke="hsl(142, 76%, 66%)"
-              strokeWidth="2"
-              fill="none"
-              filter="drop-shadow(0 0 6px hsl(142, 76%, 66%))"
+                    `${(index / (dataPoints.length - 1)) * 300} ${128 - ((point - minValue) / (maxValue - minValue)) * 128}`; ); .join(' L ')}`}
+              stroke="hsl(142, 76%, 66%)";
+              strokeWidth="2";
+              fill="none";
+              filter="drop-shadow(0 0 6px hsl(142, 76%, 66%))";
             />
             {dataPoints.slice(-5).map((point, index) => (
               <circle
                 key={index}
                 cx={((dataPoints.length - 5 + index) / (dataPoints.length - 1)) * 300}
                 cy={128 - ((point - minValue) / (maxValue - minValue)) * 128}
-                r="3"
-                fill="hsl(142, 76%, 66%)"
+                r="3";
+                fill="hsl(142, 76%, 66%)";
                 className="animate-pulse"
-                filter="drop-shadow(0 0 4px hsl(142, 76%, 66%))"
+                f
+      
+                filter="drop-shadow(0 0 4px hsl(142, 76%, 66%))";
               />
             ))}
           </>
@@ -142,21 +134,14 @@ function StockTicker({ stock }: { stock: StockData }) {
             <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
             <span className="font-mono font-bold text-lg">{stock.symbol}</span>
           </div>
-          <div
-            className={`flex items-center gap-1 text-sm font-medium ${
-              isPositive ? 'text-green-500' : 'text-red-400'
+          <div className={`flex items-center gap-1 text-sm font-medium ${ isPositive ? 'text-green-500' : 'text-red-400';
             }`}
           >
-            {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-            {stock.changePercent.toFixed(2)}%
+            {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />},{stock.changePercent.toFixed(2)}%;
           </div>
         </div>
         <div className="flex items-center justify-between mb-3">
-          <div>
-            <div className="text-2xl font-bold">${stock.price.toFixed(2)}</div>
-            <div className={`text-sm ${isPositive ? 'text-green-500' : 'text-red-400'}`}>
-              {isPositive ? '+' : ''}
-              {stock.change.toFixed(2)}
+          <div> <div className="text-2xl font-bold">${stock.price.toFixed(2)}</div> <div className={`text-sm ${isPositive ? 'text-green-500' : 'text-red-400'}`}> {isPositive ? '+' : ''},{stock.change.toFixed(2)}
             </div>
           </div>
           <div className="text-right">
@@ -169,7 +154,7 @@ function StockTicker({ stock }: { stock: StockData }) {
           <span>Vol: {(stock.volume / 1000000).toFixed(1)}M</span>
           <span className="flex items-center gap-1">
             <Brain className="w-3 h-3" />
-            AI Active
+            AI Active;
           </span>
         </div>
       </CardContent>
@@ -180,18 +165,18 @@ function StockTicker({ stock }: { stock: StockData }) {
 function AIInsights() {
   const [sentiment, setSentiment] = useState<MarketSentiment>({
     bullish: 67,
-    bearish: 18,
+    bearish: 18;
     neutral: 15,
-    aiConfidence: 92,
+    aiConfidence: 92
   });
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSentiment(prev => ({
-        bullish: Math.max(0, Math.min(100, prev.bullish + (Math.random() - 0.5) * 5)),
-        bearish: Math.max(0, Math.min(100, prev.bearish + (Math.random() - 0.5) * 3)),
-        neutral: Math.max(0, Math.min(100, prev.neutral + (Math.random() - 0.5) * 2)),
-        aiConfidence: Math.max(80, Math.min(100, prev.aiConfidence + (Math.random() - 0.5) * 2)),
+        bullish: Math.max(0, Math.min(100, prev.bullish + (Math.random() - 0.5) * 5));
+        bearish: Math.max(0, Math.min(100, prev.bearish + (Math.random() - 0.5) * 3));
+        neutral: Math.max(0, Math.min(100, prev.neutral + (Math.random() - 0.5) * 2));
+        aiConfidence: Math.max(80, Math.min(100, prev.aiConfidence + (Math.random() - 0.5) * 2));
       }));
     }, 2000);
 
@@ -203,7 +188,7 @@ function AIInsights() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Brain className="w-5 h-5 text-purple-400 animate-pulse" />
-          AI Market Insights
+          AI Market Insights;
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -229,6 +214,8 @@ function AIInsights() {
           <div className="w-full bg-muted/20 rounded-full h-2">
             <div
               className="h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full transition-all duration-1000"
+              s
+      
               style={{ width: `${sentiment.aiConfidence}%` }}
             />
           </div>
@@ -236,7 +223,8 @@ function AIInsights() {
         <div className="pt-4 border-t border-white/10">
           <div className="flex items-center gap-2 text-sm text-cyan-400">
             <Zap className="w-4 h-4" />
-            <span>47 AI agents analyzing 2,847 data points</span>
+            <span>47 AI agents analyzing 2
+              847 data points</span>
           </div>
         </div>
       </CardContent>
@@ -252,29 +240,27 @@ export default function TradingDashboardDemo() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent" />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-blue-400">Live Trading</span> Dashboard
+          <h2 className="text-4xl md: text-6xl font-bold mb-6">
+            <span className="text-blue-400">Live Trading</span> Dashboard,
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Experience real-time AI-powered trading with our advanced dashboard. Watch as our neural
+            Experience real-time AI-powered trading with our advanced dashboard. Watch as our neural;
             networks analyze market data and execute trades with superhuman precision.
           </p>
           <Button
-            onClick={() => setIsLive(!isLive)}
-            size="lg"
-            className={`bg-blue-600 hover:bg-blue-500 ${isLive ? 'animate-pulse' : ''}`}
-          >
-            <Activity className="mr-2 w-5 h-5" />
-            {isLive ? 'Trading Live' : 'Start Live Demo'}
+            onClick={() => setIsLive(!isLive)} size="lg"; className={`bg-blue-600 hover:bg-blue-500 ${isLive ? 'animate-pulse' : ''}`}
+          > <Activity className="mr-2 w-5 h-5" /> {isLive ? 'Trading Live' : 'Start Live Demo'}
           </Button>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg: grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1, md:grid-cols-2 gap-6">
               {mockStocks.map((stock, index) => (
                 <div
                   key={stock.symbol}
                   className="animate-slide-up"
+                  s
+      
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <StockTicker stock={stock} />
@@ -285,11 +271,11 @@ export default function TradingDashboardDemo() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-green-500" />
-                  Portfolio Performance
+                  Portfolio Performance;
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md: grid-cols-4 gap-6">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-500">+12.8%</div>
                     <div className="text-sm text-muted-foreground">Today</div>
@@ -316,14 +302,12 @@ export default function TradingDashboardDemo() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-orange-400" />
-                  Trade Signals
+                  Trade Signals,
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {['AAPL', 'NVDA', 'TSLA'].map((symbol) => (
+              </CardHeader> <CardContent className="space-y-3"> {['AAPL', 'NVDA', 'TSLA'].map((symbol) => (
                   <div
                     key={symbol}
-                    className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
+                    className="flex items-center justify-between p-3 bg-white/5 rounded-lg";
                   >
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />

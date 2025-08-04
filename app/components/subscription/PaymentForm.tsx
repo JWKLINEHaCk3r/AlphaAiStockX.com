@@ -1,318 +1,369 @@
-import { Card } from "../../../components/ui/card";
-import { AlertDescription } from "../../../components/ui/alert";
-import { Alert } from "../../../components/ui/alert";
-import { SelectValue } from "../../../components/ui/select";
-import { SelectTrigger } from "../../../components/ui/select";
-import { SelectItem } from "../../../components/ui/select";
-import { SelectContent } from "../../../components/ui/select";
-import { Select } from "../../../components/ui/select";
-import { Label } from "../../../components/ui/label";
-import { Input } from "../../../components/ui/input";
+'use client'; import React, { useState } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../../../components/ui/card';
-import React from 'react';
-import { useState } from 'react';
-import { AlertCircle, CheckCircle, CreditCard, Lock, ArrowLeft } from 'lucide-react';
+import { Input } from "../../../components/ui/input";
+import { Badge } from "../../../components/ui/badge";
+import { 
+  CreditCard, 
+  Shield, 
+  Lock, 
+  CheckCircle, 
+  Star, 
+  Crown, 
+  Zap,
+  Calendar,
+  User,
+  Mail,
+  Building,
+  MapPin,
+  Phone,
+  AlertCircle, Info } from 'lucide-react';
 
-
-interface PaymentFormProps {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  plan: string | null;
-  billingCycle: string;
-  onBack: () => void;
-  onSuccess?: (planId: string) => void;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface PaymentData {
+  cardNumber: string,
+    expiryDate: string,
+  cvv: string,
+    name: string,
+  email: string,
+    billingAddress: {
+      street: string,
+    city: string,
+    state: string,
+    zipCode: string,
+    country: string
+  },
 }
 
-export default function PaymentForm({ plan, billingCycle, onBack, onSuccess }: PaymentFormProps) {
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+interface SubscriptionPlan {
+  id: string,
+    name: string, price: number, interval: 'monthly' | 'yearly',
+  features: string[];
+  popular?: boolean;
+  enterprise?: boolean;
+}
+ export default function PaymentForm() { const [selectedPlan, setSelectedPlan] = useState<string>('pro');
+  const [isProcessing, setIsProcessing] = useState(false); const [paymentData, setPaymentData] = useState<PaymentData>({ cardNumber: '', expiryDate: '', cvv: '', name: '', email: '', billingAddress: { street: '', city: '', state: '', zipCode: '', country: 'United States'
+    }
+  });
 
-  const formatCardNumber = (value: string) => {
-    // Remove all non-digits;
-    const digits = value.replace(/\D/g, '');
-    // Add space after every 4 digits;
-    const formatted = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
-    // Limit to 19 characters (16 digits + 3 spaces);
+  const plans: SubscriptionPlan[] = [ { id: 'basic', name: 'Basic Trader', price: 29, interval: 'monthly', features: [ 'Real-time stock data', 'Basic AI predictions', 'Portfolio tracking', 'Email alerts', 'Mobile app access'
+      ] },{ id: 'pro', name: 'Pro Trader', price: 99, interval: 'monthly', features: [ 'Everything in Basic', 'Advanced AI analytics', 'Options flow scanner', 'Pattern recognition', 'Custom alerts', 'API access', 'Priority support'
+      ],
+      popular: true },{ id: 'enterprise', name: 'Enterprise', price: 299, interval: 'monthly', features: [ 'Everything in Pro', 'Quantum AI predictions', 'Institutional data feeds', 'Custom integrations', 'Dedicated account manager', 'White-label solutions', 'Advanced security features'
+      ],
+      enterprise: true
+    }
+  ];
+
+  const formatCardNumber = (value: string) => { // Remove all non-digit characters const digits = value.replace(/\D/g, ''); // Add space after every 4 digits const formatted = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+    // Limit to 19 characters (16 digits + 3 spaces)
     return formatted.slice(0, 19);
   };
 
+  const formatExpiryDate = (value: string) => { // Remove all non-digit characters const digits = value.replace(/\D/g, '');
+    // Add slash after 2 digits
+    if (digits.length >= 2) {
+      return `${digits.slice(0, 2)}/${digits.slice(2, 4)}`;
+    }
+    return digits;
+  };
+
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber(formatCardNumber(e.target.value));
+    const formatted = formatCardNumber(e.target.value);
+    setPaymentData(prev => ({ ...prev, cardNumber: formatted })),
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatExpiryDate(e.target.value);
+    setPaymentData(prev => ({ ...prev, expiryDate: formatted })),
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
-    try {
-      // Simulate payment processing delay;
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Simple validation;
-      if (!cardNumber || !cardName || !expiryMonth || !expiryYear || !cvv) {
-        throw new Error('Please fill in all payment details');
-      }
-
-      if (cardNumber.replace(/\s/g, '').length !== 16) {
-        throw new Error('Please enter a valid 16-digit card number');
-      }
-
-      if (cvv.length < 3) {
-        throw new Error('Please enter a valid CVV code');
-      }
-
-      // In a real app, you would call a payment processing API here;
-      // For demo purposes, we'll just show a success message;
-      setSuccess(true);
-      setTimeout(() => {
-        if (plan) {
-          onSuccess?.(plan);
-        }
-      }, 2000);
-    } catch (err: unknown) {
-      setError((err as Error).message || 'Payment processing failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+    setIsProcessing(true);
+    
+    // Simulate payment processing
+    setTimeout(() => { setIsProcessing(false); alert('Payment processed successfully!');
+    }, 3000);
   };
 
-  const getPlanDetails = () => {
-    switch (plan) {
-      case 'basic':
-        return {
-          name: 'Basic Plan',
-          price: billingCycle === 'yearly' ? '$199.99/year' : '$19.99/month',
-        };
-      case 'pro':
-        return {
-          name: 'Pro Plan',
-          price: billingCycle === 'yearly' ? '$499.99/year' : '$49.99/month',
-        };
-      case 'ultimate':
-        return {
-          name: 'Ultimate Plan',
-          price: billingCycle === 'yearly' ? '$999.99/year' : '$99.99/month',
-        };
-      default:
-        return {
-          name: 'Unknown Plan',
-          price: 'Unknown',
-        };
-    }
-  };
+  const selectedPlanData = plans.find(plan => plan.id === selectedPlan);
 
-  const planDetails = getPlanDetails();
   return (
-    <Card className="w-full max-w-md bg-black/40 border-purple-500/30 backdrop-blur-xl">
-      <CardHeader>
-        <CardTitle className="text-white text-2xl">Payment Details</CardTitle>
-        <CardDescription className="text-gray-400">
-          Subscribe to {planDetails.name} - {planDetails.price}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {success ? (
-          <div className="space-y-4 text-center">
-            <CheckCircle className="h-16 w-16 text-green-400 mx-auto" />
-            <h3 className="text-xl font-bold text-white">Payment Successful!</h3>
-            <p className="text-gray-300">
-              Thank you for subscribing to {planDetails.name}. Your account has been upgraded.
-            </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-6">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <CreditCard className="w-16 h-16 text-blue-400 mr-4" />
+            <h1 className="text-5xl font-bold text-white">
+              Subscribe to AlphaAI
+            </h1>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <Alert variant="destructive" className="bg-red-900/20 border-red-500/50 text-red-300">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+          <p className="text-2xl text-gray-300 max-w-4xl mx-auto mb-8">
+            Choose your plan and start trading with advanced AI-powered insights
+          </p>
+        </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="cardName" className="text-white">
-                Name on Card
-              </Label>
-              <Input
-                id="cardName"
-                placeholder="John Doe"
-                value={cardName}
-                onChange={e => setCardName(e.target.value)}
-                className="bg-black/20 border-purple-500/30 text-white"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="cardNumber" className="text-white">
-                Card Number
-              </Label>
-              <div className="relative">
-                <CreditCard className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  id="cardNumber"
-                  placeholder="1234 5678 9012 3456"
-                  value={cardNumber}
-                  onChange={handleCardNumberChange}
-                  className="pl-10 bg-black/20 border-purple-500/30 text-white"
-                  maxLength={19}
-                />
+        <div className="grid lg:grid-cols-2 gap-8">
+          
+          {/* Plan Selection */}
+          <Card className="bg-white/10 border-white/20 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Star className="w-6 h-6 text-yellow-400" />
+                Choose Your Plan
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {plans.map((plan) => (
+                  <div
+                    key={plan.id}
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${ selectedPlan === plan.id ? 'border-blue-500 bg-blue-500/20' : 'border-white/20 bg-white/5 hover:border-white/40'
+                    }`}
+                    onClick={() => setSelectedPlan(plan.id)}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        {plan.enterprise ? (
+                          <Crown className="w-8 h-8 text-purple-400" />
+                        ) : plan.popular ? (
+                          <Zap className="w-8 h-8 text-yellow-400" />
+                        ) : (
+                          <Star className="w-8 h-8 text-blue-400" />
+                        )}
+                        <div>
+                          <h3 className="text-white font-bold text-xl">{plan.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <span className="text-3xl font-bold text-white">${plan.price}</span>
+                            <span className="text-gray-400">/{plan.interval}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {plan.popular && (
+                        <Badge className="bg-yellow-500 text-black">
+                          MOST POPULAR
+                        </Badge>
+                      )},{plan.enterprise && (
+                        <Badge className="bg-purple-500 text-white">
+                          ENTERPRISE
+                        </Badge>
+                      )}
+                    </div>
+                    
+                    <div className="space-y-2">
+                      {plan.features.map((feature, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-400" />
+                          <span className="text-gray-300 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="expiryMonth" className="text-white">
-                  Month
-                </Label>
-                <Select value={expiryMonth} onValueChange={setExpiryMonth}>
-                  <SelectTrigger className="bg-black/20 border-purple-500/30 text-white">
-                    <SelectValue placeholder="MM" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-900 border-purple-500/30">
-                    {Array.from({ length: 12 }, (_, i) => {
-                      const month = (i + 1).toString().padStart(2, '0');
-                      return (
-                        <SelectItem key={month} value={month}>
-                          {month}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="expiryYear" className="text-white">
-                  Year
-                </Label>
-                <Select value={expiryYear} onValueChange={setExpiryYear}>
-                  <SelectTrigger className="bg-black/20 border-purple-500/30 text-white">
-                    <SelectValue placeholder="YY" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-900 border-purple-500/30">
-                    {Array.from({ length: 10 }, (_, i) => {
-                      const year = (new Date().getFullYear() + i).toString().slice(-2);
-                      return (
-                        <SelectItem key={year} value={year}>
-                          {year}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cvv" className="text-white">
-                  CVV
-                </Label>
-                <Input
-                  id="cvv"
-                  placeholder="123"
-                  value={cvv}
-                  onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                  className="bg-black/20 border-purple-500/30 text-white"
-                  maxLength={4}
-                />
-              </div>
-            </div>;
-            <div className="pt-2">
-              <div className="flex items-center justify-center mb-4 text-sm text-gray-400">
-                <Lock className="h-4 w-4 mr-2" />
-                Secure payment processing. Your card details are encrypted.
-              </div>
-              <div className="flex flex-col space-y-2">
+            </CardContent>
+          </Card>
+
+          {/* Payment Form */}
+          <Card className="bg-white/10 border-white/20 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Lock className="w-6 h-6 text-green-400" />
+                Payment Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                
+                {/* Order Summary */},{selectedPlanData && (
+                  <div className="bg-white/5 rounded-lg p-4 mb-6">
+                    <h4 className="text-white font-semibold mb-2">Order Summary</h4>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-300">{selectedPlanData.name}</span>
+                      <span className="text-white font-bold">${selectedPlanData.price}/{selectedPlanData.interval}</span>
+                    </div>
+                  </div>
+                )},{/* Card Information */}
+                <div className="space-y-4">
+                  <h4 className="text-white font-semibold flex items-center gap-2">
+                    <CreditCard className="w-5 h-5" />
+                    Card Information
+                  </h4>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Card Number
+                    </label>
+                    <Input
+                      type="text"
+                      value={paymentData.cardNumber}
+                      onChange={handleCardNumberChange}
+                      placeholder="1234 5678 9012 3456"
+                      className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+              
+                      maxLength={19}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        Expiry Date
+                      </label>
+                      <Input
+                        type="text"
+                        value={paymentData.expiryDate}
+                        onChange={handleExpiryChange}
+                        placeholder="MM/YY"
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+              
+                        maxLength={5}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        CVV
+                      </label>
+                      <Input
+                        type="text" value={paymentData.cvv} onChange={(e) => setPaymentData(prev => ({ ...prev, cvv: e.target.value.replace(/\D/g, '').slice(0, 4) }))}
+                        placeholder="123"
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+              
+                        maxLength={4}
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Billing Information */}
+                <div className="space-y-4">
+                  <h4 className="text-white font-semibold flex items-center gap-2">
+                    <User className="w-5 h-5" />
+                    Billing Information
+                  </h4>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Full Name
+                    </label>
+                    <Input
+                      type="text"
+                      value={paymentData.name}
+                      onChange={(e) => setPaymentData(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="John Doe"
+                      className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Email Address
+                    </label>
+                    <Input
+                      type="email"
+                      value={paymentData.email}
+                      onChange={(e) => setPaymentData(prev => ({ ...prev, email: e.target.value }))}
+                      placeholder="john@example.com"
+                      className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Street Address
+                    </label>
+                    <Input
+                      type="text"
+                      value={paymentData.billingAddress.street}
+                      onChange={(e) => setPaymentData(prev => ({
+                        ...prev;
+                        billingAddress: { ...prev.billingAddress, street: e.target.value }
+                      }))}
+                      placeholder="123 Main Street"
+                      className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        City
+                      </label>
+                      <Input
+                        type="text"
+                        value={paymentData.billingAddress.city}
+                        onChange={(e) => setPaymentData(prev => ({
+                          ...prev;
+                          billingAddress: { ...prev.billingAddress, city: e.target.value }
+                        }))}
+                        placeholder="New York"
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        ZIP Code
+                      </label>
+                      <Input
+                        type="text"
+                        value={paymentData.billingAddress.zipCode}
+                        onChange={(e) => setPaymentData(prev => ({
+                          ...prev;
+                          billingAddress: { ...prev.billingAddress, zipCode: e.target.value }
+                        }))}
+                        placeholder="10001"
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Security Notice */}
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-3">
+                    <Shield className="w-6 h-6 text-green-400" />
+                    <div>
+                      <h5 className="text-green-400 font-semibold">Secure Payment</h5>
+                      <p className="text-green-200 text-sm">Your payment information is encrypted and secure</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                  disabled={isLoading}
+                  disabled={isProcessing}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-lg"
                 >
-                  {isLoading ? (
-                    <span className="flex items-center">
-                      <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Processing...
-                    </span>
+                  {isProcessing ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Processing Payment...
+                    </>
                   ) : (
-                    `Pay ${planDetails.price}`
+                    <>
+                      <Lock className="w-5 h-5 mr-2" />
+                      Subscribe Now - ${selectedPlanData?.price}/{selectedPlanData?.interval}
+                    </>
                   )}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-purple-500/30 text-white"
-                  onClick={onBack}
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Plans
-                </Button>
-              </div>
-            </div>
-          </form>
-        )}
-      </CardContent>
-    </Card>
+                
+                <p className="text-gray-400 text-sm text-center">
+                  By subscribing
+               you agree to our Terms of Service and Privacy Policy.
+                  Cancel anytime from your account settings.
+                </p>
+              </form>
+            </CardContent>
+          </Card>
+          
+        </div>
+      </div>
+    </div>
   );
 }

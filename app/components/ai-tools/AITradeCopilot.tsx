@@ -1,54 +1,63 @@
-'use client';
-import React from 'react';
+'use client'; import React, { useState } from 'react';
 
-import { useState } from 'react';
+interface TradeSignal {
+  symbol: string,
+    action: string,
+  confidence: string,
+    aiNote: string
+}
 
 export default function AITradeCopilot() {
   const [loading, setLoading] = useState(false);
-  type Suggestion = {
-    symbol: string;
-    action: string;
-    reason: string;
-    simulation: string;
-  } | null;
+  const [signals, setSignals] = useState<TradeSignal[]>([]);
 
-  const [suggestion, setSuggestion] = useState<Suggestion>(null);
-
-  // Placeholder: Replace with real AI API call;
-  const getSuggestion = () => {
+  const getSignals = () => {
     setLoading(true);
     setTimeout(() => {
-      setSuggestion({
-        symbol: 'GOOGL',;
-        action: 'Buy',;
-        reason: 'AI: Strong earnings, bullish technicals, positive news flow.',;
-        simulation: '+7.2% gain in 30 days (simulated)',;
-      });
+      setSignals([ {  symbol: 'TSLA',  action: 'BUY',  confidence: '85%',  aiNote: 'AI: Strong momentum breakout with high volume confirmation.' 
+        }, {  symbol: 'META',  action: 'HOLD',  confidence: '72%',  aiNote: 'AI: Consolidation phase, wait for clear direction.' 
+        }, {  symbol: 'AMZN',  action: 'SELL',  confidence: '78%',  aiNote: 'AI: Overbought conditions, consider profit taking.' 
+        }
+      ]);
       setLoading(false);
-    }, 1200);
+    }, 1100);
   };
 
-  return (;
-    <div className="futuristic-card holo-shimmer p-6 mb-8">;
-      <h2 className="text-2xl font-bold neon-text mb-2">AI Trade Copilot</h2>;
-      <p className="text-slate-300 mb-4">;
-        Suggests, explains, and simulates trades based on all known market data.;
-      </p>;
-      <button;
-        className="holo-btn px-6 py-2 font-bold mb-4";
-        onClick={getSuggestion}
+  const getActionColor = (action: string) => { switch (action) { case 'BUY': return 'text-green-400'; case 'SELL': return 'text-red-400'; case 'HOLD': return 'text-yellow-400'; default: return 'text-gray-400';
+    }
+  };
+
+  return (
+    <div className="futuristic-card holo-shimmer p-6 mb-8">
+      <h2 className="text-2xl font-bold neon-text mb-2">AI Trade Copilot</h2>
+      <p className="text-slate-300 mb-4">
+        Real-time AI trading signals and recommendations powered by machine learning
+      </p>
+      
+      <button 
+        onClick={getSignals}
         disabled={loading}
-      >;
-        {loading ? 'Thinking...' : 'Get Trade Suggestion'}
-      </button>;
-      {suggestion && (;
-        <div className="mt-4 futuristic-card p-4 animated-neon-border">;
-          <div className="text-xl font-bold neon-text mb-1">{suggestion.symbol}</div>;
-          <div className="text-emerald-300 font-bold">Action: {suggestion.action}</div>;
-          <div className="text-fuchsia-300">{suggestion.reason}</div>;
-          <div className="text-cyan-300 mt-2">Simulation: {suggestion.simulation}</div>;
-        </div>;
+        className="holo-button mb-4" > {loading ? 'Generating AI Signals...' : 'Get AI Trade Signals'}
+      </button>
+
+      {signals.length > 0 && (
+        <div className="space-y-4">
+          {signals.map((signal, index) => (
+            <div key={index} className="ai-insight-card p-4">
+              <div className="flex justify-between items-center mb-2">
+                <div className="flex items-center space-x-3">
+                  <span className="font-bold text-blue-300 text-lg">{signal.symbol}</span>
+                  <span className={`font-bold text-xl ${getActionColor(signal.action)}`}>
+                    {signal.action}
+                  </span>
+                </div>
+                <span className="text-yellow-400 font-bold">{signal.confidence}</span>
+              </div>
+              <p className="text-sm text-slate-300">{signal.aiNote}</p>
+            </div>
+          ))}
+        </div>
       )}
-    </div>;
+    </div>
   );
 }

@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 
 interface Particle {
@@ -24,13 +25,15 @@ interface Particle {
 
 
 
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  color: string;
-  opacity: number;
+
+  x: number,
+    y: number,
+  vx: number,
+    vy: number,
+  size: number,
+    color: string,
+  opacity: number
+
 
 
 
@@ -59,36 +62,28 @@ export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>();
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+ useEffect(() => { if (typeof window === 'undefined') return;
 
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
+    if (!canvas) return; const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
-    const resizeCanvas = () => {
-      if (typeof window !== 'undefined') {
+ const resizeCanvas = () => { if (typeof window !== 'undefined') {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
     };
 
-    const createParticles = () => {
-      const particles: Particle[] = [];
-      const colors = ['#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EF4444'];
+    const createParticles = () => { const particles: Particle[] = [], const colors = ['#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EF4444'];
 
       for (let i = 0; i < 50; i++) {
         particles.push({
-          x: Math.random() * canvas.width,;
-          y: Math.random() * canvas.height,;
-          vx: (Math.random() - 0.5) * 0.5,;
-          vy: (Math.random() - 0.5) * 0.5,;
-          size: Math.random() * 3 + 1,;
-          color: colors[Math.floor(Math.random() * colors.length)],;
-          opacity: Math.random() * 0.5 + 0.3,;
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height;
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5;
+          size: Math.random() * 3 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)];
+          opacity: Math.random() * 0.5 + 0.3,
         });
       }
 
@@ -107,7 +102,6 @@ export default function AnimatedBackground() {
 
         ctx.save();
         ctx.globalAlpha = particle.opacity;
-import { AnimatedBackground } from "./animated-background-client";
         ctx.fillStyle = particle.color;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -125,15 +119,9 @@ import { AnimatedBackground } from "./animated-background-client";
     const handleResize = () => {
       resizeCanvas();
       createParticles();
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleResize);
+    }; if (typeof window !== 'undefined') { window.addEventListener('resize', handleResize);
     }
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', handleResize);
+ return () => { if (typeof window !== 'undefined') { window.removeEventListener('resize', handleResize);
       }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -141,11 +129,9 @@ import { AnimatedBackground } from "./animated-background-client";
     };
   }, []);
 
-  return (;
-    <canvas;
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0";
-      style={{ background: 'transparent' }}
-    />;
-  );
+  return (
+    <canvas
+      ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" style={{ background: 'transparent' }}
+    />
+  ),
 }

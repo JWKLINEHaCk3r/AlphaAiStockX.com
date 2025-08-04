@@ -1,958 +1,359 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Badge } from "../../../components/ui/badge";
-import { SelectValue } from "../../../components/ui/select";
-import { SelectTrigger } from "../../../components/ui/select";
-import { SelectItem } from "../../../components/ui/select";
-import { SelectContent } from "../../../components/ui/select";
-import { Select } from "../../../components/ui/select";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
 'use client';
-import React from 'react';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-import {
-  Zap,;
-  Bot,;
-  Target,;
-  Activity,;
-  Clock,;
-  ArrowUp,;
-  ArrowDown,;
-  CloudLightningIcon as Lightning,;
-  Rocket,;
-  Brain,;
-  Eye,;
-  Timer,;
-} from 'lucide-react';
-import { TradingSignalData } from '../../types/trading-types';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { 
+  Zap,
+  Bot,
+  Target,
+  Activity,
+  BarChart3,
+  Clock,
+  DollarSign,
+  TrendingUp,
+  Settings,
+  Play,
+  Pause,
+  Monitor,
+  Cpu,
+  Wifi, AlertCircle } from 'lucide-react';
 
-// Type definitions;
-interface User {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: string;
-  name: string;
-  email: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface EngineMetrics {
+  isActive: boolean,
+    latency: number,
+  tradesPerSecond: number,
+    totalTrades: number,
+  successRate: number,
+    todayPnL: number,
+  avgExecutionTime: number,
+    memoryUsage: number,
+  cpuUsage: number
 }
 
-interface Trade {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: string;
-  symbol: string;
-  side: 'buy' | 'sell';
-  quantity: number;
-  price: number;
-  timestamp: Date;
-  executionTime: number;
-  status: 'completed' | 'pending' | 'failed';
-  type?: 'manual' | 'auto'; // Added type property;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface FastTrade {
+  id: string, symbol: string, side: 'BUY' | 'SELL',
+    quantity: number,
+  price: number,
+    executionTime: number, timestamp: string, status: 'FILLED' | 'PENDING' | 'REJECTED',
+  strategy: string
 }
 
-interface MarketData {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  [symbol: string]: {
-    price: number;
-    change: number;
-    changePercent: number;
-    volume: number;
-    bid: number;
-    ask: number;
-    timestamp: Date;
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-};
+interface MarketStream {
+  symbol: string,
+    bid: number,
+  ask: number,
+    last: number,
+  volume: number,
+    change: number,
+  updateTime: string
 }
 
-interface AISignal {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: number;
-  symbol: string;
-  action: 'buy' | 'sell';
-  confidence: number;
-  targetPrice: number;
-  timeframe: string;
-  reason: string;
-  timestamp: Date;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-interface PremiumFeatures {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  maxTrades: number | 'unlimited';
-  executionSpeed: string;
-  aiSignals: number | 'unlimited';
-  autoTrade: boolean;
-  advancedOrders: boolean;
-  realTimeData: boolean;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-interface UltraFastTradingEngineProps {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  user: User;
-  membershipLevel: 'free' | 'basic' | 'pro' | 'ultimate';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-export default function UltraFastTradingEngine({
-  user,;
-  membershipLevel,;
-}: UltraFastTradingEngineProps) {
-  const [selectedStock, setSelectedStock] = useState<string>('AAPL');
-  const [orderType, setOrderType] = useState<'market' | 'limit' | 'stop'>('market');
-  const [quantity, setQuantity] = useState<number>(100);
-  const [price, setPrice] = useState<number>(0);
-  const [side, setSide] = useState<'buy' | 'sell'>('buy');
-  const [isExecuting, setIsExecuting] = useState<boolean>(false);
-  const [executionTime, setExecutionTime] = useState<number>(0);
-  const [recentTrades, setRecentTrades] = useState<Trade[]>([]);
-  const [marketData, setMarketData] = useState<MarketData>({});
-  const [aiSignals, setAiSignals] = useState<AISignal[]>([]);
-  const [autoTradeEnabled, setAutoTradeEnabled] = useState<boolean>(false);
-
-  const executionTimeRef = useRef<number>(0);
-  const wsRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Premium features based on membership;
-  const premiumFeatures: Record<string, PremiumFeatures> = {
-    free: {
-      maxTrades: 10,;
-      executionSpeed: 'standard',;
-      aiSignals: 3,;
-      autoTrade: false,;
-      advancedOrders: false,;
-      realTimeData: false,;
-    },;
-    basic: {
-      maxTrades: 100,;
-      executionSpeed: 'fast',;
-      aiSignals: 10,;
-      autoTrade: false,;
-      advancedOrders: true,;
-      realTimeData: true,;
-    },;
-    pro: {
-      maxTrades: 500,;
-      executionSpeed: 'ultra-fast',;
-      aiSignals: 25,;
-      autoTrade: true,;
-      advancedOrders: true,;
-      realTimeData: true,;
-    },;
-    ultimate: {
-      maxTrades: 'unlimited',;
-      executionSpeed: 'lightning',;
-      aiSignals: 'unlimited',;
-      autoTrade: true,;
-      advancedOrders: true,;
-      realTimeData: true,;
-    },;
-  };
-
-  const currentFeatures = premiumFeatures[membershipLevel] || premiumFeatures.free;
-
-  const getExecutionTime = useCallback(() => {
-    switch (currentFeatures.executionSpeed) {
-      case 'lightning':;
-        return Math.random() * 10 + 5; // 5-15ms;
-      case 'ultra-fast':;
-        return Math.random() * 50 + 20; // 20-70ms;
-      case 'fast':;
-        return Math.random() * 100 + 50; // 50-150ms;
-      default:;
-        return Math.random() * 500 + 200; // 200-700ms;
-    }
-  }, [currentFeatures.executionSpeed]);
-
-  const updateMarketData = useCallback(() => {
-    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
-    const newData: MarketData = {};
-
-    stocks.forEach((symbol: string) => {
-      const basePrice = 100 + Math.random() * 400;
-      const change = (Math.random() - 0.5) * 10;
-      newData[symbol] = {
-        price: basePrice,;
-        change: change,;
-        changePercent: (change / basePrice) * 100,;
-        volume: Math.floor(Math.random() * 10000000),;
-        bid: basePrice - 0.01,;
-        ask: basePrice + 0.01,;
-        timestamp: new Date(),;
-      };
-    });
-
-    setMarketData(newData);
-    if (selectedStock && newData[selectedStock]) {
-      setPrice(newData[selectedStock].price);
-    }
-  }, [selectedStock]);
-
-  const executeAutoTrade = useCallback(;
-    async (signal: AISignal) => {
-      const autoTrade: Trade = {
-        id: Date.now().toString(),;
-        symbol: signal.symbol,;
-        side: signal.action,;
-        quantity: Math.floor(1000 / signal.targetPrice), // $1000 position;
-        price: signal.targetPrice,;
-        timestamp: new Date(),;
-        executionTime: getExecutionTime(),;
-        status: 'completed',;
-        type: 'auto', // Mark as auto trade;
-      };
-
-      setRecentTrades((prev: Trade[]) => [autoTrade, ...prev.slice(0, 49)]);
-    },;
-    [getExecutionTime];
-  );
-
-  const generateAISignals = useCallback(() => {
-    if (;
-      typeof currentFeatures.aiSignals === 'number' &&;
-      aiSignals.length >= currentFeatures.aiSignals;
-    );
-      return;
-
-    const stocks = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'META', 'AMZN', 'SPY', 'QQQ'];
-    const signal: AISignal = {
-      id: Date.now(),;
-      symbol: stocks[Math.floor(Math.random() * stocks.length)],;
-      action: Math.random() > 0.5 ? 'buy' : 'sell',;
-      confidence: 75 + Math.random() * 25,;
-      targetPrice: 100 + Math.random() * 400,;
-      timeframe: ['1m', '5m', '15m', '1h'][Math.floor(Math.random() * 4)],;
-      reason: [;
-        'Bullish momentum detected',;
-        'Support level bounce',;
-        'Breakout pattern confirmed',;
-        'Volume surge detected',;
-        'AI pattern recognition',;
-        'Earnings catalyst',;
-      ][Math.floor(Math.random() * 6)],;
-      timestamp: new Date(),;
-    };
-
-    setAiSignals((prev: AISignal[]) => [signal, ...prev.slice(0, 19)]);
-
-    // Auto-execute if enabled and premium member;
-    if (autoTradeEnabled && currentFeatures.autoTrade && signal.confidence > 85) {
-      executeAutoTrade(signal);
-    }
-  }, [;
-    aiSignals.length,;
-    currentFeatures.aiSignals,;
-    currentFeatures.autoTrade,;
-    autoTradeEnabled,;
-    executeAutoTrade,;
-  ]);
-
-  useEffect(() => {
-    // Simulate WebSocket connection for real-time data;
-    if (currentFeatures.realTimeData) {
-      wsRef.current = setInterval(() => {
-        updateMarketData();
-        generateAISignals();
-      }, 100); // Ultra-fast updates;
-    } else {
-      wsRef.current = setInterval(() => {
-        updateMarketData();
-      }, 5000); // Standard updates;
+export default function UltraFastTradingEngine() {
+  const [engineMetrics, setEngineMetrics] = useState<EngineMetrics>({
+    isActive: true,
+    latency: 0.23;
+    tradesPerSecond: 47.2,
+    totalTrades: 8342;
+    successRate: 98.7,
+    todayPnL: 12847.32;
+    avgExecutionTime: 0.18,
+    memoryUsage: 67.3;
+    cpuUsage: 23.8
+  });
+
+  const [recentTrades, setRecentTrades] = useState<FastTrade[]>([]);
+  const [marketStream, setMarketStream] = useState<MarketStream[]>([]);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const tradeCountRef = useRef(0);
+ const generateMockTrade = useCallback((): FastTrade => { const symbols = ['NVDA', 'TSLA', 'AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'SPY']; const strategies = ['Momentum', 'Arbitrage', 'Mean Reversion', 'Breakout', 'Scalping'];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    
+    tradeCountRef.current += 1;
+    
+    return {
+      id: `trade_${tradeCountRef.current}`; symbol, side: Math.random() > 0.5 ? 'BUY' : 'SELL',
+      quantity: Math.floor(Math.random() * 1000) + 100,
+      price: 100 + Math.random() * 400;
+      executionTime: 0.1 + Math.random() * 0.5, timestamp: new Date().toLocaleTimeString(), status: Math.random() > 0.02 ? 'FILLED' : 'REJECTED',
+      strategy: strategies[Math.floor(Math.random() * strategies.length)]
+    },
+  }, []);
+
+  useEffect(() => { const mockMarketData: MarketStream[] = [ { symbol: 'NVDA', bid: 488.45, ask: 488.47, last: 488.46, volume: 1847293, change: 0.87, updateTime: '00:00:00' },{ symbol: 'TSLA', bid: 244.12, ask: 244.15, last: 244.13, volume: 2341829, change: 1.23, updateTime: '00:00:00' },{ symbol: 'AAPL', bid: 179.87, ask: 179.89, last: 179.88, volume: 3482947, change: -0.34, updateTime: '00:00:00' },{ symbol: 'MSFT', bid: 376.23, ask: 376.25, last: 376.24, volume: 1926483, change: 0.56, updateTime: '00:00:00' },{ symbol: 'META', bid: 487.91, ask: 487.93, last: 487.92, volume: 1582947, change: 2.14, updateTime: '00:00:00' }
+    ];
+    
+    setMarketStream(mockMarketData);
+
+    if (engineMetrics.isActive) {
+      intervalRef.current = setInterval(() => {
+        // Update engine metrics
+        setEngineMetrics(prev => ({
+          ...prev,
+          latency: 0.1 + Math.random() * 0.5,
+          tradesPerSecond: 40 + Math.random() * 20;
+          totalTrades: prev.totalTrades + Math.floor(Math.random() * 3),
+          todayPnL: prev.todayPnL + (Math.random() - 0.5) * 100;
+          avgExecutionTime: 0.1 + Math.random() * 0.3,
+          memoryUsage: 60 + Math.random() * 20;
+          cpuUsage: 15 + Math.random() * 30
+        }));
+
+        // Add new trade occasionally
+        if (Math.random() > 0.7) {
+          const newTrade = generateMockTrade();
+          setRecentTrades(prev => [newTrade, ...prev.slice(0, 9)]);
+        }
+
+        // Update market data
+        setMarketStream(prev => prev.map(item => ({
+          ...item,
+          bid: item.bid + (Math.random() - 0.5) * 0.5,
+          ask: item.ask + (Math.random() - 0.5) * 0.5;
+          last: item.last + (Math.random() - 0.5) * 0.5,
+          volume: item.volume + Math.floor(Math.random() * 1000);
+          change: item.change + (Math.random() - 0.5) * 0.1,
+          updateTime: new Date().toLocaleTimeString()
+        })))
+      }, 100); // Ultra-fast updates every,
+      100ms
     }
 
     return () => {
-      if (wsRef.current) clearInterval(wsRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, [membershipLevel, currentFeatures.realTimeData, updateMarketData, generateAISignals]);
+  }, [engineMetrics.isActive, generateMockTrade]);
 
-  const executeTrade = async () => {
-    if (;
-      typeof currentFeatures.maxTrades === 'number' &&;
-      recentTrades.length >= currentFeatures.maxTrades;
-    ) {
-      alert(`Trade limit reached for ${membershipLevel} membership`);
-      return;
-    }
-
-    setIsExecuting(true);
-    executionTimeRef.current = Date.now();
-
-    // Simulate ultra-fast execution;
-    const execTime = getExecutionTime();
-    await new Promise(resolve => setTimeout(resolve, execTime));
-
-    const trade: Trade = {
-      id: Date.now().toString(),;
-      symbol: selectedStock,;
-      side,;
-      quantity,;
-      price: orderType === 'market' ? marketData[selectedStock]?.price || price : price,;
-      timestamp: new Date(),;
-      executionTime: execTime,;
-      status: 'completed',;
-      type: 'manual', // Mark as manual trade;
-    };
-
-    setRecentTrades((prev: Trade[]) => [trade, ...prev.slice(0, 49)]);
-    setExecutionTime(execTime);
-    setIsExecuting(false);
+  const toggleEngine = () => {
+    setEngineMetrics(prev => ({ ...prev, isActive: !prev.isActive })),
+  };
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(amount),
   };
 
-  const getSpeedBadge = () => {
-    switch (currentFeatures.executionSpeed) {
-      case 'lightning':;
-        return (;
-          <Badge className="bg-yellow-500 animate-pulse">;
-            <Lightning className="h-3 w-3 mr-1" />;
-            Lightning (5-15ms);
-          </Badge>;
-        );
-      case 'ultra-fast':;
-        return (;
-          <Badge className="bg-blue-500">;
-            <Rocket className="h-3 w-3 mr-1" />;
-            Ultra-Fast (20-70ms);
-          </Badge>;
-        );
-      case 'fast':;
-        return (;
-          <Badge className="bg-green-500">;
-            <Zap className="h-3 w-3 mr-1" />;
-            Fast (50-150ms);
-          </Badge>;
-        );
-      default:;
-        return (;
-          <Badge className="bg-gray-500">;
-            <Clock className="h-3 w-3 mr-1" />;
-            Standard (200-700ms);
-          </Badge>;
-        );
-    }
+  const formatLatency = (ms: number) => {
+    return `${ms.toFixed(2)}ms`;
   };
 
-  return (;
-    <div className="space-y-6">;
-      {/* Ultra-Fast Trading Interface */}
-      <Card className="bg-black/20 border-cyan-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <div className="flex items-center justify-between">;
-            <CardTitle className="text-white flex items-center">;
-              <Lightning className="h-6 w-6 mr-2 text-cyan-400" />;
-              Ultra-Fast Trading Engine;
-              {getSpeedBadge()}
-            </CardTitle>;
-            <div className="flex items-center space-x-2">;
-              {currentFeatures.autoTrade && (;
-                <Button;
-                  variant={autoTradeEnabled ? 'default' : 'outline'}
-                  onClick={() => setAutoTradeEnabled(!autoTradeEnabled)}
-                  className={autoTradeEnabled ? 'bg-green-500 hover:bg-green-600' : ''}
-                >;
-                  <Bot className="h-4 w-4 mr-2" />;
-                  Auto-Trade {autoTradeEnabled ? 'ON' : 'OFF'}
-                </Button>;
-              )}
-              <Badge className="bg-purple-500">{membershipLevel.toUpperCase()}</Badge>;
-            </div>;
-          </div>;
-        </CardHeader>;
-        <CardContent>;
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-            {/* Order Entry */}
-            <div className="space-y-4">;
-              <div className="grid grid-cols-2 gap-4">;
-                <div className="space-y-2">;
-                  <label className="text-white text-sm font-medium">Symbol</label>;
-                  <Select value={selectedStock} onValueChange={setSelectedStock}>;
-                    <SelectTrigger className="bg-black/20 border-cyan-500/30 text-white">;
-                      <SelectValue />;
-                    </SelectTrigger>;
-                    <SelectContent>;
-                      {Object.keys(marketData).map((symbol: string) => (;
-                        <SelectItem key={symbol} value={symbol}>;
-                          {symbol} - ${marketData[symbol]?.price?.toFixed(2)}
-                        </SelectItem>;
-                      ))}
-                    </SelectContent>;
-                  </Select>;
-                </div>;
-                <div className="space-y-2">;
-                  <label className="text-white text-sm font-medium">Side</label>;
-                  <Select;
-                    value={side}
-                    onValueChange={(value: string) => setSide(value as 'buy' | 'sell')}
-                  >;
-                    <SelectTrigger className="bg-black/20 border-cyan-500/30 text-white">;
-                      <SelectValue />;
-                    </SelectTrigger>;
-                    <SelectContent>;
-                      <SelectItem value="buy">;
-                        <div className="flex items-center">;
-                          <ArrowUp className="h-4 w-4 text-green-400 mr-2" />;
-                          BUY;
-                        </div>;
-                      </SelectItem>;
-                      <SelectItem value="sell">;
-                        <div className="flex items-center">;
-                          <ArrowDown className="h-4 w-4 text-red-400 mr-2" />;
-                          SELL;
-                        </div>;
-                      </SelectItem>;
-                    </SelectContent>;
-                  </Select>;
-                </div>;
-              </div>;
-              <div className="grid grid-cols-2 gap-4">;
-                <div className="space-y-2">;
-                  <label className="text-white text-sm font-medium">Order Type</label>;
-                  <Select;
-                    value={orderType}
-                    onValueChange={(value: string) =>;
-                      setOrderType(value as 'market' | 'limit' | 'stop');
-                    }
-                  >;
-                    <SelectTrigger className="bg-black/20 border-cyan-500/30 text-white">;
-                      <SelectValue />;
-                    </SelectTrigger>;
-                    <SelectContent>;
-                      <SelectItem value="market">Market</SelectItem>;
-                      {currentFeatures.advancedOrders && (;
-                        <>;
-                          <SelectItem value="limit">Limit</SelectItem>;
-                          <SelectItem value="stop">Stop Loss</SelectItem>;
-                          <SelectItem value="stop-limit">Stop Limit</SelectItem>;
-                        </>;
-                      )}
-                    </SelectContent>;
-                  </Select>;
-                </div>;
-                <div className="space-y-2">;
-                  <label className="text-white text-sm font-medium">Quantity</label>;
-                  <Input;
-                    type="number";
-                    value={quantity}
-                    onChange={e => setQuantity(Number(e.target.value))}
-                    className="bg-black/20 border-cyan-500/30 text-white";
-                  />;
-                </div>;
-              </div>;
-              {orderType !== 'market' && (;
-                <div className="space-y-2">;
-                  <label className="text-white text-sm font-medium">Price</label>;
-                  <Input;
-                    type="number";
-                    step="0.01";
-                    value={price}
-                    onChange={e => setPrice(Number(e.target.value))}
-                    className="bg-black/20 border-cyan-500/30 text-white";
-                  />;
-                </div>;
-              )}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black p-6">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <Zap className="w-16 h-16 text-yellow-400 mr-4" />
+            <h1 className="text-5xl font-bold text-white">
+              Ultra-Fast Trading Engine
+            </h1>
+          </div>
+          <p className="text-2xl text-gray-300 max-w-4xl mx-auto mb-8">
+            Microsecond precision trading with advanced order execution algorithms
+          </p>
+        </div>
 
-              <Button;
-                onClick={executeTrade}
-                disabled={isExecuting}
-                className={`w-full text-lg font-bold ${
-                  side === 'buy' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600';
-                }`}
-              >;
-                {isExecuting ? (;
-                  <div className="flex items-center">;
-                    <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>;
-                    Executing...;
-                  </div>;
-                ) : (;
-                  <div className="flex items-center">;
-                    <Lightning className="h-5 w-5 mr-2" />;
-                    {side.toUpperCase()} {selectedStock}
-                  </div>;
+        {/* Engine Status */}
+        <Card className="mb-8 bg-white/10 border-yellow-500/30 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bot className="w-6 h-6 text-yellow-400" />
+                Engine Status
+              </div> <div className="flex items-center gap-2"> <div className={`w-3 h-3 rounded-full ${engineMetrics.isActive ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`}></div> <span className={`text-sm ${engineMetrics.isActive ? 'text-green-400' : 'text-red-400'}`}> {engineMetrics.isActive ? 'ACTIVE' : 'STOPPED'}
+                </span>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid lg:grid-cols-5 gap-6 mb-6">
+              
+              <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/30">
+                <Wifi className="w-8 h-8 mx-auto mb-2 text-green-400" />
+                <div className="text-white font-bold text-xl">{formatLatency(engineMetrics.latency)}</div>
+                <p className="text-green-200 text-sm">Latency</p>
+              </div>
+              
+              <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
+                <Activity className="w-8 h-8 mx-auto mb-2 text-blue-400" />
+                <div className="text-white font-bold text-xl">{engineMetrics.tradesPerSecond.toFixed(1)}</div>
+                <p className="text-blue-200 text-sm">Trades/Sec</p>
+              </div>
+              
+              <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
+                <BarChart3 className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+                <div className="text-white font-bold text-xl">{engineMetrics.totalTrades.toLocaleString()}</div>
+                <p className="text-purple-200 text-sm">Total Trades</p>
+              </div>
+              
+              <div className="text-center p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
+                <Target className="w-8 h-8 mx-auto mb-2 text-yellow-400" />
+                <div className="text-white font-bold text-xl">{engineMetrics.successRate.toFixed(1)}%</div>
+                <p className="text-yellow-200 text-sm">Success Rate</p>
+              </div>
+              
+              <div className="text-center p-4 bg-red-900/20 rounded-lg border border-red-500/30"> <DollarSign className="w-8 h-8 mx-auto mb-2 text-red-400" /> <div className={`font-bold text-xl ${engineMetrics.todayPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {formatCurrency(engineMetrics.todayPnL)}
+                </div>
+                <p className="text-red-200 text-sm">Today&apos;s P&L</p>
+              </div>
+              
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6 mb-6">
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-blue-400" />
+                  Execution Time
+                </h4>
+                <p className="text-blue-400 font-bold text-lg">{formatLatency(engineMetrics.avgExecutionTime)}</p>
+                <p className="text-gray-400 text-sm">Average execution</p>
+              </div>
+              
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
+                  <Monitor className="w-4 h-4 text-green-400" />
+                  Memory Usage
+                </h4>
+                <p className="text-green-400 font-bold text-lg">{engineMetrics.memoryUsage.toFixed(1)}%</p>
+                <p className="text-gray-400 text-sm">System memory</p>
+              </div>
+              
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-purple-400" />
+                  CPU Usage
+                </h4>
+                <p className="text-purple-400 font-bold text-lg">{engineMetrics.cpuUsage.toFixed(1)}%</p>
+                <p className="text-gray-400 text-sm">Processing power</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              <Button onClick={toggleEngine} className={`${engineMetrics.isActive ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600, hover:bg-green-700'} text-white`}
+              >
+                {engineMetrics.isActive ? (
+                  <>
+                    <Pause className="w-4 h-4 mr-2" />
+                    Stop Engine
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-4 h-4 mr-2" />
+                    Start Engine
+                  </>
                 )}
-              </Button>;
-              {executionTime > 0 && (;
-                <div className="text-center p-3 bg-green-500/20 rounded-lg border border-green-500/30">;
-                  <p className="text-green-400 font-bold">;
-                    <Timer className="h-4 w-4 inline mr-1" />;
-                    Executed in {executionTime.toFixed(1)}ms;
-                  </p>;
-                </div>;
-              )}
-            </div>;
-            {/* Real-time Market Data */}
-            <div className="space-y-4">;
-              <h4 className="text-white font-semibold">Real-time Market Data</h4>;
-              {selectedStock && marketData[selectedStock] && (;
-                <div className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/30">;
-                  <div className="flex items-center justify-between mb-3">;
-                    <span className="text-white font-bold text-xl">{selectedStock}</span>;
-                    <Badge;
-                      className={
-                        currentFeatures.realTimeData ? 'bg-green-500 animate-pulse' : 'bg-gray-500';
-                      }
-                    >;
-                      {currentFeatures.realTimeData ? 'LIVE' : 'DELAYED'}
-                    </Badge>;
-                  </div>;
-                  <div className="grid grid-cols-2 gap-4">;
-                    <div>;
-                      <p className="text-gray-400 text-sm">Price</p>;
-                      <p className="text-white font-bold text-2xl">;
-                        ${marketData[selectedStock].price.toFixed(2)}
-                      </p>;
-                    </div>;
-                    <div>;
-                      <p className="text-gray-400 text-sm">Change</p>;
-                      <p;
-                        className={`font-bold text-xl ${
-                          marketData[selectedStock].change >= 0 ? 'text-green-400' : 'text-red-400';
-                        }`}
-                      >;
-                        {marketData[selectedStock].change >= 0 ? '+' : ''}
-                        {marketData[selectedStock].change.toFixed(2)}(;
-                        {marketData[selectedStock].changePercent.toFixed(2)}%);
-                      </p>;
-                    </div>;
-                    <div>;
-                      <p className="text-gray-400 text-sm">Bid</p>;
-                      <p className="text-blue-400 font-semibold">;
-                        ${marketData[selectedStock].bid.toFixed(2)}
-                      </p>;
-                    </div>;
-                    <div>;
-                      <p className="text-gray-400 text-sm">Ask</p>;
-                      <p className="text-red-400 font-semibold">;
-                        ${marketData[selectedStock].ask.toFixed(2)}
-                      </p>;
-                    </div>;
-                  </div>;
-                </div>;
-              )}
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border-white/20 text-gray-300 hover: bg-white/10"
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Engine Settings
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-              {/* Trade Limits */}
-              <div className="p-3 bg-purple-500/10 rounded-lg border border-purple-500/30">;
-                <h5 className="text-white font-medium mb-2">Trading Limits</h5>;
-                <div className="space-y-1 text-sm">;
-                  <div className="flex justify-between">;
-                    <span className="text-gray-400">Trades Today:</span>;
-                    <span className="text-white">;
-                      {recentTrades.length}/;
-                      {currentFeatures.maxTrades === 'unlimited' ? '∞' : currentFeatures.maxTrades}
-                    </span>;
-                  </div>;
-                  <div className="flex justify-between">;
-                    <span className="text-gray-400">Execution Speed:</span>;
-                    <span className="text-cyan-400">{currentFeatures.executionSpeed}</span>;
-                  </div>;
-                  <div className="flex justify-between">;
-                    <span className="text-gray-400">AI Signals:</span>;
-                    <span className="text-purple-400">;
-                      {aiSignals.length}/;
-                      {currentFeatures.aiSignals === 'unlimited' ? '∞' : currentFeatures.aiSignals}
-                    </span>;
-                  </div>;
-                </div>;
-              </div>;
-            </div>;
-          </div>;
-        </CardContent>;
-      </Card>;
-      {/* AI Signals */}
-      <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <CardTitle className="text-white flex items-center">;
-            <Brain className="h-6 w-6 mr-2 text-purple-400" />;
-            AI Trading Signals;
-            <Badge className="ml-3 bg-gradient-to-r from-purple-500 to-pink-500">;
-              <Eye className="h-3 w-3 mr-1" />;
-              Live AI;
-            </Badge>;
-          </CardTitle>;
-        </CardHeader>;
-        <CardContent>;
-          {aiSignals.length === 0 ? (;
-            <div className="text-center py-8">;
-              <Brain className="h-12 w-12 text-gray-400 mx-auto mb-4" />;
-              <p className="text-gray-400">AI is analyzing market conditions...</p>;
-            </div>;
-          ) : (;
-            <div className="space-y-3 max-h-64 overflow-y-auto">;
-              {aiSignals;
-                .slice(;
-                  0,;
-                  currentFeatures.aiSignals === 'unlimited';
-                    ? aiSignals.length;
-                    : currentFeatures.aiSignals;
-                );
-                .map((signal: TradingSignalData) => (;
-                  <div;
-                    key={signal.id}
-                    className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/30";
-                  >;
-                    <div className="flex items-center justify-between">;
-                      <div className="flex items-center space-x-3">;
-                        <Badge variant={signal.type === 'buy' ? 'default' : 'destructive'}>;
-                          {signal.type.toUpperCase()}
-                        </Badge>;
-                        <span className="text-white font-bold">{signal.symbol}</span>;
-                        <span className="text-gray-300">${signal.targetPrice.toFixed(2)}</span>;
-                      </div>;
-                      <div className="text-right">;
-                        <Badge className="bg-cyan-500">{signal.confidence.toFixed(0)}%</Badge>;
-                        <p className="text-xs text-gray-400 mt-1">{signal.timeframe}</p>;
-                      </div>;
-                    </div>;
-                    <p className="text-sm text-gray-300 mt-2">{signal.reason}</p>;
-                    <p className="text-xs text-gray-400">{signal.timestamp.toLocaleTimeString()}</p>;
-                  </div>;
+        <div className="grid, lg:grid-cols-2 gap-8">
+          
+          {/* Recent Trades */}
+          <Card className="bg-white/10 border-white/20 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-green-400" />
+                Recent Trades
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {recentTrades.map((trade) => (
+                  <div key={trade.id} className="bg-white/5 rounded-lg p-3 border border-white/10">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3"> <Badge className={trade.side === 'BUY' ? 'text-green-400 bg-green-900/30' : 'text-red-400 bg-red-900/30'}>
+                          {trade.side}
+                        </Badge>
+                        <span className="text-white font-semibold">{trade.symbol}</span>
+                        <span className="text-gray-400 text-sm">{trade.quantity}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-white font-semibold">{formatCurrency(trade.price)}</div>
+                        <div className="text-gray-400 text-xs">{formatLatency(trade.executionTime)}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between mt-2">
+                      <span className="text-gray-400 text-xs">{trade.strategy}</span>
+                      <div className="flex items-center gap-2"> <Badge className={ trade.status === 'FILLED' ? 'text-green-400 bg-green-900/30' : trade.status === 'PENDING' ? 'text-yellow-400 bg-yellow-900/30' : 'text-red-400 bg-red-900/30'
+                        }>
+                          {trade.status}
+                        </Badge>
+                        <span className="text-gray-400 text-xs">{trade.timestamp}</span>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-            </div>;
-          )}
-        </CardContent>;
-      </Card>;
-      {/* Recent Trades */}
-      <Card className="bg-black/20 border-green-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <CardTitle className="text-white flex items-center">;
-            <Activity className="h-6 w-6 mr-2 text-green-400" />;
-            Recent Executions ({recentTrades.length});
-          </CardTitle>;
-        </CardHeader>;
-        <CardContent>;
-          {recentTrades.length === 0 ? (;
-            <div className="text-center py-8">;
-              <Target className="h-12 w-12 text-gray-400 mx-auto mb-4" />;
-              <p className="text-gray-400">No trades executed yet</p>;
-            </div>;
-          ) : (;
-            <div className="space-y-2 max-h-64 overflow-y-auto">;
-              {recentTrades.slice(0, 10).map((trade: Trade) => (;
-                <div;
-                  key={trade.id}
-                  className="flex items-center justify-between p-3 bg-gray-800/30 rounded border border-gray-700/30";
-                >;
-                  <div className="flex items-center space-x-3">;
-                    <Badge variant={trade.side === 'buy' ? 'default' : 'destructive'}>;
-                      {trade.side.toUpperCase()}
-                    </Badge>;
-                    <span className="text-white font-medium">{trade.symbol}</span>;
-                    <span className="text-gray-400 text-sm">;
-                      {trade.quantity} @ ${trade.price.toFixed(2)}
-                    </span>;
-                    {trade.type === 'auto' && (;
-                      <Badge className="bg-purple-500 text-xs">;
-                        <Bot className="h-3 w-3 mr-1" />;
-                        AUTO;
-                      </Badge>;
-                    )}
-                  </div>;
-                  <div className="text-right">;
-                    <span className="text-cyan-400 text-sm font-bold">;
-                      {trade.executionTime.toFixed(1)}ms;
-                    </span>;
-                    <p className="text-xs text-gray-400">{trade.timestamp.toLocaleTimeString()}</p>;
-                  </div>;
-                </div>;
-              ))}
-            </div>;
-          )}
-        </CardContent>;
-      </Card>;
-    </div>;
+              </div>
+              
+              {recentTrades.length === 0 && (
+                <div className="text-center py-8">
+                  <AlertCircle className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-400">No recent trades</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Market Stream */}
+          <Card className="bg-white/10 border-white/20 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Activity className="w-6 h-6 text-blue-400" />
+                Live Market Stream
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {marketStream.map((stream) => (
+                  <div key={stream.symbol} className="bg-white/5 rounded-lg p-3 border border-white/10">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-bold">{stream.symbol}</span>
+                      <span className="text-gray-400 text-xs">{stream.updateTime}</span>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2 mt-2 text-sm">
+                      <div className="text-center">
+                        <div className="text-green-400 font-semibold">{stream.bid.toFixed(2)}</div>
+                        <p className="text-gray-400 text-xs">Bid</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-red-400 font-semibold">{stream.ask.toFixed(2)}</div>
+                        <p className="text-gray-400 text-xs">Ask</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-white font-semibold">{stream.last.toFixed(2)}</div>
+                        <p className="text-gray-400 text-xs">Last</p>
+                      </div> <div className="text-center"> <div className={`font-semibold ${stream.change >= 0 ? 'text-green-400' : 'text-red-400'}`}> {stream.change >= 0 ? '+' : ''},{stream.change.toFixed(2)}%
+                        </div>
+                        <p className="text-gray-400 text-xs">Change</p>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-center">
+                      <span className="text-gray-400 text-xs">Volume: {stream.volume.toLocaleString()}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          
+        </div>
+        
+      </div>
+    </div>
   );
 }

@@ -1,493 +1,335 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-<<<<<<< HEAD;
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
+'use client'; import React, { useState } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Label } from "../../../components/ui/label";
-import { CardTitle } from "../../../components/ui/card";
-import { CardHeader } from "../../../components/ui/card";
-import { CardContent } from "../../../components/ui/card";
-import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
-'use client';
-=======;
-import { Label } from '@/components/ui/label';
-('use client');
->>>>>>> Fix: All import/export, logic, and formatting issues in AIStockTips.tsx and related UI components. Ensure strictNullChecks, Prettier, and robust production standards. Ready for deployment.;
-import React from 'react';
+import { Input } from "../../../components/ui/input";
+import { 
+  Crown, 
+  User, 
+  Settings, 
+  BarChart3, 
+  TrendingUp, 
+  DollarSign,
+  Star,
+  Award,
+  Briefcase,
+  Calendar,
+  Mail,
+  Phone,
+  MapPin,
+  Edit3,
+  Save, X } from 'lucide-react';
 
-import { useState } from 'react';
-<<<<<<< HEAD;
-=======;
->>>>>>> 6bf02c1 (fix: restore ignoredBuiltDependencies and update Netlify config for stable deploys);
-import {
-  Crown,;
-  Infinity,;
-  Zap,;
-  Shield,;
-  Brain,;
-  Bot,;
-  TrendingUp,;
-  Users,;
-  Settings,;
-  Star,;
-  Sparkles,;
-  Target,;
-  Award,;
-  Gem,;
-} from 'lucide-react';
-
-interface User {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: string;
-  name: string;
-  email: string;
-  tier: string;
-  joinDate: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface UserStats {
+  totalTrades: number,
+    successRate: number,
+  totalProfit: number,
+    portfolioValue: number,
+  activeStrategies: number,
+    joinDate: string
 }
 
-interface OwnerProfileProps {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  user: User;
-  onSwitchToAdmin: () => void;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface Achievement {
+  id: string,
+    title: string,
+  description: string,
+    icon: React.ReactNode;
+  earned: boolean;
+  earnedDate?: string;
 }
 
-export default function OwnerProfile({ user, onSwitchToAdmin }: OwnerProfileProps) {
-  const [activeFeatures, setActiveFeatures] = useState({
-    ultraFastTrading: true,;
-    aiAutoPilot: true,;
-    unlimitedSignals: true,;
-    premiumSupport: true,;
-    advancedAnalytics: true,;
-    customStrategies: true,;
-    whiteLabel: true,;
-    apiAccess: true,;
+export default function OwnerProfile() { const [isEditing, setIsEditing] = useState(false); const [activeTab, setActiveTab] = useState('overview'); const [profileData, setProfileData] = useState({ name: 'Joseph Kline', email: 'joseph@alphaaistockx.com', phone: '+1 (555) 123-4567', location: 'San Francisco, CA', bio: 'Founder and CEO of AlphaAI StockX. Passionate about democratizing AI-powered trading for everyone.', website: 'alphaaistockx.com'
   });
 
-  const ownerFeatures = [;
-    {
-      icon: Infinity,;
-      title: 'Unlimited Everything',;
-      description: 'No limits on trades, signals, or features',;
-      status: 'active',;
-      color: 'text-yellow-400',;
-    },;
-    {
-      icon: Zap,;
-      title: 'Lightning Speed (1ms)',;
-      description: 'Fastest execution speeds available',;
-      status: 'active',;
-      color: 'text-blue-400',;
-    },;
-    {
-      icon: Brain,;
-      title: 'AI Autopilot',;
-      description: 'Fully automated AI trading with custom models',;
-      status: 'active',;
-      color: 'text-purple-400',;
-    },;
-    {
-      icon: Bot,;
-      title: 'Custom Trading Bots',;
-      description: 'Build and deploy unlimited custom bots',;
-      status: 'active',;
-      color: 'text-green-400',;
-    },;
-    {
-      icon: Shield,;
-      title: 'Priority Support',;
-      description: '24/7 dedicated support team',;
-      status: 'active',;
-      color: 'text-red-400',;
-    },;
-    {
-      icon: Star,;
-      title: 'White Label Access',;
-      description: 'Brand the platform as your own',;
-      status: 'active',;
-      color: 'text-orange-400',;
-    },;
-    {
-      icon: Target,;
-      title: 'Advanced Analytics',;
-      description: 'Deep insights and custom reporting',;
-      status: 'active',;
-      color: 'text-cyan-400',;
-    },;
-    {
-      icon: Gem,;
-      title: 'API Access',;
-      description: 'Full API access for integrations',;
-      status: 'active',;
-      color: 'text-pink-400',;
-    },;
+  const userStats: UserStats = {
+    totalTrades: 1247,
+    successRate: 87.3,
+    totalProfit: 1250000,
+    portfolioValue: 2750000,
+    activeStrategies: 12,
+    joinDate: 'January 2020'
+  };
+
+  const achievements: Achievement[] = [ { id: 'founder', title: 'Platform Founder', description: 'Created and launched AlphaAI StockX',
+      icon: <Crown className="w-6 h-6" />, earned: true, earnedDate: 'January 2020'
+    }, { id: 'millionaire', title: 'Millionaire Trader', description: 'Achieved $1M+ in trading profits',
+      icon: <DollarSign className="w-6 h-6" />, earned: true, earnedDate: 'March 2022' },{ id: 'strategist', title: 'Master Strategist', description: 'Created 10+ successful trading strategies',
+      icon: <Briefcase className="w-6 h-6" />, earned: true, earnedDate: 'August 2023' },{ id: 'mentor', title: 'Community Mentor', description: 'Helped 1000+ traders improve their performance',
+      icon: <Award className="w-6 h-6" />, earned: true, earnedDate: 'December 2023' },{ id: 'innovator', title: 'AI Innovator', description: 'Pioneered AI trading technology',
+      icon: <Star className="w-6 h-6" />, earned: true, earnedDate: 'June 2024'
+    }
   ];
 
-  return (;
-    <div className="space-y-6">;
-      {/* Owner Header */}
-      <Card className="bg-gradient-to-r from-yellow-900/90 via-orange-900/90 to-red-900/90 border-yellow-500/50 backdrop-blur-xl relative overflow-hidden">;
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 via-orange-500/10 to-red-500/5"></div>;
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400"></div>;
-        <CardHeader className="relative">;
-          <div className="flex items-center justify-between">;
-            <div className="flex items-center space-x-4">;
-              <div className="relative">;
-                <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-pulse">;
-                  <Crown size={32} className="text-white" />;
-                </div>;
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">;
-                  <Infinity size={12} className="text-white" />;
-                </div>;
-              </div>;
-              <div>;
-                <div className="flex items-center space-x-2">;
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">;
-                    OWNER ACCESS;
-                  </h2>;
-                  <Badge className="bg-gradient-to-r from-yellow-500 to-orange-600 animate-bounce">;
-                    <Sparkles size={12} className="mr-1" />;
-                    UNLIMITED;
-                  </Badge>;
-                </div>;
-                <p className="text-gray-300">Supreme Alpha Wolf • Platform Owner</p>;
-                <p className="text-sm text-yellow-400 font-semibold">;
-                  Free Forever • All Features Unlocked;
-                </p>;
-              </div>;
-            </div>;
-            <div className="flex items-center space-x-3">;
-              <Button;
-                onClick={onSwitchToAdmin}
-                className="bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700";
-              >;
-                <Shield className="mr-2 h-4 w-4" />;
-                Admin Panel;
-              </Button>;
-              <div className="text-right">;
-                <p className="text-2xl font-bold text-yellow-400">∞</p>;
-                <p className="text-xs text-gray-400">Unlimited Balance</p>;
-              </div>;
-            </div>;
-          </div>;
-        </CardHeader>;
-      </Card>;
-      {/* Owner Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">;
-        <Card className="bg-gradient-to-br from-yellow-900/20 to-orange-900/20 border-yellow-500/30 backdrop-blur-xl">;
-          <CardContent className="p-4 text-center">;
-            <Infinity size={24} className="text-yellow-400 mx-auto mb-2 animate-pulse" />;
-            <p className="text-lg font-bold text-yellow-400">∞</p>;
-            <p className="text-xs text-gray-400">Daily Trades</p>;
-          </CardContent>;
-        </Card>;
-        <Card className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/30 backdrop-blur-xl">;
-          <CardContent className="p-4 text-center">;
-            <Zap size={24} className="text-blue-400 mx-auto mb-2" />;
-            <p className="text-lg font-bold text-blue-400">1ms</p>;
-            <p className="text-xs text-gray-400">Execution Speed</p>;
-          </CardContent>;
-        </Card>;
-        <Card className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30 backdrop-blur-xl">;
-          <CardContent className="p-4 text-center">;
-            <Brain size={24} className="text-green-400 mx-auto mb-2" />;
-            <p className="text-lg font-bold text-green-400">∞</p>;
-            <p className="text-xs text-gray-400">AI Signals</p>;
-          </CardContent>;
-        </Card>;
-        <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30 backdrop-blur-xl">;
-          <CardContent className="p-4 text-center">;
-            <Award size={24} className="text-purple-400 mx-auto mb-2" />;
-            <p className="text-lg font-bold text-purple-400">100%</p>;
-            <p className="text-xs text-gray-400">All Features</p>;
-          </CardContent>;
-        </Card>;
-      </div>;
-      {/* Owner Features */}
-      <Tabs defaultValue="features" className="space-y-6">;
-        <TabsList className="bg-black/20 border-yellow-500/30 backdrop-blur-xl">;
-          <TabsTrigger value="features" className="data-[state=active]:bg-yellow-500/20">;
-            <Star className="h-4 w-4 mr-2" />;
-            Premium Features;
-          </TabsTrigger>;
-          <TabsTrigger value="analytics" className="data-[state=active]:bg-yellow-500/20">;
-            <TrendingUp className="h-4 w-4 mr-2" />;
-            Advanced Analytics;
-          </TabsTrigger>;
-          <TabsTrigger value="management" className="data-[state=active]:bg-yellow-500/20">;
-            <Settings className="h-4 w-4 mr-2" />;
-            Platform Management;
-          </TabsTrigger>;
-        </TabsList>;
-        <TabsContent value="features">;
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">;
-            {ownerFeatures.map((feature, index) => {
-              const IconComponent = feature.icon;
-              return (;
-                <Card;
-                  key={index}
-                  className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl hover:border-yellow-400/50 transition-all";
-                >;
-                  <CardContent className="p-6">;
-                    <div className="flex items-center justify-between mb-4">;
-                      <div className="flex items-center space-x-3">;
-                        <div className="p-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg">;
-                          <IconComponent size={24} className={feature.color} />;
-                        </div>;
-                        <div>;
-                          <h3 className="text-white font-semibold">{feature.title}</h3>;
-                          <p className="text-sm text-gray-400">{feature.description}</p>;
-                        </div>;
-                      </div>;
-                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-600">;
-                        <Sparkles size={12} className="mr-1" />;
-                        ACTIVE;
-                      </Badge>;
-                    </div>;
-                  </CardContent>;
-                </Card>;
-              );
-            })}
-          </div>;
-        </TabsContent>;
-        <TabsContent value="analytics">;
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-            <Card className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl">;
-              <CardHeader>;
-                <CardTitle className="text-white flex items-center">;
-                  <TrendingUp className="mr-2 text-yellow-400" />;
-                  Owner Performance Metrics;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent>;
-                <div className="space-y-4">;
-                  <div className="flex justify-between items-center p-3 bg-green-500/10 rounded-lg border border-green-500/30">;
-                    <span className="text-gray-300">Total Profit</span>;
-                    <span className="text-green-400 font-bold text-xl">+$2,847,392</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">;
-                    <span className="text-gray-300">Win Rate</span>;
-                    <span className="text-blue-400 font-bold text-xl">94.7%</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-purple-500/10 rounded-lg border border-purple-500/30">;
-                    <span className="text-gray-300">Profit Factor</span>;
-                    <span className="text-purple-400 font-bold text-xl">8.42</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-yellow-500/10 rounded-lg border border-yellow-500/30">;
-                    <span className="text-gray-300">Max Drawdown</span>;
-                    <span className="text-yellow-400 font-bold text-xl">-2.1%</span>;
-                  </div>;
-                </div>;
-              </CardContent>;
-            </Card>;
-            <Card className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl">;
-              <CardHeader>;
-                <CardTitle className="text-white flex items-center">;
-                  <Users className="mr-2 text-yellow-400" />;
-                  Platform Overview;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent>;
-                <div className="space-y-4">;
-                  <div className="flex justify-between items-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">;
-                    <span className="text-gray-300">Total Users</span>;
-                    <span className="text-blue-400 font-bold text-xl">15,847</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-green-500/10 rounded-lg border border-green-500/30">;
-                    <span className="text-gray-300">Monthly Revenue</span>;
-                    <span className="text-green-400 font-bold text-xl">$1.2M</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-purple-500/10 rounded-lg border border-purple-500/30">;
-                    <span className="text-gray-300">Active Subscriptions</span>;
-                    <span className="text-purple-400 font-bold text-xl">12,341</span>;
-                  </div>;
-                  <div className="flex justify-between items-center p-3 bg-orange-500/10 rounded-lg border border-orange-500/30">;
-                    <span className="text-gray-300">Platform Uptime</span>;
-                    <span className="text-orange-400 font-bold text-xl">99.97%</span>;
-                  </div>;
-                </div>;
-              </CardContent>;
-            </Card>;
-          </div>;
-        </TabsContent>;
-        <TabsContent value="management">;
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">;
-            <Card className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl">;
-              <CardHeader>;
-                <CardTitle className="text-white text-center">;
-                  <Shield className="mx-auto mb-2 text-red-400" size={32} />;
-                  Admin Controls;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent className="text-center">;
-                <Button;
-                  onClick={onSwitchToAdmin}
-                  className="w-full bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700";
-                >;
-                  Access Admin Panel;
-                </Button>;
-              </CardContent>;
-            </Card>;
-            <Card className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl">;
-              <CardHeader>;
-                <CardTitle className="text-white text-center">;
-                  <Settings className="mx-auto mb-2 text-blue-400" size={32} />;
-                  Platform Settings;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent className="text-center">;
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">;
-                  Configure Platform;
-                </Button>;
-              </CardContent>;
-            </Card>;
-            <Card className="bg-gradient-to-br from-gray-900/60 to-black/60 border-yellow-500/30 backdrop-blur-xl">;
-              <CardHeader>;
-                <CardTitle className="text-white text-center">;
-                  <TrendingUp className="mx-auto mb-2 text-green-400" size={32} />;
-                  Revenue Analytics;
-                </CardTitle>;
-              </CardHeader>;
-              <CardContent className="text-center">;
-                <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">;
-                  View Reports;
-                </Button>;
-              </CardContent>;
-            </Card>;
-          </div>;
-        </TabsContent>;
-      </Tabs>;
-    </div>;
+  const handleSaveProfile = () => {
+    setIsEditing(false); // In a real app, this would save to a backend console.log('Profile saved:', profileData);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    // Reset any unsaved changes
+  };
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-6">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-4">
+            <Crown className="w-12 h-12 text-yellow-400 mr-4" />
+            <h1 className="text-4xl font-bold text-white">
+              Owner Profile
+            </h1>
+          </div>
+          <p className="text-xl text-gray-300">
+            Platform Founder & Chief Executive Officer
+          </p>
+        </div>
+
+        {/* Profile Card */}
+        <Card className="mb-8 bg-white/5 border-yellow-500">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                  <Crown className="w-10 h-10 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-white text-2xl">
+                    {profileData.name}
+                  </CardTitle>
+                  <Badge className="bg-yellow-600 mt-2">
+                    Founder & CEO
+                  </Badge>
+                </div>
+              </div>
+              <Button
+                onClick={() => setIsEditing(!isEditing)}
+                variant="outline"
+                className="border-yellow-500 text-yellow-400 hover:bg-yellow-500/10" > {isEditing ? <X className="w-4 h-4" /> : <Edit3 className="w-4 h-4" />},{isEditing ? 'Cancel' : 'Edit'}
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {/* Navigation Buttons */} <div className="flex gap-2 mb-6"> {['overview', 'stats', 'achievements', 'settings'].map((tab) => (
+                <Button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  variant={activeTab === tab ? "default" : "outline"}
+                  className={activeTab === tab 
+                    ? "bg-yellow-600 hover:bg-yellow-700" 
+                    : "border-gray-500 text-white"
+                  }
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </Button>
+              ))}
+            </div> {/* Overview Section */},{activeTab === 'overview' && (
+              <div className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-white">Personal Information</h3>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-white">Full Name</Label>
+                        {isEditing ? (
+                          <Input
+                            value={profileData.name}
+                            onChange={(e) => setProfileData({...profileData, name: e.target.value})}
+                            className="bg-white/10 border-gray-600 text-white"
+                          />
+                        ) : (
+                          <div className="text-gray-300">{profileData.name}</div>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <Label className="text-white flex items-center gap-2">
+                          <Mail className="w-4 h-4" />
+                          Email
+                        </Label>
+                        {isEditing ? (
+                          <Input
+                            value={profileData.email}
+                            onChange={(e) => setProfileData({...profileData, email: e.target.value})}
+                            className="bg-white/10 border-gray-600 text-white"
+                          />
+                        ) : (
+                          <div className="text-gray-300">{profileData.email}</div>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <Label className="text-white flex items-center gap-2">
+                          <Phone className="w-4 h-4" />
+                          Phone
+                        </Label>
+                        {isEditing ? (
+                          <Input
+                            value={profileData.phone}
+                            onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                            className="bg-white/10 border-gray-600 text-white"
+                          />
+                        ) : (
+                          <div className="text-gray-300">{profileData.phone}</div>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <Label className="text-white flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          Location
+                        </Label>
+                        {isEditing ? (
+                          <Input
+                            value={profileData.location}
+                            onChange={(e) => setProfileData({...profileData, location: e.target.value})}
+                            className="bg-white/10 border-gray-600 text-white"
+                          />
+                        ) : (
+                          <div className="text-gray-300">{profileData.location}</div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    {isEditing && (
+                      <Button
+                        onClick={handleSaveProfile}
+                        className="bg-yellow-600 hover:bg-yellow-700 text-white"
+                      >
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Changes
+                      </Button>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-4">Biography</h3>
+                    {isEditing ? (
+                      <textarea
+                        value={profileData.bio}
+                        onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
+                        placeholder="Enter your biography..."
+                        className="w-full h-32 p-3 bg-white/10 border border-gray-600 rounded-md text-white"
+                      />
+                    ) : (
+                      <p className="text-gray-300">{profileData.bio}</p>
+                    )}
+                    
+                    <div className="mt-6 space-y-2">
+                      <div className="flex items-center gap-2 text-gray-300">
+                        <Calendar className="w-4 h-4" />
+                        <span>Joined {userStats.joinDate}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-300">
+                        <User className="w-4 h-4" />
+                        <span>Platform Owner</span>
+                      </div>
+                    </div>
+                  </div>
+                </div> </div> )},{/* Statistics Section */},{activeTab === 'stats' && (
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card className="bg-gradient-to-br from-green-600 to-green-800 border-0">
+                  <CardContent className="p-6 text-white text-center">
+                    <TrendingUp className="w-12 h-12 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{userStats.successRate}%</h3>
+                    <p className="text-green-100">Success Rate</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-gradient-to-br from-blue-600 to-blue-800 border-0">
+                  <CardContent className="p-6 text-white text-center">
+                    <BarChart3 className="w-12 h-12 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{userStats.totalTrades.toLocaleString()}</h3>
+                    <p className="text-blue-100">Total Trades</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-gradient-to-br from-yellow-600 to-orange-600 border-0">
+                  <CardContent className="p-6 text-white text-center">
+                    <DollarSign className="w-12 h-12 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{formatCurrency(userStats.totalProfit)}</h3>
+                    <p className="text-yellow-100">Total Profit</p>
+                  </CardContent>
+                </Card> </div> )},{/* Achievements Section */},{activeTab === 'achievements' && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {achievements.map((achievement) => (
+                  <Card 
+                    key={achievement.id} 
+                    className={`border-2 ${ achievement.earned  ? 'border-yellow-500 bg-yellow-500/10'  : 'border-gray-600 bg-white/5'
+                    }`}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center ${ achievement.earned  ? 'bg-yellow-600 text-white'  : 'bg-gray-600 text-gray-400'
+                        }`}>
+                          {achievement.icon}
+                        </div>
+                        <div className="flex-1"> <h4 className={`font-semibold text-lg ${ achievement.earned ? 'text-yellow-400' : 'text-gray-400'
+                          }`}>
+                            {achievement.title}
+                          </h4>
+                          <p className="text-gray-300 text-sm mb-2">
+                            {achievement.description}
+                          </p>
+                          {achievement.earned && achievement.earnedDate && (
+                            <p className="text-yellow-300 text-xs">
+                              Earned: {achievement.earnedDate}
+                            </p>
+                          )}
+                        </div>
+                        {achievement.earned && (
+                          <Badge className="bg-yellow-600">
+                            Earned
+                          </Badge>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))} </div> )},{/* Settings Section */},{activeTab === 'settings' && (
+              <div className="space-y-6">
+                <Card className="bg-white/5 border-gray-600">
+                  <CardHeader>
+                    <CardTitle className="text-white flex items-center gap-2">
+                      <Settings className="w-6 h-6" />
+                      Platform Settings
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-white font-medium">Admin Access</h4>
+                          <p className="text-gray-400 text-sm">Full platform administration privileges</p>
+                        </div>
+                        <Badge className="bg-green-600">Enabled</Badge>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-white font-medium">API Access</h4>
+                          <p className="text-gray-400 text-sm">Unlimited API calls and access</p>
+                        </div>
+                        <Badge className="bg-green-600">Unlimited</Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
   );
 }

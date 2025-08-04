@@ -1,35 +1,43 @@
-'use client';
+'use client'; import React, { useState } from 'react';
+ export default function SubscribePage() { const [email, setEmail] = useState('');
 
-// Force dynamic rendering to prevent static generation issues;
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) { e.preventDefault(); console.log('Email submitted:', email);
+    // Add subscription logic,
+      here
+    }
 
-import React, { FormEvent, useState } from 'react';
-
-export default function SubscribePage() {
-  const [email, setEmail] = useState('');
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // You can add logic here to handle the submitted email;
-  }
-
-  return (;
-    <div className="max-w-xl mx-auto py-12 px-4">;
-      <h1 className="text-4xl font-extrabold neon-text mb-8">Subscribe to Algo Exchange</h1>;
-      <p className="mb-4 text-slate-300">Receive valuable tips, news, and special promotions.</p>;
-      <form className="space-y-6" onSubmit={handleSubmit}>;
-        <input;
-          type="email";
-          className="w-full px-4 py-2 rounded bg-black/60 border border-violet-700 text-white";
-          required;
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />;
-        <button className="holo-btn px-8 py-3 font-bold" type="submit">;
-          Subscribe;
-        </button>;
-      </form>;
-    </div>;
-  );
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-black text-white">
+      <div className="max-w-xl mx-auto py-12 px-4">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Subscribe to Updates
+          </h1>
+          <p className="text-gray-300 mb-8">
+            Get the latest AI trading insights and platform updates
+          </p>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus: outline-none,
+      focus: border-blue-500"
+              
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500, hover:from-blue-600,
+      hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  )
 }

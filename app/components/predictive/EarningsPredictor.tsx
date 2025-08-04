@@ -1,632 +1,433 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
-import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  AnalysisResult,;
-  BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
-  CryptoData,;
-  DeFiProtocol,;
-  NFTCollection,;
-  UserProfile,;
-  ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  Alert as AlertType,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
-} from '../../types/trading-types';
+import { Button } from "../../../components/ui/button";
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  Calendar, 
+  DollarSign, 
+  BarChart3, 
+  AlertTriangle,
+  Target,
+  CheckCircle,
+  Clock,
+  Zap,
+  Brain, LineChart } from 'lucide-react';
 
-'use client';
-import React, { useState, useEffect } from 'react';
-
-// Types;
-interface EarningData {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  name: string;
-  date: string;
-  time: string;
-  currentPrice: number;
-  estimatedEPS: string;
-  estimatedRevenue: string;
-  aiPrediction: 'beat' | 'miss';
-  confidenceScore: number;
-  priceTarget: number;
-  volatilityExpected: number;
-  optionsActivity: 'high' | 'medium' | 'low';
-  analystRating: 'buy' | 'hold' | 'sell';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface EarningsData {
+  symbol: string,
+    companyName: string,
+  reportDate: string,
+    estimatedEPS: number,
+  predictedEPS: number,
+    confidence: number,
+  priceTarget: number,
+    currentPrice: number, expectedMove: number, sentiment: 'bullish' | 'bearish' | 'neutral', risk: 'low' | 'medium' | 'high'
 }
 
-interface EarningsAnalysisData {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  metric: string;
-  impact: 'Critical' | 'High' | 'Medium';
-  prediction: string;
-  confidence: number;
-  historicalAccuracy: number;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface AIStockPrediction { symbol: string, prediction: 'buy' | 'sell' | 'hold',
+  confidence: number,
+    targetPrice: number,
+  timeframe: string,
+    factors: string[]
 }
-
-interface SurprisePrediction {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  type: string;
-  probability: number;
-  expectedMove: string;
-  reasoning: string;
-  riskLevel: 'High' | 'Medium' | 'Low';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-// Add interface for company data;
-interface CompanyData {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  name: string;
-  date: string;
-  time: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
 export default function EarningsPredictor() {
-  const [upcomingEarnings, setUpcomingEarnings] = useState<EarningData[]>([]);
-  const [earningsAnalysis, setEarningsAnalysis] = useState<EarningsAnalysisData[]>([]);
-  const [surprisePredictions, setSurprisePredictions] = useState<SurprisePrediction[]>([]);
+  const [selectedSymbol, setSelectedSymbol] = useState<string>('AAPL');
+  const [predictions, setPredictions] = useState<AIStockPrediction[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const upcomingEarnings: EarningsData[] = [
+    {
+      symbol: 'AAPL',
+      companyName: 'Apple Inc.',
+      reportDate: '2024-01-25',
+      estimatedEPS: 2.18,
+      predictedEPS: 2.23,
+      confidence: 87,
+      priceTarget: 195.50,
+      currentPrice: 188.30,
+      expectedMove: 4.2,
+      sentiment: 'bullish',
+      risk: 'low'
+    },
+    {
+      symbol: 'MSFT',
+      companyName: 'Microsoft Corporation',
+      reportDate: '2024-01-24',
+      estimatedEPS: 2.78,
+      predictedEPS: 2.85,
+      confidence: 91,
+      priceTarget: 385.00,
+      currentPrice: 376.20,
+      expectedMove: 3.8,
+      sentiment: 'bullish',
+      risk: 'low'
+    },
+    {
+      symbol: 'GOOGL',
+      companyName: 'Alphabet Inc.',
+      reportDate: '2024-01-30',
+      estimatedEPS: 1.65,
+      predictedEPS: 1.72,
+      confidence: 83,
+      priceTarget: 155.00,
+      currentPrice: 142.80,
+      expectedMove: 5.1,
+      sentiment: 'bullish',
+      risk: 'medium'
+    },
+    {
+      symbol: 'TSLA',
+      companyName: 'Tesla Inc.',
+      reportDate: '2024-01-24',
+      estimatedEPS: 0.74,
+      predictedEPS: 0.68,
+      confidence: 76,
+      priceTarget: 220.00,
+      currentPrice: 238.50,
+      expectedMove: 8.3,
+      sentiment: 'bearish',
+      risk: 'high'
+    },
+    {
+      symbol: 'NVDA',
+      companyName: 'NVIDIA Corporation',
+      reportDate: '2024-02-21',
+      estimatedEPS: 4.12,
+      predictedEPS: 4.28,
+      confidence: 89,
+      priceTarget: 920.00,
+      currentPrice: 875.40,
+      expectedMove: 6.7,
+      sentiment: 'bullish',
+      risk: 'medium'
+    }
+  ];
+
+  const generatePredictions = (symbol: string) => {
+    setIsLoading(true);
+    
+    // Simulate AI analysis
+    setTimeout(() => {
+      const earningsData = upcomingEarnings.find(e => e.symbol === symbol);
+      if (earningsData) {
+        const newPredictions: AIStockPrediction[] = [
+          { symbol: symbol, prediction: earningsData.sentiment === 'bullish' ? 'buy' : earningsData.sentiment === 'bearish' ? 'sell' : 'hold',
+            confidence: earningsData.confidence, targetPrice: earningsData.priceTarget, timeframe: '1-2 weeks post-earnings', factors: [ 'Historical earnings accuracy', 'Revenue growth trends', 'Market sentiment analysis', 'Technical indicators', 'Institutional activity'
+            ]
+          }
+        ];
+        setPredictions(newPredictions);
+      }
+      setIsLoading(false);
+    }, 2000);
+  };
 
   useEffect(() => {
-    generateUpcomingEarnings();
-    generateEarningsAnalysis();
-    generateSurprisePredictions();
-  }, []);
+    generatePredictions(selectedSymbol);
+  }, [selectedSymbol]);
 
-  const generateUpcomingEarnings = () => {
-    const companies = [;
-      { symbol: 'AAPL', name: 'Apple Inc.', date: '2024-01-25', time: 'AMC' },;
-      { symbol: 'MSFT', name: 'Microsoft Corp.', date: '2024-01-24', time: 'AMC' },;
-      { symbol: 'GOOGL', name: 'Alphabet Inc.', date: '2024-01-23', time: 'AMC' },;
-      { symbol: 'TSLA', name: 'Tesla Inc.', date: '2024-01-24', time: 'AMC' },;
-      { symbol: 'NVDA', name: 'NVIDIA Corp.', date: '2024-02-21', time: 'AMC' },;
-      { symbol: 'META', name: 'Meta Platforms', date: '2024-01-31', time: 'AMC' },;
-      { symbol: 'AMZN', name: 'Amazon.com Inc.', date: '2024-02-01', time: 'AMC' },;
-      { symbol: 'NFLX', name: 'Netflix Inc.', date: '2024-01-23', time: 'AMC' },;
-    ];
+  const getSentimentColor = (sentiment: string) => {
+    switch (sentiment) {
+      case 'bullish':
+        return 'text-green-600 bg-green-100';
+      case 'bearish':
+        return 'text-red-600 bg-red-100';
+      default:
+        return 'text-yellow-600 bg-yellow-100';
+    }
+  };
 
-    const earnings: EarningData[] = companies.map((company: CompanyData) => ({
-      ...company,;
-      currentPrice: 100 + Math.random() * 400,;
-      estimatedEPS: (Math.random() * 5 + 0.5).toFixed(2),;
-      estimatedRevenue: (Math.random() * 50 + 10).toFixed(1),;
-      aiPrediction: Math.random() > 0.5 ? 'beat' : 'miss',;
-      confidenceScore: 70 + Math.random() * 30,;
-      priceTarget: 0,;
-      volatilityExpected: 5 + Math.random() * 15,;
-      optionsActivity: Math.random() > 0.7 ? 'high' : Math.random() > 0.4 ? 'medium' : 'low',;
-      analystRating: Math.random() > 0.6 ? 'buy' : Math.random() > 0.3 ? 'hold' : 'sell',;
-    }));
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case 'low':
+        return 'text-green-600 bg-green-100';
+      case 'medium':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'high':
+        return 'text-red-600 bg-red-100';
+      default:
+        return 'text-gray-600 bg-gray-100';
+    }
+  };
 
-    earnings.forEach(earning => {
-      const multiplier =;
-        earning.aiPrediction === 'beat' ? 1.05 + Math.random() * 0.1 : 0.95 - Math.random() * 0.1;
-      earning.priceTarget = earning.currentPrice * multiplier;
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     });
-
-    setUpcomingEarnings(earnings);
   };
 
-  const generateEarningsAnalysis = () => {
-    const analysis: EarningsAnalysisData[] = [;
-      {
-        symbol: 'AAPL',;
-        metric: 'iPhone Sales',;
-        impact: 'High',;
-        prediction: 'Strong holiday sales expected',;
-        confidence: 85,;
-        historicalAccuracy: 78,;
-      },;
-      {
-        symbol: 'MSFT',;
-        metric: 'Azure Growth',;
-        impact: 'High',;
-        prediction: 'Cloud revenue acceleration',;
-        confidence: 92,;
-        historicalAccuracy: 84,;
-      },;
-      {
-        symbol: 'TSLA',;
-        metric: 'Delivery Numbers',;
-        impact: 'Critical',;
-        prediction: 'Q4 deliveries may disappoint',;
-        confidence: 76,;
-        historicalAccuracy: 71,;
-      },;
-      {
-        symbol: 'NVDA',;
-        metric: 'AI Chip Demand',;
-        impact: 'Critical',;
-        prediction: 'Continued AI boom driving sales',;
-        confidence: 94,;
-        historicalAccuracy: 89,;
-      },;
-    ];
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-4">
+            <Brain className="w-12 h-12 text-blue-600 mr-4" />
+            <h1 className="text-4xl font-bold text-gray-800">
+              AI Earnings Predictor
+            </h1>
+          </div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Advanced AI-powered earnings predictions with real-time analysis and sentiment tracking
+          </p>
+        </div>
 
-    setEarningsAnalysis(analysis);
-  };
+        {/* Key Metrics */}
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
+          <Card className="border-green-200 bg-green-50">
+            <CardContent className="p-6 text-center">
+              <Target className="w-10 h-10 text-green-600 mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-green-700">87.3%</h3>
+              <p className="text-green-600">Prediction Accuracy</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-blue-200 bg-blue-50">
+            <CardContent className="p-6 text-center">
+              <BarChart3 className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-blue-700">247</h3>
+              <p className="text-blue-600">Companies Tracked</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-purple-200 bg-purple-50">
+            <CardContent className="p-6 text-center">
+              <Zap className="w-10 h-10 text-purple-600 mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-purple-700">Real-time</h3>
+              <p className="text-purple-600">Data Processing</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-orange-200 bg-orange-50">
+            <CardContent className="p-6 text-center">
+              <LineChart className="w-10 h-10 text-orange-600 mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-orange-700">+23.4%</h3>
+              <p className="text-orange-600">Avg. Return</p>
+            </CardContent>
+          </Card>
+        </div>
 
-  const generateSurprisePredictions = () => {
-    const surprises: SurprisePrediction[] = [;
-      {
-        symbol: 'COIN',;
-        type: 'Positive Surprise',;
-        probability: 78,;
-        expectedMove: '+12%',;
-        reasoning: 'Crypto trading volume surge',;
-        riskLevel: 'Medium',;
-      },;
-      {
-        symbol: 'SNAP',;
-        type: 'Negative Surprise',;
-        probability: 65,;
-        expectedMove: '-8%',;
-        reasoning: 'Ad revenue headwinds',;
-        riskLevel: 'High',;
-      },;
-      {
-        symbol: 'ROKU',;
-        type: 'Positive Surprise',;
-        probability: 72,;
-        expectedMove: '+15%',;
-        reasoning: 'Streaming growth acceleration',;
-        riskLevel: 'Medium',;
-      },;
-    ];
+        {/* Upcoming Earnings */}
+        <Card className="mb-12">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-2xl">
+              <Calendar className="w-7 h-7 text-blue-600" />
+              Upcoming Earnings Reports
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {upcomingEarnings.map((earnings) => (
+                <Card 
+                  key={earnings.symbol} className={`cursor-pointer transition-all duration-200 hover:shadow-md ${ selectedSymbol === earnings.symbol ? 'border-blue-500 bg-blue-50' : ''
+                  }`}
+                  onClick={() => setSelectedSymbol(earnings.symbol)}
+                >
+                  <CardContent className="p-6">
+                    <div className="grid md:grid-cols-6 gap-4 items-center">
+                      <div className="md:col-span-2">
+                        <h3 className="font-bold text-lg text-gray-800">{earnings.symbol}</h3>
+                        <p className="text-sm text-gray-600">{earnings.companyName}</p>
+                        <p className="text-sm text-gray-500 flex items-center mt-1">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {formatDate(earnings.reportDate)}
+                        </p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500">Estimated EPS</p>
+                        <p className="font-semibold text-gray-800">${earnings.estimatedEPS}</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500">AI Predicted</p>
+                        <p className="font-semibold text-blue-600">${earnings.predictedEPS}</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500">Confidence</p>
+                        <div className="flex items-center justify-center">
+                          <div className="w-full bg-gray-200 rounded-full h-2 mr-2">
+                            <div 
+                              className="bg-blue-600 h-2 rounded-full"
+                              style={{width: `${earnings.confidence}%`}}
+                            />
+                          </div>
+                          <span className="text-sm font-semibold">{earnings.confidence}%</span>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <Badge className={getSentimentColor(earnings.sentiment)}>
+                          {earnings.sentiment.toUpperCase()}
+                        </Badge>
+                        <Badge className={`${getRiskColor(earnings.risk)} ml-2`}>
+                          {earnings.risk.toUpperCase()} RISK
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
-    setSurprisePredictions(surprises);
-  };
+        {/* AI Prediction Details */},{selectedSymbol && (
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Selected Company Details */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-green-600" />
+                  {selectedSymbol} Analysis
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {(() => {
+                  const selectedEarnings = upcomingEarnings.find(e => e.symbol === selectedSymbol);
+                  if (!selectedEarnings) return null;
+                  
+                  return (
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500">Current Price</p>
+                          <p className="text-xl font-bold text-gray-800">
+                            ${selectedEarnings.currentPrice}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Price Target</p>
+                          <p className="text-xl font-bold text-blue-600">
+                            ${selectedEarnings.priceTarget}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Expected Move</p>
+                          <p className="text-lg font-semibold text-purple-600">
+                            ±{selectedEarnings.expectedMove}%
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Upside Potential</p>
+                          <p className="text-lg font-semibold text-green-600">
+                            {(((selectedEarnings.priceTarget - selectedEarnings.currentPrice) / selectedEarnings.currentPrice) * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="pt-4 border-t">
+                        <h4 className="font-semibold text-gray-800 mb-3">EPS Comparison</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-600">Analyst Estimate:</span>
+                            <span className="font-semibold">${selectedEarnings.estimatedEPS}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-600">AI Prediction:</span>
+                            <span className="font-semibold text-blue-600">${selectedEarnings.predictedEPS}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-600">Difference:</span>
+                            <span className={`font-semibold ${ selectedEarnings.predictedEPS > selectedEarnings.estimatedEPS  ? 'text-green-600'  : 'text-red-600' }`}> {selectedEarnings.predictedEPS > selectedEarnings.estimatedEPS ? '+' : ''}
+                              ${(selectedEarnings.predictedEPS - selectedEarnings.estimatedEPS).toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </CardContent>
+            </Card>
 
-  const getPredictionColor = (prediction: string) => {
-    return prediction === 'beat' ? 'text-emerald-400' : 'text-red-400';
-  };
-
-  const getImpactColor = (impact: string) => {
-    switch (impact) {
-      case 'Critical':;
-        return 'text-red-400';
-      case 'High':;
-        return 'text-amber-400';
-      default:;
-        return 'text-emerald-400';
-    }
-  };
-
-  const getRatingColor = (rating: string) => {
-    switch (rating) {
-      case 'buy':;
-        return 'text-emerald-400';
-      case 'sell':;
-        return 'text-red-400';
-      default:;
-        return 'text-amber-400';
-    }
-  };
-
-  return (;
-    <div className="space-y-6">;
-      {/* Upcoming Earnings */}
-      <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <CardTitle className="text-stone-100 flex items-center">;
-            <span className="h-6 w-6 mr-2 text-emerald-400">📅</span>;
-            Upcoming Earnings with AI Predictions;
-          </CardTitle>;
-        </CardHeader>;
-        <CardContent>;
-          <div className="space-y-3">;
-            {upcomingEarnings.map((earning, index) => (;
-              <div;
-                key={index}
-                className="p-4 bg-stone-800/30 rounded-lg border border-stone-600/30 hover:border-stone-500/50 transition-all";
-              >;
-                <div className="flex items-center justify-between">;
-                  <div className="flex items-center space-x-4">;
-                    <div>;
-                      <div className="flex items-center space-x-2">;
-                        <span className="text-stone-100 font-bold">{earning.symbol}</span>;
-                        <Badge className="border-emerald-500/30 text-emerald-400 bg-emerald-500/10">;
-                          {earning.date}
-                        </Badge>;
-                        <Badge className={getPredictionColor(earning.aiPrediction)}>;
-                          AI: {earning.aiPrediction}
-                        </Badge>;
-                      </div>;
-                      <p className="text-sm text-stone-400">{earning.name}</p>;
-                    </div>;
-                    <div className="text-center">;
-                      <p className="text-stone-400 text-sm">Current Price</p>;
-                      <p className="text-stone-100 font-semibold">;
-                        ${earning.currentPrice.toFixed(2)}
-                      </p>;
-                    </div>;
-                    <div className="text-center">;
-                      <p className="text-stone-400 text-sm">Est. EPS</p>;
-                      <p className="text-stone-100 font-semibold">${earning.estimatedEPS}</p>;
-                    </div>;
-                    <div className="text-center">;
-                      <p className="text-stone-400 text-sm">AI Target</p>;
-                      <p;
-                        className={`font-semibold ${earning.priceTarget > earning.currentPrice ? 'text-emerald-400' : 'text-red-400'}`}
-                      >;
-                        ${earning.priceTarget.toFixed(2)}
-                      </p>;
-                    </div>;
-                    <div className="text-center">;
-                      <p className="text-stone-400 text-sm">Confidence</p>;
-                      <div className="flex items-center">;
-                        <span className="text-emerald-400 font-bold">;
-                          {earning.confidenceScore.toFixed(0)}%;
-                        </span>;
-                        <span className="text-amber-400 ml-1">⭐</span>;
-                      </div>;
-                    </div>;
-                  </div>;
-                  <div className="text-right">;
-                    <Badge className={getRatingColor(earning.analystRating)}>;
-                      {earning.analystRating}
-                    </Badge>;
-                    <p className="text-xs text-stone-400 mt-1">;
-                      Vol: {earning.volatilityExpected.toFixed(1)}%;
-                    </p>;
-                    <p className="text-xs text-stone-400">Options: {earning.optionsActivity}</p>;
-                  </div>;
-                </div>;
-              </div>;
-            ))}
-          </div>;
-        </CardContent>;
-      </Card>;
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">;
-        {/* Key Metrics Analysis */}
-        <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">;
-          <CardHeader>;
-            <CardTitle className="text-stone-100 flex items-center">;
-              <span className="h-6 w-6 mr-2 text-purple-400">🧠</span>;
-              AI Key Metrics Analysis;
-            </CardTitle>;
-          </CardHeader>;
-          <CardContent className="space-y-4">;
-            {earningsAnalysis.map((analysis, index) => (;
-              <div;
-                key={index}
-                className="p-4 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg border border-purple-500/30";
-              >;
-                <div className="flex items-center justify-between mb-3">;
-                  <div className="flex items-center space-x-2">;
-                    <span className="text-stone-100 font-bold">{analysis.symbol}</span>;
-                    <Badge className={getImpactColor(analysis.impact)}>;
-                      {analysis.impact} Impact;
-                    </Badge>;
-                  </div>;
-                  <div className="text-right">;
-                    <p className="text-emerald-400 font-semibold">{analysis.confidence}%</p>;
-                    <p className="text-xs text-stone-400">Confidence</p>;
-                  </div>;
-                </div>;
-                <div className="space-y-2">;
-                  <div className="flex justify-between">;
-                    <span className="text-stone-400 text-sm">Focus Metric:</span>;
-                    <span className="text-stone-200 font-medium">{analysis.metric}</span>;
-                  </div>;
-                  <div className="flex justify-between">;
-                    <span className="text-stone-400 text-sm">Historical Accuracy:</span>;
-                    <span className="text-amber-400 font-medium">;
-                      {analysis.historicalAccuracy}%;
-                    </span>;
-                  </div>;
-                  <p className="text-stone-300 text-sm mt-2">{analysis.prediction}</p>;
-                </div>;
-              </div>;
-            ))}
-          </CardContent>;
-        </Card>;
-        {/* Surprise Predictions */}
-        <Card className="bg-stone-900/40 border-emerald-500/30 backdrop-blur-xl">;
-          <CardHeader>;
-            <CardTitle className="text-stone-100 flex items-center">;
-              <span className="h-6 w-6 mr-2 text-amber-400">⚠️</span>;
-              Earnings Surprise Predictions;
-            </CardTitle>;
-          </CardHeader>;
-          <CardContent className="space-y-4">;
-            {surprisePredictions.map((surprise, index) => (;
-              <div;
-                key={index}
-                className="p-4 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-lg border border-amber-500/30";
-              >;
-                <div className="flex items-center justify-between mb-3">;
-                  <div className="flex items-center space-x-2">;
-                    <span className="text-stone-100 font-bold">{surprise.symbol}</span>;
-                    <Badge;
-                      className={
-                        surprise.type.includes('Positive');
-                          ? 'bg-emerald-500/20 text-emerald-400';
-                          : 'bg-red-500/20 text-red-400';
-                      }
-                    >;
-                      {surprise.type}
-                    </Badge>;
-                  </div>;
-                  <div className="text-right">;
-                    <p className="text-amber-400 font-semibold">{surprise.probability}%</p>;
-                    <p className="text-xs text-stone-400">Probability</p>;
-                  </div>;
-                </div>;
-                <div className="space-y-2">;
-                  <div className="flex justify-between">;
-                    <span className="text-stone-400 text-sm">Expected Move:</span>;
-                    <span;
-                      className={`font-semibold ${
-                        surprise.expectedMove.includes('+') ? 'text-emerald-400' : 'text-red-400';
-                      }`}
-                    >;
-                      {surprise.expectedMove}
-                    </span>;
-                  </div>;
-                  <div className="flex justify-between">;
-                    <span className="text-stone-400 text-sm">Risk Level:</span>;
-                    <Badge;
-                      className={
-                        surprise.riskLevel === 'High';
-                          ? 'bg-red-500/20 text-red-400';
-                          : 'bg-gray-500/20 text-gray-400';
-                      }
-                    >;
-                      {surprise.riskLevel}
-                    </Badge>;
-                  </div>;
-                  <p className="text-stone-300 text-sm mt-2">{surprise.reasoning}</p>;
-                </div>;
-              </div>;
-            ))}
-          </CardContent>;
-        </Card>;
-      </div>;
-    </div>;
+            {/* AI Predictions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Brain className="w-6 h-6 text-purple-600" />
+                  AI Recommendations
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {isLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <span className="ml-3 text-gray-600">Analyzing data...</span>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {predictions.map((prediction, index) => (
+                      <div key={index} className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <Badge  className={ prediction.prediction === 'buy'  ? 'bg-green-100 text-green-800'  : prediction.prediction === 'sell' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'
+                            }
+                          >
+                            {prediction.prediction.toUpperCase()}
+                          </Badge>
+                          <span className="text-sm text-gray-500">
+                            Confidence: {prediction.confidence}%
+                          </span>
+                        </div>
+                        
+                        <div>
+                          <p className="text-sm text-gray-500">Target Price</p>
+                          <p className="text-2xl font-bold text-blue-600">
+                            ${prediction.targetPrice}
+                          </p>
+                          <p className="text-sm text-gray-500">{prediction.timeframe}</p>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Key Factors</h4>
+                          <ul className="space-y-1">
+                            {prediction.factors.map((factor, factorIndex) => (
+                              <li key={factorIndex} className="flex items-center text-sm text-gray-600">
+                                <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                                {factor}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                    
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                      onClick={() => generatePredictions(selectedSymbol)}
+                    >
+                      <Zap className="w-4 h-4 mr-2" />
+                      Refresh Analysis
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )},{/* Risk Warning */}
+        <Alert className="mt-8 border-yellow-200 bg-yellow-50">
+          <AlertTriangle className="h-4 w-4 text-yellow-600" />
+          <div className="ml-2">
+            <h4 className="font-semibold text-yellow-800">Investment Risk Disclosure</h4>
+            <p className="text-yellow-700 text-sm mt-1">
+              AI predictions are based on historical data and market analysis. Past performance does not guarantee future results. 
+              Always conduct your own research and consider consulting with a financial advisor before making investment decisions.
+            </p>
+          </div>
+        </Alert>
+        
+      </div>
+    </div>
   );
 }

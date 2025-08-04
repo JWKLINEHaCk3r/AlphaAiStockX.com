@@ -2,31 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 
-interface ClientOnlyProps {
+interface ClientOnlyProps { children: React.ReactNode,
+  fallback?: React.ReactNode
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
 
 
 
@@ -51,9 +29,10 @@ interface ClientOnlyProps {
 
 }
 
-export default function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
+export default function ClientOnly({ children,
+               fallback = null }: ClientOnlyProps) {
   const [hasMounted, setHasMounted] = useState(false);
-
+  
   useEffect(() => {
     setHasMounted(true);
   }, []);

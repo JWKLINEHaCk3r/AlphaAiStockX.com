@@ -1,6 +1,4 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+'use client'; import { useState, useEffect } from 'react';
 
 interface ViewportSize {
 
@@ -26,11 +24,13 @@ interface ViewportSize {
 
 
 
-  width: number;
-  height: number;
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
+
+  width: number,
+    height: number,
+  isMobile: boolean,
+    isTablet: boolean,
+  isDesktop: boolean
+
 
 
 
@@ -80,19 +80,10 @@ export function useViewport(): ViewportSize {
     };
 
     // Set initial viewport;
-    updateViewport();
-
-    if (typeof window !== 'undefined') {
-      // Add event listener;
-      window.addEventListener('resize', updateViewport);
-      window.addEventListener('orientationchange', updateViewport);
+    updateViewport(); if (typeof window !== 'undefined') { // Add event listener; window.addEventListener('resize', updateViewport); window.addEventListener('orientationchange', updateViewport);
     }
 
-    // Cleanup;
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', updateViewport);
-        window.removeEventListener('orientationchange', updateViewport);
+    // Cleanup; return () => { if (typeof window !== 'undefined') { window.removeEventListener('resize', updateViewport); window.removeEventListener('orientationchange', updateViewport);
       }
     };
   }, []);

@@ -1,7 +1,4 @@
-import NextAuth from 'next-auth';
-import { JWT } from 'next-auth/jwt';
-
-declare module 'next-auth' {
+import NextAuth from 'next-auth'; import { JWT } from 'next-auth/jwt'; declare module 'next-auth' {
   interface Session {
 
 
@@ -26,14 +23,16 @@ declare module 'next-auth' {
 
 
 
+
     user: {
-      id: string;
-      email: string;
-      name: string;
+      id: string,
+      email: string,
+    name: string;
       image?: string;
       tier?: string;
       status?: string;
     
+
 
 
 
@@ -83,8 +82,9 @@ declare module 'next-auth' {
 
 
 
-    id: string;
-    email: string;
+
+    id: string,
+    email: string,
     name: string;
     tier?: string;
     status?: string;
@@ -111,11 +111,11 @@ declare module 'next-auth' {
 
 
 
-}
-}
 
-declare module 'next-auth/jwt' {
+}
+} declare module 'next-auth/jwt' {
   interface JWT {
+
 
 
 
@@ -143,6 +143,7 @@ declare module 'next-auth/jwt' {
     tier?: string;
     status?: string;
   
+
 
 
 

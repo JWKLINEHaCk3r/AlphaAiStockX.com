@@ -3,18 +3,14 @@ if (typeof global !== 'undefined' && typeof self === 'undefined') {
   // Define self as global for server-side compatibility;
   global.self = global;
 }
-
-// Polyfill for WebGL context in Node.js environment;
-if (typeof global !== 'undefined' && typeof window === 'undefined') {
+ // Polyfill for WebGL context in Node.js environment; if (typeof global !== 'undefined' && typeof window === 'undefined') {
   global.window = global;
   global.document = {
     documentElement: {
       scrollTop: 0,;
       scrollHeight: 1000,;
       clientHeight: 800,;
-    },;
-    body: {
-      className: '',;
+    },; body: { className: '',;
     },;
     createElement: () => ({
       style: {},;
@@ -31,8 +27,6 @@ if (typeof global !== 'undefined' && typeof window === 'undefined') {
     getElementById: () => null,;
     querySelector: () => null,;
     querySelectorAll: () => [],;
-  };
-  global.navigator = {
-    userAgent: 'node.js',;
+  }; global.navigator = { userAgent: 'node.js',;
   };
 }

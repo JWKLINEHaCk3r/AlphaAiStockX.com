@@ -1,0 +1,193 @@
+import { NextRequest, NextResponse } from 'next/server'; import { getToken } from 'next-auth/jwt';
+
+// Enhanced Security configuration for Next.js 15.3.5+
+const SECURITY_CONFIG = { 
+  rateLimit: { 
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'), // 15 minutes 
+    maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'), 
+    strictEndpoints: { 
+      '/api/trading': 20, 
+      '/api/auth': 10, 
+      '/api/portfolio': 50
+    }
+  }, 
+  csrf: { 
+    enabled: process.env.NODE_ENV === 'production', 
+    tokenHeader: 'x-csrf-token'
+  }, 
+  headers: { 
+    enforceHttps: process.env.NODE_ENV === 'production',
+    originValidation: true,
+    suspiciousActivityDetection: true
+  }
+};
+
+// Rate limiting stores
+const requestCounts = new Map<string, { count: number, windowStart: number }>();
+const suspiciousIpStore = new Map<string, { attempts: number, lastAttempt: number }>();
+
+// Security headers 
+const SECURITY_HEADERS = { 
+  'X-Content-Type-Options': 'nosniff', 
+  'X-Frame-Options': 'DENY', 
+  'Referrer-Policy': 'strict-origin-when-cross-origin', 
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()', 
+  'X-XSS-Protection': '1; mode=block', 
+  'Cross-Origin-Embedder-Policy': 'require-corp', 
+  'Cross-Origin-Opener-Policy': 'same-origin', 
+  'Cross-Origin-Resource-Policy': 'same-origin', 
+  'Origin-Agent-Cluster': '?1', 
+  // Cache control for sensitive pages 
+  'Cache-Control': 'no-store, no-cache, must-revalidate, private', 
+  'Pragma': 'no-cache', 
+  'Expires': '0'
+};
+
+// Content Security Policy 
+const CSP_DIRECTIVES = [ 
+  "default-src 'self'", 
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com", 
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", 
+  "font-src 'self' https://fonts.gstatic.com", 
+  "img-src 'self' data: https: blob:", 
+  "connect-src 'self' https://api.coingecko.com https://api.polygon.io wss:", 
+  "frame-ancestors 'none'", 
+  "object-src 'none'", 
+  "base-uri 'self'", 
+  "form-action 'self'"
+];
+
+// Helper function to get client IP function getClientIP(request: NextRequest): string { const forwarded = request.headers.get('x-forwarded-for'); const realIp = request.headers.get('x-real-ip');
+   if (forwarded) { return forwarded.split(',')[0].trim();
+  }
+  
+  if (realIp) {
+    return realIp;
+  } return request.ip || 'unknown';
+}
+
+// Rate limiting function
+function isRateLimited(ip: string, endpoint: string): boolean {
+  const now = Date.now();
+  const windowMs = SECURITY_CONFIG.rateLimit.windowMs;
+  
+  // Get endpoint-specific limit or default
+  const maxRequests = SECURITY_CONFIG.rateLimit.strictEndpoints[endpoint as keyof typeof SECURITY_CONFIG.rateLimit.strictEndpoints] 
+    || SECURITY_CONFIG.rateLimit.maxRequests;
+  
+  const key = `${ip}:${endpoint}`;
+  const record = requestCounts.get(key);
+  
+  if (!record || (now - record.windowStart) > windowMs) {
+    // New window
+    requestCounts.set(key, { count: 1, windowStart: now });
+    return false;
+  }
+  
+  if (record.count >= maxRequests) {
+    return true;
+  }
+  
+  record.count++;
+  return false;
+}
+
+// Suspicious activity detection
+function detectSuspiciousActivity(ip: string, request: NextRequest): boolean {
+  const now = Date.now();
+  const suspicious = suspiciousIpStore.get(ip);
+  
+  // Check for suspicious patterns
+  const suspiciousPatterns = [
+    /\\.{2,}/, // Directory traversal
+    /<script/i, // XSS attempts
+    /union.*select/i, // SQL injection
+    /javascript:/i, // JavaScript injection
+    /%[0-9a-f]{2}/i // URL encoding (potential bypass attempts)
+  ];
+  
+  const url = request.url;
+  const hasSuspiciousPattern = suspiciousPatterns.some(pattern => pattern.test(url));
+  
+  if (hasSuspiciousPattern) {
+    const attempts = suspicious ? suspicious.attempts + 1 : 1;
+    suspiciousIpStore.set(ip, { attempts, lastAttempt: now });
+    
+    // Block if too many suspicious attempts
+    return attempts > 3;
+  }
+  
+  return false;
+}
+
+// CSRF protection
+function validateCSRFToken(request: NextRequest): boolean {
+  if (!SECURITY_CONFIG.csrf.enabled) return true;
+   const method = request.method; if (['GET', 'HEAD', 'OPTIONS'].includes(method)) return true;
+   const token = request.headers.get(SECURITY_CONFIG.csrf.tokenHeader); const cookieToken = request.cookies.get('csrf-token')?.value;
+  
+  return token && cookieToken && token === cookieToken;
+}
+
+// Main middleware function
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const ip = getClientIP(request); // Skip middleware for static files and API routes that don't need protection
+  if (
+    pathname.startsWith('/_next/') || pathname.startsWith('/api/health') || pathname.includes('.')
+  ) {
+    return NextResponse.next();
+  }
+  
+  // Detect suspicious activity
+  if (SECURITY_CONFIG.headers.suspiciousActivityDetection && detectSuspiciousActivity(ip, request)) { console.warn(`Suspicious activity detected from IP: ${ip}`); return new NextResponse('Forbidden', { status: 403 });
+  }
+  
+  // Rate limiting
+  if (isRateLimited(ip, pathname)) { console.warn(`Rate limit exceeded for IP: ${ip} on ${pathname}`); return new NextResponse('Too Many Requests', { 
+      status: 429, headers: { 'Retry-After': '60'
+      }
+    });
+  }
+   // CSRF protection for API routes if (pathname.startsWith('/api/') && !validateCSRFToken(request)) { return new NextResponse('CSRF token invalid', { status: 403 });
+  }
+   // Protected routes that require authentication const protectedRoutes = ['/dashboard', '/portfolio', '/trading', '/settings'];
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
+  
+  if (isProtectedRoute) {
+    const token = await getToken({ 
+      req: request, 
+      secret: process.env.NEXTAUTH_SECRET 
+    });
+     if (!token) { const loginUrl = new URL('/auth/signin', request.url); loginUrl.searchParams.set('callbackUrl', request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+  
+  // Create response with security headers
+  const response = NextResponse.next();
+  
+  // Apply security headers
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+  
+  // Set CSP header response.headers.set( 'Content-Security-Policy', CSP_DIRECTIVES.join('; ')
+  );
+   // HTTPS redirect in production if (SECURITY_CONFIG.headers.enforceHttps && !request.url.startsWith('https://')) { const httpsUrl = request.url.replace('http://', 'https: //'),
+    return NextResponse.redirect(httpsUrl, 301);
+  }
+  
+  return response;
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file) */ '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
+};

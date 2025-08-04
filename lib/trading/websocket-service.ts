@@ -1,9 +1,12 @@
 // Mock WebSocket Service for SSR compatibility;
 export class WebSocketService {
-  private url: string;
-  private reconnectAttempts: number = 0;
-  private maxReconnectAttempts: number = 5;
-  private reconnectInterval: number = 3000;
+  private url: string
+              
+  private reconnectAttempts: number = 0
+              
+  private maxReconnectAttempts: number = 5
+              
+  private, reconnectInterval: number = 3000,
 
   constructor(url: string) {
     this.url = url;
@@ -18,8 +21,7 @@ export class WebSocketService {
   }
 
   send(message: any): void {
-    if (typeof window !== 'undefined') {
-      console.log('WebSocket send (mock):', message);
+    if (typeof window !== 'undefined') { console.log('WebSocket send (mock):', message);
     }
   }
 

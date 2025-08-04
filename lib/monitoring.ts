@@ -24,17 +24,16 @@ interface HealthMetrics {
 
 
 
-
-  status: 'healthy' | 'degraded' | 'unhealthy';
-  timestamp: string;
-  uptime: number;
-  version: string;
-  environment: string;
-  services: {
-    database: ServiceHealth;
-    redis: ServiceHealth;
-    externalAPIs: ServiceHealth;
-    websocket: ServiceHealth;
+ status: 'healthy' | 'degraded' | 'unhealthy',
+    timestamp: string,
+  uptime: number,
+    version: string,
+  environment: string,
+    services: {
+      database: ServiceHealth,
+    redis: ServiceHealth,
+    externalAPIs: ServiceHealth,
+    websocket: ServiceHealth
   
 
 
@@ -58,18 +57,19 @@ interface HealthMetrics {
 
 
 
-};
+
+},
   performance: {
-    responseTime: number;
+      responseTime: number,
     memoryUsage: NodeJS.MemoryUsage;
-    cpuUsage: number;
-  };
+    cpuUsage: number
+  },
   security: {
-    activeUsers: number;
-    failedLogins: number;
-    rateLimitHits: number;
-    suspiciousActivity: number;
-  };
+      activeUsers: number,
+    failedLogins: number,
+    rateLimitHits: number,
+    suspiciousActivity: number
+  }
 }
 
 interface ServiceHealth {
@@ -95,11 +95,11 @@ interface ServiceHealth {
 
 
 
-
-  status: 'up' | 'down' | 'degraded';
+ status: 'up' | 'down' | 'degraded';
   responseTime?: number;
   lastCheck: string;
   error?: string;
+
 
 
 
@@ -157,30 +157,24 @@ class PerformanceMonitor {
   }
 
   private static checkAlerts(name: string, value: number): void {
-    const average = this.getAverageMetric(name, 5);
-
-    if (name === 'responseTime' && average > this.alertThresholds.responseTime) {
-      this.sendAlert('HIGH_RESPONSE_TIME', {
-        metric: name,;
-        value: average,;
-        threshold: this.alertThresholds.responseTime,;
-      });
-    }
-
-    if (name === 'errorRate' && average > this.alertThresholds.errorRate) {
-      this.sendAlert('HIGH_ERROR_RATE', {
-        metric: name,;
-        value: average,;
-        threshold: this.alertThresholds.errorRate,;
-      });
+    const average = this.getAverageMetric(name, 5); if (name === 'responseTime' && average > this.alertThresholds.responseTime) { this.sendAlert('HIGH_RESPONSE_TIME', {
+        metric: name,
+    value: average,
+        threshold: this.alertThresholds.responseTime
+      }),
+    } if (name === 'errorRate' && average > this.alertThresholds.errorRate) { this.sendAlert('HIGH_ERROR_RATE', {
+        metric: name,
+    value: average,
+        threshold: this.alertThresholds.errorRate
+      }),
     }
   }
 
   private static sendAlert(type: string, data: any): void {
     console.error(`ALERT [${type}]:`, data);
 
-    // In production, integrate with alerting services like:;
-    // - PagerDuty;
+    // In production
+               integrate with alerting services like: // - PagerDuty,
     // - Slack;
     // - Email notifications;
     // - Datadog;
@@ -195,20 +189,14 @@ class HealthChecker {
 
     try {
       // Mock database health check (replace with actual implementation);
-      // Example: await prisma.$queryRaw`SELECT 1`;
+      // Example: await prisma.$queryRaw`SELECT 1`,
       await new Promise(resolve => setTimeout(resolve, 10));
-
-      return {
-        status: 'up',;
-        responseTime: Date.now() - startTime,;
-        lastCheck: new Date().toISOString(),;
-      };
-    } catch (error) {
-      return {
-        status: 'down',;
-        lastCheck: new Date().toISOString(),;
-        error: error instanceof Error ? error.message : 'Unknown error',;
-      };
+ return { status: 'up',
+    responseTime: Date.now() - startTime,
+        lastCheck: new Date().toISOString()
+      }
+    } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
+      },
     }
   }
 
@@ -217,20 +205,14 @@ class HealthChecker {
 
     try {
       // Mock Redis health check (replace with actual implementation);
-      // Example: await redis.ping();
+      // Example: await redis.ping(),
       await new Promise(resolve => setTimeout(resolve, 5));
-
-      return {
-        status: 'up',;
-        responseTime: Date.now() - startTime,;
-        lastCheck: new Date().toISOString(),;
-      };
-    } catch (error) {
-      return {
-        status: 'down',;
-        lastCheck: new Date().toISOString(),;
-        error: error instanceof Error ? error.message : 'Unknown error',;
-      };
+ return { status: 'up',
+    responseTime: Date.now() - startTime,
+        lastCheck: new Date().toISOString()
+      }
+    } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
+      },
     }
   }
 
@@ -238,39 +220,26 @@ class HealthChecker {
     const startTime = Date.now();
 
     try {
-      // Check critical external services;
-      const checks = await Promise.allSettled([;
-        fetch('https://paper-api.alpaca.markets/v2/account', {
-          headers: { 'APCA-API-KEY-ID': 'test' },;
-          signal: AbortSignal.timeout(5000),;
-        }),;
+      // Check critical external services; const checks = await Promise.allSettled([ fetch('https://paper-api.alpaca.markets/v2/account', { headers: { 'APCA-API-KEY-ID': 'test' };
+          signal: AbortSignal.timeout(5000)
+        });
         // Add other critical API checks;
-      ]);
-
-      const failures = checks.filter(result => result.status === 'rejected').length;
+      ]); const failures = checks.filter(result => result.status === 'rejected').length;
       const successRate = (checks.length - failures) / checks.length;
-
-      return {
-        status: successRate > 0.8 ? 'up' : successRate > 0.5 ? 'degraded' : 'down',;
-        responseTime: Date.now() - startTime,;
-        lastCheck: new Date().toISOString(),;
-      };
-    } catch (error) {
-      return {
-        status: 'down',;
-        lastCheck: new Date().toISOString(),;
-        error: error instanceof Error ? error.message : 'Unknown error',;
-      };
+ return { status: successRate > 0.8 ? 'up' : successRate > 0.5 ? 'degraded' : 'down',
+    responseTime: Date.now() - startTime,
+        lastCheck: new Date().toISOString()
+      }
+    } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
+      },
     }
   }
 
   static async checkWebSocket(): Promise<ServiceHealth> {
-    // Mock WebSocket health check;
-    return {
-      status: 'up',;
-      responseTime: 5,;
-      lastCheck: new Date().toISOString(),;
-    };
+    // Mock WebSocket health check; return { status: 'up',
+    responseTime: 5,
+      lastCheck: new Date().toISOString()
+    }
   }
 }
 
@@ -294,10 +263,10 @@ class SystemMetrics {
 // Security metrics collector;
 class SecurityMetrics {
   private static securityStats = {
-    activeUsers: 0,;
-    failedLogins: 0,;
-    rateLimitHits: 0,;
-    suspiciousActivity: 0,;
+    activeUsers: 0,
+    failedLogins: 0;
+    rateLimitHits: 0,
+    suspiciousActivity: 0
   };
 
   static incrementFailedLogins(): void {
@@ -322,11 +291,11 @@ class SecurityMetrics {
 
   static resetStats(): void {
     this.securityStats = {
-      activeUsers: 0,;
-      failedLogins: 0,;
-      rateLimitHits: 0,;
-      suspiciousActivity: 0,;
-    };
+      activeUsers: 0,
+    failedLogins: 0;
+      rateLimitHits: 0,
+    suspiciousActivity: 0
+    }
   }
 }
 
@@ -334,88 +303,58 @@ class SecurityMetrics {
 export async function getSystemHealth(): Promise<HealthMetrics> {
   const startTime = Date.now();
 
-  const [database, redis, externalAPIs, websocket] = await Promise.all([;
-    HealthChecker.checkDatabase(),;
-    HealthChecker.checkRedis(),;
-    HealthChecker.checkExternalAPIs(),;
-    HealthChecker.checkWebSocket(),;
+  const [database, redis, externalAPIs, websocket] = await Promise.all([
+    HealthChecker.checkDatabase();
+    HealthChecker.checkRedis();
+    HealthChecker.checkExternalAPIs();
+    HealthChecker.checkWebSocket();
   ]);
 
-  const services = { database, redis, externalAPIs, websocket };
+  const services = { database, redis, externalAPIs,
+      websocket
+    };
 
-  // Determine overall system status;
-  const serviceStatuses = Object.values(services).map(service => service.status);
-  const downServices = serviceStatuses.filter(status => status === 'down').length;
-  const degradedServices = serviceStatuses.filter(status => status === 'degraded').length;
-
-  let overallStatus: 'healthy' | 'degraded' | 'unhealthy';
-  if (downServices > 0) {
-    overallStatus = downServices > 1 ? 'unhealthy' : 'degraded';
-  } else if (degradedServices > 0) {
-    overallStatus = 'degraded';
-  } else {
-    overallStatus = 'healthy';
+  // Determine overall system status; const serviceStatuses = Object.values(services).map(service => service.status); const downServices = serviceStatuses.filter(status => status === 'down').length; const degradedServices = serviceStatuses.filter(status => status === 'degraded').length; let overallStatus: 'healthy' | 'degraded' | 'unhealthy', if (downServices > 0) { overallStatus = downServices > 1 ? 'unhealthy' : 'degraded'; } else if (degradedServices > 0) { overallStatus = 'degraded'; } else { overallStatus = 'healthy';
   }
-
-  const responseTime = Date.now() - startTime;
-  PerformanceMonitor.recordMetric('healthCheckTime', responseTime);
+ const responseTime = Date.now() - startTime; PerformanceMonitor.recordMetric('healthCheckTime', responseTime);
 
   return {
-    status: overallStatus,;
-    timestamp: new Date().toISOString(),;
-    uptime: SystemMetrics.getUptime(),;
-    version: process.env.npm_package_version || '2.5.0',;
-    environment: process.env.NODE_ENV || 'development',;
-    services,;
+    status: overallStatus,
+    timestamp: new Date().toISOString(), uptime: SystemMetrics.getUptime(), version: process.env.npm_package_version || '2.5.0', environment: process.env.NODE_ENV || 'development',
+    services;
     performance: {
-      responseTime,;
-      memoryUsage: SystemMetrics.getMemoryUsage(),;
-      cpuUsage: SystemMetrics.getCPUUsage(),;
-    },;
-    security: SecurityMetrics.getSecurityStats(),;
-  };
+      responseTime,
+      memoryUsage: SystemMetrics.getMemoryUsage(),
+    cpuUsage: SystemMetrics.getCPUUsage()
+    };
+    security: SecurityMetrics.getSecurityStats()
+  },
 }
 
-// Logging utilities;
-class Logger {
-  private static logLevel = process.env.LOG_LEVEL || 'info';
-
-  static debug(message: string, meta?: any): void {
-    if (this.shouldLog('debug')) {
-      console.debug(this.formatLog('DEBUG', message, meta));
+// Logging utilities; class Logger { private static logLevel = process.env.LOG_LEVEL || 'info';
+ static debug(message: string, meta?: any): void { if (this.shouldLog('debug')) { console.debug(this.formatLog('DEBUG', message, meta));
     }
   }
-
-  static info(message: string, meta?: any): void {
-    if (this.shouldLog('info')) {
-      console.info(this.formatLog('INFO', message, meta));
+ static info(message: string, meta?: any): void { if (this.shouldLog('info')) { console.info(this.formatLog('INFO', message, meta));
     }
   }
-
-  static warn(message: string, meta?: any): void {
-    if (this.shouldLog('warn')) {
-      console.warn(this.formatLog('WARN', message, meta));
+ static warn(message: string, meta?: any): void { if (this.shouldLog('warn')) { console.warn(this.formatLog('WARN', message, meta));
     }
   }
-
-  static error(message: string, meta?: any): void {
-    if (this.shouldLog('error')) {
-      console.error(this.formatLog('ERROR', message, meta));
+ static error(message: string, meta?: any): void { if (this.shouldLog('error')) { console.error(this.formatLog('ERROR', message, meta));
     }
   }
-
-  private static shouldLog(level: string): boolean {
-    const levels = ['debug', 'info', 'warn', 'error'];
+ private static shouldLog(level: string): boolean { const levels = ['debug', 'info', 'warn', 'error'];
     return levels.indexOf(level) >= levels.indexOf(this.logLevel);
   }
 
   private static formatLog(level: string, message: string, meta?: any): string {
     const timestamp = new Date().toISOString();
     const logEntry = {
-      timestamp,;
-      level,;
-      message,;
-      ...(meta && { meta }),;
+      timestamp;
+      level;
+      message;
+      ...(meta && { meta });
     };
     return JSON.stringify(logEntry);
   }
@@ -427,17 +366,11 @@ export function monitorRequest(req: any, res: any, next: () => void): void {
   const originalSend = res.send;
 
   res.send = function (data: any) {
-    const responseTime = Date.now() - startTime;
-
-    PerformanceMonitor.recordMetric('responseTime', responseTime);
-
-    Logger.info('Request processed', {
-      method: req.method,;
-      url: req.url,;
-      statusCode: res.statusCode,;
-      responseTime,;
-      userAgent: req.headers['user-agent'],;
-      ip: req.ip || req.connection.remoteAddress,;
+    const responseTime = Date.now() - startTime; PerformanceMonitor.recordMetric('responseTime', responseTime); Logger.info('Request processed', {
+      method: req.method,
+    url: req.url;
+      statusCode: res.statusCode, responseTime; userAgent: req.headers['user-agent'],
+    ip: req.ip || req.connection.remoteAddress
     });
 
     return originalSend.call(this, data);
@@ -447,4 +380,6 @@ export function monitorRequest(req: any, res: any, next: () => void): void {
 }
 
 // Export for use in API routes;
-export { PerformanceMonitor, HealthChecker, SystemMetrics, SecurityMetrics, Logger };
+export { PerformanceMonitor, HealthChecker, SystemMetrics, SecurityMetrics,
+      Logger
+    };

@@ -9,8 +9,7 @@ import { Card } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { Button } from "./components/ui/button";
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs'; import path from 'path';
 
 // Function to search for TypeScript files
 function findTsxFiles(dir, fileList = []) {
@@ -18,11 +17,7 @@ function findTsxFiles(dir, fileList = []) {
 
   files.forEach(file => {
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
-
-    if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') {
-      findTsxFiles(filePath, fileList);
-    } else if (file.endsWith('.tsx')) {
+    const stat = fs.statSync(filePath); if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList); } else if (file.endsWith('.tsx')) {
       fileList.push(filePath);
     }
   });
@@ -31,9 +26,7 @@ function findTsxFiles(dir, fileList = []) {
 }
 
 // Function to fix missing UI component imports
-function fixMissingImports(filePath) {
-  try {
-    let content = fs.readFileSync(filePath, 'utf8');
+function fixMissingImports(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Check for missing Card imports
@@ -50,21 +43,14 @@ function fixMissingImports(filePath) {
       /\bCardDescription\b/.test(content) &&
       !/CardDescription.*from.*@\/components\/ui\/card/.test(content);
 
-    if (usesCard || usesCardContent || usesCardHeader || usesCardTitle || usesCardDescription) {
-      // Find insertion point after existing imports
-      const importLines = content.split('\n').filter(line => line.trim().startsWith('import'));
+    if (usesCard || usesCardContent || usesCardHeader || usesCardTitle || usesCardDescription) { // Find insertion point after existing imports const importLines = content.split('\n').filter(line => line.trim().startsWith('import'));
 
       if (`;
-
-          // Find the last import line
-          const lastImportIndex = content.lastIndexOf('import ');
-          const nextLineIndex = content.indexOf('\n', lastImportIndex);
+ // Find the last import line const lastImportIndex = content.lastIndexOf('import '); const nextLineIndex = content.indexOf('\n', lastImportIndex);
 
           if (nextLineIndex !== -1) {
             content =
-              content.slice(0, nextLineIndex + 1) +
-              cardImport +
-              '\n' +
+              content.slice(0, nextLineIndex + 1) + cardImport + '\n' +
               content.slice(nextLineIndex + 1);
             modified = true;
           }
@@ -74,17 +60,12 @@ function fixMissingImports(filePath) {
 
     // Check for missing Badge imports
     const usesBadge =
-      /\bBadge\b/.test(content) && !/Badge.*from.*@\/components\/ui\/badge/.test(content);
-    if (usesBadge) {
-      const lastImportIndex = content.lastIndexOf('import ');
-      const nextLineIndex = content.indexOf('\n', lastImportIndex);
+      /\bBadge\b/.test(content) && !/Badge.*from.*@\/components\/ui\/badge/.test(content); if (usesBadge) { const lastImportIndex = content.lastIndexOf('import '); const nextLineIndex = content.indexOf('\n', lastImportIndex);
 
       if (nextLineIndex !== -1) {
         const badgeImport = ``;
         content =
-          content.slice(0, nextLineIndex + 1) +
-          badgeImport +
-          '\n' +
+          content.slice(0, nextLineIndex + 1) + badgeImport + '\n' +
           content.slice(nextLineIndex + 1);
         modified = true;
       }
@@ -92,60 +73,38 @@ function fixMissingImports(filePath) {
 
     // Check for missing Button imports
     const usesButton =
-      /\bButton\b/.test(content) && !/Button.*from.*@\/components\/ui\/button/.test(content);
-    if (usesButton) {
-      const lastImportIndex = content.lastIndexOf('import ');
-      const nextLineIndex = content.indexOf('\n', lastImportIndex);
+      /\bButton\b/.test(content) && !/Button.*from.*@\/components\/ui\/button/.test(content); if (usesButton) { const lastImportIndex = content.lastIndexOf('import '); const nextLineIndex = content.indexOf('\n', lastImportIndex);
 
       if (nextLineIndex !== -1) {
         const buttonImport = ``;
         content =
-          content.slice(0, nextLineIndex + 1) +
-          buttonImport +
-          '\n' +
+          content.slice(0, nextLineIndex + 1) + buttonImport + '\n' +
           content.slice(nextLineIndex + 1);
         modified = true;
       }
     }
 
-    // Fix Badge variant issues by removing variant="outline"
-    if (/variant="outline"/.test(content)) {
-      content = content.replace(/\s*variant="outline"/g, '');
+    // Fix Badge variant issues by removing variant="outline" if (/variant="outline"/.test(content)) { content = content.replace(/\s*variant="outline"/g, '');
+      modified = true;
+    }
+ // Fix lucide-react import issues by removing them if (/from ['"]lucide-react['"]/.test(content)) { content = content.replace(/import\s*{[^}]*}\s*from\s*['"]lucide-react['"];\s*\n?/g, '');
       modified = true;
     }
 
-    // Fix lucide-react import issues by removing them
-    if (/from ['"]lucide-react['"]/.test(content)) {
-      content = content.replace(/import\s*{[^}]*}\s*from\s*['"]lucide-react['"];\s*\n?/g, '');
-      modified = true;
-    }
-
-    if (modified) {
-      fs.writeFileSync(filePath, content);
-      console.log('Fixed: ' + path.relative(process.cwd(), filePath));
+    if (modified) { fs.writeFileSync(filePath, content); console.log('Fixed: ' + path.relative(process.cwd(), filePath));
       return true;
     }
 
-    return false;
-  } catch (error) {
-    console.error('Error processing ' + filePath + ': ' + error.message);
+    return false; } catch (error) { console.error('Error processing ' + filePath + ': ' + error.message);
     return false;
   }
 }
 
 // Main execution
-function main() {
-  const projectRoot = process.cwd();
-  const appDir = path.join(projectRoot, 'app', 'components');
-
-  if (!fs.existsSync(appDir)) {
-    console.error('app/components directory not found');
+function main() { const projectRoot = process.cwd(); const appDir = path.join(projectRoot, 'app', 'components');
+ if (!fs.existsSync(appDir)) { console.error('app/components directory not found');
     process.exit(1);
-  }
-
-  console.log('Finding TypeScript files with missing UI imports...');
-  const tsxFiles = findTsxFiles(appDir);
-  console.log('Found ' + tsxFiles.length + ' .tsx files');
+  } console.log('Finding TypeScript files with missing UI imports...'); const tsxFiles = findTsxFiles(appDir); console.log('Found ' + tsxFiles.length + ' .tsx files');
 
   let fixedCount = 0;
 
@@ -153,12 +112,8 @@ function main() {
     if (fixMissingImports(filePath)) {
       fixedCount++;
     }
-  });
-
-  console.log('\nFixed ' + fixedCount + ' files');
-
-  if (fixedCount > 0) {
-    console.log('Running TypeScript check to verify fixes...');
+  }); console.log('\nFixed ' + fixedCount + ' files');
+ if (fixedCount > 0) { console.log('Running TypeScript check to verify fixes...');
   }
 }
 

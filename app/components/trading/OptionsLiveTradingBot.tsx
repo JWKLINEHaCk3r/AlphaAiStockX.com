@@ -1,939 +1,334 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Calendar } from "../../../components/ui/calendar";
-import { Badge } from "../../../components/ui/badge";
-import { SelectValue } from "../../../components/ui/select";
-import { SelectTrigger } from "../../../components/ui/select";
-import { SelectItem } from "../../../components/ui/select";
-import { SelectContent } from "../../../components/ui/select";
-import { Select } from "../../../components/ui/select";
-import { Button } from "../../../components/ui/button";
 'use client';
-import React from 'react';
 
-import { useState, useEffect } from 'react';
-import {
-  Play,;
-  Pause,;
-  Square,;
-  Zap,;
-  TrendingUp,;
-  Activity,;
-  Target,;
-  Brain,;
-  Wallet,;
-  DollarSign,;
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { 
+  Play,
+  Pause,
+  Square,
+  DollarSign,
+  Target,
+  BarChart3,
+  Clock,
+  Settings,
+  Bot,
+  Eye,
+  Wifi, WifiOff } from 'lucide-react';
 
-interface OptionsLeg {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  type: string;
-  strike: number;
-  expiry: string;
-  dte: number;
-  action: 'BUY' | 'SELL';
-  quantity: number;
-  price: number;
-  bid: number;
-  ask: number;
-  last?: number;
-  volume?: number;
-  openInterest?: number;
-  iv: number;
-  delta: number;
-  gamma: number;
-  theta: number;
-  vega: number;
-  stockPrice?: number;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface OptionsPosition {
+  id: string, symbol: string, type: 'CALL' | 'PUT',
+    strike: number,
+  expiry: string,
+    contracts: number,
+  premium: number,
+    currentValue: number,
+  pnl: number,
+    pnlPercent: number,
+  impliedVolatility: number,
+    delta: number,
+  gamma: number,
+    theta: number,
+  vega: number,
+    timestamp: string
 }
 
-interface OptionsTrade {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: number;
-  symbol: string;
-  strategy: string;
-  legs: OptionsLeg[];
-  confidence: number;
-  timestamp: Date;
-  pnl: number;
-  status: string;
-  dte: number;
-  maxProfit: string | number;
-  maxLoss: number;
-  breakeven: number;
-  exitTime?: Date;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-interface OptionsStrategy {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  id: string;
-  name: string;
-  description: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-interface OptionsChainItem {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  symbol: string;
-  expiry: string;
-  strike: number;
-  type: string;
-  bid: number;
-  ask: number;
-  last: number;
-  volume?: number;
-  openInterest?: number;
-  dte: number;
-  iv: number;
-  delta: number;
-  gamma: number;
-  theta: number;
-  vega: number;
-  stockPrice?: number;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface BotMetrics {
+  isActive: boolean,
+    isConnected: boolean,
+  totalContracts: number,
+    todayPnL: number,
+  winRate: number,
+    avgDuration: string,
+  riskLevel: string,
+    strategy: string,
+  lastTrade: string
 }
 
 export default function OptionsLiveTradingBot() {
-  const [botStatus, setBotStatus] = useState('stopped');
-  const [accountBalance, setAccountBalance] = useState(50000);
-  const [totalPnL, setTotalPnL] = useState(0);
-  const [dailyPnL, setDailyPnL] = useState(0);
-  const [activeOptionsTrades, setActiveOptionsTrades] = useState<OptionsTrade[]>([]);
-  const [optionsHistory, setOptionsHistory] = useState<OptionsTrade[]>([]);
-  const [optionsChain, setOptionsChain] = useState<OptionsChainItem[]>([]);
-  const [botSettings, setBotSettings] = useState({
-    maxPositionSize: 5000,;
-    maxDailyLoss: 1000,;
-    maxConcurrentTrades: 5,;
-    riskPerTrade: 2.0,;
-    aiConfidenceThreshold: 80,;
-    optionsStrategy: 'momentum',;
-    dteRange: [7, 45], // Days to expiration;
-    deltaRange: [0.3, 0.7],;
-    ivThreshold: 30,;
+  const [botMetrics, setBotMetrics] = useState<BotMetrics>({
+    isActive: true,
+    isConnected: true,
+    totalContracts: 128,
+    todayPnL: 5247.83, winRate: 72.4, avgDuration: '3.2 hrs', riskLevel: 'Moderate', strategy: 'Gamma Scalping', lastTrade: 'SELL TSLA 250C @ $8.45'
   });
 
-  const optionsStrategies = [;
-    { id: 'momentum', name: 'Momentum Plays', description: 'High probability directional moves' },;
-    { id: 'earnings', name: 'Earnings Straddles', description: 'Volatility expansion plays' },;
-    { id: 'iron-condor', name: 'Iron Condors', description: 'Range-bound strategies' },;
-    { id: 'credit-spreads', name: 'Credit Spreads', description: 'High probability income' },;
-    { id: 'gamma-scalping', name: 'Gamma Scalping', description: 'Delta-neutral strategies' },;
-    { id: 'volatility', name: 'Volatility Arbitrage', description: 'IV vs RV plays' },;
-  ];
+  const [positions, setPositions] = useState<OptionsPosition[]>([]);
 
   useEffect(() => {
-    generateOptionsChain();
-    const interval = setInterval(() => {
-      updateOptionsData();
-      if (botStatus === 'running') {
-        executeOptionsTradeLogic();
+    const mockPositions: OptionsPosition[] = [ { id: 'opt_1', symbol: 'NVDA', type: 'CALL', strike: 490, expiry: '2024-02-16',
+        contracts: 10,
+        premium: 12.50;
+        currentValue: 15.80,
+        pnl: 3300;
+        pnlPercent: 26.4,
+        impliedVolatility: 0.45;
+        delta: 0.68,
+        gamma: 0.025;
+        theta: -0.15, vega: 0.32, timestamp: '14:32:00' },{ id: 'opt_2', symbol: 'TSLA', type: 'PUT', strike: 240, expiry: '2024-02-09',
+        contracts: 5,
+        premium: 8.20;
+        currentValue: 11.75,
+        pnl: 1775;
+        pnlPercent: 43.3,
+        impliedVolatility: 0.62;
+        delta: -0.42,
+        gamma: 0.018;
+        theta: -0.22, vega: 0.28, timestamp: '13:45:30' },{ id: 'opt_3', symbol: 'AAPL', type: 'CALL', strike: 185, expiry: '2024-01-26',
+        contracts: 8,
+        premium: 4.30;
+        currentValue: 2.85,
+        pnl: -1160;
+        pnlPercent: -33.7,
+        impliedVolatility: 0.38;
+        delta: 0.22,
+        gamma: 0.012;
+        theta: -0.45, vega: 0.18, timestamp: '12:20:15'
       }
+    ];
+
+    setPositions(mockPositions);
+
+    // Simulate real-time updates
+    const interval = setInterval(() => {
+      setBotMetrics(prev => ({
+        ...prev,
+        todayPnL: prev.todayPnL + (Math.random() - 0.5) * 100,
+        totalContracts: prev.totalContracts + (Math.random() > 0.97 ? 1 : 0)
+      }))
     }, 3000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps;
-  }, [botStatus, botSettings]);
+  }, []);
 
-  const generateOptionsChain = () => {
-    const symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'META'];
-    const chain: OptionsChainItem[] = [];
-
-    symbols.forEach(symbol => {
-      const stockPrice = 100 + Math.random() * 400;
-      const expirations = ['2024-01-19', '2024-01-26', '2024-02-02', '2024-02-16', '2024-03-15'];
-
-      expirations.forEach(expiry => {
-        for (let i = -5; i <= 5; i++) {
-          const strike = Math.round((stockPrice + i * 10) / 5) * 5;
-          const dte = Math.floor(Math.random() * 45) + 1;
-
-          // Call option;
-          chain.push({
-            symbol,;
-            type: 'CALL',;
-            strike,;
-            expiry,;
-            dte,;
-            bid: Math.random() * 10 + 0.5,;
-            ask: Math.random() * 10 + 1.0,;
-            last: Math.random() * 10 + 0.75,;
-            volume: Math.floor(Math.random() * 1000),;
-            openInterest: Math.floor(Math.random() * 5000),;
-            iv: 20 + Math.random() * 60,;
-            delta: 0.1 + Math.random() * 0.8,;
-            gamma: Math.random() * 0.1,;
-            theta: -Math.random() * 0.5,;
-            vega: Math.random() * 0.3,;
-            stockPrice,;
-          });
-
-          // Put option;
-          chain.push({
-            symbol,;
-            type: 'PUT',;
-            strike,;
-            expiry,;
-            dte,;
-            bid: Math.random() * 10 + 0.5,;
-            ask: Math.random() * 10 + 1.0,;
-            last: Math.random() * 10 + 0.75,;
-            volume: Math.floor(Math.random() * 1000),;
-            openInterest: Math.floor(Math.random() * 5000),;
-            iv: 20 + Math.random() * 60,;
-            delta: -(0.1 + Math.random() * 0.8),;
-            gamma: Math.random() * 0.1,;
-            theta: -Math.random() * 0.5,;
-            vega: Math.random() * 0.3,;
-            stockPrice,;
-          });
-        }
-      });
-    });
-
-    setOptionsChain(chain);
+  const toggleBot = () => {
+    setBotMetrics(prev => ({ ...prev, isActive: !prev.isActive })),
+  };
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(amount),
+  };
+ const formatPercent = (percent: number) => { return `${percent >= 0 ? '+' : ''}${percent.toFixed(2)}%`;
   };
 
-  const executeOptionsTradeLogic = () => {
-    const strategy = botSettings.optionsStrategy;
-    const aiConfidence = 70 + Math.random() * 30;
-
-    if (;
-      aiConfidence >= botSettings.aiConfidenceThreshold &&;
-      activeOptionsTrades.length < botSettings.maxConcurrentTrades;
-    ) {
-      const shouldTrade = Math.random() > 0.92; // 8% chance per cycle;
-      if (shouldTrade) {
-        executeOptionsStrategy(strategy, aiConfidence);
-      }
-    }
-
-    // Manage existing trades;
-    activeOptionsTrades.forEach(trade => {
-      const shouldClose = Math.random() > 0.97; // 3% chance to close per cycle;
-      if (shouldClose || trade.dte <= 1) {
-        closeOptionsTrade(trade.id);
-      }
-    });
+  const formatGreek = (value: number) => {
+    return value.toFixed(3);
   };
 
-  const executeOptionsStrategy = (strategy: string, confidence: number) => {
-    const availableOptions = optionsChain.filter(;
-      opt => opt.dte >= botSettings.dteRange[0] && opt.dte <= botSettings.dteRange[1];
-    );
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black p-6">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <Target className="w-16 h-16 text-purple-400 mr-4" />
+            <h1 className="text-5xl font-bold text-white">
+              Options Live Trading Bot
+            </h1>
+          </div>
+          <p className="text-2xl text-gray-300 max-w-4xl mx-auto mb-8">
+            Advanced options trading with real-time Greeks monitoring and risk management
+          </p>
+        </div>
 
-    if (availableOptions.length === 0) return;
+        {/* Bot Status Dashboard */}
+        <Card className="mb-8 bg-white/10 border-purple-500/30 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bot className="w-6 h-6 text-purple-400" />
+                Options Bot Status
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  {botMetrics.isConnected ? (
+                    <Wifi className="w-5 h-5 text-green-400" />
+                  ) : (
+                    <WifiOff className="w-5 h-5 text-red-400" /> )} <span className={`text-sm ${botMetrics.isConnected ? 'text-green-400' : 'text-red-400'}`}> {botMetrics.isConnected ? 'CONNECTED' : 'DISCONNECTED'}
+                  </span> </div> <div className={`w-3 h-3 rounded-full ${botMetrics.isActive ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`}></div> <span className={`text-sm ${botMetrics.isActive ? 'text-green-400' : 'text-red-400'}`}> {botMetrics.isActive ? 'TRADING' : 'PAUSED'}
+                </span>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid lg:grid-cols-4 gap-6 mb-6">
+              
+              <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
+                <BarChart3 className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+                <div className="text-white font-bold text-xl">{botMetrics.totalContracts}</div>
+                <p className="text-purple-200 text-sm">Contracts Traded</p>
+              </div>
+              
+              <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/30"> <DollarSign className="w-8 h-8 mx-auto mb-2 text-green-400" /> <div className={`font-bold text-xl ${botMetrics.todayPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {formatCurrency(botMetrics.todayPnL)}
+                </div>
+                <p className="text-green-200 text-sm">Today&apos;s P&L</p>
+              </div>
+              
+              <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
+                <Target className="w-8 h-8 mx-auto mb-2 text-blue-400" />
+                <div className="text-white font-bold text-xl">{botMetrics.winRate}%</div>
+                <p className="text-blue-200 text-sm">Win Rate</p>
+              </div>
+              
+              <div className="text-center p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
+                <Clock className="w-8 h-8 mx-auto mb-2 text-yellow-400" />
+                <div className="text-white font-bold text-xl">{botMetrics.avgDuration}</div>
+                <p className="text-yellow-200 text-sm">Avg Duration</p>
+              </div>
+              
+            </div>
 
-    const selectedOption = availableOptions[Math.floor(Math.random() * availableOptions.length)];
-    const contracts = Math.floor(botSettings.maxPositionSize / (selectedOption.ask * 100));
+            <div className="grid lg:grid-cols-3 gap-6 mb-6">
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2">Active Strategy</h4>
+                <p className="text-purple-400 font-bold">{botMetrics.strategy}</p>
+                <p className="text-gray-400 text-sm mt-1">Optimized for current volatility</p>
+              </div>
+              
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2">Risk Level</h4>
+                <Badge className="text-yellow-400 bg-yellow-900/30">{botMetrics.riskLevel}</Badge>
+                <p className="text-gray-400 text-sm mt-1">Max 5% portfolio risk</p>
+              </div>
+              
+              <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                <h4 className="text-white font-semibold mb-2">Last Trade</h4>
+                <p className="text-white font-semibold text-sm">{botMetrics.lastTrade}</p>
+                <p className="text-gray-400 text-sm mt-1">2 minutes ago</p>
+              </div>
+            </div>
 
-    let tradeType, legs;
+            <div className="flex justify-center gap-4">
+              <Button onClick={toggleBot} className={`${botMetrics.isActive ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600, hover:bg-green-700'} text-white`}
+              >
+                {botMetrics.isActive ? (
+                  <>
+                    <Pause className="w-4 h-4 mr-2" />
+                    Pause Trading
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-4 h-4 mr-2" />
+                    Start Trading
+                  </>
+                )}
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border-white/20 text-gray-300 hover: bg-white/10"
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Bot Settings
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border-white/20 text-gray-300, hover:bg-white/10"
+              >
+                <Square className="w-4 h-4 mr-2" />
+                Close All Positions
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-    switch (strategy) {
-      case 'momentum':;
-        tradeType = Math.random() > 0.5 ? 'LONG_CALL' : 'LONG_PUT';
-        legs = [;
-          {
-            ...selectedOption,;
-            action: 'BUY' as const,;
-            quantity: contracts,;
-            price: selectedOption.ask,;
-          },;
-        ];
-        break;
-
-      case 'earnings':;
-        tradeType = 'LONG_STRADDLE';
-        legs = [;
-          {
-            ...selectedOption,;
-            type: 'CALL',;
-            action: 'BUY' as const,;
-            quantity: contracts,;
-            price: selectedOption.ask,;
-          },;
-          {
-            ...selectedOption,;
-            type: 'PUT',;
-            action: 'BUY' as const,;
-            quantity: contracts,;
-            price: selectedOption.ask,;
-          },;
-        ];
-        break;
-
-      case 'credit-spreads':;
-        tradeType = Math.random() > 0.5 ? 'BULL_PUT_SPREAD' : 'BEAR_CALL_SPREAD';
-        legs = [;
-          {
-            ...selectedOption,;
-            action: 'SELL' as const,;
-            quantity: contracts,;
-            price: selectedOption.bid,;
-          },;
-          {
-            ...selectedOption,;
-            strike: selectedOption.strike + (tradeType === 'BULL_PUT_SPREAD' ? -10 : 10),;
-            action: 'BUY' as const,;
-            quantity: contracts,;
-            price: selectedOption.ask * 0.7,;
-          },;
-        ];
-        break;
-
-      default:;
-        tradeType = 'LONG_CALL';
-        legs = [;
-          {
-            ...selectedOption,;
-            action: 'BUY' as const,;
-            quantity: contracts,;
-            price: selectedOption.ask,;
-          },;
-        ];
-    }
-
-    const newTrade = {
-      id: Date.now(),;
-      symbol: selectedOption.symbol,;
-      strategy: tradeType,;
-      legs,;
-      confidence,;
-      timestamp: new Date(),;
-      pnl: 0,;
-      status: 'open',;
-      dte: selectedOption.dte,;
-      maxProfit: calculateMaxProfit(tradeType, legs),;
-      maxLoss: calculateMaxLoss(tradeType, legs),;
-      breakeven: calculateBreakeven(tradeType, legs),;
-    };
-
-    setActiveOptionsTrades(prev => [...prev, newTrade]);
-  };
-
-  const calculateMaxProfit = (strategy: string, legs: OptionsLeg[]): string | number => {
-    // Simplified calculation;
-    const totalCredit = legs;
-      .filter((leg: OptionsLeg) => leg.action === 'SELL');
-      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
-    const totalDebit = legs;
-      .filter((leg: OptionsLeg) => leg.action === 'BUY');
-      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
-
-    if (strategy.includes('SPREAD')) {
-      return Math.max(totalCredit - totalDebit, 0) * 100;
-    }
-    return strategy.includes('LONG') ? 'Unlimited' : totalCredit * 100;
-  };
-
-  const calculateMaxLoss = (strategy: string, legs: OptionsLeg[]): number => {
-    const totalDebit = legs;
-      .filter((leg: OptionsLeg) => leg.action === 'BUY');
-      .reduce((sum: number, leg: OptionsLeg) => sum + leg.price * leg.quantity, 0);
-    return totalDebit * 100;
-  };
-
-  const calculateBreakeven = (strategy: string, legs: OptionsLeg[]): number => {
-    const mainLeg = legs[0];
-    const netDebit = legs.reduce(;
-      (sum: number, leg: OptionsLeg) => sum + (leg.action === 'BUY' ? leg.price : -leg.price),;
-      0;
-    );
-
-    if (mainLeg.type === 'CALL') {
-      return mainLeg.strike + netDebit;
-    } else {
-      return mainLeg.strike - netDebit;
-    }
-  };
-
-  const closeOptionsTrade = (tradeId: number) => {
-    const trade = activeOptionsTrades.find(t => t.id === tradeId);
-    if (!trade) return;
-
-    // Simulate P&L calculation;
-    const pnl = (Math.random() - 0.3) * 1000; // Slight positive bias;
-    const closedTrade = {
-      ...trade,;
-      pnl,;
-      status: 'closed',;
-      exitTime: new Date(),;
-    };
-
-    setActiveOptionsTrades(prev => prev.filter(t => t.id !== tradeId));
-    setOptionsHistory(prev => [closedTrade, ...prev.slice(0, 49)]);
-
-    setAccountBalance(prev => prev + pnl);
-    setTotalPnL(prev => prev + pnl);
-    setDailyPnL(prev => prev + pnl);
-  };
-
-  const updateOptionsData = () => {
-    // Update options prices and Greeks;
-    setOptionsChain(prev =>;
-      prev.map((option: OptionsChainItem) => ({
-        ...option,;
-        bid: Math.max(option.bid + (Math.random() - 0.5) * 0.5, 0.01),;
-        ask: Math.max(option.ask + (Math.random() - 0.5) * 0.5, 0.02),;
-        last: Math.max(option.last + (Math.random() - 0.5) * 0.5, 0.01),;
-        iv: Math.max(option.iv + (Math.random() - 0.5) * 5, 5),;
-        dte: Math.max(option.dte - 0.1, 0),;
-      }));
-    );
-
-    // Update active trades P&L;
-    setActiveOptionsTrades(prev =>;
-      prev.map(trade => {
-        const pnlChange = (Math.random() - 0.5) * 200;
-        return {
-          ...trade,;
-          pnl: trade.pnl + pnlChange,;
-          dte: Math.max(trade.dte - 0.1, 0),;
-        };
-      });
-    );
-  };
-
-  const startBot = () => setBotStatus('running');
-  const pauseBot = () => setBotStatus('paused');
-  const stopBot = () => {
-    setBotStatus('stopped');
-    activeOptionsTrades.forEach(trade => closeOptionsTrade(trade.id));
-  };
-
-  return (;
-    <div className="space-y-6">;
-      {/* Options Bot Control Panel */}
-      <Card className="bg-gray-900/90 border-cyan-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <div className="flex items-center justify-between">;
-            <CardTitle className="text-gray-100 flex items-center">;
-              <Target className="h-6 w-6 mr-2 text-cyan-400" />;
-              Live Options Trading Bot;
-              <Badge;
-                className={`ml-3 ${
-                  botStatus === 'running';
-                    ? 'bg-green-500 animate-pulse';
-                    : botStatus === 'paused';
-                      ? 'bg-yellow-500';
-                      : 'bg-gray-500';
-                }`}
-              >;
-                {botStatus === 'running';
-                  ? '🔴 LIVE OPTIONS';
-                  : botStatus === 'paused';
-                    ? '⏸️ PAUSED';
-                    : '⏹️ STOPPED'}
-              </Badge>;
-            </CardTitle>;
-            <div className="flex items-center space-x-2">;
-              {botStatus === 'stopped' && (;
-                <Button;
-                  onClick={startBot}
-                  className="bg-green-500 hover:bg-green-600 text-black font-bold";
-                >;
-                  <Play className="h-4 w-4 mr-2" />;
-                  START OPTIONS BOT;
-                </Button>;
-              )}
-
-              {botStatus === 'running' && (;
-                <>;
-                  <Button;
-                    onClick={pauseBot}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-black";
-                  >;
-                    <Pause className="h-4 w-4 mr-2" />;
-                    Pause;
-                  </Button>;
-                  <Button;
-                    onClick={stopBot}
-                    variant="outline";
-                    className="border-gray-500 text-gray-300";
-                  >;
-                    <Square className="h-4 w-4 mr-2" />;
-                    Stop;
-                  </Button>;
-                </>;
-              )}
-
-              {botStatus === 'paused' && (;
-                <>;
-                  <Button;
-                    onClick={() => setBotStatus('running')}
-                    className="bg-green-500 hover:bg-green-600 text-black";
-                  >;
-                    <Play className="h-4 w-4 mr-2" />;
-                    Resume;
-                  </Button>;
-                  <Button;
-                    onClick={stopBot}
-                    variant="outline";
-                    className="border-gray-500 text-gray-300";
-                  >;
-                    <Square className="h-4 w-4 mr-2" />;
-                    Stop;
-                  </Button>;
-                </>;
-              )}
-            </div>;
-          </div>;
-        </CardHeader>;
-        <CardContent>;
-          {/* Strategy Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">;
-            <div className="space-y-2">;
-              <label className="text-gray-200 text-sm font-medium">Options Strategy</label>;
-              <Select;
-                value={botSettings.optionsStrategy}
-                onValueChange={value =>;
-                  setBotSettings(prev => ({ ...prev, optionsStrategy: value }));
-                }
-              >;
-                <SelectTrigger className="bg-gray-800/30 border-cyan-500/30 text-gray-200">;
-                  <SelectValue />;
-                </SelectTrigger>;
-                <SelectContent className="bg-gray-800 border-gray-600">;
-                  {optionsStrategies.map((strategy: OptionsStrategy) => (;
-                    <SelectItem key={strategy.id} value={strategy.id}>;
-                      <div>;
-                        <div className="font-medium">{strategy.name}</div>;
-                        <div className="text-xs text-gray-400">{strategy.description}</div>;
-                      </div>;
-                    </SelectItem>;
-                  ))}
-                </SelectContent>;
-              </Select>;
-            </div>;
-            <div className="space-y-2">;
-              <label className="text-gray-200 text-sm font-medium">DTE Range</label>;
-              <div className="flex space-x-2">;
-                <input;
-                  type="number";
-                  value={botSettings.dteRange[0]}
-                  onChange={e =>;
-                    setBotSettings(prev => ({
-                      ...prev,;
-                      dteRange: [Number.parseInt(e.target.value), prev.dteRange[1]],;
-                    }));
-                  }
-                  className="w-full px-3 py-2 bg-gray-800/30 border border-cyan-500/30 rounded text-gray-200";
-                  placeholder="Min DTE";
-                />;
-                <input;
-                  type="number";
-                  value={botSettings.dteRange[1]}
-                  onChange={e =>;
-                    setBotSettings(prev => ({
-                      ...prev,;
-                      dteRange: [prev.dteRange[0], Number.parseInt(e.target.value)],;
-                    }));
-                  }
-                  className="w-full px-3 py-2 bg-gray-800/30 border border-cyan-500/30 rounded text-gray-200";
-                  placeholder="Max DTE";
-                />;
-              </div>;
-            </div>;
-            <div className="space-y-2">;
-              <label className="text-gray-200 text-sm font-medium">IV Threshold</label>;
-              <input;
-                type="number";
-                value={botSettings.ivThreshold}
-                onChange={e =>;
-                  setBotSettings(prev => ({
-                    ...prev,;
-                    ivThreshold: Number.parseFloat(e.target.value),;
-                  }));
-                }
-                className="w-full px-3 py-2 bg-gray-800/30 border border-cyan-500/30 rounded text-gray-200";
-                placeholder="IV %";
-              />;
-            </div>;
-          </div>;
-          {/* Options Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Wallet className="h-6 w-6 text-green-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Account Balance</p>;
-              <p className="text-lg font-bold text-green-400">${accountBalance.toLocaleString()}</p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <TrendingUp className="h-6 w-6 text-cyan-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Options P&L</p>;
-              <p;
-                className={`text-lg font-bold ${totalPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}
-              >;
-                ${totalPnL.toFixed(2)}
-              </p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Activity className="h-6 w-6 text-blue-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Daily P&L</p>;
-              <p;
-                className={`text-lg font-bold ${dailyPnL >= 0 ? 'text-green-400' : 'text-red-400'}`}
-              >;
-                ${dailyPnL.toFixed(2)}
-              </p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Target className="h-6 w-6 text-purple-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Active Positions</p>;
-              <p className="text-lg font-bold text-gray-100">{activeOptionsTrades.length}</p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Calendar className="h-6 w-6 text-yellow-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Avg DTE</p>;
-              <p className="text-lg font-bold text-gray-100">;
-                {activeOptionsTrades.length > 0;
-                  ? (;
-                      activeOptionsTrades.reduce((sum, t) => sum + t.dte, 0) /;
-                      activeOptionsTrades.length;
-                    ).toFixed(0);
-                  : 0}
-              </p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Brain className="h-6 w-6 text-pink-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Strategy</p>;
-              <p className="text-sm font-bold text-gray-100">;
-                {botSettings.optionsStrategy.toUpperCase()}
-              </p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <Zap className="h-6 w-6 text-orange-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Win Rate</p>;
-              <p className="text-lg font-bold text-gray-100">;
-                {optionsHistory.length > 0;
-                  ? (;
-                      (optionsHistory.filter(t => t.pnl > 0).length / optionsHistory.length) *;
-                      100;
-                    ).toFixed(1);
-                  : 0}
-                %;
-              </p>;
-            </div>;
-            <div className="text-center p-3 bg-gray-800/50 rounded-lg border border-cyan-500/20">;
-              <DollarSign className="h-6 w-6 text-indigo-400 mx-auto mb-1" />;
-              <p className="text-sm text-gray-400">Avg Trade</p>;
-              <p className="text-lg font-bold text-gray-100">;
-                $;
-                {optionsHistory.length > 0;
-                  ? (;
-                      optionsHistory.reduce((sum, t) => sum + t.pnl, 0) / optionsHistory.length;
-                    ).toFixed(0);
-                  : 0}
-              </p>;
-            </div>;
-          </div>;
-        </CardContent>;
-      </Card>;
-      {/* Active Options Positions */}
-      <Card className="bg-gray-900/90 border-cyan-500/30 backdrop-blur-xl">;
-        <CardHeader>;
-          <CardTitle className="text-gray-100 flex items-center">;
-            <Activity className="h-6 w-6 mr-2 text-green-400" />;
-            Active Options Positions ({activeOptionsTrades.length});
-          </CardTitle>;
-        </CardHeader>;
-        <CardContent>;
-          {activeOptionsTrades.length === 0 ? (;
-            <div className="text-center py-8">;
-              <Target className="h-12 w-12 text-gray-400 mx-auto mb-4" />;
-              <p className="text-gray-400">;
-                No active options positions. Bot is scanning for opportunities...;
-              </p>;
-            </div>;
-          ) : (;
-            <div className="space-y-3">;
-              {activeOptionsTrades.map((trade: OptionsTrade) => (;
-                <div;
-                  key={trade.id}
-                  className="p-4 bg-gray-800/50 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all";
-                >;
-                  <div className="flex items-center justify-between">;
-                    <div className="flex items-center space-x-4">;
-                      <div>;
-                        <div className="flex items-center space-x-2">;
-                          <span className="text-gray-100 font-bold text-lg">{trade.symbol}</span>;
-                          <Badge className="bg-purple-500">{trade.strategy}</Badge>;
-                          <Badge variant="outline" className="border-cyan-500/30 text-cyan-400">;
-                            {trade.dte.toFixed(0)} DTE;
-                          </Badge>;
-                        </div>;
-                        <p className="text-sm text-gray-400">{trade.legs.length} leg(s)</p>;
-                      </div>;
-                      <div className="text-center">;
-                        <p className="text-gray-400 text-sm">P&L</p>;
-                        <p;
-                          className={`font-bold text-lg ${trade.pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}
-                        >;
-                          ${trade.pnl.toFixed(2)}
-                        </p>;
-                      </div>;
-                      <div className="text-center">;
-                        <p className="text-gray-400 text-sm">Max Profit</p>;
-                        <p className="text-green-400 font-semibold">;
-                          {typeof trade.maxProfit === 'string';
-                            ? trade.maxProfit;
-                            : `$${trade.maxProfit.toFixed(0)}`}
-                        </p>;
-                      </div>;
-                      <div className="text-center">;
-                        <p className="text-gray-400 text-sm">Max Loss</p>;
-                        <p className="text-red-400 font-semibold">${trade.maxLoss.toFixed(0)}</p>;
-                      </div>;
-                      <div className="text-center">;
-                        <p className="text-gray-400 text-sm">Breakeven</p>;
-                        <p className="text-gray-100 font-semibold">${trade.breakeven.toFixed(2)}</p>;
-                      </div>;
-                    </div>;
-                    <div className="text-right">;
-                      <p className="text-xs text-gray-400">;
-                        {trade.timestamp.toLocaleTimeString()}
-                      </p>;
-                      <Badge className="bg-cyan-500 mt-1">;
-                        {trade.confidence.toFixed(0)}% Confidence;
-                      </Badge>;
-                    </div>;
-                  </div>;
-                  {/* Legs Details */}
-                  <div className="mt-3 pt-3 border-t border-gray-700/30">;
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">;
-                      {trade.legs.map((leg: OptionsLeg, index: number) => (;
-                        <div key={index} className="text-xs bg-gray-700/30 p-2 rounded">;
-                          <span;
-                            className={leg.action === 'BUY' ? 'text-green-400' : 'text-red-400'}
-                          >;
-                            {leg.action}
-                          </span>{' '}
-                          <span className="text-gray-300">;
-                            {leg.quantity} {leg.type} ${leg.strike}
-                          </span>;
-                          <br />;
-                          <span className="text-gray-400">@ ${leg.price.toFixed(2)}</span>;
-                        </div>;
-                      ))}
-                    </div>;
-                  </div>;
-                </div>;
-              ))}
-            </div>;
-          )}
-        </CardContent>;
-      </Card>;
-    </div>;
+        {/* Active Options Positions */}
+        <Card className="bg-white/10 border-white/20 backdrop-blur">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              <Eye className="w-6 h-6 text-green-400" />
+              Active Options Positions ({positions.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <div className="grid gap-4">
+                {positions.map((position) => (
+                  <div key={position.id} className="bg-white/5 rounded-lg p-4 border border-white/10">
+                    <div className="grid lg:grid-cols-8 gap-4 items-center text-sm">
+                      
+                      {/* Symbol & Type */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center">
+                          <span className="text-white font-bold text-xs">
+                            {position.symbol.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <h3 className="text-white font-bold">{position.symbol}</h3> <Badge className={position.type === 'CALL' ? 'text-green-400 bg-green-900/30' : 'text-red-400 bg-red-900/30'}>
+                            {position.type}
+                          </Badge>
+                        </div>
+                      </div>
+                      
+                      {/* Strike & Expiry */}
+                      <div className="text-center">
+                        <div className="text-white font-semibold">${position.strike}</div>
+                        <p className="text-gray-400 text-xs">{position.expiry}</p>
+                      </div>
+                      
+                      {/* Contracts & Premium */}
+                      <div className="text-center">
+                        <div className="text-white font-semibold">{position.contracts}</div>
+                        <p className="text-gray-400 text-xs">@ {formatCurrency(position.premium)}</p>
+                      </div>
+                      
+                      {/* Current Value */}
+                      <div className="text-center">
+                        <div className="text-white font-semibold">{formatCurrency(position.currentValue)}</div>
+                        <p className="text-gray-400 text-xs">Current</p>
+                      </div>
+                      
+                      {/* P&L */} <div className="text-center"> <div className={`font-bold ${position.pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          {formatCurrency(position.pnl)} </div> <div className={`text-xs ${position.pnlPercent >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          {formatPercent(position.pnlPercent)}
+                        </div>
+                      </div>
+                      
+                      {/* Greeks */}
+                      <div className="text-center">
+                        <div className="text-white text-xs">
+                          <div>Δ: {formatGreek(position.delta)}</div>
+                          <div>Γ: {formatGreek(position.gamma)}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="text-white text-xs">
+                          <div>Θ: {formatGreek(position.theta)}</div>
+                          <div>V: {formatGreek(position.vega)}</div>
+                        </div>
+                      </div>
+                      
+                      {/* IV & Time */}
+                      <div className="text-center">
+                        <div className="text-white font-semibold text-xs">{(position.impliedVolatility * 100).toFixed(1)}%</div>
+                        <p className="text-gray-400 text-xs">{position.timestamp}</p>
+                      </div>
+                      
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {positions.length === 0 && (
+              <div className="text-center py-12">
+                <Target className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-400 text-xl">No active options positions</p>
+                <p className="text-gray-500 mt-2">Bot is scanning for opportunities</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        
+      </div>
+    </div>
   );
 }

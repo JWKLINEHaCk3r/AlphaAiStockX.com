@@ -1,671 +1,547 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.js';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card.tsx';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Card, CardHeader, CardContent, CardTitle } from '../../../components/ui/card';
-import { Alert } from '../../../components/ui/alert';
-import { TabsTrigger } from "../../../components/ui/tabs";
-import { TabsList } from "../../../components/ui/tabs";
-import { TabsContent } from "../../../components/ui/tabs";
-import { Tabs } from "../../../components/ui/tabs";
-import { AvatarImage } from "../../../components/ui/avatar";
-import { AvatarFallback } from "../../../components/ui/avatar";
-import { Avatar } from "../../../components/ui/avatar";
+'use client'; import React, { useState } from 'react';
+import { Card, CardHeader, CardContent,
+      CardTitle
+    } from "../../../components/ui/card";
+import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
-import { SelectValue } from "../../../components/ui/select";
-import { SelectTrigger } from "../../../components/ui/select";
-import { SelectItem } from "../../../components/ui/select";
-import { SelectContent } from "../../../components/ui/select";
-import { Select } from "../../../components/ui/select";
-import { Textarea } from "../../../components/ui/textarea";
-import { Label } from "../../../components/ui/label";
-import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import {
-  AIStockPrediction,;
-  SportsEvent,;
-  TradingOpportunity,;
-  Trade,;
-  Trader,;
-  AnalysisResult,;
-  BankAccount,;
-  Transaction,;
-  TradingSignalData,;
-  ChartPattern,;
-  TechnicalIndicators,;
-  SectorPerformance,;
-  BacktestStrategy,;
-  AIWhiteLabelMetrics,;
-  MarketClassification,;
-  TradingRecommendation,;
-  StockAnalysis,;
-  RealtimeData,;
-  VolumeProfile,;
-  AIAnalysisComponents,;
-  CryptoData,;
-  DeFiProtocol,;
-  NFTCollection,;
-  UserProfile,;
-  ThemeOption,;
-  AccentColor,;
-  SubscriptionPlan,;
-  TradingStrategy,;
-  ScanResult,;
-  SiteDiagnostic,;
-  Alert,;
-  NewsAnalysis,;
-  SocialPlatform,;
-  Influencer,;
-  SocialPost,;
-  DeepLearningModel,;
-  MarketPattern,;
-} from '../../types/trading-types';
+import { 
+  User, 
+  Settings, 
+  Bell, 
+  Shield, 
+  Eye, 
+  Camera, 
+  Edit3, 
+  Save,
+  Upload,
+  AlertCircle,
+  CheckCircle,
+  Star,
+  TrendingUp,
+  BarChart3,
+  Calendar,
+  Target, Zap } from 'lucide-react';
 
-'use client';
-import React from 'react';
-
-import { useState } from 'react';
-import {
-  Settings,;
-  User,;
-  MapPin,;
-  Globe,;
-  TrendingUp,;
-  Shield,;
-  Eye,;
-  Camera,;
-  Crown,;
-  Star,;
-  Target,;
-  Flame,;
-  Palette,;
-  Trophy,;
-} from 'lucide-react';
-
-interface User {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  name?: string;
-  bio?: string;
-  location?: string;
-  website?: string;
-  tradingExperience?: string;
-  riskTolerance?: string;
-  investmentGoals?: string[];
-  profileVisibility?: string;
-  showPortfolio?: boolean;
-  showReturns?: boolean;
-  theme?: string;
-  accentColor?: string;
-  avatar?: string;
-  subscription?: string;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface UserProfile {
+  id: string,
+    username: string,
+  email: string,
+    fullName: string,
+  bio: string,
+  avatar: string, joinDate: string, tradingLevel: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert', preferences: { theme: 'light' | 'dark' | 'auto',
+    notifications: boolean,
+    emailUpdates: boolean,
+    publicProfile: boolean,
+    showPerformance: boolean
+  };
+  stats: {
+    totalTrades: number,
+    winRate: number,
+    totalReturn: number,
+    currentStreak: number
+  };
 }
 
-interface CustomizableProfileProps {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  user: User;
-  onUpdateProfile: (data: any) => void;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface TabsProps {
+  value: string,
+    onValueChange: (value: string) => void,
+    children: React.ReactNode
 }
 
-export default function CustomizableProfile({ user, onUpdateProfile }: CustomizableProfileProps) {
-  const [profileData, setProfileData] = useState({
-    displayName: user?.name || '',;
-    bio: user?.bio || '',;
-    location: user?.location || '',;
-    website: user?.website || '',;
-    tradingExperience: user?.tradingExperience || 'intermediate',;
-    riskTolerance: user?.riskTolerance || 'moderate',;
-    investmentGoals: user?.investmentGoals || [],;
-    profileVisibility: user?.profileVisibility || 'public',;
-    showPortfolio: user?.showPortfolio || false,;
-    showReturns: user?.showReturns || false,;
-    theme: user?.theme || 'dark',;
-    accentColor: user?.accentColor || 'purple',;
+interface TabsListProps {
+  children: React.ReactNode
+}
+
+interface TabsTriggerProps {
+  value: string,
+    children: React.ReactNode
+}
+
+interface TabsContentProps {
+  value: string;
+  children: React.ReactNode;
+}
+
+// Simple Tabs Implementation
+const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children }) => {
+  return (
+    <div className="w-full">
+      {React.Children.map(children, (child) => 
+        React.cloneElement(child as React.ReactElement, { activeTab: value, onTabChange: onValueChange })
+      )}
+    </div>
+  );
+};
+
+const TabsList: React.FC<TabsListProps & { activeTab?: string, onTabChange?: (value: string) => void }> = ({ children, activeTab, onTabChange }) => {
+  return (
+    <div className="flex space-x-1 bg-gray-100 rounded-lg p-1 mb-4">
+      {React.Children.map(children, (child ) => 
+        React.cloneElement(child as React.ReactElement, { activeTab,
+      onTabChange
+    })
+      )}
+    </div>
+  );
+};
+
+const TabsTrigger: React.FC<TabsTriggerProps & { activeTab?: string; onTabChange?: (value: string) => void }> = ({ 
+  value,
+  children, 
+  activeTab,
+  onTabChange
+}) => {
+  const isActive = activeTab === value;
+  return (
+    <button
+      onClick={() => onTabChange?.(value)}
+      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+        isActive 
+          ? 'bg-white text-blue-600 shadow-sm' 
+          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+      }`}
+    >
+      {children}
+    </button>
+  );
+};
+
+const TabsContent: React.FC<TabsContentProps & { activeTab?: string }> = ({ value, children,
+      activeTab
+    }) => {
+  if (activeTab !== value) return null;
+  return <div>{children}</div>;
+};
+
+export default function CustomizableProfile() { const [activeTab, setActiveTab] = useState('profile');
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false); const [profile, setProfile] = useState<UserProfile>({ id: '1', username: 'alphatrader_pro', email: 'john.doe@example.com', fullName: 'John Doe', bio: 'Professional trader specializing in AI-driven strategies and risk management. 8+ years experience in algorithmic trading.', avatar: '/api/placeholder/150/150', joinDate: '2023-03-15', tradingLevel: 'Expert', preferences: { theme: 'dark',
+      notifications: true,
+      emailUpdates: true,
+      publicProfile: true,
+      showPerformance: true
+    },
+    stats: {
+      totalTrades: 2847,
+      winRate: 73.2,
+      totalReturn: 127.4,
+      currentStreak: 12
+    }
   });
 
-  const [achievements] = useState([;
-    {
-      id: 1,;
-      name: 'First Trade',;
-      description: 'Completed your first trade',;
-      icon: Target,;
-      earned: true,;
-    },;
-    {
-      id: 2,;
-      name: 'Profit Master',;
-      description: 'Achieved 10% portfolio return',;
-      icon: TrendingUp,;
-      earned: true,;
-    },;
-    {
-      id: 3,;
-      name: 'Diamond Hands',;
-      description: 'Held a position for 6+ months',;
-      icon: Crown,;
-      earned: false,;
-    },;
-    {
-      id: 4,;
-      name: 'Alpha Wolf',;
-      description: 'Top 1% performer this month',;
-      icon: Flame,;
-      earned: true,;
-    },;
-    {
-      id: 5,;
-      name: 'Risk Manager',;
-      description: 'Never exceeded risk limits',;
-      icon: Shield,;
-      earned: false,;
-    },;
-  ]);
-
-  const [tradingStats] = useState({
-    totalTrades: 247,;
-    winRate: 68.4,;
-    avgReturn: 12.7,;
-    bestTrade: 45.2,;
-    worstTrade: -8.3,;
-    sharpeRatio: 1.84,;
-    maxDrawdown: 12.1,;
-  });
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSaving(false);
+    setIsEditing(false);
+  };
 
   const handleInputChange = (field: string, value: any) => {
-    setProfileData(prev => ({ ...prev, [field]: value }));
+    setProfile(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
-  const handleSaveProfile = () => {
-    onUpdateProfile(profileData);
+  const handlePreferenceChange = (field: string, value: any) => {
+    setProfile(prev => ({
+      ...prev,
+      preferences: {
+        ...prev.preferences,
+        [field]: value
+      }
+    }));
   };
 
-  const themeOptions = [;
-    { value: 'dark', label: 'Dark Mode', preview: 'bg-gray-900' },;
-    { value: 'light', label: 'Light Mode', preview: 'bg-white' },;
-    { value: 'midnight', label: 'Midnight Blue', preview: 'bg-blue-900' },;
-    { value: 'forest', label: 'Forest Green', preview: 'bg-green-900' },;
-  ];
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case 'Beginner':
+        return 'bg-green-100 text-green-800';
+      case 'Intermediate':
+        return 'bg-blue-100 text-blue-800';
+      case 'Advanced':
+        return 'bg-purple-100 text-purple-800';
+      case 'Expert':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
 
-  const accentColors = [;
-    { value: 'purple', label: 'Purple', color: 'bg-purple-500' },;
-    { value: 'blue', label: 'Blue', color: 'bg-blue-500' },;
-    { value: 'green', label: 'Green', color: 'bg-green-500' },;
-    { value: 'red', label: 'Red', color: 'bg-red-500' },;
-    { value: 'yellow', label: 'Gold', color: 'bg-yellow-500' },;
-    { value: 'pink', label: 'Pink', color: 'bg-pink-500' },;
-  ];
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Profile Settings</h1>
+          <p className="text-xl text-gray-600">Customize your trading profile and preferences</p>
+        </div>
 
-  return (;
-    <div className="space-y-6">;
-      {/* Profile Header */}
-      <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-        <CardContent className="p-6">;
-          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">;
-            <div className="relative">;
-              <Avatar className="h-24 w-24 border-4 border-purple-500/30">;
-                <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`} />;
-                <AvatarFallback className="bg-purple-900 text-white text-2xl">;
-                  {user?.name?.charAt(0) || 'U'}
-                </AvatarFallback>;
-              </Avatar>;
-              <Button;
-                size="sm";
-                className="absolute -bottom-2 -right-2 rounded-full bg-purple-500 hover:bg-purple-600";
-              >;
-                <Camera className="h-4 w-4" />;
-              </Button>;
-            </div>;
-            <div className="flex-1 text-center md:text-left">;
-              <h2 className="text-2xl font-bold text-white">{profileData.displayName}</h2>;
-              <p className="text-gray-400 mt-1">{profileData.bio || 'Alpha Wolf Trader'}</p>;
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-3">;
-                {user?.subscription && (;
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">;
-                    <Crown className="h-3 w-3 mr-1" />;
-                    {user.subscription === 'ultimate' ? 'Alpha Wolf' : user.subscription} Pack;
-                  </Badge>;
-                )}
-                <Badge variant="outline" className="border-green-500/30 text-green-400">;
-                  <TrendingUp className="h-3 w-3 mr-1" />;
-                  {tradingStats.winRate}% Win Rate;
-                </Badge>;
-                <Badge variant="outline" className="border-blue-500/30 text-blue-400">;
-                  <Star className="h-3 w-3 mr-1" />;
-                  {achievements.filter(a => a.earned).length} Achievements;
-                </Badge>;
-              </div>;
-            </div>;
-            <div className="text-center">;
-              <p className="text-3xl font-bold text-green-400">+{tradingStats.avgReturn}%</p>;
-              <p className="text-sm text-gray-400">Avg Return</p>;
-            </div>;
-          </div>;
-        </CardContent>;
-      </Card>;
-      <Tabs defaultValue="profile" className="space-y-6">;
-        <TabsList className="bg-black/20 border-purple-500/30">;
-          <TabsTrigger value="profile" className="data-[state=active]:bg-purple-500/20">;
-            <User className="h-4 w-4 mr-2" />;
-            Profile Info;
-          </TabsTrigger>;
-          <TabsTrigger value="appearance" className="data-[state=active]:bg-purple-500/20">;
-            <Palette className="h-4 w-4 mr-2" />;
-            Appearance;
-          </TabsTrigger>;
-          <TabsTrigger value="privacy" className="data-[state=active]:bg-purple-500/20">;
-            <Eye className="h-4 w-4 mr-2" />;
-            Privacy;
-          </TabsTrigger>;
-          <TabsTrigger value="achievements" className="data-[state=active]:bg-purple-500/20">;
-            <Trophy className="h-4 w-4 mr-2" />;
-            Achievements;
-          </TabsTrigger>;
-          <TabsTrigger value="stats" className="data-[state=active]:bg-purple-500/20">;
-            <TrendingUp className="h-4 w-4 mr-2" />;
-            Trading Stats;
-          </TabsTrigger>;
-        </TabsList>;
-        <TabsContent value="profile">;
-          <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-            <CardHeader>;
-              <CardTitle className="text-white">Profile Information</CardTitle>;
-            </CardHeader>;
-            <CardContent className="space-y-4">;
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">;
-                <div className="space-y-2">;
-                  <Label className="text-white">Display Name</Label>;
-                  <Input;
-                    value={profileData.displayName}
-                    onChange={e => handleInputChange('displayName', e.target.value)}
-                    className="bg-black/20 border-purple-500/30 text-white";
-                  />;
-                </div>;
-                <div className="space-y-2">;
-                  <Label className="text-white">Location</Label>;
-                  <Input;
-                    value={profileData.location}
-                    onChange={e => handleInputChange('location', e.target.value)}
-                    placeholder="e.g., New York, NY";
-                    className="bg-black/20 border-purple-500/30 text-white";
-                  />;
-                </div>;
-              </div>;
-              <div className="space-y-2">;
-                <Label className="text-white">Bio</Label>;
-                <Textarea;
-                  value={profileData.bio}
-                  onChange={e => handleInputChange('bio', e.target.value)}
-                  placeholder="Tell other traders about yourself...";
-                  className="bg-black/20 border-purple-500/30 text-white";
-                  rows={3}
-                />;
-              </div>;
-              <div className="space-y-2">;
-                <Label className="text-white">Website</Label>;
-                <Input;
-                  value={profileData.website}
-                  onChange={e => handleInputChange('website', e.target.value)}
-                  placeholder="https://your-website.com";
-                  className="bg-black/20 border-purple-500/30 text-white";
-                />;
-              </div>;
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">;
-                <div className="space-y-2">;
-                  <Label className="text-white">Trading Experience</Label>;
-                  <Select;
-                    value={profileData.tradingExperience}
-                    onValueChange={value => handleInputChange('tradingExperience', value)}
-                  >;
-                    <SelectTrigger className="bg-black/20 border-purple-500/30 text-white">;
-                      <SelectValue />;
-                    </SelectTrigger>;
-                    <SelectContent>;
-                      <SelectItem value="beginner">Beginner (less than 1 year)</SelectItem>;
-                      <SelectItem value="intermediate">Intermediate (1-3 years)</SelectItem>;
-                      <SelectItem value="advanced">Advanced (3-5 years)</SelectItem>;
-                      <SelectItem value="expert">Expert (5+ years)</SelectItem>;
-                    </SelectContent>;
-                  </Select>;
-                </div>;
-                <div className="space-y-2">;
-                  <Label className="text-white">Risk Tolerance</Label>;
-                  <Select;
-                    value={profileData.riskTolerance}
-                    onValueChange={value => handleInputChange('riskTolerance', value)}
-                  >;
-                    <SelectTrigger className="bg-black/20 border-purple-500/30 text-white">;
-                      <SelectValue />;
-                    </SelectTrigger>;
-                    <SelectContent>;
-                      <SelectItem value="conservative">Conservative</SelectItem>;
-                      <SelectItem value="moderate">Moderate</SelectItem>;
-                      <SelectItem value="aggressive">Aggressive</SelectItem>;
-                      <SelectItem value="very-aggressive">Very Aggressive</SelectItem>;
-                    </SelectContent>;
-                  </Select>;
-                </div>;
-              </div>;
-            </CardContent>;
-          </Card>;
-        </TabsContent>;
-        <TabsContent value="appearance">;
-          <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-            <CardHeader>;
-              <CardTitle className="text-white">Customize Appearance</CardTitle>;
-            </CardHeader>;
-            <CardContent className="space-y-6">;
-              <div className="space-y-4">;
-                <Label className="text-white text-lg">Theme</Label>;
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">;
-                  {themeOptions.map((theme: any) => (;
-                    <div;
-                      key={theme.value}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        profileData.theme === theme.value;
-                          ? 'border-purple-500 bg-purple-500/20';
-                          : 'border-gray-700 hover:border-gray-600';
+        {/* Profile Overview Card */}
+        <Card className="mb-8 bg-gradient-to-r from-blue-600 to-purple-600 border-0 text-white">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-6">
+              <div className="relative">
+                <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center">
+                  <User className="w-12 h-12" />
+                </div>
+                <button className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                  <Camera className="w-4 h-4" />
+                </button>
+              </div>
+              
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-1">{profile.fullName}</h2>
+                <p className="text-blue-100 mb-2">@{profile.username}</p>
+                <Badge className={`${getLevelColor(profile.tradingLevel)} text-sm`}>
+                  {profile.tradingLevel} Trader
+                </Badge>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-6 text-center">
+                <div>
+                  <p className="text-3xl font-bold">{profile.stats.totalTrades.toLocaleString()}</p>
+                  <p className="text-blue-100 text-sm">Total Trades</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold">{profile.stats.winRate}%</p>
+                  <p className="text-blue-100 text-sm">Win Rate</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold">+{profile.stats.totalReturn}%</p>
+                  <p className="text-blue-100 text-sm">Total Return</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold">{profile.stats.currentStreak}</p>
+                  <p className="text-blue-100 text-sm">Win Streak</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Tabs */}
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="profile">
+              <User className="w-4 h-4 mr-2" />
+              Profile
+            </TabsTrigger>
+            <TabsTrigger value="preferences">
+              <Settings className="w-4 h-4 mr-2" />
+              Preferences
+            </TabsTrigger>
+            <TabsTrigger value="notifications">
+              <Bell className="w-4 h-4 mr-2" />
+              Notifications
+            </TabsTrigger>
+            <TabsTrigger value="privacy">
+              <Shield className="w-4 h-4 mr-2" />
+              Privacy
+            </TabsTrigger>
+            <TabsTrigger value="performance">
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Performance
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Profile Tab */}
+          <TabsContent value="profile">
+            <div className="grid lg:grid-cols-2 gap-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <span>Basic Information</span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+              
+                      onClick={() => setIsEditing(!isEditing)}
+                    >
+                      {isEditing ? (
+                        <>
+                          <Eye className="w-4 h-4 mr-2" />
+                          Cancel
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="w-4 h-4 mr-2" />
+                          Edit
+                        </>
+                      )}
+                    </Button>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Full Name
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="text" value={profile.fullName} onChange={(e) => handleInputChange('fullName', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+      focus:ring-blue-500"
+                      />
+                    ) : (
+                      <p className="text-gray-800">{profile.fullName}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Username
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="text" value={profile.username} onChange={(e) => handleInputChange('username', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+      focus:ring-blue-500"
+                      />
+                    ) : (
+                      <p className="text-gray-800">@{profile.username}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="email" value={profile.email} onChange={(e) => handleInputChange('email', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+      focus:ring-blue-500"
+                      />
+                    ) : (
+                      <p className="text-gray-800">{profile.email}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Bio
+                    </label>
+                    {isEditing ? (
+                      <textarea value={profile.bio} onChange={(e) => handleInputChange('bio', e.target.value)}
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+      focus:ring-blue-500"
+                      />
+                    ) : (
+                      <p className="text-gray-800">{profile.bio}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Trading Level
+                    </label>
+                    {isEditing ? (
+                      <select value={profile.tradingLevel} onChange={(e) => handleInputChange('tradingLevel', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+      focus:ring-blue-500"
+                      >
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Expert">Expert</option>
+                      </select>
+                    ) : (
+                      <Badge className={getLevelColor(profile.tradingLevel)}>
+                        {profile.tradingLevel}
+                      </Badge>
+                    )}
+                  </div>
+                  
+                  {isEditing && (
+                    <Button 
+                      onClick={handleSave}
+                      disabled={isSaving}
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                    >
+                      {isSaving ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4 mr-2" />
+                          Save Changes
+                        </>
+                      )}
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle>Account Statistics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <BarChart3 className="w-8 h-8 text-blue-600" />
+                        <div>
+                          <p className="font-semibold">Total Trades</p>
+                          <p className="text-sm text-gray-600">All time</p>
+                        </div>
+                      </div>
+                      <p className="text-2xl font-bold text-blue-600">
+                        {profile.stats.totalTrades.toLocaleString()}
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Target className="w-8 h-8 text-green-600" />
+                        <div>
+                          <p className="font-semibold">Win Rate</p>
+                          <p className="text-sm text-gray-600">Success percentage</p>
+                        </div>
+                      </div>
+                      <p className="text-2xl font-bold text-green-600">
+                        {profile.stats.winRate}%
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <TrendingUp className="w-8 h-8 text-purple-600" />
+                        <div>
+                          <p className="font-semibold">Total Return</p>
+                          <p className="text-sm text-gray-600">Portfolio performance</p>
+                        </div>
+                      </div>
+                      <p className="text-2xl font-bold text-purple-600">
+                        +{profile.stats.totalReturn}%
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Zap className="w-8 h-8 text-yellow-600" />
+                        <div>
+                          <p className="font-semibold">Current Streak</p>
+                          <p className="text-sm text-gray-600">Consecutive wins</p>
+                        </div>
+                      </div>
+                      <p className="text-2xl font-bold text-yellow-600">
+                        {profile.stats.currentStreak}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Preferences Tab */}
+          <TabsContent value="preferences">
+            <Card>
+              <CardHeader>
+                <CardTitle>Application Preferences</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Theme Preference
+                  </label> <div className="flex gap-4"> {['light', 'dark', 'auto'].map((theme) => (
+                      <button key={theme} onClick={() => handlePreferenceChange('theme', theme)}
+                        className={`px-4 py-2 rounded-md border ${ profile.preferences.theme === theme ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                      >
+                        {theme.charAt(0).toUpperCase() + theme.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Email Updates</p>
+                    <p className="text-sm text-gray-600">Receive trading insights and market updates</p>
+                  </div> <button onClick={() => handlePreferenceChange('emailUpdates', !profile.preferences.emailUpdates)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${ profile.preferences.emailUpdates ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${ profile.preferences.emailUpdates ? 'translate-x-6' : 'translate-x-1'
                       }`}
-                      onClick={() => handleInputChange('theme', theme.value)}
-                    >;
-                      <div className={`w-full h-16 rounded ${theme.preview} mb-2`}></div>;
-                      <p className="text-white text-sm text-center">{theme.label}</p>;
-                    </div>;
-                  ))}
-                </div>;
-              </div>;
-              <div className="space-y-4">;
-                <Label className="text-white text-lg">Accent Color</Label>;
-                <div className="flex flex-wrap gap-3">;
-                  {accentColors.map((color: any) => (;
-                    <div;
-                      key={color.value}
-                      className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                        profileData.accentColor === color.value;
-                          ? 'border-white';
-                          : 'border-gray-700 hover:border-gray-600';
+                    />
+                  </button>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Push Notifications</p>
+                    <p className="text-sm text-gray-600">Real-time alerts for price movements and signals</p>
+                  </div> <button onClick={() => handlePreferenceChange('notifications', !profile.preferences.notifications)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${ profile.preferences.notifications ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${ profile.preferences.notifications ? 'translate-x-6' : 'translate-x-1'
                       }`}
-                      onClick={() => handleInputChange('accentColor', color.value)}
-                    >;
-                      <div className={`w-8 h-8 rounded-full ${color.color}`}></div>;
-                      <p className="text-white text-xs text-center mt-1">{color.label}</p>;
-                    </div>;
-                  ))}
-                </div>;
-              </div>;
-            </CardContent>;
-          </Card>;
-        </TabsContent>;
-        <TabsContent value="privacy">;
-          <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-            <CardHeader>;
-              <CardTitle className="text-white">Privacy Settings</CardTitle>;
-            </CardHeader>;
-            <CardContent className="space-y-4">;
-              <div className="space-y-2">;
-                <Label className="text-white">Profile Visibility</Label>;
-                <Select;
-                  value={profileData.profileVisibility}
-                  onValueChange={value => handleInputChange('profileVisibility', value)}
-                >;
-                  <SelectTrigger className="bg-black/20 border-purple-500/30 text-white">;
-                    <SelectValue />;
-                  </SelectTrigger>;
-                  <SelectContent>;
-                    <SelectItem value="public">Public</SelectItem>;
-                    <SelectItem value="friends">Friends Only</SelectItem>;
-                    <SelectItem value="private">Private</SelectItem>;
-                  </SelectContent>;
-                </Select>;
-              </div>;
-              <div className="space-y-4">;
-                <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">;
-                  <div>;
-                    <p className="text-white font-medium">Show Portfolio</p>;
-                    <p className="text-sm text-gray-400">Allow others to see your holdings</p>;
-                  </div>;
-                  <Button;
-                    variant={profileData.showPortfolio ? 'default' : 'outline'}
-                    onClick={() => handleInputChange('showPortfolio', !profileData.showPortfolio)}
-                    className={profileData.showPortfolio ? 'bg-green-500 hover:bg-green-600' : ''}
-                  >;
-                    {profileData.showPortfolio ? 'Enabled' : 'Disabled'}
-                  </Button>;
-                </div>;
-                <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">;
-                  <div>;
-                    <p className="text-white font-medium">Show Returns</p>;
-                    <p className="text-sm text-gray-400">Display your trading performance</p>;
-                  </div>;
-                  <Button;
-                    variant={profileData.showReturns ? 'default' : 'outline'}
-                    onClick={() => handleInputChange('showReturns', !profileData.showReturns)}
-                    className={profileData.showReturns ? 'bg-green-500 hover:bg-green-600' : ''}
-                  >;
-                    {profileData.showReturns ? 'Enabled' : 'Disabled'}
-                  </Button>;
-                </div>;
-              </div>;
-            </CardContent>;
-          </Card>;
-        </TabsContent>;
-        <TabsContent value="achievements">;
-          <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-            <CardHeader>;
-              <CardTitle className="text-white">Your Achievements</CardTitle>;
-            </CardHeader>;
-            <CardContent>;
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">;
-                {achievements.map(achievement => {
-                  const IconComponent = achievement.icon;
-                  return (;
-                    <div;
-                      key={achievement.id}
-                      className={`p-4 rounded-lg border-2 ${
-                        achievement.earned;
-                          ? 'border-yellow-500/50 bg-yellow-500/10';
-                          : 'border-gray-700/50 bg-gray-800/20';
+                    />
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Privacy Tab */}
+          <TabsContent value="privacy">
+            <Card>
+              <CardHeader>
+                <CardTitle>Privacy Settings</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Public Profile</p>
+                    <p className="text-sm text-gray-600">Allow others to view your trading statistics</p>
+                  </div> <button onClick={() => handlePreferenceChange('publicProfile', !profile.preferences.publicProfile)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${ profile.preferences.publicProfile ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${ profile.preferences.publicProfile ? 'translate-x-6' : 'translate-x-1'
                       }`}
-                    >;
-                      <div className="flex items-center space-x-3">;
-                        <div;
-                          className={`p-3 rounded-full ${achievement.earned ? 'bg-yellow-500/20' : 'bg-gray-700/20'}`}
-                        >;
-                          <IconComponent;
-                            className={`h-6 w-6 ${achievement.earned ? 'text-yellow-400' : 'text-gray-500'}`}
-                          />;
-                        </div>;
-                        <div>;
-                          <p;
-                            className={`font-medium ${achievement.earned ? 'text-yellow-400' : 'text-gray-400'}`}
-                          >;
-                            {achievement.name}
-                          </p>;
-                          <p className="text-sm text-gray-400">{achievement.description}</p>;
-                        </div>;
-                      </div>;
-                    </div>;
-                  );
-                })}
-              </div>;
-            </CardContent>;
-          </Card>;
-        </TabsContent>;
-        <TabsContent value="stats">;
-          <Card className="bg-black/20 border-purple-500/30 backdrop-blur-xl">;
-            <CardHeader>;
-              <CardTitle className="text-white">Trading Statistics</CardTitle>;
-            </CardHeader>;
-            <CardContent>;
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-blue-400">{tradingStats.totalTrades}</p>;
-                  <p className="text-sm text-gray-400">Total Trades</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-green-400">{tradingStats.winRate}%</p>;
-                  <p className="text-sm text-gray-400">Win Rate</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-purple-400">{tradingStats.avgReturn}%</p>;
-                  <p className="text-sm text-gray-400">Avg Return</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-yellow-400">{tradingStats.sharpeRatio}</p>;
-                  <p className="text-sm text-gray-400">Sharpe Ratio</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-green-400">+{tradingStats.bestTrade}%</p>;
-                  <p className="text-sm text-gray-400">Best Trade</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-red-400">{tradingStats.worstTrade}%</p>;
-                  <p className="text-sm text-gray-400">Worst Trade</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-orange-400">{tradingStats.maxDrawdown}%</p>;
-                  <p className="text-sm text-gray-400">Max Drawdown</p>;
-                </div>;
-                <div className="text-center p-4 bg-white/5 rounded-lg">;
-                  <p className="text-2xl font-bold text-cyan-400">A+</p>;
-                  <p className="text-sm text-gray-400">Alpha Rating</p>;
-                </div>;
-              </div>;
-            </CardContent>;
-          </Card>;
-        </TabsContent>;
-      </Tabs>;
-      <div className="flex justify-end">;
-        <Button;
-          onClick={handleSaveProfile}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600";
-        >;
-          Save Profile Changes;
-        </Button>;
-      </div>;
-    </div>;
+                    />
+                  </button>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Show Performance</p>
+                    <p className="text-sm text-gray-600">Display your trading performance to other users</p>
+                  </div> <button onClick={() => handlePreferenceChange('showPerformance', !profile.preferences.showPerformance)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${ profile.preferences.showPerformance ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${ profile.preferences.showPerformance ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                </div>
+                
+                <Alert className="border-yellow-200 bg-yellow-50">
+                  <AlertCircle className="h-4 w-4 text-yellow-600" />
+                  <div className="ml-2">
+                    <h4 className="font-semibold text-yellow-800">Privacy Notice</h4>
+                    <p className="text-yellow-700 text-sm mt-1">
+                      Your personal information and trading data are protected with bank-grade encryption. 
+                      We never share your data with third parties without your explicit consent.
+                    </p>
+                  </div>
+                </Alert>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+        </Tabs>
+        
+      </div>
+    </div>
   );
 }

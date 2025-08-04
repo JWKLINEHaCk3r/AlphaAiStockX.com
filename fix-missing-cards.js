@@ -5,7 +5,7 @@ import { Button } from "./components/ui/button";
 
 
 // Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
-// Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts.
+// Card components are referenced by name only, no .tsx or .js import for Node.js compatibility in Node scripts.
 // ...existing code...
 // ...existing code...
 
@@ -20,23 +20,13 @@ import { Button } from "./components/ui/button";
  * AI-powered component recovery and generation system
  */
 
-import fs from 'fs';
-import path from 'path';
-
-console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components...');
+import fs from 'fs'; import path from 'path'; console.log('🔧 AlphaAI Missing Cards Recovery - Restoring trading components...');
 
 // Helper: Check if a path is a file
 
 
 // Advanced AI Trading Card Components Generator
-function generateMissingCards() {
-  const components = {
-    'trading-cards.tsx': `import React from 'react';
-
-import { Badge } from './badge';
-import { Button } from './button';
-import { Progress } from './progress';
-import { TrendingUp, TrendingDown, Brain, Zap, DollarSign, Target } from 'lucide-react';
+function generateMissingCards() { const components = { 'trading-cards.tsx': `import React from 'react'; import { Badge } from './badge'; import { Button } from './button'; import { Progress } from './progress'; import { TrendingUp, TrendingDown, Brain, Zap, DollarSign, Target } from 'lucide-react';
 
 // AI Market Analysis Card
 export const AIMarketCard = ({
@@ -47,31 +37,19 @@ export const AIMarketCard = ({
   aiRecommendation,
   isLoading = false
 }: {
-  symbol: string;
-  price: number;
-  change: number;
-  aiConfidence: number;
-  aiRecommendation: 'BUY' | 'SELL' | 'HOLD';
+  symbol: string,
+  price: number,
+  change: number, aiConfidence: number, aiRecommendation: 'BUY' | 'SELL' | 'HOLD',
   isLoading?: boolean;
-}) => {
-  const isPositive = change >= 0;
-  const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red';
-  return (
-    <Card className={['relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 'border-yellow-500/50 shadow-yellow-500/25', 'shadow-lg'].join(' ')}>
+}) => { const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red'; return ( <Card className={['relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 'border-yellow-500/50 shadow-yellow-500/25', 'shadow-lg'].join(' ')}>
       <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-bold">{symbol}</CardTitle>
-          <Badge variant={aiRecommendation === 'BUY' ? 'default' : aiRecommendation === 'SELL' ? 'destructive' : 'secondary'}>
+        <div className="flex items-center justify-between"> <CardTitle className="text-lg font-bold">{symbol}</CardTitle> <Badge variant={aiRecommendation === 'BUY' ? 'default' : aiRecommendation === 'SELL' ? 'destructive' : 'secondary'}>
             <Brain className="w-3 h-3 mr-1" />
             {aiRecommendation}
           </Badge>
         </div>
-        <CardDescription className="flex items-center gap-2">
-          <DollarSign className="w-4 h-4" />
-          {'$' + price.toFixed(2)}
-          <span className={['flex items-center', isPositive ? 'text-green-500' : 'text-red-500'].join(' ')}>
-            {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-            {change > 0 ? '+' : ''}{change.toFixed(2)}%
+        <CardDescription className="flex items-center gap-2"> <DollarSign className="w-4 h-4" /> {'$' + price.toFixed(2)} <span className={['flex items-center', isPositive ? 'text-green-500' : 'text-red-500'].join(' ')}> {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}, {change > 0 ? '+' : ''},
+    {change.toFixed(2)}%
           </span>
         </CardDescription>
       </CardHeader>
@@ -99,9 +77,7 @@ export const AIMarketCard = ({
             </div>
           </div>
         </div>
-      </CardContent>
-      <div className="absolute top-2 right-2">
-        <div className={['w-2 h-2 rounded-full', confidenceColor === 'green' ? 'bg-green-500' : confidenceColor === 'yellow' ? 'bg-yellow-500' : 'bg-red-500', 'animate-pulse'].join(' ')}></div>
+      </CardContent> <div className="absolute top-2 right-2"> <div className={['w-2 h-2 rounded-full', confidenceColor === 'green' ? 'bg-green-500' : confidenceColor === 'yellow' ? 'bg-yellow-500' : 'bg-red-500', 'animate-pulse'].join(' ')}></div>
       </div>
     </Card>
   );
@@ -114,9 +90,9 @@ export const AIPortfolioCard = ({
   aiPerformance,
   activePositions = 0 
 }: {
-  totalValue: number;
-  dailyChange: number;
-  aiPerformance: number;
+  totalValue: number,
+  dailyChange: number,
+  aiPerformance: number,
   activePositions?: number;
 }) => (
   <Card className="bg-gradient-to-br from-purple-950/50 to-indigo-950/50 border-purple-500/30">
@@ -130,10 +106,7 @@ export const AIPortfolioCard = ({
     <CardContent className="space-y-4">
       <div className="text-center">
         <div className="text-3xl font-bold text-purple-300">
-          \${totalValue.toLocaleString()}
-        </div>
-        <div className={\`text-lg \${dailyChange >= 0 ? 'text-green-400' : 'text-red-400'}\`}>
-          {dailyChange >= 0 ? '+' : ''}\${Math.abs(dailyChange).toLocaleString()} ({((dailyChange/totalValue)*100).toFixed(2)}%)
+          \${totalValue.toLocaleString()} </div> <div className={\`text-lg \${dailyChange >= 0 ? 'text-green-400' : 'text-red-400'}\`}> {dailyChange >= 0 ? '+' : ''}\${Math.abs(dailyChange).toLocaleString()} ({((dailyChange/totalValue)*100).toFixed(2)}%)
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4 text-sm">
@@ -156,10 +129,8 @@ export const AISignalCard = ({
   marketSentiment, 
   nextAction,
   timeToAction = 0 
-}: {
-  signalStrength: number;
-  marketSentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL';
-  nextAction: string;
+}: { signalStrength: number, marketSentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL',
+  nextAction: string,
   timeToAction?: number;
 }) => (
   <Card className="bg-gradient-to-r from-cyan-950/50 to-blue-950/50 border-cyan-500/30">
@@ -173,11 +144,7 @@ export const AISignalCard = ({
       <div className="text-center">
         <div className="text-4xl font-bold text-cyan-300 mb-2">
           {signalStrength}%
-        </div>
-        <Badge variant={
-          marketSentiment === 'BULLISH' ? 'default' : 
-          marketSentiment === 'BEARISH' ? 'destructive' : 
-          'secondary'
+        </div> <Badge variant={ marketSentiment === 'BULLISH' ? 'default' :  marketSentiment === 'BEARISH' ? 'destructive' :  'secondary'
         }>
           {marketSentiment}
         </Badge>
@@ -193,29 +160,21 @@ export const AISignalCard = ({
       </div>
     </CardContent>
     <CardFooter>
-      <Button className="w-full bg-cyan-600 hover:bg-cyan-500">
+      <Button className="w-full bg-cyan-600 hover: bg-cyan-500">
         Execute AI Trade
       </Button>
     </CardFooter>
   </Card>
-);
+),
 
 // AI Risk Management Card
 export const AIRiskCard = ({ 
   riskLevel, 
-  stopLoss, 
-  maxDrawdown,
-  riskAdjustment = 'OPTIMAL' 
+  stopLoss,  maxDrawdown, riskAdjustment = 'OPTIMAL' 
 }: {
-  riskLevel: number;
-  stopLoss: number;
-  maxDrawdown: number;
-  riskAdjustment?: 'LOW' | 'OPTIMAL' | 'HIGH';
-}) => (
-  <Card className={\`border-2 transition-all duration-300 \${
-    riskLevel < 30 ? 'border-green-500/50 bg-green-950/20' :
-    riskLevel < 70 ? 'border-yellow-500/50 bg-yellow-950/20' :
-    'border-red-500/50 bg-red-950/20'
+  riskLevel: number,
+  stopLoss: number, maxDrawdown: number, riskAdjustment?: 'LOW' | 'OPTIMAL' | 'HIGH';
+}) => ( <Card className={\`border-2 transition-all duration-300 \${ riskLevel < 30 ? 'border-green-500/50 bg-green-950/20' : riskLevel < 70 ? 'border-yellow-500/50 bg-yellow-950/20' : 'border-red-500/50 bg-red-950/20'
   }\`}>
     <CardHeader>
       <CardTitle className="flex items-center gap-2">
@@ -225,9 +184,7 @@ export const AIRiskCard = ({
       <CardDescription>Quantum risk management system</CardDescription>
     </CardHeader>
     <CardContent className="space-y-3">
-      <div className="flex items-center justify-between">
-        <span>Risk Level</span>
-        <Badge variant={riskLevel < 30 ? 'default' : riskLevel < 70 ? 'secondary' : 'destructive'}>
+      <div className="flex items-center justify-between"> <span>Risk Level</span> <Badge variant={riskLevel < 30 ? 'default' : riskLevel < 70 ? 'secondary' : 'destructive'}>
           {riskLevel}%
         </Badge>
       </div>
@@ -247,31 +204,21 @@ export const AIRiskCard = ({
       </Badge>
     </CardContent>
   </Card>
-);`,
-
-    'market-overview.tsx': `import React from 'react';
-
-import { Badge } from './badge';
-import { Progress } from './progress';
-import { TrendingUp, TrendingDown, Activity, Globe, Zap } from 'lucide-react';
+);`, 'market-overview.tsx': `import React from 'react'; import { Badge } from './badge'; import { Progress } from './progress'; import { TrendingUp, TrendingDown, Activity, Globe, Zap } from 'lucide-react';
 
 // Real-time Market Overview Component
 export const MarketOverview = ({ 
   marketData = {
-    sp500: { value: 4750.23, change: 1.2 },
-    nasdaq: { value: 14820.45, change: -0.8 },
-    dow: { value: 35420.67, change: 0.5 }
-  },
-  aiMarketSentiment = 'BULLISH',
+    sp500: { value: 4750.23, change: 1.2 };
+    nasdaq: { value: 14820.45, change: -0.8 };
+    dow: { value: 35420.67, change: 0.5 } }, aiMarketSentiment = 'BULLISH',
   tradingVolume = 2.8,
   aiActiveSignals = 47
 }: {
   marketData?: {
-    sp500: { value: number; change: number };
-    nasdaq: { value: number; change: number };
-    dow: { value: number; change: number };
-  };
-  aiMarketSentiment?: 'BULLISH' | 'BEARISH' | 'NEUTRAL';
+    sp500: { value: number, change: number };
+    nasdaq: { value: number, change: number };
+    dow: { value: number, change: number }; }; aiMarketSentiment?: 'BULLISH' | 'BEARISH' | 'NEUTRAL';
   tradingVolume?: number;
   aiActiveSignals?: number;
 }) => (
@@ -295,12 +242,9 @@ export const MarketOverview = ({
           return (
             <div key={index} className="text-center p-3 bg-slate-800/50 rounded-lg">
               <div className="text-sm text-slate-400 mb-1">{name}</div>
-              <div className="font-bold">{data.value.toLocaleString()}</div>
-              <div className={\`text-sm flex items-center justify-center gap-1 \${
-                isPositive ? 'text-green-400' : 'text-red-400'
-              }\`}>
-                {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                {isPositive ? '+' : ''}{data.change}%
+              <div className="font-bold">{data.value.toLocaleString()}</div> <div className={\`text-sm flex items-center justify-center gap-1 \${ isPositive ? 'text-green-400' : 'text-red-400'
+              }\`}> {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}, {isPositive ? '+' : ''},
+    {data.change}%
               </div>
             </div>
           );
@@ -311,11 +255,7 @@ export const MarketOverview = ({
         <div className="flex items-center gap-3">
           <Zap className="w-5 h-5 text-yellow-400" />
           <div>
-            <div className="font-medium">AI Market Sentiment</div>
-            <Badge variant={
-              aiMarketSentiment === 'BULLISH' ? 'default' :
-              aiMarketSentiment === 'BEARISH' ? 'destructive' :
-              'secondary'
+            <div className="font-medium">AI Market Sentiment</div> <Badge variant={ aiMarketSentiment === 'BULLISH' ? 'default' : aiMarketSentiment === 'BEARISH' ? 'destructive' : 'secondary'
             }>
               {aiMarketSentiment}
             </Badge>
@@ -386,39 +326,19 @@ export const AIPerformanceCard = ({
 }
 
 // Create missing trading components
-
-  try {
-    const componentsDir = path.join(process.cwd(), 'components/ui');
+ try { const componentsDir = path.join(process.cwd(), 'components/ui');
     
     // Ensure components directory exists
-    if (!fs.existsSync(componentsDir)) {
-      fs.mkdirSync(componentsDir, { recursive: true });
-      console.log('📁 Created components/ui directory');
+    if (!fs.existsSync(componentsDir)) { fs.mkdirSync(componentsDir, { recursive: true }); console.log('📁 Created components/ui directory');
     }
 
     const components = generateMissingCards();
     
     for (const [filename, content] of Object.entries(components)) {
-      const filePath = path.join(componentsDir, filename);
-      fs.writeFileSync(filePath, content);
-      console.log('✅ Created ' + filename + ' with advanced AI trading components');
+      const filePath = path.join(componentsDir, filename); fs.writeFileSync(filePath, content); console.log('✅ Created ' + filename + ' with advanced AI trading components');
     }
 
-    // Create index file for easy imports
-    const indexContent = [
-      "export * from './trading-cards';",
-      "export * from './card';",
-      "export * from './button';",
-      "export * from './badge';",
-      "export * from './progress';"
-    ].join('\n');
-
-    fs.writeFileSync(path.join(componentsDir, 'index.ts'), indexContent);
-    console.log('📦 Created components index file');
-
-    console.log('🎉 AlphaAI missing cards recovered! Trading interface is now complete!');
-  } catch (error) {
-    console.error('❌ Error creating missing cards:', error);
+    // Create index file for easy imports const indexContent = [ "export * from './trading-cards';", "export * from './card';", "export * from './button';", "export * from './badge';", "export * from './progress';" ].join('\n'); fs.writeFileSync(path.join(componentsDir, 'index.ts'), indexContent); console.log('📦 Created components index file'); console.log('🎉 AlphaAI missing cards recovered! Trading interface is now complete!'); } catch (error) { console.error('❌ Error creating missing cards:', error);
     process.exit(1);
   }
 
