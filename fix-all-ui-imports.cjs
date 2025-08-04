@@ -1,154 +1,130 @@
 const fs = require('fs');
 const path = require('path');
-const { glob } = require('glob');
 
 console.log('🚀 AlphaAI UI Import Fixer - Powering up the trading platform...');
 
-// Utility to get relative import path from a file to a component
-function getRelativeImportPath(filePath, componentPath) {
-  const fromDir = path.dirname(filePath);
-  let relPath = path.relative(fromDir, componentPath);
-  if (!relPath.startsWith('.')) relPath = './' + relPath;
-  // Remove .tsx/.ts/.js/.jsx extension for import
-  relPath = relPath.replace(/\\/g, '/').replace(/\.(tsx|ts|js|jsx)$/, '');
-  return relPath;
-}
+function fixAllUIImports() {
+    const directories = ['./app', './components', './pages', './lib', './hooks', './__tests__'];
+    let processedFiles = 0;
+    let fixedFiles = 0;
 
-// Helper: Check if a path is a file
-function isFile(filePath) {
-  try {
-    return fs.statSync(filePath).isFile();
-  } catch (e) {
-    return false;
-  }
-}
+    const uiComponents = {
+        'Card': '@/components/ui/card',
+        'CardContent': '@/components/ui/card',
+        'CardHeader': '@/components/ui/card',
+        'CardTitle': '@/components/ui/card',
+        'Button': '@/components/ui/button',
+        'Input': '@/components/ui/input',
+        'Badge': '@/components/ui/badge',
+        'Progress': '@/components/ui/progress',
+        'Toast': '@/components/ui/toast',
+        'Toaster': '@/components/ui/toaster',
+        'Calendar': '@/components/ui/calendar'
+    };
 
-// UI Components mapping for automatic import resolution (relative paths)
-const UI_COMPONENTS = {
-  'Button': 'components/ui/button',
-  'Card': 'components/ui/card',
-  'Input': 'components/ui/input',
-  'Label': 'components/ui/label',
-  'Textarea': 'components/ui/textarea',
-  'Select': 'components/ui/select',
-  'SelectContent': 'components/ui/select',
-  'SelectItem': 'components/ui/select',
-  'SelectTrigger': 'components/ui/select',
-  'SelectValue': 'components/ui/select',
-  'Checkbox': 'components/ui/checkbox',
-  'Switch': 'components/ui/switch',
-  'Slider': 'components/ui/slider',
-  'Progress': 'components/ui/progress',
-  'Badge': 'components/ui/badge',
-  'Avatar': 'components/ui/avatar',
-  'AvatarFallback': 'components/ui/avatar',
-  'AvatarImage': 'components/ui/avatar',
-  'Dialog': 'components/ui/dialog',
-  'DialogContent': 'components/ui/dialog',
-  'DialogDescription': 'components/ui/dialog',
-  'DialogFooter': 'components/ui/dialog',
-  'DialogHeader': 'components/ui/dialog',
-  'DialogTitle': 'components/ui/dialog',
-  'DialogTrigger': 'components/ui/dialog',
-  'Alert': 'components/ui/alert',
-  'AlertDescription': 'components/ui/alert',
-  'AlertTitle': 'components/ui/alert',
-  'Tabs': 'components/ui/tabs',
-  'TabsContent': 'components/ui/tabs',
-  'TabsList': 'components/ui/tabs',
-  'TabsTrigger': 'components/ui/tabs',
-  'Toast': 'components/ui/toast',
-  'Toaster': 'components/ui/toaster',
-  'ScrollArea': 'components/ui/scroll-area',
-  'Popover': 'components/ui/popover',
-  'PopoverContent': 'components/ui/popover',
-  'PopoverTrigger': 'components/ui/popover',
-  'Calendar': 'components/ui/calendar',
-  'NavigationMenu': 'components/ui/navigation',
-  'NavigationMenuList': 'components/ui/navigation',
-  'NavigationMenuContent': 'components/ui/navigation',
-  'NavigationMenuTrigger': 'components/ui/navigation',
-  'NavigationMenuItem': 'components/ui/navigation',
-  'NavigationMenuLink': 'components/ui/navigation'
-};
+    directories.forEach(dir => {
+        if (fs.existsSync(dir)) {
+            const files = getAllFiles(dir, ['.tsx', '.ts', '.jsx', '.js']);
+            processedFiles += files.length;
+            
+            files.forEach(file => {
+                try {
+                    let content = fs.readFileSync(file, 'utf8');
+                    let modified = false;
+                    let importsToAdd = [];
 
-// Only include trading components that exist in the codebase
-const TRADING_COMPONENTS = {
-  'TradingDashboard': 'components/ui/trading-dashboard-demo',
-  'VoiceControl': 'components/ui/voice-control',
-  'AnimatedBackground': 'components/ui/animated-background-client'
-};
+                    // Check for missing imports
+                    Object.entries(uiComponents).forEach(([component, importPath]) => {
+                        if (usesComponent(content, component) && !hasImport(content, importPath)) {
+                            if (!importsToAdd.find(imp => imp.path === importPath)) {
+                                importsToAdd.push({
+                                    path: importPath,
+                                    components: []
+                                });
+                            }
+                            const importGroup = importsToAdd.find(imp => imp.path === importPath);
+                            if (!importGroup.components.includes(component)) {
+                                importGroup.components.push(component);
+                            }
+                        }
+                    });
 
-async function fixUIImports() {
-  try {
-    // Get all TypeScript and JavaScript files
-    const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
-      cwd: process.cwd(),
-      ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*']
+                    // Add React import if needed
+                    if (needsReactImport(content) && !hasReactImport(content)) {
+                        content = 'import React from "react";\n' + content;
+                        modified = true;
+                        console.log(`⚛️ Added React import to ${file}`);
+                    }
+
+                    // Add UI component imports
+                    importsToAdd.forEach(({ path, components }) => {
+                        const importStatement = `import { ${components.join(', ')} } from "${path}";\n`;
+                        content = importStatement + content;
+                        modified = true;
+                        console.log(`✅ Added ${components.join(', ')} import to ${file}`);
+                    });
+
+                    if (modified) {
+                        fs.writeFileSync(file, content);
+                        fixedFiles++;
+                        console.log(`💾 Updated ${file}`);
+                    }
+                } catch (error) {
+                    console.log(`❌ Error processing ${file}: ${error.message}`);
+                }
+            });
+        }
     });
 
-    console.log(`📝 Found ${files.length} files to process`);
+    console.log(`📝 Found ${processedFiles} files to process`);
+    console.log(`🎉 AlphaAI UI Import fixing complete! Trading platform is now powered up!`);
+    console.log(`✨ Fixed ${fixedFiles} files with missing imports`);
+}
 
-    for (const file of files) {
-      const filePath = path.join(process.cwd(), file);
-      // Skip directories
-      if (!isFile(filePath)) {
-        continue;
-      }
-      let content = fs.readFileSync(filePath, 'utf8');
-      let modified = false;
+function usesComponent(content, component) {
+    const patterns = [
+        new RegExp(`<${component}[\\s>]`),
+        new RegExp(`${component}\\(`),
+        new RegExp(`\\b${component}\\b`)
+    ];
+    return patterns.some(pattern => pattern.test(content));
+}
 
-      // Fix missing UI component imports
-      for (const [component, relComponentPath] of Object.entries(UI_COMPONENTS)) {
-        const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
-        // Remove any existing alias import for this component
-        content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
-        const absComponentPath = path.join(process.cwd(), relComponentPath + '.tsx');
-        const importPath = getRelativeImportPath(filePath, absComponentPath);
-        const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
-        if (componentRegex.test(content) && !importRegex.test(content)) {
-          // Add import at the top
-          const importStatement = `import { ${component} } from "${importPath}";\n`;
-          content = importStatement + content;
-          modified = true;
-          console.log(`✅ Added ${component} import to ${file}`);
+function hasImport(content, importPath) {
+    return content.includes(`from "${importPath}"`) || content.includes(`from '${importPath}'`);
+}
+
+function needsReactImport(content) {
+    const reactFeatures = ['useState', 'useEffect', 'useContext', 'JSX', '<div', '<span', 'React.'];
+    return reactFeatures.some(feature => content.includes(feature));
+}
+
+function hasReactImport(content) {
+    return content.includes('import React') || content.includes('import * as React');
+}
+
+function getAllFiles(dir, extensions) {
+    let files = [];
+    
+    try {
+        const items = fs.readdirSync(dir);
+        
+        for (const item of items) {
+            const fullPath = path.join(dir, item);
+            const stat = fs.statSync(fullPath);
+            
+            if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
+                files = files.concat(getAllFiles(fullPath, extensions));
+            } else if (stat.isFile() && extensions.some(ext => item.endsWith(ext))) {
+                files.push(fullPath);
+            }
         }
-      }
-
-      // Fix trading component imports
-      for (const [component, relComponentPath] of Object.entries(TRADING_COMPONENTS)) {
-        const componentRegex = new RegExp(`\\b${component}\\b`, 'g');
-        content = content.replace(new RegExp(`import.*\\b${component}\\b.*from.*['"]@/components[^'"]*['"];?\\n?`, 'g'), '');
-        const absComponentPath = path.join(process.cwd(), relComponentPath + '.tsx');
-        const importPath = getRelativeImportPath(filePath, absComponentPath);
-        const importRegex = new RegExp(`import.*\\b${component}\\b.*from.*['"]${importPath}['"]`, 'g');
-        if (componentRegex.test(content) && !importRegex.test(content)) {
-          const importStatement = `import { ${component} } from "${importPath}";\n`;
-          content = importStatement + content;
-          modified = true;
-          console.log(`🤖 Added AI Trading ${component} import to ${file}`);
-        }
-      }
-
-      // Fix React imports
-      if ((/jsx|tsx/.test(path.extname(file)) || /React/.test(content)) && !/import.*React.*from.*['"]react['"]/.test(content)) {
-        content = `import React from 'react';\n` + content;
-        modified = true;
-        console.log(`⚛️ Added React import to ${file}`);
-      }
-
-      if (modified) {
-        fs.writeFileSync(filePath, content);
-        console.log(`💾 Updated ${file}`);
-      }
+    } catch (error) {
+        console.log(`Error reading directory ${dir}: ${error.message}`);
     }
-
-    console.log('🎉 AlphaAI UI Import fixing complete! Trading platform is now powered up!');
-  } catch (error) {
-    console.error('❌ Error fixing UI imports:', error);
-    process.exit(1);
-  }
+    
+    return files;
 }
 
 // Run the fixer
-fixUIImports();
+fixAllUIImports();
