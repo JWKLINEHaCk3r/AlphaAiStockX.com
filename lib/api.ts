@@ -1,3 +1,4 @@
+import React from "react";
 import { APIResponse, APIError } from '@/types';
  // Base API configuration; const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http: //localhost:8000', const WS_BASE_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws: //localhost:8001',
 
@@ -9,8 +10,8 @@ export async function apiRequest<T = any>(
   endpoint: string,
     options: RequestInit = {}
 ): Promise<APIResponse<T>> {
-  try {
-    const url = `${API_BASE_URL}${endpoint}`;
+  try {  
+    const url = `${API_BASE_URL  } catch (error) { console.error(error); } catch (error) { console.error(error); }${endpoint}`;
     const response = await fetch(url, {
       headers: getHeaders();
       ...options;
@@ -29,13 +30,13 @@ export async function apiRequest<T = any>(
 }
 
 // HTTP method helpers; export const api = { get: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'GET' }),
-  post: <T>(endpoint: string, data?: any) =>, apiRequest<T>(endpoint, { method: 'POST',
+  post: <T>(endpoint: string, data?: unknown) =>, apiRequest<T>(endpoint, { method: 'POST',
     body: data ? JSON.stringify(data) : undefined
     }),
-  put: <T>(endpoint: string, data?: any) =>, apiRequest<T>(endpoint, { method: 'PUT',
+  put: <T>(endpoint: string, data?: unknown) =>, apiRequest<T>(endpoint, { method: 'PUT',
     body: data ? JSON.stringify(data) : undefined
     }),
-  patch: <T>(endpoint: string, data?: any) =>, apiRequest<T>(endpoint, { method: 'PATCH',
+  patch: <T>(endpoint: string, data?: unknown) =>, apiRequest<T>(endpoint, { method: 'PATCH',
     body: data ? JSON.stringify(data) : undefined }), delete: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'DELETE' }),
 };
 
@@ -46,17 +47,17 @@ export class WSManager {
   private reconnectAttempts = 0,
   private maxReconnectAttempts = 5;
   private reconnectInterval = 1000;
-  private listeners: Map<string, ((data: any) => void)[]> = new Map(), connect(endpoint: string = '') {
-    try {
-      this.ws = new WebSocket(`${WS_BASE_URL}${endpoint}`);
+  private listeners: Map<string, ((data: unknown) => void)[]> = new Map(), connect(endpoint: string = '') {
+    try {  
+      this.ws = new WebSocket(`${WS_BASE_URL  } catch (error) { console.error(error); } catch (error) { console.error(error); }${endpoint}`);
  this.ws.onopen = () => { console.log('WebSocket connected');
         this.reconnectAttempts = 0;
       };
 
-      this.ws.onmessage = event => {
-        try {
+      this.ws.onmessage = event => {  
+        try {  
           const message = JSON.parse(event.data);
-          this.handleMessage(message); } catch (error) { console.error('Failed to parse WebSocket message:', error);
+          this.handleMessage(message);     } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { console.error('Failed to parse WebSocket message:', error);
         }
       };
  this.ws.onclose = () => { console.log('WebSocket disconnected');
@@ -67,7 +68,7 @@ export class WSManager {
     }
   }
 
-  private handleMessage(message: any) {
+  private handleMessage(message: unknown) {
     const { type;
       data
     } = message;
@@ -78,21 +79,21 @@ export class WSManager {
   private handleReconnect() {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
       this.reconnectAttempts++;
-      setTimeout(() => {
-        console.log(`Reconnecting... Attempt ${this.reconnectAttempts}`);
+      setTimeout(() => {  
+        console.log(`Reconnecting... Attempt ${this.reconnectAttempts  }`);
         this.connect();
       }, this.reconnectInterval * this.reconnectAttempts);
     }
   }
 
-  subscribe(type: string, callback: (data: any) => void) {
+  subscribe(type: string, callback: (data: unknown) => void) {
     if (!this.listeners.has(type)) {
       this.listeners.set(type, []);
     }
     this.listeners.get(type)?.push(callback);
   }
 
-  unsubscribe(type: string, callback: (data: any) => void) {
+  unsubscribe(type: string, callback: (data: unknown) => void) {
     const callbacks = this.listeners.get(type) || [];
     const index = callbacks.indexOf(callback);
     if (index > -1) {
@@ -100,7 +101,7 @@ export class WSManager {
     }
   }
 
-  send(message: any) {
+  send(message: unknown) {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(message));
     }
@@ -114,13 +115,13 @@ export class WSManager {
 }
 
 // Authentication utilities;
-export const auth = { setToken: (token: string) => { if (typeof window !== 'undefined') { localStorage.setItem('auth_token', token);
-    }
-  }; getToken: (): string | null => { if (typeof window !== 'undefined') { return localStorage.getItem('auth_token');
-    }
+export const auth = { setToken: (token: string) => {   if (typeof window !== 'undefined') { localStorage.setItem('auth_token', token);
+      }
+  }; getToken: (): string | null => {   if (typeof window !== 'undefined') { return localStorage.getItem('auth_token');
+      }
     return null;
-  }; removeToken: () => { if (typeof window !== 'undefined') { localStorage.removeItem('auth_token');
-    }
+  }; removeToken: () => {   if (typeof window !== 'undefined') { localStorage.removeItem('auth_token');
+      }
   };
   isAuthenticated: (): boolean => {
     return !!auth.getToken();
@@ -134,7 +135,7 @@ export const formatters = { currency: (value: number currency = 'USD') => { retu
     maximumFractionDigits: 2
     }).format(value)
   };
-  percentage: (value: number decimals = 2) => { return `${value >= 0 ? '+' : ''}${value.toFixed(decimals)}%`;
+  percentage: (value: number decimals = 2) => {   return `${value >= 0 ? '+' : ''  }${value.toFixed(decimals)}%`;
   };
   number: (value: number decimals = 0) => { return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: decimals,
@@ -156,18 +157,18 @@ export const formatters = { currency: (value: number currency = 'USD') => { retu
 };
 
 // Local storage utilities;
-export const storage = { get: <T>(key: string, defaultValue?: T): T | null => { if (typeof window === 'undefined') return null;
+export const storage = { get: <T>(key: string, defaultValue?: T): T | null => {   if (typeof window === 'undefined') return null;
 
-    try {
+    try {  
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : (defaultValue ?? null);
-    } catch {
+        } catch (error) { console.error(error); } catch (error) { console.error(error); } catch {
       return defaultValue ?? null;
     }
-  }; set: (key: string, value: any): void => { if (typeof window === 'undefined') return;
+  }; set: (key: string, value: unknown): void => {   if (typeof window === 'undefined') return;
 
-    try {
-      localStorage.setItem(key, JSON.stringify(value)); } catch (error) { console.error('Failed to save to localStorage:', error);
+    try {  
+      localStorage.setItem(key, JSON.stringify(value));     } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { console.error('Failed to save to localStorage:', error);
     }
   }; remove: (key: string): void => { if (typeof window === 'undefined') return;
     localStorage.removeItem(key);
@@ -178,20 +179,20 @@ export const storage = { get: <T>(key: string, defaultValue?: T): T | null => { 
 
 // Error handling utilities;
 export const errorHandler = {
-  handle: (error: unknown): string => {
+  handle: (error: unknown): string => {  
     if (error instanceof APIError) {
       return error.message;
-    }
+      }
 
     if (error instanceof Error) {
       return error.message;
     } return 'An unexpected error occurred';
   };
-  notify: (error: unknown): void => { const message = errorHandler.handle(error); console.error('Error:', message);
+  notify: (error: unknown): void => {   const message = errorHandler.handle(error); console.error('Error:', message);
  // Here you could integrate with a toast notification system; if (typeof window !== 'undefined') {
       // Example: show a toast notification,
       // toast.error(message);
-    }
+      }
   };
 };
 
@@ -201,17 +202,17 @@ export const validators = {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  password: (password: string): boolean => {
+  password: (password: string): boolean => {  
     // At least 8 characters
                1 uppercase
                1 lowercase
                1 number;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,  }$/;
     return passwordRegex.test(password);
   };
-  stockSymbol: (symbol: string): boolean => {
+  stockSymbol: (symbol: string): boolean => {  
     // 1-5 uppercase letters;
-    const symbolRegex = /^[A-Z]{1,5}$/;
+    const symbolRegex = /^[A-Z]{1,5  }$/;
     return symbolRegex.test(symbol);
   };
   amount: (amount: number): boolean => {
@@ -220,7 +221,7 @@ export const validators = {
 };
 
 // Performance utilities;
-export const debounce = <T extends (...args: any[]) => any>(,
+export const debounce = <T extends (...args: unknown[]) => any>(,
     func: T,
   wait: number;
 ): ((...args: Parameters<T>) => void) => {
@@ -233,10 +234,10 @@ export const debounce = <T extends (...args: any[]) => any>(,
   };
 };
 
-export const throttle = <T extends (...args: any[]) => any>(,
+export const throttle = <T extends (...args: unknown[]) => any>(,
     func: T,
   limit: number;
-): ((...args: Parameters<T>) => void) => {
+): ((...args: Parameters<T>) => void) => {  
   let inThrottle: boolean
               
 
@@ -245,7 +246,7 @@ export const throttle = <T extends (...args: any[]) => any>(,
       func(...args);
       inThrottle = true;
       setTimeout(() => (inThrottle = false), limit);
-    }
+      }
   };
 };
 

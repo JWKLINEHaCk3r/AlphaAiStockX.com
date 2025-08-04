@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Globe, 
+import { Globe, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Box, 
   Users, 
   Gamepad2,
@@ -17,7 +18,7 @@ import {
   Play,
   Pause,
   BarChart3,
-  Target,
+  Target, }
   Rocket, Star } from 'lucide-react';
 
 interface MetaverseAsset {
@@ -107,19 +108,19 @@ interface VirtualWorld {
     }
   ];
 
-  const formatPrice = (price: number) => {
-    if (price < 1) return `$${price.toFixed(4)}`;
+  const formatPrice = (price: number) => {  
+    if (price < 1) return `$${price.toFixed(4)  }`;
     return `$${price.toFixed(2)}`;
   };
 
-  const formatMarketCap = (marketCap: number) => {
+  const formatMarketCap = (marketCap: number) => {  
     if (marketCap >= 1000000000) {
-      return `$${(marketCap / 1000000000).toFixed(1)}B`;
+      return `$${(marketCap / 1000000000).toFixed(1)  }B`;
     }
     return `$${(marketCap / 1000000).toFixed(0)}M`;
   };
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (category: string) => {  
     switch (category) {
       case 'gaming':
         return 'bg-green-600';
@@ -131,18 +132,18 @@ interface VirtualWorld {
         return 'bg-yellow-600';
       default:
         return 'bg-gray-600';
-    }
+      }
   }; const filteredAssets = selectedCategory === 'all' 
     ? metaverseAssets 
     : metaverseAssets.filter(asset => asset.category === selectedCategory);
 
-  useEffect(() => {
+  useEffect(() => {  
     const interval = setInterval(() => {
       if (isLive) {
         // Simulate real-time price updates
         setIsLive(prev => !prev);
         setTimeout(() => setIsLive(true), 1000);
-      }
+        }
     }, 5000);
 
     return () => clearInterval(interval);

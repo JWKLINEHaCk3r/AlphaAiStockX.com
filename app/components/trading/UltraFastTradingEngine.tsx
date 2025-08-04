@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Zap,
+import { Zap,
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Bot,
   Target,
   Activity,
@@ -19,7 +20,7 @@ import {
   Play,
   Pause,
   Monitor,
-  Cpu,
+  Cpu, }
   Wifi, AlertCircle } from 'lucide-react';
 
 interface EngineMetrics {
@@ -69,13 +70,13 @@ export default function UltraFastTradingEngine() {
   const [marketStream, setMarketStream] = useState<MarketStream[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const tradeCountRef = useRef(0);
- const generateMockTrade = useCallback((): FastTrade => { const symbols = ['NVDA', 'TSLA', 'AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'SPY']; const strategies = ['Momentum', 'Arbitrage', 'Mean Reversion', 'Breakout', 'Scalping'];
+ const generateMockTrade = useCallback((): FastTrade => {   const symbols = ['NVDA', 'TSLA', 'AAPL', 'MSFT', 'META', 'GOOGL', 'AMZN', 'SPY']; const strategies = ['Momentum', 'Arbitrage', 'Mean Reversion', 'Breakout', 'Scalping'];
     const symbol = symbols[Math.floor(Math.random() * symbols.length)];
     
     tradeCountRef.current += 1;
     
     return {
-      id: `trade_${tradeCountRef.current}`; symbol, side: Math.random() > 0.5 ? 'BUY' : 'SELL',
+      id: `trade_${tradeCountRef.current  }`; symbol, side: Math.random() > 0.5 ? 'BUY' : 'SELL',
       quantity: Math.floor(Math.random() * 1000) + 100,
       price: 100 + Math.random() * 400;
       executionTime: 0.1 + Math.random() * 0.5, timestamp: new Date().toLocaleTimeString(), status: Math.random() > 0.02 ? 'FILLED' : 'REJECTED',
@@ -122,10 +123,10 @@ export default function UltraFastTradingEngine() {
       100ms
     }
 
-    return () => {
+    return () => {  
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
-      }
+        }
     };
   }, [engineMetrics.isActive, generateMockTrade]);
 
@@ -137,8 +138,8 @@ export default function UltraFastTradingEngine() {
     }).format(amount),
   };
 
-  const formatLatency = (ms: number) => {
-    return `${ms.toFixed(2)}ms`;
+  const formatLatency = (ms: number) => {  
+    return `${ms.toFixed(2)  }ms`;
   };
 
   return (

@@ -1,10 +1,10 @@
-import {
-  PasswordSecurity;
+import React from "react";
+import { PasswordSecurity;
   CSRFProtection;
   EncryptionUtils;
   InputValidator;
   RateLimiter;
-  SecurityAudit;
+  SecurityAudit; }
 } from '@/lib/security'; describe('Security Utilities', () => { describe('PasswordSecurity', () => { it('should hash passwords securely', async () => { const password = 'SecurePassword123!@#';
       const hash = await PasswordSecurity.hash(password);
 
@@ -15,12 +15,12 @@ import {
 
       expect(isValid).toBe(true);
       expect(isInvalid).toBe(false);
-    }); it('should reject weak passwords', async () => { const weakPasswords = [; 'password'; '123456'; 'short'; 'nouppercase123!'; 'NOLOWERCASE123!'; 'NoSpecialChars123'; 'NoNumbers!@#';
+    }); it('should reject weak passwords', async () => {   const weakPasswords = [; 'password'; '123456'; 'short'; 'nouppercase123!'; 'NOLOWERCASE123!'; 'NoSpecialChars123'; 'NoNumbers!@#';
       ];
 
       for (const weakPassword of weakPasswords) {
         await expect(PasswordSecurity.hash(weakPassword)).rejects.toThrow();
-      }
+        }
     }); it('should generate secure passwords', () => {
       const password = PasswordSecurity.generateSecurePassword(16);
 
@@ -96,13 +96,13 @@ import {
       expect(result1.remaining).toBe(4);
       expect(result2.allowed).toBe(true);
       expect(result2.remaining).toBe(3);
-    }); it('should block requests over limit', () => {
+    }); it('should block requests over limit', () => {  
       const maxRequests = 3;
       const windowMs = 60000;
 
       // Make requests up to the limit; for (let i = 0; i < maxRequests; i++) { const result = RateLimiter.checkLimit('test-key', maxRequests, windowMs);
         expect(result.allowed).toBe(true);
-      }
+        }
  // Next request should be blocked; const blockedResult = RateLimiter.checkLimit('test-key', maxRequests, windowMs);
       expect(blockedResult.allowed).toBe(false);
       expect(blockedResult.remaining).toBe(0);

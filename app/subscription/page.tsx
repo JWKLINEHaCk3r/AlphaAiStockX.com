@@ -1,5 +1,6 @@
-'use client'; import React from 'react';
-
+import React from 'react';
+'use client';
+import { Label } from "../../components/ui/label";
 export default function SubscriptionPage() {
   const plans = [ { name: 'Starter',
       price: 49, features: [ 'AI Hot Stock Tips', 'Basic AutoTrade Bot', 'Sportsbook AI Picks', 'Community Access'

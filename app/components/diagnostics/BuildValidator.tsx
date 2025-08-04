@@ -1,11 +1,13 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { CheckCircle, XCircle, Clock, Play } from 'lucide-react';
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
  interface BuildValidationResult { status: 'idle' | 'running' | 'success' | 'error',
     message: string;
   details?: string[];
@@ -17,17 +19,17 @@ interface BuildValidatorProps {
  export default function BuildValidator({ onValidationComplete }: BuildValidatorProps) { const [buildStatus, setBuildStatus] = useState<'idle' | 'running' | 'success' | 'error'>('idle'); const [lintStatus, setLintStatus] = useState<'idle' | 'running' | 'success' | 'error'>('idle'); const [testStatus, setTestStatus] = useState<'idle' | 'running' | 'success' | 'error'>('idle');
   const [isRunning, setIsRunning] = useState(false);
   
-  const runBuildValidation = async () => {
+  const runBuildValidation = async () => {  
     setIsRunning(true);
      // Reset statuses setBuildStatus('running'); setLintStatus('idle'); setTestStatus('idle');
     
-    try {
+    try {  
       // Simulate build process await new Promise(resolve => setTimeout(resolve, 2000)); setBuildStatus('success');
        // Simulate lint process setLintStatus('running'); await new Promise(resolve => setTimeout(resolve, 1500)); setLintStatus('success');
        // Simulate test process setTestStatus('running'); await new Promise(resolve => setTimeout(resolve, 1000)); setTestStatus('success');
       
       if (onValidationComplete) { onValidationComplete({ status: 'success', message: 'All validations passed successfully', details: ['Build completed', 'Linting passed', 'Tests passed']
-        });
+            } catch (error) { console.error(error); } catch (error) { console.error(error); });
       }
        } catch (error) { setBuildStatus('error'); setLintStatus('error'); setTestStatus('error');
       
@@ -39,7 +41,7 @@ interface BuildValidatorProps {
     }
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: string) => {  
     switch (status) {
       case 'success':
         return <CheckCircle className="w-4 h-4 text-green-600" />;
@@ -49,10 +51,10 @@ interface BuildValidatorProps {
         return <Clock className="w-4 h-4 text-blue-600 animate-spin" />;
       default:
         return <Clock className="w-4 h-4 text-gray-400" />;
-    }
+      }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string) => {  
     switch (status) {
       case 'success':
         return 'text-green-600';
@@ -62,7 +64,7 @@ interface BuildValidatorProps {
         return 'text-blue-600';
       default:
         return 'text-gray-400';
-    }
+      }
   };
 
   return (

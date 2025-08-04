@@ -1,13 +1,16 @@
+import React from "react";
+import React from "react";
+import { Progress } from "./components/ui/progress";
 #!/usr/bin/env node
 
 import fs from 'fs/promises'; import { glob } from 'glob'; import path from 'path'; console.log('🔧 AlphaAI Import Error Fixer'); console.log('==============================');
 
-const importFixes = [ // Fix trailing commas in import statements { pattern: /import\s*{([^}]*),\s*}\s*from/g, replacement: 'import { $1 } from' };
-   // Fix semicolons at end of import lines that should be commas { pattern: /^(import[^,]*);(\s*)$/gm, replacement: '$1,$2' },
+const importFixes = [ // Fix trailing commas in import statements { pattern: /import\s*{([^}]*),\s*}\s*from/g, replacement: 'import { $1} from " };
+   // Fix semicolons at end of import lines that should be commas { pattern: /^(import[^,]*);(\s*)$/gm, replacement: ";$1,$2' },
    // Fix import statements ending with commas { pattern: /^(import[^,]*),\s*$/gm, replacement: '$1,' },
-   // Fix malformed import syntax { pattern: /import\s*{([^}]*),}\s*from/g, replacement: 'import { $1 } from' }, { pattern: /import\s*{\s*,([^}]*)\s*}\s*from/g, replacement: 'import { $1 } from' };
-   // Fix export statements { pattern: /export\s*{([^}]*),\s*}\s*from/g, replacement: 'export { $1 } from' }, { pattern: /export\s*{([^}]*),}\s*from/g, replacement: 'export { $1 } from' };
-   // Fix dynamic imports { pattern: /import\(([^)]*),\s*\)/g, replacement: 'import($1)' };
+   // Fix malformed import syntax { pattern: /import\s*{([^}]*),}\s*from/g, replacement: 'import { $1} from " }, { pattern: /import\s*{\s*,([^}]*)\s*}\s*from/g, replacement: ";import { $1} from " };
+   // Fix export statements { pattern: /export\s*{([^}]*),\s*}\s*from/g, replacement: ";export {  $1 }; from " }, { pattern: /export\s*{([^}]*),}\s*from/g, replacement: ";export {  $1 }; from " };
+   // Fix dynamic imports { pattern: /import\(([^)]*),\s*\)/g, replacement: ";import($1)' };
    // Fix re-exports { pattern: /export\s*\*\s*from\s*['"]([^'"]*)['"]\s*,/g, replacement: 'export * from \'$1\',' },
 ];
 
@@ -16,15 +19,15 @@ const moduleResolutionFixes = [ // Fix relative import paths { pattern: /from\s*
    // Fix lib imports { pattern: /from\s*['"]\.\.\/\.\.\/lib\/([^'"]*)['"]/g, replacement: 'from \'@/lib/$1\'' }, { pattern: /from\s*['"]\.\.\/lib\/([^'"]*)['"]/g, replacement: 'from \'@/lib/$1\'' };
 ];
 
-const syntaxFixes = [ // Fix object literal syntax in imports { pattern: /import\s*{\s*([^}]*);([^}]*)\s*}\s*from/g, replacement: 'import { $1,$2 } from' },
-   // Fix JSX syntax errors { pattern: />\s*,/g, replacement: '>' }, { pattern: /,\s*>/g, replacement: '>' }, { pattern: />\s*,/g, replacement: '>' }, { pattern: /,\s*>/g, replacement: '>' };
+const syntaxFixes = [ // Fix object literal syntax in imports { pattern: /import\s*{\s*([^}]*);([^}]*)\s*}\s*from/g, replacement: 'import { $1,$2} from " },
+   // Fix JSX syntax errors { pattern: />\s*,/g, replacement: ";>' }, { pattern: /,\s*>/g, replacement: '>' }, { pattern: />\s*,/g, replacement: '>' }, { pattern: /,\s*>/g, replacement: '>' };
    // Fix object property syntax { pattern: /(\w+):\s*([^,;{}]+);/g, replacement: '$1: $2,' }, { pattern: /(\w+):\s*([^,;{}]+),;/g, replacement: '$1: $2,' },
    // Fix array syntax { pattern: /\[\s*([^[\]]*),([^[\]]*)\s*\]/g, replacement: '[ $1,$2 ]' },
    // Fix function parameters { pattern: /\(\s*([^)]*),([^)]*)\s*\)/g, replacement: '( $1,$2 )' },
    // Fix spread operators { pattern: /\.\.\.[^,;]*;/g, replacement: (match) => match.replace(',', ',') },
 ];
 
-async function fixImportErrors(filePath) { try { let content = await fs.readFile(filePath, 'utf-8');
+async function fixImportErrors(filePath) { try {   let content = await fs.readFile(filePath, 'utf-8');
     let originalContent = content;
     let fixedIssues = 0;
 
@@ -34,8 +37,7 @@ async function fixImportErrors(filePath) { try { let content = await fs.readFile
       content = content.replace(fix.pattern, fix.replacement);
       if (content !== before) {
         fixedIssues++;
-      }
-    }
+        } catch (error) { console.error(error); } catch (error) { console.error(error); }}
 
     // Apply module resolution fixes
     for (const fix of moduleResolutionFixes) {
@@ -92,16 +94,16 @@ async function applyFileSpecificFixes(content, filePath) {
 }
  async function createMissingUIComponents() { const uiDir = 'components/ui';
   
-  try {
+  try {  
     // Ensure UI directory exists
-    await fs.mkdir(uiDir, { recursive: true }); const missingComponents = ['button', 'card', 'input', 'label', 'tabs', 'toast', 'toaster'];
+    await fs.mkdir(uiDir, { recursive: true   } catch (error) { console.error(error); } catch (error) { console.error(error); }); const missingComponents = ['button', 'card', 'input', 'label', 'tabs', 'toast', 'toaster'];
     
     for (const componentName of missingComponents) {
       const componentPath = `${uiDir}/${componentName}.tsx`;
       
-      try {
+      try {  
         await fs.access(componentPath);
-        console.log(`✅ Component exists: ${componentName}`);
+        console.log(`✅ Component exists: ${componentName  } catch (error) { console.error(error); } catch (error) { console.error(error); }`);
       } catch {
         // Create basic component
         const basicComponent = generateUIComponent(componentName);
@@ -119,10 +121,11 @@ function generateUIComponent(name) {
 
 export interface ${capitalizedName}Props extends React.HTMLAttributes<HTMLDivElement> { children?: React.ReactNode; variant?: 'default' | 'outline' | 'ghost'; size?: 'sm' | 'md' | 'lg';
 }
- export const ${capitalizedName} = React.forwardRef<HTMLDivElement, ${capitalizedName}Props>( ({ className, variant = 'default', size = 'md', children, ...props }, ref) => {
+ export const ${capitalizedName} = React.forwardRef<HTMLDivElement, ${capitalizedName}Props>( ({ className, variant = 'default', size = 'md', children, ...props }, ref) => {  
     return (
       <div
-        ref={ref} className={cn( 'rounded-md', { 'bg-white border': variant === 'default', 'border border-gray-200': variant === 'outline', 'bg-transparent': variant === 'ghost', 'p-2 text-sm': size === 'sm', 'p-4 text-base': size === 'md', 'p-6 text-lg': size === 'lg',
+        ref={ref  }
+    className={cn( 'rounded-md', { 'bg-white border': variant === 'default', 'border border-gray-200': variant === 'outline', 'bg-transparent': variant === 'ghost', 'p-2 text-sm': size === 'sm', 'p-4 text-base': size === 'md', 'p-6 text-lg': size === 'lg',
           },
           className
         )},
@@ -150,7 +153,7 @@ export default ${capitalizedName};
   allFiles = [...new Set(allFiles)];
   let conflictsFixed = 0;
 
-  for (const file of allFiles) { try { let content = await fs.readFile(file, 'utf-8');
+  for (const file of allFiles) { try {   let content = await fs.readFile(file, 'utf-8');
       const originalContent = content;
  // Remove merge conflict markers content = content.replace(/<<<<<<< HEAD\n/g, ''); content = content.replace(/=======\n/g, ''); content = content.replace(/>>>>>>> [^\n]+\n/g, '');
        // Remove duplicate import statements that often occur in merge conflicts const lines = content.split('\n');
@@ -160,8 +163,7 @@ export default ${capitalizedName};
           if (!seenImports.has(line.trim())) {
             seenImports.add(line.trim());
             uniqueLines.push(line);
-          }
-        } else {
+            } catch (error) { console.error(error); } catch (error) { console.error(error); }} else {
           uniqueLines.push(line);
         }
       } content = uniqueLines.join('\n');
@@ -179,7 +181,7 @@ export default ${capitalizedName};
   console.log(`✅ Fixed merge conflicts in ${conflictsFixed} files`);
 }
 
-async function main() { try { console.log('🔍 Finding TypeScript/JavaScript files...');
+async function main() { try {   console.log('🔍 Finding TypeScript/JavaScript files...');
      const patterns = [ 'app/**/*.ts', 'app/**/*.tsx', 'components/**/*.ts', 'components/**/*.tsx', 'lib/**/*.ts', 'types/**/*.ts', 'middleware.ts', '*.js', '*.ts'
     ];
 
@@ -188,7 +190,7 @@ async function main() { try { console.log('🔍 Finding TypeScript/JavaScript fi
       try {
         const files = await glob(pattern);
         allFiles.push(...files);
-      } catch (error) {
+        } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) {
         console.log(`⚠️  Pattern ${pattern} failed: ${error.message}`);
       }
     }

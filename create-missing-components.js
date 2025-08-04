@@ -1,9 +1,7 @@
 // Component Fix Script - Fix all imports and create missing components;
 import { writeFileSync, existsSync } from 'fs'; import { join } from 'path';
 
-const componentsToCreate = [; { path: 'app/dashboard/algos/AITradeCopilot.tsx',; content: `'use client', import React from 'react';
-
-export default function AITradeCopilot() {
+const componentsToCreate = [; { path: 'app/dashboard/algos/AITradeCopilot.tsx',; content: `&apos;use client&apos;, export default function AITradeCopilot() {
   return (;
     <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-xl p-6">;
       <h3 className="text-2xl font-bold text-purple-400 mb-4">AI Trade Copilot</h3>;
@@ -29,9 +27,7 @@ export default function AITradeCopilot() {
     </div>;
   );
 }`,;
-  },; { path: 'app/dashboard/algos/AdvancedAIStrategies.tsx',; content: `'use client', import React from 'react';
-
-interface Props {
+  },; { path: 'app/dashboard/algos/AdvancedAIStrategies.tsx',; content: `&apos;use client&apos;, interface Props {
 
 
 
@@ -105,7 +101,7 @@ export default function AdvancedAIStrategies({ onSelect }: Props) { const strate
     </div>;
   );
 }`,;
-  },; { path: 'app/dashboard/algos/AutoTradeBotFuturistic.tsx',; content: `'use client', import React, { useState } from 'react';
+  },; { path: 'app/dashboard/algos/AutoTradeBotFuturistic.tsx',; content: `&apos;use client&apos;, import React, { useState } from 'react';
 
 export default function AutoTradeBotFuturistic() {
   const [isActive, setIsActive] = useState(false);
@@ -150,9 +146,7 @@ export default function AutoTradeBotFuturistic() {
     </div>;
   );
 }`,;
-  },; { path: 'app/dashboard/trade-history/TradeHistoryTable.tsx',; content: `'use client', import React from 'react';
-
-export default function TradeHistoryTable() { const trades = [; { id: 1, symbol: 'AAPL', type: 'BUY', quantity: 100, price: 175.43, profit: 543.00, timestamp: '2024-01-15 10:30:00' },; { id: 2, symbol: 'TSLA', type: 'SELL', quantity: 50, price: 238.59, profit: -270.50, timestamp: '2024-01-15 11:45:00' },; { id: 3, symbol: 'GOOGL', type: 'BUY', quantity: 10, price: 2847.23, profit: 472.30, timestamp: '2024-01-15 14:20:00' },; { id: 4, symbol: 'MSFT', type: 'BUY', quantity: 75, price: 378.92, profit: 845.50, timestamp: '2024-01-15 15:10:00' },;
+  },; { path: 'app/dashboard/trade-history/TradeHistoryTable.tsx',; content: `&apos;use client&apos;, export default function TradeHistoryTable() { const trades = [; { id: 1, symbol: 'AAPL', type: 'BUY', quantity: 100, price: 175.43, profit: 543.00, timestamp: '2024-01-15 10:30:00' },; { id: 2, symbol: 'TSLA', type: 'SELL', quantity: 50, price: 238.59, profit: -270.50, timestamp: '2024-01-15 11:45:00' },; { id: 3, symbol: 'GOOGL', type: 'BUY', quantity: 10, price: 2847.23, profit: 472.30, timestamp: '2024-01-15 14:20:00' },; { id: 4, symbol: 'MSFT', type: 'BUY', quantity: 75, price: 378.92, profit: 845.50, timestamp: '2024-01-15 15:10:00' },;
   ];
 
   return (;
@@ -189,7 +183,7 @@ export default function TradeHistoryTable() { const trades = [; { id: 1, symbol:
     </div>;
   );
 }`,;
-  },; { path: 'app/dashboard/sportsbook/SportBeatBookieBot.tsx',; content: `'use client', import React, { useState } from 'react';
+  },; { path: 'app/dashboard/sportsbook/SportBeatBookieBot.tsx',; content: `&apos;use client&apos;, import React, { useState } from 'react';
 
 export default function SportBeatBookieBot() {
   const [isActive, setIsActive] = useState(true);
@@ -242,11 +236,11 @@ export default function SportBeatBookieBot() {
 
 console.log('Creating missing components...');
 
-componentsToCreate.forEach(({ path, content }) => {
+componentsToCreate.forEach(({ path, content }) => {  
   const fullPath = join(process.cwd(), path);
   if (!existsSync(fullPath)) {
     writeFileSync(fullPath, content);
-    console.log(\`✅ Created: \${path}\`);
+    console.log(\`✅ Created: \${path  }\`);
   } else {
     console.log(\`⚠️  Already exists: \${path}\`);
   }

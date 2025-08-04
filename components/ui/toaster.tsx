@@ -1,11 +1,11 @@
+import React from 'react';
+import { Toaster } from "./toaster";
 // Removed circular import;
 import { Toast } from "./toast";
-import React from 'react';
-import {
-  Toast;
+import { Toast;
   ToastClose;
   ToastDescription;
-  ToastProvider;
+  ToastProvider; }
   ToastTitle; ToastViewport; } from '@/components/ui/toast'; import { useToast } from '@/hooks/use-toast';
 
 export function Toaster() {
@@ -28,3 +28,5 @@ export function Toaster() {
     </ToastProvider>
   );
 }
+
+export default toaster;

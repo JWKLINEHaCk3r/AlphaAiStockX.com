@@ -1,30 +1,24 @@
+import React from 'react';
 'use client';
- // Force dynamic rendering to prevent static generation issues; export const dynamic = 'force-dynamic';
-export const revalidate = 0; import React from 'react';
 
-export default function ProfilePage() { return (
-    <main className="max-w-2xl mx-auto p-8 glassmorphic rounded-xl shadow-2xl mt-8 animate-fade-in">
-      <h1 className="text-4xl font-bold text-fuchsia-400 mb-4 drop-shadow">Your Profile</h1>
-      <div className="flex flex-col gap-4">
-        <div className="bg-black/30 rounded-lg p-4">
-          <div className="text-fuchsia-200 font-semibold">Name: </div>
-          <div className="text-white">(User Name Here)</div>
+export default function ProfilePage() {
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white">
+      <div className="container mx-auto px-4 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-6xl font-extrabold neon-text mb-8">
+            User Profile
+          </h1>
+          <div className="text-xl text-gray-300 space-y-4 max-w-3xl mx-auto">
+            <p>
+              Customize your trading experience and manage your account settings.
+            </p>
+            <p className="text-lg text-blue-300">
+              Profile management and authentication coming soon
+            </p>
+          </div>
         </div>
-        <div className="bg-black/30 rounded-lg p-4">
-          <div className="text-fuchsia-200 font-semibold">Email:</div>
-          <div className="text-white">(user@email.com)</div>
-        </div>
-        <div className="bg-black/30 rounded-lg p-4">
-          <div className="text-fuchsia-200 font-semibold">Subscription:</div>
-          <div className="text-white">Pro</div>
-        </div>
-        <button className="bg-fuchsia-600 hove,
-    r:bg-fuchsia-700 text-white font-bold py-3 px-6 rounded-lg transition-colors mt-2">
-          Edit Profile, </button>
-      </div>
-      <div className="text-xs text-fuchsia-300 mt-4 italic">
-        * Profile management and authentication coming soon
       </div>
     </main>
-  )
- }
+  );
+}

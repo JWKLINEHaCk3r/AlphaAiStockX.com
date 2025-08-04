@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Bot, 
+import { Bot, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Brain, 
   Zap, 
   TrendingUp, 
@@ -25,7 +26,7 @@ import {
   Network,
   BarChart3,
   DollarSign,
-  Clock,
+  Clock, }
   Shield, Rocket } from 'lucide-react';
 
 interface AIBot {
@@ -108,23 +109,23 @@ interface BotPerformance {
     }
   ];
 
-  const getStatusColor = (status: string) => { switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'paused': return 'text-yellow-600 bg-yellow-100'; case 'training': return 'text-blue-600 bg-blue-100'; case 'offline': return 'text-red-600 bg-red-100'; default: return 'text-gray-600 bg-gray-100'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'paused': return 'text-yellow-600 bg-yellow-100'; case 'training': return 'text-blue-600 bg-blue-100'; case 'offline': return 'text-red-600 bg-red-100'; default: return 'text-gray-600 bg-gray-100'
+      }
   };
 
-  const getRiskColor = (risk: string) => { switch (risk) { case 'low': return 'text-green-600 bg-green-100'; case 'medium': return 'text-yellow-600 bg-yellow-100'; case 'high': return 'text-red-600 bg-red-100'; default: return 'text-gray-600 bg-gray-100'
-    }
+  const getRiskColor = (risk: string) => {   switch (risk) { case 'low': return 'text-green-600 bg-green-100'; case 'medium': return 'text-yellow-600 bg-yellow-100'; case 'high': return 'text-red-600 bg-red-100'; default: return 'text-gray-600 bg-gray-100'
+      }
   };
 
-  const getTypeIcon = (type: string) => { switch (type) { case 'scalping': return <Zap className="w-5 h-5" />; case 'swing': return <TrendingUp className="w-5 h-5" />; case 'momentum': return <Rocket className="w-5 h-5" />; case 'arbitrage': return <Target className="w-5 h-5" />; case 'sentiment': return <Brain className="w-5 h-5" />;
+  const getTypeIcon = (type: string) => {   switch (type) { case 'scalping': return <Zap className="w-5 h-5" />; case 'swing': return <TrendingUp className="w-5 h-5" />; case 'momentum': return <Rocket className="w-5 h-5" />; case 'arbitrage': return <Target className="w-5 h-5" />; case 'sentiment': return <Brain className="w-5 h-5" />;
       default: return <Bot className="w-5 h-5" />
-    }
-  }; const handleBotAction = (botId: string, action: 'start' | 'pause' | 'reset') => {
+      }
+  }; const handleBotAction = (botId: string, action: 'start' | 'pause' | 'reset') => {  
     setIsDeploying(true);
     // Simulate API call
     setTimeout(() => {
       setIsDeploying(false);
-      console.log(`${action} bot ${botId}`);
+      console.log(`${action  } bot ${botId}`);
     }, 2000);
   };
  const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
@@ -255,8 +256,8 @@ interface BotPerformance {
                       variant="outline" ;
                       size="sm" ,
                       className="flex-1 border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
-                      onClick={(e) => { e.stopPropagation(); handleBotAction(bot.id, 'pause');
-                      }}
+                      onClick={(e) => {   e.stopPropagation(); handleBotAction(bot.id, 'pause');
+                        }}
                       disabled={isDeploying}
                     >
                       <Pause className="w-4 h-4 mr-1" />
@@ -267,8 +268,8 @@ interface BotPerformance {
                       variant="outline" ,
                       size="sm" ,
                       className="flex-1 border-green-500 text-green-500 hover:bg-green-500/10"
-                      onClick={(e) => { e.stopPropagation(); handleBotAction(bot.id, 'start');
-                      }}
+                      onClick={(e) => {   e.stopPropagation(); handleBotAction(bot.id, 'start');
+                        }}
                       disabled={isDeploying}
                     >
                       <Play className="w-4 h-4 mr-1" />
@@ -280,11 +281,11 @@ interface BotPerformance {
                     variant="outline" ,
                     size="sm" ,
                     className="border-gray-500 text-gray-300 hover:bg-gray-500/10"
-                    onClick={(e) => {
+                    onClick={(e) => {  
                       e.stopPropagation();
                       // Open,
       settings
-    }}
+      }}
                   >
                     <Settings className="w-4 h-4" />
                   </Button>
@@ -304,7 +305,7 @@ interface BotPerformance {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {(() => {
+                {(() => {  
                   const bot = aiBots.find(b => b.id === selectedBot);
                   if (!bot) return null;
                   
@@ -317,7 +318,7 @@ interface BotPerformance {
                             <span className="text-white font-medium">Win Rate</span>
                           </div>
                           <p className="text-2xl font-bold text-green-400">
-                            {bot.performance.winRate}%
+                            {bot.performance.winRate  }%
                           </p>
                         </div>
                         
@@ -380,7 +381,7 @@ interface BotPerformance {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {(() => {
+                {(() => {  
                   const bot = aiBots.find(b => b.id === selectedBot);
                   if (!bot) return null;
                   
@@ -390,7 +391,7 @@ interface BotPerformance {
                         <h4 className="text-white font-semibold mb-3">Current Status</h4>
                         <div className="flex items-center justify-between">
                           <span className="text-gray-300">Operating Mode</span>
-                          <Badge className={getStatusColor(bot.status)}>
+                          <Badge className={getStatusColor(bot.status)  }>
                             {bot.status.toUpperCase()}
                           </Badge>
                         </div>

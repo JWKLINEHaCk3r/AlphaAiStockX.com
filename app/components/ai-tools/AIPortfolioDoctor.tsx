@@ -18,12 +18,12 @@ export default function AIPortfolioDoctor() {
     }, 1300);
   };
 
-  const getRiskColor = (risk: string) => { switch (risk.toLowerCase()) { case 'low': return 'text-green-400'; case 'medium': return 'text-yellow-400'; case 'high': return 'text-red-400'; default: return 'text-gray-400';
-    }
+  const getRiskColor = (risk: string) => {   switch (risk.toLowerCase()) { case 'low': return 'text-green-400'; case 'medium': return 'text-yellow-400'; case 'high': return 'text-red-400'; default: return 'text-gray-400';
+      }
   };
 
-  const getDiversificationColor = (diversification: string) => { switch (diversification.toLowerCase()) { case 'excellent': return 'text-green-400'; case 'good': return 'text-blue-400'; case 'fair': return 'text-yellow-400'; case 'poor': return 'text-red-400'; default: return 'text-gray-400';
-    }
+  const getDiversificationColor = (diversification: string) => {   switch (diversification.toLowerCase()) { case 'excellent': return 'text-green-400'; case 'good': return 'text-blue-400'; case 'fair': return 'text-yellow-400'; case 'poor': return 'text-red-400'; default: return 'text-gray-400';
+      }
   };
 
   return (

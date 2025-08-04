@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Database, 
+import { Database, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Globe, 
   TrendingUp, 
   BarChart3, 
@@ -24,7 +25,7 @@ import {
   Eye, 
   Rss,
   Radio,
-  Satellite,
+  Satellite, }
   Cloud, Shield } from 'lucide-react';
 
 interface DataSource {
@@ -88,17 +89,17 @@ interface DataMetrics {
     });
   }, []);
 
-  const getStatusColor = (status: string) => { switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'inactive': return 'text-gray-600 bg-gray-100'; case 'error': return 'text-red-600 bg-red-100'; case 'maintenance': return 'text-yellow-600 bg-yellow-100'; default: return 'text-gray-600 bg-gray-100'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'inactive': return 'text-gray-600 bg-gray-100'; case 'error': return 'text-red-600 bg-red-100'; case 'maintenance': return 'text-yellow-600 bg-yellow-100'; default: return 'text-gray-600 bg-gray-100'
+      }
   };
 
-  const getCostColor = (cost: string) => { switch (cost) { case 'free': return 'text-green-600 bg-green-100'; case 'premium': return 'text-blue-600 bg-blue-100'; case 'enterprise': return 'text-purple-600 bg-purple-100'; default: return 'text-gray-600 bg-gray-100'
-    }
+  const getCostColor = (cost: string) => {   switch (cost) { case 'free': return 'text-green-600 bg-green-100'; case 'premium': return 'text-blue-600 bg-blue-100'; case 'enterprise': return 'text-purple-600 bg-purple-100'; default: return 'text-gray-600 bg-gray-100'
+      }
   };
 
-  const getTypeIcon = (type: string) => { switch (type) { case 'market': return <BarChart3 className="w-5 h-5" />; case 'news': return <Rss className="w-5 h-5" />; case 'social': return <Radio className="w-5 h-5" />; case 'economic': return <TrendingUp className="w-5 h-5" />; case 'technical': return <Activity className="w-5 h-5" />; case 'alternative': return <Satellite className="w-5 h-5" />;
+  const getTypeIcon = (type: string) => {   switch (type) { case 'market': return <BarChart3 className="w-5 h-5" />; case 'news': return <Rss className="w-5 h-5" />; case 'social': return <Radio className="w-5 h-5" />; case 'economic': return <TrendingUp className="w-5 h-5" />; case 'technical': return <Activity className="w-5 h-5" />; case 'alternative': return <Satellite className="w-5 h-5" />;
       default: return <Database className="w-5 h-5" />
-    }
+      }
   }; const filteredSources = selectedCategory === 'all' 
     ? dataSources 
     : dataSources.filter(source => source.type === selectedCategory),

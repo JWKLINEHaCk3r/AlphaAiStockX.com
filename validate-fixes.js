@@ -1,19 +1,21 @@
+'use client';
+
 import React from 'react'; import fs from 'fs'; import path from 'path'; console.log('🔍 Validating AlphaAI StockX Fixes...'); console.log('=====================================');
 
 // Key files to check; const keyFiles = [; 'app/dashboard/page.tsx',; 'app/components/ai/AITradingAdvisor.tsx',; 'app/components/trading/AIModelTraining.tsx',; 'components/ui/card.tsx',; 'app/components/PortfolioOptimizer.tsx',;
 ];
 
-// Validation checks; const checks = { hasReactImport: content => content.includes('import React'),; hasUseClient: content => content.includes("'use client'"),;
+// Validation checks; const checks = { hasReactImport: content => content.includes('import React'),; hasUseClient: content => content.includes(""),;
   hasValidExport: content => {
     const exportMatches = content.match(/export default/g);
     return exportMatches && exportMatches.length === 1; },; noMalformedCardImports: content => !content.includes('CardCoCard'),; noDuplicateUseClient: content => { const matches = content.match(/'use client'/g);
     return !matches || matches.length <= 1;
-  },; correctImportOrder: content => { if (!content.includes("'use client'")) return true; const lines = content.split('\n');
+  },; correctImportOrder: content => {   if (!content.includes("'use client'")) return true; const lines = content.split('\n');
     let useClientIndex = -1;
     let firstImportAfterClient = -1;
  for (let i = 0; i < lines.length; i++) { if (lines[i].includes("'use client'")) {
         useClientIndex = i;
-      }
+        }
       if (useClientIndex >= 0 && lines[i].match(/^import .+ from/)) {
         firstImportAfterClient = i;
         break;
@@ -28,11 +30,11 @@ let totalChecks = 0;
 let passedChecks = 0;
 const results = []; console.log('\n📁 Checking key files...\n');
 
-keyFiles.forEach(filePath => {
+keyFiles.forEach(filePath => {  
   const fullPath = path.resolve(filePath);
  if (!fs.existsSync(fullPath)) { console.log('File not found: ' + filePath),
     return;
-  } const content = fs.readFileSync(fullPath, 'utf8');
+    } const content = fs.readFileSync(fullPath, 'utf8');
   const fileResults = {
     file: filePath,;
     checks: {},;
@@ -42,18 +44,18 @@ keyFiles.forEach(filePath => {
 
   console.log(`📄 ${filePath}`);
 
-  Object.entries(checks).forEach(([checkName, checkFn]) => {
+  Object.entries(checks).forEach(([checkName, checkFn]) => {  
     totalChecks++;
     fileResults.total++;
 
-    try {
+    try {  
       const passed = checkFn(content);
       fileResults.checks[checkName] = passed;
 
       if (passed) {
         passedChecks++;
         fileResults.score++;
-        console.log(`  ✅ ${checkName}`);
+        console.log(`  ✅ ${checkName    } catch (error) { console.error(error); } catch (error) { console.error(error); }`);
       } else {
         console.log(`  ❌ ${checkName}`);
       } } catch (error) { console.log('Error in ' + checkName + ': ' + error.message);
@@ -84,8 +86,8 @@ results.forEach(result => {
   });
 });
 
-Object.entries(checkSummary).forEach(([checkName, summary]) => { const percentage = Math.round((summary.passed / summary.total) * 100); const status = percentage === 100 ? '✅' : percentage >= 80 ? '⚠️' : '❌';
-  console.log(`  ${status} ${checkName}: ${summary.passed}/${summary.total} (${percentage}%)`);
+Object.entries(checkSummary).forEach(([checkName, summary]) => {   const percentage = Math.round((summary.passed / summary.total) * 100); const status = percentage === 100 ? '✅' : percentage >= 80 ? '⚠️' : '❌';
+  console.log(`  ${status  } ${checkName}: ${summary.passed}/${summary.total} (${percentage}%)`);
 });
 
 // Status assessment; const overallPercentage = Math.round((passedChecks / totalChecks) * 100); let status = ''; let recommendation = '';

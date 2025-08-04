@@ -1,3 +1,4 @@
+import React from "react";
 import { NextRequest } from 'next/server';
 
 // Performance monitoring configuration;
@@ -232,7 +233,7 @@ class PerformanceMonitor {
   }
 
   // Send performance alert;
-  private sendAlert(type: string, data: any) {
+  private sendAlert(type: string, data: unknown) {
     const alertData = {
       type;
       timestamp: new Date().toISOString();
@@ -289,8 +290,8 @@ class PerformanceMonitor {
 
     // Get top endpoints by request count;
     const endpointCounts = new Map<string, number>();
-    recentMetrics.forEach(metric => {
-      const key = `${metric.method} ${metric.endpoint}`;
+    recentMetrics.forEach(metric => {  
+      const key = `${metric.method  } ${metric.endpoint}`;
       endpointCounts.set(key, (endpointCounts.get(key) || 0) + 1);
     });
 
@@ -303,10 +304,10 @@ class PerformanceMonitor {
 
     // Get error breakdown by status code;
     const errorBreakdown: Record<number, number> = {};
-    recentMetrics.forEach(metric => {
+    recentMetrics.forEach(metric => {  
       if (metric.statusCode >= 400) {
         errorBreakdown[metric.statusCode] = (errorBreakdown[metric.statusCode] || 0) + 1;
-      }
+        }
     });
 
     // Get current memory usage;
@@ -375,16 +376,16 @@ export const performanceMonitor = new PerformanceMonitor();
 export function withPerformanceMonitoring<T extends any[], R>(
   fn: (...args: T) => Promise<R>, endpoint: string, method: string = 'GET',
 ) {
-  return async (...args: T): Promise<R> => {
+  return async (...args: T): Promise<R> => {  
     const startTime = Date.now();
     let statusCode = 200;
     let error: string | undefined
               
 
-    try {
+    try {  
       const result = await fn(...args);
       return result;
-    } catch (err) { statusCode = 500; error = err instanceof Error ? err.message : 'Unknown error',
+        } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (err) { statusCode = 500; error = err instanceof Error ? err.message : 'Unknown error',
       throw err;
     } finally {
       const duration = Date.now() - startTime;
@@ -402,7 +403,7 @@ export function withPerformanceMonitoring<T extends any[], R>(
 
 // Express-style middleware for Next.js API routes;
 export function createPerformanceMiddleware(endpoint: string) {
-  return (request: NextRequest, response: any, next?: Function) => {
+  return (request: NextRequest, response: unknown, next?: Function) => {
     const startTime = Date.now();
 
     // Capture original response methods;
@@ -413,17 +414,17 @@ export function createPerformanceMiddleware(endpoint: string) {
     let statusCode = 200;
 
     // Override response methods to capture status code;
-    response.send = function (body: any) {
+    response.send = function (body: unknown) {
       statusCode = response.statusCode || 200;
       return originalSend.call(this, body);
     };
 
-    response.json = function (body: any) {
+    response.json = function (body: unknown) {
       statusCode = response.statusCode || 200;
       return originalJson.call(this, body);
     };
 
-    response.end = function (...args: any[]) {
+    response.end = function (...args: unknown[]) {
       const duration = Date.now() - startTime;
       statusCode = response.statusCode || 200;
 
@@ -442,8 +443,8 @@ export function createPerformanceMiddleware(endpoint: string) {
 // Performance optimization utilities;
 export class PerformanceOptimizer {
   // Database query optimization;
-  static optimizeQuery(query: string, params: any[]): {
-      query: string, params: any[] },{
+  static optimizeQuery(query: string, params: unknown[]): {
+      query: string, params: unknown[] },{
     // Add query optimization logic here;
     // For example: Add LIMIT clauses
                optimize JOINs

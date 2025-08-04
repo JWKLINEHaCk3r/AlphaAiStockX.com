@@ -1,7 +1,7 @@
-'use client'; import React from 'react';
-import { Card, CardHeader, CardContent,
-      CardTitle
-    } from "../../../components/ui/card";
+import React from 'react';
+'use client';
+import { Label } from "../../../components/ui/label";
+import {  Card ,  Card, CardHeader, CardContent, CardTitle  } from "../../../components/ui/card";
 
 export default function AIWhiteLabelAnalytics() {
   return (

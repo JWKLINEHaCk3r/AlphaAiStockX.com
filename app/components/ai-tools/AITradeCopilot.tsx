@@ -23,8 +23,8 @@ export default function AITradeCopilot() {
     }, 1100);
   };
 
-  const getActionColor = (action: string) => { switch (action) { case 'BUY': return 'text-green-400'; case 'SELL': return 'text-red-400'; case 'HOLD': return 'text-yellow-400'; default: return 'text-gray-400';
-    }
+  const getActionColor = (action: string) => {   switch (action) { case 'BUY': return 'text-green-400'; case 'SELL': return 'text-red-400'; case 'HOLD': return 'text-yellow-400'; default: return 'text-gray-400';
+      }
   };
 
   return (

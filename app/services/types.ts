@@ -1,3 +1,4 @@
+import React from "react";
 // Types and interfaces for the AI trading engine and services;
 export interface Trade { symbol: string,
     action: 'buy' | 'sell',

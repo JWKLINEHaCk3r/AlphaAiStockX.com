@@ -1,12 +1,17 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import {  TabsTrigger ,  TabsList  } from "../../../components/ui/tabs";
+import {  TabsContent ,  Tabs  } from "../../../components/ui/tabs";
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  User, 
+import { User, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Settings, 
   Bell, 
   Shield, 
@@ -20,7 +25,7 @@ import {
   Star,
   TrendingUp,
   BarChart3,
-  Calendar,
+  Calendar, }
   Target, Zap } from 'lucide-react';
 
 interface UserProfile {
@@ -64,7 +69,7 @@ interface TabsContentProps {
 }
 
 // Simple Tabs Implementation
-const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children }) => {
+const Tabs: React.FunctionComponent<TabsProps> = ({ value, onValueChange, children }) => {
   return (
     <div className="w-full">
       {React.Children.map(children, (child) => 
@@ -74,7 +79,7 @@ const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children }) => {
   );
 };
 
-const TabsList: React.FC<TabsListProps & { activeTab?: string, onTabChange?: (value: string) => void }> = ({ children, activeTab, onTabChange }) => {
+const TabsList: React.FunctionComponent<TabsListProps & { activeTab?: string, onTabChange?: (value: string) => void }> = ({ children, activeTab, onTabChange }) => {
   return (
     <div className="flex space-x-1 bg-gray-100 rounded-lg p-1 mb-4">
       {React.Children.map(children, (child ) => 
@@ -86,16 +91,16 @@ const TabsList: React.FC<TabsListProps & { activeTab?: string, onTabChange?: (va
   );
 };
 
-const TabsTrigger: React.FC<TabsTriggerProps & { activeTab?: string; onTabChange?: (value: string) => void }> = ({ 
+const TabsTrigger: React.FunctionComponent<TabsTriggerProps & { activeTab?: string; onTabChange?: (value: string) => void }> = ({ 
   value,
   children, 
   activeTab,
   onTabChange
-}) => {
+}) => {  
   const isActive = activeTab === value;
   return (
     <button
-      onClick={() => onTabChange?.(value)}
+      onClick={() => onTabChange?.(value)  }
       className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
         isActive 
           ? 'bg-white text-blue-600 shadow-sm' 
@@ -107,11 +112,11 @@ const TabsTrigger: React.FC<TabsTriggerProps & { activeTab?: string; onTabChange
   );
 };
 
-const TabsContent: React.FC<TabsContentProps & { activeTab?: string }> = ({ value, children,
+const TabsContent: React.FunctionComponent<TabsContentProps & { activeTab?: string }> = ({ value, children,
       activeTab
-    }) => {
+    }) => {  
   if (activeTab !== value) return null;
-  return <div>{children}</div>;
+  return <div>{children  }</div>;
 };
 
 export default function CustomizableProfile() { const [activeTab, setActiveTab] = useState('profile');
@@ -138,24 +143,24 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
     setIsEditing(false);
   };
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: string, value: unknown) => {
     setProfile(prev => ({
       ...prev,
       [field]: value
     }));
   };
 
-  const handlePreferenceChange = (field: string, value: any) => {
+  const handlePreferenceChange = (field: string, value: unknown) => {  
     setProfile(prev => ({
       ...prev,
       preferences: {
         ...prev.preferences,
         [field]: value
-      }
+        }
     }));
   };
 
-  const getLevelColor = (level: string) => {
+  const getLevelColor = (level: string) => {  
     switch (level) {
       case 'Beginner':
         return 'bg-green-100 text-green-800';
@@ -167,7 +172,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
         return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
-    }
+      }
   };
 
   return (

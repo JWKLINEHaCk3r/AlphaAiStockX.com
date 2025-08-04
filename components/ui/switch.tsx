@@ -1,4 +1,6 @@
-import React from 'react'; 'use client';
+import React from 'react';
+'use client';
+import { Switch } from "./switch";
  // Removed circular import; import { cn } from '@/lib/utils';
 
 export function Switch({
@@ -30,3 +32,5 @@ export function Switch({
     </button>
   );
 }
+
+export default switch;

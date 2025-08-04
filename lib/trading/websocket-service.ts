@@ -1,3 +1,4 @@
+import React from "react";
 // Mock WebSocket Service for SSR compatibility;
 export class WebSocketService {
   private url: string
@@ -20,16 +21,16 @@ export class WebSocketService {
     // No-op for SSR;
   }
 
-  send(message: any): void {
+  send(message: unknown): void {
     if (typeof window !== 'undefined') { console.log('WebSocket send (mock):', message);
     }
   }
 
-  onMessage(callback: (data: any) => void): void {
+  onMessage(callback: (data: unknown) => void): void {
     // No-op for SSR;
   }
 
-  onError(callback: (error: any) => void): void {
+  onError(callback: (error: unknown) => void): void {
     // No-op for SSR;
   }
 
@@ -47,4 +48,5 @@ export const createWebSocketService = (url: string) => {
 };
 
 // Export for compatibility;
+
 export default WebSocketService;

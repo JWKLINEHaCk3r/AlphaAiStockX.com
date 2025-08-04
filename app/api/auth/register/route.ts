@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  try {
+  try {  
     const body = await request.json();
-    const { email, password, username } = body;
+    const { email, password, username   } catch (error) { console.error(error); } catch (error) { console.error(error); }= body;
     
     // TODO: Complete this comment
     // Registration logic would go here  console.log('User registration, attempt:', { email, username });

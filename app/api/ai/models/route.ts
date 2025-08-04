@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  try {
+  try {  
     // TODO: Complete this comment
     // Mock AI models data
     const models = [
       {  id: 'gpt-trader-v1',  name: 'GPT Trader v1',  description: 'Advanced language model for trading decisions',
         accuracy: 94.7,
         available: true
-      },
+        } catch (error) { console.error(error); } catch (error) { console.error(error); },
       {  id: 'quantum-analyst',  name: 'Quantum Market Analyst',  description: 'Quantum computing powered market analysis',
         accuracy: 97.2,
         available: true

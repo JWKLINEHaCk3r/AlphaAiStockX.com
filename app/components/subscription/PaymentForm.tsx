@@ -1,12 +1,15 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import { Badge } from "../../../components/ui/badge";
-import { 
-  CreditCard, 
+import { CreditCard, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Shield, 
   Lock, 
   CheckCircle, 
@@ -18,7 +21,7 @@ import {
   Mail,
   Building,
   MapPin,
-  Phone,
+  Phone, }
   AlertCircle, Info } from 'lucide-react';
 
 interface PaymentData {
@@ -62,10 +65,10 @@ interface SubscriptionPlan {
     return formatted.slice(0, 19);
   };
 
-  const formatExpiryDate = (value: string) => { // Remove all non-digit characters const digits = value.replace(/\D/g, '');
+  const formatExpiryDate = (value: string) => {   // Remove all non-digit characters const digits = value.replace(/\D/g, '');
     // Add slash after 2 digits
     if (digits.length >= 2) {
-      return `${digits.slice(0, 2)}/${digits.slice(2, 4)}`;
+      return `${digits.slice(0, 2)  }/${digits.slice(2, 4)}`;
     }
     return digits;
   };

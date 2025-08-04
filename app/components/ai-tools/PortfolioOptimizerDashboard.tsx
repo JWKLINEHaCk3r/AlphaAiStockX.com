@@ -1,6 +1,10 @@
-'use client'; import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'; import { Button } from '@/components/ui/button'; import { Badge } from '@/components/ui/badge';
+'use client';
+import { Badge } from "../../../components/ui/badge";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React, { useState } from 'react';
 import { PieChart, BarChart3, TrendingUp, Shield } from 'lucide-react';
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 interface OptimizationResult {
   asset: string,
@@ -41,9 +45,9 @@ export default function PortfolioOptimizerDashboard() {
     }, 2000);
   };
 
-  const getAllocationChange = (current: number, recommended: number) => {
+  const getAllocationChange = (current: number, recommended: number) => {  
     const change = recommended - current;
-    if (change > 0) return { text: `+${change}%`, color: 'text-green-600' };
+    if (change > 0) return { text: `+${change  }%`, color: 'text-green-600' };
     if (change < 0) return { text: `${change}%`, color: 'text-red-600' };
     return { text: '0%', color: 'text-gray-600' };
   };

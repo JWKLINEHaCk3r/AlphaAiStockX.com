@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Brain, 
+import { Brain, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Zap, 
   TrendingUp, 
   BarChart3, 
@@ -24,7 +25,7 @@ import {
   Atom,
   Layers,
   Bolt,
-  Sparkles,
+  Sparkles, }
   Network, Gauge } from 'lucide-react';
 
 interface QuantumState {
@@ -98,17 +99,17 @@ export default function QuantumAICore() { const [isActive, setIsActive] = useSta
     return () => clearInterval(interval);
   }, [isActive]);
 
-  const getPredictionColor = (prediction: string) => { switch (prediction) { case 'bullish': return 'text-green-600 bg-green-100'; case 'bearish': return 'text-red-600 bg-red-100'; default: return 'text-yellow-600 bg-yellow-100'
-    }
+  const getPredictionColor = (prediction: string) => {   switch (prediction) { case 'bullish': return 'text-green-600 bg-green-100'; case 'bearish': return 'text-red-600 bg-red-100'; default: return 'text-yellow-600 bg-yellow-100'
+      }
   };
 
-  const getModelTypeIcon = (type: string) => { switch (type) { case 'quantum': return <Atom className="w-5 h-5" />; case 'neural': return <Brain className="w-5 h-5" />; case 'hybrid': return <Network className="w-5 h-5" />;
+  const getModelTypeIcon = (type: string) => {   switch (type) { case 'quantum': return <Atom className="w-5 h-5" />; case 'neural': return <Brain className="w-5 h-5" />; case 'hybrid': return <Network className="w-5 h-5" />;
       default: return <Cpu className="w-5 h-5" />
-    }
+      }
   };
 
-  const getStatusColor = (status: string) => { switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'training': return 'text-blue-600 bg-blue-100'; case 'idle': return 'text-gray-600 bg-gray-100'; default: return 'text-gray-600 bg-gray-100'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'active': return 'text-green-600 bg-green-100'; case 'training': return 'text-blue-600 bg-blue-100'; case 'idle': return 'text-gray-600 bg-gray-100'; default: return 'text-gray-600 bg-gray-100'
+      }
   };
 
   return (

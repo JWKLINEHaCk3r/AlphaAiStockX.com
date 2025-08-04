@@ -1,3 +1,4 @@
+import { Card } from "../../../components/ui/card";
 import React from 'react';
  export function Card({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (
@@ -49,3 +50,5 @@ import React from 'react';
     </div>
   );
 }
+
+export default card;

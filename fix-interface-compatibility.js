@@ -20,11 +20,11 @@ function findFiles(dir, pattern) {
   // Fix 1: Standardize Trade interface ID type to number const tradeInterfaceFiles = [ './app/components/PerformanceMetrics.tsx', './app/components/TradeHistory.tsx'
   ];
   
-  tradeInterfaceFiles.forEach(filePath => { if (fs.existsSync(filePath)) { let content = fs.readFileSync(filePath, 'utf8');
+  tradeInterfaceFiles.forEach(filePath => {   if (fs.existsSync(filePath)) { let content = fs.readFileSync(filePath, 'utf8');
       const original = content;
       
       // Fix Trade interface id type
-      content = content.replace( /interface Trade\s*{[^}]*id:\s*string[^}]*}/gs, (match) => match.replace(/id:\s*string/, 'id: number')
+      content = content.replace( /interface Trade\s*{[^  }]*id:\s*string[^}]*}/gs, (match) => match.replace(/id:\s*string/, 'id: number')
       ),
       
       // Fix RecentTrade interface if it exists
@@ -43,8 +43,8 @@ function findFiles(dir, pattern) {
     // Make commonly optional properties actually optional const commonOptionalProps = [ 'winRate', 'subscription', 'lastActivity', 'description',  'message', 'reasoning', 'entryTime', 'exitTime', 'stopLoss',  'takeProfit', 'confidence', 'strategy', 'pnl', 'positionSize'
     ];
      commonOptionalProps.forEach(prop => { // Find properties that aren't already optional and make them optional
-      const propRegex = new RegExp(`(\\s+${prop}):\\s*([^;\\n?]+)([;\\n])`, 'g'); content = content.replace(propRegex, (match, propName, propType, ending) => { if (!propName.includes('?') && !propType.includes('undefined')) {
-          return `${propName}?: ${propType}${ending}`;
+      const propRegex = new RegExp(`(\\s+${prop}):\\s*([^;\\n?]+)([;\\n])`, 'g'); content = content.replace(propRegex, (match, propName, propType, ending) => {   if (!propName.includes('?') && !propType.includes('undefined')) {
+          return `${propName  }?: ${propType}${ending}`;
         }
         return match;
       });
@@ -55,14 +55,14 @@ function findFiles(dir, pattern) {
     }
   });
 
-  // Fix 3: Replace dangerous any types with safer alternatives tsxFiles.forEach(filePath => { let content = fs.readFileSync(filePath, 'utf8');
+  // Fix 3: Replace dangerous any types with safer alternatives tsxFiles.forEach(filePath => {   let content = fs.readFileSync(filePath, 'utf8');
     const original = content;
     
     // Replace any parameter types with more specific types
     content = content.replace(
       /\(([^:)]*?):\s*any([^)]*?)\)/g, (match, paramName, rest) => { if (paramName.includes('event') || paramName.includes('Event')) {
-          return `(${paramName}: Event${rest})`; } if (paramName.includes('trade')) {
-          return `(${paramName}: any${rest})`; // Keep as any for trade objects to avoid breaking } if (paramName.includes('data') || paramName.includes('item')) {
+          return `(${paramName  }: Event${rest})`; } if (paramName.includes('trade')) {
+          return `(${paramName}: unknown${rest})`; // Keep as any for trade objects to avoid breaking } if (paramName.includes('data') || paramName.includes('item')) {
           return `(${paramName}: Record<string, unknown>${rest})`;
         }
         return `(${paramName}: unknown${rest})`;
@@ -75,13 +75,13 @@ function findFiles(dir, pattern) {
     }
   });
 
-  // Fix 4: Add proper event handler types tsxFiles.forEach(filePath => { let content = fs.readFileSync(filePath, 'utf8');
+  // Fix 4: Add proper event handler types tsxFiles.forEach(filePath => {   let content = fs.readFileSync(filePath, 'utf8');
     const original = content;
     
     // Fix onChange handlers without proper typing
     content = content.replace(
-      /onChange=\{([^}]*)\}/g, (match, handler) => { if (!handler.includes('ChangeEvent') && !handler.includes('=>')) {
-          return `onChange={(e: React.ChangeEvent<HTMLInputElement>) => ${handler}(e)}`;
+      /onChange=\{([^  }]*)\}/g, (match, handler) => {   if (!handler.includes('ChangeEvent') && !handler.includes('=>')) {
+          return `onChange={(e: React.ChangeEvent<HTMLInputElement>) => ${handler  }(e)}`;
         }
         return match;
       }
@@ -89,8 +89,8 @@ function findFiles(dir, pattern) {
     
     // Fix onClick handlers without proper typing
     content = content.replace(
-      /onClick=\{([^}]*)\}/g, (match, handler) => { if (!handler.includes('MouseEvent') && !handler.includes('=>') && !handler.includes('()')) {
-          return `onClick={(e: React.MouseEvent) => ${handler}(e)}`;
+      /onClick=\{([^}]*)\}/g, (match, handler) => {   if (!handler.includes('MouseEvent') && !handler.includes('=>') && !handler.includes('()')) {
+          return `onClick={(e: React.MouseEvent) => ${handler  }(e)}`;
         }
         return match;
       }
@@ -101,7 +101,7 @@ function findFiles(dir, pattern) {
     }
   });
 
-  // Fix 5: Add safe property access for common patterns tsxFiles.forEach(filePath => { let content = fs.readFileSync(filePath, 'utf8');
+  // Fix 5: Add safe property access for common patterns tsxFiles.forEach(filePath => {   let content = fs.readFileSync(filePath, 'utf8');
     const original = content;
     
     // Add safe navigation for toFixed calls
@@ -112,7 +112,7 @@ function findFiles(dir, pattern) {
     content = content.replace( /(\w+)\.(\w+)\.toLocaleString\(/g, 'new Date($1?.$2).toLocaleString('
     );
      if (content !== original) { fs.writeFileSync(filePath, content, 'utf8');
-      console.log(`✓ Added safe property access patterns in ${path.basename(filePath)}`);
+      console.log(`✓ Added safe property access patterns in ${path.basename(filePath)  }`);
       totalFixed++;
     }
   });

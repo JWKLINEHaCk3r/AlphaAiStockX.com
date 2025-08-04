@@ -1,7 +1,12 @@
-'use client'; import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'; import { Badge } from '@/components/ui/badge'; import { Button } from '@/components/ui/button'; import { Input } from '@/components/ui/input';
-import { 
-  User,
+'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import { Badge } from "../../../components/ui/badge";
+import { Input } from "../../../components/ui/input";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React, { useState } from 'react';
+import { User, }
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Calendar, Shield } from 'lucide-react';
 
 interface AdminUser {

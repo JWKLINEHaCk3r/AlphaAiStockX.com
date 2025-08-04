@@ -1,9 +1,11 @@
+import React from 'react';
+'use client';
 
-'use client'; import React from 'react'; import nextDynamic from 'next/dynamic'; const AITradingDashboard = nextDynamic(() => import('../components/AITradingDashboard'), {
-    ssr: false
+import dynamic from 'next/dynamic';
+
+const AITradingDashboard = dynamic(() => import('../components/AITradingDashboard'), {
+  ssr: false
 });
- // Force dynamic rendering to prevent static generation issues export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 export default function AITradingPage() {
   return (
@@ -12,5 +14,5 @@ export default function AITradingPage() {
         <AITradingDashboard />
       </div>
     </div>
-  )
+  );
 }

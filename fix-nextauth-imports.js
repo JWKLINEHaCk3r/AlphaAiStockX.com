@@ -4,8 +4,7 @@ const fs = require('fs'); const path = require('path'); const { execSync } = req
 
 // Find all files with getServerSession imports
 function findFilesWithGetServerSession() {
-  try { const result = execSync( 'find . -name "*.ts" -o -name "*.tsx" | xargs grep -l "getServerSession" | grep -v node_modules | grep -v .next', { encoding: 'utf8' }
-    );
+  try {   const result = execSync( 'find . -name "*.ts" -o -name "*.tsx" | xargs grep -l "getServerSession" | grep -v node_modules | grep -v .next', { encoding: 'utf8'   } catch (error) { console.error(error); } catch (error) { console.error(error); });
     return result .trim() .split('\n')
       .filter(file => file.length > 0); } catch (error) { console.log('No files found with getServerSession');
     return [];
@@ -17,9 +16,9 @@ function fixFile(filePath) {
   console.log(`Fixing ${filePath}...`); let content = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
-  // Replace import statements if ( content.includes("import { getServerSession } from 'next-auth'") || content.includes("import { getServerSession } from 'next-auth/next'")
-  ) { content = content .replace(/import { getServerSession } from 'next-auth'(?:\/next)?;?\n?/g, '') .replace(/import { authOptions } from '@\/app\/lib\/auth';?\n?/g, '');
- // Add the new import at the top after other imports if (!content.includes("import { auth } from '@/app/lib/auth'")) {
+  // Replace import statements if ( content.includes("import { getServerSession} from "next-auth";") || content.includes("import { getServerSession} from "next-auth/next";")
+  ) { content = content .replace(/import { getServerSession} from "next-auth";(?:\/next)?;?\n?/g, '') .replace(/import { authOptions } from '@\/app\/lib\/auth';?\n?/g, '');
+ // Add the new import at the top after other imports if (!content.includes("import { auth} from "@/app/lib/auth";")) {
       const importMatch = content.match(/(import.*?from.*?;[\s\n]*)+/);
       if (importMatch) { const importSection = importMatch[0]; const replacement = importSection + "import { auth } from '@/app/lib/auth';\n";
         content = content.replace(importSection, replacement);
@@ -45,11 +44,11 @@ function fixFile(filePath) {
     },
   ];
 
-  patterns.forEach(({ from, to }) => {
+  patterns.forEach(({ from, to }) => {  
     if (from.test(content)) {
       content = content.replace(from, to);
       modified = true;
-    }
+      }
   });
  if (modified) { fs.writeFileSync(filePath, content, 'utf8');
     console.log(`✅ Fixed ${filePath}`);
@@ -69,12 +68,12 @@ console.log(`📁 Found ${files.length} files to fix: `),
 files.forEach(file => console.log(`  - ${file}`));
 
 let fixedCount = 0;
-files.forEach(file => {
+files.forEach(file => {  
   if (fixFile(file)) {
     fixedCount++;
-  }
+    }
 });
  console.log(`\n🎉 Fixed ${fixedCount} out of ${files.length} files`); console.log('🏗️  Running build to verify fixes...');
- try { execSync('npm run build', { stdio: 'inherit' }); console.log('✅ Build successful! All NextAuth imports fixed.'); } catch (error) { console.log('❌ Build failed. Some issues may remain.');
+ try {   execSync('npm run build', { stdio: 'inherit'   } catch (error) { console.error(error); } catch (error) { console.error(error); }); console.log('✅ Build successful! All NextAuth imports fixed.'); } catch (error) { console.log('❌ Build failed. Some issues may remain.');
   process.exit(1);
 }

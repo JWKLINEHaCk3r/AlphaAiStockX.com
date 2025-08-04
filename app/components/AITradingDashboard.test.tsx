@@ -1,8 +1,8 @@
+import React from 'react';
 import { Card } from "../../components/ui/card";
 // ...existing code...
 // This file does not contain a local Card component declaration
 // Ensure to import Card from ui/card if needed
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'; import '@testing-library/jest-dom'; import AITradingDashboard from './AITradingDashboard'; describe('AITradingDashboard', () => { it('renders loading state initially', () => {
     render(<AITradingDashboard />), expect(screen.getByText(/Initializing AI Trading Engine/i)).toBeInTheDocument()
    }); it('renders dashboard after trader initializes', async () => { render(<AITradingDashboard />), await waitFor(() => {
@@ -25,3 +25,5 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'; imp
     console.error = originalError
   })
 });
+
+export default AITradingDashboard.test;

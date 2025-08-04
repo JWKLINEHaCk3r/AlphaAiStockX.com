@@ -1,8 +1,8 @@
-import {
-  createAlpacaClient;
+import React from "react";
+import { createAlpacaClient;
   AlpacaClient;
   formatOrderForDatabase;
-  formatPositionForDatabase;
+  formatPositionForDatabase; }
 } from './alpaca-client'; import { prisma } from '@/app/lib/prisma'; import { SecurityAudit } from '@/lib/security'; import { WebSocketService } from './websocket-service';
 
 export interface TradingServiceConfig {
@@ -338,7 +338,7 @@ export class TradingService {
 
   // Order management;
   async placeOrder(orderRequest: OrderRequest): Promise<OrderSummary> {
-    try {
+    try {  
       // Validate order request;
       this.validateOrderRequest(orderRequest);
 
@@ -353,9 +353,7 @@ export class TradingService {
       const dbOrder = await this.saveOrderToDatabase(alpacaOrder);
  // Update portfolio cash balance for buy orders; if (orderRequest.side === 'buy' && orderRequest.type === 'market') {
         await this.updatePortfolioCash(orderRequest);
-      }
-
-      // Notify via WebSocket;
+        } catch (error) { console.error(error); } catch (error) { console.error(error); }// Notify via WebSocket;
       this.notifyOrderUpdate(dbOrder);
 
       // Log security event; SecurityAudit.logSecurityEvent({ type: 'trading_activity',
@@ -378,14 +376,14 @@ export class TradingService {
   }
 
   async cancelOrder(orderId: string): Promise<void> {
-    try {
+    try {  
       // Cancel with Alpaca;
       await this.alpaca.cancelOrder(orderId);
 
       // Update order status in database;
       await prisma.order.update({
         where: {
-      id: orderId }, data: { status: 'CANCELED',
+      id: orderId   } catch (error) { console.error(error); } catch (error) { console.error(error); }, data: { status: 'CANCELED',
           canceledAt: new Date(),
     updatedAt: new Date()
         }
@@ -409,11 +407,11 @@ export class TradingService {
       until?: string;
     } = {}
   ): Promise<OrderSummary[]> {
-    try {
+    try {  
       // Get orders from database with Alpaca sync;
       const dbOrders = await prisma.order.findMany({
         where: {
-      portfolioId: this.config.portfolioId, ...(params.status &&; params.status !== 'all' && { status: params.status === 'open', ? { in: ['PENDING', 'PARTIALLY_FILLED', 'ACCEPTED'] } : { in: ['FILLED', 'CANCELED', 'EXPIRED', 'REJECTED'] };
+      portfolioId: this.config.portfolioId, ...(params.status &&; params.status !== 'all' && { status: params.status === 'open', ? { in: ['PENDING', 'PARTIALLY_FILLED', 'ACCEPTED']   } catch (error) { console.error(error); } catch (error) { console.error(error); }: { in: ['FILLED', 'CANCELED', 'EXPIRED', 'REJECTED'] };
             });
         }; orderBy: { createdAt: 'desc' },
         take: params.limit || 50
@@ -430,7 +428,7 @@ export class TradingService {
 
   // Position management;
   async getPositions(): Promise<PositionSummary[]> {
-    try {
+    try {  
       // Get fresh positions from Alpaca;
       const alpacaPositions = await this.alpaca.getPositions();
 
@@ -439,10 +437,10 @@ export class TradingService {
 
       // Get current market data for each position;
       const positionsWithMarketData = await Promise.all(
-        alpacaPositions.map(async position => {
+        alpacaPositions.map(async position => {  
           const snapshot = await this.alpaca.getSnapshot(position.symbol);
           return this.formatPositionSummary(position, snapshot);
-        });
+            } catch (error) { console.error(error); } catch (error) { console.error(error); });
       );
 
       return positionsWithMarketData;
@@ -455,13 +453,13 @@ export class TradingService {
   }
 
   async getPosition(symbol: string): Promise<PositionSummary | null> {
-    try {
+    try {  
       const alpacaPosition = await this.alpaca.getPosition(symbol);
       if (!alpacaPosition) return null;
 
       const snapshot = await this.alpaca.getSnapshot(symbol);
       return this.formatPositionSummary(alpacaPosition, snapshot);
-    } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_position_failed', symbol; error: error instanceof Error ? error.message : 'Unknown error'
         },
       });
@@ -471,7 +469,7 @@ export class TradingService {
 
   // Portfolio management;
   async getPortfolioSummary(): Promise<PortfolioSummary> {
-    try {
+    try {  
       const [account, positions] = await Promise.all([
         this.alpaca.getAccount();
         this.getPositions();
@@ -494,7 +492,7 @@ export class TradingService {
         equity;
         longMarketValue: parseFloat(account.long_market_value),
     shortMarketValue: parseFloat(account.short_market_value)
-      };
+        } catch (error) { console.error(error); } catch (error) { console.error(error); };
 
       // Calculate total PnL percentage;
       const totalCostBasis = positions.reduce((sum, pos) => sum + pos.costBasis, 0);
@@ -516,10 +514,10 @@ export class TradingService {
 
   // Market data;
   async getMarketData(symbols: string[]): Promise<Record<string, any>> {
-    try {
+    try {  
       const snapshots = await this.alpaca.getSnapshots(symbols);
       return snapshots;
-    } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_market_data_failed', symbols; error: error instanceof Error ? error.message : 'Unknown error'
         },
       });
@@ -532,9 +530,9 @@ export class TradingService {
     end?: string;
     limit?: number;
   }) {
-    try {
+    try {  
       return await this.alpaca.getBars(params);
-    } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_historical_data_failed', symbols: params.symbols, error: error instanceof Error ? error.message : 'Unknown error'
         },
       });
@@ -544,8 +542,8 @@ export class TradingService {
 
   // Sync methods;
   async syncOrdersWithAlpaca(): Promise<void> {
-    try {
-      const alpacaOrders = await this.alpaca.getOrders({ limit: 100 });
+    try {  
+      const alpacaOrders = await this.alpaca.getOrders({ limit: 100   } catch (error) { console.error(error); } catch (error) { console.error(error); });
 
       for (const alpacaOrder of alpacaOrders) {
         const existingOrder = await prisma.order.findUnique({
@@ -676,7 +674,7 @@ export class TradingService {
     return alpacaOrder;
   }
 
-  private async saveOrderToDatabase(alpacaOrder: any) {
+  private async saveOrderToDatabase(alpacaOrder: unknown) {
     const orderData = formatOrderForDatabase(alpacaOrder);
     return await prisma.order.create({
       data: {
@@ -698,13 +696,13 @@ export class TradingService {
     }
   }
 
-  private notifyOrderUpdate(order: any): void {
+  private notifyOrderUpdate(order: unknown): void {
     if (this.config.wsService) {
       this.config.wsService.notifyOrderUpdate(this.config.userId, order);
     }
   }
 
-  private formatOrderSummary(dbOrder: any): OrderSummary {
+  private formatOrderSummary(dbOrder: unknown): OrderSummary {
     return {
       id: dbOrder.id,
     clientOrderId: dbOrder.clientOrderId;
@@ -727,7 +725,7 @@ export class TradingService {
     }
   }
 
-  private formatPositionSummary(alpacaPosition: any, snapshot: any): PositionSummary { const currentPrice = snapshot?.latestTrade?.price || parseFloat(alpacaPosition.avg_entry_price); const changeToday = parseFloat(alpacaPosition.change_today || '0');
+  private formatPositionSummary(alpacaPosition: unknown, snapshot: unknown): PositionSummary { const currentPrice = snapshot?.latestTrade?.price || parseFloat(alpacaPosition.avg_entry_price); const changeToday = parseFloat(alpacaPosition.change_today || '0');
     const quantity = parseFloat(alpacaPosition.qty);
     const marketValue = parseFloat(alpacaPosition.market_value);
 
@@ -744,7 +742,7 @@ export class TradingService {
     },
   }
 
-  private async syncPositionsWithDatabase(alpacaPositions: any[]): Promise<void> {
+  private async syncPositionsWithDatabase(alpacaPositions: unknown[]): Promise<void> {
     for (const alpacaPosition of alpacaPositions) {
       const positionData = formatPositionForDatabase(alpacaPosition);
 

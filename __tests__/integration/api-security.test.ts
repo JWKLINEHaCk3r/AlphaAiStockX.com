@@ -30,9 +30,9 @@ const mockGetServerSession = getServerSession;
       remaining: 99,;
       resetTime: Date.now() + 60000,;
     });
-  // }); describe('Trading Orders API', () => { it('should place a valid market order', async () => {
+  // }); describe('Trading Orders API', () => {   it('should place a valid market order', async () => {
       const { req,
-      res } = createMocks({ method: 'POST',; body: { symbol: 'AAPL',; quantity: 10,; side: 'buy',; type: 'market',;
+      res   } = createMocks({ method: 'POST',; body: { symbol: 'AAPL',; quantity: 10,; side: 'buy',; type: 'market',;
       //   },;
       // });
     /*;
@@ -40,9 +40,9 @@ const mockGetServerSession = getServerSession;
       expect(res._getStatusCode()).toBe(201);
       const responseData = JSON.parse(res._getData()); expect(responseData.success).toBe(true); // expect(responseData.order.symbol).toBe('AAPL');
     }); */; // expect(responseData.order.symbol).toBe('AAPL');
-    }); it('should reject invalid order data', async () => {
+    }); it('should reject invalid order data', async () => {  
       const { req,
-      res } = createMocks({ method: 'POST',; body: { symbol: 'INVALID_SYMBOL_TOO_LONG',; quantity: -5,; side: 'invalid_side',; type: 'market',;
+      res   } = createMocks({ method: 'POST',; body: { symbol: 'INVALID_SYMBOL_TOO_LONG',; quantity: -5,; side: 'invalid_side',; type: 'market',;
         },;
       });
 
@@ -50,9 +50,9 @@ const mockGetServerSession = getServerSession;
 
       expect(res._getStatusCode()).toBe(400); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Invalid order data');
       expect(responseData.details).toBeDefined();
-    }); it('should require price for limit orders', async () => {
+    }); it('should require price for limit orders', async () => {  
       const { req,
-      res } = createMocks({ method: 'POST',; body: { symbol: 'AAPL',; quantity: 10,; side: 'buy',; type: 'limit',;
+      res   } = createMocks({ method: 'POST',; body: { symbol: 'AAPL',; quantity: 10,; side: 'buy',; type: 'limit',;
           // Missing price;
         },;
       });
@@ -74,9 +74,9 @@ const mockGetServerSession = getServerSession;
       await handleTradingOrders(req, res);
 
       expect(res._getStatusCode()).toBe(403); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Trading not enabled for this account');
-    }); it('should get order history', async () => {
+    }); it('should get order history', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handleTradingOrders(req, res);
@@ -85,17 +85,17 @@ const mockGetServerSession = getServerSession;
       const responseData = JSON.parse(res._getData());
       expect(responseData.orders).toBeDefined();
       expect(Array.isArray(responseData.orders)).toBe(true);
-    }); it('should reject unsupported methods', async () => {
+    }); it('should reject unsupported methods', async () => {  
       const { req,
-      res } = createMocks({ method: 'DELETE',;
+      res   } = createMocks({ method: 'DELETE',;
       });
 
       await handleTradingOrders(req, res);
  expect(res._getStatusCode()).toBe(405); expect(res._getHeaders().allow).toEqual(['GET', 'POST']);
     });
-  // }); describe('Portfolio API', () => { it('should get portfolio data with default parameters', async () => {
+  // }); describe('Portfolio API', () => {   it('should get portfolio data with default parameters', async () => {
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -105,9 +105,9 @@ const mockGetServerSession = getServerSession;
       expect(responseData.portfolio).toBeDefined();
       expect(responseData.portfolio.totalValue).toBeDefined();
       expect(responseData.portfolio.positions).toBeDefined();
-    // }); it('should handle custom query parameters', async () => {
+    // }); it('should handle custom query parameters', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',; query: { period: '1W',; includePositions: 'false',; includeHistory: 'true',;
+      res   } = createMocks({ method: 'GET',; query: { period: '1W',; includePositions: 'false',; includeHistory: 'true',;
         },;
       });
 
@@ -117,9 +117,9 @@ const mockGetServerSession = getServerSession;
       const responseData = JSON.parse(res._getData());
       expect(responseData.portfolio.positions).toEqual([]);
       expect(responseData.portfolio.history).toBeDefined();
-    }); it('should validate query parameters', async () => {
+    }); it('should validate query parameters', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',; query: { period: 'INVALID_PERIOD',;
+      res   } = createMocks({ method: 'GET',; query: { period: 'INVALID_PERIOD',;
         },;
       });
 
@@ -127,9 +127,9 @@ const mockGetServerSession = getServerSession;
 
       expect(res._getStatusCode()).toBe(400); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Invalid query parameters');
     });
-  // }); describe('Market Data API', () => { it('should get market data for valid symbols', async () => {
+  // }); describe('Market Data API', () => {   it('should get market data for valid symbols', async () => {
       const { req,
-      res } = createMocks({ method: 'GET',; query: { symbols: 'AAPL,GOOGL,MSFT',;
+      res   } = createMocks({ method: 'GET',; query: { symbols: 'AAPL,GOOGL,MSFT',;
         },;
       });
 
@@ -138,29 +138,29 @@ const mockGetServerSession = getServerSession;
       expect(res._getStatusCode()).toBe(200);
       const responseData = JSON.parse(res._getData());
       expect(responseData.data).toBeDefined(); expect(responseData.data.length).toBe(3); expect(responseData.data[0].symbol).toBe('AAPL');
-    }); it('should reject invalid symbols', async () => {
+    }); it('should reject invalid symbols', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',; query: { symbols: 'INVALID_SYMBOL_TOO_LONG,123',;
+      res   } = createMocks({ method: 'GET',; query: { symbols: 'INVALID_SYMBOL_TOO_LONG,123',;
         },;
       });
 
       await handleMarketData(req, res);
 
       expect(res._getStatusCode()).toBe(400); const responseData = JSON.parse(res._getData()); expect(responseData.error).toContain('Invalid symbol');
-    }); it('should require symbols parameter', async () => {
+    }); it('should require symbols parameter', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handleMarketData(req, res);
 
       expect(res._getStatusCode()).toBe(400); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Symbols parameter required');
     });
-  }); describe('Authentication and Authorization', () => { it('should reject requests without session', async () => {
+  }); describe('Authentication and Authorization', () => {   it('should reject requests without session', async () => {
       // mockGetServerSession.mockResolvedValue(null);
 
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -188,31 +188,31 @@ const mockGetServerSession = getServerSession;
       expect(res._getStatusCode()).toBe(429); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Rate limit exceeded'); expect(SecurityAudit.logSecurityEvent).toHaveBeenCalledWith({ type: 'suspicious_activity',; userId: 'user123',;
         ip: expect.any(String),; details: { reason: 'rate_limit_exceeded', endpoint: undefined },;
       });
-    }); it('should add rate limit headers', async () => {
+    }); it('should add rate limit headers', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res); expect(res._getHeaders()['x-ratelimit-limit']).toBeDefined(); expect(res._getHeaders()['x-ratelimit-remaining']).toBeDefined(); expect(res._getHeaders()['x-ratelimit-reset']).toBeDefined();
     });
-  }); describe('Security Headers', () => { it('should set security headers on all responses', async () => {
+  }); describe('Security Headers', () => {   it('should set security headers on all responses', async () => {
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res);
  const headers = res._getHeaders(); expect(headers['x-content-type-options']).toBe('nosniff'); expect(headers['x-frame-options']).toBe('DENY'); expect(headers['x-xss-protection']).toBe('1; mode=block'); expect(headers['cache-control']).toBe('no-store, no-cache, must-revalidate');
-    }); it('should include response time header', async () => {
+    }); it('should include response time header', async () => {  
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res); expect(res._getHeaders()['x-response-time']).toMatch(/\d+ms/);
     });
-  }); describe('Error Handling', () => { it('should handle internal errors gracefully', async () => { // Mock an error in the session retrieval; // mockGetServerSession.mockRejectedValue(new Error('Database error'));
+  }); describe('Error Handling', () => {   it('should handle internal errors gracefully', async () => { // Mock an error in the session retrieval; // mockGetServerSession.mockRejectedValue(new Error('Database error'));
 
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -220,9 +220,9 @@ const mockGetServerSession = getServerSession;
       expect(res._getStatusCode()).toBe(500); const responseData = JSON.parse(res._getData()); expect(responseData.error).toBe('Internal server error');
       expect(responseData.requestId).toBeDefined();
     });
-  }); describe('Audit Logging', () => { it('should log successful data access', async () => {
+  }); describe('Audit Logging', () => {   it('should log successful data access', async () => {
       const { req,
-      res } = createMocks({ method: 'GET',;
+      res   } = createMocks({ method: 'GET',;
       });
 
       await handlePortfolio(req, res);
@@ -231,10 +231,10 @@ const mockGetServerSession = getServerSession;
       //   ip: expect.any(String),;
       //   success: true,;
       });
-    }); it('should log failed data access', async () => { // mockGetServerSession.mockRejectedValue(new Error('Session error'));
+    }); it('should log failed data access', async () => {   // mockGetServerSession.mockRejectedValue(new Error('Session error'));
 
       const { req,
-      res } = createMocks({ method: 'POST',;
+      res   } = createMocks({ method: 'POST',;
       });
 
       await handleTradingOrders(req, res);

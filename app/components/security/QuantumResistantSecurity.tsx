@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Shield, 
+import { Shield, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Lock, 
   Key, 
   Eye, 
@@ -25,7 +26,7 @@ import {
   Activity,
   TrendingUp,
   BarChart3,
-  Clock,
+  Clock, }
   Target, AlertCircle } from 'lucide-react';
 
 interface SecurityMetric {
@@ -68,20 +69,20 @@ export default function QuantumResistantSecurity() {
     }, 3000);
   };
 
-  const getStatusColor = (status: string) => { switch (status) { case 'secure': return 'text-green-400 bg-green-900/30'; case 'warning': return 'text-yellow-400 bg-yellow-900/30'; case 'critical': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'secure': return 'text-green-400 bg-green-900/30'; case 'warning': return 'text-yellow-400 bg-yellow-900/30'; case 'critical': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
 
-  const getThreatLevelColor = (level: string) => { switch (level) { case 'low': return 'text-green-400'; case 'medium': return 'text-yellow-400'; case 'high': return 'text-orange-400'; case 'critical': return 'text-red-400'; default: return 'text-gray-400'
-    }
+  const getThreatLevelColor = (level: string) => {   switch (level) { case 'low': return 'text-green-400'; case 'medium': return 'text-yellow-400'; case 'high': return 'text-orange-400'; case 'critical': return 'text-red-400'; default: return 'text-gray-400'
+      }
   };
 
-  const getProtocolTypeColor = (type: string) => { switch (type) { case 'quantum': return 'text-purple-400 bg-purple-900/30'; case 'classical': return 'text-blue-400 bg-blue-900/30'; case 'hybrid': return 'text-cyan-400 bg-cyan-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getProtocolTypeColor = (type: string) => {   switch (type) { case 'quantum': return 'text-purple-400 bg-purple-900/30'; case 'classical': return 'text-blue-400 bg-blue-900/30'; case 'hybrid': return 'text-cyan-400 bg-cyan-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
 
-  const getProtocolStatusColor = (status: string) => { switch (status) { case 'active': return 'text-green-400'; case 'standby': return 'text-yellow-400'; case 'upgrading': return 'text-blue-400'; default: return 'text-gray-400'
-    }
+  const getProtocolStatusColor = (status: string) => {   switch (status) { case 'active': return 'text-green-400'; case 'standby': return 'text-yellow-400'; case 'upgrading': return 'text-blue-400'; default: return 'text-gray-400'
+      }
   };
 
   // Simple progress bar component const ProgressBar = ({ value className = '' }: { value: number, className?: string }) => (

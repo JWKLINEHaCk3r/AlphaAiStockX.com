@@ -1,3 +1,4 @@
+import { TradingDashboard } from "../../components/ui/trading-dashboard-demo";
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import TradingDashboardDemo from "../../components/ui/trading-dashboard-demo";
@@ -25,8 +26,8 @@ jest.mock('recharts', () => ({
     <div data-testid="responsive-container">{children}</div>
   )
 }));
-const renderWithProviders = (component: React.ReactElement) => {
-  // return render(<ThemeProvider defaultTheme="dark">{component}</ThemeProvider>);
+const renderWithProviders = (component: React.ReactElement) => {  
+  // return render(<ThemeProvider defaultTheme="dark">{component  }</ThemeProvider>);
   return render(component);
 }; describe('TradingDashboard', () => {
   beforeEach(() => {
@@ -60,8 +61,8 @@ const renderWithProviders = (component: React.ReactElement) => {
     renderWithProviders(<TradingDashboardDemo />);
  await waitFor(() => { expect(screen.getByTestId('portfolio-value')).toHaveTextContent('$100,000');
     });
-  }); it('handles order placement', async () => {
-    renderWithProviders(<TradingDashboardDemo />); const symbolInput = screen.getByTestId('symbol-input'); const quantityInput = screen.getByTestId('quantity-input'); const placeOrderButton = screen.getByTestId('place-order-button'); fireEvent.change(symbolInput, { target: { value: 'AAPL' } }); fireEvent.change(quantityInput, { target: { value: '10' } });
+  }); it('handles order placement', async () => {  
+    renderWithProviders(<TradingDashboardDemo />); const symbolInput = screen.getByTestId('symbol-input'); const quantityInput = screen.getByTestId('quantity-input'); const placeOrderButton = screen.getByTestId('place-order-button'); fireEvent.change(symbolInput, { target: { value: 'AAPL'   } }); fireEvent.change(quantityInput, { target: { value: '10' } });
     fireEvent.click(placeOrderButton);
  await waitFor(() => { expect(global.fetch).toHaveBeenCalledWith('/api/trading/orders', { method: 'POST', headers: { 'Content-Type': 'application/json'
         }, body: JSON.stringify({ symbol: 'AAPL', quantity: 10, type: 'market', side: 'buy'
@@ -110,3 +111,4 @@ const renderWithProviders = (component: React.ReactElement) => {
     renderWithProviders(<TradingDashboardDemo />); expect(screen.getByText('Please log in to access trading')).toBeTruthy();
   });
 });
+export default TradingDashboard.test;

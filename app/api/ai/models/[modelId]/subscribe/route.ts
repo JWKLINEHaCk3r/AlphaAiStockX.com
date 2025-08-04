@@ -1,3 +1,4 @@
+import React from "react";
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(
@@ -5,9 +6,9 @@ export async function POST(
   context: { params: Promise<{
       modelId: string }> }
 ) {
-  try {
+  try {  
     const params = await context.params;
-    const { modelId } = params;
+    const { modelId   } catch (error) { console.error(error); } catch (error) { console.error(error); }= params;
     const body = await request.json();
     
     // TODO: Complete this comment
@@ -33,9 +34,9 @@ export async function GET(
   context: { params: Promise<{
       modelId: string }> }
 ) {
-  try {
+  try {  
     const params = await context.params;
-    const { modelId } = params;
+    const { modelId   } catch (error) { console.error(error); } catch (error) { console.error(error); }= params;
     
     // TODO: Complete this comment
     // Return subscription status for the model

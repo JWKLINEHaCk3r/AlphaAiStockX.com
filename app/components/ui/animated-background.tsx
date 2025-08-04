@@ -1,4 +1,5 @@
 'use client';
+import { AnimatedBackground } from "../../../components/ui/animated-background-client";
 
 import React, { useRef, useEffect } from 'react';
 
@@ -33,13 +34,13 @@ export default function AnimatedBackground() {
     },
   }, [colors]);
 
-  const initParticles = React.useCallback((width: number, height: number) => {
+  const initParticles = React.useCallback((width: number, height: number) => {  
     const particleCount = Math.min(150, Math.floor((width * height) / 8000));
     particlesRef.current = [];
     
     for (let i = 0; i < particleCount; i++) {
       particlesRef.current.push(createParticle(width, height));
-    }
+      }
   }, [createParticle]);
 
   const updateParticle = (particle: Particle, width: number, height: number) => {
@@ -67,7 +68,7 @@ export default function AnimatedBackground() {
     ctx.restore();
   };
 
-  const drawConnections = (ctx: CanvasRenderingContext2D, particles: Particle[]) => {
+  const drawConnections = (ctx: CanvasRenderingContext2D, particles: Particle[]) => {  
     const maxDistance = 120;
     
     for (let i = 0; i < particles.length; i++) {
@@ -85,19 +86,19 @@ export default function AnimatedBackground() {
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
           ctx.restore();
-        }
+          }
       }
     }
   };
 
-  const animate = React.useCallback(() => {
+  const animate = React.useCallback(() => {  
     const canvas = canvasRef.current;
     if (!canvas) return; const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const { width,
       height
-    } = canvas;
+      } = canvas;
     
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
@@ -114,12 +115,12 @@ export default function AnimatedBackground() {
     animationFrameRef.current = requestAnimationFrame(animate);
   }, []);
 
-  const handleResize = React.useCallback(() => {
+  const handleResize = React.useCallback(() => {  
     if (resizeTimeout.current) {
       clearTimeout(resizeTimeout.current);
-    }
+      }
     
-    resizeTimeout.current = setTimeout(() => {
+    resizeTimeout.current = setTimeout(() => {  
       const canvas = canvasRef.current;
       if (!canvas) return;
       
@@ -130,7 +131,7 @@ export default function AnimatedBackground() {
       canvas.height = rect.height * dpr; const ctx = canvas.getContext('2d');
       if (ctx) {
         ctx.scale(dpr, dpr);
-      }
+        }
       
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
@@ -144,7 +145,7 @@ export default function AnimatedBackground() {
     }, 100);
   }, [initParticles]);
 
-  useEffect(() => {
+  useEffect(() => {  
     const canvas = canvasRef.current;
     if (!canvas) return;
     
@@ -158,7 +159,7 @@ export default function AnimatedBackground() {
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
-      }
+        }
       if (resizeTimeout.current) {
         clearTimeout(resizeTimeout.current); } window.removeEventListener('resize', handleResize);
     };

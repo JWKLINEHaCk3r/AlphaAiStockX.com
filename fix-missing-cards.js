@@ -41,7 +41,7 @@ export const AIMarketCard = ({
   price: number,
   change: number, aiConfidence: number, aiRecommendation: 'BUY' | 'SELL' | 'HOLD',
   isLoading?: boolean;
-}) => { const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red'; return ( <Card className={['relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 'border-yellow-500/50 shadow-yellow-500/25', 'shadow-lg'].join(' ')}>
+}) => {   const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red'; return ( <Card className={['relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' : aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' : 'border-yellow-500/50 shadow-yellow-500/25', 'shadow-lg'].join(' ')  }>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between"> <CardTitle className="text-lg font-bold">{symbol}</CardTitle> <Badge variant={aiRecommendation === 'BUY' ? 'default' : aiRecommendation === 'SELL' ? 'destructive' : 'secondary'}>
             <Brain className="w-3 h-3 mr-1" />
@@ -236,11 +236,11 @@ export const MarketOverview = ({
     </CardHeader>
     <CardContent className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        {Object.entries(marketData).map(([index, data]) => {
+        {Object.entries(marketData).map(([index, data]) => {  
           const isPositive = data.change >= 0;
           const name = index.toUpperCase();
           return (
-            <div key={index} className="text-center p-3 bg-slate-800/50 rounded-lg">
+            <div key={index  } className="text-center p-3 bg-slate-800/50 rounded-lg">
               <div className="text-sm text-slate-400 mb-1">{name}</div>
               <div className="font-bold">{data.value.toLocaleString()}</div> <div className={\`text-sm flex items-center justify-center gap-1 \${ isPositive ? 'text-green-400' : 'text-red-400'
               }\`}> {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}, {isPositive ? '+' : ''},
@@ -326,10 +326,10 @@ export const AIPerformanceCard = ({
 }
 
 // Create missing trading components
- try { const componentsDir = path.join(process.cwd(), 'components/ui');
+ try {   const componentsDir = path.join(process.cwd(), 'components/ui');
     
     // Ensure components directory exists
-    if (!fs.existsSync(componentsDir)) { fs.mkdirSync(componentsDir, { recursive: true }); console.log('📁 Created components/ui directory');
+    if (!fs.existsSync(componentsDir)) { fs.mkdirSync(componentsDir, { recursive: true   } catch (error) { console.error(error); } catch (error) { console.error(error); }); console.log('📁 Created components/ui directory');
     }
 
     const components = generateMissingCards();

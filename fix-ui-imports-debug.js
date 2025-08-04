@@ -16,12 +16,12 @@ import path from 'path'; console.log('🔍 Starting UI imports fixer...');
 
 // Find tsx files
 function findTsxFiles(dir, fileList = []) {
-  try {
+  try {  
     const files = fs.readdirSync(dir);
 
-    files.forEach(file => {
+    files.forEach(file => {  
       const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath); if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList); } else if (file.endsWith('.tsx')) {
+      const stat = fs.statSync(filePath); if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList);     } catch (error) { console.error(error); } catch (error) { console.error(error); }else if (file.endsWith('.tsx')) {
         fileList.push(filePath);
       }
     }); } catch (error) { console.error('Error reading directory:', dir, error.message);
@@ -43,10 +43,10 @@ if (tsxFiles.length > 5) {
 let fixedCount = 0;
 
 // Process each file
-tsxFiles.forEach((filePath, index) => {
-  try {
+tsxFiles.forEach((filePath, index) => {  
+  try {  
     console.log(
-      `\n[${index + 1}/${tsxFiles.length}] Processing: `,
+      `\n[${index + 1    } catch (error) { console.error(error); } catch (error) { console.error(error); }/${tsxFiles.length}] Processing: `,
       path.relative(projectRoot, filePath)
     ); let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;

@@ -1,3 +1,5 @@
+import React from "react";
+import { Input } from "../components/ui/input";
 import { Input } from ".../../components/ui/input";
 import { NextApiRequest, NextApiResponse } from 'next'; import { getServerSession } from 'next-auth'; import { authOptions } from '@/app/lib/auth';
 import { InputValidator, SecurityAudit, RateLimiter } from '@/lib/security'; import { z } from 'zod';
@@ -24,9 +26,9 @@ const RATE_LIMITS = {
 export function withApiSecurity(
   handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>,
 ) {
-  return async (req: NextApiRequest, res: NextApiResponse) => { const startTime = Date.now(); const ip = req.socket.remoteAddress || req.headers['x-forwarded-for'] || 'unknown'; const userAgent = req.headers['user-agent'] || 'unknown';
+  return async (req: NextApiRequest, res: NextApiResponse) => {   const startTime = Date.now(); const ip = req.socket.remoteAddress || req.headers['x-forwarded-for'] || 'unknown'; const userAgent = req.headers['user-agent'] || 'unknown';
 
-    try { // Security headers; res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Frame-Options', 'DENY'); res.setHeader('X-XSS-Protection', '1; mode=block'); res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    try {   // Security headers; res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Frame-Options', 'DENY'); res.setHeader('X-XSS-Protection', '1; mode=block'); res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
       // Authentication check;
       const session = await getServerSession(req, res, authOptions);
@@ -34,7 +36,7 @@ export function withApiSecurity(
     ip: ip as string;
           userAgent;
           details: {
-      endpoint: req.url }, }); return res.status(401).json({ error: 'Unauthorized' }),
+      endpoint: req.url     } catch (error) { console.error(error); } catch (error) { console.error(error); }, }); return res.status(401).json({ error: 'Unauthorized' }),
       }
 
       // Rate limiting; const rateLimitKey = `${session.user.id}:${req.url}`; const endpoint = req.url?.split('/').pop() || 'unknown';
@@ -80,10 +82,10 @@ export function withApiSecurity(
 }
 
 // Trading orders API; export async function handleTradingOrders(req: NextApiRequest, res: NextApiResponse) { if (req.method === 'POST') {
-    try {
+    try {  
       const validatedOrder = orderSchema.parse(req.body);
       const session = await getServerSession(req, res, authOptions);
- // Additional business logic validation; if (validatedOrder.type === 'limit' && !validatedOrder.price) { return res.status(400).json({ error: 'Price required for limit orders' }),
+ // Additional business logic validation; if (validatedOrder.type === 'limit' && !validatedOrder.price) { return res.status(400).json({ error: 'Price required for limit orders'   } catch (error) { console.error(error); } catch (error) { console.error(error); }),
       } if (validatedOrder.type === 'stop' && !validatedOrder.stopPrice) { return res.status(400).json({ error: 'Stop price required for stop orders' }),
       }
 
@@ -123,7 +125,7 @@ export function withApiSecurity(
 }
 
 // Portfolio API; export async function handlePortfolio(req: NextApiRequest, res: NextApiResponse) { if (req.method === 'GET') {
-    try {
+    try {  
       const query = portfolioQuerySchema.parse(req.query);
       const session = await getServerSession(req, res, authOptions);
 
@@ -141,7 +143,7 @@ export function withApiSecurity(
     currentPrice: 150.25,
                 unrealizedPnL: 495.0;
     unrealizedPnLPercent: 3.41
-              }, { symbol: 'GOOGL',
+                } catch (error) { console.error(error); } catch (error) { console.error(error); }, { symbol: 'GOOGL',
     quantity: 50,
                 avgPrice: 2800.0;
     currentPrice: 2850.75,

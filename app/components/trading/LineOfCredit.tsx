@@ -1,14 +1,16 @@
 'use client';
+import { Slider } from "../../../components/ui/slider";
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
-import { 
-  CreditCard, 
+import { CreditCard, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   DollarSign, 
   TrendingUp, 
   Shield, 
@@ -19,7 +21,7 @@ import {
   Percent,
   FileText,
   Target,
-  BarChart3,
+  BarChart3, }
   Info, Building } from 'lucide-react';
 
 interface CreditTerms {
@@ -45,7 +47,7 @@ export default function LineOfCredit() {
   const maxLoanAmount = 500000;
   const minLoanAmount = 10000;
 
-  const calculateTerms = React.useCallback(() => {
+  const calculateTerms = React.useCallback(() => {  
     // Calculate interest rate based on credit score
     let interestRate = 12.0; // Base rate
     if (creditScore >= 800) interestRate = 6.5;
@@ -62,7 +64,7 @@ export default function LineOfCredit() {
     const monthlyRate = interestRate / 100 / 12;
     const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
     const totalInterest = (monthlyPayment * termMonths) - loanAmount;
- // Determine approval status let approvalStatus: 'pending' | 'approved' | 'denied' = 'pending', if (creditScore >= 650 && annualIncome >= 50000) { approvalStatus = 'approved'; } else if (creditScore < 600 || annualIncome < 30000) { approvalStatus = 'denied';
+ // Determine approval status let approvalStatus: 'pending' | 'approved' | 'denied' = 'pending', if (creditScore >= 650 && annualIncome >= 50000) { approvalStatus = 'approved';   } else if (creditScore < 600 || annualIncome < 30000) { approvalStatus = 'denied';
     }
 
     setTerms({
@@ -86,8 +88,8 @@ export default function LineOfCredit() {
  const getCreditScoreColor = (score: number) => { if (score >= 800) return 'text-green-400'; if (score >= 750) return 'text-blue-400'; if (score >= 700) return 'text-yellow-400'; if (score >= 650) return 'text-orange-400'; return 'text-red-400';
   };
 
-  const getApprovalColor = (status: string) => { switch (status) { case 'approved': return 'text-green-400 bg-green-900/30'; case 'denied': return 'text-red-400 bg-red-900/30'; default: return 'text-yellow-400 bg-yellow-900/30'
-    }
+  const getApprovalColor = (status: string) => {   switch (status) { case 'approved': return 'text-green-400 bg-green-900/30'; case 'denied': return 'text-red-400 bg-red-900/30'; default: return 'text-yellow-400 bg-yellow-900/30'
+      }
   };
 
   return (

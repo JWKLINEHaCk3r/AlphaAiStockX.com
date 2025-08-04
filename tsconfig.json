@@ -3,7 +3,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "es2023"
+      "es6"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,22 +21,13 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["./components/*"],
-      "@/app/*": ["./app/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/hooks/*": ["./hooks/*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "target": "ES2022",
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": false,
-    "noUncheckedIndexedAccess": false,
-    "noImplicitReturns": false,
-    "verbatimModuleSyntax": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false
+    "target": "es2017",
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",
@@ -46,8 +37,8 @@
   ],
   "exclude": [
     "node_modules",
-    "react-demo",
-    "workspaces",
-    "src"
+    ".next",
+    "out",
+    "cypress"
   ]
 }

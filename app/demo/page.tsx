@@ -1,5 +1,5 @@
-'use client'; import React from 'react';
-
+import React from 'react';
+'use client';
 export default function DemoPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white">

@@ -1,6 +1,8 @@
+import React from "react";
+import React from "react";
+'use client';
+
 import { Card } from "./components/ui/card";
-
-
 
 // Fixer script: Only manipulates import statements as text. Never generates or requires .js or .tsx card components.
 // Card components are referenced by name only, no .tsx or .js import for Node.js compatibility in Node scripts.
@@ -16,7 +18,7 @@ console.log('🔧 Fixing all exports and imports in AlphaAI StockX...');
 
 // Function to fix React imports
 function fixReactImports(content) {
-  // Fix React imports for client components if ( content.includes("'use client'") && !content.includes('import React') && content.includes('React.')
+// Fix React imports for client components if ( content.includes("") && !content.includes('import React') && content.includes('React.')
   ) { content = content.replace( /import \{ ([^}]+) \} from ['"]react['"];/g, "import React, { $1 } from 'react';"
     );
   }
@@ -69,9 +71,9 @@ function fixExportIssues(content) {
   // Count export default statements
   const exportMatches = content.match(/export default/g); if (exportMatches && exportMatches.length > 1) { const lines = content.split('\n');
     const exportLines = [];
- lines.forEach((line, index) => { if (line.includes('export default')) {
+ lines.forEach((line, index) => {   if (line.includes('export default')) {
         exportLines.push(index);
-      }
+        }
     });
 
     // Keep only the last export default
@@ -101,7 +103,7 @@ function fixExportIssues(content) {
 }
 
 // Function to process a single file
-function processFile(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
+function processFile(filePath) { try {   let content = fs.readFileSync(filePath, 'utf8');
     const originalContent = content;
 
     // Apply all fixes
@@ -113,7 +115,7 @@ function processFile(filePath) { try { let content = fs.readFileSync(filePath, '
     content = fixImportOrder(content);
 
     // Only write if content changed if (content !== originalContent) { fs.writeFileSync(filePath, content, 'utf8');
-      console.log(`✅ Fixed: ${path.basename(filePath)}`);
+      console.log(`✅ Fixed: ${path.basename(filePath)  } catch (error) { console.error(error); } catch (error) { console.error(error); }`);
       return true;
     }
 
@@ -129,12 +131,12 @@ function findTsxFiles(dir) {
   const files = [];
 
   function scanDir(currentDir) {
-    try {
+    try {  
       const items = fs.readdirSync(currentDir);
 
       for (const item of items) {
         const fullPath = path.join(currentDir, item);
-        const stat = fs.statSync(fullPath); if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') { scanDir(fullPath); } else if (stat.isFile() && item.endsWith('.tsx')) {
+        const stat = fs.statSync(fullPath); if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') { scanDir(fullPath);   } catch (error) { console.error(error); } catch (error) { console.error(error); }else if (stat.isFile() && item.endsWith('.tsx')) {
           files.push(fullPath);
         }
       }

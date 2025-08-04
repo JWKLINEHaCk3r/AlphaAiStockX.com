@@ -1,14 +1,16 @@
 'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Alert } from "../../../components/ui/alert";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  TrendingUp, 
+import { TrendingUp, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   TrendingDown, 
   Calendar, 
   DollarSign, 
@@ -17,7 +19,7 @@ import {
   Target,
   CheckCircle,
   Clock,
-  Zap,
+  Zap, }
   Brain, LineChart } from 'lucide-react';
 
 interface EarningsData {
@@ -110,7 +112,7 @@ export default function EarningsPredictor() {
     }
   ];
 
-  const generatePredictions = (symbol: string) => {
+  const generatePredictions = (symbol: string) => {  
     setIsLoading(true);
     
     // Simulate AI analysis
@@ -121,7 +123,7 @@ export default function EarningsPredictor() {
           { symbol: symbol, prediction: earningsData.sentiment === 'bullish' ? 'buy' : earningsData.sentiment === 'bearish' ? 'sell' : 'hold',
             confidence: earningsData.confidence, targetPrice: earningsData.priceTarget, timeframe: '1-2 weeks post-earnings', factors: [ 'Historical earnings accuracy', 'Revenue growth trends', 'Market sentiment analysis', 'Technical indicators', 'Institutional activity'
             ]
-          }
+            }
         ];
         setPredictions(newPredictions);
       }
@@ -133,7 +135,7 @@ export default function EarningsPredictor() {
     generatePredictions(selectedSymbol);
   }, [selectedSymbol]);
 
-  const getSentimentColor = (sentiment: string) => {
+  const getSentimentColor = (sentiment: string) => {  
     switch (sentiment) {
       case 'bullish':
         return 'text-green-600 bg-green-100';
@@ -141,10 +143,10 @@ export default function EarningsPredictor() {
         return 'text-red-600 bg-red-100';
       default:
         return 'text-yellow-600 bg-yellow-100';
-    }
+      }
   };
 
-  const getRiskColor = (risk: string) => {
+  const getRiskColor = (risk: string) => {  
     switch (risk) {
       case 'low':
         return 'text-green-600 bg-green-100';
@@ -154,7 +156,7 @@ export default function EarningsPredictor() {
         return 'text-red-600 bg-red-100';
       default:
         return 'text-gray-600 bg-gray-100';
-    }
+      }
   };
 
   const formatDate = (dateString: string) => {
@@ -294,7 +296,7 @@ export default function EarningsPredictor() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {(() => {
+                {(() => {  
                   const selectedEarnings = upcomingEarnings.find(e => e.symbol === selectedSymbol);
                   if (!selectedEarnings) return null;
                   
@@ -304,7 +306,7 @@ export default function EarningsPredictor() {
                         <div>
                           <p className="text-sm text-gray-500">Current Price</p>
                           <p className="text-xl font-bold text-gray-800">
-                            ${selectedEarnings.currentPrice}
+                            ${selectedEarnings.currentPrice  }
                           </p>
                         </div>
                         <div>

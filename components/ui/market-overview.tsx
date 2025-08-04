@@ -1,4 +1,5 @@
-import { Card } from "./card";
+import { Card } from "./card.js";
+import { Card } from "./card.js";
 import React from 'react'; import { Badge } from './badge'; import { Progress } from './progress';
 import { TrendingUp, TrendingDown, Activity, Globe, Zap } from 'lucide-react';
 
@@ -38,11 +39,11 @@ export const MarketOverview = ({
     </CardHeader>
     <CardContent className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        {Object.entries(marketData).map(([index, data]) => {
+        {Object.entries(marketData).map(([index, data]) => {  
           const isPositive = data.change >= 0;
           const name = index.toUpperCase();
           return (
-            <div key={index} className="text-center p-3 bg-slate-800/50 rounded-lg">
+            <div key={index  } className="text-center p-3 bg-slate-800/50 rounded-lg">
               <div className="text-sm text-slate-400 mb-1">{name}</div>
               <div className="font-bold">{data.value.toLocaleString()}</div> <div className={`text-sm flex items-center justify-center gap-1 ${ isPositive ? 'text-green-400' : 'text-red-400'; }`}> {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />},{isPositive ? '+' : ''},{data.change}%;
               </div>
@@ -118,3 +119,4 @@ export const AIPerformanceCard = ({
     </CardContent>
   </Card>
 );
+export default market-overview;

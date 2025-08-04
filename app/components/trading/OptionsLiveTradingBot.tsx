@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Play,
+import { Play,
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Pause,
   Square,
   DollarSign,
@@ -16,7 +17,7 @@ import {
   Clock,
   Settings,
   Bot,
-  Eye,
+  Eye, }
   Wifi, WifiOff } from 'lucide-react';
 
 interface OptionsPosition {
@@ -111,7 +112,7 @@ export default function OptionsLiveTradingBot() {
       minimumFractionDigits: 2
     }).format(amount),
   };
- const formatPercent = (percent: number) => { return `${percent >= 0 ? '+' : ''}${percent.toFixed(2)}%`;
+ const formatPercent = (percent: number) => {   return `${percent >= 0 ? '+' : ''  }${percent.toFixed(2)}%`;
   };
 
   const formatGreek = (value: number) => {

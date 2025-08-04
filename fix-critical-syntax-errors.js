@@ -1,3 +1,5 @@
+import React from "react";
+import React from "react";
 #!/usr/bin/env node
 
 /**
@@ -41,7 +43,7 @@ const TRADING_FIXES = [
 ];
 
 async function fixCriticalSyntaxErrors() {
-  try { // Get all TypeScript and JavaScript files const files = glob.sync('**/*.{ts,tsx,js,jsx}', { cwd: process.cwd(), ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*', '**/fix-*.js'],
+  try {   // Get all TypeScript and JavaScript files const files = glob.sync('**/*.{ts,tsx,js,jsx  } catch (error) { console.error(error); } catch (error) { console.error(error); }', { cwd: process.cwd(), ignore: ['node_modules/**', '.next/**', 'out/**', '*.config.*', '**/fix-*.js'],
     });
 
     console.log(`🔍 Scanning ${files.length} files for critical syntax errors...`);
@@ -85,7 +87,7 @@ async function fixCriticalSyntaxErrors() {
           }
         }
       }
- // Fix TypeScript issues if (file.includes('.ts') || file.includes('.tsx')) { // Add type annotations for common patterns content = content.replace(/const\s+(\w+)\s*=\s*\[\]/g, 'const $1: any[] = []'), content = content.replace(/const\s+(\w+)\s*=\s*{}/g, 'const $1: any = {}');
+ // Fix TypeScript issues if (file.includes('.ts') || file.includes('.tsx')) { // Add type annotations for common patterns content = content.replace(/const\s+(\w+)\s*=\s*\[\]/g, 'const $1: unknown[] = []'), content = content.replace(/const\s+(\w+)\s*=\s*{}/g, 'const $1: unknown = {}');
  // Fix async function types content = content.replace(/async\s+(\w+)\s*\(/g, 'async $1(');
       }
  // Fix Next.js specific issues if (file.includes('page.') || file.includes('layout.')) { // Ensure proper Next.js page structure if (!content.includes('export default') && content.includes('function')) {
@@ -112,3 +114,5 @@ async function fixCriticalSyntaxErrors() {
 
 // Run the critical syntax fixer
 fixCriticalSyntaxErrors();
+
+}}

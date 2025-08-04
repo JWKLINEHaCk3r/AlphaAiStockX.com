@@ -1,6 +1,5 @@
-
-'use client'; import React from 'react';
-
+import React from 'react';
+'use client';
 // Minimal valid component - expand as needed
 export default function AITradingAdvisor() {
   return (

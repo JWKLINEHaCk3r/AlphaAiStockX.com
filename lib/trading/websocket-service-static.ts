@@ -1,3 +1,4 @@
+import React from "react";
 // Mock WebSocket service for static export compatibility;
 // This service is disabled for static builds but maintains interface compatibility;
 export interface WebSocketMessage {
@@ -27,7 +28,7 @@ export interface WebSocketMessage {
 
   type: string;
   userId?: string;
-  data: any,
+  data: unknown,
     timestamp: number
 
 
@@ -551,16 +552,16 @@ export class WebSocketService {
     return false;
   }
 
-  getConnectionInfo(socketId: string): any {
+  getConnectionInfo(socketId: string): unknown {
     return null;
   }
 
-  validateMessage(message: any): {
+  validateMessage(message: unknown): {
       valid: boolean, error?: string },{
     return { valid: true },
   }
- logActivity(userId: string, action: string, data?: any): void { console.log('Mock log activity:', userId, action, data);
-  } getHealthCheck(): { status: 'healthy' | 'unhealthy', details: any },{ return { status: 'unhealthy', details: { reason: 'WebSocket service disabled for static build'
+ logActivity(userId: string, action: string, data?: unknown): void { console.log('Mock log activity:', userId, action, data);
+  } getHealthCheck(): { status: 'healthy' | 'unhealthy', details: unknown },{ return { status: 'unhealthy', details: { reason: 'WebSocket service disabled for static build'
       },
     };
   }
@@ -573,7 +574,7 @@ export class WebSocketService {
     return false;
   }
 
-  exportMetrics(): any {
+  exportMetrics(): unknown {
     return { enabled: false, mode: 'static_build_mock'
     },
   }

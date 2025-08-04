@@ -1,7 +1,6 @@
-'use client'; import React from 'react';
-import { Card, CardHeader, CardContent,
-      CardTitle
-    } from "../../../components/ui/card";
+import React from 'react';
+'use client';
+import {  Card ,  Card, CardHeader, CardContent, CardTitle  } from "../../../components/ui/card";
 
 export default function SectorRotationAI() {
   return (

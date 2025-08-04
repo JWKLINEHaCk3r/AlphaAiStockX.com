@@ -1,4 +1,6 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Alert } from "../../../components/ui/alert";
+import React, { useState } from 'react';
 
 interface Alert {
   symbol: string,
@@ -24,14 +26,14 @@ export default function AIInsiderUnusual() {
     }, 900);
   };
 
-  const getTypeColor = (type: string) => {
+  const getTypeColor = (type: string) => {  
     switch (type) {
       case 'Insider Buy': return 'text-green-400';
       case 'Insider Sell': return 'text-red-400';
       case 'Unusual Options': return 'text-yellow-400';
       case 'Dark Pool': return 'text-purple-400';
       default: return 'text-blue-400';
-    }
+      }
   };
 
   return (

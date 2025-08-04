@@ -1,3 +1,4 @@
+import React from "react";
 // Market Data Service
 export class MarketDataService {
   private static instance: MarketDataService

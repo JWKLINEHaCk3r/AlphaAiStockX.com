@@ -1,7 +1,9 @@
-'use client'; import React from 'react';
+import React from 'react';
+'use client';
+import { Card } from "../../../components/ui/card";
 import { ArrowUp, ArrowDown, TrendingUp, Star, Clock, Target } from 'lucide-react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 
@@ -39,12 +41,12 @@ const, mockTrades: TradeRecommendation[] = [ { symbol: 'NVDA', action: 'BUY',
 ];
 
 export default function AITop5Trades() {
-  const getActionColor = (action: string) => { switch (action) { case 'BUY': return 'text-green-400 bg-green-900/30'; case 'SELL': return 'text-red-400 bg-red-900/30'; case 'HOLD': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getActionColor = (action: string) => {   switch (action) { case 'BUY': return 'text-green-400 bg-green-900/30'; case 'SELL': return 'text-red-400 bg-red-900/30'; case 'HOLD': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
 
-  const getRiskColor = (risk: string) => { switch (risk) { case 'LOW': return 'text-green-400'; case 'MEDIUM': return 'text-yellow-400'; case 'HIGH': return 'text-red-400'; default: return 'text-gray-400'
-    }
+  const getRiskColor = (risk: string) => {   switch (risk) { case 'LOW': return 'text-green-400'; case 'MEDIUM': return 'text-yellow-400'; case 'HIGH': return 'text-red-400'; default: return 'text-gray-400'
+      }
   };
  const getConfidenceColor = (confidence: number) => { if (confidence >= 90) return 'text-green-400'; if (confidence >= 80) return 'text-yellow-400'; return 'text-red-400';
   };

@@ -1,8 +1,7 @@
 'use client'; import React, { useState } from 'react';
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
-import { 
-  X, 
+import { X, 
   Crown, 
   Star, 
   CheckCircle, 
@@ -14,7 +13,7 @@ import {
   Globe,
   Users,
   Headphones,
-  CreditCard,
+  CreditCard, }
   Lock, ArrowLeft } from 'lucide-react';
 
 interface SubscriptionModalProps {
@@ -62,15 +61,15 @@ export default function SubscriptionModal({
   const handleSelectPlan = (planId: string) => { setSelectedPlan(planId); setView('payment');
   };
 
-  const handleSubscribe = () => {
+  const handleSubscribe = () => {  
     if (selectedPlan) {
       onSubscribe(selectedPlan);
       onClose();
-    }
+      }
   };
- const getPrice = (plan: Plan) => { if (plan.price === 0) return 'Free'; const price = billingInterval === 'yearly' ? plan.yearlyPrice : plan.price const interval = billingInterval === 'yearly' ? 'year' : plan.interval
+ const getPrice = (plan: Plan) => {   if (plan.price === 0) return 'Free'; const price = billingInterval === 'yearly' ? plan.yearlyPrice : plan.price const interval = billingInterval === 'yearly' ? 'year' : plan.interval
               
-    return `$${price}/${interval}`;
+    return `$${price  }/${interval}`;
   };
  const getSavings = (plan: Plan) => { if (plan.price === 0 || billingInterval === 'monthly') return null;
     const monthlyCost = plan.price * 12;
@@ -136,13 +135,13 @@ export default function SubscriptionModal({
 
               {/* Plans Grid */}
               <div className="grid lg:grid-cols-3 gap-6">
-                {plans.map((plan) => {
+                {plans.map((plan) => {  
                   const savings = getSavings(plan);
                   const isCurrentPlan = currentPlan === plan.id;
                   
                   return (
                     <div
-                      key={plan.id}
+                      key={plan.id  }
                       className={`relative bg-white/5 rounded-xl border-2 p-6 transition-all hover:scale-105 ${ plan.popular ? 'border-yellow-500 bg-yellow-500/10' : plan.enterprise ? 'border-purple-500 bg-purple-500/10' : 'border-white/20 hover:border-white/40'
                       }`}
                     >
@@ -208,14 +207,14 @@ export default function SubscriptionModal({
             <div className="max-w-md mx-auto">
               <div className="bg-white/10 rounded-lg p-6 mb-6">
                 <h3 className="text-white font-semibold mb-4">Order Summary</h3>
-                {(() => {
+                {(() => {  
                   const plan = plans.find(p => p.id === selectedPlan);
                   if (!plan) return null;
                   
                   return (
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-gray-300">{plan.name}</span>
+                        <span className="text-gray-300">{plan.name  }</span>
                         <span className="text-white font-semibold">{getPrice(plan)}</span> </div> {billingInterval === 'yearly' && plan.price > 0 && (
                         <div className="flex justify-between text-green-400 text-sm">
                           <span>Yearly discount</span>

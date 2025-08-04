@@ -1,5 +1,9 @@
+import React from "react";
+'use client';
+
+import { Toast } from "../components/ui/toast";
 import { Toast } from ".../../components/ui/toast";
-'use client'; import * as React from 'react';
+import * as React from 'react';
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
 
 const TOAST_LIMIT = 1;
@@ -33,62 +37,16 @@ type Action =; | { type: ActionType['ADD_TOAST'],
 
 interface State {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   toasts: ToasterToast[]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
-const addToRemoveQueue = (toastId: string) => {
+const addToRemoveQueue = (toastId: string) => {  
   if (toastTimeouts.has(toastId)) {
     return;
-  }
+    }
 
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId); dispatch({ type: 'REMOVE_TOAST',
@@ -154,7 +112,7 @@ function dispatch(action: Action) {
   });
 } type Toast = Omit<ToasterToast, 'id'>;
 
-function toast({ ...props }: Toast) {
+function toast({...props}: Toast) {
   const id = genId();
 
   const update = (props: ToasterToast) =>, dispatch({ type: 'UPDATE_TOAST',
@@ -182,13 +140,13 @@ function toast({ ...props }: Toast) {
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
 
-  React.useEffect(() => {
+  React.useEffect(() => {  
     listeners.push(setState);
     return () => {
       const index = listeners.indexOf(setState);
       if (index > -1) {
         listeners.splice(index, 1);
-      }
+        }
     };
   }, [state]);
 
@@ -198,6 +156,6 @@ function useToast() {
   };
 }
 
-export { useToast,
-      toast
+export {  useToast,
+      toast  };
     };

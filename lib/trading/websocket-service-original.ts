@@ -1,3 +1,4 @@
+import React from "react";
 // Mock WebSocket service for static export compatibility;
 // This service is disabled for static builds but maintains interface compatibility;
 import { SecurityAudit } from '@/lib/security';
@@ -29,7 +30,7 @@ export interface WebSocketMessage {
 
   type: string;
   userId?: string;
-  data: any,
+  data: unknown,
     timestamp: number
 
 
@@ -416,7 +417,7 @@ export class WebSocketService {
     // Initialize will be called when needed;
   }
 
-  initialize(server?: any): void {
+  initialize(server?: unknown): void {
     if (this.isInitialized) return;
 
     // Create HTTP server if not provided;
@@ -434,16 +435,16 @@ export class WebSocketService {
   }
 
   private setupEventHandlers(): void {
-    if (!this.io) return; this.io.on('connection', socket => {
-      console.log(`Client connected: ${socket.id}`);
+    if (!this.io) return; this.io.on('connection', socket => {  
+      console.log(`Client connected: ${socket.id  }`);
  // Handle authentication; socket.on('authenticate', async (data: {
-      userId: string, token: string }) => {
-        try {
+      userId: string, token: string }) => {  
+        try {  
           // Validate token (implement your token validation logic);
           const isValid = await this.validateToken(data.token, data.userId);
 
           if (isValid) {
-            socket.userId = data.userId; this.addClientConnection(data.userId, socket.id); socket.emit('authenticated', { success: true });
+            socket.userId = data.userId; this.addClientConnection(data.userId, socket.id); socket.emit('authenticated', { success: true     } catch (error) { console.error(error); } catch (error) { console.error(error); });
  SecurityAudit.logSecurityEvent({ type: 'websocket_auth',
     userId: data.userId, details: { action: 'authenticated', socketId: socket.id },
             }); } else { socket.emit('authentication_error', { error: 'Invalid token' });
@@ -495,8 +496,8 @@ export class WebSocketService {
       }); socket.on('unsubscribe_notifications', () => {
         if (!socket.userId) return; this.removeSubscription('notifications', socket.userId); socket.emit('unsubscribed_notifications');
       });
- // Handle disconnect; socket.on('disconnect', () => {
-        console.log(`Client disconnected: ${socket.id}`);
+ // Handle disconnect; socket.on('disconnect', () => {  
+        console.log(`Client disconnected: ${socket.id  }`);
 
         if (socket.userId) {
           this.removeClientConnection(socket.userId, socket.id);
@@ -653,24 +654,24 @@ export class WebSocketService {
 
   private cleanupUserSubscriptions(userId: string): void {
     // Remove user from all subscriptions;
-    this.subscriptions.forEach((subscribers, type) => {
+    this.subscriptions.forEach((subscribers, type) => {  
       subscribers.delete(userId);
       if (subscribers.size === 0) {
         this.subscriptions.delete(type);
-      }
+        }
     });
 
     // Remove user from market data subscriptions;
-    this.marketDataSubscriptions.forEach((subscribers, symbol) => {
+    this.marketDataSubscriptions.forEach((subscribers, symbol) => {  
       subscribers.delete(userId);
       if (subscribers.size === 0) {
         this.marketDataSubscriptions.delete(symbol);
-      }
+        }
     });
   }
 
   private async validateToken(token: string, userId: string): Promise<boolean> {
-    try {
+    try {  
       // Implement your token validation logic here;
       // This could involve JWT verification database lookup, etc. // For now, we'll return true as a placeholder;
       // Example: JWT verification,
@@ -678,7 +679,7 @@ export class WebSocketService {
       // return decoded.userId === userId;
 
       return true; // Placeholder;
-    } catch (error) {
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) {
       SecurityAudit.logSecurityEvent({
         type: 'authentication_error';
         userId; details: { action: 'token_validation_failed', error: error instanceof Error ? error.message : 'Unknown error'

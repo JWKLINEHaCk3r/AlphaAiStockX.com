@@ -1,11 +1,15 @@
-'use client'; import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'; import { Button } from '@/components/ui/button'; import { Badge } from '@/components/ui/badge';
-import { Mic, MicOff, Volume2 } from 'lucide-react';
+'use client';
+import { Badge } from "../../../components/ui/badge";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React, { useState } from 'react';
+import { Mic, MicOff, Volume2 } from "lucide-react";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 export default function AIVoiceCommandCenter() { const [isListening, setIsListening] = useState(false); const [lastCommand, setLastCommand] = useState<string>('');
 
-  const toggleListening = () => {
-    setIsListening(!isListening); if (!isListening) { setLastCommand('Voice recognition activated...'); } else { setLastCommand('Voice recognition stopped.');
+  const toggleListening = () => {  
+    setIsListening(!isListening); if (!isListening) { setLastCommand('Voice recognition activated...');   } else { setLastCommand('Voice recognition stopped.');
     }
   };
 

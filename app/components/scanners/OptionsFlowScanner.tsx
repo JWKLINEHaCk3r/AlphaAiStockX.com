@@ -1,14 +1,15 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import { 
-  Search, 
+import { Search, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   TrendingUp, 
   TrendingDown, 
   Activity, 
@@ -26,7 +27,7 @@ import {
   AlertTriangle,
   CheckCircle,
   ArrowUpRight,
-  ArrowDownRight,
+  ArrowDownRight, }
   Volume2, Percent } from 'lucide-react';
 
 interface OptionsFlow {
@@ -55,9 +56,9 @@ export default function OptionsFlowScanner() { const [isScanning, setIsScanning]
     minVolume: 100,
     minPremium: 1000, maxDaysToExpiry: 30, sentiment: 'all', size: 'all', type: 'all'
   });
- const generateOptionsFlow = (): OptionsFlow[] => { const symbols = ['AAPL', 'MSFT', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'AMZN', 'GOOGL'];
+ const generateOptionsFlow = (): OptionsFlow[] => {   const symbols = ['AAPL', 'MSFT', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'AMZN', 'GOOGL'];
     const flow: OptionsFlow[] = symbols.map((symbol, index) => ({
-      id: `flow_${index}`; symbol, type: Math.random() > 0.5 ? 'CALL' : 'PUT', strike: Math.round((150 + Math.random() * 200) * 100) / 100, expiry: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      id: `flow_${index  }`; symbol, type: Math.random() > 0.5 ? 'CALL' : 'PUT', strike: Math.round((150 + Math.random() * 200) * 100) / 100, expiry: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       volume: Math.round(100 + Math.random() * 5000), premium: Math.round((1000 + Math.random() * 50000) * 100) / 100, sentiment: ['bullish', 'bearish', 'neutral'][Math.floor(Math.random() * 3)] as 'bullish' | 'bearish' | 'neutral', size: ['small', 'medium', 'large', 'whale'][Math.floor(Math.random() * 4)] as 'small' | 'medium' | 'large' | 'whale',
       confidence: Math.round(60 + Math.random() * 40),
       impliedMove: Math.round((2 + Math.random() * 15) * 100) / 100;
@@ -94,18 +95,18 @@ export default function OptionsFlowScanner() { const [isScanning, setIsScanning]
     }, 3500);
   };
 
-  const getSentimentColor = (sentiment: string) => { switch (sentiment) { case 'bullish': return 'text-green-400'; case 'bearish': return 'text-red-400'; default: return 'text-yellow-400'
-    }
+  const getSentimentColor = (sentiment: string) => {   switch (sentiment) { case 'bullish': return 'text-green-400'; case 'bearish': return 'text-red-400'; default: return 'text-yellow-400'
+      }
   };
 
-  const getSizeColor = (size: string) => { switch (size) { case 'whale': return 'text-purple-400 bg-purple-900/30'; case 'large': return 'text-blue-400 bg-blue-900/30'; case 'medium': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getSizeColor = (size: string) => {   switch (size) { case 'whale': return 'text-purple-400 bg-purple-900/30'; case 'large': return 'text-blue-400 bg-blue-900/30'; case 'medium': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
  const getConfidenceColor = (confidence: number) => { if (confidence >= 85) return 'text-green-500'; if (confidence >= 70) return 'text-yellow-500'; return 'text-red-500';
   };
 
-  const getFlowTypeColor = (flowType: string) => { switch (flowType) { case 'buy_to_open': return 'text-green-400 bg-green-900/30'; case 'sell_to_open': return 'text-red-400 bg-red-900/30'; case 'buy_to_close': return 'text-blue-400 bg-blue-900/30'; default: return 'text-orange-400 bg-orange-900/30'
-    }
+  const getFlowTypeColor = (flowType: string) => {   switch (flowType) { case 'buy_to_open': return 'text-green-400 bg-green-900/30'; case 'sell_to_open': return 'text-red-400 bg-red-900/30'; case 'buy_to_close': return 'text-blue-400 bg-blue-900/30'; default: return 'text-orange-400 bg-orange-900/30'
+      }
   };
 
   const filteredFlow = optionsFlow.filter(flow => { const matchesSearch = flow.symbol.toLowerCase().includes(searchTerm.toLowerCase()); const matchesFilter = selectedFilter === 'all' || 
@@ -123,11 +124,11 @@ export default function OptionsFlowScanner() { const [isScanning, setIsScanning]
     }).format(amount)
   };
 
-  const formatTime = (timestamp: string) => {
+  const formatTime = (timestamp: string) => {  
     const date = new Date(timestamp);
     const now = new Date();
     const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60)); if (diffMinutes < 1) return 'Just now';
-    if (diffMinutes < 60) return `${diffMinutes}m ago`;
+    if (diffMinutes < 60) return `${diffMinutes  }m ago`;
     return `${Math.floor(diffMinutes / 60)}h ago`;
   };
 

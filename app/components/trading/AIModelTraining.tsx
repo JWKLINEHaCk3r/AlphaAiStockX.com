@@ -1,13 +1,15 @@
 'use client';
+import { Select } from "../../../components/ui/select";
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Brain,
+import { Brain,
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Cpu,
   Database,
   Zap,
@@ -22,7 +24,7 @@ import {
   AlertTriangle,
   Clock,
   Target,
-  Eye,
+  Eye, }
   Download, Upload } from 'lucide-react';
 
 interface TrainingSession {
@@ -123,10 +125,10 @@ export default function AIModelTraining() { const [isTraining, setIsTraining] = 
     }, 2000);
   };
 
-  const getStatusColor = (status: string) => { switch (status) { case 'training': return 'text-blue-400 bg-blue-900/30'; case 'completed': return 'text-green-400 bg-green-900/30'; case 'failed': return 'text-red-400 bg-red-900/30'; case 'queued': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
-  }; const getPerformanceColor = (value: number, type: 'accuracy' | 'return' | 'sharpe' | 'drawdown' | 'winrate') => { switch (type) { case 'accuracy': case 'winrate': return value >= 90 ? 'text-green-400' : value >= 80 ? 'text-yellow-400' : 'text-red-400'; case 'return': return value >= 25 ? 'text-green-400' : value >= 15 ? 'text-yellow-400' : 'text-red-400'; case 'sharpe': return value >= 2 ? 'text-green-400' : value >= 1.5 ? 'text-yellow-400' : 'text-red-400'; case 'drawdown': return value <= 5 ? 'text-green-400' : value <= 10 ? 'text-yellow-400' : 'text-red-400'; default: return 'text-white'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'training': return 'text-blue-400 bg-blue-900/30'; case 'completed': return 'text-green-400 bg-green-900/30'; case 'failed': return 'text-red-400 bg-red-900/30'; case 'queued': return 'text-yellow-400 bg-yellow-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
+  }; const getPerformanceColor = (value: number, type: 'accuracy' | 'return' | 'sharpe' | 'drawdown' | 'winrate') => {   switch (type) { case 'accuracy': case 'winrate': return value >= 90 ? 'text-green-400' : value >= 80 ? 'text-yellow-400' : 'text-red-400'; case 'return': return value >= 25 ? 'text-green-400' : value >= 15 ? 'text-yellow-400' : 'text-red-400'; case 'sharpe': return value >= 2 ? 'text-green-400' : value >= 1.5 ? 'text-yellow-400' : 'text-red-400'; case 'drawdown': return value <= 5 ? 'text-green-400' : value <= 10 ? 'text-yellow-400' : 'text-red-400'; default: return 'text-white'
+      }
   };
 
   // Simple progress bar component const ProgressBar = ({ value className = '' }: { value: number, className?: string }) => (

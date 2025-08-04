@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  try { return NextResponse.json({ message: 'User profile endpoint is healthy', timestamp: new Date().toISOString(), status: 'active'
-    }); } catch (error) { console.error('User profile GET error:', error); return NextResponse.json( { error: 'Internal server error' },
+  try {   return NextResponse.json({ message: 'User profile endpoint is healthy', timestamp: new Date().toISOString(), status: 'active'
+      } catch (error) { console.error(error); } catch (error) { console.error(error); }); } catch (error) { console.error('User profile GET error:', error); return NextResponse.json( { error: 'Internal server error' },
       { status: 500 }
     );
 }
 }
 
 export async function PUT(request: NextRequest) {
-  try {
+  try {  
     const body = await request.json();
      return NextResponse.json({ message: 'Profile updated successfully',
       data: body,
       timestamp: new Date().toISOString()
-    }) } catch (error) { console.error('User profile PUT error:', error); return NextResponse.json( { error: 'Internal server error' },
+      } catch (error) { console.error(error); } catch (error) { console.error(error); }) } catch (error) { console.error('User profile PUT error:', error); return NextResponse.json( { error: 'Internal server error' },
       { status: 500 }
     );
 }

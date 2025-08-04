@@ -1,11 +1,13 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Brain, 
+import { Brain, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Zap, 
   Target, 
   TrendingUp, 
@@ -13,7 +15,7 @@ import {
   BarChart3,
   Bot,
   Cpu,
-  LineChart,
+  LineChart, }
   Activity, CheckCircle } from 'lucide-react';
 
 interface AIModel {
@@ -62,12 +64,12 @@ interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold'
     }, 3000);
   };
 
-  const getStatusColor = (status: string) => { switch (status) { case 'active': return 'bg-green-600'; case 'training': return 'bg-yellow-600'; case 'offline': return 'bg-gray-600'; default: return 'bg-gray-600';
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'active': return 'bg-green-600'; case 'training': return 'bg-yellow-600'; case 'offline': return 'bg-gray-600'; default: return 'bg-gray-600';
+      }
   };
 
-  const getPredictionColor = (prediction: string) => { switch (prediction) { case 'buy': return 'text-green-400'; case 'sell': return 'text-red-400'; case 'hold': return 'text-yellow-400'; default: return 'text-gray-400';
-    }
+  const getPredictionColor = (prediction: string) => {   switch (prediction) { case 'buy': return 'text-green-400'; case 'sell': return 'text-red-400'; case 'hold': return 'text-yellow-400'; default: return 'text-gray-400';
+      }
   };
 
   return (

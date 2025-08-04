@@ -968,7 +968,7 @@ export interface SystemEvent {
 
 
  type: 'trade_executed' | 'signal_generated' | 'alert_triggered' | 'market_status_change',
-    data: any,
+    data: unknown,
   timestamp: Date;
   userId?: string;
 
@@ -1024,7 +1024,7 @@ export interface WSMessage {
 
 
   type: string,
-    data: any,
+    data: unknown,
   timestamp: Date
 
 

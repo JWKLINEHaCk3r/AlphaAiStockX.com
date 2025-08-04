@@ -1,3 +1,4 @@
+import React from "react";
 import { Input } from '../../components/ui/input'; describe('AlphaAiStockX Security Tests', () => { beforeEach(() => { cy.visit('/');
   }); describe('Security Headers', () => { it('should have required security headers', () => {
       cy.checkSecurityHeaders();

@@ -14,13 +14,13 @@ const CACHE_NAME = 'alphaaistockx-v1'; const urlsToCache = [; '/',; '/index.html
     });
   );
 });
- // Activate event; self.addEventListener('activate', event => {
+ // Activate event; self.addEventListener('activate', event => {  
   event.waitUntil(;
     caches.keys().then(cacheNames =>;
       Promise.all(;
         cacheNames.map(cacheName => { if (cacheName !== CACHE_NAME) { console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
-          }
+            }
         });
       );
     );

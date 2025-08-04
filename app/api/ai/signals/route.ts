@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  try {
+  try {  
     // TODO: Complete this comment
     // Mock AI trading signals
     const signals = [
@@ -10,7 +10,7 @@ export async function GET() {
         confidence: 85.7,
         targetPrice: 195.00,
         timestamp: new Date().toISOString()
-      },
+        } catch (error) { console.error(error); } catch (error) { console.error(error); },
       {
         id: 2,  symbol: 'TSLA',  signal: 'HOLD',
         confidence: 78.3,

@@ -1,13 +1,16 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
-import { 
-  Crown, 
+import { Crown, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   User, 
   Settings, 
   BarChart3, 
@@ -20,7 +23,7 @@ import {
   Mail,
   Phone,
   MapPin,
-  Edit3,
+  Edit3, }
   Save, X } from 'lucide-react';
 
 interface UserStats {

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Alert } from "./components/ui/alert";
 import { Progress } from "./components/ui/progress";
@@ -8,58 +10,57 @@ import { Progress } from "./components/ui/progress";
 // Common any type replacements
 const anyTypeReplacements = [
   // Component map functions
-  { from: /\.map\(\(([^:]+): any\) =>/g, to: '.map(($1: any) =>', replacement: '.map(($1: Record<string, unknown>) =>'
+  { from: /\.map\(\(([^:]+): unknown\) =>/g, to: '.map(($1: unknown) =>', replacement: '.map(($1: Record<string, unknown>) =>'
   },
   
   // Prediction and signal types
-  { from: /predictions\.map\(\(prediction: any\)/g, to: 'predictions.map((prediction: AIStockPrediction)'
+  { from: /predictions\.map\(\(prediction: unknown\)/g, to: 'predictions.map((prediction: AIStockPrediction)'
   };
   
   // Event and opportunity types
-  { from: /events\.map\(\(event: any\)/g, to: 'events.map((event: SportsEvent)'
-  }, { from: /opportunities\.map\(\(opportunity: any\)/g, to: 'opportunities.map((opportunity: TradingOpportunity)'
+  { from: /events\.map\(\(event: unknown\)/g, to: 'events.map((event: SportsEvent)'
+  }, { from: /opportunities\.map\(\(opportunity: unknown\)/g, to: 'opportunities.map((opportunity: TradingOpportunity)'
   };
   
   // Trade types
-  { from: /trades\.map\(\(trade: any\)/g, to: 'trades.map((trade: Trade)'
+  { from: /trades\.map\(\(trade: unknown\)/g, to: 'trades.map((trade: Trade)'
   };
   
   // User and trader types
-  { from: /traders\.map\(\(trader: any\)/g, to: 'traders.map((trader: Trader)'
+  { from: /traders\.map\(\(trader: unknown\)/g, to: 'traders.map((trader: Trader)'
   };
   
   // Model and analysis types
-  { from: /models\.map\(\(model: any\)/g, to: 'models.map((model: VisionModel)'
-  }, { from: /results\.map\(\(result: any\)/g, to: 'results.map((result: AnalysisResult)'
+  { from: /models\.map\(\(model: unknown\)/g, to: 'models.map((model: VisionModel)'
+  }, { from: /results\.map\(\(result: unknown\)/g, to: 'results.map((result: AnalysisResult)'
   };
   
   // Stock and financial types
-  { from: /stocks\.map\(\(stock: any\)/g, to: 'stocks.map((stock: StockData)'
-  }, { from: /accounts\.map\(\(account: any\)/g, to: 'accounts.map((account: BankAccount)'
-  }, { from: /transactions\.map\(\(transaction: any\)/g, to: 'transactions.map((transaction: Transaction)'
+  { from: /stocks\.map\(\(stock: unknown\)/g, to: 'stocks.map((stock: StockData)'
+  }, { from: /accounts\.map\(\(account: unknown\)/g, to: 'accounts.map((account: BankAccount)'
+  }, { from: /transactions\.map\(\(transaction: unknown\)/g, to: 'transactions.map((transaction: Transaction)'
   };
   
   // Signal and pattern types
-  { from: /signals\.map\(\(signal: any\)/g, to: 'signals.map((signal: TradingSignalData)'
-  }, { from: /patterns\.map\(\(pattern: any\)/g, to: 'patterns.map((pattern: ChartPattern)'
+  { from: /signals\.map\(\(signal: unknown\)/g, to: 'signals.map((signal: TradingSignalData)'
+  }, { from: /patterns\.map\(\(pattern: unknown\)/g, to: 'patterns.map((pattern: ChartPattern)'
   };
   
   // Generic function parameters
-  { from: /getPerformanceColor = \(perf: any\)/g, to: 'getPerformanceColor = (perf: { change?: number; value?: number })'
+  { from: /getPerformanceColor = \(perf: unknown\)/g, to: 'getPerformanceColor = (perf: { change?: number; value?: number })'
   },
   
-  { from: /getReturnColor = \(value: any\)/g, to: 'getReturnColor = (value: number)'
-  }, { from: /executeTrade = \(conditions: any\)/g, to: 'executeTrade = (conditions: Record<string, unknown>)'
+  { from: /getReturnColor = \(value: unknown\)/g, to: 'getReturnColor = (value: number)'
+  }, { from: /executeTrade = \(conditions: unknown\)/g, to: 'executeTrade = (conditions: Record<string, unknown>)'
   },
   
   // Object property access
-  { from: /assessTechnicalRisk\(technicals: any\)/g, to: 'assessTechnicalRisk(technicals: TechnicalIndicators)'
-  }, { from: /getRiskRecommendation\(analysis: any\)/g, to: 'getRiskRecommendation(analysis: { risk: RiskAnalysis, sentiment: any, technicals: TechnicalIndicators })'
+  { from: /assessTechnicalRisk\(technicals: unknown\)/g, to: 'assessTechnicalRisk(technicals: TechnicalIndicators)'
+  }, { from: /getRiskRecommendation\(analysis: unknown\)/g, to: 'getRiskRecommendation(analysis: { risk: RiskAnalysis, sentiment: unknown, technicals: TechnicalIndicators })'
   }
 ];
 
-// Import statements to add to files const importStatements = { 'app/components': `import {
-  AIStockPrediction,
+// Import statements to add to files const importStatements = { 'app/components': `import { AIStockPrediction,
   SportsEvent,
   TradingOpportunity,
   Trade,
@@ -95,13 +96,12 @@ const anyTypeReplacements = [
   NewsAnalysis,
   SocialPlatform,
   Influencer,
-  SocialPost,
-  DeepLearningModel, MarketPattern, } from '../../types/trading-types';`, 'app/services': `import {
-  Position,
+  SocialPost, }
+  DeepLearningModel, MarketPattern, } from '../../types/trading-types';`, 'app/services': `import { Position,
   TechnicalIndicators,
   VolumeProfile,
   BollingerBands,
-  SupportResistance,
+  SupportResistance, }
   OptimalAllocations, RebalanceAction, } from '../types/trading-types';`
 };
  function findFilesToFix() { const extensions = ['.ts', '.tsx']; const excludeDirs = ['node_modules', '.next', 'out', '.git'];
@@ -109,8 +109,8 @@ const anyTypeReplacements = [
   function scanDirectory(dir) {
     const files = [];
     
-    try {
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
+    try {  
+      const entries = fs.readdirSync(dir, { withFileTypes: true   } catch (error) { console.error(error); } catch (error) { console.error(error); });
       
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
@@ -128,7 +128,7 @@ const anyTypeReplacements = [
     return files;
   } return scanDirectory('app');
 }
- function hasAnyTypes(content) { return content.includes(': any') ||  content.includes('any[]') ||  content.includes('any|') || content.includes('any,') || content.includes('any)') || content.includes('any>');
+ function hasAnyTypes(content) { return content.includes(': unknown') ||  content.includes('any[]') ||  content.includes('any|') || content.includes('any,') || content.includes('any)') || content.includes('any>');
 }
 
 function addImportsIfNeeded(filePath, content) {
@@ -164,12 +164,12 @@ function fixAnyTypes(content) {
       fixed = fixed.replace(replacement.from, replacement.replacement);
     }
   }
-   // Generic fixes for remaining any types fixed = fixed.replace(/: any\[\]/g, ': Record<string, unknown>[]'); fixed = fixed.replace(/\\[key: string\\]: any/g, '[key: string]: unknown'),
+   // Generic fixes for remaining any types fixed = fixed.replace(/: unknown\[\]/g, ': Record<string, unknown>[]'); fixed = fixed.replace(/\\[key: string\\]: unknown/g, '[key: string]: unknown'),
   
   return fixed;
 }
- function removeUnusedImports(content) { // Remove unused React import for files using 'use client' if (content.includes("'use client'") && !content.includes('React.')) { content = content.replace(/import React,?\s*{([^}]*)}?\s*from\s*['"]react['"];?\\n?/g, 
-      (match, destructured) => { if (destructured) { return `import {${destructured}} from 'react';\\n`; } return '';
+function removeUnusedImports(content) { // Remove unused React import for files using if (content.includes("'use client'") && !content.includes('React.')) { content = content.replace(/import React,?\s*{([^}]*)}?\s*from\s*['"]react['"];?\\n?/g,
+      (match, destructured) => {   if (destructured) { return `import {${destructured  }} from 'react';\\n`; } return '';
       });
   }
   
@@ -177,8 +177,8 @@ function fixAnyTypes(content) {
 }
 
 function fixFile(filePath) {
-  try {
-    console.log(`Fixing ${filePath}...`); let content = fs.readFileSync(filePath, 'utf8');
+  try {  
+    console.log(`Fixing ${filePath  } catch (error) { console.error(error); } catch (error) { console.error(error); }...`); let content = fs.readFileSync(filePath, 'utf8');
     const originalContent = content;
     
     // Skip if no any types found
@@ -223,7 +223,7 @@ function fixFile(filePath) {
     }
   } console.log('\\n✅ TypeScript fixes completed!');
   console.log(`📊 Processed ${fixedCount} files`);
-   // Run type check console.log('\\n🔍 Running TypeScript check...'); try { execSync('npx tsc --noEmit', { stdio: 'inherit' }); console.log('✅ TypeScript check passed!'); } catch (error) { console.log('ℹ️  TypeScript check found remaining issues - this is normal, continue with manual fixes');
+   // Run type check console.log('\\n🔍 Running TypeScript check...'); try {   execSync('npx tsc --noEmit', { stdio: 'inherit'   } catch (error) { console.error(error); } catch (error) { console.error(error); }); console.log('✅ TypeScript check passed!'); } catch (error) { console.log('ℹ️  TypeScript check found remaining issues - this is normal, continue with manual fixes');
   }
 }
 

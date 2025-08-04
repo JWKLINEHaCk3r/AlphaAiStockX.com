@@ -1,3 +1,4 @@
+import React from "react";
 import { Card } from "./components/ui/card";
 
 
@@ -25,7 +26,7 @@ const importFixes = [ { search: /import { Card, CardCoCard, CardContent, ([^}]+)
     replace: "",
   }, { search: /import { CardCoCard } from '@\/components\/ui\/card';/g,
     replace: "",
-  }, { search: /import { Wolf } from 'lucide-react'/g, replace: "import { Zap } from 'lucide-react'";
+  }, { search: /import { Wolf} from "lucide-react";/g, replace: "import { Zap} from "lucide-react";";
   },
   { search: /<Wolf /g, replace: '<Zap ',
   }, { search: /import { ntent, ([^}]+) } from '@\/components\/ui\/card';/g,
@@ -40,33 +41,32 @@ const typeFixes = [
   },
   { search: /useState\(\{\}\)/g, replace: 'useState<Record<string, any>>({})',
   },
-  { search: /= ([a-zA-Z]+) => \{/g, replace: '= ($1: any) => {';
+  { search: /= ([a-zA-Z]+) => \{/g, replace: '= ($1: unknown) => {';
   },
-  { search: /\.map\(([a-zA-Z]+) => \(/g, replace: '.map(($1: any) => (',
+  { search: /\.map\(([a-zA-Z]+) => \(/g, replace: '.map(($1: unknown) => (',
   },
-  { search: /\.map\(([a-zA-Z]+), ([a-zA-Z]+) => \(/g, replace: '.map(($1: any, $2: number) => (',
+  { search: /\.map\(([a-zA-Z]+), ([a-zA-Z]+) => \(/g, replace: '.map(($1: unknown, $2: number) => (',
   },
 ];
 
-function processFile(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
+function processFile(filePath) { try {   let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Apply import fixes
-    importFixes.forEach(fix => {
+    importFixes.forEach(fix => {  
       const newContent = content.replace(fix.search, fix.replace);
       if (newContent !== content) {
         content = newContent;
         modified = true;
-      }
-    });
+          } catch (error) { console.error(error); } catch (error) { console.error(error); }});
 
     // Apply type fixes
-    typeFixes.forEach(fix => {
+    typeFixes.forEach(fix => {  
       const newContent = content.replace(fix.search, fix.replace);
       if (newContent !== content) {
         content = newContent;
         modified = true;
-      }
+        }
     });
 
     // Clean up duplicate imports content = content.replace( /^import.*\n(?=import.*from ['"]@\/components\/ui\/button['"];)/gm, ''
@@ -101,8 +101,8 @@ const __filename = fileURLToPath(import.meta.url); const __dirname = path.dirnam
 const files = findTsxFiles(appDir);
 
 let fixedCount = 0;
-files.forEach(file => {
+files.forEach(file => {  
   if (processFile(file)) {
     fixedCount++;
-  }
+    }
 }); console.log('\nProcessed ' + files.length + ' files, fixed ' + fixedCount + ' files.');

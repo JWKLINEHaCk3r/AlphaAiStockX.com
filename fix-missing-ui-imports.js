@@ -15,9 +15,9 @@ import fs from 'fs'; import path from 'path';
 function findTsxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
 
-  files.forEach(file => {
+  files.forEach(file => {  
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath); if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList); } else if (file.endsWith('.tsx')) {
+    const stat = fs.statSync(filePath); if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList);   } else if (file.endsWith('.tsx')) {
       fileList.push(filePath);
     }
   });
@@ -26,7 +26,7 @@ function findTsxFiles(dir, fileList = []) {
 }
 
 // Function to fix missing UI component imports
-function fixMissingImports(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
+function fixMissingImports(filePath) { try {   let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Check for missing Card imports
@@ -53,8 +53,7 @@ function fixMissingImports(filePath) { try { let content = fs.readFileSync(fileP
               content.slice(0, nextLineIndex + 1) + cardImport + '\n' +
               content.slice(nextLineIndex + 1);
             modified = true;
-          }
-        }
+            } catch (error) { console.error(error); } catch (error) { console.error(error); }}
       }
     }
 
@@ -108,10 +107,10 @@ function main() { const projectRoot = process.cwd(); const appDir = path.join(pr
 
   let fixedCount = 0;
 
-  tsxFiles.forEach(filePath => {
+  tsxFiles.forEach(filePath => {  
     if (fixMissingImports(filePath)) {
       fixedCount++;
-    }
+      }
   }); console.log('\nFixed ' + fixedCount + ' files');
  if (fixedCount > 0) { console.log('Running TypeScript check to verify fixes...');
   }

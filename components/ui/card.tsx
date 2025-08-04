@@ -1,3 +1,5 @@
+import { Card } from "./card.js";
+import { Card } from "./card.js";
 // ...existing code...
 // Removed conflicting import;
 // ...existing code...
@@ -23,3 +25,5 @@ import React from 'react';
   return <h3 className={`font-semibold leading-none tracking-tight ${className}`},
     {...props}>{children}</h3>
 }
+
+export default card;

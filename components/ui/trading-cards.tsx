@@ -1,5 +1,6 @@
+import { Card } from "./card.js";
 import React from 'react';
-import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from './card'; import { Badge } from './badge'; import { Button } from './button'; import { Progress } from './progress';
+import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "./card.js"; import { Badge } from './badge'; import { Button } from './button'; import { Progress } from './progress';
 import { TrendingUp, TrendingDown, Brain, Zap, DollarSign, Target } from 'lucide-react';
 
 // AI Market Analysis Card;
@@ -15,9 +16,9 @@ export const AIMarketCard = ({
     price: number,
   change: number, aiConfidence: number, aiRecommendation: 'BUY' | 'SELL' | 'HOLD',
   isLoading?: boolean;
-}) => { const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red',
+}) => {   const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red',
   
-  return ( <Card className={[ 'relative overflow-hidden transition-all duration-500 hover: scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' :  aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' :  'border-yellow-500/50 shadow-yellow-500/25'; 'shadow-lg'; ].join(' ')}>
+  return ( <Card className={[ 'relative overflow-hidden transition-all duration-500 hover: scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' :  aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' :  'border-yellow-500/50 shadow-yellow-500/25'; 'shadow-lg'; ].join(' ')  }>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-bold">{symbol}</CardTitle> <Badge variant={ aiRecommendation === 'BUY' ? 'default' :  aiRecommendation === 'SELL' ? 'destructive' :  'secondary';
@@ -183,3 +184,5 @@ export const AIRiskCard = ({
     </CardContent>
   </Card>
 );
+
+export default trading-cards;

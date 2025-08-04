@@ -12,8 +12,8 @@ const fixes = [
     replacement: (match, interfaceName, body) => { // Common properties that should be optional const optionalProps = ['winRate', 'subscription', 'lastActivity', 'description', 'message'];
       let newBody = body;
        optionalProps.forEach(prop => { // Make property optional if it exists and isn't already optional
-        const propRegex = new RegExp(`(\\s+${prop}):\\s*([^;\\n]+)([;\\n])`, 'g'); newBody = newBody.replace(propRegex, (propMatch, propName, propType, ending) => { if (!propName.includes('?')) {
-            return `${propName}?: ${propType}${ending}`;
+        const propRegex = new RegExp(`(\\s+${prop}):\\s*([^;\\n]+)([;\\n])`, 'g'); newBody = newBody.replace(propRegex, (propMatch, propName, propType, ending) => {   if (!propName.includes('?')) {
+            return `${propName  }?: ${propType}${ending}`;
           }
           return propMatch;
         });
@@ -29,8 +29,8 @@ const fixes = [
   
   // Fix function parameter any types
   {
-    pattern: /\(([^)]*?)\s*:\s*any([^)]*?)\)/g, replacement: (match, paramName, rest) => { if (paramName.includes('event') || paramName.includes('Event')) {
-        return `(${paramName}: Event${rest})`; } if (paramName.includes('data') || paramName.includes('item')) {
+    pattern: /\(([^)]*?)\s*:\s*any([^)]*?)\)/g, replacement: (match, paramName, rest) => {   if (paramName.includes('event') || paramName.includes('Event')) {
+        return `(${paramName  }: Event${rest})`; } if (paramName.includes('data') || paramName.includes('item')) {
         return `(${paramName}: Record<string, unknown>${rest})`;
       }
       return `(${paramName}: unknown${rest})`; }, description: 'Replace any parameter types with more specific types'
@@ -38,14 +38,14 @@ const fixes = [
   
   // Add proper React event types
   {
-    pattern: /onChange=\{[^}]*\}\s*\/>/g; replacement: (match) => { if (!match.includes('ChangeEvent')) { return match.replace(/onChange=\{([^}]*)\}/, 'onChange={(e: React.ChangeEvent<HTMLInputElement>) => $1(e)}');
+    pattern: /onChange=\{[^}]*\}\s*\/>/g; replacement: (match) => {   if (!match.includes('ChangeEvent')) { return match.replace(/onChange=\{([^  }]*)\}/, 'onChange={(e: React.ChangeEvent<HTMLInputElement>) => $1(e)}');
       }
       return match; }, description: 'Add proper React ChangeEvent types'
   };
   
   // Fix onClick handlers
   {
-    pattern: /onClick=\{[^}]*\}\s*/g; replacement: (match) => { if (!match.includes('MouseEvent') && !match.includes('() =>')) { return match.replace(/onClick=\{([^}]*)\}/, 'onClick={(e: React.MouseEvent) => $1(e)}');
+    pattern: /onClick=\{[^}]*\}\s*/g; replacement: (match) => {   if (!match.includes('MouseEvent') && !match.includes('() =>')) { return match.replace(/onClick=\{([^  }]*)\}/, 'onClick={(e: React.MouseEvent) => $1(e)}');
       }
       return match; }, description: 'Add proper React MouseEvent types'
   }
@@ -80,19 +80,19 @@ function findFiles(dir, pattern, files = []) {
   let modified = false;
   
   // Apply general fixes
-  fixes.forEach(fix => {
+  fixes.forEach(fix => {  
     const original = content;
     content = content.replace(fix.pattern, fix.replacement);
     if (content !== original) {
-      console.log(`✓ Applied: ${fix.description} in ${path.basename(filePath)}`);
+      console.log(`✓ Applied: ${fix.description  } in ${path.basename(filePath)}`);
       modified = true;
     }
   });
   
   // Apply specific fixes
-  specificFixes.forEach(fix => { const shouldApply = fix.files.some(filePattern => { if (filePattern.includes('*')) { const regex = new RegExp(filePattern.replace(/\*\*/g, '.*').replace(/\*/g, '[^/]*'));
+  specificFixes.forEach(fix => {   const shouldApply = fix.files.some(filePattern => { if (filePattern.includes('*')) { const regex = new RegExp(filePattern.replace(/\*\*/g, '.*').replace(/\*/g, '[^/]*'));
         return regex.test(filePath);
-      }
+        }
       return filePath.includes(filePattern);
     });
     
@@ -115,10 +115,10 @@ function findFiles(dir, pattern, files = []) {
 // Main execution function main() { console.log('🔧 Starting comprehensive TypeScript fixes...\n'); const tsxFiles = findFiles('./app', /\.tsx?$/);
   let totalFixed = 0;
   
-  tsxFiles.forEach(file => {
+  tsxFiles.forEach(file => {  
     if (applyFixes(file)) {
       totalFixed++;
-    }
+      }
   });
    console.log(`\n✅ Fixed ${totalFixed} files`); console.log('🎯 Running TypeScript check to verify fixes...\n');
 }

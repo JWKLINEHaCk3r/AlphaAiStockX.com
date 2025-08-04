@@ -1,14 +1,15 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import { 
-  Search, 
+import { Search, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   TrendingUp, 
   TrendingDown, 
   Brain, 
@@ -25,7 +26,7 @@ import {
   BarChart3,
   LineChart,
   DollarSign,
-  Percent,
+  Percent, }
   Clock, Target } from 'lucide-react';
 
 interface Stock {
@@ -109,17 +110,17 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
     }, 4000);
   };
 
-  const getRecommendationColor = (recommendation: string) => {
+  const getRecommendationColor = (recommendation: string) => {  
     switch (recommendation) { case 'BUY': return 'text-green-600 bg-green-100'; case 'SELL': return 'text-red-600 bg-red-100'; default: return 'text-yellow-600 bg-yellow-100'
-    }
+      }
   };
 
-  const getSentimentColor = (sentiment: string) => { switch (sentiment) { case 'bullish': return 'text-green-400'; case 'bearish': return 'text-red-400'; default: return 'text-yellow-400'
-    }
+  const getSentimentColor = (sentiment: string) => {   switch (sentiment) { case 'bullish': return 'text-green-400'; case 'bearish': return 'text-red-400'; default: return 'text-yellow-400'
+      }
   };
 
-  const getRiskColor = (risk: string) => { switch (risk) { case 'low': return 'text-green-500'; case 'medium': return 'text-yellow-500'; default: return 'text-red-500'
-    }
+  const getRiskColor = (risk: string) => {   switch (risk) { case 'low': return 'text-green-500'; case 'medium': return 'text-yellow-500'; default: return 'text-red-500'
+      }
   };
  const getConfidenceColor = (confidence: number) => { if (confidence >= 85) return 'text-green-500'; if (confidence >= 70) return 'text-yellow-500'; return 'text-red-500';
   };
@@ -135,9 +136,9 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
     }).format(amount),
   };
 
-  const formatVolume = (volume: number) => {
+  const formatVolume = (volume: number) => {  
     if (volume >= 1000000) {
-      return `${(volume / 1000000).toFixed(1)}M`;
+      return `${(volume / 1000000).toFixed(1)  }M`;
     }
     if (volume >= 1000) {
       return `${(volume / 1000).toFixed(0)}K`;

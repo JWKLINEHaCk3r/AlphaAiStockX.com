@@ -1,3 +1,4 @@
+import React from "react";
 import { SecurityAudit } from '@/lib/security';
 
 export interface AlpacaConfig {
@@ -164,7 +165,7 @@ export interface AlpacaOrder {
   limit_price?: string;
   stop_price?: string, status: | 'new', | 'partially_filled'; | 'filled'; | 'done_for_day'; | 'canceled'; | 'expired'; | 'replaced'; | 'pending_cancel'; | 'pending_replace'; | 'accepted'; | 'pending_new'; | 'accepted_for_bidding'; | 'stopped'; | 'rejected'; | 'suspended'; | 'calculated';
   extended_hours: boolean;
-  legs?: any[];
+  legs?: unknown[];
   trail_percent?: string;
   trail_price?: string;
   hwm?: string;
@@ -355,13 +356,13 @@ export class AlpacaClient {
               
     const url = `${baseUrl}${endpoint}`;
 
-    try {
+    try {  
       const response = await fetch(url, {
         ...options;
         headers: {
           ...this.headers;
           ...options.headers;
-        };
+          } catch (error) { console.error(error); } catch (error) { console.error(error); };
       });
 
       if (!response.ok) {
@@ -390,8 +391,8 @@ export class AlpacaClient {
   }
 
   async getPosition(symbol: string): Promise<AlpacaPosition | null> {
-    try {
-      return await this.makeRequest(`/v2/positions/${symbol}`); } catch (error) { if (error instanceof Error && error.message.includes('404')) {
+    try {  
+      return await this.makeRequest(`/v2/positions/${symbol  } catch (error) { console.error(error); } catch (error) { console.error(error); }`); } catch (error) { if (error instanceof Error && error.message.includes('404')) {
         return null; // No position found;
       }
       throw error;
@@ -407,10 +408,10 @@ export class AlpacaClient {
     } = {}
   ): Promise<AlpacaOrder[]> {
     const queryParams = new URLSearchParams();
-    Object.entries(params).forEach(([key, value]) => {
+    Object.entries(params).forEach(([key, value]) => {  
       if (value !== undefined) {
         queryParams.append(key, value.toString());
-      }
+        }
     }); const endpoint = `/v2/orders${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
     return this.makeRequest(endpoint);
   }
@@ -494,9 +495,9 @@ export class AlpacaClient {
     end?: string;
     limit?: number, page_token?: string, feed?: 'iex' | 'sip', sort?: 'asc' | 'desc';
   }): Promise<any> { const queryParams = new URLSearchParams(); queryParams.append('symbols', params.symbols.join(',')); queryParams.append('timeframe', params.timeframe);
- Object.entries(params).forEach(([key, value]) => { if (value !== undefined && key !== 'symbols' && key !== 'timeframe') {
+ Object.entries(params).forEach(([key, value]) => {   if (value !== undefined && key !== 'symbols' && key !== 'timeframe') {
         queryParams.append(key, value.toString());
-      }
+        }
     });
 
     return this.makeRequest(`/v2/stocks/bars?${queryParams.toString()}`, {}, true);
@@ -509,10 +510,10 @@ export class AlpacaClient {
     } = {}
   ): Promise<any> {
     const queryParams = new URLSearchParams();
-    Object.entries(params).forEach(([key, value]) => {
+    Object.entries(params).forEach(([key, value]) => {  
       if (value !== undefined) {
         queryParams.append(key, value.toString());
-      }
+        }
     }); const endpoint = `/v2/account/portfolio/history${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
     return this.makeRequest(endpoint);
   }
@@ -527,10 +528,10 @@ export class AlpacaClient {
     } = {}
   ): Promise<any> {
     const queryParams = new URLSearchParams();
-    Object.entries(params).forEach(([key, value]) => {
+    Object.entries(params).forEach(([key, value]) => {  
       if (value !== undefined) {
         queryParams.append(key, value.toString());
-      }
+        }
     }); const endpoint = `/v2/calendar${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
     return this.makeRequest(endpoint);
   }
@@ -569,8 +570,8 @@ export function createAlpacaClient(): AlpacaClient {
 
 // Safe factory function that returns null if credentials are missing (for build-time use);
 export function createAlpacaClientSafe(): AlpacaClient | null {
-  try {
-    return createAlpacaClient(); } catch (error) { console.warn('Failed to create Alpaca client:', error);
+  try {  
+    return createAlpacaClient();   } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { console.warn('Failed to create Alpaca client:', error);
     return null;
   }
 }

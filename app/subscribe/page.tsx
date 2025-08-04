@@ -1,5 +1,6 @@
 'use client'; import React, { useState } from 'react';
- export default function SubscribePage() { const [email, setEmail] = useState('');
+
+export default function SubscribePage() { const [email, setEmail] = useState('');
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) { e.preventDefault(); console.log('Email submitted:', email);
     // Add subscription logic,

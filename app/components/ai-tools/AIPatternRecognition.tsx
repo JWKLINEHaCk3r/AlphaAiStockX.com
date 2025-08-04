@@ -23,8 +23,8 @@ export default function AIPatternRecognition() {
       setLoading(false);
     }, 1100);
   };
- const getPatternColor = (pattern: string) => { const bullishPatterns = ['Cup & Handle', 'Ascending Triangle', 'Bull Flag']; const bearishPatterns = ['Head & Shoulders'];
-     if (bullishPatterns.some(p => pattern.includes(p))) { return 'text-green-400'; } else if (bearishPatterns.some(p => pattern.includes(p))) { return 'text-red-400'; } return 'text-yellow-400';
+ const getPatternColor = (pattern: string) => {   const bullishPatterns = ['Cup & Handle', 'Ascending Triangle', 'Bull Flag']; const bearishPatterns = ['Head & Shoulders'];
+     if (bullishPatterns.some(p => pattern.includes(p))) { return 'text-green-400';   } else if (bearishPatterns.some(p => pattern.includes(p))) { return 'text-red-400'; } return 'text-yellow-400';
   };
 
   const getConfidenceColor = (confidence: string) => { const percent = parseInt(confidence); if (percent >= 90) return 'text-green-500'; if (percent >= 80) return 'text-yellow-400'; return 'text-orange-400';

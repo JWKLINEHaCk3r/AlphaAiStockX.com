@@ -1,6 +1,7 @@
-'use client'; import React from 'react';
-
-export type Account = { 
+import React from 'react';
+'use client';
+import { Label } from "../../../components/ui/label";
+export type Account = {
   portfolio_value?: number | string;
   buying_power?: number | string; 
   status?: string;

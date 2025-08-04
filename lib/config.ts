@@ -1,3 +1,4 @@
+import React from "react";
 // Application configuration and constants;
 export const APP_CONFIG = {
   name: 'AlphaAIStockX', version: '2.0.0', description: 'Next-Level AI Trading Platform', url: process.env.NEXT_PUBLIC_APP_URL || 'https://alphaaistockx.com', api: { baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000', wsUrl: process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8001',

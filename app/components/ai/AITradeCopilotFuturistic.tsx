@@ -14,7 +14,7 @@ const getPositions = async () => ([]);
 interface AIStrategy {
   name: string;
   description: string;
-  run: (marketData: any, accountData: any) => Promise<{
+  run: (marketData: unknown, accountData: unknown) => Promise<{
     action: string;
     confidence: number;
     reason: string;
@@ -35,15 +35,15 @@ export default function AITradeCopilotFuturistic() {
   const [pnl, setPnl] = useState(0); const [confidence, setConfidence] = useState(0); const [aiReason, setAiReason] = useState('');
   const [log, setLog] = useState<string[]>([]);
 
-  useEffect(() => {
+  useEffect(() => {  
     let interval: NodeJS.Timeout
               
      if (running) { setStatus('Running'); setLog(l => ['AI Bot started.', ...l]);
       interval = setInterval(async () => {
-        try {
+        try {  
           const account = await getAccount();
           const positions = await getPositions();
-          const marketData = { volatility: Math.random() * 0.6 };
+          const marketData = { volatility: Math.random() * 0.6     } catch (error) { console.error(error); } catch (error) { console.error(error); };
           setPnl(Number(account?.equity) - Number(account?.last_equity || account?.equity));
           // Run selected AI strategy
           const result = await selectedStrategy.run(marketData, { account,
@@ -82,10 +82,10 @@ export default function AITradeCopilotFuturistic() {
         <select
           className="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white"
           value={selectedStrategy.name}
-          onChange={(e) => {
+          onChange={(e) => {  
             const strat = strategies.find(s => s.name === e.target.value);
             if (strat) setSelectedStrategy(strat);
-          }}
+            }}
         >
           {strategies.map(strategy => (
             <option key={strategy.name} value={strategy.name}>

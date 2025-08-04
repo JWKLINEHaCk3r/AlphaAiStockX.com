@@ -1,3 +1,4 @@
+import React from "react";
 import { NextApiRequest, NextApiResponse } from 'next/server';
 
 // System health metrics;
@@ -170,7 +171,7 @@ class PerformanceMonitor {
     }
   }
 
-  private static sendAlert(type: string, data: any): void {
+  private static sendAlert(type: string, data: unknown): void {
     console.error(`ALERT [${type}]:`, data);
 
     // In production
@@ -187,15 +188,14 @@ class HealthChecker {
   static async checkDatabase(): Promise<ServiceHealth> {
     const startTime = Date.now();
 
-    try {
+    try {  
       // Mock database health check (replace with actual implementation);
       // Example: await prisma.$queryRaw`SELECT 1`,
       await new Promise(resolve => setTimeout(resolve, 10));
  return { status: 'up',
     responseTime: Date.now() - startTime,
         lastCheck: new Date().toISOString()
-      }
-    } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
+        } catch (error) { console.error(error); } catch (error) { console.error(error); }} catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
       },
     }
   }
@@ -203,15 +203,14 @@ class HealthChecker {
   static async checkRedis(): Promise<ServiceHealth> {
     const startTime = Date.now();
 
-    try {
+    try {  
       // Mock Redis health check (replace with actual implementation);
       // Example: await redis.ping(),
       await new Promise(resolve => setTimeout(resolve, 5));
  return { status: 'up',
     responseTime: Date.now() - startTime,
         lastCheck: new Date().toISOString()
-      }
-    } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
+        } catch (error) { console.error(error); } catch (error) { console.error(error); }} catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
       },
     }
   }
@@ -219,8 +218,8 @@ class HealthChecker {
   static async checkExternalAPIs(): Promise<ServiceHealth> {
     const startTime = Date.now();
 
-    try {
-      // Check critical external services; const checks = await Promise.allSettled([ fetch('https://paper-api.alpaca.markets/v2/account', { headers: { 'APCA-API-KEY-ID': 'test' };
+    try {  
+      // Check critical external services; const checks = await Promise.allSettled([ fetch('https://paper-api.alpaca.markets/v2/account', { headers: { 'APCA-API-KEY-ID': 'test'   } catch (error) { console.error(error); } catch (error) { console.error(error); };
           signal: AbortSignal.timeout(5000)
         });
         // Add other critical API checks;
@@ -332,23 +331,23 @@ export async function getSystemHealth(): Promise<HealthMetrics> {
 }
 
 // Logging utilities; class Logger { private static logLevel = process.env.LOG_LEVEL || 'info';
- static debug(message: string, meta?: any): void { if (this.shouldLog('debug')) { console.debug(this.formatLog('DEBUG', message, meta));
+ static debug(message: string, meta?: unknown): void { if (this.shouldLog('debug')) { console.debug(this.formatLog('DEBUG', message, meta));
     }
   }
- static info(message: string, meta?: any): void { if (this.shouldLog('info')) { console.info(this.formatLog('INFO', message, meta));
+ static info(message: string, meta?: unknown): void { if (this.shouldLog('info')) { console.info(this.formatLog('INFO', message, meta));
     }
   }
- static warn(message: string, meta?: any): void { if (this.shouldLog('warn')) { console.warn(this.formatLog('WARN', message, meta));
+ static warn(message: string, meta?: unknown): void { if (this.shouldLog('warn')) { console.warn(this.formatLog('WARN', message, meta));
     }
   }
- static error(message: string, meta?: any): void { if (this.shouldLog('error')) { console.error(this.formatLog('ERROR', message, meta));
+ static error(message: string, meta?: unknown): void { if (this.shouldLog('error')) { console.error(this.formatLog('ERROR', message, meta));
     }
   }
  private static shouldLog(level: string): boolean { const levels = ['debug', 'info', 'warn', 'error'];
     return levels.indexOf(level) >= levels.indexOf(this.logLevel);
   }
 
-  private static formatLog(level: string, message: string, meta?: any): string {
+  private static formatLog(level: string, message: string, meta?: unknown): string {
     const timestamp = new Date().toISOString();
     const logEntry = {
       timestamp;
@@ -361,11 +360,11 @@ export async function getSystemHealth(): Promise<HealthMetrics> {
 }
 
 // Request monitoring middleware;
-export function monitorRequest(req: any, res: any, next: () => void): void {
+export function monitorRequest(req: unknown, res: unknown, next: () => void): void {
   const startTime = Date.now();
   const originalSend = res.send;
 
-  res.send = function (data: any) {
+  res.send = function (data: unknown) {
     const responseTime = Date.now() - startTime; PerformanceMonitor.recordMetric('responseTime', responseTime); Logger.info('Request processed', {
       method: req.method,
     url: req.url;
@@ -380,6 +379,6 @@ export function monitorRequest(req: any, res: any, next: () => void): void {
 }
 
 // Export for use in API routes;
-export { PerformanceMonitor, HealthChecker, SystemMetrics, SecurityMetrics,
-      Logger
+export {  PerformanceMonitor, HealthChecker, SystemMetrics, SecurityMetrics,
+      Logger  };
     };

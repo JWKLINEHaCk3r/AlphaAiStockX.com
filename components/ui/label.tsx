@@ -1,3 +1,4 @@
+import { Label } from "./label";
 // Removed circular import;
 import React from 'react';
  export function Label({ children className = '', ...props }: React.LabelHTMLAttributes<HTMLLabelElement> & { className?: string }) {
@@ -5,3 +6,5 @@ import React from 'react';
     {...props}>{children}</label>
 // end of file;
 }
+
+export default label;

@@ -1,13 +1,14 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  Bot, 
+import { Bot, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Play, 
   Pause, 
   Settings, 
@@ -18,7 +19,7 @@ import {
   Zap,
   BarChart3,
   Clock,
-  Star,
+  Star, }
   Wifi, WifiOff } from 'lucide-react';
 
 interface BotStatus {
@@ -105,7 +106,7 @@ export default function LiveTradingBot() {
       minimumFractionDigits: 2
     }).format(amount),
   };
- const formatPercent = (percent: number) => { return `${percent >= 0 ? '+' : ''}${percent.toFixed(2)}%`;
+ const formatPercent = (percent: number) => {   return `${percent >= 0 ? '+' : ''  }${percent.toFixed(2)}%`;
   };
 
   return (

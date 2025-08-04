@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  try {
+  try {  
     // TODO: Complete this comment
     // Mock portfolio data
     const portfolio = {
@@ -13,7 +13,7 @@ export async function GET() {
           currentPrice: 189.50,
           totalValue: 9475.00,
           dayChange: 2.5
-        }, { symbol: 'NVDA',
+          } catch (error) { console.error(error); } catch (error) { console.error(error); }, { symbol: 'NVDA',
           shares: 25,
           currentPrice: 875.30,
           totalValue: 21882.50,

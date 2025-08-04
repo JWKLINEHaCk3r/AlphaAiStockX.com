@@ -1,13 +1,15 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Alert, AlertDescription } from "../../../components/ui/alert";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import { Badge } from "../../../components/ui/badge";
-import { 
-  Shield, 
+import { Shield, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   CheckCircle, 
   AlertTriangle, 
   Clock, 
@@ -18,7 +20,7 @@ import {
   Eye, 
   Download,
   Server,
-  Zap,
+  Zap, }
   FileText, Search } from 'lucide-react';
 
 interface SSLCertificate { domain: string, status: 'valid' | 'expiring' | 'expired' | 'invalid',
@@ -73,18 +75,18 @@ export default function IONOSSSLFixer() {
     }, 5000);
   };
 
-  const getStatusColor = (status: string) => { switch (status) { case 'valid': return 'text-green-400 bg-green-900/30'; case 'expiring': return 'text-yellow-400 bg-yellow-900/30'; case 'expired': return 'text-red-400 bg-red-900/30'; case 'invalid': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getStatusColor = (status: string) => {   switch (status) { case 'valid': return 'text-green-400 bg-green-900/30'; case 'expiring': return 'text-yellow-400 bg-yellow-900/30'; case 'expired': return 'text-red-400 bg-red-900/30'; case 'invalid': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
 
-  const getSeverityColor = (severity: string) => { switch (severity) { case 'low': return 'text-blue-400 bg-blue-900/30'; case 'medium': return 'text-yellow-400 bg-yellow-900/30'; case 'high': return 'text-orange-400 bg-orange-900/30'; case 'critical': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
-    }
+  const getSeverityColor = (severity: string) => {   switch (severity) { case 'low': return 'text-blue-400 bg-blue-900/30'; case 'medium': return 'text-yellow-400 bg-yellow-900/30'; case 'high': return 'text-orange-400 bg-orange-900/30'; case 'critical': return 'text-red-400 bg-red-900/30'; default: return 'text-gray-400 bg-gray-900/30'
+      }
   };
 
-  const getIssueIcon = (type: string) => { switch (type) { case 'certificate': return Shield case 'configuration': return Settings case 'renewal': return Clock case 'security': return Lock;
+  const getIssueIcon = (type: string) => {   switch (type) { case 'certificate': return Shield case 'configuration': return Settings case 'renewal': return Clock case 'security': return Lock;
       default: return;
       AlertTriangle
-    }
+      }
   };
 
   return (
@@ -311,10 +313,10 @@ export default function IONOSSSLFixer() {
               </div>
             ) : (
               <div className="space-y-4">
-                {issues.map((issue, index) => {
+                {issues.map((issue, index) => {  
                   const Icon = getIssueIcon(issue.type);
                   return (
-                    <Alert key={index} className="bg-white/5 border-white/10">
+                    <Alert key={index  } className="bg-white/5 border-white/10">
                       <div className="flex items-start gap-4">
                         <Icon className="w-6 h-6 text-yellow-400 mt-1" />
                         <div className="flex-1">

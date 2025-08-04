@@ -1,11 +1,13 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  TrendingUp, 
+import { TrendingUp, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   Zap, 
   Shield, 
   BarChart3, 
@@ -14,7 +16,7 @@ import {
   Trophy,
   Target,
   CheckCircle,
-  ArrowRight,
+  ArrowRight, }
   Play, Rocket } from 'lucide-react';
 
 interface PlatformFeature {
@@ -54,13 +56,13 @@ interface CompetitorComparison {
       competitor2: false },{ feature: '24/7 Support', alphaAI: true, competitor1: 'Business hours', competitor2: 'Email only' },{ feature: 'Commission-Free', alphaAI: 'All trades', competitor1: 'Limited trades', competitor2: '$9.99 per trade'
     }
   ];
- const renderComparisonValue = (value: string | boolean) => { if (typeof value === 'boolean') {
+ const renderComparisonValue = (value: string | boolean) => {   if (typeof value === 'boolean') {
       return value ? (
         <CheckCircle className="w-5 h-5 text-green-500 mx-auto" />
       ) : (
         <span className="text-red-500">✗</span>
       );
-    }
+      }
     return <span className="text-gray-800">{value}</span>;
   };
 

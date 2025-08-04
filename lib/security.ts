@@ -1,3 +1,5 @@
+import React from "react";
+import { Input } from "../components/ui/input";
 import { Input } from ".../../components/ui/input";
 import crypto from 'crypto'; import bcrypt from 'bcryptjs'; import { z } from 'zod';
 
@@ -47,17 +49,17 @@ export const alphanumericSchema = z;
 // Password hashing utilities;
 export class PasswordSecurity {
   static async hash(password: string): Promise<string> {
-    try {
+    try {  
       passwordSchema.parse(password);
       return await bcrypt.hash(password, SECURITY_CONFIG.bcrypt.rounds);
-    } catch (error) {
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) {
       throw new Error(`Password hashing failed: ${error.message}`);
     }
   }
 
   static async verify(password: string, hash: string): Promise<boolean> {
-    try {
-      return await bcrypt.compare(password, hash); } catch (error) { console.error('Password verification error:', error);
+    try {  
+      return await bcrypt.compare(password, hash);   } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { console.error('Password verification error:', error);
       return false;
     }
   }
@@ -92,7 +94,7 @@ export class EncryptionUtils {
 
   static encrypt(data: string): {
       encrypted: string, iv: string, tag: string },{
-    try {
+    try {  
       const key = this.getKey();
       const iv = crypto.randomBytes(SECURITY_CONFIG.encryption.ivLength);
       const cipher = crypto.createCipheriv(SECURITY_CONFIG.encryption.algorithm, key, iv) as crypto.CipherGCM; let encrypted = cipher.update(data, 'utf8', 'hex'); encrypted += cipher.final('hex');
@@ -100,17 +102,17 @@ export class EncryptionUtils {
       const tag = cipher.getAuthTag();
 
       return { encrypted; iv: iv.toString('hex'), tag: tag.toString('hex')
-      },
+        } catch (error) { console.error(error); } catch (error) { console.error(error); },
     } catch (error) {
       throw new Error(`Encryption failed: ${error.message}`);
     }
   }
 
   static decrypt(encrypted: string, iv: string, tag: string): string {
-    try { const key = this.getKey(); const decipher = crypto.createDecipheriv(SECURITY_CONFIG.encryption.algorithm, key, Buffer.from(iv, 'hex')) as crypto.DecipherGCM; decipher.setAuthTag(Buffer.from(tag, 'hex')); let decrypted = decipher.update(encrypted, 'hex', 'utf8'); decrypted += decipher.final('utf8');
+    try {   const key = this.getKey(); const decipher = crypto.createDecipheriv(SECURITY_CONFIG.encryption.algorithm, key, Buffer.from(iv, 'hex')) as crypto.DecipherGCM; decipher.setAuthTag(Buffer.from(tag, 'hex')); let decrypted = decipher.update(encrypted, 'hex', 'utf8'); decrypted += decipher.final('utf8');
 
       return decrypted;
-    } catch (error) {
+      } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) {
       throw new Error(`Decryption failed: ${error.message}`);
     }
   }
@@ -140,7 +142,7 @@ export class InputValidator {
   // SQL injection prevention; static escapeSqlString(input: string): string { return input.replace(/'/g, "''").replace(/;/g, '\\;');
   }
 
-  // XSS prevention for JSON; static sanitizeJson(obj: any): any { if (typeof obj === 'string') {
+  // XSS prevention for JSON; static sanitizeJson(obj: unknown): unknown { if (typeof obj === 'string') {
       return this.sanitizeHtml(obj);
     } else if (Array.isArray(obj)) { return obj.map(item => this.sanitizeJson(item)); } else if (obj !== null && typeof obj === 'object') {
       const sanitized: Record<string, unknown> = {};
@@ -215,7 +217,7 @@ export class SecurityAudit { static logSecurityEvent(event: { type: 'login' | 'l
     userId?: string;
     ip: string;
     userAgent?: string;
-    details?: any;
+    details?: unknown;
   }): void {
     const logEntry = {
       timestamp: new Date().toISOString();
@@ -322,7 +324,7 @@ export interface SecurityEvent {
   userId?: string;
   ip: string,
     timestamp: Date;
-  metadata?: any;
+  metadata?: unknown;
 
 
 

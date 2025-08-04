@@ -1,3 +1,4 @@
+import React from "react";
 'use client'; import { useState, useEffect } from 'react';
 
 interface ViewportSize {
@@ -83,8 +84,8 @@ export function useViewport(): ViewportSize {
     updateViewport(); if (typeof window !== 'undefined') { // Add event listener; window.addEventListener('resize', updateViewport); window.addEventListener('orientationchange', updateViewport);
     }
 
-    // Cleanup; return () => { if (typeof window !== 'undefined') { window.removeEventListener('resize', updateViewport); window.removeEventListener('orientationchange', updateViewport);
-      }
+    // Cleanup; return () => {   if (typeof window !== 'undefined') { window.removeEventListener('resize', updateViewport); window.removeEventListener('orientationchange', updateViewport);
+        }
     };
   }, []);
 

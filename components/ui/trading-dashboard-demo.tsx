@@ -1,14 +1,14 @@
+import { Card } from "./card.js";
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from './card'; import { Button } from './button';
-import {
-  TrendingUp;
+import { Card, CardHeader, CardContent, CardTitle } from "./card.js"; import { Button } from './button';
+import { TrendingUp;
   TrendingDown;
   DollarSign;
   Brain;
   Zap;
-  BarChart3;
+  BarChart3; }
   Target; Activity; } from 'lucide-react';
 
 interface StockData {

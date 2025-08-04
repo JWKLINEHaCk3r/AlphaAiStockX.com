@@ -1,3 +1,5 @@
+'use client';
+
 #!/usr/bin/env node
 
 const fs = require('fs'); const path = require('path'); console.log('🚀 Starting Comprehensive Import Fixing...');
@@ -13,7 +15,7 @@ const IMPORT_MAPPINGS = { // UI Components '../../../components/ui/card': '../..
 // Patterns to fix common import issues
 const IMPORT_FIXES = [
   // Fix duplicate imports { pattern: /import\s+{\s*([^}]+)\s*}\s*from\s+['"]([^'"]+)['"]\s*;\s*import\s+{\s*([^}]+)\s*}\s*from\s+['"]([^'"]+)['"]\s*;/g,
-    fix: (match, imports1, path1, imports2, path2) => { if (path1 === path2) { const allImports = [...new Set([...imports1.split(','), ...imports2.split(',')].map(i => i.trim()))]; return `import { ${allImports.join(', ')} } from '${path1}';`;
+    fix: (match, imports1, path1, imports2, path2) => {   if (path1 === path2) { const allImports = [...new Set([...imports1.split(','), ...imports2.split(',')].map(i => i.trim()))]; return `import { ${allImports.join(', ')  } } from '${path1}';`;
       }
       return match;
     }
@@ -31,7 +33,7 @@ const IMPORT_FIXES = [
   // Fix React duplicate imports { pattern: /import\s+React\s+from\s+['"]react['"]\s*,\s*import\s+React\s+from\s+['"]react['"]\s*;/g, fix: "import React from 'react',"
   },
   
-  // Fix use client directive placement { pattern: /(['"]use client['"])\s*,\s*(import.*)/g, fix: "'use client',\n\n$2"
+// Fix use client directive placement { pattern: /(['"]use client['"])\s*,\s*(import.*)/g, fix: ",\n\n$2"
   }
 ];
 

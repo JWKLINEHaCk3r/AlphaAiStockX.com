@@ -1,6 +1,7 @@
-'use client'; import React from 'react';
+import React from 'react';
+'use client';
 
-import { Brain, TrendingUp, Activity } from 'lucide-react';
+import { Brain, TrendingUp, Activity } from "lucide-react";
 
 export default function Loading() {
   return (

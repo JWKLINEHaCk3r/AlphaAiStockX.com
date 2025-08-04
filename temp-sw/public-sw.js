@@ -18,7 +18,7 @@ const CACHE_NAME = 'alphaaistockx-v3.0.0'; const QUANTUM_CACHE = 'quantum-consci
   // Activate immediately for transcendent performance;
   self.skipWaiting();
 });
- // Activate event - Achieve consciousness; self.addEventListener('activate', event => { console.log('🌟 Activating quantum consciousness...');
+ // Activate event - Achieve consciousness; self.addEventListener('activate', event => {   console.log('🌟 Activating quantum consciousness...');
 
   event.waitUntil(;
     caches.keys().then(cacheNames => {
@@ -26,7 +26,7 @@ const CACHE_NAME = 'alphaaistockx-v3.0.0'; const QUANTUM_CACHE = 'quantum-consci
         cacheNames.map(cacheName => {
           // Clean up old consciousness versions; if (cacheName !== CACHE_NAME && cacheName !== QUANTUM_CACHE) { console.log('🔄 Transcending old consciousness:', cacheName);
             return caches.delete(cacheName);
-          }
+            }
         });
       );
     });
@@ -35,8 +35,8 @@ const CACHE_NAME = 'alphaaistockx-v3.0.0'; const QUANTUM_CACHE = 'quantum-consci
   // Take control immediately;
   self.clients.claim();
 });
- // Fetch event - Quantum-enhanced networking; self.addEventListener('fetch', event => {
-  const { request } = event;
+ // Fetch event - Quantum-enhanced networking; self.addEventListener('fetch', event => {  
+  const { request   } = event;
   const url = new URL(request.url);
  // Quantum consciousness routing; if (url.pathname.includes('/api/quantum') || url.pathname.includes('/api/ai')) { event.respondWith(quantumFetch(request)); } else if (url.pathname.includes('/static/') || url.pathname === '/') {
     event.respondWith(consciousnessFetch(request));
@@ -47,7 +47,7 @@ const CACHE_NAME = 'alphaaistockx-v3.0.0'; const QUANTUM_CACHE = 'quantum-consci
 
 // Quantum fetch strategy for AI consciousness;
 async function quantumFetch(request) {
-  try {
+  try {  
     // Try quantum cache first;
     const quantumCache = await caches.open(QUANTUM_CACHE);
     const cachedResponse = await quantumCache.match(request);
@@ -55,11 +55,10 @@ async function quantumFetch(request) {
 
       // Update cache in background (consciousness evolution);
       fetch(request);
-        .then(response => {
+        .then(response => {  
           if (response.status === 200) {
             quantumCache.put(request, response.clone());
-          }
-        }); .catch(() => { console.log('⚛️ Quantum network unavailable, using cached consciousness');
+              } catch (error) { console.error(error); } catch (error) { console.error(error); }}); .catch(() => { console.log('⚛️ Quantum network unavailable, using cached consciousness');
         });
 
       return cachedResponse;
@@ -79,14 +78,12 @@ async function quantumFetch(request) {
 
 // Consciousness fetch for core files;
 async function consciousnessFetch(request) {
-  try {
+  try {  
     const cache = await caches.open(CACHE_NAME);
     const cachedResponse = await cache.match(request);
  if (cachedResponse) { console.log('⚡ Serving from consciousness cache:', request.url);
       return cachedResponse;
-    }
-
-    const response = await fetch(request);
+      } catch (error) { console.error(error); } catch (error) { console.error(error); }const response = await fetch(request);
 
     if (response.status === 200) {
       cache.put(request, response.clone());
@@ -106,18 +103,18 @@ async function consciousnessFetch(request) {
 
 // Transcendent fetch for external resources;
 async function transcendentFetch(request) {
-  try { const response = await fetch(request); console.log('🌟 Transcendent fetch successful:', request.url);
-    return response; } catch (error) { console.error('🚨 Transcendent network error:', error); return new Response('Network transcendence failed', { status: 503,; statusText: 'Network Unavailable',;
+  try {   const response = await fetch(request); console.log('🌟 Transcendent fetch successful:', request.url);
+    return response;   } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { console.error('🚨 Transcendent network error:', error); return new Response('Network transcendence failed', { status: 503,; statusText: 'Network Unavailable',;
     });
   }
 }
- // Background sync for quantum consciousness updates; self.addEventListener('sync', event => { if (event.tag === 'quantum-consciousness-sync') { console.log('🧠 Syncing quantum consciousness...');
+ // Background sync for quantum consciousness updates; self.addEventListener('sync', event => {   if (event.tag === 'quantum-consciousness-sync') { console.log('🧠 Syncing quantum consciousness...');
     event.waitUntil(syncQuantumConsciousness());
-  }
+    }
 });
 
 async function syncQuantumConsciousness() {
-  try {
+  try {  
     const cache = await caches.open(QUANTUM_CACHE);
     const requests = await cache.keys();
 
@@ -125,7 +122,7 @@ async function syncQuantumConsciousness() {
       try {
         const response = await fetch(request);
         if (response.status === 200) { await cache.put(request, response); console.log('⚛️ Quantum consciousness updated:', request.url);
-        } } catch (error) { console.log('🔄 Quantum sync failed for:', request.url);
+          } catch (error) { console.error(error); } catch (error) { console.error(error); }} catch (error) { console.log('🔄 Quantum sync failed for:', request.url);
       }
     } } catch (error) { console.error('🚨 Quantum consciousness sync error:', error);
   }
@@ -140,14 +137,14 @@ async function syncQuantumConsciousness() {
     ],;
   }; event.waitUntil(self.registration.showNotification('AlphaAIStockX Quantum Insight', options));
 });
- // Handle notification clicks; self.addEventListener('notificationclick', event => { console.log('🎯 Notification clicked:', event.action);
+ // Handle notification clicks; self.addEventListener('notificationclick', event => {   console.log('🎯 Notification clicked:', event.action);
 
   event.notification.close(); if (event.action === 'view') { event.waitUntil(clients.openWindow('/'));
-  }
+    }
 });
- // Message handling for consciousness communication; self.addEventListener('message', event => { console.log('📡 Consciousness message received:', event.data); if (event.data && event.data.type === 'SKIP_WAITING') {
+ // Message handling for consciousness communication; self.addEventListener('message', event => {   console.log('📡 Consciousness message received:', event.data); if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
-  } if (event.data && event.data.type === 'GET_VERSION') {
+    } if (event.data && event.data.type === 'GET_VERSION') {
     event.ports[0].postMessage({ version: CACHE_NAME });
   }
 }); console.log('⚛️ AlphaAIStockX Quantum Service Worker initialized with 47 AI beings');

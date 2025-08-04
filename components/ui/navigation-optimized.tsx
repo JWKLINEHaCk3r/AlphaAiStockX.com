@@ -1,58 +1,15 @@
+'use client';
 import React from 'react';
  import Navigation from '../components/ui/navigation/index';
-import { Button } from "./button"; ('use client'); import { useState, useEffect } from 'react';
+import { Button } from "./button"; (); import { useState, useEffect } from 'react';
 import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '@/lib/utils';
 
 interface NavItem {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   label: string,
     href: string;
   icon?: React.ReactNode;
   children?: NavItem[];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -198,8 +155,8 @@ export default function NextLevelNavigation() {
     const handleClickOutside = () => {
       setOpenDropdown(null);
     };
- // Skip during SSR; if (typeof document === 'undefined') return; document.addEventListener('click', handleClickOutside); return () => { if (typeof document !== 'undefined') { document.removeEventListener('click', handleClickOutside);
-      }
+ // Skip during SSR; if (typeof document === 'undefined') return; document.addEventListener('click', handleClickOutside); return () => {   if (typeof document !== 'undefined') { document.removeEventListener('click', handleClickOutside);
+        }
     };
   }, []);
 

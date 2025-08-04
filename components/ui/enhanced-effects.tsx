@@ -6,9 +6,9 @@ export function ScrollProgress() {
     return null;
   }
 
-  useEffect(() => { // Skip during SSR or if document is not available; if (typeof window === 'undefined') return; if (typeof document === 'undefined') return;
+  useEffect(() => {   // Skip during SSR or if document is not available; if (typeof window === 'undefined') return; if (typeof document === 'undefined') return;
 
-    try { const updateScrollProgress = () => { if (typeof document === 'undefined') return;
+    try {   const updateScrollProgress = () => { if (typeof document === 'undefined') return;
 
         const scrollPx = document.documentElement?.scrollTop || 0;
         const scrollHeight = document.documentElement?.scrollHeight || 0;
@@ -18,8 +18,7 @@ export function ScrollProgress() {
         if (winHeightPx > 0) {
           const scrolled = (scrollPx / winHeightPx) * 100;
           setScrollProgress(Math.min(100, Math.max(0, scrolled)));
-        }
-      }; if (typeof window !== 'undefined') { window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            } catch (error) { console.error(error); } catch (error) { console.error(error); }}; if (typeof window !== 'undefined') { window.addEventListener('scroll', updateScrollProgress, { passive: true });
         updateScrollProgress(); // Initial calculation;
       } return () => window.removeEventListener('scroll', updateScrollProgress); } catch (error) { console.warn('ScrollProgress initialization failed during SSR:', error);
       return () => {}; // Return empty cleanup function;
@@ -50,10 +49,10 @@ export function MatrixRain() {
     return null;
   }
 
-  useEffect(() => { // Skip during SSR; if (typeof window === 'undefined') return;
+  useEffect(() => {   // Skip during SSR; if (typeof window === 'undefined') return;
 
-    try { const chars  =  '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      const newCharacters = Array.from({ length: 50 }, (_, i) => ({ id: i, char: chars[Math.floor(Math.random() * chars.length)] || '0', // Fallback to '0';
+    try {   const chars  =  '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      const newCharacters = Array.from({ length: 50     } catch (error) { console.error(error); } catch (error) { console.error(error); }, (_, i) => ({ id: i, char: chars[Math.floor(Math.random() * chars.length)] || '0', // Fallback to '0';
         left: Math.random() * 100,
     duration: Math.random() * 3 + 2;
         delay: Math.random() * 2
@@ -94,3 +93,5 @@ export function AIConsciousnessOrb() { // Early return for SSR; if (typeof windo
     </div>
   );
 }
+
+export default enhanced-effects;

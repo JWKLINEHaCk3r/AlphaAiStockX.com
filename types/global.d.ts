@@ -25,7 +25,7 @@ declare global {
 
 
 
-      [elemName: string]: any
+      [elemName: string]: unknown
     
 
 

@@ -32,7 +32,7 @@ import React from 'react'; // Cypress support commands for E2E testing; import '
 //       login(email: string, password: string): Chainable<Element>,
 //       logout(): Chainable<Element>;
 //       navigateToTrading(): Chainable<Element>;
-//       placeOrder(orderData: any): Chainable<Element>,
+//       placeOrder(orderData: unknown): Chainable<Element>,
 //       checkSecurityHeaders(): Chainable<Element>;
 //       byTestId(testId: string): Chainable<Element>,
 //;
@@ -73,8 +73,8 @@ import React from 'react'; // Cypress support commands for E2E testing; import '
  // Check security headers; Cypress.Commands.add('checkSecurityHeaders', () => { cy.request('/').then(response => { expect(response.headers).to.have.property('x-content-type-options', 'nosniff'); expect(response.headers).to.have.property('x-frame-options'); expect(response.headers).to.have.property('x-xss-protection');
   });
 });
- // Get by test ID; Cypress.Commands.add('byTestId', testId => {
-  return cy.get(`[data-testid="${testId}"]`);
+ // Get by test ID; Cypress.Commands.add('byTestId', testId => {  
+  return cy.get(`[data-testid="${testId  }"]`);
 });
 
 // Global configuration;
@@ -88,8 +88,8 @@ beforeEach(() => {
  // Mock external APIs in test environment; if (Cypress.env('MOCK_APIS')) { cy.intercept('GET', '**/api/market-data/**', { fixture: 'market-data.json' }); cy.intercept('POST', '**/api/trading/orders', { fixture: 'order-response.json' });
   }
 });
- // Handle uncaught exceptions; Cypress.on('uncaught:exception', err => { // Don't fail tests on React hydration warnings; if (err.message.includes('Hydration')) {
+ // Handle uncaught exceptions; Cypress.on('uncaught:exception', err => {   // Don't fail tests on React hydration warnings; if (err.message.includes('Hydration')) {
     return false;
-  }
+    }
   return true;
 });

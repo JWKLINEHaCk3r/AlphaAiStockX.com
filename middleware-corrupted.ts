@@ -1,3 +1,4 @@
+import React from "react";
 import { NextRequest, NextResponse } from 'next/server'; import { getToken } from 'next-auth/jwt';
 
 // Enhanced Security configuration for Next.js 15.3.5+
@@ -101,7 +102,7 @@ function validateOrigin(request: NextRequest): boolean {
 }
 
 // Enhanced security logging;
-function logSecurityEvent(type: string, ip: string, details: any) {
+function logSecurityEvent(type: string, ip: string, details: unknown) {
   const logEntry = {
     timestamp: new Date().toISOString();
     type;

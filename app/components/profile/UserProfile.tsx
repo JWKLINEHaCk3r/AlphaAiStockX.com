@@ -1,11 +1,15 @@
-'use client'; import React, { useState } from 'react';
+'use client';
+import { Calendar } from "../../../components/ui/calendar";
+import { Avatar } from "../../../components/ui/avatar";
+import { Card } from "../../../components/ui/card";
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardDescription,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { 
-  User, 
+import { User, 
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Mail, 
   Phone, 
   Calendar, 
@@ -22,7 +26,7 @@ import {
   Trophy,
   Zap,
   DollarSign,
-  Activity,
+  Activity, }
   Clock, CheckCircle } from 'lucide-react';
 
 interface UserData {
@@ -66,7 +70,7 @@ interface SimpleTabsProps {
 }
 
 // Simple tabs implementation to avoid import conflicts
-const SimpleTabs: React.FC<SimpleTabsProps> = ({ value, onValueChange, children }) => {
+const SimpleTabs: React.FunctionComponent<SimpleTabsProps> = ({ value, onValueChange, children }) => {
   return (
     <div className="w-full">
       {React.Children.map(children, (child, index) => {
@@ -81,7 +85,7 @@ const SimpleTabs: React.FC<SimpleTabsProps> = ({ value, onValueChange, children 
   );
 };
 
-const SimpleTabsList: React.FC<{
+const SimpleTabsList: React.FunctionComponent<{
   children: React.ReactNode;
   activeTab?: string;
   onTabChange?: (value: string) => void;
@@ -99,18 +103,18 @@ const SimpleTabsList: React.FC<{
   );
 };
 
-const SimpleTabsTrigger: React.FC<{
+const SimpleTabsTrigger: React.FunctionComponent<{
       value: string, 
   children: React.ReactNode; 
   activeTab?: string; 
   onTabChange?: (value: string) => void 
 }> = ({ value, children, activeTab,
       onTabChange
-    }) => {
+    }) => {  
   const isActive = activeTab === value;
   return (
     <button
-      onClick={() => onTabChange?.(value)}
+      onClick={() => onTabChange?.(value)  }
       className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${ isActive  ? 'bg-white text-blue-600 shadow-sm'  : 'text-gray-600 hover: text-gray-800, hover:bg-gray-50'
       }`}
     >
@@ -119,14 +123,14 @@ const SimpleTabsTrigger: React.FC<{
   );
 };
 
-const SimpleTabsContent: React.FC<{
+const SimpleTabsContent: React.FunctionComponent<{
       value: string, children: React.ReactNode, activeTab?: string }> = ({ 
   value, 
   children,
       activeTab
-    }) => {
+    }) => {  
   if (activeTab !== value) return null;
-  return <div>{children}</div>;
+  return <div>{children  }</div>;
 };
 
 export default function UserProfile() { const [activeTab, setActiveTab] = useState('overview');
@@ -151,12 +155,12 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
     ]
   };
 
-  const getLevelColor = (level: string) => { switch (level) { case 'Beginner': return 'bg-green-100 text-green-800'; case 'Intermediate': return 'bg-blue-100 text-blue-800'; case 'Advanced': return 'bg-purple-100 text-purple-800'; case 'Expert': return 'bg-red-100 text-red-800'; default: return 'bg-gray-100 text-gray-800'
-    }
+  const getLevelColor = (level: string) => {   switch (level) { case 'Beginner': return 'bg-green-100 text-green-800'; case 'Intermediate': return 'bg-blue-100 text-blue-800'; case 'Advanced': return 'bg-purple-100 text-purple-800'; case 'Expert': return 'bg-red-100 text-red-800'; default: return 'bg-gray-100 text-gray-800'
+      }
   };
 
-  const getSubscriptionColor = (subscription: string) => { switch (subscription) { case 'Free': return 'bg-gray-100 text-gray-800'; case 'Pro': return 'bg-blue-100 text-blue-800'; case 'Premium': return 'bg-purple-100 text-purple-800'; case 'Enterprise': return 'bg-yellow-100 text-yellow-800'; default: return 'bg-gray-100 text-gray-800'
-    }
+  const getSubscriptionColor = (subscription: string) => {   switch (subscription) { case 'Free': return 'bg-gray-100 text-gray-800'; case 'Pro': return 'bg-blue-100 text-blue-800'; case 'Premium': return 'bg-purple-100 text-purple-800'; case 'Enterprise': return 'bg-yellow-100 text-yellow-800'; default: return 'bg-gray-100 text-gray-800'
+      }
   };
  const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
       minimumFractionDigits: 0

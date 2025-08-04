@@ -2,11 +2,11 @@
 
 interface AITradingDashboardProps {
   className?: string;
-} const AITradingDashboard: React.FC<AITradingDashboardProps> = ({ className = '' }) => {
+} const AITradingDashboard: React.FunctionComponent<AITradingDashboardProps> = ({ className = '' }) => {  
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className={`ai-trading-dashboard ${className }`}>
+    <div className={`ai-trading-dashboard ${className   }`}>
       <div className="dashboard-header">
         <h1>AI Trading Dashboard</h1>
         <p>Advanced AI-powered trading platform</p>

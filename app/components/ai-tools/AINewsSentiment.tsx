@@ -24,14 +24,14 @@ export default function AINewsSentiment() {
     }, 1000);
   };
 
-  const getSentimentColor = (sentiment: string) => {
+  const getSentimentColor = (sentiment: string) => {  
     switch (sentiment) {
       case 'Very Bullish': return 'text-green-500';
       case 'Bullish': return 'text-green-400';
       case 'Bearish': return 'text-red-400';
       case 'Very Bearish': return 'text-red-500';
       default: return 'text-gray-400';
-    }
+      }
   };
   
   const getImpactColor = (impact: string) => {

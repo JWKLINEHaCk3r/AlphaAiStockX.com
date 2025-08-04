@@ -1,8 +1,12 @@
 'use client';
+import { Badge } from "../../../components/ui/badge";
+import { Input } from "../../../components/ui/input";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'; import { Button } from '@/components/ui/button'; import { Input } from '@/components/ui/input'; import { Badge } from '@/components/ui/badge';
 import { Bot, User, Send, Mic } from 'lucide-react';
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 interface ChatMessage { id: string, type: 'user' | 'bot',
   content: string,
@@ -54,17 +58,17 @@ export default function GPTTraderChatbot() {
     }, 1500);
   };
 
-  const generateBotResponse = (userInput: string): string => {
+  const generateBotResponse = (userInput: string): string => {  
     const input = userInput.toLowerCase(); if (input.includes('portfolio') || input.includes('holdings')) { return 'Based on your moderate risk tolerance, I recommend diversifying across tech, healthcare and index funds. Your current allocation looks balanced.';
-    } if (input.includes('buy') || input.includes('purchase')) { return 'Before making any purchases, let me analyze the current market conditions and your risk profile. What specific stock or sector interests you?';
+      } if (input.includes('buy') || input.includes('purchase')) { return 'Before making any purchases, let me analyze the current market conditions and your risk profile. What specific stock or sector interests you?';
     } if (input.includes('market') || input.includes('trend')) { return 'Current market sentiment is cautiously optimistic. I\'m seeing strong momentum in AI and healthcare sectors. Would you like me to provide specific recommendations?';
     } if (input.includes('risk')) { return 'Given your moderate risk tolerance, I suggest maintaining 60% stocks, 30% bonds and 10% alternative investments. This provides good growth potential with manageable downside.';
     } return 'I understand your question. Let me analyze the current market data and provide you with a personalized recommendation based on your investment profile.';
   };
- const handleKeyPress = (e: React.KeyboardEvent) => { if (e.key === 'Enter' && !e.shiftKey) {
+ const handleKeyPress = (e: React.KeyboardEvent) => {   if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
-    }
+      }
   };
 
   return (

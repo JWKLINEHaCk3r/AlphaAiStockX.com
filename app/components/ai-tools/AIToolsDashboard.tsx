@@ -1,11 +1,14 @@
-'use client'; import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'; import { Button } from '@/components/ui/button'; import { Badge } from '@/components/ui/badge';
-import { 
-  Brain,
+'use client';
+import { Tabs } from "../../../components/ui/tabs";
+import { Badge } from "../../../components/ui/badge";
+import { Card } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
+import React, { useState } from 'react';
+import { Brain,
   Search,
   Shield,
   Target,
-  BarChart3,
+  BarChart3, }
   Globe, Zap } from 'lucide-react';
  // Import AI tool components
 import AIBacktester from './AIBacktester';
@@ -16,6 +19,7 @@ import AIPatternRecognition from './AIPatternRecognition';
 import AIPortfolioDoctor from './AIPortfolioDoctor';
 import AIStockScreener from './AIStockScreener';
 import AITradeCopilot from './AITradeCopilot';
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 interface ToolStats {
   name: string,
@@ -33,7 +37,7 @@ interface ToolStats {
     }
   ];
 
-  const renderToolContent = () => { 
+  const renderToolContent = () => {   
     switch (activeTab) { 
       case 'backtester': return <AIBacktester />;
       case 'heatmap': return <AIGlobalHeatmap />;
@@ -48,7 +52,7 @@ interface ToolStats {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2, lg:grid-cols-3 gap-6">
               {toolStats.map((tool, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
+                <Card key={index  } className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">

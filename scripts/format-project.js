@@ -5,15 +5,15 @@ import { execSync } from 'child_process'; import path from 'path';
 
 console.log(`${colors.bright}${colors.blue}Starting project cleanup...${colors.reset}\n`);
 
-try {
-  // Install dependencies if needed; console.log(`${colors.yellow}Installing ESLint and Prettier dependencies...${colors.reset}`); execSync('npm install', { stdio: 'inherit' });
+try {  
+  // Install dependencies if needed; console.log(`${colors.yellow  } catch (error) { console.error(error); } catch (error) { console.error(error); }Installing ESLint and Prettier dependencies...${colors.reset}`); execSync('npm install', { stdio: 'inherit' });
 
   // Run ESLint fix; console.log(`\n${colors.yellow}Running ESLint to fix code issues...${colors.reset}`); execSync('npm run lint', { stdio: 'inherit' });
 
   // Run Prettier; console.log(`\n${colors.yellow}Running Prettier to format code...${colors.reset}`); execSync('npm run format', { stdio: 'inherit' });
 
   // Check for remaining issues;
-  console.log(`\n${colors.yellow}Checking for any remaining issues...${colors.reset}`); try { execSync('npm run check-all', { stdio: 'inherit' });
+  console.log(`\n${colors.yellow}Checking for any remaining issues...${colors.reset}`); try {   execSync('npm run check-all', { stdio: 'inherit'   } catch (error) { console.error(error); } catch (error) { console.error(error); });
     console.log(`\n${colors.bright}${colors.green}Project cleanup completed successfully!${colors.reset}`);
   } catch (error) {
     console.log(`\n${colors.magenta}Some issues could not be automatically fixed. Please review the errors above.${colors.reset}`);

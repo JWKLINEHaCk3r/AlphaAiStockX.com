@@ -1,14 +1,15 @@
 'use client';
+import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent,
-      CardTitle
+      CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import { 
-  Search, 
+import { Search, 
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
   TrendingUp, 
   TrendingDown, 
   BarChart3, 
@@ -24,7 +25,7 @@ import {
   AlertTriangle,
   Star,
   Clock,
-  DollarSign,
+  DollarSign, }
   Percent, Activity } from 'lucide-react';
 
 interface PatternMatch {
@@ -92,8 +93,8 @@ export default function AdvancedPatternScanner() { const [isScanning, setIsScann
     }, 3000);
   };
 
-  const getDirectionColor = (direction: string) => { switch (direction) { case 'bullish': return 'text-green-600 bg-green-100'; case 'bearish': return 'text-red-600 bg-red-100'; default: return 'text-yellow-600 bg-yellow-100'
-    }
+  const getDirectionColor = (direction: string) => {   switch (direction) { case 'bullish': return 'text-green-600 bg-green-100'; case 'bearish': return 'text-red-600 bg-red-100'; default: return 'text-yellow-600 bg-yellow-100'
+      }
   };
  const getConfidenceColor = (confidence: number) => { if (confidence >= 85) return 'text-green-600'; if (confidence >= 70) return 'text-yellow-600'; return 'text-red-600';
   };
@@ -107,9 +108,9 @@ export default function AdvancedPatternScanner() { const [isScanning, setIsScann
     }).format(amount),
   };
 
-  const formatVolume = (volume: number) => {
+  const formatVolume = (volume: number) => {  
     if (volume >= 1000000) {
-      return `${(volume / 1000000).toFixed(1)}M`;
+      return `${(volume / 1000000).toFixed(1)  }M`;
     }
     if (volume >= 1000) {
       return `${(volume / 1000).toFixed(0)}K`;

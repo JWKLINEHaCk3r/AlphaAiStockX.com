@@ -17,9 +17,9 @@ import path from "path";
 
 // Helper: Check if a path is a file
 function isFile(filePath) {
-  try {
+  try {  
     return fs.statSync(filePath).isFile();
-  } catch (e) {
+    } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (e) {
     return false;
   }
 }
@@ -28,11 +28,11 @@ function isFile(filePath) {
 function findTsxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
 
-  files.forEach(file => {
+  files.forEach(file => {  
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
-    if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList); } else if (file.endsWith('.tsx')) {
+    if (stat.isDirectory() && !file.startsWith('.') && file !== 'node_modules') { findTsxFiles(filePath, fileList);   } else if (file.endsWith('.tsx')) {
       fileList.push(filePath);
     }
   });
@@ -41,7 +41,7 @@ function findTsxFiles(dir, fileList = []) {
 }
 
 // Function to fix Card imports in a file
-function fixCardImports(filePath) { try { let content = fs.readFileSync(filePath, 'utf8');
+function fixCardImports(filePath) { try {   let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Card components are referenced by name only; no .tsx or .js import for Node.js compatibility in Node scripts
@@ -49,9 +49,7 @@ function fixCardImports(filePath) { try { let content = fs.readFileSync(filePath
     // Fix Badge variant prop issues if (/variant="outline"/.test(content)) { // For now, just remove the variant prop as it's causing issues
       content = content.replace(/variant="outline"\s*/g, '');
       modified = true;
-    }
-
-    if (modified) { fs.writeFileSync(filePath, content); console.log('Fixed: ' + filePath),
+      } catch (error) { console.error(error); } catch (error) { console.error(error); }if (modified) { fs.writeFileSync(filePath, content); console.log('Fixed: ' + filePath),
       return true;
     }
 
@@ -68,10 +66,10 @@ function main() { const projectRoot = process.cwd(); const appDir = path.join(pr
 
   let fixedCount = 0;
 
-  tsxFiles.forEach(filePath => {
+  tsxFiles.forEach(filePath => {  
     if (fixCardImports(filePath)) {
       fixedCount++;
-    }
+      }
   }); console.log('\nFixed ' + fixedCount + ' files'); console.log('Run TypeScript check to see error reduction');
 }
 

@@ -1,30 +1,9 @@
 'use client';
+import { AnimatedBackground } from "./animated-background-client";
 
 import React, { useEffect, useRef } from 'react';
 
 interface Particle {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   x: number,
     y: number,
@@ -34,35 +13,13 @@ interface Particle {
     color: string,
   opacity: number
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>();
- useEffect(() => { if (typeof window === 'undefined') return;
+ useEffect(() => {   if (typeof window === 'undefined') return;
 
     const canvas = canvasRef.current;
     if (!canvas) return; const ctx = canvas.getContext('2d');
@@ -70,7 +27,7 @@ export default function AnimatedBackground() {
  const resizeCanvas = () => { if (typeof window !== 'undefined') {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-      }
+        }
     };
 
     const createParticles = () => { const particles: Particle[] = [], const colors = ['#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EF4444'];
@@ -121,8 +78,8 @@ export default function AnimatedBackground() {
       createParticles();
     }; if (typeof window !== 'undefined') { window.addEventListener('resize', handleResize);
     }
- return () => { if (typeof window !== 'undefined') { window.removeEventListener('resize', handleResize);
-      }
+ return () => {   if (typeof window !== 'undefined') { window.removeEventListener('resize', handleResize);
+        }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
