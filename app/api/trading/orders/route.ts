@@ -1,28 +1,71 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  try {   return NextResponse.json({ message: 'orders endpoint is healthy', timestamp: new Date().toISOString(), status: 'active'
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }); } catch (error) { console.error('orders GET error:', error); return NextResponse.json( { error: 'Internal server error' },
+export async function GET() {
+  try {
+    // Mock open orders
+    const orders = [
+      {
+        orderId: 'ORD-PENDING-001',
+        symbol: 'AAPL',
+        action: 'BUY',
+        quantity: 50,
+        orderType: 'LIMIT',
+        limitPrice: 182.00,
+        status: 'PENDING',
+        createdAt: new Date(Date.now() - 1800000).toISOString()
+      },
+      {
+        orderId: 'ORD-PENDING-002',
+        symbol: 'TSLA',
+        action: 'SELL',
+        quantity: 25,
+        orderType: 'STOP_LOSS',
+        stopPrice: 240.00,
+        status: 'PENDING',
+        createdAt: new Date(Date.now() - 3600000).toISOString()
+      }
+    ];
+
+    return NextResponse.json({
+      success: true,
+      orders: orders
+    });
+  } catch (error) {
+    console.error('orders GET error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch orders' },
       { status: 500 }
     );
-}
+  }
 }
 
 export async function POST(request: NextRequest) {
-  try {  
+  try {
     const body = await request.json();
-     return NextResponse.json({ message: 'orders POST successful',
-      data: body,
-      timestamp: new Date().toISOString()
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }) } catch (error) { console.error('orders POST error:', error); return NextResponse.json( { error: 'Internal server error' },
+    const { symbol, action, quantity, orderType, price, stopPrice } = body;
+    
+    // Mock order creation
+    const order = {
+      orderId: `ORD-${Date.now()}`,
+      symbol: symbol,
+      action: action,
+      quantity: quantity,
+      orderType: orderType,
+      price: price,
+      stopPrice: stopPrice,
+      status: 'PENDING',
+      createdAt: new Date().toISOString()
+    };
+
+    return NextResponse.json({
+      success: true,
+      order: order
+    });
+  } catch (error) {
+    console.error('orders POST error:', error);
+    return NextResponse.json(
+      { error: 'Failed to create order' },
       { status: 500 }
     );
-}
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
+  }
 }

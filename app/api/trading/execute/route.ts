@@ -1,28 +1,71 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  try {   return NextResponse.json({ message: 'execute endpoint is healthy', timestamp: new Date().toISOString(), status: 'active'
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }); } catch (error) { console.error('execute GET error:', error); return NextResponse.json( { error: 'Internal server error' },
-      { status: 500 }
-    );
-}
-}
-
 export async function POST(request: NextRequest) {
-  try {  
+  try {
     const body = await request.json();
-     return NextResponse.json({ message: 'execute POST successful',
-      data: body,
-      timestamp: new Date().toISOString()
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }) } catch (error) { console.error('execute POST error:', error); return NextResponse.json( { error: 'Internal server error' },
+    const { symbol, action, quantity, orderType, price } = body;
+    
+    // Mock trade execution
+    const execution = {
+      orderId: `ORD-${Date.now()}`,
+      symbol: symbol,
+      action: action, // BUY or SELL
+      quantity: quantity,
+      orderType: orderType || 'MARKET',
+      price: price || null,
+      status: 'FILLED',
+      executionPrice: orderType === 'MARKET' ? 
+        (symbol === 'AAPL' ? 185.25 : 435.80) : price,
+      timestamp: new Date().toISOString(),
+      commission: 0.99
+    };
+
+    return NextResponse.json({
+      success: true,
+      execution: execution
+    });
+  } catch (error) {
+    console.error('execute POST error:', error);
+    return NextResponse.json(
+      { error: 'Trade execution failed' },
       { status: 500 }
     );
-}
+  }
 }
 
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
+export async function GET() {
+  try {
+    // Mock recent executions
+    const executions = [
+      {
+        orderId: 'ORD-1725486123',
+        symbol: 'AAPL',
+        action: 'BUY',
+        quantity: 10,
+        executionPrice: 185.25,
+        timestamp: new Date(Date.now() - 3600000).toISOString(),
+        status: 'FILLED'
+      },
+      {
+        orderId: 'ORD-1725486098',
+        symbol: 'NVDA',
+        action: 'SELL',
+        quantity: 5,
+        executionPrice: 435.80,
+        timestamp: new Date(Date.now() - 7200000).toISOString(),
+        status: 'FILLED'
+      }
+    ];
+
+    return NextResponse.json({
+      success: true,
+      executions: executions
+    });
+  } catch (error) {
+    console.error('execute GET error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch executions' },
+      { status: 500 }
+    );
+  }
 }

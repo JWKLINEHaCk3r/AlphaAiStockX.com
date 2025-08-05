@@ -1,28 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  try {   return NextResponse.json({ message: 'analyze endpoint is healthy', timestamp: new Date().toISOString(), status: 'active'
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }); } catch (error) { console.error('analyze GET error:', error); return NextResponse.json( { error: 'Internal server error' },
+export async function GET() {
+  try {
+    // Mock trading analysis data
+    const analysis = {
+      marketTrend: 'bullish',
+      volatility: 'medium',
+      recommendations: [
+        {
+          symbol: 'AAPL',
+          action: 'BUY',
+          confidence: 87.5,
+          targetPrice: 195.00,
+          reasoning: 'Strong quarterly earnings and positive market sentiment'
+        },
+        {
+          symbol: 'TSLA',
+          action: 'HOLD',
+          confidence: 72.3,
+          targetPrice: 180.00,
+          reasoning: 'Mixed signals from recent deliveries data'
+        }
+      ],
+      timestamp: new Date().toISOString()
+    };
+
+    return NextResponse.json(analysis);
+  } catch (error) {
+    console.error('analyze GET error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
       { status: 500 }
     );
-}
+  }
 }
 
 export async function POST(request: NextRequest) {
-  try {  
+  try {
     const body = await request.json();
-     return NextResponse.json({ message: 'analyze POST successful',
-      data: body,
+    const { symbol, timeframe } = body;
+    
+    // Mock analysis for specific symbol
+    const symbolAnalysis = {
+      symbol: symbol || 'AAPL',
+      timeframe: timeframe || '1D',
+      technicalIndicators: {
+        rsi: 65.4,
+        macd: 'bullish',
+        bollinger: 'neutral'
+      },
+      priceTarget: 195.00,
+      stopLoss: 175.00,
+      confidence: 84.2,
       timestamp: new Date().toISOString()
-      } catch (error) { console.error(error); } catch (error) { console.error(error); }) } catch (error) { console.error('analyze POST error:', error); return NextResponse.json( { error: 'Internal server error' },
+    };
+
+    return NextResponse.json(symbolAnalysis);
+  } catch (error) {
+    console.error('analyze POST error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
       { status: 500 }
     );
-}
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
+  }
 }
