@@ -12,10 +12,11 @@ COPY package.json pnpm-lock.yaml* .npmrc .pnpmfile.cjs ./
 
 # Configure pnpm and install dependencies
 RUN pnpm config set auto-install-peers true && \
+    pnpm config set strict-peer-dependencies false && \
     pnpm config set enable-pre-post-scripts true && \
     pnpm config set fund false && \
     pnpm config set audit false && \
-    pnpm install --frozen-lockfile --prod=false
+    echo "y" | pnpm install --no-frozen-lockfile --prod=false
 
 # Copy source code
 COPY . .
