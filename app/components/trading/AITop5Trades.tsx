@@ -1,41 +1,42 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from 'react';
-'use client';
 import { Card } from "../../../components/ui/card";
 import { ArrowUp, ArrowDown, TrendingUp, Star, Clock, Target } from 'lucide-react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 
-interface TradeRecommendation { symbol: string, action: 'BUY' | 'SELL' | 'HOLD',
-  confidence: number,
-    targetPrice: number,
-  currentPrice: number,
-    expectedReturn: number,
-  timeframe: string, aiReasoning: string, riskLevel: 'LOW' | 'MEDIUM' | 'HIGH',
+interface TradeRecommendation { symbol: string, action: 'BUY' | 'SELL' | 'HOLD'"
+  confidence: number"
+    targetPrice: number"
+  currentPrice: number"
+    expectedReturn: number"
+  timeframe: string, aiReasoning: string, riskLevel: 'LOW' | 'MEDIUM' | 'HIGH'"
     sector: string
 }
 
-const, mockTrades: TradeRecommendation[] = [ { symbol: 'NVDA', action: 'BUY',
-    confidence: 94,
+const, mockTrades: TradeRecommendation[] = [ { symbol: 'NVDA', action: 'BUY'"
+    confidence: 94"
     targetPrice: 550.00;
     currentPrice: 489.33, expectedReturn: 12.4, timeframe: '2-3 weeks', aiReasoning: 'Strong earnings momentum
-               AI sector leadership technical breakout pattern', riskLevel: 'MEDIUM', sector: 'Technology' },{ symbol: 'TSLA', action: 'BUY',
-    confidence: 87,
+               AI sector leadership technical breakout pattern', riskLevel: 'MEDIUM', sector: 'Technology' },{ symbol: 'TSLA', action: 'BUY'"
+    confidence: 87"
     targetPrice: 275.00;
     currentPrice: 245.67, expectedReturn: 11.9, timeframe: '3-4 weeks', aiReasoning: 'Oversold conditions
-               positive delivery numbers institutional accumulation', riskLevel: 'HIGH', sector: 'Automotive' },{ symbol: 'AAPL', action: 'HOLD',
-    confidence: 82,
+               positive delivery numbers institutional accumulation', riskLevel: 'HIGH', sector: 'Automotive' },{ symbol: 'AAPL', action: 'HOLD'"
+    confidence: 82"
     targetPrice: 195.50;
     currentPrice: 178.42, expectedReturn: 9.6, timeframe: '1-2 months', aiReasoning: 'Seasonal strength ahead
-               services growth dividend appeal', riskLevel: 'LOW', sector: 'Technology' },{ symbol: 'MSFT', action: 'BUY',
-    confidence: 89,
+               services growth dividend appeal', riskLevel: 'LOW', sector: 'Technology' },{ symbol: 'MSFT', action: 'BUY'"
+    confidence: 89"
     targetPrice: 410.00;
     currentPrice: 376.80, expectedReturn: 8.8, timeframe: '4-6 weeks', aiReasoning: 'Cloud dominance
-               AI integration enterprise demand resilience', riskLevel: 'LOW', sector: 'Technology' },{ symbol: 'META', action: 'SELL',
-    confidence: 76,
+               AI integration enterprise demand resilience', riskLevel: 'LOW', sector: 'Technology' },{ symbol: 'META', action: 'SELL'"
+    confidence: 76"
     targetPrice: 420.00;
     currentPrice: 484.52, expectedReturn: -13.3, timeframe: '2-3 weeks', aiReasoning: 'Overvaluation concerns
                regulatory headwinds user growth slowdown', riskLevel: 'HIGH', sector: 'Technology'

@@ -1,4 +1,6 @@
-'use client'; import React from 'react'; import Link from 'next/link';
+import React from 'react';
+"use client";
+
 
 export default function PlatformPage() {
   return (
@@ -32,7 +34,7 @@ export default function PlatformPage() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/api/auth/signin">
-              <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4 rounded-lg, hover:from-blue-600,
+              <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4 rounded-lg, hover:from-blue-600"
       hover:to-purple-700 transition-all duration-300">
                 Sign In to Trade
               </button>

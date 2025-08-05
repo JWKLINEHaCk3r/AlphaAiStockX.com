@@ -1,5 +1,8 @@
+"use client";
+
+
 import React from 'react';
-'use client';
+
 export default function InvestorsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-fuchsia-900 via-purple-900 to-black text-white">
@@ -16,37 +19,29 @@ export default function InvestorsPage() {
             <input
               type="text"
               placeholder="Your Name"
-              
-              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus: outline-none,
-      focus: border-fuchsia-500"
+              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500"
               required
             />
             <input
               type="email"
               placeholder="Email Address"
-              
-              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30, focus:outline-none,
-      focus: border-fuchsia-500"
+              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500"
               required
             />
             <input
               type="text"
               placeholder="Company/Organization"
-              
-              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30, focus: outline-none,
-      focus:border-fuchsia-500"
+              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500"
             />
             <textarea
               placeholder="Investment Inquiry"
               rows={4}
-              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus: outline-none,
-      focus: border-fuchsia-500"
+              className="w-full bg-black/30 text-fuchsia-100 rounded-lg px-4 py-2 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500"
               required
             />
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-fuchsia-600 to-purple-600, hover:from-fuchsia-700,
-      hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+              className="w-full bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
             >
               Submit Inquiry
             </button>
@@ -54,5 +49,5 @@ export default function InvestorsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

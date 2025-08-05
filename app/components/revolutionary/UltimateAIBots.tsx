@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -20,93 +21,93 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   Settings, 
   Play, 
   Pause, 
-  RotateCcw,
-  CheckCircle,
-  AlertCircle,
-  Star,
-  Award,
-  Cpu,
-  Network,
-  BarChart3,
-  DollarSign,
+  RotateCcw"
+  CheckCircle"
+  AlertCircle"
+  Star"
+  Award"
+  Cpu"
+  Network"
+  BarChart3"
+  DollarSign"
   Clock, }
   Shield, Rocket } from 'lucide-react';
 
 interface AIBot {
-  id: string, name: string, type: 'scalping' | 'swing' | 'momentum' | 'arbitrage' | 'sentiment', status: 'active' | 'paused' | 'training' | 'offline',
-  accuracy: number,
-    profitability: number,
-  trades24h: number, totalProfit: number, riskLevel: 'low' | 'medium' | 'high',
-    description: string,
-  features: string[],
+  id: string, name: string, type: 'scalping' | 'swing' | 'momentum' | 'arbitrage' | 'sentiment', status: 'active' | 'paused' | 'training' | 'offline'"
+  accuracy: number"
+    profitability: number"
+  trades24h: number, totalProfit: number, riskLevel: 'low' | 'medium' | 'high'"
+    description: string"
+  features: string[]"
     performance: {
-      winRate: number,
-    avgReturn: number,
-    maxDrawdown: number,
+      winRate: number"
+    avgReturn: number"
+    maxDrawdown: number"
     sharpeRatio: number
   }
 }
 
 interface BotPerformance {
-  botId: string,
-    timestamp: string,
-  profit: number,
+  botId: string"
+    timestamp: string"
+  profit: number"
     trades: number
 }
  export default function UltimateAIBots() { const [selectedBot, setSelectedBot] = useState<string>('bot-1');
   const [isDeploying, setIsDeploying] = useState(false);
 
-  const aiBots: AIBot[] = [ { id: 'bot-1', name: 'Alpha Scalper', type: 'scalping', status: 'active',
-      accuracy: 94.7,
+  const aiBots: AIBot[] = [ { id: 'bot-1', name: 'Alpha Scalper', type: 'scalping', status: 'active'"
+      accuracy: 94.7"
       profitability: 127.4;
       trades24h: 847, totalProfit: 45621.30, riskLevel: 'medium', description: 'High-frequency scalping bot with microsecond execution speed', features: [ 'Real-time market scanning', 'Microsecond execution', 'Risk management algorithms', 'Dynamic position sizing'
-      ],
+      ]"
       performance: {
-      winRate: 87.3,
+      winRate: 87.3"
         avgReturn: 1.2;
-        maxDrawdown: 4.7,
+        maxDrawdown: 4.7"
         sharpeRatio: 2.8
-      } },{ id: 'bot-2', name: 'Quantum Swing', type: 'swing', status: 'active',
-      accuracy: 91.2,
+      } },{ id: 'bot-2', name: 'Quantum Swing', type: 'swing', status: 'active'"
+      accuracy: 91.2"
       profitability: 89.7;
       trades24h: 23, totalProfit: 78945.67, riskLevel: 'low', description: 'Quantum-enhanced swing trading with multi-timeframe analysis', features: [ 'Quantum probability analysis', 'Multi-timeframe scanning', 'Trend reversal detection', 'Advanced pattern recognition'
-      ],
+      ]"
       performance: {
-      winRate: 78.9,
+      winRate: 78.9"
         avgReturn: 4.8;
-        maxDrawdown: 8.2,
+        maxDrawdown: 8.2"
         sharpeRatio: 3.1
-      } },{ id: 'bot-3', name: 'Momentum Master', type: 'momentum', status: 'active',
-      accuracy: 88.9,
+      } },{ id: 'bot-3', name: 'Momentum Master', type: 'momentum', status: 'active'"
+      accuracy: 88.9"
       profitability: 156.8;
       trades24h: 156, totalProfit: 92134.21, riskLevel: 'high', description: 'High-performance momentum trading with AI-powered predictions', features: [ 'Momentum indicator fusion', 'Breakout pattern detection', 'Volume-price analysis', 'News sentiment integration'
-      ],
+      ]"
       performance: {
-      winRate: 74.2,
+      winRate: 74.2"
         avgReturn: 6.3;
-        maxDrawdown: 12.4,
+        maxDrawdown: 12.4"
         sharpeRatio: 2.4
-      } },{ id: 'bot-4', name: 'Arbitrage Hunter', type: 'arbitrage', status: 'training',
-      accuracy: 98.5,
+      } },{ id: 'bot-4', name: 'Arbitrage Hunter', type: 'arbitrage', status: 'training'"
+      accuracy: 98.5"
       profitability: 67.3;
       trades24h: 1247, totalProfit: 34567.89, riskLevel: 'low', description: 'Cross-exchange arbitrage opportunities with guaranteed profits', features: [ 'Multi-exchange monitoring', 'Latency optimization', 'Automatic execution', 'Risk-free profits'
-      ],
+      ]"
       performance: {
-      winRate: 96.8,
+      winRate: 96.8"
         avgReturn: 0.3;
-        maxDrawdown: 0.8,
+        maxDrawdown: 0.8"
         sharpeRatio: 4.7
-      } },{ id: 'bot-5', name: 'Sentiment Analyzer', type: 'sentiment', status: 'paused',
-      accuracy: 86.4,
+      } },{ id: 'bot-5', name: 'Sentiment Analyzer', type: 'sentiment', status: 'paused'"
+      accuracy: 86.4"
       profitability: 103.2;
       trades24h: 67, totalProfit: 56789.12, riskLevel: 'medium', description: 'AI-powered sentiment analysis from news
-               social media and market data',
+               social media and market data'"
       features: [ 'Social media monitoring', 'News sentiment analysis', 'Market emotion detection', 'Contrarian strategies'
-      ],
+      ]"
       performance: {
-      winRate: 71.5,
+      winRate: 71.5"
         avgReturn: 3.7;
-        maxDrawdown: 9.1,
+        maxDrawdown: 9.1"
         sharpeRatio: 2.1
       }
     }
@@ -131,9 +132,9 @@ interface BotPerformance {
       console.log(`${action  } bot ${botId}`);
     }, 2000);
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
 
   return (
@@ -257,7 +258,7 @@ interface BotPerformance {
                 {/* Action Buttons */} <div className="flex gap-2"> {bot.status === 'active' ? (
                     <Button 
                       variant="outline" ;
-                      size="sm" ,
+                      size="sm" "
                       className="flex-1 border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
                       onClick={(e) => {   e.stopPropagation(); handleBotAction(bot.id, 'pause');
                         }}
@@ -268,8 +269,8 @@ interface BotPerformance {
                     </Button>
                   ) : (
                     <Button 
-                      variant="outline" ,
-                      size="sm" ,
+                      variant="outline" "
+                      size="sm" "
                       className="flex-1 border-green-500 text-green-500 hover:bg-green-500/10"
                       onClick={(e) => {   e.stopPropagation(); handleBotAction(bot.id, 'start');
                         }}
@@ -281,12 +282,12 @@ interface BotPerformance {
                   )}
                   
                   <Button 
-                    variant="outline" ,
-                    size="sm" ,
+                    variant="outline" "
+                    size="sm" "
                     className="border-gray-500 text-gray-300 hover:bg-gray-500/10"
                     onClick={(e) => {  
                       e.stopPropagation();
-                      // Open,
+                      // Open"
       settings
       }}
                   >

@@ -1,4 +1,6 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 export default function ContactPage() { const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '', subject: 'General Inquiry'
   });
@@ -8,7 +10,7 @@ export default function ContactPage() { const [formData, setFormData] = useState
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
-      ...formData,
+      ...formData"
       [e.target.name]: e.target.value
     });
   };
@@ -37,7 +39,7 @@ export default function ContactPage() { const [formData, setFormData] = useState
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus: outline-none,
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none
       focus:border-blue-500"
                   required
                 />
@@ -54,7 +56,7 @@ export default function ContactPage() { const [formData, setFormData] = useState
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus: outline-none,
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none
       focus:border-blue-500"
                   required
                 />
@@ -71,15 +73,15 @@ export default function ContactPage() { const [formData, setFormData] = useState
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus: outline-none,
-      focus: border-blue-500"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none
+      focus:border-blue-500"
                   required
                 />
               </div>
               
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500, hover:from-blue-600,
+                className=" hover:from-blue-600"
       hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
               >
                 Send Message

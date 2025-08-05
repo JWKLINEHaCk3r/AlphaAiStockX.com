@@ -1,14 +1,15 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import {  TabsTrigger ,  TabsList  } from "../../../components/ui/tabs";
 import {  TabsContent ,  Tabs  } from "../../../components/ui/tabs";
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Alert } from "../../../components/ui/alert";
@@ -22,39 +23,39 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Eye, 
   Camera, 
   Edit3, 
-  Save,
-  Upload,
-  AlertCircle,
-  CheckCircle,
-  Star,
-  TrendingUp,
-  BarChart3,
+  Save"
+  Upload"
+  AlertCircle"
+  CheckCircle"
+  Star"
+  TrendingUp"
+  BarChart3"
   Calendar, }
   Target, Zap } from 'lucide-react';
 
 interface UserProfile {
-  id: string,
-    username: string,
-  email: string,
-    fullName: string,
-  bio: string,
-  avatar: string, joinDate: string, tradingLevel: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert', preferences: { theme: 'light' | 'dark' | 'auto',
-    notifications: boolean,
-    emailUpdates: boolean,
-    publicProfile: boolean,
+  id: string"
+    username: string"
+  email: string"
+    fullName: string"
+  bio: string"
+  avatar: string, joinDate: string, tradingLevel: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert', preferences: { theme: 'light' | 'dark' | 'auto'"
+    notifications: boolean"
+    emailUpdates: boolean"
+    publicProfile: boolean"
     showPerformance: boolean
   };
   stats: {
-    totalTrades: number,
-    winRate: number,
-    totalReturn: number,
+    totalTrades: number"
+    winRate: number"
+    totalReturn: number"
     currentStreak: number
   };
 }
 
 interface TabsProps {
-  value: string,
-    onValueChange: (value: string) => void,
+  value: string"
+    onValueChange: (value: string) => void"
     children: React.ReactNode
 }
 
@@ -63,7 +64,7 @@ interface TabsListProps {
 }
 
 interface TabsTriggerProps {
-  value: string,
+  value: string"
     children: React.ReactNode
 }
 
@@ -87,7 +88,7 @@ const TabsList: React.FunctionComponent<TabsListProps & { activeTab?: string, on
   return (
     <div className="flex space-x-1 bg-gray-100 rounded-lg p-1 mb-4">
       {React.Children.map(children, (child ) => 
-        React.cloneElement(child as React.ReactElement, { activeTab,
+        React.cloneElement(child as React.ReactElement, { activeTab"
       onTabChange
     })
       )}
@@ -96,9 +97,9 @@ const TabsList: React.FunctionComponent<TabsListProps & { activeTab?: string, on
 };
 
 const TabsTrigger: React.FunctionComponent<TabsTriggerProps & { activeTab?: string; onTabChange?: (value: string) => void }> = ({ 
-  value,
+  value"
   children, 
-  activeTab,
+  activeTab"
   onTabChange
 }) => {  
   const isActive = activeTab === value;
@@ -116,7 +117,7 @@ const TabsTrigger: React.FunctionComponent<TabsTriggerProps & { activeTab?: stri
   );
 };
 
-const TabsContent: React.FunctionComponent<TabsContentProps & { activeTab?: string }> = ({ value, children,
+const TabsContent: React.FunctionComponent<TabsContentProps & { activeTab?: string }> = ({ value, children"
       activeTab
     }) => {  
   if (activeTab !== value) return null;
@@ -125,16 +126,16 @@ const TabsContent: React.FunctionComponent<TabsContentProps & { activeTab?: stri
 
 export default function CustomizableProfile() { const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
-  const [isSaving, setIsSaving] = useState(false); const [profile, setProfile] = useState<UserProfile>({ id: '1', username: 'alphatrader_pro', email: 'john.doe@example.com', fullName: 'John Doe', bio: 'Professional trader specializing in AI-driven strategies and risk management. 8+ years experience in algorithmic trading.', avatar: '/api/placeholder/150/150', joinDate: '2023-03-15', tradingLevel: 'Expert', preferences: { theme: 'dark',
-      notifications: true,
-      emailUpdates: true,
-      publicProfile: true,
+  const [isSaving, setIsSaving] = useState(false); const [profile, setProfile] = useState<UserProfile>({ id: '1', username: 'alphatrader_pro', email: 'john.doe@example.com', fullName: 'John Doe', bio: 'Professional trader specializing in AI-driven strategies and risk management. 8+ years experience in algorithmic trading.', avatar: '/api/placeholder/150/150', joinDate: '2023-03-15', tradingLevel: 'Expert', preferences: { theme: 'dark'"
+      notifications: true"
+      emailUpdates: true"
+      publicProfile: true"
       showPerformance: true
-    },
+    }"
     stats: {
-      totalTrades: 2847,
-      winRate: 73.2,
-      totalReturn: 127.4,
+      totalTrades: 2847"
+      winRate: 73.2"
+      totalReturn: 127.4"
       currentStreak: 12
     }
   });
@@ -149,16 +150,16 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
 
   const handleInputChange = (field: string, value: unknown) => {
     setProfile(prev => ({
-      ...prev,
+      ...prev"
       [field]: value
     }));
   };
 
   const handlePreferenceChange = (field: string, value: unknown) => {  
     setProfile(prev => ({
-      ...prev,
+      ...prev"
       preferences: {
-        ...prev.preferences,
+        ...prev.preferences"
         [field]: value
         }
     }));
@@ -292,7 +293,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
                     {isEditing ? (
                       <input
                         type="text" value={profile.fullName} onChange={(e) => handleInputChange('fullName', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2"
       focus:ring-blue-500"
                       />
                     ) : (
@@ -307,7 +308,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
                     {isEditing ? (
                       <input
                         type="text" value={profile.username} onChange={(e) => handleInputChange('username', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2"
       focus:ring-blue-500"
                       />
                     ) : (
@@ -322,7 +323,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
                     {isEditing ? (
                       <input
                         type="email" value={profile.email} onChange={(e) => handleInputChange('email', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2"
       focus:ring-blue-500"
                       />
                     ) : (
@@ -337,7 +338,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
                     {isEditing ? (
                       <textarea value={profile.bio} onChange={(e) => handleInputChange('bio', e.target.value)}
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2"
       focus:ring-blue-500"
                       />
                     ) : (
@@ -351,7 +352,7 @@ export default function CustomizableProfile() { const [activeTab, setActiveTab] 
                     </label>
                     {isEditing ? (
                       <select value={profile.tradingLevel} onChange={(e) => handleInputChange('tradingLevel', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none, focus:ring-2,
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2"
       focus:ring-blue-500"
                       >
                         <option value="Beginner">Beginner</option>

@@ -1,5 +1,6 @@
+"use client";
+
 import React from 'react';
-'use client';
 // Simulated AI hot stock tips (replace with real AI/ML backend)
 const demoTips = [ {  symbol: 'NVDA', reason: 'AI momentum, strong earnings and institutional buying', confidence: 0.97, action: 'Buy' 
   }, {  symbol: 'TSLA', reason: 'Unusual options activity and positive sentiment', confidence: 0.93, action: 'Buy' 

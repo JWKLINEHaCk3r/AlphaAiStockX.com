@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -21,32 +22,32 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   Settings, 
   Play, 
   Pause, 
-  RotateCcw,
-  CheckCircle,
-  AlertTriangle,
-  Info,
-  Atom,
-  Layers,
-  Bolt,
+  RotateCcw"
+  CheckCircle"
+  AlertTriangle"
+  Info"
+  Atom"
+  Layers"
+  Bolt"
   Sparkles, }
   Network, Gauge } from 'lucide-react';
 
 interface QuantumState {
-  id: string,
-    name: string,
+  id: string"
+    name: string"
   probability: number, confidence: number, prediction: 'bullish' | 'bearish' | 'neutral'
 }
 
 interface AIModel {
-  id: string, name: string, type: 'neural' | 'quantum' | 'hybrid', accuracy: number, status: 'active' | 'training' | 'idle',
+  id: string, name: string, type: 'neural' | 'quantum' | 'hybrid', accuracy: number, status: 'active' | 'training' | 'idle'"
     processingPower: number
 }
 
 interface MarketPrediction {
-  symbol: string,
-    prediction: number,
-  confidence: number,
-    timeframe: string,
+  symbol: string"
+    prediction: number"
+  confidence: number"
+    timeframe: string"
   factors: string[]
 }
 
@@ -58,24 +59,24 @@ export default function QuantumAICore() { const [isActive, setIsActive] = useSta
 
   // Initialize data
   useEffect(() => {
-    setQuantumStates([ { id: '1', name: 'Market Sentiment',
-        probability: 0.847, confidence: 94.2, prediction: 'bullish' },{ id: '2', name: 'Price Movement',
-        probability: 0.763, confidence: 87.1, prediction: 'bullish' },{ id: '3', name: 'Volume Pattern',
-        probability: 0.521, confidence: 72.4, prediction: 'neutral' },{ id: '4', name: 'Risk Assessment',
+    setQuantumStates([ { id: '1', name: 'Market Sentiment'"
+        probability: 0.847, confidence: 94.2, prediction: 'bullish' },{ id: '2', name: 'Price Movement'"
+        probability: 0.763, confidence: 87.1, prediction: 'bullish' },{ id: '3', name: 'Volume Pattern'"
+        probability: 0.521, confidence: 72.4, prediction: 'neutral' },{ id: '4', name: 'Risk Assessment'"
         probability: 0.328, confidence: 81.6, prediction: 'bearish'
       }
     ]);
 
-    setAiModels([ { id: '1', name: 'Quantum Neural Network', type: 'quantum', accuracy: 94.7, status: 'active',
-        processingPower: 87 },{ id: '2', name: 'Deep Learning Model', type: 'neural', accuracy: 89.3, status: 'active',
-        processingPower: 92 },{ id: '3', name: 'Hybrid AI Engine', type: 'hybrid', accuracy: 96.1, status: 'training',
+    setAiModels([ { id: '1', name: 'Quantum Neural Network', type: 'quantum', accuracy: 94.7, status: 'active'"
+        processingPower: 87 },{ id: '2', name: 'Deep Learning Model', type: 'neural', accuracy: 89.3, status: 'active'"
+        processingPower: 92 },{ id: '3', name: 'Hybrid AI Engine', type: 'hybrid', accuracy: 96.1, status: 'training'"
         processingPower: 78
       }
     ]);
 
-    setMarketPredictions([ { symbol: 'AAPL',
-        prediction: 187.42, confidence: 91.7, timeframe: '24h', factors: ['Earnings momentum', 'Technical patterns', 'Quantum sentiment'] },{ symbol: 'TSLA',
-        prediction: 242.18, confidence: 88.3, timeframe: '24h', factors: ['Volume analysis', 'Market correlation', 'AI trend detection'] },{ symbol: 'NVDA',
+    setMarketPredictions([ { symbol: 'AAPL'"
+        prediction: 187.42, confidence: 91.7, timeframe: '24h', factors: ['Earnings momentum', 'Technical patterns', 'Quantum sentiment'] },{ symbol: 'TSLA'"
+        prediction: 242.18, confidence: 88.3, timeframe: '24h', factors: ['Volume analysis', 'Market correlation', 'AI trend detection'] },{ symbol: 'NVDA'"
         prediction: 892.55, confidence: 93.9, timeframe: '24h', factors: ['Quantum analysis', 'Sector strength', 'Technical indicators']
       }
     ]);
@@ -93,8 +94,8 @@ export default function QuantumAICore() { const [isActive, setIsActive] = useSta
       });
 
       setQuantumStates(prev => prev.map(state => ({
-        ...state,
-        probability: Math.max(0, Math.min(1, state.probability + (Math.random() - 0.5) * 0.1)),
+        ...state"
+        probability: Math.max(0, Math.min(1, state.probability + (Math.random() - 0.5) * 0.1))"
         confidence: Math.max(60, Math.min(100, state.confidence + (Math.random() - 0.5) * 5))
       })));
     }, 2000);

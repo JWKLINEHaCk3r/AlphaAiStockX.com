@@ -1,14 +1,15 @@
+"use client";
+
 import React from 'react';
-'use client';
 import { Label } from "../../components/ui/label";
 export default function SubscriptionPage() {
-  const plans = [ { name: 'Starter',
+  const plans = [ { name: 'Starter'"
       price: 49, features: [ 'AI Hot Stock Tips', 'Basic AutoTrade Bot', 'Sportsbook AI Picks', 'Community Access'
       ]
-    }, { name: 'Pro',
+    }, { name: 'Pro'"
       price: 99, features: [ 'Advanced AI Analytics', 'Multiple Trading Bots', 'Risk Management Tools', 'Priority Support', 'API Access'
       ]
-    }, { name: 'Enterprise',
+    }, { name: 'Enterprise'"
       price: 199, features: [ 'Custom AI Models', 'Institutional Features', 'Dedicated Support', 'White Label Options', 'Advanced Reporting'
       ]
     }
@@ -41,7 +42,7 @@ export default function SubscriptionPage() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover: from-blue-600,
+              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover: from-blue-600"
       hover: to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
                 Choose Plan
               </button>

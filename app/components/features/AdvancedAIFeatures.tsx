@@ -1,10 +1,11 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -15,46 +16,46 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   Target, 
   TrendingUp, 
   Shield, 
-  BarChart3,
-  Bot,
-  Cpu,
+  BarChart3"
+  Bot"
+  Cpu"
   LineChart, }
   Activity, CheckCircle } from 'lucide-react';
 
 interface AIModel {
-  id: string,
-    name: string,
-  description: string, accuracy: number, status: 'active' | 'training' | 'offline',
-    predictions: number,
+  id: string"
+    name: string"
+  description: string, accuracy: number, status: 'active' | 'training' | 'offline'"
+    predictions: number"
   successRate: number
 }
 
-interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold',
-  confidence: number,
-    targetPrice: number,
-  timeframe: string,
+interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold'"
+  confidence: number"
+    targetPrice: number"
+  timeframe: string"
     reasoning: string[]
 }
  export default function AdvancedAIFeatures() { const [selectedModel, setSelectedModel] = useState<string>('neural-prophet');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const aiModels: AIModel[] = [ { id: 'neural-prophet', name: 'Neural Prophet v3.2', description: 'Advanced time series forecasting with neural networks', accuracy: 89.7, status: 'active',
-      predictions: 15420,
-      successRate: 87.3 },{ id: 'lstm-ensemble', name: 'LSTM Ensemble', description: 'Long Short-Term Memory networks for pattern recognition', accuracy: 85.2, status: 'active',
-      predictions: 12890,
-      successRate: 82.1 },{ id: 'transformer-alpha', name: 'Transformer Alpha', description: 'Attention-based model for market sentiment analysis', accuracy: 92.1, status: 'training',
-      predictions: 8750,
-      successRate: 90.4 },{ id: 'quantum-ml', name: 'Quantum ML Beta', description: 'Quantum machine learning for complex market dynamics', accuracy: 94.8, status: 'offline',
-      predictions: 3200,
+  const aiModels: AIModel[] = [ { id: 'neural-prophet', name: 'Neural Prophet v3.2', description: 'Advanced time series forecasting with neural networks', accuracy: 89.7, status: 'active'"
+      predictions: 15420"
+      successRate: 87.3 },{ id: 'lstm-ensemble', name: 'LSTM Ensemble', description: 'Long Short-Term Memory networks for pattern recognition', accuracy: 85.2, status: 'active'"
+      predictions: 12890"
+      successRate: 82.1 },{ id: 'transformer-alpha', name: 'Transformer Alpha', description: 'Attention-based model for market sentiment analysis', accuracy: 92.1, status: 'training'"
+      predictions: 8750"
+      successRate: 90.4 },{ id: 'quantum-ml', name: 'Quantum ML Beta', description: 'Quantum machine learning for complex market dynamics', accuracy: 94.8, status: 'offline'"
+      predictions: 3200"
       successRate: 94.2
     }
   ];
 
-  const recentPredictions: PredictionResult[] = [ { symbol: 'AAPL', prediction: 'buy',
+  const recentPredictions: PredictionResult[] = [ { symbol: 'AAPL', prediction: 'buy'"
       confidence: 87.2, targetPrice: 195.50, timeframe: '5 days', reasoning: [ 'Strong earnings momentum', 'Positive analyst sentiment', 'Technical breakout pattern'
-      ] },{ symbol: 'TSLA', prediction: 'hold',
+      ] },{ symbol: 'TSLA', prediction: 'hold'"
       confidence: 72.8, targetPrice: 242.10, timeframe: '7 days', reasoning: [ 'Mixed market signals', 'Volatility concerns', 'Awaiting production data'
-      ] },{ symbol: 'NVDA', prediction: 'buy',
+      ] },{ symbol: 'NVDA', prediction: 'buy'"
       confidence: 91.5, targetPrice: 520.00, timeframe: '3 days', reasoning: [ 'AI sector growth', 'Strong technical indicators', 'Institutional buying pressure'
       ]
     }
@@ -189,7 +190,7 @@ interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold'
                 <Button 
                   onClick={handleAnalyze}
                   disabled={isAnalyzing}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700,
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700"
       hover:to-purple-700"
                 >
                   {isAnalyzing ? (
@@ -282,7 +283,7 @@ interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold'
         </Card>
 
         {/* AI Features Grid */}
-        <div className="grid md: grid-cols-2,
+        <div className="grid md: grid-cols-2"
       lg:grid-cols-4 gap-6 mb-12">
           <Card className="bg-gradient-to-br from-blue-600 to-blue-800 border-0">
             <CardContent className="p-6 text-white text-center">
@@ -337,7 +338,7 @@ interface PredictionResult { symbol: string, prediction: 'buy' | 'sell' | 'hold'
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md: grid-cols-2,
+            <div className="grid md: grid-cols-2"
       lg:grid-cols-4 gap-6">
               <div className="text-center p-4 bg-white/5 rounded-lg">
                 <div className="text-3xl font-bold text-green-400 mb-2">94.2%</div>

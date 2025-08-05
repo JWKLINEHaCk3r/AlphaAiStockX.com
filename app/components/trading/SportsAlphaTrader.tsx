@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface SportsTrade {
-  event: string,
-    prediction: string,
-  confidence: string,
+  event: string"
+    prediction: string"
+  confidence: string"
     odds: string
 }
 

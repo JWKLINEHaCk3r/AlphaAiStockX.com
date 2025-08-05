@@ -1,13 +1,14 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Alert } from "../../../components/ui/alert";
@@ -19,28 +20,28 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Calendar, 
   DollarSign, 
   BarChart3, 
-  AlertTriangle,
-  Target,
-  CheckCircle,
-  Clock,
+  AlertTriangle"
+  Target"
+  CheckCircle"
+  Clock"
   Zap, }
   Brain, LineChart } from 'lucide-react';
 
 interface EarningsData {
-  symbol: string,
-    companyName: string,
-  reportDate: string,
-    estimatedEPS: number,
-  predictedEPS: number,
-    confidence: number,
-  priceTarget: number,
+  symbol: string"
+    companyName: string"
+  reportDate: string"
+    estimatedEPS: number"
+  predictedEPS: number"
+    confidence: number"
+  priceTarget: number"
     currentPrice: number, expectedMove: number, sentiment: 'bullish' | 'bearish' | 'neutral', risk: 'low' | 'medium' | 'high'
 }
 
-interface AIStockPrediction { symbol: string, prediction: 'buy' | 'sell' | 'hold',
-  confidence: number,
-    targetPrice: number,
-  timeframe: string,
+interface AIStockPrediction { symbol: string, prediction: 'buy' | 'sell' | 'hold'"
+  confidence: number"
+    targetPrice: number"
+  timeframe: string"
     factors: string[]
 }
 export default function EarningsPredictor() {
@@ -50,68 +51,68 @@ export default function EarningsPredictor() {
 
   const upcomingEarnings: EarningsData[] = [
     {
-      symbol: 'AAPL',
-      companyName: 'Apple Inc.',
-      reportDate: '2024-01-25',
-      estimatedEPS: 2.18,
-      predictedEPS: 2.23,
-      confidence: 87,
-      priceTarget: 195.50,
-      currentPrice: 188.30,
-      expectedMove: 4.2,
-      sentiment: 'bullish',
+      symbol: 'AAPL'"
+      companyName: 'Apple Inc.'"
+      reportDate: '2024-01-25'"
+      estimatedEPS: 2.18"
+      predictedEPS: 2.23"
+      confidence: 87"
+      priceTarget: 195.50"
+      currentPrice: 188.30"
+      expectedMove: 4.2"
+      sentiment: 'bullish'"
       risk: 'low'
-    },
+    }"
     {
-      symbol: 'MSFT',
-      companyName: 'Microsoft Corporation',
-      reportDate: '2024-01-24',
-      estimatedEPS: 2.78,
-      predictedEPS: 2.85,
-      confidence: 91,
-      priceTarget: 385.00,
-      currentPrice: 376.20,
-      expectedMove: 3.8,
-      sentiment: 'bullish',
+      symbol: 'MSFT'"
+      companyName: 'Microsoft Corporation'"
+      reportDate: '2024-01-24'"
+      estimatedEPS: 2.78"
+      predictedEPS: 2.85"
+      confidence: 91"
+      priceTarget: 385.00"
+      currentPrice: 376.20"
+      expectedMove: 3.8"
+      sentiment: 'bullish'"
       risk: 'low'
-    },
+    }"
     {
-      symbol: 'GOOGL',
-      companyName: 'Alphabet Inc.',
-      reportDate: '2024-01-30',
-      estimatedEPS: 1.65,
-      predictedEPS: 1.72,
-      confidence: 83,
-      priceTarget: 155.00,
-      currentPrice: 142.80,
-      expectedMove: 5.1,
-      sentiment: 'bullish',
+      symbol: 'GOOGL'"
+      companyName: 'Alphabet Inc.'"
+      reportDate: '2024-01-30'"
+      estimatedEPS: 1.65"
+      predictedEPS: 1.72"
+      confidence: 83"
+      priceTarget: 155.00"
+      currentPrice: 142.80"
+      expectedMove: 5.1"
+      sentiment: 'bullish'"
       risk: 'medium'
-    },
+    }"
     {
-      symbol: 'TSLA',
-      companyName: 'Tesla Inc.',
-      reportDate: '2024-01-24',
-      estimatedEPS: 0.74,
-      predictedEPS: 0.68,
-      confidence: 76,
-      priceTarget: 220.00,
-      currentPrice: 238.50,
-      expectedMove: 8.3,
-      sentiment: 'bearish',
+      symbol: 'TSLA'"
+      companyName: 'Tesla Inc.'"
+      reportDate: '2024-01-24'"
+      estimatedEPS: 0.74"
+      predictedEPS: 0.68"
+      confidence: 76"
+      priceTarget: 220.00"
+      currentPrice: 238.50"
+      expectedMove: 8.3"
+      sentiment: 'bearish'"
       risk: 'high'
-    },
+    }"
     {
-      symbol: 'NVDA',
-      companyName: 'NVIDIA Corporation',
-      reportDate: '2024-02-21',
-      estimatedEPS: 4.12,
-      predictedEPS: 4.28,
-      confidence: 89,
-      priceTarget: 920.00,
-      currentPrice: 875.40,
-      expectedMove: 6.7,
-      sentiment: 'bullish',
+      symbol: 'NVDA'"
+      companyName: 'NVIDIA Corporation'"
+      reportDate: '2024-02-21'"
+      estimatedEPS: 4.12"
+      predictedEPS: 4.28"
+      confidence: 89"
+      priceTarget: 920.00"
+      currentPrice: 875.40"
+      expectedMove: 6.7"
+      sentiment: 'bullish'"
       risk: 'medium'
     }
   ];
@@ -124,7 +125,7 @@ export default function EarningsPredictor() {
       const earningsData = upcomingEarnings.find(e => e.symbol === symbol);
       if (earningsData) {
         const newPredictions: AIStockPrediction[] = [
-          { symbol: symbol, prediction: earningsData.sentiment === 'bullish' ? 'buy' : earningsData.sentiment === 'bearish' ? 'sell' : 'hold',
+          { symbol: symbol, prediction: earningsData.sentiment === 'bullish' ? 'buy' : earningsData.sentiment === 'bearish' ? 'sell' : 'hold'"
             confidence: earningsData.confidence, targetPrice: earningsData.priceTarget, timeframe: '1-2 weeks post-earnings', factors: [ 'Historical earnings accuracy', 'Revenue growth trends', 'Market sentiment analysis', 'Technical indicators', 'Institutional activity'
             ]
             }
@@ -165,8 +166,8 @@ export default function EarningsPredictor() {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
+      month: 'short'"
+      day: 'numeric'"
       year: 'numeric'
     });
   };

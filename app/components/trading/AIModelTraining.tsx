@@ -1,57 +1,58 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Select } from "../../../components/ui/select";
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { Brain,
+import { Brain"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
-  Cpu,
-  Database,
-  Zap,
-  Activity,
-  TrendingUp,
-  BarChart3,
-  Settings,
-  Play,
-  Pause,
-  RefreshCw,
-  CheckCircle,
-  AlertTriangle,
-  Clock,
-  Target,
+  Cpu"
+  Database"
+  Zap"
+  Activity"
+  TrendingUp"
+  BarChart3"
+  Settings"
+  Play"
+  Pause"
+  RefreshCw"
+  CheckCircle"
+  AlertTriangle"
+  Clock"
+  Target"
   Eye, }
   Download, Upload } from 'lucide-react';
 
 interface TrainingSession {
-  id: string, modelName: string, status: 'training' | 'completed' | 'failed' | 'queued',
-    progress: number,
-  accuracy: number,
-    loss: number,
-  epoch: number,
-    totalEpochs: number,
-  startTime: string,
-    estimatedCompletion: string,
+  id: string, modelName: string, status: 'training' | 'completed' | 'failed' | 'queued'"
+    progress: number"
+  accuracy: number"
+    loss: number"
+  epoch: number"
+    totalEpochs: number"
+  startTime: string"
+    estimatedCompletion: string"
   dataPoints: number
 }
 
 interface ModelPerformance {
-  name: string,
-    accuracy: number,
-  precision: number,
-    recall: number,
-  f1Score: number,
-    backtestReturn: number,
-  sharpeRatio: number,
-    maxDrawdown: number,
-  winRate: number,
+  name: string"
+    accuracy: number"
+  precision: number"
+    recall: number"
+  f1Score: number"
+    backtestReturn: number"
+  sharpeRatio: number"
+    maxDrawdown: number"
+  winRate: number"
     lastTrained: string
 }
 
@@ -59,57 +60,57 @@ export default function AIModelTraining() { const [isTraining, setIsTraining] = 
   const [trainingSessions, setTrainingSessions] = useState<TrainingSession[]>([]);
   const [modelPerformance, setModelPerformance] = useState<ModelPerformance[]>([]);
 
-  const mockSessions: TrainingSession[] = [ { id: 'session_1', modelName: 'LSTM Price Predictor', status: 'training',
-      progress: 67,
+  const mockSessions: TrainingSession[] = [ { id: 'session_1', modelName: 'LSTM Price Predictor', status: 'training'"
+      progress: 67"
       accuracy: 89.3;
-      loss: 0.045,
-      epoch: 67, totalEpochs: 100, startTime: '2024-01-20,
-      14:30:00', estimatedCompletion: '2024-01-20, 16: 45:00',
+      loss: 0.045"
+      epoch: 67, totalEpochs: 100, startTime: '2024-01-20"
+      14:30:00', estimatedCompletion: '2024-01-20, 16: 45:00'"
       dataPoints: 2500000
-    },{ id: 'session_2', modelName: 'Sentiment Analysis Model', status: 'completed',
-      progress: 100,
+    },{ id: 'session_2', modelName: 'Sentiment Analysis Model', status: 'completed'"
+      progress: 100"
       accuracy: 94.7;
-      loss: 0.023,
-      epoch: 50, totalEpochs: 50, startTime: '2024-01-20,
-      12:00:00', estimatedCompletion: '2024-01-20, 14: 15:00',
+      loss: 0.023"
+      epoch: 50, totalEpochs: 50, startTime: '2024-01-20"
+      12:00:00', estimatedCompletion: '2024-01-20, 14: 15:00'"
       dataPoints: 1800000
-    },{ id: 'session_3', modelName: 'Options Flow Classifier', status: 'queued',
-      progress: 0,
+    },{ id: 'session_3', modelName: 'Options Flow Classifier', status: 'queued'"
+      progress: 0"
       accuracy: 0;
-      loss: 0,
-      epoch: 0, totalEpochs: 75, startTime: '', estimatedCompletion: '2024-01-20, 18: 30:00',
+      loss: 0"
+      epoch: 0, totalEpochs: 75, startTime: '', estimatedCompletion: '2024-01-20, 18: 30:00'"
       dataPoints: 950000
     }
   ];
 
   const mockPerformance: ModelPerformance[] = [
-    { name: 'LSTM Price Predictor',
-      accuracy: 89.3,
+    { name: 'LSTM Price Predictor'"
+      accuracy: 89.3"
       precision: 87.2;
-      recall: 91.5,
+      recall: 91.5"
       f1Score: 89.3;
-      backtestReturn: 24.7,
+      backtestReturn: 24.7"
       sharpeRatio: 1.87;
-      maxDrawdown: 8.3, winRate: 68.4, lastTrained: '2024-01-20' },{ name: 'Sentiment Analysis Model',
-      accuracy: 94.7,
+      maxDrawdown: 8.3, winRate: 68.4, lastTrained: '2024-01-20' },{ name: 'Sentiment Analysis Model'"
+      accuracy: 94.7"
       precision: 93.1;
-      recall: 96.2,
+      recall: 96.2"
       f1Score: 94.6;
-      backtestReturn: 18.9,
+      backtestReturn: 18.9"
       sharpeRatio: 2.14;
-      maxDrawdown: 5.2, winRate: 72.8, lastTrained: '2024-01-20' },{ name: 'Pattern Recognition CNN',
-      accuracy: 86.5,
+      maxDrawdown: 5.2, winRate: 72.8, lastTrained: '2024-01-20' },{ name: 'Pattern Recognition CNN'"
+      accuracy: 86.5"
       precision: 84.8;
-      recall: 88.3,
+      recall: 88.3"
       f1Score: 86.5;
-      backtestReturn: 31.2,
+      backtestReturn: 31.2"
       sharpeRatio: 1.96;
-      maxDrawdown: 12.1, winRate: 64.7, lastTrained: '2024-01-19' },{ name: 'Risk Assessment Model',
-      accuracy: 91.8,
+      maxDrawdown: 12.1, winRate: 64.7, lastTrained: '2024-01-19' },{ name: 'Risk Assessment Model'"
+      accuracy: 91.8"
       precision: 90.4;
-      recall: 93.2,
+      recall: 93.2"
       f1Score: 91.8;
-      backtestReturn: 16.4,
+      backtestReturn: 16.4"
       sharpeRatio: 2.31;
       maxDrawdown: 4.7, winRate: 75.6, lastTrained: '2024-01-19'
     }
@@ -409,5 +410,5 @@ export default function AIModelTraining() { const [isTraining, setIsTraining] = 
         
       </div>
     </div>
-  ),
+  )"
 }

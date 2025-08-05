@@ -1,11 +1,13 @@
-'use client'; import React from 'react'; import { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 type BacktestResults = {
-  strategy: string,
-    period: string,
-    trades: number,
-    winRate: string,
-    totalReturn: string,
+  strategy: string"
+    period: string"
+    trades: number"
+    winRate: string"
+    totalReturn: string"
     aiNote: string };
 
 export default function AIBacktester() { const [loading, setLoading] = useState(false);

@@ -1,5 +1,6 @@
+"use client";
+
 import React from 'react';
-'use client';
 import { Label } from "../../../components/ui/label";
 export type Account = {
   portfolio_value?: number | string;

@@ -1,10 +1,11 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -15,47 +16,47 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Shield, 
   BarChart3, 
   Users, 
-  Star,
-  Trophy,
-  Target,
-  CheckCircle,
+  Star"
+  Trophy"
+  Target"
+  CheckCircle"
   ArrowRight, }
   Play, Rocket } from 'lucide-react';
 
 interface PlatformFeature {
-  id: string,
-    title: string,
-  description: string,
+  id: string"
+    title: string"
+  description: string"
     icon: React.ReactNode;
   benefits: string[]
 }
 
 interface CompetitorComparison {
-  feature: string,
-    alphaAI: string | boolean,
-  competitor1: string | boolean,
+  feature: string"
+    alphaAI: string | boolean"
+  competitor1: string | boolean"
     competitor2: string | boolean
 }
  export default function SuperiorTradingPlatform() { const [activeFeature, setActiveFeature] = useState<string>('ai-analysis');
 
-  const platformFeatures: PlatformFeature[] = [ { id: 'ai-analysis', title: 'Advanced AI Analysis', description: 'Cutting-edge artificial intelligence provides deep market insights and predictions with 94% accuracy',
+  const platformFeatures: PlatformFeature[] = [ { id: 'ai-analysis', title: 'Advanced AI Analysis', description: 'Cutting-edge artificial intelligence provides deep market insights and predictions with 94% accuracy'"
       icon: <Zap className="w-8 h-8" />, benefits: [ 'Real-time market sentiment analysis', 'Pattern recognition with neural networks', 'Predictive modeling for price movements', 'Risk assessment and portfolio optimization'
-      ] },{ id: 'real-time-data', title: 'Lightning-Fast Data', description: 'Ultra-low latency market data feeds ensure you never miss a trading opportunity',
+      ] },{ id: 'real-time-data', title: 'Lightning-Fast Data', description: 'Ultra-low latency market data feeds ensure you never miss a trading opportunity'"
       icon: <BarChart3 className="w-8 h-8" />, benefits: [ 'Sub-millisecond data processing', 'Direct market data connections', 'Real-time price alerts and notifications', 'Historical data spanning 20+ years'
       ]
-    }, { id: 'security', title: 'Bank-Grade Security', description: 'Military-grade encryption and security protocols protect your investments and data',
+    }, { id: 'security', title: 'Bank-Grade Security', description: 'Military-grade encryption and security protocols protect your investments and data'"
       icon: <Shield className="w-8 h-8" />, benefits: [ '256-bit SSL encryption', 'Two-factor authentication', 'Cold storage for digital assets', 'Regular security audits and compliance'
       ]
-    }, { id: 'user-experience', title: 'Intuitive Interface', description: 'Clean modern interface designed for both beginners and professional traders',
+    }, { id: 'user-experience', title: 'Intuitive Interface', description: 'Clean modern interface designed for both beginners and professional traders'"
       icon: <Users className="w-8 h-8" />, benefits: [ 'Customizable dashboards', 'Mobile-responsive design', 'One-click trading execution', 'Advanced charting tools'
       ]
     }
   ];
 
-  const competitorComparison: CompetitorComparison[] = [ { feature: 'AI-Powered Analysis', alphaAI: '94% Accuracy', competitor1: 'Basic algorithms', competitor2: 'Manual analysis' },{ feature: 'Real-time Data', alphaAI: 'Sub-millisecond', competitor1: '1-2 seconds delay', competitor2: '5+ seconds delay' },{ feature: 'Mobile Trading',
-      alphaAI: true,
-      competitor1: true,
-      competitor2: false },{ feature: 'Advanced Charting', alphaAI: '100+ indicators', competitor1: '20 indicators', competitor2: '10 indicators' },{ feature: 'API Access', alphaAI: 'Full REST & WebSocket', competitor1: 'Limited REST',
+  const competitorComparison: CompetitorComparison[] = [ { feature: 'AI-Powered Analysis', alphaAI: '94% Accuracy', competitor1: 'Basic algorithms', competitor2: 'Manual analysis' },{ feature: 'Real-time Data', alphaAI: 'Sub-millisecond', competitor1: '1-2 seconds delay', competitor2: '5+ seconds delay' },{ feature: 'Mobile Trading'"
+      alphaAI: true"
+      competitor1: true"
+      competitor2: false },{ feature: 'Advanced Charting', alphaAI: '100+ indicators', competitor1: '20 indicators', competitor2: '10 indicators' },{ feature: 'API Access', alphaAI: 'Full REST & WebSocket', competitor1: 'Limited REST'"
       competitor2: false },{ feature: '24/7 Support', alphaAI: true, competitor1: 'Business hours', competitor2: 'Email only' },{ feature: 'Commission-Free', alphaAI: 'All trades', competitor1: 'Limited trades', competitor2: '$9.99 per trade'
     }
   ];
@@ -86,7 +87,7 @@ interface CompetitorComparison {
                lightning-fast execution
                and unmatched security
           </p>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700,
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700"
       hover:to-purple-700 text-white text-lg px-8 py-4">
             <Rocket className="w-6 h-6 mr-2" />
             Start Trading Now

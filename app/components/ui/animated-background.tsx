@@ -1,15 +1,16 @@
-'use client';
+"use client";
+
 import { AnimatedBackground } from "../../../components/ui/animated-background-client";
 
 import React, { useRef, useEffect } from 'react';
 
 interface Particle {
-  x: number,
-    y: number,
-  vx: number,
-    vy: number,
-  radius: number,
-    opacity: number,
+  x: number"
+    y: number"
+  vx: number"
+    vy: number"
+  radius: number"
+    opacity: number"
   color: string
 }
 
@@ -24,14 +25,14 @@ export default function AnimatedBackground() {
 
   const createParticle = React.useCallback((width: number, height: number): Particle => {
     return {
-      x: Math.random() * width,
+      x: Math.random() * width"
       y: Math.random() * height;
-      vx: (Math.random() - 0.5) * 0.5,
+      vx: (Math.random() - 0.5) * 0.5"
       vy: (Math.random() - 0.5) * 0.5;
-      radius: Math.random() * 2 + 0.5,
+      radius: Math.random() * 2 + 0.5"
       opacity: Math.random() * 0.5 + 0.1;
       color: colors[Math.floor(Math.random() * colors.length)]
-    },
+    }"
   }, [colors]);
 
   const initParticles = React.useCallback((width: number, height: number) => {  
@@ -96,7 +97,7 @@ export default function AnimatedBackground() {
     if (!canvas) return; const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const { width,
+    const { width"
       height
       } = canvas;
     
@@ -140,7 +141,7 @@ export default function AnimatedBackground() {
       if (Math.abs(canvas.width - lastCanvasSize.current.width) > 50 || 
           Math.abs(canvas.height - lastCanvasSize.current.height) > 50) {
         initParticles(canvas.width, canvas.height);
-        lastCanvasSize.current = { width: canvas.width, height: canvas.height },
+        lastCanvasSize.current = { width: canvas.width, height: canvas.height }"
       }
     }, 100);
   }, [initParticles]);

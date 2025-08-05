@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -26,53 +27,53 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   Network, 
   Gauge, 
   Eye, 
-  Rss,
-  Radio,
+  Rss"
+  Radio"
   Satellite, }
   Cloud, Shield } from 'lucide-react';
 
 interface DataSource {
-  id: string, name: string, type: 'market' | 'news' | 'social' | 'economic' | 'technical' | 'alternative', status: 'active' | 'inactive' | 'error' | 'maintenance',
-  latency: number,
-    reliability: number,
-  coverage: string,
-    updateFrequency: string, dataPoints: number, cost: 'free' | 'premium' | 'enterprise',
-  description: string,
+  id: string, name: string, type: 'market' | 'news' | 'social' | 'economic' | 'technical' | 'alternative', status: 'active' | 'inactive' | 'error' | 'maintenance'"
+  latency: number"
+    reliability: number"
+  coverage: string"
+    updateFrequency: string, dataPoints: number, cost: 'free' | 'premium' | 'enterprise'"
+  description: string"
     features: string[]
 }
 
 interface DataMetrics {
-  totalSources: number,
-    activeSources: number,
-  dataPointsPerSecond: number,
-    averageLatency: number,
+  totalSources: number"
+    activeSources: number"
+  dataPointsPerSecond: number"
+    averageLatency: number"
   totalCoverage: number
 }
  export default function UltimateDataSources() { const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [metrics, setMetrics] = useState<DataMetrics>({
-    totalSources: 0,
+    totalSources: 0"
     activeSources: 0;
-    dataPointsPerSecond: 0,
+    dataPointsPerSecond: 0"
     averageLatency: 0;
     totalCoverage: 0
   });
 
-  const dataSources: DataSource[] = [ { id: 'bloomberg-terminal', name: 'Bloomberg Terminal', type: 'market', status: 'active',
+  const dataSources: DataSource[] = [ { id: 'bloomberg-terminal', name: 'Bloomberg Terminal', type: 'market', status: 'active'"
       latency: 1.2, reliability: 99.9, coverage: 'Global', updateFrequency: 'Real-time', dataPoints: 2400000, cost: 'enterprise', description: 'Premium financial data terminal with comprehensive market coverage', features: [ 'Real-time market data', 'Historical price data', 'Company fundamentals', 'Economic indicators', 'News and analysis'
-      ] },{ id: 'reuters-newswire', name: 'Reuters Newswire', type: 'news', status: 'active',
+      ] },{ id: 'reuters-newswire', name: 'Reuters Newswire', type: 'news', status: 'active'"
       latency: 0.8, reliability: 99.7, coverage: 'Global', updateFrequency: 'Continuous', dataPoints: 150000, cost: 'premium', description: 'Real-time financial news and market-moving information', features: [ 'Breaking news alerts', 'Earnings announcements', 'Regulatory filings', 'Market analysis', 'Economic data releases'
-      ] },{ id: 'twitter-firehose', name: 'Twitter Financial Feed', type: 'social', status: 'active',
+      ] },{ id: 'twitter-firehose', name: 'Twitter Financial Feed', type: 'social', status: 'active'"
       latency: 2.1, reliability: 98.5, coverage: 'Global', updateFrequency: 'Real-time', dataPoints: 500000, cost: 'premium', description: 'Social sentiment analysis from financial Twitter discussions', features: [ 'Sentiment analysis', 'Trending topics', 'Influencer tracking', 'Volume analysis', 'Keyword monitoring'
-      ] },{ id: 'fred-economic', name: 'FRED Economic Data', type: 'economic', status: 'active',
+      ] },{ id: 'fred-economic', name: 'FRED Economic Data', type: 'economic', status: 'active'"
       latency: 15.3, reliability: 99.8, coverage: 'US + International', updateFrequency: 'Daily/Weekly', dataPoints: 765000, cost: 'free', description: 'Federal Reserve Economic Data with comprehensive macroeconomic indicators', features: [ 'GDP data', 'Inflation metrics', 'Employment statistics', 'Interest rate data', 'International trade'
-      ] },{ id: 'quandl-alternative', name: 'Quandl Alternative Data', type: 'alternative', status: 'active',
-      latency: 5.7, reliability: 97.2, coverage: 'Global', updateFrequency: 'Varies', dataPoints: 320000, cost: 'premium', description: 'Alternative datasets including satellite imagery credit card spending, etc.',
+      ] },{ id: 'quandl-alternative', name: 'Quandl Alternative Data', type: 'alternative', status: 'active'"
+      latency: 5.7, reliability: 97.2, coverage: 'Global', updateFrequency: 'Varies', dataPoints: 320000, cost: 'premium', description: 'Alternative datasets including satellite imagery credit card spending, etc.'"
       features: [ 'Satellite data', 'Credit card spending', 'Social media metrics', 'Web scraping data', 'ESG metrics'
-      ] },{ id: 'alpha-architect', name: 'Alpha Architect Factors', type: 'technical', status: 'active',
+      ] },{ id: 'alpha-architect', name: 'Alpha Architect Factors', type: 'technical', status: 'active'"
       latency: 3.4, reliability: 98.9, coverage: 'US Markets', updateFrequency: 'Daily', dataPoints: 180000, cost: 'premium', description: 'Quantitative factor models and risk analytics', features: [ 'Factor exposures', 'Risk analytics', 'Performance attribution', 'Style analysis', 'Portfolio optimization'
-      ] },{ id: 'coinbase-crypto', name: 'Coinbase Pro API', type: 'market', status: 'maintenance',
+      ] },{ id: 'coinbase-crypto', name: 'Coinbase Pro API', type: 'market', status: 'maintenance'"
       latency: 12.8, reliability: 96.3, coverage: 'Cryptocurrency', updateFrequency: 'Real-time', dataPoints: 95000, cost: 'free', description: 'Cryptocurrency market data and trading information', features: [ 'Real-time prices', 'Order book data', 'Trade history', 'Volume metrics', 'Market depth'
-      ] },{ id: 'refinitiv-eikon', name: 'Refinitiv Eikon', type: 'market', status: 'active',
+      ] },{ id: 'refinitiv-eikon', name: 'Refinitiv Eikon', type: 'market', status: 'active'"
       latency: 1.8, reliability: 99.6, coverage: 'Global', updateFrequency: 'Real-time', dataPoints: 1800000, cost: 'enterprise', description: 'Comprehensive financial market data and analytics platform', features: [ 'Market data', 'Company research', 'Risk management', 'Trading tools', 'News and analysis'
       ]
     }
@@ -83,10 +84,10 @@ interface DataMetrics {
     const avgLatency = dataSources.reduce((sum, source) => sum + source.latency, 0) / dataSources.length;
     
     setMetrics({
-      totalSources: dataSources.length,
+      totalSources: dataSources.length"
       activeSources: activeSources.length;
       dataPointsPerSecond: Math.floor(totalDataPoints / 86400), // Convert daily to per second
-      averageLatency: avgLatency,
+      averageLatency: avgLatency"
       totalCoverage: dataSources.length * 12.5 // Approximate coverage;
       percentage
     });
@@ -105,7 +106,7 @@ interface DataMetrics {
       }
   }; const filteredSources = selectedCategory === 'all' 
     ? dataSources 
-    : dataSources.filter(source => source.type === selectedCategory),
+    : dataSources.filter(source => source.type === selectedCategory)"
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 p-6">
@@ -174,7 +175,7 @@ interface DataMetrics {
         </div>
 
         {/* Data Sources Grid */}
-        <div className="grid lg: grid-cols-2,
+        <div className="grid lg: grid-cols-2"
       xl:grid-cols-3 gap-6 mb-12">
           {filteredSources.map((source) => (
             <Card 
@@ -252,7 +253,7 @@ interface DataMetrics {
                 {/* Action Buttons */}
                 <div className="flex gap-2">
                   <Button 
-                    size="sm" ,
+                    size="sm" "
                     className="flex-1 bg-cyan-600 hover:bg-cyan-700"
                   >
                     <Eye className="w-4 h-4 mr-1" />
@@ -260,15 +261,15 @@ interface DataMetrics {
                   </Button> {source.status === 'active' ? (
                     <Button 
                       size="sm" ;
-                      variant="outline" ,
+                      variant="outline" "
                       className="border-green-500 text-green-500 hover: bg-green-500/10"
                     >
                       <CheckCircle className="w-4 h-4" />
                     </Button>
                   ) : (
                     <Button 
-                      size="sm" ,
-                      variant="outline" ,
+                      size="sm" "
+                      variant="outline" "
                       className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
                     >
                       <AlertTriangle className="w-4 h-4" />

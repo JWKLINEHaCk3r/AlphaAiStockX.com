@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface Pattern {
-  symbol: string,
-    pattern: string,
-  confidence: string,
+  symbol: string"
+    pattern: string"
+  confidence: string"
     aiNote: string
 }
 

@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface NewsItem {
-  headline: string,
-    impact: string,
-  sentiment: string,
+  headline: string"
+    impact: string"
+  sentiment: string"
     aiNote: string
 }
 

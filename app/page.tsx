@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 
 import React, { useState, useEffect } from 'react'; import Link from 'next/link';
 
@@ -34,7 +35,7 @@ export default function HomePage() {
           
           <div className="flex flex-col sm: flex-row gap-4 justify-center mb-16">
             <Link href="/platform">
-              <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4 rounded-lg, hover:from-blue-600,
+              <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4 rounded-lg, hover:from-blue-600"
       hover: to-purple-700 transition-all duration-300">
                 Start Trading
               </button>
@@ -78,7 +79,7 @@ export default function HomePage() {
             Join the AI trading revolution and let our advanced algorithms work for you.
           </p>
           <Link href="/contact">
-            <button className="bg-gradient-to-r from-green-500 to-blue-500 text-lg px-8 py-4 rounded-lg hover: from-green-600,
+            <button className="bg-gradient-to-r from-green-500 to-blue-500 text-lg px-8 py-4 rounded-lg hover: from-green-600"
       hover:to-blue-600 transition-all duration-300">
               Get Started Today
             </button>

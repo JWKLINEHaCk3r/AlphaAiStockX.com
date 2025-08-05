@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface TradeSignal {
-  symbol: string,
-    action: string,
-  confidence: string,
+  symbol: string"
+    action: string"
+  confidence: string"
     aiNote: string
 }
 

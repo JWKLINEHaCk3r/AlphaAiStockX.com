@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -25,24 +26,24 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Globe, 
   Network, 
   Settings, 
-  RefreshCw,
-  Activity,
-  TrendingUp,
-  BarChart3,
+  RefreshCw"
+  Activity"
+  TrendingUp"
+  BarChart3"
   Clock, }
   Target, AlertCircle } from 'lucide-react';
 
 interface SecurityMetric {
-  name: string, value: number, status: 'secure' | 'warning' | 'critical',
+  name: string, value: number, status: 'secure' | 'warning' | 'critical'"
     description: string
 }
- interface QuantumThreat { level: 'low' | 'medium' | 'high' | 'critical',
-    probability: number,
-  timeToThreat: string,
+ interface QuantumThreat { level: 'low' | 'medium' | 'high' | 'critical'"
+    probability: number"
+  timeToThreat: string"
     affectedSystems: string[]
 }
 
-interface EncryptionProtocol { name: string, type: 'classical' | 'quantum' | 'hybrid', strength: number, status: 'active' | 'standby' | 'upgrading',
+interface EncryptionProtocol { name: string, type: 'classical' | 'quantum' | 'hybrid', strength: number, status: 'active' | 'standby' | 'upgrading'"
   keySize: string
 }
 

@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -14,31 +15,31 @@ import { Globe,
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
   Box, 
   Users, 
-  Gamepad2,
-  Coins,
-  VolumeX,
-  Volume2,
-  Play,
-  Pause,
-  BarChart3,
+  Gamepad2"
+  Coins"
+  VolumeX"
+  Volume2"
+  Play"
+  Pause"
+  BarChart3"
   Target, }
   Rocket, Star } from 'lucide-react';
 
 interface MetaverseAsset {
-  id: string,
-    name: string,
-  symbol: string,
-    price: number,
-  change24h: number,
+  id: string"
+    name: string"
+  symbol: string"
+    price: number"
+  change24h: number"
     volume: number, marketCap: number, category: 'gaming' | 'land' | 'nft' | 'platform'
 }
 
 interface VirtualWorld {
-  id: string,
-    name: string,
-  users: number,
-    landPrice: number,
-  isActive: boolean,
+  id: string"
+    name: string"
+  users: number"
+    landPrice: number"
+  isActive: boolean"
     description: string
 }
  export default function MetaverseTrading() { const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -50,63 +51,63 @@ interface VirtualWorld {
     { 
       id: 'meta', 
       name: 'Meta Platforms', 
-      symbol: 'META',
-      price: 298.50,
-      change24h: 2.3,
+      symbol: 'META'"
+      price: 298.50"
+      change24h: 2.3"
       volume: 1250000000, 
       marketCap: 758000000000, 
       category: 'platform' 
-    },
+    }"
     { 
       id: 'sand', 
       name: 'The Sandbox', 
-      symbol: 'SAND',
-      price: 0.47,
-      change24h: -1.2,
+      symbol: 'SAND'"
+      price: 0.47"
+      change24h: -1.2"
       volume: 45000000, 
       marketCap: 890000000, 
       category: 'gaming' 
-    },
+    }"
     { 
       id: 'mana', 
       name: 'Decentraland', 
-      symbol: 'MANA',
-      price: 0.32,
-      change24h: 5.7,
+      symbol: 'MANA'"
+      price: 0.32"
+      change24h: 5.7"
       volume: 78000000, 
       marketCap: 590000000, 
       category: 'land' 
-    },
+    }"
     { 
       id: 'axs', 
       name: 'Axie Infinity', 
-      symbol: 'AXS',
-      price: 7.23,
-      change24h: -3.1,
+      symbol: 'AXS'"
+      price: 7.23"
+      change24h: -3.1"
       volume: 67000000, 
       marketCap: 450000000, 
       category: 'gaming' 
-    },
+    }"
     { 
       id: 'enj', 
       name: 'Enjin Coin', 
-      symbol: 'ENJ',
-      price: 0.18,
-      change24h: 1.8,
+      symbol: 'ENJ'"
+      price: 0.18"
+      change24h: 1.8"
       volume: 23000000, 
       marketCap: 160000000, 
       category: 'nft'
     }
   ];
 
-  const virtualWorlds: VirtualWorld[] = [ { id: 'horizon', name: 'Horizon Worlds',
-      users: 300000,
-      landPrice: 0, isActive: true, description: 'Meta\'s social VR platform' },{ id: 'sandbox', name: 'The Sandbox',
-      users: 150000,
-      landPrice: 1250, isActive: true, description: 'Voxel gaming metaverse' },{ id: 'decentraland', name: 'Decentraland',
-      users: 80000,
-      landPrice: 890, isActive: true, description: 'Virtual reality platform' },{ id: 'vrchat', name: 'VRChat',
-      users: 450000,
+  const virtualWorlds: VirtualWorld[] = [ { id: 'horizon', name: 'Horizon Worlds'"
+      users: 300000"
+      landPrice: 0, isActive: true, description: 'Meta\'s social VR platform' },{ id: 'sandbox', name: 'The Sandbox'"
+      users: 150000"
+      landPrice: 1250, isActive: true, description: 'Voxel gaming metaverse' },{ id: 'decentraland', name: 'Decentraland'"
+      users: 80000"
+      landPrice: 890, isActive: true, description: 'Virtual reality platform' },{ id: 'vrchat', name: 'VRChat'"
+      users: 450000"
       landPrice: 0, isActive: true, description: 'Social VR experience'
     }
   ];

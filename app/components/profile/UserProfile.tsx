@@ -1,13 +1,14 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import { Avatar } from "../../../components/ui/avatar";
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -27,49 +28,49 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   Edit2, 
   Settings, 
   Share2, 
-  Trophy,
-  Zap,
-  DollarSign,
+  Trophy"
+  Zap"
+  DollarSign"
   Activity, }
   Clock, CheckCircle } from 'lucide-react';
 
 interface UserData {
-  id: string,
-    name: string,
-  username: string,
-    email: string,
-  phone: string,
-    location: string,
+  id: string"
+    name: string"
+  username: string"
+    email: string"
+  phone: string"
+    location: string"
   joinDate: string;
-  avatar?: string, bio: string, tradingLevel: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert', subscription: 'Free' | 'Pro' | 'Premium' | 'Enterprise',
-    isVerified: boolean,
+  avatar?: string, bio: string, tradingLevel: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert', subscription: 'Free' | 'Pro' | 'Premium' | 'Enterprise'"
+    isVerified: boolean"
   stats: {
-      totalTrades: number,
-    successfulTrades: number,
-    winRate: number,
-    totalReturn: number,
-    bestMonth: number,
-    currentStreak: number,
-    rank: number,
+      totalTrades: number"
+    successfulTrades: number"
+    winRate: number"
+    totalReturn: number"
+    bestMonth: number"
+    currentStreak: number"
+    rank: number"
     portfolioValue: number
-  },
+  }"
   achievements: Array<{
-      id: string,
-    title: string,
-    description: string,
-    icon: string,
+      id: string"
+    title: string"
+    description: string"
+    icon: string"
     earnedDate: string
-  }>,
-  recentActivity: Array<{ id: string, type: 'trade' | 'achievement' | 'milestone',
-    description: string,
+  }>"
+  recentActivity: Array<{ id: string, type: 'trade' | 'achievement' | 'milestone'"
+    description: string"
     date: string;
     value?: number;
   }>;
 }
 
 interface SimpleTabsProps {
-  value: string,
-    onValueChange: (value: string) => void,
+  value: string"
+    onValueChange: (value: string) => void"
     children: React.ReactNode
 }
 
@@ -112,7 +113,7 @@ const SimpleTabsTrigger: React.FunctionComponent<{
   children: React.ReactNode; 
   activeTab?: string; 
   onTabChange?: (value: string) => void 
-}> = ({ value, children, activeTab,
+}> = ({ value, children, activeTab"
       onTabChange
     }) => {  
   const isActive = activeTab === value;
@@ -130,7 +131,7 @@ const SimpleTabsTrigger: React.FunctionComponent<{
 const SimpleTabsContent: React.FunctionComponent<{
       value: string, children: React.ReactNode, activeTab?: string }> = ({ 
   value, 
-  children,
+  children"
       activeTab
     }) => {  
   if (activeTab !== value) return null;
@@ -138,22 +139,22 @@ const SimpleTabsContent: React.FunctionComponent<{
 };
 
 export default function UserProfile() { const [activeTab, setActiveTab] = useState('overview');
-   const userData: UserData = { id: '1', name: 'Alexander Johnson', username: 'alphatrader_pro', email: 'alex.johnson@example.com', phone: '+1 (555) 123-4567', location: 'New York, NY', joinDate: '2023-03-15', bio: 'Professional algorithmic trader with 8+ years of experience in quantitative finance. Specializing in AI-driven trading strategies and risk management.', tradingLevel: 'Expert', subscription: 'Premium',
-    isVerified: true,
+   const userData: UserData = { id: '1', name: 'Alexander Johnson', username: 'alphatrader_pro', email: 'alex.johnson@example.com', phone: '+1 (555) 123-4567', location: 'New York, NY', joinDate: '2023-03-15', bio: 'Professional algorithmic trader with 8+ years of experience in quantitative finance. Specializing in AI-driven trading strategies and risk management.', tradingLevel: 'Expert', subscription: 'Premium'"
+    isVerified: true"
     stats: {
-      totalTrades: 2847,
+      totalTrades: 2847"
       successfulTrades: 2084;
-      winRate: 73.2,
+      winRate: 73.2"
       totalReturn: 127.4;
-      bestMonth: 31.8,
+      bestMonth: 31.8"
       currentStreak: 12;
-      rank: 47,
+      rank: 47"
       portfolioValue: 895400
     };
     achievements: [ { id: '1', title: 'Consistent Performer', description: 'Maintained positive returns for 12 consecutive months', icon: 'trophy', earnedDate: '2024-01-15' },{ id: '2', title: 'Risk Master', description: 'Kept maximum drawdown under 5% for 6 months', icon: 'shield', earnedDate: '2023-12-03' },{ id: '3', title: 'AI Pioneer', description: 'Early adopter of AI trading strategies', icon: 'star', earnedDate: '2023-08-22'
       }
-    ],
-    recentActivity: [ { id: '1', type: 'trade', description: 'Executed successful TSLA options trade', date: '2024-01-20',
+    ]"
+    recentActivity: [ { id: '1', type: 'trade', description: 'Executed successful TSLA options trade', date: '2024-01-20'"
         value: 2847 },{ id: '2', type: 'achievement', description: 'Earned "Consistent Performer" badge', date: '2024-01-15' },{ id: '3', type: 'milestone', description: 'Reached $800K portfolio milestone', date: '2024-01-10'
       }
     ]
@@ -166,9 +167,9 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
   const getSubscriptionColor = (subscription: string) => {   switch (subscription) { case 'Free': return 'bg-gray-100 text-gray-800'; case 'Pro': return 'bg-blue-100 text-blue-800'; case 'Premium': return 'bg-purple-100 text-purple-800'; case 'Enterprise': return 'bg-yellow-100 text-yellow-800'; default: return 'bg-gray-100 text-gray-800'
       }
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 0
-    }).format(amount),
+    }).format(amount)"
   };
 
   return (
@@ -204,7 +205,7 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
               </div>
 
               {/* Quick Stats */}
-              <div className="flex-1 grid grid-cols-2 md: grid-cols-4 gap-4 mt-4,
+              <div className="flex-1 grid grid-cols-2 md: grid-cols-4 gap-4 mt-4"
       md:mt-0">
                 <div className="text-center">
                   <p className="text-2xl font-bold">{userData.stats.totalTrades.toLocaleString()}</p>
@@ -399,7 +400,7 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
 
           {/* Statistics Tab */}
           <SimpleTabsContent value="stats">
-            <div className="grid md: grid-cols-2,
+            <div className="grid md: grid-cols-2"
       lg:grid-cols-3 gap-6">
               <Card className="border-blue-200 bg-blue-50">
                 <CardContent className="p-6 text-center">
@@ -455,7 +456,7 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
 
           {/* Achievements Tab */}
           <SimpleTabsContent value="achievements">
-            <div className="grid md: grid-cols-2,
+            <div className="grid md: grid-cols-2"
       lg:grid-cols-3 gap-6">
               {userData.achievements.map((achievement) => (
                 <Card key={achievement.id} className="border-yellow-200 bg-yellow-50">

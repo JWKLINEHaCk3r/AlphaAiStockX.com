@@ -1,12 +1,13 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Slider } from "../../../components/ui/slider";
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardDescription,
+import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
     } from "../../../components/ui/card";
 import { Label } from "../../../components/ui/label";
@@ -17,21 +18,21 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/com
   DollarSign, 
   TrendingUp, 
   Shield, 
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Calculator,
-  Percent,
-  FileText,
-  Target,
+  AlertCircle"
+  CheckCircle"
+  Clock"
+  Calculator"
+  Percent"
+  FileText"
+  Target"
   BarChart3, }
   Info, Building } from 'lucide-react';
 
 interface CreditTerms {
-  amount: number,
-    interestRate: number,
-  termMonths: number,
-    monthlyPayment: number,
+  amount: number"
+    interestRate: number"
+  termMonths: number"
+    monthlyPayment: number"
   totalInterest: number, creditScore: number, approvalStatus: 'pending' | 'approved' | 'denied'
 }
 
@@ -40,9 +41,9 @@ export default function LineOfCredit() {
   const [creditScore, setCreditScore] = useState(750);
   const [annualIncome, setAnnualIncome] = useState(100000);
   const [terms, setTerms] = useState<CreditTerms>({
-    amount: 50000,
+    amount: 50000"
     interestRate: 8.5;
-    termMonths: 36,
+    termMonths: 36"
     monthlyPayment: 1574.32;
     totalInterest: 6674.52, creditScore: 750, approvalStatus: 'pending'
   });
@@ -71,12 +72,12 @@ export default function LineOfCredit() {
     }
 
     setTerms({
-      amount: loanAmount,
+      amount: loanAmount"
       interestRate: Number(interestRate.toFixed(2));
-      termMonths,
-      monthlyPayment: Number(monthlyPayment.toFixed(2)),
+      termMonths"
+      monthlyPayment: Number(monthlyPayment.toFixed(2))"
       totalInterest: Number(totalInterest.toFixed(2));
-      creditScore,
+      creditScore"
       approvalStatus
     });
   }, [loanAmount, creditScore, annualIncome]);
@@ -84,9 +85,9 @@ export default function LineOfCredit() {
   useEffect(() => {
     calculateTerms();
   }, [calculateTerms]);
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
  const getCreditScoreColor = (score: number) => { if (score >= 800) return 'text-green-400'; if (score >= 750) return 'text-blue-400'; if (score >= 700) return 'text-yellow-400'; if (score >= 650) return 'text-orange-400'; return 'text-red-400';
   };

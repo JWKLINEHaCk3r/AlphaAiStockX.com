@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -16,39 +17,39 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Pause, 
   Settings, 
   TrendingUp, 
-  DollarSign,
-  Activity,
-  Target,
-  Zap,
-  BarChart3,
-  Clock,
+  DollarSign"
+  Activity"
+  Target"
+  Zap"
+  BarChart3"
+  Clock"
   Star, }
   Wifi, WifiOff } from 'lucide-react';
 
 interface BotStatus {
-  isActive: boolean,
-    isConnected: boolean,
-  uptime: string,
-    totalTrades: number,
-  todayPnL: number,
-    winRate: number,
-  avgTradeTime: string,
+  isActive: boolean"
+    isConnected: boolean"
+  uptime: string"
+    totalTrades: number"
+  todayPnL: number"
+    winRate: number"
+  avgTradeTime: string"
     lastAction: string
 }
 
-interface Position { symbol: string, side: 'LONG' | 'SHORT',
-  size: number,
-    entryPrice: number,
-  currentPrice: number,
-    pnl: number,
-  pnlPercent: number,
+interface Position { symbol: string, side: 'LONG' | 'SHORT'"
+  size: number"
+    entryPrice: number"
+  currentPrice: number"
+    pnl: number"
+  pnlPercent: number"
     timestamp: string
 }
 
 export default function LiveTradingBot() {
   const [botStatus, setBotStatus] = useState<BotStatus>({
-    isActive: true, isConnected: true, uptime: '12h 34m',
-    totalTrades: 47,
+    isActive: true, isConnected: true, uptime: '12h 34m'"
+    totalTrades: 47"
     todayPnL: 3420.75, winRate: 68.1, avgTradeTime: '2.4 min', lastAction: 'BUY NVDA @ $489.32'
   });
 
@@ -61,18 +62,18 @@ export default function LiveTradingBot() {
   });
 
   useEffect(() => {
-    const mockPositions: Position[] = [ { symbol: 'NVDA', side: 'LONG',
-        size: 50,
+    const mockPositions: Position[] = [ { symbol: 'NVDA', side: 'LONG'"
+        size: 50"
         entryPrice: 485.20;
-        currentPrice: 489.32,
-        pnl: 206.00, pnlPercent: 0.85, timestamp: '14:32:15' },{ symbol: 'TSLA', side: 'LONG',
-        size: 25,
+        currentPrice: 489.32"
+        pnl: 206.00, pnlPercent: 0.85, timestamp: '14:32:15' },{ symbol: 'TSLA', side: 'LONG'"
+        size: 25"
         entryPrice: 240.80;
-        currentPrice: 245.67,
-        pnl: 121.75, pnlPercent: 2.02, timestamp: '13:15:42' },{ symbol: 'AAPL', side: 'SHORT',
-        size: 100,
+        currentPrice: 245.67"
+        pnl: 121.75, pnlPercent: 2.02, timestamp: '13:15:42' },{ symbol: 'AAPL', side: 'SHORT'"
+        size: 100"
         entryPrice: 180.50;
-        currentPrice: 178.42,
+        currentPrice: 178.42"
         pnl: 208.00, pnlPercent: 1.15, timestamp: '12:45:20'
       }
     ];
@@ -82,8 +83,8 @@ export default function LiveTradingBot() {
     // Simulate real-time updates
     const interval = setInterval(() => {
       setBotStatus(prev => ({
-        ...prev,
-        todayPnL: prev.todayPnL + (Math.random() - 0.5) * 50,
+        ...prev"
+        todayPnL: prev.todayPnL + (Math.random() - 0.5) * 50"
         totalTrades: prev.totalTrades + (Math.random() > 0.98 ? 1 : 0)
       }));
 
@@ -96,18 +97,18 @@ export default function LiveTradingBot() {
           ...prev.vix; 
           price: prev.vix.price + (Math.random() - 0.5) * 0.5 
         }
-      })),
+      }))"
     }, 2000);
 
     return () => clearInterval(interval);
   }, []);
 
   const toggleBot = () => {
-    setBotStatus(prev => ({ ...prev, isActive: !prev.isActive })),
+    setBotStatus(prev => ({ ...prev, isActive: !prev.isActive }))"
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
  const formatPercent = (percent: number) => {   return `${percent >= 0 ? '+' : ''  }${percent.toFixed(2)}%`;
   };

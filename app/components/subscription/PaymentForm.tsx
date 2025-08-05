@@ -1,13 +1,14 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
@@ -20,33 +21,33 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   CheckCircle, 
   Star, 
   Crown, 
-  Zap,
-  Calendar,
-  User,
-  Mail,
-  Building,
-  MapPin,
+  Zap"
+  Calendar"
+  User"
+  Mail"
+  Building"
+  MapPin"
   Phone, }
   AlertCircle, Info } from 'lucide-react';
 
 interface PaymentData {
-  cardNumber: string,
-    expiryDate: string,
-  cvv: string,
-    name: string,
-  email: string,
+  cardNumber: string"
+    expiryDate: string"
+  cvv: string"
+    name: string"
+  email: string"
     billingAddress: {
-      street: string,
-    city: string,
-    state: string,
-    zipCode: string,
+      street: string"
+    city: string"
+    state: string"
+    zipCode: string"
     country: string
-  },
+  }"
 }
 
 interface SubscriptionPlan {
-  id: string,
-    name: string, price: number, interval: 'monthly' | 'yearly',
+  id: string"
+    name: string, price: number, interval: 'monthly' | 'yearly'"
   features: string[];
   popular?: boolean;
   enterprise?: boolean;
@@ -58,9 +59,9 @@ interface SubscriptionPlan {
 
   const plans: SubscriptionPlan[] = [ { id: 'basic', name: 'Basic Trader', price: 29, interval: 'monthly', features: [ 'Real-time stock data', 'Basic AI predictions', 'Portfolio tracking', 'Email alerts', 'Mobile app access'
       ] },{ id: 'pro', name: 'Pro Trader', price: 99, interval: 'monthly', features: [ 'Everything in Basic', 'Advanced AI analytics', 'Options flow scanner', 'Pattern recognition', 'Custom alerts', 'API access', 'Priority support'
-      ],
+      ]"
       popular: true },{ id: 'enterprise', name: 'Enterprise', price: 299, interval: 'monthly', features: [ 'Everything in Pro', 'Quantum AI predictions', 'Institutional data feeds', 'Custom integrations', 'Dedicated account manager', 'White-label solutions', 'Advanced security features'
-      ],
+      ]"
       enterprise: true
     }
   ];
@@ -80,12 +81,12 @@ interface SubscriptionPlan {
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCardNumber(e.target.value);
-    setPaymentData(prev => ({ ...prev, cardNumber: formatted })),
+    setPaymentData(prev => ({ ...prev, cardNumber: formatted }))"
   };
 
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatExpiryDate(e.target.value);
-    setPaymentData(prev => ({ ...prev, expiryDate: formatted })),
+    setPaymentData(prev => ({ ...prev, expiryDate: formatted }))"
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

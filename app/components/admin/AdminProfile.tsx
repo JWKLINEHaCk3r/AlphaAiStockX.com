@@ -1,9 +1,10 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
@@ -15,15 +16,15 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Calendar, Shield } from 'lucide-react';
 
 interface AdminUser {
-  id: string,
-  name: string,
-  email: string,
-  phone: string,
-  role: string,
-  department: string,
-  location: string,
-  joinedAt: Date,
-  lastLogin: Date,
+  id: string"
+  name: string"
+  email: string"
+  phone: string"
+  role: string"
+  department: string"
+  location: string"
+  joinedAt: Date"
+  lastLogin: Date"
   permissions: string[]
 }
 
@@ -34,7 +35,7 @@ const AdminProfile = () => { const [admin, setAdmin] = useState<AdminUser>({ id:
 
   const handleInputChange = (field: keyof AdminUser, value: string) => {
     setFormData(prev => ({
-      ...prev,
+      ...prev"
       [field]: value
     }));
   };

@@ -1,11 +1,12 @@
-'use client';
+"use client";
+
 import { Alert } from "../../../components/ui/alert";
 import React, { useState } from 'react';
 
 interface Alert {
-  symbol: string,
-    type: string,
-  amount: string,
+  symbol: string"
+    type: string"
+  amount: string"
     aiNote: string
 }
 

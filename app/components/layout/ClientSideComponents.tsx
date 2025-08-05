@@ -1,16 +1,17 @@
+"use client";
+
 import React from 'react';
-'use client';
 
 import dynamic from 'next/dynamic';
 
 // Dynamic imports for client-side only components to prevent SSR issues
 export const ScrollProgress = dynamic(
-  () => import('@/components/ui/enhanced-effects').then(mod => ({ default: mod.ScrollProgress })),
+  () => import('@/components/ui/enhanced-effects').then(mod => ({ default: mod.ScrollProgress }))"
   { ssr: false }
 );
 
 export const MatrixRain = dynamic(
-  () => import('@/components/ui/enhanced-effects').then(mod => ({ default: mod.MatrixRain })),
+  () => import('@/components/ui/enhanced-effects').then(mod => ({ default: mod.MatrixRain }))"
   { ssr: false }
 );
 

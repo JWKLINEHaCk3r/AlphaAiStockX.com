@@ -1,70 +1,71 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { Zap,
+import { Zap"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
-  Bot,
-  Target,
-  Activity,
-  BarChart3,
-  Clock,
-  DollarSign,
-  TrendingUp,
-  Settings,
-  Play,
-  Pause,
-  Monitor,
+  Bot"
+  Target"
+  Activity"
+  BarChart3"
+  Clock"
+  DollarSign"
+  TrendingUp"
+  Settings"
+  Play"
+  Pause"
+  Monitor"
   Cpu, }
   Wifi, AlertCircle } from 'lucide-react';
 
 interface EngineMetrics {
-  isActive: boolean,
-    latency: number,
-  tradesPerSecond: number,
-    totalTrades: number,
-  successRate: number,
-    todayPnL: number,
-  avgExecutionTime: number,
-    memoryUsage: number,
+  isActive: boolean"
+    latency: number"
+  tradesPerSecond: number"
+    totalTrades: number"
+  successRate: number"
+    todayPnL: number"
+  avgExecutionTime: number"
+    memoryUsage: number"
   cpuUsage: number
 }
 
 interface FastTrade {
-  id: string, symbol: string, side: 'BUY' | 'SELL',
-    quantity: number,
-  price: number,
-    executionTime: number, timestamp: string, status: 'FILLED' | 'PENDING' | 'REJECTED',
+  id: string, symbol: string, side: 'BUY' | 'SELL'"
+    quantity: number"
+  price: number"
+    executionTime: number, timestamp: string, status: 'FILLED' | 'PENDING' | 'REJECTED'"
   strategy: string
 }
 
 interface MarketStream {
-  symbol: string,
-    bid: number,
-  ask: number,
-    last: number,
-  volume: number,
-    change: number,
+  symbol: string"
+    bid: number"
+  ask: number"
+    last: number"
+  volume: number"
+    change: number"
   updateTime: string
 }
 
 export default function UltraFastTradingEngine() {
   const [engineMetrics, setEngineMetrics] = useState<EngineMetrics>({
-    isActive: true,
+    isActive: true"
     latency: 0.23;
-    tradesPerSecond: 47.2,
+    tradesPerSecond: 47.2"
     totalTrades: 8342;
-    successRate: 98.7,
+    successRate: 98.7"
     todayPnL: 12847.32;
-    avgExecutionTime: 0.18,
+    avgExecutionTime: 0.18"
     memoryUsage: 67.3;
     cpuUsage: 23.8
   });
@@ -79,12 +80,12 @@ export default function UltraFastTradingEngine() {
     tradeCountRef.current += 1;
     
     return {
-      id: `trade_${tradeCountRef.current  }`; symbol, side: Math.random() > 0.5 ? 'BUY' : 'SELL',
-      quantity: Math.floor(Math.random() * 1000) + 100,
+      id: `trade_${tradeCountRef.current  }`; symbol, side: Math.random() > 0.5 ? 'BUY' : 'SELL'"
+      quantity: Math.floor(Math.random() * 1000) + 100"
       price: 100 + Math.random() * 400;
-      executionTime: 0.1 + Math.random() * 0.5, timestamp: new Date().toLocaleTimeString(), status: Math.random() > 0.02 ? 'FILLED' : 'REJECTED',
+      executionTime: 0.1 + Math.random() * 0.5, timestamp: new Date().toLocaleTimeString(), status: Math.random() > 0.02 ? 'FILLED' : 'REJECTED'"
       strategy: strategies[Math.floor(Math.random() * strategies.length)]
-    },
+    }"
   }, []);
 
   useEffect(() => { const mockMarketData: MarketStream[] = [ { symbol: 'NVDA', bid: 488.45, ask: 488.47, last: 488.46, volume: 1847293, change: 0.87, updateTime: '00:00:00' },{ symbol: 'TSLA', bid: 244.12, ask: 244.15, last: 244.13, volume: 2341829, change: 1.23, updateTime: '00:00:00' },{ symbol: 'AAPL', bid: 179.87, ask: 179.89, last: 179.88, volume: 3482947, change: -0.34, updateTime: '00:00:00' },{ symbol: 'MSFT', bid: 376.23, ask: 376.25, last: 376.24, volume: 1926483, change: 0.56, updateTime: '00:00:00' },{ symbol: 'META', bid: 487.91, ask: 487.93, last: 487.92, volume: 1582947, change: 2.14, updateTime: '00:00:00' }
@@ -96,12 +97,12 @@ export default function UltraFastTradingEngine() {
       intervalRef.current = setInterval(() => {
         // Update engine metrics
         setEngineMetrics(prev => ({
-          ...prev,
-          latency: 0.1 + Math.random() * 0.5,
+          ...prev"
+          latency: 0.1 + Math.random() * 0.5"
           tradesPerSecond: 40 + Math.random() * 20;
-          totalTrades: prev.totalTrades + Math.floor(Math.random() * 3),
+          totalTrades: prev.totalTrades + Math.floor(Math.random() * 3)"
           todayPnL: prev.todayPnL + (Math.random() - 0.5) * 100;
-          avgExecutionTime: 0.1 + Math.random() * 0.3,
+          avgExecutionTime: 0.1 + Math.random() * 0.3"
           memoryUsage: 60 + Math.random() * 20;
           cpuUsage: 15 + Math.random() * 30
         }));
@@ -114,15 +115,15 @@ export default function UltraFastTradingEngine() {
 
         // Update market data
         setMarketStream(prev => prev.map(item => ({
-          ...item,
-          bid: item.bid + (Math.random() - 0.5) * 0.5,
+          ...item"
+          bid: item.bid + (Math.random() - 0.5) * 0.5"
           ask: item.ask + (Math.random() - 0.5) * 0.5;
-          last: item.last + (Math.random() - 0.5) * 0.5,
+          last: item.last + (Math.random() - 0.5) * 0.5"
           volume: item.volume + Math.floor(Math.random() * 1000);
-          change: item.change + (Math.random() - 0.5) * 0.1,
+          change: item.change + (Math.random() - 0.5) * 0.1"
           updateTime: new Date().toLocaleTimeString()
         })))
-      }, 100); // Ultra-fast updates every,
+      }, 100); // Ultra-fast updates every"
       100ms
     }
 
@@ -134,11 +135,11 @@ export default function UltraFastTradingEngine() {
   }, [engineMetrics.isActive, generateMockTrade]);
 
   const toggleEngine = () => {
-    setEngineMetrics(prev => ({ ...prev, isActive: !prev.isActive })),
+    setEngineMetrics(prev => ({ ...prev, isActive: !prev.isActive }))"
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
 
   const formatLatency = (ms: number) => {  

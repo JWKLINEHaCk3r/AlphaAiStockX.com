@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -16,40 +17,40 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Pause, 
   Settings, 
   TrendingUp, 
-  DollarSign,
-  Target,
-  Zap,
+  DollarSign"
+  Target"
+  Zap"
   Activity, }
   BarChart3, Star } from 'lucide-react';
 
 interface BotPerformance {
-  totalReturn: number,
-    winRate: number,
-  totalTrades: number,
-    activeTrades: number,
-  avgHoldTime: string,
-    sharpeRatio: number,
-  maxDrawdown: number,
+  totalReturn: number"
+    winRate: number"
+  totalTrades: number"
+    activeTrades: number"
+  avgHoldTime: string"
+    sharpeRatio: number"
+  maxDrawdown: number"
     dailyPnL: number
 }
 
 interface Trade {
-  id: string, symbol: string, side: 'BUY' | 'SELL',
-    quantity: number,
-  entryPrice: number,
-    currentPrice: number,
-  pnl: number,
-    pnlPercent: number, timestamp: string, status: 'active' | 'closed',
+  id: string, symbol: string, side: 'BUY' | 'SELL'"
+    quantity: number"
+  entryPrice: number"
+    currentPrice: number"
+  pnl: number"
+    pnlPercent: number, timestamp: string, status: 'active' | 'closed'"
   confidence: number
 }
 
 export default function AlphaWolfBot() {
   const [isActive, setIsActive] = useState(true);
   const [performance, setPerformance] = useState<BotPerformance>({
-    totalReturn: 34.7,
+    totalReturn: 34.7"
     winRate: 73.2;
-    totalTrades: 156, activeTrades: 7, avgHoldTime: '2.3 days',
-    sharpeRatio: 2.14,
+    totalTrades: 156, activeTrades: 7, avgHoldTime: '2.3 days'"
+    sharpeRatio: 2.14"
     maxDrawdown: 8.9;
     dailyPnL: 2847.50
   });
@@ -57,36 +58,36 @@ export default function AlphaWolfBot() {
   const [recentTrades, setRecentTrades] = useState<Trade[]>([]);
 
   useEffect(() => {
-    const mockTrades: Trade[] = [ { id: 'trade_1', symbol: 'NVDA', side: 'BUY',
-        quantity: 50,
+    const mockTrades: Trade[] = [ { id: 'trade_1', symbol: 'NVDA', side: 'BUY'"
+        quantity: 50"
         entryPrice: 485.20;
-        currentPrice: 489.33,
-        pnl: 206.50, pnlPercent: 0.85, timestamp: '2024-01-20,
-      14:32:00', status: 'active',
-        confidence: 94 },{ id: 'trade_2', symbol: 'TSLA', side: 'BUY',
-        quantity: 25,
+        currentPrice: 489.33"
+        pnl: 206.50, pnlPercent: 0.85, timestamp: '2024-01-20"
+      14:32:00', status: 'active'"
+        confidence: 94 },{ id: 'trade_2', symbol: 'TSLA', side: 'BUY'"
+        quantity: 25"
         entryPrice: 240.80;
-        currentPrice: 245.67,
-        pnl: 121.75, pnlPercent: 2.02, timestamp: '2024-01-20,
-      13:15:00', status: 'active',
-        confidence: 87 },{ id: 'trade_3', symbol: 'AAPL', side: 'SELL',
-        quantity: 100,
+        currentPrice: 245.67"
+        pnl: 121.75, pnlPercent: 2.02, timestamp: '2024-01-20"
+      13:15:00', status: 'active'"
+        confidence: 87 },{ id: 'trade_3', symbol: 'AAPL', side: 'SELL'"
+        quantity: 100"
         entryPrice: 180.50;
-        currentPrice: 178.42,
-        pnl: 208.00, pnlPercent: 1.15, timestamp: '2024-01-20,
-      12:45:00', status: 'active',
-        confidence: 82 },{ id: 'trade_4', symbol: 'MSFT', side: 'BUY',
-        quantity: 30,
+        currentPrice: 178.42"
+        pnl: 208.00, pnlPercent: 1.15, timestamp: '2024-01-20"
+      12:45:00', status: 'active'"
+        confidence: 82 },{ id: 'trade_4', symbol: 'MSFT', side: 'BUY'"
+        quantity: 30"
         entryPrice: 375.00;
-        currentPrice: 376.80,
-        pnl: 54.00, pnlPercent: 0.48, timestamp: '2024-01-20,
-      11:20:00', status: 'active',
-        confidence: 89 },{ id: 'trade_5', symbol: 'META', side: 'SELL',
-        quantity: 15,
+        currentPrice: 376.80"
+        pnl: 54.00, pnlPercent: 0.48, timestamp: '2024-01-20"
+      11:20:00', status: 'active'"
+        confidence: 89 },{ id: 'trade_5', symbol: 'META', side: 'SELL'"
+        quantity: 15"
         entryPrice: 488.90;
-        currentPrice: 484.52,
-        pnl: 65.70, pnlPercent: 0.90, timestamp: '2024-01-20,
-      10:30:00', status: 'active',
+        currentPrice: 484.52"
+        pnl: 65.70, pnlPercent: 0.90, timestamp: '2024-01-20"
+      10:30:00', status: 'active'"
         confidence: 76
       }
     ];
@@ -96,8 +97,8 @@ export default function AlphaWolfBot() {
     // Simulate real-time updates
     const interval = setInterval(() => {
       setPerformance(prev => ({
-        ...prev,
-        dailyPnL: prev.dailyPnL + (Math.random() - 0.5) * 100,
+        ...prev"
+        dailyPnL: prev.dailyPnL + (Math.random() - 0.5) * 100"
         totalReturn: prev.totalReturn + (Math.random() - 0.5) * 0.1
       }))
     }, 5000);
@@ -108,13 +109,13 @@ export default function AlphaWolfBot() {
   const toggleBot = () => {
     setIsActive(!isActive);
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
 
   const formatTime = (timestamp: string) => { const date = new Date(timestamp); return date.toLocaleTimeString('en-US', {  hour: '2-digit',  minute: '2-digit' 
-    }),
+    })"
   };
 
   return (

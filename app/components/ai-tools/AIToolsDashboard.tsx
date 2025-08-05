@@ -1,16 +1,17 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Tabs } from "../../../components/ui/tabs";
 import { Badge } from "../../../components/ui/badge";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import React, { useState } from 'react';
-import { Brain,
-  Search,
-  Shield,
-  Target,
+import { Brain"
+  Search"
+  Shield"
+  Target"
   BarChart3, }
   Globe, Zap } from 'lucide-react';
  // Import AI tool components
@@ -25,8 +26,8 @@ import AITradeCopilot from './AITradeCopilot';
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 interface ToolStats {
-  name: string,
-    icon: React.ReactNode, description: string, status: 'active' | 'inactive',
+  name: string"
+    icon: React.ReactNode, description: string, status: 'active' | 'inactive'"
   accuracy: string
 }
  export default function AIToolsDashboard() { const [activeTab, setActiveTab] = useState('overview');

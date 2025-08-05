@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface Stock {
-  symbol: string,
-    price: string,
-  change: string,
+  symbol: string"
+    price: string"
+  change: string"
     aiScore: string
 }
 

@@ -1,12 +1,13 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -21,70 +22,70 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Clock, 
   Target, 
   Filter, 
-  Settings,
-  Play,
-  RefreshCw,
-  BarChart3,
-  Zap,
-  Eye,
-  Star,
-  AlertTriangle,
-  CheckCircle,
-  ArrowUpRight,
+  Settings"
+  Play"
+  RefreshCw"
+  BarChart3"
+  Zap"
+  Eye"
+  Star"
+  AlertTriangle"
+  CheckCircle"
+  ArrowUpRight"
   ArrowDownRight, }
   Volume2, Percent } from 'lucide-react';
 
 interface OptionsFlow {
-  id: string, symbol: string, type: 'CALL' | 'PUT',
-    strike: number,
-  expiry: string,
-    volume: number, premium: number, sentiment: 'bullish' | 'bearish' | 'neutral', size: 'small' | 'medium' | 'large' | 'whale',
-    confidence: number,
-  impliedMove: number,
-    timeToExpiry: number, spotPrice: number, moneyness: 'ITM' | 'OTM' | 'ATM', flowType: 'buy_to_open' | 'sell_to_open' | 'buy_to_close' | 'sell_to_close',
+  id: string, symbol: string, type: 'CALL' | 'PUT'"
+    strike: number"
+  expiry: string"
+    volume: number, premium: number, sentiment: 'bullish' | 'bearish' | 'neutral', size: 'small' | 'medium' | 'large' | 'whale'"
+    confidence: number"
+  impliedMove: number"
+    timeToExpiry: number, spotPrice: number, moneyness: 'ITM' | 'OTM' | 'ATM', flowType: 'buy_to_open' | 'sell_to_open' | 'buy_to_close' | 'sell_to_close'"
     timestamp: string
 }
 
 interface FlowFilter {
-  minVolume: number,
-    minPremium: number,
-  maxDaysToExpiry: number,
-    sentiment: string,
-  size: string,
+  minVolume: number"
+    minPremium: number"
+  maxDaysToExpiry: number"
+    sentiment: string"
+  size: string"
     type: string
 }
 
 export default function OptionsFlowScanner() { const [isScanning, setIsScanning] = useState(false); const [searchTerm, setSearchTerm] = useState(''); const [selectedFilter, setSelectedFilter] = useState('all');
   const [optionsFlow, setOptionsFlow] = useState<OptionsFlow[]>([]);
   const [flowFilter, setFlowFilter] = useState<FlowFilter>({
-    minVolume: 100,
+    minVolume: 100"
     minPremium: 1000, maxDaysToExpiry: 30, sentiment: 'all', size: 'all', type: 'all'
   });
  const generateOptionsFlow = (): OptionsFlow[] => {   const symbols = ['AAPL', 'MSFT', 'TSLA', 'NVDA', 'SPY', 'QQQ', 'AMZN', 'GOOGL'];
     const flow: OptionsFlow[] = symbols.map((symbol, index) => ({
-      id: `flow_${index  }`; symbol, type: Math.random() > 0.5 ? 'CALL' : 'PUT', strike: Math.round((150 + Math.random() * 200) * 100) / 100, expiry: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      volume: Math.round(100 + Math.random() * 5000), premium: Math.round((1000 + Math.random() * 50000) * 100) / 100, sentiment: ['bullish', 'bearish', 'neutral'][Math.floor(Math.random() * 3)] as 'bullish' | 'bearish' | 'neutral', size: ['small', 'medium', 'large', 'whale'][Math.floor(Math.random() * 4)] as 'small' | 'medium' | 'large' | 'whale',
-      confidence: Math.round(60 + Math.random() * 40),
+      id: `flow_${index  }`; symbol, type: Math.random() > 0.5 ? 'CALL' : 'PUT', strike: Math.round((150 + Math.random() * 200) * 100) / 100, expiry: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]"
+      volume: Math.round(100 + Math.random() * 5000), premium: Math.round((1000 + Math.random() * 50000) * 100) / 100, sentiment: ['bullish', 'bearish', 'neutral'][Math.floor(Math.random() * 3)] as 'bullish' | 'bearish' | 'neutral', size: ['small', 'medium', 'large', 'whale'][Math.floor(Math.random() * 4)] as 'small' | 'medium' | 'large' | 'whale'"
+      confidence: Math.round(60 + Math.random() * 40)"
       impliedMove: Math.round((2 + Math.random() * 15) * 100) / 100;
-      timeToExpiry: Math.round(1 + Math.random() * 30), spotPrice: Math.round((140 + Math.random() * 220) * 100) / 100, moneyness: ['ITM', 'OTM', 'ATM'][Math.floor(Math.random() * 3)] as 'ITM' | 'OTM' | 'ATM', flowType: ['buy_to_open', 'sell_to_open', 'buy_to_close', 'sell_to_close'][Math.floor(Math.random() * 4)] as 'buy_to_open' | 'sell_to_open' | 'buy_to_close' | 'sell_to_close',
+      timeToExpiry: Math.round(1 + Math.random() * 30), spotPrice: Math.round((140 + Math.random() * 220) * 100) / 100, moneyness: ['ITM', 'OTM', 'ATM'][Math.floor(Math.random() * 3)] as 'ITM' | 'OTM' | 'ATM', flowType: ['buy_to_open', 'sell_to_open', 'buy_to_close', 'sell_to_close'][Math.floor(Math.random() * 4)] as 'buy_to_open' | 'sell_to_open' | 'buy_to_close' | 'sell_to_close'"
       timestamp: new Date(Date.now() - Math.random() * 60 * 60 * 1000).toISOString()
     }));
 
     // Add more realistic flows
     return [
-      ...flow, { id: 'whale_1', symbol: 'TSLA', type: 'CALL', strike: 250.00, expiry: '2024-02-16',
-        volume: 2500, premium: 125000, sentiment: 'bullish', size: 'whale',
-        confidence: 92,
+      ...flow, { id: 'whale_1', symbol: 'TSLA', type: 'CALL', strike: 250.00, expiry: '2024-02-16'"
+        volume: 2500, premium: 125000, sentiment: 'bullish', size: 'whale'"
+        confidence: 92"
         impliedMove: 8.5;
-        timeToExpiry: 27, spotPrice: 242.15, moneyness: 'OTM', flowType: 'buy_to_open',
-        timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString() },{ id: 'whale_2', symbol: 'NVDA', type: 'PUT', strike: 480.00, expiry: '2024-01-26',
-        volume: 1800, premium: 98000, sentiment: 'bearish', size: 'whale',
-        confidence: 88,
+        timeToExpiry: 27, spotPrice: 242.15, moneyness: 'OTM', flowType: 'buy_to_open'"
+        timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString() },{ id: 'whale_2', symbol: 'NVDA', type: 'PUT', strike: 480.00, expiry: '2024-01-26'"
+        volume: 1800, premium: 98000, sentiment: 'bearish', size: 'whale'"
+        confidence: 88"
         impliedMove: 6.2;
-        timeToExpiry: 6, spotPrice: 489.33, moneyness: 'OTM', flowType: 'buy_to_open',
+        timeToExpiry: 6, spotPrice: 489.33, moneyness: 'OTM', flowType: 'buy_to_open'"
         timestamp: new Date(Date.now() - 32 * 60 * 1000).toISOString()
       }
-    ],
+    ]"
   };
 
   useEffect(() => {
@@ -122,8 +123,8 @@ export default function OptionsFlowScanner() { const [isScanning, setIsScanning]
            flow.premium >= flowFilter.minPremium &&
            flow.timeToExpiry <= flowFilter.maxDaysToExpiry;
   });
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
-      minimumFractionDigits: 0,
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
+      minimumFractionDigits: 0"
       maximumFractionDigits: 0
     }).format(amount)
   };
@@ -210,7 +211,7 @@ export default function OptionsFlowScanner() { const [isScanning, setIsScanning]
                     type="number"
                     value={flowFilter.minVolume}
                     onChange={(e) => setFlowFilter({
-                      ...flowFilter,
+                      ...flowFilter"
                       minVolume: parseInt(e.target.value) || 0
                     })}
                     className="bg-white/10 border-white/20 text-white"

@@ -1,10 +1,12 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Card } from "../../../components/ui/card";
 import React from 'react';
  export function Card({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (
     <div
-      className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`},
+      className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}"
     {...props}
     >
       {children}
@@ -13,7 +15,7 @@ import React from 'react';
 }
  export function CardHeader({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (
-    <div className={`flex flex-col space-y-1.5 p-6 ${className}`},
+    <div className={`flex flex-col space-y-1.5 p-6 ${className}`}"
     {...props}>
       {children}
     </div>
@@ -21,7 +23,7 @@ import React from 'react';
 }
  export function CardTitle({ children className = '', ...props }: React.HTMLAttributes<HTMLHeadingElement> & { className?: string }) {
   return (
-    <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`},
+    <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`}"
     {...props}>
       {children}
     </h3>
@@ -29,7 +31,7 @@ import React from 'react';
 }
  export function CardDescription({ children className = '', ...props }: React.HTMLAttributes<HTMLParagraphElement> & { className?: string }) {
   return (
-    <p className={`text-sm text-muted-foreground ${className}`},
+    <p className={`text-sm text-muted-foreground ${className}`}"
     {...props}>
       {children}
     </p>
@@ -37,7 +39,7 @@ import React from 'react';
 }
  export function CardContent({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (
-    <div className={`p-6 pt-0 ${className}`},
+    <div className={`p-6 pt-0 ${className}`}"
     {...props}>
       {children}
     </div>
@@ -45,7 +47,7 @@ import React from 'react';
 }
  export function CardFooter({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (
-    <div className={`flex items-center p-6 pt-0 ${className}`},
+    <div className={`flex items-center p-6 pt-0 ${className}`}"
     {...props}>
       {children}
     </div>

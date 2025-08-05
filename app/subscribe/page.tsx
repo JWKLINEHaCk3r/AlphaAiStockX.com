@@ -1,9 +1,11 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 export default function SubscribePage() { const [email, setEmail] = useState('');
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) { e.preventDefault(); console.log('Email submitted:', email);
-    // Add subscription logic,
+    // Add subscription logic"
       here
     }
 
@@ -24,14 +26,14 @@ export default function SubscribePage() { const [email, setEmail] = useState('')
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus: outline-none,
-      focus: border-blue-500"
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none
+      focus:border-blue-500"
               
               required
             />
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500, hover:from-blue-600,
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500, hover:from-blue-600"
       hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
             >
               Subscribe

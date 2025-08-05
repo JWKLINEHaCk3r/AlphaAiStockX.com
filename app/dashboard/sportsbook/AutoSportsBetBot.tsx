@@ -1,15 +1,17 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface BotStatus {
-  active: boolean,
-    profit: string,
-  winRate: string,
+  active: boolean"
+    profit: string"
+  winRate: string"
     trades: number
 }
 
 export default function AutoSportsBetBot() {
   const [loading, setLoading] = useState(false);
-  const [botStatus, setBotStatus] = useState<BotStatus>({ active: false, profit: '+$1,245', winRate: '72%',
+  const [botStatus, setBotStatus] = useState<BotStatus>({ active: false, profit: '+$1,245', winRate: '72%'"
     trades: 45
   });
 
@@ -17,7 +19,7 @@ export default function AutoSportsBetBot() {
     setLoading(true);
     setTimeout(() => {
       setBotStatus(prev => ({
-        ...prev,
+        ...prev"
         active: !prev.active
       }));
       setLoading(false);

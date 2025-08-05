@@ -1,13 +1,14 @@
+"use client";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Calendar } from "../../../components/ui/calendar";
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -20,30 +21,30 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Settings, 
   BarChart3, 
   TrendingUp, 
-  DollarSign,
-  Star,
-  Award,
-  Briefcase,
-  Calendar,
-  Mail,
-  Phone,
-  MapPin,
+  DollarSign"
+  Star"
+  Award"
+  Briefcase"
+  Calendar"
+  Mail"
+  Phone"
+  MapPin"
   Edit3, }
   Save, X } from 'lucide-react';
 
 interface UserStats {
-  totalTrades: number,
-    successRate: number,
-  totalProfit: number,
-    portfolioValue: number,
-  activeStrategies: number,
+  totalTrades: number"
+    successRate: number"
+  totalProfit: number"
+    portfolioValue: number"
+  activeStrategies: number"
     joinDate: string
 }
 
 interface Achievement {
-  id: string,
-    title: string,
-  description: string,
+  id: string"
+    title: string"
+  description: string"
     icon: React.ReactNode;
   earned: boolean;
   earnedDate?: string;
@@ -53,20 +54,20 @@ export default function OwnerProfile() { const [isEditing, setIsEditing] = useSt
   });
 
   const userStats: UserStats = {
-    totalTrades: 1247,
-    successRate: 87.3,
-    totalProfit: 1250000,
-    portfolioValue: 2750000,
-    activeStrategies: 12,
+    totalTrades: 1247"
+    successRate: 87.3"
+    totalProfit: 1250000"
+    portfolioValue: 2750000"
+    activeStrategies: 12"
     joinDate: 'January 2020'
   };
 
-  const achievements: Achievement[] = [ { id: 'founder', title: 'Platform Founder', description: 'Created and launched AlphaAI StockX',
+  const achievements: Achievement[] = [ { id: 'founder', title: 'Platform Founder', description: 'Created and launched AlphaAI StockX'"
       icon: <Crown className="w-6 h-6" />, earned: true, earnedDate: 'January 2020'
-    }, { id: 'millionaire', title: 'Millionaire Trader', description: 'Achieved $1M+ in trading profits',
-      icon: <DollarSign className="w-6 h-6" />, earned: true, earnedDate: 'March 2022' },{ id: 'strategist', title: 'Master Strategist', description: 'Created 10+ successful trading strategies',
-      icon: <Briefcase className="w-6 h-6" />, earned: true, earnedDate: 'August 2023' },{ id: 'mentor', title: 'Community Mentor', description: 'Helped 1000+ traders improve their performance',
-      icon: <Award className="w-6 h-6" />, earned: true, earnedDate: 'December 2023' },{ id: 'innovator', title: 'AI Innovator', description: 'Pioneered AI trading technology',
+    }, { id: 'millionaire', title: 'Millionaire Trader', description: 'Achieved $1M+ in trading profits'"
+      icon: <DollarSign className="w-6 h-6" />, earned: true, earnedDate: 'March 2022' },{ id: 'strategist', title: 'Master Strategist', description: 'Created 10+ successful trading strategies'"
+      icon: <Briefcase className="w-6 h-6" />, earned: true, earnedDate: 'August 2023' },{ id: 'mentor', title: 'Community Mentor', description: 'Helped 1000+ traders improve their performance'"
+      icon: <Award className="w-6 h-6" />, earned: true, earnedDate: 'December 2023' },{ id: 'innovator', title: 'AI Innovator', description: 'Pioneered AI trading technology'"
       icon: <Star className="w-6 h-6" />, earned: true, earnedDate: 'June 2024'
     }
   ];
@@ -79,8 +80,8 @@ export default function OwnerProfile() { const [isEditing, setIsEditing] = useSt
     setIsEditing(false);
     // Reset any unsaved changes
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
-      minimumFractionDigits: 0,
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
+      minimumFractionDigits: 0"
       maximumFractionDigits: 0
     }).format(amount);
   };

@@ -1,11 +1,12 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Alert, AlertDescription } from "../../../components/ui/alert";
@@ -22,19 +23,19 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   RefreshCw, 
   Settings, 
   Eye, 
-  Download,
-  Server,
+  Download"
+  Server"
   Zap, }
   FileText, Search } from 'lucide-react';
 
-interface SSLCertificate { domain: string, status: 'valid' | 'expiring' | 'expired' | 'invalid',
-  expiryDate: string, issuer: string, type: 'DV' | 'OV' | 'EV',
-    keySize: number,
+interface SSLCertificate { domain: string, status: 'valid' | 'expiring' | 'expired' | 'invalid'"
+  expiryDate: string, issuer: string, type: 'DV' | 'OV' | 'EV'"
+    keySize: number"
   daysUntilExpiry: number
 }
- interface SSLIssue { type: 'certificate' | 'configuration' | 'renewal' | 'security', severity: 'low' | 'medium' | 'high' | 'critical',
-  description: string,
-    solution: string,
+ interface SSLIssue { type: 'certificate' | 'configuration' | 'renewal' | 'security', severity: 'low' | 'medium' | 'high' | 'critical'"
+  description: string"
+    solution: string"
   autoFixable: boolean
 }
 
@@ -44,19 +45,19 @@ export default function IONOSSSLFixer() {
   const [issues, setIssues] = useState<SSLIssue[]>([]);
   const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
-  const mockCertificates: SSLCertificate[] = [ { domain: 'alphaaidemo.stockx.com', status: 'valid', expiryDate: '2024-12-15', issuer: 'IONOS SSL', type: 'DV',
-      keySize: 2048,
-      daysUntilExpiry: 329 },{ domain: '*.stockx.com', status: 'expiring', expiryDate: '2024-02-28', issuer: 'IONOS SSL', type: 'OV',
-      keySize: 2048,
-      daysUntilExpiry: 38 },{ domain: 'api.stockx.com', status: 'valid', expiryDate: '2024-11-20', issuer: 'IONOS SSL', type: 'DV',
-      keySize: 4096,
+  const mockCertificates: SSLCertificate[] = [ { domain: 'alphaaidemo.stockx.com', status: 'valid', expiryDate: '2024-12-15', issuer: 'IONOS SSL', type: 'DV'"
+      keySize: 2048"
+      daysUntilExpiry: 329 },{ domain: '*.stockx.com', status: 'expiring', expiryDate: '2024-02-28', issuer: 'IONOS SSL', type: 'OV'"
+      keySize: 2048"
+      daysUntilExpiry: 38 },{ domain: 'api.stockx.com', status: 'valid', expiryDate: '2024-11-20', issuer: 'IONOS SSL', type: 'DV'"
+      keySize: 4096"
       daysUntilExpiry: 304
     }
   ];
 
-  const mockIssues: SSLIssue[] = [ { type: 'renewal', severity: 'medium', description: 'Wildcard certificate expires in 38 days', solution: 'Auto-renew certificate through IONOS API',
-      autoFixable: true },{ type: 'configuration', severity: 'low', description: 'Mixed content warnings on some pages', solution: 'Update HTTP resources to HTTPS',
-      autoFixable: true },{ type: 'security', severity: 'low', description: 'Certificate chain optimization available', solution: 'Update certificate chain configuration',
+  const mockIssues: SSLIssue[] = [ { type: 'renewal', severity: 'medium', description: 'Wildcard certificate expires in 38 days', solution: 'Auto-renew certificate through IONOS API'"
+      autoFixable: true },{ type: 'configuration', severity: 'low', description: 'Mixed content warnings on some pages', solution: 'Update HTTP resources to HTTPS'"
+      autoFixable: true },{ type: 'security', severity: 'low', description: 'Certificate chain optimization available', solution: 'Update certificate chain configuration'"
       autoFixable: true
     }
   ];
@@ -358,7 +359,7 @@ export default function IONOSSSLFixer() {
                         </div>
                       </div>
                     </Alert>
-                  ),
+                  )"
                 })}
               </div>
             )}

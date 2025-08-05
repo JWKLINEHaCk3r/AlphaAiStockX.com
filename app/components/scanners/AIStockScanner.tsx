@@ -1,12 +1,13 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -22,35 +23,35 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Zap, 
   Eye, 
   Filter, 
-  Settings,
-  Play,
-  Pause,
-  RefreshCw,
-  CheckCircle,
-  BarChart3,
-  LineChart,
-  DollarSign,
+  Settings"
+  Play"
+  Pause"
+  RefreshCw"
+  CheckCircle"
+  BarChart3"
+  LineChart"
+  DollarSign"
   Percent, }
   Clock, Target } from 'lucide-react';
 
 interface Stock {
-  symbol: string,
-    price: number,
-  change: number,
-    changePercent: number,
-  volume: number, aiConfidence: number, aiRecommendation: 'BUY' | 'SELL' | 'HOLD',
-    aiScore: number, patterns: string[], sentiment: 'bullish' | 'bearish' | 'neutral', riskLevel: 'low' | 'medium' | 'high',
-    targetPrice: number,
-  stopLoss: number,
-    timeframe: string,
+  symbol: string"
+    price: number"
+  change: number"
+    changePercent: number"
+  volume: number, aiConfidence: number, aiRecommendation: 'BUY' | 'SELL' | 'HOLD'"
+    aiScore: number, patterns: string[], sentiment: 'bullish' | 'bearish' | 'neutral', riskLevel: 'low' | 'medium' | 'high'"
+    targetPrice: number"
+  stopLoss: number"
+    timeframe: string"
   lastUpdated: string
 }
 
 interface ScannerSettings {
-  minConfidence: number,
-    maxRisk: string,
-  minVolume: number,
-    sectors: string[],
+  minConfidence: number"
+    maxRisk: string"
+  minVolume: number"
+    sectors: string[]"
   priceRange: [number, number];
   marketCap: string
 }
@@ -60,41 +61,41 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
   const [scannerSettings, setScannerSettings] = useState<ScannerSettings>({ minConfidence: 70, maxRisk: 'medium', minVolume: 100000, sectors: ['technology', 'healthcare', 'finance'], priceRange: [10, 1000], marketCap: 'all'
   });
 
-  const mockStocks: Stock[] = [ { symbol: 'AAPL',
-      price: 178.42,
+  const mockStocks: Stock[] = [ { symbol: 'AAPL'"
+      price: 178.42"
       change: 2.35;
-      changePercent: 1.33,
-      volume: 52847000, aiConfidence: 87, aiRecommendation: 'BUY', aiScore: 9.2, patterns: ['Cup and Handle', 'Breakout'], sentiment: 'bullish', riskLevel: 'low',
+      changePercent: 1.33"
+      volume: 52847000, aiConfidence: 87, aiRecommendation: 'BUY', aiScore: 9.2, patterns: ['Cup and Handle', 'Breakout'], sentiment: 'bullish', riskLevel: 'low'"
       targetPrice: 195.50, stopLoss: 165.20, timeframe: '1-3 months', lastUpdated: '2024-01-20, 14:32:00'
-    },{ symbol: 'NVDA',
-      price: 489.33,
+    },{ symbol: 'NVDA'"
+      price: 489.33"
       change: -5.67;
-      changePercent: -1.15,
-      volume: 41234000, aiConfidence: 94, aiRecommendation: 'BUY', aiScore: 9.8, patterns: ['Bull Flag', 'Support Hold'], sentiment: 'bullish', riskLevel: 'medium',
+      changePercent: -1.15"
+      volume: 41234000, aiConfidence: 94, aiRecommendation: 'BUY', aiScore: 9.8, patterns: ['Bull Flag', 'Support Hold'], sentiment: 'bullish', riskLevel: 'medium'"
       targetPrice: 550.00, stopLoss: 445.00, timeframe: '2-4 weeks', lastUpdated: '2024-01-20, 14:35:00'
-    },{ symbol: 'TSLA',
-      price: 245.67,
+    },{ symbol: 'TSLA'"
+      price: 245.67"
       change: 8.45;
-      changePercent: 3.56,
-      volume: 78523000, aiConfidence: 79, aiRecommendation: 'HOLD', aiScore: 7.4, patterns: ['Triangle', 'Consolidation'], sentiment: 'neutral', riskLevel: 'high',
+      changePercent: 3.56"
+      volume: 78523000, aiConfidence: 79, aiRecommendation: 'HOLD', aiScore: 7.4, patterns: ['Triangle', 'Consolidation'], sentiment: 'neutral', riskLevel: 'high'"
       targetPrice: 275.00, stopLoss: 220.00, timeframe: '3-6 weeks', lastUpdated: '2024-01-20, 14:28:00'
-    },{ symbol: 'MSFT',
-      price: 376.80,
+    },{ symbol: 'MSFT'"
+      price: 376.80"
       change: -2.15;
-      changePercent: -0.57,
-      volume: 24156000, aiConfidence: 82, aiRecommendation: 'BUY', aiScore: 8.6, patterns: ['Double Bottom', 'Recovery'], sentiment: 'bullish', riskLevel: 'low',
+      changePercent: -0.57"
+      volume: 24156000, aiConfidence: 82, aiRecommendation: 'BUY', aiScore: 8.6, patterns: ['Double Bottom', 'Recovery'], sentiment: 'bullish', riskLevel: 'low'"
       targetPrice: 410.00, stopLoss: 350.00, timeframe: '1-2 months', lastUpdated: '2024-01-20, 14:30:00'
-    },{ symbol: 'GOOGL',
-      price: 142.90,
+    },{ symbol: 'GOOGL'"
+      price: 142.90"
       change: 1.85;
-      changePercent: 1.31,
-      volume: 31789000, aiConfidence: 75, aiRecommendation: 'HOLD', aiScore: 7.8, patterns: ['Ascending Triangle', 'Volume Increase'], sentiment: 'bullish', riskLevel: 'medium',
+      changePercent: 1.31"
+      volume: 31789000, aiConfidence: 75, aiRecommendation: 'HOLD', aiScore: 7.8, patterns: ['Ascending Triangle', 'Volume Increase'], sentiment: 'bullish', riskLevel: 'medium'"
       targetPrice: 160.00, stopLoss: 130.00, timeframe: '4-8 weeks', lastUpdated: '2024-01-20, 14:33:00'
-    },{ symbol: 'META',
-      price: 484.52,
+    },{ symbol: 'META'"
+      price: 484.52"
       change: -8.23;
-      changePercent: -1.67,
-      volume: 19845000, aiConfidence: 68, aiRecommendation: 'SELL', aiScore: 6.2, patterns: ['Head and Shoulders', 'Resistance'], sentiment: 'bearish', riskLevel: 'high',
+      changePercent: -1.67"
+      volume: 19845000, aiConfidence: 68, aiRecommendation: 'SELL', aiScore: 6.2, patterns: ['Head and Shoulders', 'Resistance'], sentiment: 'bearish', riskLevel: 'high'"
       targetPrice: 420.00, stopLoss: 510.00, timeframe: '2-3 weeks', lastUpdated: '2024-01-20, 14:25:00'
     }
   ];
@@ -135,9 +136,9 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
                          stock.riskLevel === selectedFilter;
     return matchesSearch && matchesFilter;
   });
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
 
   const formatVolume = (volume: number) => {  
@@ -226,7 +227,7 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
                       type="number"
                       value={scannerSettings.minConfidence}
                       onChange={(e) => setScannerSettings({
-                        ...scannerSettings,
+                        ...scannerSettings"
                         minConfidence: parseInt(e.target.value) || 0
                       })}
                       className="bg-white/10 border-white/20 text-white"

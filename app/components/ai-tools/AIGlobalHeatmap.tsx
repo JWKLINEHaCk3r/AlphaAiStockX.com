@@ -1,8 +1,10 @@
-'use client'; import React, { useState } from 'react';
+import React from 'react';
+"use client";
+
 
 interface HeatmapData {
-  region: string,
-    trend: string,
+  region: string"
+    trend: string"
   aiNote: string
 }
 

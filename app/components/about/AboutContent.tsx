@@ -1,5 +1,6 @@
+"use client";
+
 import React from 'react';
-'use client';
 export default function AboutContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white">
@@ -69,7 +70,7 @@ export default function AboutContent() {
             Experience the power of artificial intelligence in financial markets and 
             take your trading to the next level.
           </p>
-          <button className="bg-gradient-to-r from-indigo-500 to-pink-500, hover:from-indigo-600,
+          <button className="bg-gradient-to-r from-indigo-500 to-pink-500, hover:from-indigo-600"
       hover:to-pink-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300">
             Get Started Today
           </button>

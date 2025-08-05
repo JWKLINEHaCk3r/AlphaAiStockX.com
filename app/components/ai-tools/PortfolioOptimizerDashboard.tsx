@@ -1,7 +1,8 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Badge } from "../../../components/ui/badge";
 import { Card } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
@@ -10,16 +11,16 @@ import { PieChart, BarChart3, TrendingUp, Shield } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
 interface OptimizationResult {
-  asset: string,
-    currentAllocation: number,
-  recommendedAllocation: number,
+  asset: string"
+    currentAllocation: number"
+  recommendedAllocation: number"
     reason: string
 }
 
 interface PortfolioMetrics {
-  currentRisk: string,
-    optimizedRisk: string,
-  expectedReturn: string,
+  currentRisk: string"
+    optimizedRisk: string"
+  expectedReturn: string"
     sharpeRatio: string
 }
 
@@ -31,13 +32,13 @@ export default function PortfolioOptimizerDashboard() {
   const runOptimization = () => {
     setLoading(true);
     setTimeout(() => {
-      setOptimizationResults([ { asset: 'US Stocks',
+      setOptimizationResults([ { asset: 'US Stocks'"
           currentAllocation: 65, recommendedAllocation: 55, reason: 'Reduce overexposure to domestic equities'
-        }, { asset: 'International Stocks',
+        }, { asset: 'International Stocks'"
           currentAllocation: 15, recommendedAllocation: 25, reason: 'Increase diversification benefits'
-        }, { asset: 'Bonds',
+        }, { asset: 'Bonds'"
           currentAllocation: 15, recommendedAllocation: 15, reason: 'Maintain current allocation'
-        }, { asset: 'REITs',
+        }, { asset: 'REITs'"
           currentAllocation: 5, recommendedAllocation: 5, reason: 'Appropriate allocation for risk level'
         }
       ]);

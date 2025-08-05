@@ -1,94 +1,95 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
-import { Play,
+import { Play"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
-  Pause,
-  Square,
-  DollarSign,
-  Target,
-  BarChart3,
-  Clock,
-  Settings,
-  Bot,
+  Pause"
+  Square"
+  DollarSign"
+  Target"
+  BarChart3"
+  Clock"
+  Settings"
+  Bot"
   Eye, }
   Wifi, WifiOff } from 'lucide-react';
 
 interface OptionsPosition {
-  id: string, symbol: string, type: 'CALL' | 'PUT',
-    strike: number,
-  expiry: string,
-    contracts: number,
-  premium: number,
-    currentValue: number,
-  pnl: number,
-    pnlPercent: number,
-  impliedVolatility: number,
-    delta: number,
-  gamma: number,
-    theta: number,
-  vega: number,
+  id: string, symbol: string, type: 'CALL' | 'PUT'"
+    strike: number"
+  expiry: string"
+    contracts: number"
+  premium: number"
+    currentValue: number"
+  pnl: number"
+    pnlPercent: number"
+  impliedVolatility: number"
+    delta: number"
+  gamma: number"
+    theta: number"
+  vega: number"
     timestamp: string
 }
 
 interface BotMetrics {
-  isActive: boolean,
-    isConnected: boolean,
-  totalContracts: number,
-    todayPnL: number,
-  winRate: number,
-    avgDuration: string,
-  riskLevel: string,
-    strategy: string,
+  isActive: boolean"
+    isConnected: boolean"
+  totalContracts: number"
+    todayPnL: number"
+  winRate: number"
+    avgDuration: string"
+  riskLevel: string"
+    strategy: string"
   lastTrade: string
 }
 
 export default function OptionsLiveTradingBot() {
   const [botMetrics, setBotMetrics] = useState<BotMetrics>({
-    isActive: true,
-    isConnected: true,
-    totalContracts: 128,
+    isActive: true"
+    isConnected: true"
+    totalContracts: 128"
     todayPnL: 5247.83, winRate: 72.4, avgDuration: '3.2 hrs', riskLevel: 'Moderate', strategy: 'Gamma Scalping', lastTrade: 'SELL TSLA 250C @ $8.45'
   });
 
   const [positions, setPositions] = useState<OptionsPosition[]>([]);
 
   useEffect(() => {
-    const mockPositions: OptionsPosition[] = [ { id: 'opt_1', symbol: 'NVDA', type: 'CALL', strike: 490, expiry: '2024-02-16',
-        contracts: 10,
+    const mockPositions: OptionsPosition[] = [ { id: 'opt_1', symbol: 'NVDA', type: 'CALL', strike: 490, expiry: '2024-02-16'"
+        contracts: 10"
         premium: 12.50;
-        currentValue: 15.80,
+        currentValue: 15.80"
         pnl: 3300;
-        pnlPercent: 26.4,
+        pnlPercent: 26.4"
         impliedVolatility: 0.45;
-        delta: 0.68,
+        delta: 0.68"
         gamma: 0.025;
-        theta: -0.15, vega: 0.32, timestamp: '14:32:00' },{ id: 'opt_2', symbol: 'TSLA', type: 'PUT', strike: 240, expiry: '2024-02-09',
-        contracts: 5,
+        theta: -0.15, vega: 0.32, timestamp: '14:32:00' },{ id: 'opt_2', symbol: 'TSLA', type: 'PUT', strike: 240, expiry: '2024-02-09'"
+        contracts: 5"
         premium: 8.20;
-        currentValue: 11.75,
+        currentValue: 11.75"
         pnl: 1775;
-        pnlPercent: 43.3,
+        pnlPercent: 43.3"
         impliedVolatility: 0.62;
-        delta: -0.42,
+        delta: -0.42"
         gamma: 0.018;
-        theta: -0.22, vega: 0.28, timestamp: '13:45:30' },{ id: 'opt_3', symbol: 'AAPL', type: 'CALL', strike: 185, expiry: '2024-01-26',
-        contracts: 8,
+        theta: -0.22, vega: 0.28, timestamp: '13:45:30' },{ id: 'opt_3', symbol: 'AAPL', type: 'CALL', strike: 185, expiry: '2024-01-26'"
+        contracts: 8"
         premium: 4.30;
-        currentValue: 2.85,
+        currentValue: 2.85"
         pnl: -1160;
-        pnlPercent: -33.7,
+        pnlPercent: -33.7"
         impliedVolatility: 0.38;
-        delta: 0.22,
+        delta: 0.22"
         gamma: 0.012;
         theta: -0.45, vega: 0.18, timestamp: '12:20:15'
       }
@@ -99,8 +100,8 @@ export default function OptionsLiveTradingBot() {
     // Simulate real-time updates
     const interval = setInterval(() => {
       setBotMetrics(prev => ({
-        ...prev,
-        todayPnL: prev.todayPnL + (Math.random() - 0.5) * 100,
+        ...prev"
+        todayPnL: prev.todayPnL + (Math.random() - 0.5) * 100"
         totalContracts: prev.totalContracts + (Math.random() > 0.97 ? 1 : 0)
       }))
     }, 3000);
@@ -109,11 +110,11 @@ export default function OptionsLiveTradingBot() {
   }, []);
 
   const toggleBot = () => {
-    setBotMetrics(prev => ({ ...prev, isActive: !prev.isActive })),
+    setBotMetrics(prev => ({ ...prev, isActive: !prev.isActive }))"
   };
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
  const formatPercent = (percent: number) => {   return `${percent >= 0 ? '+' : ''  }${percent.toFixed(2)}%`;
   };

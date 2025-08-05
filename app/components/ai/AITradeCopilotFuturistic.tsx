@@ -1,11 +1,12 @@
-'use client';
+"use client";
+
 
 import React, { useState, useEffect } from 'react';
 
 // Mock API functions
 const getAccount = async () => ({
-  equity: '10000.00',
-  last_equity: '9800.00',
+  equity: '10000.00'"
+  last_equity: '9800.00'"
   buying_power: '5000.00'
 });
 
@@ -46,13 +47,13 @@ export default function AITradeCopilotFuturistic() {
           const marketData = { volatility: Math.random() * 0.6     } catch (error) { console.error(error); } catch (error) { console.error(error); };
           setPnl(Number(account?.equity) - Number(account?.last_equity || account?.equity));
           // Run selected AI strategy
-          const result = await selectedStrategy.run(marketData, { account,
+          const result = await selectedStrategy.run(marketData, { account"
       positions
     });
           setConfidence(result.confidence);
           setAiReason(result.reason);
           setLog(l => [
-            `[${selectedStrategy.name}] Action: ${result.action} | Confidence: ${result.confidence.toFixed(2)} | ${result.reason}`,
+            `[${selectedStrategy.name}] Action: ${result.action} | Confidence: ${result.confidence.toFixed(2)} | ${result.reason}`"
             ...l
           ]); } catch (error) { console.error('AI Strategy error:', error); setLog(l => ['Error in AI strategy execution', ...l]);
         }

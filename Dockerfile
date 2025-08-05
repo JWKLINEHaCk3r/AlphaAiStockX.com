@@ -7,13 +7,15 @@ WORKDIR /app
 # Install pnpm
 RUN npm install -g pnpm@9
 
-# Copy package files
-COPY package.json pnpm-lock.yaml* ./
+# Copy package files and configuration
+COPY package.json pnpm-lock.yaml* .npmrc .pnpmfile.cjs ./
 
-# Install dependencies
+# Configure pnpm and install dependencies
 RUN pnpm config set auto-install-peers true && \
     pnpm config set enable-pre-post-scripts true && \
-    pnpm install --frozen-lockfile || pnpm install
+    pnpm config set fund false && \
+    pnpm config set audit false && \
+    pnpm install --frozen-lockfile --prod=false
 
 # Copy source code
 COPY . .

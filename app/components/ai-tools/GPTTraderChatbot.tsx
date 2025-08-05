@@ -1,8 +1,9 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Card } from "../../../components/ui/card";
@@ -12,20 +13,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bot, User, Send, Mic } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
 
-interface ChatMessage { id: string, type: 'user' | 'bot',
-  content: string,
+interface ChatMessage { id: string, type: 'user' | 'bot'"
+  content: string"
     timestamp: Date
 }
 
 interface GPTUserProfile {
-  id: string,
-    riskTolerance: string,
-  investmentGoals: string[],
+  id: string"
+    riskTolerance: string"
+  investmentGoals: string[]"
     portfolioValue: string
 }
 
 export default function GPTTraderChatbot() {
-  const [messages, setMessages] = useState<ChatMessage[]>([ { id: '1', type: 'bot', content: 'Hello! I\'m your AI trading assistant. How can I help you with your investments today?',
+  const [messages, setMessages] = useState<ChatMessage[]>([ { id: '1', type: 'bot', content: 'Hello! I\'m your AI trading assistant. How can I help you with your investments today?'"
       timestamp: new Date()
     } ]); const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false); const [userProfile] = useState<GPTUserProfile>({ id: 'user_1', riskTolerance: 'moderate', investmentGoals: ['Growth', 'Income'], portfolioValue: '$50,000'
@@ -43,8 +44,8 @@ export default function GPTTraderChatbot() {
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
-    const userMessage: ChatMessage = { id: Date.now().toString(), type: 'user',
-      content: inputMessage,
+    const userMessage: ChatMessage = { id: Date.now().toString(), type: 'user'"
+      content: inputMessage"
       timestamp: new Date()
     };
  setMessages(prev => [...prev, userMessage]); setInputMessage('');
@@ -52,8 +53,8 @@ export default function GPTTraderChatbot() {
 
     // Simulate AI response
     setTimeout(() => {
-      const botResponse: ChatMessage = { id: (Date.now() + 1).toString(), type: 'bot',
-        content: generateBotResponse(inputMessage),
+      const botResponse: ChatMessage = { id: (Date.now() + 1).toString(), type: 'bot'"
+        content: generateBotResponse(inputMessage)"
         timestamp: new Date()
       };
 

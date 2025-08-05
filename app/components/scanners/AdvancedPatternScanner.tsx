@@ -1,12 +1,13 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-'use client';
 import { Card } from "../../../components/ui/card";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent,
+import { Card, CardHeader, CardContent"
       CardTitle }
     } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
@@ -21,64 +22,64 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.j
   Zap, 
   Eye, 
   Filter, 
-  Settings,
-  Play,
-  Pause,
-  RefreshCw,
-  CheckCircle,
-  AlertTriangle,
-  Star,
-  Clock,
+  Settings"
+  Play"
+  Pause"
+  RefreshCw"
+  CheckCircle"
+  AlertTriangle"
+  Star"
+  Clock"
   DollarSign, }
   Percent, Activity } from 'lucide-react';
 
 interface PatternMatch {
-  id: string,
-    symbol: string,
-  pattern: string,
-    confidence: number, timeframe: string, direction: 'bullish' | 'bearish' | 'neutral',
-  probability: number,
-    targetPrice: number,
-  currentPrice: number,
-    volume: number,
+  id: string"
+    symbol: string"
+  pattern: string"
+    confidence: number, timeframe: string, direction: 'bullish' | 'bearish' | 'neutral'"
+  probability: number"
+    targetPrice: number"
+  currentPrice: number"
+    volume: number"
   lastUpdated: string
 }
 
 interface ScannerConfig {
-  patterns: string[],
-    timeframes: string[],
-  minConfidence: number,
-    minVolume: number,
+  patterns: string[]"
+    timeframes: string[]"
+  minConfidence: number"
+    minVolume: number"
   markets: string[]
 }
 
 export default function AdvancedPatternScanner() { const [isScanning, setIsScanning] = useState(false); const [searchTerm, setSearchTerm] = useState(''); const [selectedPattern, setSelectedPattern] = useState('all');
-  const [patternMatches, setPatternMatches] = useState<PatternMatch[]>([]); const [scannerConfig, setScannerConfig] = useState<ScannerConfig>({ patterns: ['all'], timeframes: ['1h', '4h', '1d'],
+  const [patternMatches, setPatternMatches] = useState<PatternMatch[]>([]); const [scannerConfig, setScannerConfig] = useState<ScannerConfig>({ patterns: ['all'], timeframes: ['1h', '4h', '1d']"
     minConfidence: 75, minVolume: 100000, markets: ['stocks', 'crypto', 'forex']
   });
  const patterns = [ 'Head and Shoulders', 'Double Top', 'Double Bottom', 'Triangle', 'Flag', 'Pennant', 'Cup and Handle', 'Inverse Head and Shoulders', 'Wedge', 'Rectangle', 'Channel', 'Support/Resistance Break'
   ];
 
-  const sampleMatches: PatternMatch[] = [ { id: '1', symbol: 'AAPL', pattern: 'Cup and Handle', confidence: 87.3, timeframe: '4h', direction: 'bullish',
-      probability: 78.4,
+  const sampleMatches: PatternMatch[] = [ { id: '1', symbol: 'AAPL', pattern: 'Cup and Handle', confidence: 87.3, timeframe: '4h', direction: 'bullish'"
+      probability: 78.4"
       targetPrice: 195.50;
-      currentPrice: 188.30, volume: 2847000, lastUpdated: '2024-01-20,
-      14:32:00' },{ id: '2', symbol: 'TSLA', pattern: 'Double Bottom', confidence: 92.1, timeframe: '1d', direction: 'bullish',
-      probability: 83.7,
+      currentPrice: 188.30, volume: 2847000, lastUpdated: '2024-01-20"
+      14:32:00' },{ id: '2', symbol: 'TSLA', pattern: 'Double Bottom', confidence: 92.1, timeframe: '1d', direction: 'bullish'"
+      probability: 83.7"
       targetPrice: 265.80;
-      currentPrice: 242.15, volume: 1924000, lastUpdated: '2024-01-20,
-      14:28:00' },{ id: '3', symbol: 'NVDA', pattern: 'Triangle', confidence: 79.6, timeframe: '1h', direction: 'neutral',
-      probability: 65.2,
+      currentPrice: 242.15, volume: 1924000, lastUpdated: '2024-01-20"
+      14:28:00' },{ id: '3', symbol: 'NVDA', pattern: 'Triangle', confidence: 79.6, timeframe: '1h', direction: 'neutral'"
+      probability: 65.2"
       targetPrice: 920.00;
-      currentPrice: 875.40, volume: 3156000, lastUpdated: '2024-01-20,
-      14:35:00' },{ id: '4', symbol: 'MSFT', pattern: 'Head and Shoulders', confidence: 84.9, timeframe: '4h', direction: 'bearish',
-      probability: 71.8,
+      currentPrice: 875.40, volume: 3156000, lastUpdated: '2024-01-20"
+      14:35:00' },{ id: '4', symbol: 'MSFT', pattern: 'Head and Shoulders', confidence: 84.9, timeframe: '4h', direction: 'bearish'"
+      probability: 71.8"
       targetPrice: 350.20;
-      currentPrice: 376.80, volume: 1567000, lastUpdated: '2024-01-20,
-      14:30:00' },{ id: '5', symbol: 'GOOGL', pattern: 'Flag', confidence: 88.7, timeframe: '1d', direction: 'bullish',
-      probability: 76.3,
+      currentPrice: 376.80, volume: 1567000, lastUpdated: '2024-01-20"
+      14:30:00' },{ id: '5', symbol: 'GOOGL', pattern: 'Flag', confidence: 88.7, timeframe: '1d', direction: 'bullish'"
+      probability: 76.3"
       targetPrice: 155.40;
-      currentPrice: 142.90, volume: 1834000, lastUpdated: '2024-01-20,
+      currentPrice: 142.90, volume: 1834000, lastUpdated: '2024-01-20"
       14:33:00'
     }
   ];
@@ -107,9 +108,9 @@ export default function AdvancedPatternScanner() { const [isScanning, setIsScann
     const matchesSearch = match.symbol.toLowerCase().includes(searchTerm.toLowerCase()) || match.pattern.toLowerCase().includes(searchTerm.toLowerCase()); const matchesPattern = selectedPattern === 'all' || match.pattern === selectedPattern;
     return matchesSearch && matchesPattern;
   });
- const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+ const formatCurrency = (amount: number) => { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'"
       minimumFractionDigits: 2
-    }).format(amount),
+    }).format(amount)"
   };
 
   const formatVolume = (volume: number) => {  
@@ -195,7 +196,7 @@ export default function AdvancedPatternScanner() { const [isScanning, setIsScann
                       type="number"
                       value={scannerConfig.minConfidence}
                       onChange={(e) => setScannerConfig({
-                        ...scannerConfig,
+                        ...scannerConfig"
                         minConfidence: parseInt(e.target.value) || 0
                       })}
                       className="bg-white/10 border-white/20 text-white"
@@ -419,5 +420,5 @@ export default function AdvancedPatternScanner() { const [isScanning, setIsScann
         
       </div>
     </div>
-  ),
+  )"
 }

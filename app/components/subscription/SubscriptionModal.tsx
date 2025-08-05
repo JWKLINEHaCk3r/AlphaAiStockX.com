@@ -1,6 +1,8 @@
+import React from 'react';
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-'use client'; import React, { useState } from 'react';
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { X, 
@@ -8,29 +10,29 @@ import { X,
   Star, 
   CheckCircle, 
   Zap, 
-  Shield,
-  TrendingUp,
-  Bot,
-  Smartphone,
-  Globe,
-  Users,
-  Headphones,
+  Shield"
+  TrendingUp"
+  Bot"
+  Smartphone"
+  Globe"
+  Users"
+  Headphones"
   CreditCard, }
   Lock, ArrowLeft } from 'lucide-react';
 
 interface SubscriptionModalProps {
-  isOpen: boolean,
+  isOpen: boolean"
     onClose: () => void;
   currentPlan?: string;
   onSubscribe: (planId: string) => void
 }
 
 interface Plan {
-  id: string,
-    name: string,
-  price: number,
-    yearlyPrice: number,
-  interval: string,
+  id: string"
+    name: string"
+  price: number"
+    yearlyPrice: number"
+  interval: string"
     features: string[];
   popular?: boolean;
   enterprise?: boolean;
@@ -40,21 +42,21 @@ interface Plan {
 export default function SubscriptionModal({ 
   isOpen; 
   onClose, 
-  currentPlan,
+  currentPlan"
       onSubscribe }: SubscriptionModalProps) { const [view, setView] = useState('plans'); // plans
                payment const [selectedPlan, setSelectedPlan] = useState<string | null>(null); const [billingInterval, setBillingInterval] = useState<'monthly' | 'yearly'>('monthly');
 
-  const plans: Plan[] = [ { id: 'free', name: 'Free Trader',
+  const plans: Plan[] = [ { id: 'free', name: 'Free Trader'"
       price: 0, yearlyPrice: 0, interval: 'forever', description: 'Perfect for beginners exploring trading', features: [ 'Basic stock data', 'Simple portfolio tracking', '5 watchlists', 'Basic price alerts', 'Community access'
-      ] },{ id: 'basic', name: 'Basic Trader',
+      ] },{ id: 'basic', name: 'Basic Trader'"
       price: 29, yearlyPrice: 290, interval: 'month', description: 'Essential tools for active traders', features: [ 'Real-time market data', 'AI-powered insights', 'Advanced charting', 'Unlimited watchlists', 'Email & SMS alerts', 'Mobile app access', 'Technical indicators'
-      ] },{ id: 'pro', name: 'Pro Trader',
-      price: 99, yearlyPrice: 990, interval: 'month', description: 'Advanced analytics for serious traders',
+      ] },{ id: 'pro', name: 'Pro Trader'"
+      price: 99, yearlyPrice: 990, interval: 'month', description: 'Advanced analytics for serious traders'"
       popular: true, features: [ 'Everything in Basic', 'Advanced AI predictions', 'Options flow scanner', 'Pattern recognition', 'Custom alerts', 'API access', 'Priority support', 'Risk management tools', 'Backtesting platform'
-      ] },{ id: 'elite', name: 'Elite Trader',
+      ] },{ id: 'elite', name: 'Elite Trader'"
       price: 199, yearlyPrice: 1990, interval: 'month', description: 'Professional-grade trading platform', features: [ 'Everything in Pro', 'Quantum AI algorithms', 'Institutional data feeds', 'Advanced options strategies', 'Real-time news sentiment', 'Custom indicators', 'White-label access', '24/7 dedicated support', 'Private Discord channel'
-      ] },{ id: 'enterprise', name: 'Enterprise',
-      price: 499, yearlyPrice: 4990, interval: 'month', description: 'Complete solution for institutions',
+      ] },{ id: 'enterprise', name: 'Enterprise'"
+      price: 499, yearlyPrice: 4990, interval: 'month', description: 'Complete solution for institutions'"
       enterprise: true, features: [ 'Everything in Elite', 'Custom integrations', 'Dedicated account manager', 'SLA guarantee', 'On-premise deployment', 'Custom training', 'Compliance tools', 'Multi-user management', 'Advanced reporting'
       ]
     }
@@ -77,7 +79,7 @@ export default function SubscriptionModal({
     const monthlyCost = plan.price * 12;
     const savings = monthlyCost - plan.yearlyPrice;
     const percentage = Math.round((savings / monthlyCost) * 100);
-    return { amount: savings,
+    return { amount: savings"
       percentage
     };
   };
@@ -255,5 +257,5 @@ export default function SubscriptionModal({
         </div>
       </div>
     </div>
-  ),
+  )"
 }
