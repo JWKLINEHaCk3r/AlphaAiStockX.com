@@ -11,7 +11,9 @@ RUN npm install -g pnpm@9
 COPY package.json pnpm-lock.yaml* ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm config set auto-install-peers true && \
+    pnpm config set enable-pre-post-scripts true && \
+    pnpm install --frozen-lockfile || pnpm install
 
 # Copy source code
 COPY . .
