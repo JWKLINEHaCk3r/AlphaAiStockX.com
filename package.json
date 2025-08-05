@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint --fix",
     "type-check": "tsc --noEmit",
@@ -13,7 +13,12 @@
     "deploy": "./scripts/deploy-all.sh",
     "deploy:netlify": "./scripts/deploy-netlify.sh",
     "deploy:railway": "./scripts/deploy-railway.sh",
-    "deploy:docker": "docker build -t alphaaistockx . && docker run -p 3000:3000 alphaaistockx"
+    "deploy:docker": "./scripts/deploy-all.sh",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
