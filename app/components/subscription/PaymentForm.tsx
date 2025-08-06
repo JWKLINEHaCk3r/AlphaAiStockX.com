@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "../../../components/ui/calendar";
-import { Card } from "../../../components/ui/card";
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Calendar } from '../components/ui/calendar';
+import { Card } from '../components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Badge } from "../../../components/ui/badge";
+    } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Badge } from '../components/ui/badge';
 import { CreditCard, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   Shield, 
   Lock, 
   CheckCircle, 

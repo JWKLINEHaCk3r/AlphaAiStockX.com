@@ -41,7 +41,7 @@ export const isTest = process.env.NODE_ENV === 'test';
 export function formatCurrency(amount: number, currency = 'USD'): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency,
+    currency
   }).format(amount);
 }
 

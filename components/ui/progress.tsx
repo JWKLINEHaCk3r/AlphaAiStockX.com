@@ -1,6 +1,6 @@
-import { Progress } from "@/components/ui/progress";
+import { Progress } from '../components/ui/progress';
 import { Progress } from "./progress";
-import React from 'react'; // Removed circular import; import * as ProgressPrimitive from '@radix-ui/react-progress'; import { cn } from '@/lib/utils';
+import React from 'react'; // Removed circular import; import * as ProgressPrimitive from '@radix-ui/react-progress'; import { cn } from '../lib/utils';
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>

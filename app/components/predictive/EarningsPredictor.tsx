@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "../../../components/ui/calendar";
-import { Card } from "../../../components/ui/card";
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Calendar } from '../components/ui/calendar';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Alert } from '../components/ui/alert';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { TrendingUp, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   TrendingDown, 
   Calendar, 
   DollarSign, 

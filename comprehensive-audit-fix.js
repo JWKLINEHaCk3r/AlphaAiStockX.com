@@ -1,400 +1,351 @@
-import React from "react";
-import React from "react";
-import fs from 'fs';
-import path from 'path';
-import { glob } from 'glob';
+#!/usr/bin/env node
 
-console.log('🔍 AlphaAI StockX - Comprehensive Audit & Fix');
-console.log('=============================================');
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
 
-// 1. Fix Next.js Configuration (remove deprecated options)
-function fixNextConfig() {
-  console.log('\n📝 Fixing Next.js configuration...');
-  
-  const configContent = `/** @type {import('next').NextConfig} */
-const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  experimental: {
-    esmExternals: true,
-  },
-  env: {
-    NEXT_TELEMETRY_DISABLED: '1',
-  },
-  images: {
-    domains: ['localhost', 'alphaistockx.com'],
-  },
-  reactStrictMode: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-        ],
-      },
+console.log('🔍 COMPREHENSIVE PROJECT AUDIT & FIX');
+console.log('====================================');
+
+const projectRoot = process.cwd();
+let issuesFound = [];
+let issuesFixed = [];
+
+// 1. Check project structure
+function checkProjectStructure() {
+    console.log('\n📁 Phase 1: Project Structure Audit');
+    console.log('-----------------------------------');
+    
+    const requiredDirs = [
+        'app',
+        'components/ui', 
+        'components/trading',
+        'lib',
+        'types',
+        'public'
     ];
-  },
-};
-
-export default nextConfig;`;
-
-  fs.writeFileSync('next.config.mjs', configContent);
-  console.log('✅ Fixed Next.js configuration (removed deprecated swcMinify)');
-}
-
-// 2. Fix deprecated dependencies in package.json
-function fixPackageJson() {
-  console.log('\n📦 Fixing package.json dependencies...');
-  
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  
-  // Update critical dependencies
-  const updates = {
-    // Core framework updates
-    'next': '^15.4.5',
-    'react': '^18.3.1', // Keep 18 for stability
-    'react-dom': '^18.3.1',
-    'typescript': '^5.9.2',
     
-    // Security updates
-    'axios': '^1.11.0',
-    'helmet': '^8.1.0',
-    'express-rate-limit': '^8.0.1',
-    
-    // Development dependencies
-    'eslint': '^9.32.0',
-    'eslint-config-next': '^15.4.5',
-    'eslint-config-prettier': '^10.1.8',
-    'eslint-plugin-prettier': '^5.5.3',
-    
-    // UI and animation
-    'framer-motion': '^12.23.12',
-    'lucide-react': '^0.536.0',
-    
-    // Testing
-    'jest': '^30.0.5',
-    'jest-environment-jsdom': '^30.0.5',
-    '@testing-library/jest-dom': '^6.6.4',
-    
-    // Build tools
-    'cssnano': '^7.1.0',
-    'webpack': '^5.101.0',
-    
-    // Utilities
-    'uuid': '^11.1.0',
-    'sharp': '^0.34.3',
-  };
-  
-  // Apply updates
-  Object.entries(updates).forEach(([pkg, version]) => {  
-    if (packageJson.dependencies[pkg]) {
-      packageJson.dependencies[pkg] = version;
-      console.log(`✅ Updated ${pkg  } to ${version}`);
-    } else if (packageJson.devDependencies[pkg]) {
-      packageJson.devDependencies[pkg] = version;
-      console.log(`✅ Updated ${pkg} (dev) to ${version}`);
-    }
-  });
-  
-  // Remove deprecated packages
-  const toRemove = ['@types/cypress']; // Cypress provides its own types
-  toRemove.forEach(pkg => {  
-    if (packageJson.devDependencies[pkg]) {
-      delete packageJson.devDependencies[pkg];
-      console.log(`🗑️  Removed deprecated ${pkg  }`);
-    }
-  });
-  
-  fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
-  console.log('✅ Package.json updated with latest stable versions');
-}
-
-// 3. Fix ESLint configuration
-function fixESLintConfig() {
-  console.log('\n🔧 Fixing ESLint configuration...');
-  
-  const eslintConfig = {
-    "extends": [
-      "next/core-web-vitals",
-      "prettier"
-    ],
-    "rules": {
-      "@typescript-eslint/no-unused-vars": "warn",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-expressions": "off",
-      "react/no-unescaped-entities": "warn",
-      "react/jsx-no-undef": "warn",
-      "react-hooks/exhaustive-deps": "warn",
-      "prefer-const": "warn",
-      "no-console": process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaVersion": 2021,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "ignorePatterns": [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "*.js",
-      "*.cjs",
-      "**/*.test.*",
-      "cypress/**",
-      "coverage/**"
-    ]
-  };
-  
-  fs.writeFileSync('.eslintrc.json', JSON.stringify(eslintConfig, null, 2));
-  console.log('✅ ESLint configuration updated');
-}
-
-// 4. Fix TypeScript configuration
-function fixTSConfig() {
-  console.log('\n📘 Fixing TypeScript configuration...');
-  
-  const tsConfig = {
-    "compilerOptions": {
-      "lib": ["dom", "dom.iterable", "es6"],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "strict": false,
-      "noEmit": true,
-      "esModuleInterop": true,
-      "module": "esnext",
-      "moduleResolution": "bundler",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "jsx": "preserve",
-      "incremental": true,
-      "plugins": [
-        {
-          "name": "next"
+    requiredDirs.forEach(dir => {
+        const dirPath = path.join(projectRoot, dir);
+        if (!fs.existsSync(dirPath)) {
+            console.log(`❌ Missing directory: ${dir}`);
+            issuesFound.push(`Missing directory: ${dir}`);
+            fs.mkdirSync(dirPath, { recursive: true });
+            console.log(`✅ Created: ${dir}`);
+            issuesFixed.push(`Created directory: ${dir}`);
+        } else {
+            console.log(`✅ Found: ${dir}`);
         }
-      ],
-      "paths": {
-        "@/*": ["./*"]
-      },
-      "target": "es2017",
-      "forceConsistentCasingInFileNames": true
-    },
-    "include": [
-      "next-env.d.ts",
-      "**/*.ts",
-      "**/*.tsx",
-      ".next/types/**/*.ts"
-    ],
-    "exclude": [
-      "node_modules",
-      ".next",
-      "out",
-      "cypress"
-    ]
-  };
-  
-  fs.writeFileSync('tsconfig.json', JSON.stringify(tsConfig, null, 2));
-  console.log('✅ TypeScript configuration updated');
+    });
 }
 
-// 5. Fix component issues
-async function fixComponentIssues() {
-  console.log('\n🧩 Fixing component issues...');
-  
-  const files = await glob('**/*.{tsx,ts,jsx,js}', {
-    ignore: ['node_modules/**', '.next/**', 'out/**', 'dist/**']
-  });
-  
-  let fixedCount = 0;
-  
-  for (const file of files) {
-    try {  
-      const stats = fs.statSync(file);
-      if (!stats.isFile()) continue;
-      
-      let content = fs.readFileSync(file, 'utf8');
-      const originalContent = content;
-      
-      // Fix common component issues
-      
-      // 1. Fix unused React imports (React 17+ JSX transform)
-      if (!content.includes('React.') && !content.includes('useState') && 
-          !content.includes('useEffect') && !content.includes('forwardRef')) {
-        content = content.replace(/import\s+React\s+from\s+['"]react['"];\s*\n/g, '');
-        } catch (error) { console.error(error); } catch (error) { console.error(error); }// 2. Fix missing component exports
-      if ((file.endsWith('.tsx') || file.endsWith('.jsx')) && 
-          !content.includes('export default') && !content.includes('export { ')) {
-        const componentName = path.basename(file, path.extname(file));
-        if (content.includes(`function ${componentName };`) || content.includes(`const ${componentName}`)) {
-          content += `\nexport default ${componentName};\n`;
+// 2. Check essential files
+function checkEssentialFiles() {
+    console.log('\n📄 Phase 2: Essential Files Audit');
+    console.log('---------------------------------');
+    
+    const essentialFiles = [
+        { path: 'app/layout.tsx', required: true },
+        { path: 'app/page.tsx', required: true },
+        { path: 'app/globals.css', required: true },
+        { path: 'components/ui/button.tsx', required: false },
+        { path: 'lib/utils.ts', required: false },
+        { path: 'tsconfig.json', required: true },
+        { path: 'next.config.mjs', required: false }
+    ];
+    
+    essentialFiles.forEach(file => {
+        const filePath = path.join(projectRoot, file.path);
+        if (!fs.existsSync(filePath)) {
+            console.log(`❌ Missing file: ${file.path}`);
+            issuesFound.push(`Missing file: ${file.path}`);
+            if (file.required) {
+                createMissingFile(file.path);
+            }
+        } else {
+            console.log(`✅ Found: ${file.path}`);
         }
-      }
-      
-      // 3. Fix deprecated React patterns
-      content = content.replace(/React\.FC</g, 'React.FunctionComponent<');
-      
-      // 4. Fix import statements
-      content = content.replace(/import\s+\{([^}]+)\}\s+from\s+["']([^"']+)["']\s*;\s*\n\s*import\s+\{([^}]+)\}\s+from\s+["']\2["']/g, 
-                               'import { $1, $3 } from "$2"');
-      
-      // 5. Fix console.log statements in production
-      if (process.env.NODE_ENV === 'production') {
-        content = content.replace(/console\.log\([^)]*\);?\s*\n?/g, '');
-      }
-      
-      // 6. Fix any type usage
-      content = content.replace(/:\s*any\b/g, ': unknown');
-      
-      // 7. Fix StrictMode issues
-      content = content.replace(/React\.StrictMode/g, 'StrictMode');
-      if (content.includes('StrictMode') && !content.includes('import') && !content.includes('StrictMode')) {
-        content = content.replace(/^/, 'import { StrictMode } from "react";\n');
-      }
-      
-      // 8. Fix deprecated lifecycle methods
-      content = content.replace(/componentDidMount/g, 'componentDidMount');
-      content = content.replace(/componentDidUpdate/g, 'componentDidUpdate');
-      
-      if (content !== originalContent) {
-        fs.writeFileSync(file, content);
-        fixedCount++;
-        console.log(`✅ Fixed component issues in ${file}`);
-      }
-      
+    });
+}
+
+// 3. Create missing essential files
+function createMissingFile(filePath) {
+    const fullPath = path.join(projectRoot, filePath);
+    const dir = path.dirname(fullPath);
+    
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    
+    switch (filePath) {
+        case 'app/layout.tsx':
+            fs.writeFileSync(fullPath, `import './globals.css'
+import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'AlphaAI StockX - AI Trading Platform',
+  description: 'Advanced AI-powered trading platform',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+      </body>
+    </html>
+  )
+}
+`);
+            break;
+            
+        case 'app/page.tsx':
+            fs.writeFileSync(fullPath, `export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <header className="text-center mb-12">
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+            🚀 AlphaAI StockX
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Next-Generation AI-Powered Trading Platform
+          </p>
+        </header>
+      </div>
+    </div>
+  )
+}
+`);
+            break;
+            
+        case 'app/globals.css':
+            fs.writeFileSync(fullPath, `@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+`);
+            break;
+            
+        case 'tsconfig.json':
+            fs.writeFileSync(fullPath, JSON.stringify({
+                "compilerOptions": {
+                    "target": "es2022",
+                    "lib": ["dom", "dom.iterable", "es6"],
+                    "allowJs": true,
+                    "skipLibCheck": true,
+                    "strict": false,
+                    "noEmit": true,
+                    "esModuleInterop": true,
+                    "module": "esnext",
+                    "moduleResolution": "bundler",
+                    "resolveJsonModule": true,
+                    "isolatedModules": true,
+                    "jsx": "preserve",
+                    "incremental": true,
+                    "plugins": [{ "name": "next" }],
+                    "baseUrl": ".",
+                    "paths": {
+                        "@/*": ["./*"],
+                        "@/components/*": ["./components/*"],
+                        "@/lib/*": ["./lib/*"],
+                        "@/types/*": ["./types/*"],
+                        "@/app/*": ["./app/*"]
+                    }
+                },
+                "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+                "exclude": ["node_modules"]
+            }, null, 2));
+            break;
+    }
+    
+    console.log(`✅ Created: ${filePath}`);
+    issuesFixed.push(`Created file: ${filePath}`);
+}
+
+// 4. Check dependencies
+function checkDependencies() {
+    console.log('\n📦 Phase 3: Dependencies Audit');
+    console.log('------------------------------');
+    
+    try {
+        const packagePath = path.join(projectRoot, 'package.json');
+        const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+        
+        const criticalDeps = [
+            'next',
+            'react',
+            'react-dom',
+            'typescript',
+            '@types/react',
+            '@types/react-dom'
+        ];
+        
+        const missingDeps = criticalDeps.filter(dep => 
+            !pkg.dependencies?.[dep] && !pkg.devDependencies?.[dep]
+        );
+        
+        if (missingDeps.length > 0) {
+            console.log(`❌ Missing critical dependencies: ${missingDeps.join(', ')}`);
+            issuesFound.push(`Missing dependencies: ${missingDeps.join(', ')}`);
+        } else {
+            console.log('✅ All critical dependencies present');
+        }
+        
     } catch (error) {
-      if (error.code !== 'EISDIR') {
-        console.log(`⚠️  Warning: Could not process ${file}: ${error.message}`);
-      }
+        console.log(`❌ Error reading package.json: ${error.message}`);
+        issuesFound.push(`Package.json error: ${error.message}`);
     }
-  }
-  
-  console.log(`✅ Fixed component issues in ${fixedCount} files`);
 }
 
-// 6. Create missing utility files
-function createMissingUtilities() {
-  console.log('\n🛠️  Creating missing utility files...');
-  
-  // Ensure lib/utils.ts exists with proper cn function
-  const utilsPath = 'lib/utils.ts';
-  if (!fs.existsSync(utilsPath)) {
-    const utilsContent = `import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(value);
-}
-
-export function formatPercent(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'percent',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value / 100);
-}
-`;
+// 5. Check TypeScript compilation
+function checkTypeScript() {
+    console.log('\n🔧 Phase 4: TypeScript Compilation Check');
+    console.log('---------------------------------------');
     
-    if (!fs.existsSync('lib')) {
-      fs.mkdirSync('lib', { recursive: true });
+    try {
+        execSync('npx tsc --noEmit --skipLibCheck', { stdio: 'pipe' });
+        console.log('✅ TypeScript compilation successful');
+    } catch (error) {
+        console.log('❌ TypeScript compilation errors found');
+        const errorOutput = error.stdout?.toString() || error.stderr?.toString() || '';
+        const errorLines = errorOutput.split('\n').slice(0, 10);
+        errorLines.forEach(line => {
+            if (line.trim()) console.log(`   ${line}`);
+        });
+        issuesFound.push('TypeScript compilation errors');
     }
-    fs.writeFileSync(utilsPath, utilsContent);
-    console.log('✅ Created lib/utils.ts');
-  }
-  
-  // Ensure components/ui directory structure
-  const uiComponents = ['button', 'card', 'input', 'label'];
-  uiComponents.forEach(component => {  
-    const componentPath = `components/ui/${component  }.tsx`;
-    if (!fs.existsSync(componentPath)) {
-      fs.mkdirSync(path.dirname(componentPath), { recursive: true });
-      // Create basic component template
-      const basicComponent = `import React from 'react';
-import { cn } from '@/lib/utils';
-
-interface ${component.charAt(0).toUpperCase() + component.slice(1)}Props extends React.HTMLAttributes<HTMLElement> {
-  className?: string;
 }
 
-const ${component.charAt(0).toUpperCase() + component.slice(1)} = React.forwardRef<HTMLElement, ${component.charAt(0).toUpperCase() + component.slice(1)}Props>(
-  ({ className, ...props }, ref) => {  
-    return (
-      <div
-        ref={ref  }
-        className={cn("${component}-base", className)}
-        {...props}
-      />
-    );
-  }
-);
-
-${component.charAt(0).toUpperCase() + component.slice(1)}.displayName = "${component.charAt(0).toUpperCase() + component.slice(1)}";
-
-export {  ${component.charAt(0).toUpperCase() + component.slice(1) }; };
-export default ${component.charAt(0).toUpperCase() + component.slice(1)};
-`;
-      fs.writeFileSync(componentPath, basicComponent);
-      console.log(`✅ Created basic ${component} component`);
+// 6. Check for missing imports
+function checkImports() {
+    console.log('\n🔗 Phase 5: Import Validation');
+    console.log('-----------------------------');
+    
+    // This is a simplified check - would need more sophisticated parsing
+    const tsFiles = findFilesWithExtension(projectRoot, ['.tsx', '.ts']);
+    let importIssues = 0;
+    
+    tsFiles.forEach(file => {
+        try {
+            const content = fs.readFileSync(file, 'utf8');
+            
+            // Check for common import issues
+            if (content.includes('from "@/') && !fs.existsSync(path.join(projectRoot, 'tsconfig.json'))) {
+                importIssues++;
+            }
+            
+        } catch (error) {
+            console.log(`❌ Error reading ${file}: ${error.message}`);
+        }
+    });
+    
+    if (importIssues > 0) {
+        console.log(`❌ Found ${importIssues} potential import issues`);
+        issuesFound.push(`${importIssues} import issues`);
+    } else {
+        console.log('✅ Import validation passed');
     }
-  });
 }
 
-// Main execution
-async function runComprehensiveAudit() {
-  try {  
-    fixNextConfig();
-    fixPackageJson();
-    fixESLintConfig();
-    fixTSConfig();
-    await fixComponentIssues();
-    createMissingUtilities();
+// 7. Try build
+function testBuild() {
+    console.log('\n🏗️ Phase 6: Build Test');
+    console.log('----------------------');
     
-    console.log('\n🎉 Comprehensive audit and fix completed!');
-    console.log('\n📋 Summary:');
-    console.log('✅ Next.js configuration updated (removed deprecated options)');
-    console.log('✅ Package.json dependencies updated to latest stable versions');
-    console.log('✅ ESLint configuration improved');
-    console.log('✅ TypeScript configuration optimized');
-    console.log('✅ Component issues fixed');
-    console.log('✅ Missing utility files created');
+    try {
+        console.log('Testing Next.js build...');
+        execSync('npx next build --no-lint', { stdio: 'pipe', timeout: 60000 });
+        console.log('✅ Build successful');
+    } catch (error) {
+        console.log('❌ Build failed');
+        issuesFound.push('Build failure');
+        
+        // Extract key error info
+        const errorOutput = error.stdout?.toString() || error.stderr?.toString() || '';
+        const errorLines = errorOutput.split('\n').slice(0, 15);
+        errorLines.forEach(line => {
+            if (line.trim() && (line.includes('Error:') || line.includes('Failed'))) {
+                console.log(`   ${line}`);
+            }
+        });
+    }
+}
+
+// Helper function
+function findFilesWithExtension(dir, extensions, files = []) {
+    try {
+        const items = fs.readdirSync(dir);
+        
+        items.forEach(item => {
+            const fullPath = path.join(dir, item);
+            const stat = fs.statSync(fullPath);
+            
+            if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
+                findFilesWithExtension(fullPath, extensions, files);
+            } else if (stat.isFile() && extensions.some(ext => item.endsWith(ext))) {
+                files.push(fullPath);
+            }
+        });
+    } catch (error) {
+        // Ignore errors for directories we can't read
+    }
     
-    console.log('\n🚀 Next steps:');
-    console.log('1. Run: npm install (to update dependencies)');
-    console.log('2. Run: npm run build (to test the build)');
-    console.log('3. Run: npm start (to start production server)');
+    return files;
+}
+
+// Generate summary
+function generateSummary() {
+    console.log('\n📊 AUDIT SUMMARY');
+    console.log('================');
+    console.log(`Issues Found: ${issuesFound.length}`);
+    console.log(`Issues Fixed: ${issuesFixed.length}`);
     
-    } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) {
-    console.error('❌ Error during audit:', error);
+    if (issuesFound.length > 0) {
+        console.log('\n❌ Issues Found:');
+        issuesFound.forEach((issue, i) => console.log(`   ${i + 1}. ${issue}`));
+    }
+    
+    if (issuesFixed.length > 0) {
+        console.log('\n✅ Issues Fixed:');
+        issuesFixed.forEach((fix, i) => console.log(`   ${i + 1}. ${fix}`));
+    }
+    
+    if (issuesFound.length === 0) {
+        console.log('\n🎉 No critical issues found! Project looks good.');
+    } else {
+        console.log('\n⚠️  Some issues remain that may need manual attention.');
+    }
+}
+
+// Run all checks
+async function runAudit() {
+    checkProjectStructure();
+    checkEssentialFiles();
+    checkDependencies();
+    checkTypeScript();
+    checkImports();
+    testBuild();
+    generateSummary();
+}
+
+runAudit().catch(error => {
+    console.error('❌ Audit failed:', error.message);
     process.exit(1);
-  }
-}
-
-// Run the audit
-runComprehensiveAudit();
+});

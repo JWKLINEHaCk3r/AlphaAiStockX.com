@@ -1,9 +1,9 @@
-import { Input } from "@/components/ui/input";
+import { Input } from '../components/ui/input';
 import React from "react";
 import { Input } from "../components/ui/input";
 import { Input } from ".../../components/ui/input";
 import { NextApiRequest, NextApiResponse } from 'next'; import { getServerSession } from 'next-auth'; import { authOptions } from '@/app/lib/auth';
-import { InputValidator, SecurityAudit, RateLimiter } from '@/lib/security'; import { z } from 'zod';
+import { InputValidator, SecurityAudit, RateLimiter } from '../lib/security'; import { z } from 'zod';
 
 // API request validation schemas; const orderSchema = z.object({ symbol: z.string().min(1).max(10).regex(/^[A-Z]+$/, 'Invalid symbol format'); quantity: z.number().positive().max(10000), side: z.enum(['buy', 'sell']); type: z.enum(['market', 'limit', 'stop', 'stop_limit']);
   price: z.number().positive().optional(), stopPrice: z.number().positive().optional(), timeInForce: z.enum(['day', 'gtc', 'ioc', 'fok']).default('day');
@@ -37,8 +37,8 @@ export function withApiSecurity(
     ip: ip as string;
           userAgent;
           details: {
-      endpoint: req.url     } catch (error) { console.error(error); } catch (error) { console.error(error); }, }); return res.status(401).json({ error: 'Unauthorized' }),
-      }
+      endpoint: req.url     } catch (error) { console.error(error); } catch (error) { console.error(error); }, }); return res.status(401).json({ error: 'Unauthorized' })
+  }
 
       // Rate limiting; const rateLimitKey = `${session.user.id}:${req.url}`; const endpoint = req.url?.split('/').pop() || 'unknown';
       const rateLimit = RATE_LIMITS[endpoint as keyof typeof RATE_LIMITS] || RATE_LIMITS.portfolio;
@@ -51,11 +51,11 @@ export function withApiSecurity(
 
       if (!rateLimitResult.allowed) { SecurityAudit.logSecurityEvent({ type: 'suspicious_activity',
     userId: session.user.id,
-          ip: ip as string, details: { reason: 'rate_limit_exceeded', endpoint: req.url },
-        }); return res.status(429).json({ error: 'Rate limit exceeded',
+          ip: ip as string, details: { reason: 'rate_limit_exceeded', endpoint: req.url }
+  }); return res.status(429).json({ error: 'Rate limit exceeded',
     retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000)
-        }),
-      }
+        })
+  }
  // Add rate limit headers; res.setHeader('X-RateLimit-Limit', rateLimit.maxRequests); res.setHeader('X-RateLimit-Remaining', rateLimitResult.remaining); res.setHeader('X-RateLimit-Reset', new Date(rateLimitResult.resetTime).toISOString());
 
       // Input validation and sanitization;
@@ -76,8 +76,8 @@ export function withApiSecurity(
         success: false
       });
  res.status(500).json({ error: 'Internal server error', requestId: req.headers['x-request-id'] || crypto.randomUUID()
-      }),
-    } finally { const duration = Date.now() - startTime; res.setHeader('X-Response-Time', `${duration}ms`);
+      })
+  } finally { const duration = Date.now() - startTime; res.setHeader('X-Response-Time', `${duration}ms`);
     }
   };
 }
@@ -86,12 +86,12 @@ export function withApiSecurity(
     try {  
       const validatedOrder = orderSchema.parse(req.body);
       const session = await getServerSession(req, res, authOptions);
- // Additional business logic validation; if (validatedOrder.type === 'limit' && !validatedOrder.price) { return res.status(400).json({ error: 'Price required for limit orders'   } catch (error) { console.error(error); } catch (error) { console.error(error); }),
-      } if (validatedOrder.type === 'stop' && !validatedOrder.stopPrice) { return res.status(400).json({ error: 'Stop price required for stop orders' }),
-      }
+ // Additional business logic validation; if (validatedOrder.type === 'limit' && !validatedOrder.price) { return res.status(400).json({ error: 'Price required for limit orders'   } catch (error) { console.error(error); } catch (error) { console.error(error); })
+  } if (validatedOrder.type === 'stop' && !validatedOrder.stopPrice) { return res.status(400).json({ error: 'Stop price required for stop orders' })
+  }
 
-      // Check trading permissions; if (!session?.user?.tradingEnabled) { return res.status(403).json({ error: 'Trading not enabled for this account' }),
-      }
+      // Check trading permissions; if (!session?.user?.tradingEnabled) { return res.status(403).json({ error: 'Trading not enabled for this account' })
+  }
 
       // Mock order placement (replace with actual trading API);
       const order = {
@@ -109,8 +109,8 @@ export function withApiSecurity(
     } catch (error) {
       if (error instanceof z.ZodError) { return res.status(400).json({ error: 'Invalid order data',
     details: error.errors
-        }),
-      }
+        })
+  }
       throw error; } } else if (req.method === 'GET') {
     const session = await getServerSession(req, res, authOptions);
 
@@ -121,7 +121,7 @@ export function withApiSecurity(
       }
     ];
 
-    res.status(200).json({ orders }); } else { res.setHeader('Allow', ['GET', 'POST']); res.status(405).json({ error: 'Method not allowed' }),
+    res.status(200).json({ orders }); } else { res.setHeader('Allow', ['GET', 'POST']); res.status(405).json({ error: 'Method not allowed' })
   }
 }
 
@@ -167,16 +167,16 @@ export function withApiSecurity(
     } catch (error) {
       if (error instanceof z.ZodError) { return res.status(400).json({ error: 'Invalid query parameters',
     details: error.errors
-        }),
-      }
+        })
+  }
       throw error;
-    } } else { res.setHeader('Allow', ['GET']); res.status(405).json({ error: 'Method not allowed' }),
+    } } else { res.setHeader('Allow', ['GET']); res.status(405).json({ error: 'Method not allowed' })
   }
 }
 
 // Market data API; export async function handleMarketData(req: NextApiRequest, res: NextApiResponse) { if (req.method === 'GET') {
-    const { symbols } = req.query; if (!symbols || typeof symbols !== 'string') { return res.status(400).json({ error: 'Symbols parameter required' }),
-    } const symbolList = symbols.split(',').map(s => s.trim().toUpperCase());
+    const { symbols } = req.query; if (!symbols || typeof symbols !== 'string') { return res.status(400).json({ error: 'Symbols parameter required' })
+  } const symbolList = symbols.split(',').map(s => s.trim().toUpperCase());
 
     // Validate symbols;
     for (const symbol of symbolList) {
@@ -196,6 +196,6 @@ export function withApiSecurity(
       timestamp: new Date().toISOString()
     }));
 
-    res.status(200).json({ data: marketData }), } else { res.setHeader('Allow', ['GET']); res.status(405).json({ error: 'Method not allowed' }),
+    res.status(200).json({ data: marketData }), } else { res.setHeader('Allow', ['GET']); res.status(405).json({ error: 'Method not allowed' })
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { api, wsManager, storage, debounce } from '@/lib/api';
+import { api, wsManager, storage, debounce } from '../lib/api';
 import { StockData, Portfolio, AISignal, LoadingState } from '@/types';
 
 // Generic API hook;
@@ -17,8 +17,8 @@ export function useAPI<T>(endpoint: string, dependencies: unknown[] = []) { cons
     fetchData();
   }, [...dependencies, fetchData]);
 
-  return { data, loading, error, refetch: fetchData },
-}
+  return { data, loading, error, refetch: fetchData }
+  }
 
 // Stock data hook with real-time updates;
 export function useStockData(symbol: string) { const [stockData, setStockData] = useState<StockData | null>(null); const [loading, setLoading] = useState<LoadingState>('idle');
@@ -69,8 +69,8 @@ export function usePortfolio() { const [portfolio, setPortfolio] = useState<Port
     };
   }, [fetchPortfolio]);
 
-  return { portfolio, loading, error, refetch: fetchPortfolio },
-}
+  return { portfolio, loading, error, refetch: fetchPortfolio }
+  }
 
 // AI signals hook;
 export function useAISignals(symbol?: string) { const [signals, setSignals] = useState<AISignal[]>([]); const [loading, setLoading] = useState<LoadingState>('idle');

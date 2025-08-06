@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import React from 'react';
-import { Card } from "../../../components/ui/card";
+import { Card } from '../components/ui/card';
 import { ArrowUp, ArrowDown, TrendingUp, Star, Clock, Target } from 'lucide-react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
 
 interface TradeRecommendation { symbol: string, action: 'BUY' | 'SELL' | 'HOLD'"
   confidence: number"
@@ -65,7 +65,7 @@ export default function AITop5Trades() {
       <CardContent>
         <div className="space-y-4">
           {mockTrades.map((trade, index) => (
-            <div key={trade.symbol} className="bg-white/5 rounded-lg p-4 hover: bg-white/10 transition-all">
+            <div key={trade.symbol} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all">
               <div className="grid, lg:grid-cols-6 gap-4 items-center">
                 
                 {/* Rank and Symbol */}

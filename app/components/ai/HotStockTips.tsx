@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 // Simulated AI hot stock tips (replace with real AI/ML backend)

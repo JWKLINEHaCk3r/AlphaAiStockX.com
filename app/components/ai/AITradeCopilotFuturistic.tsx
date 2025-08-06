@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -72,7 +71,7 @@ export default function AITradeCopilotFuturistic() {
           AI Trade Copilot
         </h3>
         <button
-          className={`px-6 py-3 rounded-xl font-bold text-lg transition-all ${ running  ? 'bg-red-600 text-white hover: bg-red-700'  : 'bg-fuchsia-600 text-white, hover:bg-fuchsia-700'
+          className={`px-6 py-3 rounded-xl font-bold text-lg transition-all ${ running  ? 'bg-red-600 text-white hover:bg-red-700'  : 'bg-fuchsia-600 text-white, hover:bg-fuchsia-700'
           }`}
           onClick={() => setRunning(r => !r)} > {running ? 'Stop' : 'Start'} AI
         </button>

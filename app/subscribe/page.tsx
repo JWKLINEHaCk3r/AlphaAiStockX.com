@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 export default function SubscribePage() { const [email, setEmail] = useState('');
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) { e.preventDefault(); console.log('Email submitted:', email);

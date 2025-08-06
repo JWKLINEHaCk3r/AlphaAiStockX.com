@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Globe, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
   Box, 
   Users, 
   Gamepad2"
@@ -285,7 +285,7 @@ interface VirtualWorld {
                     </div>
                     
                     <div className="flex gap-2 mt-3">
-                      <Button size="sm" className="bg-green-600 hover: bg-green-700 flex-1">
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700 flex-1">
                         Buy
                       </Button>
                       <Button size="sm" variant="outline" className="border-red-500 text-red-400, hover:bg-red-500/10 flex-1">

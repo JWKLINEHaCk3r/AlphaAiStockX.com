@@ -3,7 +3,7 @@ import { createAlpacaClient;
   AlpacaClient;
   formatOrderForDatabase;
   formatPositionForDatabase; }
-} from './alpaca-client'; import { prisma } from '@/app/lib/prisma'; import { SecurityAudit } from '@/lib/security'; import { WebSocketService } from './websocket-service';
+} from './alpaca-client'; import { prisma } from '@/app/lib/prisma'; import { SecurityAudit } from '../lib/security'; import { WebSocketService } from './websocket-service';
 
 export interface TradingServiceConfig {
 
@@ -318,8 +318,8 @@ export class TradingService {
     if (!resolvedPortfolioId) {
       const defaultPortfolio = await prisma.portfolio.findFirst({
         where: { userId, type: 'PERSONAL'
-        },
-      });
+        }
+  });
  if (!defaultPortfolio) { throw new Error('No default portfolio found for user');
       }
 
@@ -363,14 +363,14 @@ export class TradingService {
           side: orderRequest.side,
     quantity: orderRequest.quantity;
           type: orderRequest.type
-        },
-      });
+        }
+  });
 
       return this.formatOrderSummary(dbOrder);
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'trading_error',
     userId: this.config.userId, details: { action: 'order_placement_failed', symbol: orderRequest.symbol, error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -395,8 +395,8 @@ export class TradingService {
       });
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'trading_error',
     userId: this.config.userId, details: { action: 'order_cancellation_failed', orderId; error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -420,8 +420,8 @@ export class TradingService {
       return dbOrders.map(order => this.formatOrderSummary(order));
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_orders_failed', error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -446,8 +446,8 @@ export class TradingService {
       return positionsWithMarketData;
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_positions_failed', error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -461,8 +461,8 @@ export class TradingService {
       return this.formatPositionSummary(alpacaPosition, snapshot);
       } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_position_failed', symbol; error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -506,8 +506,8 @@ export class TradingService {
       return summary;
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_portfolio_summary_failed', error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -519,8 +519,8 @@ export class TradingService {
       return snapshots;
       } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_market_data_failed', symbols; error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -534,8 +534,8 @@ export class TradingService {
       return await this.alpaca.getBars(params);
       } catch (error) { console.error(error); } catch (error) { console.error(error); } catch (error) { SecurityAudit.logSecurityEvent({ type: 'data_access_error',
     userId: this.config.userId, details: { action: 'get_historical_data_failed', symbols: params.symbols, error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -548,8 +548,8 @@ export class TradingService {
       for (const alpacaOrder of alpacaOrders) {
         const existingOrder = await prisma.order.findUnique({
           where: {
-      id: alpacaOrder.id },
-        });
+      id: alpacaOrder.id }
+  });
 
         const orderData = formatOrderForDatabase(alpacaOrder);
 
@@ -566,14 +566,14 @@ export class TradingService {
             data: {
               ...orderData;
               portfolioId: this.config.portfolioId
-            },
-          });
+            }
+  });
         }
       }
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'sync_error',
     userId: this.config.userId, details: { action: 'sync_orders_failed', error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -599,8 +599,8 @@ export class TradingService {
       where: {
       id: this.config.userId },
       select: {
-      status: true, kycStatus: true },
-    }); if (!user || user.status !== 'ACTIVE') { throw new Error('Account is not active for trading');
+      status: true, kycStatus: true }
+  }); if (!user || user.status !== 'ACTIVE') { throw new Error('Account is not active for trading');
     } if (user.kycStatus !== 'APPROVED') { throw new Error('KYC verification required for trading');
     }
  // Check buying power for buy orders; if (orderRequest.side === 'buy') {
@@ -660,14 +660,14 @@ export class TradingService {
     // Add bracket order legs if specified; if (orderRequest.takeProfitPrice || orderRequest.stopLossPrice) { alpacaOrder.order_class = 'bracket';
 
       if (orderRequest.takeProfitPrice) {
-        alpacaOrder.take_profit = { limit_price: orderRequest.takeProfitPrice },
-      }
+        alpacaOrder.take_profit = { limit_price: orderRequest.takeProfitPrice }
+  }
 
       if (orderRequest.stopLossPrice) {
         alpacaOrder.stop_loss = {
           stop_price: orderRequest.stopLossPrice;
-          ...(orderRequest.stopLossLimitPrice && { limit_price: orderRequest.stopLossLimitPrice }),
-        };
+          ...(orderRequest.stopLossLimitPrice && { limit_price: orderRequest.stopLossLimitPrice })
+  };
       }
     }
 
@@ -680,8 +680,8 @@ export class TradingService {
       data: {
         ...orderData;
         portfolioId: this.config.portfolioId
-      },
-    });
+      }
+  });
   }
  private async updatePortfolioCash(orderRequest: OrderRequest): Promise<void> { if (orderRequest.side === 'buy' && orderRequest.notional) {
       await prisma.portfolio.update({
@@ -690,8 +690,8 @@ export class TradingService {
         data: {
       cashBalance: {
             decrement: orderRequest.notional
-          },
-        };
+          }
+  };
       });
     }
   }
@@ -739,7 +739,7 @@ export class TradingService {
     averageEntryPrice: parseFloat(alpacaPosition.avg_entry_price), currentPrice; side: alpacaPosition.side.toUpperCase() as 'LONG' | 'SHORT',
       changeToday;
       changeTodayPercent: marketValue > 0 ? (changeToday / (marketValue - changeToday)) * 100 : 0
-    },
+    }
   }
 
   private async syncPositionsWithDatabase(alpacaPositions: unknown[]): Promise<void> {
@@ -757,8 +757,8 @@ export class TradingService {
     create: {
           ...positionData;
           portfolioId: this.config.portfolioId
-        },
-      });
+        }
+  });
     }
   }
 
@@ -772,7 +772,7 @@ export class TradingService {
     dailyPnL: summary.dayPnL,
         totalPnL: summary.totalPnL;
     updatedAt: new Date()
-      },
-    });
+      }
+  });
   }
 }

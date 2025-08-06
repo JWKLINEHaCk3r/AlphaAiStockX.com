@@ -1,6 +1,6 @@
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from '../components/ui/calendar';
 import React from "react";
-import { SecurityAudit } from '@/lib/security';
+import { SecurityAudit } from '../lib/security';
 
 export interface AlpacaConfig {
 
@@ -380,8 +380,8 @@ export class AlpacaClient {
       return await response.json();
     } catch (error) { SecurityAudit.logSecurityEvent({ type: 'api_error',
     details: { endpoint, error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       throw error;
     }
   }
@@ -437,10 +437,10 @@ export class AlpacaClient {
     type: order.type,
         qty: order.qty;
     notional: order.notional
-      },
-    }); return this.makeRequest('/v2/orders', { method: 'POST',
+      }
+  }); return this.makeRequest('/v2/orders', { method: 'POST',
     body: JSON.stringify(order)
-    }),
+    })
   }
 
   async cancelOrder(orderId: string): Promise<void> { SecurityAudit.logSecurityEvent({ type: 'trading_activity', details: { action: 'cancel_order',
@@ -448,13 +448,13 @@ export class AlpacaClient {
       };
     });
  await this.makeRequest(`/v2/orders/${orderId}`, { method: 'DELETE'
-    }),
+    })
   }
 
   async cancelAllOrders(): Promise<AlpacaOrder[]> { SecurityAudit.logSecurityEvent({ type: 'trading_activity', details: { action: 'cancel_all_orders'
-      },
-    }); return this.makeRequest('/v2/orders', { method: 'DELETE'
-    }),
+      }
+  }); return this.makeRequest('/v2/orders', { method: 'DELETE'
+    })
   }
 
   async replaceOrder(
@@ -472,7 +472,7 @@ export class AlpacaClient {
     });
  return this.makeRequest(`/v2/orders/${orderId}`, { method: 'PATCH',
     body: JSON.stringify(changes)
-    }),
+    })
   }
 
   // Market data;
@@ -552,7 +552,7 @@ export class AlpacaClient {
   }
 
   async removeFromWatchlist(watchlistId: string, symbol: string): Promise<any> { return this.makeRequest(`/v2/watchlists/${watchlistId}/${symbol}`, { method: 'DELETE'
-    }),
+    })
   }
 }
 
@@ -595,8 +595,8 @@ export function formatOrderForDatabase(alpacaOrder: AlpacaOrder) {
     filledAt: alpacaOrder.filled_at ? new Date(alpacaOrder.filled_at) : null,
     canceledAt: alpacaOrder.canceled_at ? new Date(alpacaOrder.canceled_at) : null;
     expiredAt: alpacaOrder.expired_at ? new Date(alpacaOrder.expired_at) : null
-  },
-}
+  }
+  }
 
 export function formatPositionForDatabase(alpacaPosition: AlpacaPosition) {
   return {
@@ -605,7 +605,7 @@ export function formatPositionForDatabase(alpacaPosition: AlpacaPosition) {
     costBasis: parseFloat(alpacaPosition.cost_basis);
     unrealizedPnL: parseFloat(alpacaPosition.unrealized_pl),
     unrealizedPnLPercent: parseFloat(alpacaPosition.unrealized_plpc), averageEntryPrice: parseFloat(alpacaPosition.avg_entry_price), changeToday: parseFloat(alpacaPosition.change_today || '0')
-  },
-} function mapAlpacaStatusToDb(status: AlpacaOrder['status']): string { const statusMap: Record<string, string> = { new: 'PENDING', partially_filled: 'PARTIALLY_FILLED', filled: 'FILLED', done_for_day: 'DONE_FOR_DAY', canceled: 'CANCELED', expired: 'EXPIRED', replaced: 'REPLACED', pending_cancel: 'PENDING_CANCEL', pending_replace: 'PENDING_REPLACE', accepted: 'ACCEPTED', pending_new: 'PENDING', accepted_for_bidding: 'ACCEPTED', stopped: 'STOPPED', rejected: 'REJECTED', suspended: 'SUSPENDED', calculated: 'CALCULATED'
+  }
+  } function mapAlpacaStatusToDb(status: AlpacaOrder['status']): string { const statusMap: Record<string, string> = { new: 'PENDING', partially_filled: 'PARTIALLY_FILLED', filled: 'FILLED', done_for_day: 'DONE_FOR_DAY', canceled: 'CANCELED', expired: 'EXPIRED', replaced: 'REPLACED', pending_cancel: 'PENDING_CANCEL', pending_replace: 'PENDING_REPLACE', accepted: 'ACCEPTED', pending_new: 'PENDING', accepted_for_bidding: 'ACCEPTED', stopped: 'STOPPED', rejected: 'REJECTED', suspended: 'SUSPENDED', calculated: 'CALCULATED'
   }; return statusMap[status] || 'UNKNOWN';
 }

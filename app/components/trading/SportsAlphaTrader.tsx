@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 interface SportsTrade {
   event: string"
     prediction: string"

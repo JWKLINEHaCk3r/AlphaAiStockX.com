@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "./card.js";
 'use client';
 
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from "./card.js";
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardTitle } from "./card.js"; import { Button } from './button';
 import { TrendingUp;

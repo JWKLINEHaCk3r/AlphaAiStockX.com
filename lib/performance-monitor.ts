@@ -273,8 +273,8 @@ class PerformanceMonitor {
         errorBreakdown: {};
         timeframe;
         lastUpdated: new Date().toISOString()
-      },
-    }
+      }
+  }
 
     const totalRequests = recentMetrics.length;
     const successfulRequests = recentMetrics.filter(
@@ -326,7 +326,7 @@ class PerformanceMonitor {
       errorBreakdown;
       timeframe;
       lastUpdated: new Date().toISOString()
-    },
+    }
   }
 
   // Get detailed API metrics;
@@ -476,6 +476,6 @@ export class PerformanceOptimizer {
       maxRequests: number, windowMs: number },{ const endpointLimits: Record<string, { maxRequests: number, windowMs: number }> = { '/api/trading/orders': { maxRequests: 20, windowMs: 900000 }, // 20 per 15 min; '/api/portfolio': { maxRequests: 100, windowMs: 900000 }, // 100 per 15 min; '/api/market/data': { maxRequests: 200, windowMs: 900000 }, // 200 per 15 min; '/api/auth': { maxRequests: 10, windowMs: 900000 }, // 10 per 15 min;
     };
 
-    return endpointLimits[endpoint] || { maxRequests: 100, windowMs: 900000 },
+    return endpointLimits[endpoint] || { maxRequests: 100, windowMs: 900000 }
   }
 }

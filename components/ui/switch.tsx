@@ -1,7 +1,8 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
 import { Switch } from "./switch";
- // Removed circular import; import { cn } from '@/lib/utils';
+ // Removed circular import; import { cn } from '../lib/utils';
 
 export function Switch({
   checked; onCheckedChange; className = '';

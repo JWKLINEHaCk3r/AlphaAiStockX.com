@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 // Minimal valid component - expand as needed

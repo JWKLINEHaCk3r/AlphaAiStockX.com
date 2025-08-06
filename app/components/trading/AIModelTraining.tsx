@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select } from "../../../components/ui/select";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Select } from '../components/ui/select';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Brain"
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   Cpu"
   Database"
   Zap"
@@ -248,7 +248,7 @@ export default function AIModelTraining() { const [isTraining, setIsTraining] = 
                     
                     <Button
                       variant="outline"
-                      className="border-white/20 text-gray-300 hover: bg-white/10"
+                      className="border-white/20 text-gray-300 hover:bg-white/10"
                     >
                       <Upload className="w-4 h-4 mr-2" />
                       Upload Data
@@ -394,7 +394,7 @@ export default function AIModelTraining() { const [isTraining, setIsTraining] = 
                     </div>
                     
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-green-600 hover: bg-green-700">
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
                         <Play className="w-4 h-4" />
                       </Button>
                       <Button size="sm" variant="outline" className="border-gray-500 text-gray-300">

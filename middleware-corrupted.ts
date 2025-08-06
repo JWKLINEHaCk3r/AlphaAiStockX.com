@@ -40,7 +40,7 @@ function checkRateLimit(ip: string, pathname: string): {
 
   // Check if IP is blocked for suspicious activity;
   const suspicious = suspiciousIpStore.get(ip);
-  if (suspicious?.blocked && now - suspicious.lastViolation < 3600000) { // 1 hour block; return { allowed: false, reason: 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' },
+  if (suspicious?.blocked && now - suspicious.lastViolation < 3600000) { // 1 hour block; return { allowed: false, reason: 'IP_BLOCKED_SUSPICIOUS_ACTIVITY' }
   }
 
   // Get endpoint-specific rate limit;
@@ -55,7 +55,7 @@ function checkRateLimit(ip: string, pathname: string): {
     resetTime: now + SECURITY_CONFIG.rateLimit.windowMs;
       violations: 0
     });
-    return { allowed: true },
+    return { allowed: true }
   }
 
   if (current.count >= endpointLimit) {
@@ -78,12 +78,12 @@ function checkRateLimit(ip: string, pathname: string): {
       }
 
       suspiciousIpStore.set(ip, suspiciousData);
-    } return { allowed: false, reason: 'RATE_LIMIT_EXCEEDED' },
+    } return { allowed: false, reason: 'RATE_LIMIT_EXCEEDED' }
   }
 
   current.count++;
-  return { allowed: true },
-}
+  return { allowed: true }
+  }
 
 // Origin validation for enhanced security;
 function validateOrigin(request: NextRequest): boolean {
@@ -124,7 +124,7 @@ export async function middleware(request: NextRequest) { const { pathname } = re
 
   // Origin validation for sensitive operations; if (!validateOrigin(request)) { logSecurityEvent('INVALID_ORIGIN', ip, { origin: request.headers.get('origin'), host: request.headers.get('host'),
       pathname;
-      userAgent; }); return new NextResponse('Invalid Origin', { status: 403 }),
+      userAgent; }); return new NextResponse('Invalid Origin', { status: 403 })
   }
 
   // Enhanced rate limiting with endpoint-specific limits;
@@ -162,18 +162,18 @@ export async function middleware(request: NextRequest) { const { pathname } = re
     });
 
     if (!token) {
-      console.warn(`Unauthorized access attempt to ${pathname} from IP: ${ip}`); if (pathname.startsWith('/api/')) { return new NextResponse('Unauthorized', { status: 401 }),
-      } const loginUrl = new URL('/login', request.url); loginUrl.searchParams.set('callbackUrl', pathname);
+      console.warn(`Unauthorized access attempt to ${pathname} from IP: ${ip}`); if (pathname.startsWith('/api/')) { return new NextResponse('Unauthorized', { status: 401 })
+  } const loginUrl = new URL('/login', request.url); loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
  // Additional security checks for sensitive API routes; if (pathname.startsWith('/api/trading') || pathname.startsWith('/api/portfolio')) {
       // Verify user has trading permissions;
-      if (!token.tradingEnabled) { console.warn(`Trading access denied for user ${token.sub} from IP: ${ip}`); return new NextResponse('Trading Access Denied', { status: 403 }),
-      }
+      if (!token.tradingEnabled) { console.warn(`Trading access denied for user ${token.sub} from IP: ${ip}`); return new NextResponse('Trading Access Denied', { status: 403 })
+  }
 
       // Check for suspicious activity patterns;
-      if (await detectSuspiciousActivity(token.sub as string, ip)) { console.error(`Suspicious activity detected for user ${token.sub} from IP: ${ip}`); return new NextResponse('Account Security Check Required', { status: 423 }),
-      }
+      if (await detectSuspiciousActivity(token.sub as string, ip)) { console.error(`Suspicious activity detected for user ${token.sub} from IP: ${ip}`); return new NextResponse('Account Security Check Required', { status: 423 })
+  }
     }
   }
  // Apply maintenance mode if enabled; if (process.env.MAINTENANCE_MODE === 'true' && !pathname.startsWith('/maintenance')) { return NextResponse.redirect(new URL('/maintenance', request.url));

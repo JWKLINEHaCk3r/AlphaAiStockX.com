@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
 import React from 'react';
-import { Label } from "../../components/ui/label";
+import { Label } from '../components/ui/label';
 export default function SubscriptionPage() {
   const plans = [ { name: 'Starter'"
       price: 49, features: [ 'AI Hot Stock Tips', 'Basic AutoTrade Bot', 'Sportsbook AI Picks', 'Community Access'
@@ -42,8 +42,8 @@ export default function SubscriptionPage() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover: from-blue-600"
-      hover: to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600"
+      hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
                 Choose Plan
               </button>
             </div>

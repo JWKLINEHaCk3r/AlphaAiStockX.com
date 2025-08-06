@@ -1,7 +1,7 @@
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from '../components/ui/progress';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Card } from "./card.js";
 import React from 'react';
 import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "./card.js"; import { Badge } from './badge'; import { Button } from './button'; import { Progress } from './progress';
@@ -22,7 +22,7 @@ export const AIMarketCard = ({
   isLoading?: boolean;
 }) => {   const isPositive = change >= 0; const confidenceColor = aiConfidence > 80 ? 'green' : aiConfidence > 60 ? 'yellow' : 'red',
   
-  return ( <Card className={[ 'relative overflow-hidden transition-all duration-500 hover: scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' :  aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' :  'border-yellow-500/50 shadow-yellow-500/25'; 'shadow-lg'; ].join(' ')  }>
+  return ( <Card className={[ 'relative overflow-hidden transition-all duration-500 hover:scale-105', isLoading ? 'animate-pulse' : '', aiRecommendation === 'BUY' ? 'border-green-500/50 shadow-green-500/25' :  aiRecommendation === 'SELL' ? 'border-red-500/50 shadow-red-500/25' :  'border-yellow-500/50 shadow-yellow-500/25'; 'shadow-lg'; ].join(' ')  }>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-bold">{symbol}</CardTitle> <Badge variant={ aiRecommendation === 'BUY' ? 'default' :  aiRecommendation === 'SELL' ? 'destructive' :  'secondary';
@@ -143,7 +143,7 @@ export const AISignalCard = ({
       </div>
     </CardContent>
     <CardFooter>
-      <Button className="w-full bg-cyan-600 hover: bg-cyan-500">
+      <Button className="w-full bg-cyan-600 hover:bg-cyan-500">
         Execute AI Trade,
       </Button>
     </CardFooter>

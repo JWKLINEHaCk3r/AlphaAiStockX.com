@@ -1,58 +1,33 @@
-import React from 'react';
-"use client";
+'use client';
 
+import React from 'react';
 
 interface AITradingDashboardProps {
-  className?: string;
-} const AITradingDashboard: React.FunctionComponent<AITradingDashboardProps> = ({ className = '' }) => {  
-  const [isActive, setIsActive] = useState(false);
+  // Component props will be defined here
+}
 
+export default function AITradingDashboard(props: AITradingDashboardProps) {
   return (
-    <div className={`ai-trading-dashboard ${className   }`}>
-      <div className="dashboard-header">
-        <h1>AI Trading Dashboard</h1>
-        <p>Advanced AI-powered trading platform</p>
-      </div>
-      
-      <div className="dashboard-content">
-        <div className="trading-panel">
-          <h2>Trading Panel</h2>
-          <button 
-            onClick={() => setIsActive(!isActive)}
-            className="toggle-btn" > {isActive ? 'Stop Trading' : 'Start Trading'}
-          </button>
-        </div>
-        
-        <div className="market-data">
-          <h2>Market Overview</h2>
-          <div className="data-grid">
-            <div className="data-item">
-              <span>S&P 500</span>
-              <span>4,500.00</span>
-            </div>
-            <div className="data-item">
-              <span>NASDAQ</span>
-              <span>14,000.00</span>
-            </div>
+    <div className="min-h-screen bg-black text-white p-4">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          🤖 AI Trading Dashboard
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <h2 className="text-xl font-semibold mb-4">Trading Analytics</h2>
+            <p className="text-gray-400">AI-powered trading insights coming soon...</p>
           </div>
-        </div>
-        
-        <div className="ai-signals">
-          <h2>AI Signals</h2>
-          <div className="signals-list">
-            <div className="signal">
-              <span>AAPL - BUY Signal</span>
-              <span className="confidence">85% Confidence</span>
-            </div>
-            <div className="signal">
-              <span>TSLA - HOLD Signal</span>
-              <span className="confidence">72% Confidence</span>
-            </div>
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <h2 className="text-xl font-semibold mb-4">Portfolio Overview</h2>
+            <p className="text-gray-400">Your portfolio performance...</p>
+          </div>
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <h2 className="text-xl font-semibold mb-4">Market Trends</h2>
+            <p className="text-gray-400">Real-time market analysis...</p>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default AITradingDashboard;
+}

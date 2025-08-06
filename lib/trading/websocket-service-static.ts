@@ -508,7 +508,7 @@ export class WebSocketService {
 
   authenticateSocket(
     socketId: string,
-    token: string, ): Promise<{ success: boolean, userId?: string, error?: string }> { return Promise.resolve({ success: false, error: 'WebSocket disabled in static build' }),
+    token: string, ): Promise<{ success: boolean, userId?: string, error?: string }> { return Promise.resolve({ success: false, error: 'WebSocket disabled in static build' })
   }
  broadcastMarketData(data: MarketDataUpdate): void { console.log('Mock market data broadcast:', data);
   }
@@ -558,12 +558,12 @@ export class WebSocketService {
 
   validateMessage(message: unknown): {
       valid: boolean, error?: string },{
-    return { valid: true },
+    return { valid: true }
   }
  logActivity(userId: string, action: string, data?: unknown): void { console.log('Mock log activity:', userId, action, data);
   } getHealthCheck(): { status: 'healthy' | 'unhealthy', details: unknown },{ return { status: 'unhealthy', details: { reason: 'WebSocket service disabled for static build'
-      },
-    };
+      }
+  };
   }
  enableMaintenanceMode(): void { console.log('Mock enable maintenance mode');
   }
@@ -576,7 +576,7 @@ export class WebSocketService {
 
   exportMetrics(): unknown {
     return { enabled: false, mode: 'static_build_mock'
-    },
+    }
   }
 }
 

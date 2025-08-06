@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Bot, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
   Brain, 
   Zap, 
   TrendingUp, 
@@ -440,7 +440,7 @@ interface BotPerformance {
                       </div>
                       
                       <div className="flex gap-3">
-                        <Button className="flex-1 bg-cyan-600 hover: bg-cyan-700">
+                        <Button className="flex-1 bg-cyan-600 hover:bg-cyan-700">
                           <Settings className="w-4 h-4 mr-2" />
                           Configure
                         </Button>

@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 import { Search, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   TrendingUp, 
   TrendingDown, 
   Brain, 
@@ -281,7 +281,7 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
                     variant="outline"
                     size="sm"
               
-                    className="border-white/20 text-gray-300 hover: bg-white/10"
+                    className="border-white/20 text-gray-300 hover:bg-white/10"
                   >
                     <Filter className="w-4 h-4 mr-1" />
                     Filters
@@ -434,7 +434,7 @@ export default function AIStockScanner() { const [isScanning, setIsScanning] = u
                         <div className="flex flex-col gap-2">
                           <Button
                             size="sm"
-                            className="bg-purple-600 hover: bg-purple-700"
+                            className="bg-purple-600 hover:bg-purple-700"
                           >
                             <Eye className="w-4 h-4 mr-1" />
                             Analyze

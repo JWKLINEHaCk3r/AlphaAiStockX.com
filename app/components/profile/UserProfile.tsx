@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "../../../components/ui/calendar";
-import { Avatar } from "../../../components/ui/avatar";
-import { Card } from "../../../components/ui/card";
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Calendar } from '../components/ui/calendar';
+import { Avatar } from '../components/ui/avatar';
+import { Card } from '../components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { User, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
   Mail, 
   Phone, 
   Calendar, 
@@ -120,7 +120,7 @@ const SimpleTabsTrigger: React.FunctionComponent<{
   return (
     <button
       onClick={() => onTabChange?.(value)  }
-      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${ isActive  ? 'bg-white text-blue-600 shadow-sm'  : 'text-gray-600 hover: text-gray-800, hover:bg-gray-50'
+      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${ isActive  ? 'bg-white text-blue-600 shadow-sm'  : 'text-gray-600 hover:text-gray-800, hover:bg-gray-50'
       }`}
     >
       {children}
@@ -227,7 +227,7 @@ export default function UserProfile() { const [activeTab, setActiveTab] = useSta
 
               {/* Action Buttons */}
               <div className="flex gap-3">
-                <Button variant="outline" className="border-white/30 text-white hover: bg-white/10">
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   <Edit2 className="w-4 h-4 mr-2" />
                   Edit
                 </Button>

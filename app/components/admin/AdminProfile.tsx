@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "../../../components/ui/calendar";
-import { Badge } from "../../../components/ui/badge";
-import { Input } from "../../../components/ui/input";
-import { Card } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Card } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 import React, { useState } from 'react';
 import { User, }
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   Calendar, Shield } from 'lucide-react';
 
 interface AdminUser {

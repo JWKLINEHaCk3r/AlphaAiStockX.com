@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 interface BotStatus {
   active: boolean"
     profit: string"
@@ -57,7 +56,7 @@ export default function AutoSportsBetBot() {
       <button 
         onClick={toggleBot}
         disabled={loading}
-        className={`w-full py-3 px-6 rounded-lg font-bold transition-all ${ botStatus.active  ? 'bg-red-600 hover: bg-red-700 text-white'  : 'bg-green-600, hover:bg-green-700 text-white'
+        className={`w-full py-3 px-6 rounded-lg font-bold transition-all ${ botStatus.active  ? 'bg-red-600 hover:bg-red-700 text-white'  : 'bg-green-600, hover:bg-green-700 text-white'
         }`} > {loading ? 'Processing...' : (botStatus.active ? 'Stop Bot' : 'Start Bot')}
       </button>
     </div>

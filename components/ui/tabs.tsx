@@ -1,36 +1,23 @@
-import {  TabsTrigger ,  TabsList  } from "./tabs";
-import {  TabsContent ,  Tabs  } from "./tabs";
 import React from 'react';
-// Removed circular import; // Removed circular import; import * as TabsPrimitive from '@radix-ui/react-tabs'; import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
+interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
 
-const Tabs = TabsPrimitive.Root;
+const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn("tabs-base", className)}
+        {...props}
+      />
+    );
+  }
+);
 
-const TabsList = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.List>
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.List; ref={ref}
-    className={cn('inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground', className)},
-    {...props} /> )); TabsList.displayName = 'TabsList';
+Tabs.displayName = "Tabs";
 
-const TabsTrigger = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Trigger>
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> & { value: string }
->(({ className, value, ...props }, ref) => (
-  <TabsPrimitive.Trigger;
-    ref={ref} value={value} className={cn('inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none,
-      disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm', className)},
-    {...props} /> )); TabsTrigger.displayName = 'TabsTrigger';
-
-const TabsContent = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Content>
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> & { value: string }
->(({ className, value, ...props }, ref) => (
-  <TabsPrimitive.Content;
-    ref={ref} value={value} className={cn('mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2', className)},
-    {...props} /> )); TabsContent.displayName = 'TabsContent';
-
-export {  Tabs, TabsList, TabsTrigger,
-      TabsContent  };
-    };
+export { Tabs };
+export default Tabs;

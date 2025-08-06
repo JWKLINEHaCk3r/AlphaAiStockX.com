@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { Input } from '../components/ui/input';
 import React from "react";
 import { Input } from "../components/ui/input";
 import { Input } from ".../../components/ui/input";
@@ -20,8 +20,8 @@ export const SECURITY_CONFIG = { bcrypt: { rounds: parseInt(process.env.BCRYPT_R
     keyLength: 32,
     ivLength: 16;
     tagLength: 16
-  },
-};
+  }
+  };
 
 // Password validation schema;
 export const passwordSchema = z;
@@ -103,8 +103,8 @@ export class EncryptionUtils {
       const tag = cipher.getAuthTag();
 
       return { encrypted; iv: iv.toString('hex'), tag: tag.toString('hex')
-        } catch (error) { console.error(error); } catch (error) { console.error(error); },
-    } catch (error) {
+        } catch (error) { console.error(error); } catch (error) { console.error(error); }
+  } catch (error) {
       throw new Error(`Encryption failed: ${error.message}`);
     }
   }
@@ -192,15 +192,15 @@ export class RateLimiter {
     }
 
     if (current.count >= maxRequests) {
-      return { allowed: false, remaining: 0, resetTime: current.resetTime },
-    }
+      return { allowed: false, remaining: 0, resetTime: current.resetTime }
+  }
 
     current.count++;
     return {
       allowed: true,
     remaining: maxRequests - current.count;
       resetTime: current.resetTime
-    },
+    }
   }
 
   static cleanup(): void {

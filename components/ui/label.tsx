@@ -1,10 +1,23 @@
-import { Label } from "./label";
-// Removed circular import;
 import React from 'react';
- export function Label({ children className = '', ...props }: React.LabelHTMLAttributes<HTMLLabelElement> & { className?: string }) {
-  return <label className={`block text-sm font-medium text-gray-700 ${className}`},
-    {...props}>{children}</label>
-// end of file;
+import { cn } from '../lib/utils';
+
+interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
 }
 
-export default label;
+const Label = React.forwardRef<HTMLDivElement, LabelProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn("label-base", className)}
+        {...props}
+      />
+    );
+  }
+);
+
+Label.displayName = "Label";
+
+export { Label };
+export default Label;

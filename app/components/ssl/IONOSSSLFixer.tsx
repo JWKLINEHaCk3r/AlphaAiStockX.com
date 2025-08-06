@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Alert, AlertDescription } from "../../../components/ui/alert";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Badge } from "../../../components/ui/badge";
+    } from '../components/ui/card';
+import { Alert, AlertDescription } from '../components/ui/alert';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Badge } from '../components/ui/badge';
 import { Shield, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   CheckCircle, 
   AlertTriangle, 
   Clock, 
@@ -341,7 +341,7 @@ export default function IONOSSSLFixer() {
                           </AlertDescription>
                           <div className="flex gap-2">
                             {issue.autoFixable ? (
-                              <Button size="sm" className="bg-green-600 hover: bg-green-700">
+                              <Button size="sm" className="bg-green-600 hover:bg-green-700">
                                 <Zap className="w-4 h-4 mr-2" />
                                 Auto-Fix
                               </Button>

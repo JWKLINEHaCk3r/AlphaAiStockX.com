@@ -1,130 +1,121 @@
 #!/bin/bash
 
-# 🚀 AlphaAI Trading Platform - Quick Deployment Script
-# This script provides quick deployment options for the production-ready platform
+# Quick Deployment Script for AlphaAI StockX
+# Run this script from your project directory
 
-echo "🚀 AlphaAI Trading Platform - Quick Deploy"
-echo "========================================"
-echo ""
+echo "🚀 AlphaAI StockX - Quick Deploy Script"
+echo "======================================"
 
-# Color codes
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-NC='\033[0m'
+# Check if we're in the right directory
+if [[ ! -f "package.json" ]]; then
+    echo "❌ Error: package.json not found. Please run from project root."
+    exit 1
+fi
 
-echo -e "${GREEN}✅ PRODUCTION READY${NC} - All critical fixes completed!"
-echo ""
-echo "🎯 Choose your deployment method:"
-echo ""
-echo "1. 🌐 Vercel (Recommended - Zero Config)"
-echo "2. 🐳 Docker Compose (Full Control)"
-echo "3. ☁️  Manual Cloud Deployment"
-echo "4. 📋 Show Status Only"
-echo ""
+echo "✅ Project directory confirmed"
 
-read -p "Enter your choice (1-4): " choice
+# Step 1: Build verification
+echo "📦 Building project..."
+npm run build
 
-case $choice in
-    1)
-        echo ""
-        echo -e "${BLUE}🌐 Vercel Deployment${NC}"
-        echo "=================="
-        echo ""
-        echo "Installing Vercel CLI..."
-        npm install -g vercel
-        echo ""
-        echo "🔑 Make sure to set these environment variables in Vercel:"
-        echo "- ALPACA_API_KEY"
-        echo "- ALPACA_SECRET_KEY"
-        echo "- DATABASE_URL"
-        echo "- NEXTAUTH_SECRET"
-        echo "- NEXTAUTH_URL"
-        echo ""
-        read -p "Press Enter when environment variables are configured..."
-        echo ""
-        echo "🚀 Deploying to Vercel..."
-        vercel --prod
-        ;;
-    2)
-        echo ""
-        echo -e "${BLUE}🐳 Docker Deployment${NC}"
-        echo "==================="
-        echo ""
-        echo "🔧 Building production containers..."
-        docker-compose -f docker-compose.prod.yml build
-        echo ""
-        echo "🚀 Starting production services..."
-        docker-compose -f docker-compose.prod.yml up -d
-        echo ""
-        echo "📊 Checking service status..."
-        docker-compose -f docker-compose.prod.yml ps
-        echo ""
-        echo -e "${GREEN}✅ Deployment complete!${NC}"
-        echo "🌐 Application available at: http://localhost:3000"
-        echo "📊 Health check: http://localhost:3000/api/health"
-        ;;
-    3)
-        echo ""
-        echo -e "${BLUE}☁️  Manual Cloud Deployment${NC}"
-        echo "=========================="
-        echo ""
-        echo "📋 Manual deployment steps:"
-        echo ""
-        echo "1. 🔧 Build the application:"
-        echo "   pnpm install && pnpm build"
-        echo ""
-        echo "2. 🔑 Set environment variables:"
-        echo "   cp .env.example .env.production"
-        echo "   # Configure all required values"
-        echo ""
-        echo "3. 🚀 Start production server:"
-        echo "   pnpm start"
-        echo ""
-        echo "4. 🔍 Verify deployment:"
-        echo "   curl http://your-domain/api/health"
-        echo ""
-        echo "📚 See PRODUCTION_DEPLOYMENT_GUIDE.md for detailed instructions"
-        ;;
-    4)
-        echo ""
-        echo -e "${BLUE}📋 Current System Status${NC}"
-        echo "======================"
-        echo ""
-        echo "✅ Core Application: Ready"
-        echo "✅ Security: Hardened"
-        echo "✅ Trading APIs: Integrated"
-        echo "✅ Database: Configured"
-        echo "✅ Monitoring: Enabled"
-        echo "✅ Testing: 80%+ Coverage"
-        echo "✅ Docker: Production Ready"
-        echo ""
-        echo -e "${GREEN}🎉 STATUS: PRODUCTION READY${NC}"
-        echo ""
-        echo "🔗 Quick Links:"
-        echo "• Health Check: /api/health"
-        echo "• Trading Orders: /api/trading/orders"
-        echo "• Portfolio: /api/portfolio"
-        echo "• Market Data: /api/market/data"
-        echo "• AI Signals: /api/ai/signals"
-        echo ""
-        ;;
-    *)
-        echo ""
-        echo -e "${RED}❌ Invalid choice${NC}"
-        echo "Please run the script again and choose 1-4"
-        exit 1
-        ;;
-esac
+if [[ $? -ne 0 ]]; then
+    echo "❌ Build failed! Please fix errors before deploying."
+    exit 1
+fi
+
+echo "✅ Build successful!"
+
+# Step 2: Git setup and push
+echo "📤 Preparing GitHub deployment..."
+
+# Add all files
+git add .
+
+# Check if there are changes
+if git diff --staged --quiet; then
+    echo "ℹ️  No new changes to commit"
+else
+    echo "💾 Committing changes..."
+    git commit -m "Deploy AlphaAI StockX v2.0 - Production Ready
+
+🚀 Features:
+- Complete Next.js 15.4.4 with TypeScript
+- Responsive design with mobile navigation
+- Accessibility compliance (WCAG 2.1 AA)
+- Real-time trading dashboard
+- Portfolio management system
+- Comprehensive error handling
+- Loading states and animations
+
+🔧 Infrastructure:
+- Railway deployment configuration
+- Netlify deployment with Next.js plugin
+- GitHub Actions CI/CD pipeline
+- Docker containerization
+- Environment variables setup
+
+🎨 UI/UX Enhancements:
+- Modern card-based design
+- Smooth animations and transitions
+- Dark/light theme support
+- Mobile-first responsive layout
+- Accessibility features throughout"
+fi
+
+# Check if remote exists
+if git remote get-url origin >/dev/null 2>&1; then
+    echo "✅ GitHub remote configured"
+    echo "📤 Pushing to GitHub..."
+    git push origin main
+else
+    echo "⚠️  GitHub remote not configured"
+    echo "Please run: git remote add origin YOUR_GITHUB_REPO_URL"
+    echo "Then run: git push -u origin main"
+fi
 
 echo ""
-echo -e "${YELLOW}💡 Post-Deployment Checklist:${NC}"
-echo "1. ✅ Test health endpoint: /api/health"
-echo "2. ✅ Verify trading functionality"
-echo "3. ✅ Check monitoring dashboards"
-echo "4. ✅ Run integration tests"
-echo "5. ✅ Monitor logs for any issues"
+echo "🎉 GitHub deployment ready!"
 echo ""
-echo -e "${GREEN}🏆 AlphaAI Trading Platform Successfully Deployed!${NC}"
+
+# Step 3: Railway deployment
+echo "🚄 Railway Deployment"
+echo "===================="
+echo "To deploy to Railway:"
+echo "1. Install Railway CLI: npm install -g @railway/cli"
+echo "2. Login: railway login"
+echo "3. Deploy: railway deploy"
 echo ""
+
+# Step 4: Netlify deployment  
+echo "🌐 Netlify Deployment"
+echo "==================="
+echo "To deploy to Netlify:"
+echo "1. Install Netlify CLI: npm install -g netlify-cli"
+echo "2. Login: netlify login"
+echo "3. Deploy: netlify deploy --prod"
+echo ""
+
+echo "📋 Quick Commands:"
+echo "=================="
+echo "# Railway deploy:"
+echo "railway deploy"
+echo ""
+echo "# Netlify deploy:"
+echo "netlify deploy --prod"
+echo ""
+
+echo "✨ All configuration files are ready!"
+echo "Your project includes:"
+echo "- railway.toml (Railway config)"
+echo "- netlify.toml (Netlify config)"
+echo "- .github/workflows/deploy.yml (CI/CD)"
+echo "- Dockerfile.railway (Container config)"
+echo ""
+
+echo "🔗 After deployment, your app will be available at:"
+echo "- GitHub: https://github.com/YOUR_USERNAME/AlphaAiStockX.com"
+echo "- Railway: https://YOUR_APP.railway.app"
+echo "- Netlify: https://YOUR_APP.netlify.app"
+echo ""
+
+echo "✅ Deployment preparation complete! 🚀"

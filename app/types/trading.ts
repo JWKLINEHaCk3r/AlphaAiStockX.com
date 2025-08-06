@@ -1,4 +1,4 @@
-import { Alert } from "../../components/ui/alert";
+import { Alert } from '../components/ui/alert';
 // Common types for the trading application;
 export interface Strategy { id: number,
     name: string,

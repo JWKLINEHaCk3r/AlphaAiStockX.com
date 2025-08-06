@@ -1,5 +1,5 @@
 import { Textarea } from "./textarea";
-import React from 'react'; // Removed circular import; import { cn } from '@/lib/utils';
+import React from 'react'; // Removed circular import; import { cn } from '../lib/utils';
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
   ({ className, ...props }, ref) => {  

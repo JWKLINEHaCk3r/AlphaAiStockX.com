@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from '../components/ui/card';
 import React from 'react';
-import {  Card ,  Card, CardContent, CardTitle  } from "../../components/ui/card";
+import {  Card ,  Card, CardContent, CardTitle  } from '../components/ui/card';
 
 export default function AIChat() {
   return (

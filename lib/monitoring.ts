@@ -162,13 +162,13 @@ class PerformanceMonitor {
         metric: name,
     value: average,
         threshold: this.alertThresholds.responseTime
-      }),
-    } if (name === 'errorRate' && average > this.alertThresholds.errorRate) { this.sendAlert('HIGH_ERROR_RATE', {
+      })
+  } if (name === 'errorRate' && average > this.alertThresholds.errorRate) { this.sendAlert('HIGH_ERROR_RATE', {
         metric: name,
     value: average,
         threshold: this.alertThresholds.errorRate
-      }),
-    }
+      })
+  }
   }
 
   private static sendAlert(type: string, data: unknown): void {
@@ -196,8 +196,8 @@ class HealthChecker {
     responseTime: Date.now() - startTime,
         lastCheck: new Date().toISOString()
         } catch (error) { console.error(error); } catch (error) { console.error(error); }} catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
-      },
-    }
+      }
+  }
   }
 
   static async checkRedis(): Promise<ServiceHealth> {
@@ -211,8 +211,8 @@ class HealthChecker {
     responseTime: Date.now() - startTime,
         lastCheck: new Date().toISOString()
         } catch (error) { console.error(error); } catch (error) { console.error(error); }} catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
-      },
-    }
+      }
+  }
   }
 
   static async checkExternalAPIs(): Promise<ServiceHealth> {
@@ -230,8 +230,8 @@ class HealthChecker {
         lastCheck: new Date().toISOString()
       }
     } catch (error) { return { status: 'down', lastCheck: new Date().toISOString(), error: error instanceof Error ? error.message : 'Unknown error'
-      },
-    }
+      }
+  }
   }
 
   static async checkWebSocket(): Promise<ServiceHealth> {
@@ -327,8 +327,8 @@ export async function getSystemHealth(): Promise<HealthMetrics> {
     cpuUsage: SystemMetrics.getCPUUsage()
     };
     security: SecurityMetrics.getSecurityStats()
-  },
-}
+  }
+  }
 
 // Logging utilities; class Logger { private static logLevel = process.env.LOG_LEVEL || 'info';
  static debug(message: string, meta?: unknown): void { if (this.shouldLog('debug')) { console.debug(this.formatLog('DEBUG', message, meta));

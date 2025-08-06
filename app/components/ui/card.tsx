@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import React from 'react';
  export function Card({ children className = '', ...props }: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
   return (

@@ -1,10 +1,10 @@
-import React from "react";
 'use client';
 
+import React from "react";
 import { Toast } from "../components/ui/toast";
 import { Toast } from ".../../components/ui/toast";
 import * as React from 'react';
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
+import type { ToastActionElement, ToastProps } from '../components/ui/toast';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
@@ -51,7 +51,7 @@ const addToRemoveQueue = (toastId: string) => {
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId); dispatch({ type: 'REMOVE_TOAST',
     toastId: toastId
-    }),
+    })
   }, TOAST_REMOVE_DELAY);
 
   toastTimeouts.set(toastId, timeout);
@@ -91,12 +91,12 @@ export const reducer = (state: State, action: Action): State => { switch (action
         return {
           ...state;
           toasts: []
-        },
-      }
+        }
+  }
       return {
         ...state;
         toasts: state.toasts.filter(t => t.id !== action.toastId)
-      },
+      }
   }
 };
 

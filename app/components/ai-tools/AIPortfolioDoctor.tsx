@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 interface Diagnosis {
   risk: string"
     diversification: string"

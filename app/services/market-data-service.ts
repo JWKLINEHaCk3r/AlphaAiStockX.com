@@ -22,7 +22,7 @@ export class MarketDataService {
       changePercent: 1.34,
       volume: 52840000;
       marketCap: 2950000000000
-    },
+    }
   }
   
   async getHistoricalData(symbol: string, timeframe: string) {

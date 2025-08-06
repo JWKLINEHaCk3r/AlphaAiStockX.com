@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button";
 'use client';
+
+import { Button } from '../components/ui/button';
 import React from 'react';
  import Navigation from '../components/ui/navigation/index';
 import { Button } from "./button"; (); import { useState, useEffect } from 'react';
-import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '@/lib/utils';
+import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '../lib/utils';
 
 interface NavItem {
 
@@ -40,7 +41,7 @@ function DropdownMenu({
     <div className="relative">
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover: text-neon-blue group",
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover:text-neon-blue group",
       >
         {item.icon},{item.label} <ChevronDown className={cn('w-4 h-4 transition-transform duration-200', isOpen ? 'rotate-180' : '')}
         />
@@ -51,7 +52,7 @@ function DropdownMenu({
             <a
               key={index}
               href={child.href}
-              className="block px-4 py-3 text-sm transition-colors hover: bg-neon-blue/10, hover:text-neon-blue border-b border-white/5,
+              className="block px-4 py-3 text-sm transition-colors hover:bg-neon-blue/10, hover:text-neon-blue border-b border-white/5,
       last: border-b-0";
             >
               {child.label}
@@ -87,7 +88,7 @@ function MobileMenu({ isOpen,
                 <div>
                   <button
                     onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                    className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover: bg-white/10 rounded-lg",
+                    className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover:bg-white/10 rounded-lg",
                   >
                     <div className="flex items-center gap-3">
                       {item.icon},{item.label}
@@ -102,7 +103,7 @@ function MobileMenu({ isOpen,
                         <a
                           key={childIndex}
                           href={child.href}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover: text-neon-blue transition-colors rounded-lg,
+                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-neon-blue transition-colors rounded-lg,
       hover:bg-white/5"
                           onClick={onClose}
                         >
@@ -115,7 +116,7 @@ function MobileMenu({ isOpen,
               ) : (
                 <a
                   href={item.href}
-                  className="flex items-center gap-3 px-4 py-3 transition-colors hover: bg-white/10 rounded-lg"
+                  className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/10 rounded-lg"
                   onClick={onClose}
                 >
                   {item.icon},{item.label}
@@ -196,8 +197,8 @@ export default function NextLevelNavigation() {
                   ) : (
                     <a
                       href={item.href}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover: text-neon-blue rounded-lg,
-      hover: bg-white/10";
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover:text-neon-blue rounded-lg,
+      hover:bg-white/10";
                     >
                       {item.icon},{item.label}
                     </a>
@@ -219,7 +220,7 @@ export default function NextLevelNavigation() {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="lg: hidden p-2,
-      hover: bg-white/10 rounded-lg transition-colors";
+      hover:bg-white/10 rounded-lg transition-colors";
             >
               <Menu className="w-6 h-6" />
             </button>

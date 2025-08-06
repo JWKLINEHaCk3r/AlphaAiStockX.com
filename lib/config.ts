@@ -36,7 +36,7 @@ export const APP_CONFIG = {
     };
   };
   storage: { keys: { authToken: 'auth_token', userPrefs: 'user_preferences', theme: 'theme', watchlist: 'watchlist', portfolio: 'portfolio_cache'
-    },
+    }
   };
   limits: {
       searchResults: 20,
@@ -51,8 +51,8 @@ export const APP_CONFIG = {
 export const MARKET_HOURS = { NYSE: { timezone: 'America/New_York', open: '09:30', close: '16:00', preMarket: '04:00', afterHours: '20:00'
   }, NASDAQ: { timezone: 'America/New_York', open: '09:30', close: '16:00', preMarket: '04:00', afterHours: '20:00'
   }, CRYPTO: { timezone: 'UTC', open: '00:00', close: '23:59', preMarket: '00:00', afterHours: '23:59'
-  },
-} as const;
+  }
+  } as const;
 
 // API endpoints;
 export const API_ENDPOINTS = { auth: { login: '/auth/login', register: '/auth/register', logout: '/auth/logout', refresh: '/auth/refresh', profile: '/auth/profile'
@@ -61,8 +61,8 @@ export const API_ENDPOINTS = { auth: { login: '/auth/login', register: '/auth/re
   }, trading: { order: '/trading/order', orders: '/trading/orders', positions: '/trading/positions', balance: '/trading/balance'
   }, ai: { signals: '/ai/signals', analysis: '/ai/analysis', models: '/ai/models', agents: '/ai/agents'
   }, market: { status: '/market/status', indices: '/market/indices', movers: '/market/movers', sectors: '/market/sectors'
-  },
-} as const;
+  }
+  } as const;
 
 // WebSocket event types; export const WS_EVENTS = { CONNECT: 'connect', DISCONNECT: 'disconnect', ERROR: 'error', STOCK_UPDATE: 'stock_update', PORTFOLIO_UPDATE: 'portfolio_update', TRADE_UPDATE: 'trade_update', AI_SIGNAL: 'ai_signal', MARKET_STATUS: 'market_status', NEWS_UPDATE: 'news_update'
 } as const;
@@ -109,7 +109,7 @@ export const isMarketHours = () => {
   // Market hours: 9:30 AM -,
       4: 00 PM EST
               
-  return hour >= 9 && hour < 16,
-};
+  return hour >= 9 && hour < 16
+  };
 
 export default APP_CONFIG;

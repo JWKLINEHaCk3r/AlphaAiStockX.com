@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { TrendingUp, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   Zap, 
   Shield, 
   BarChart3, 
@@ -87,7 +87,7 @@ interface CompetitorComparison {
                lightning-fast execution
                and unmatched security
           </p>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover: from-blue-700"
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700"
       hover:to-purple-700 text-white text-lg px-8 py-4">
             <Rocket className="w-6 h-6 mr-2" />
             Start Trading Now
@@ -270,7 +270,7 @@ interface CompetitorComparison {
                and cutting-edge AI technology.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button className="bg-white text-blue-600 hover: bg-gray-100 font-semibold px-8 py-4 text-lg">
+              <Button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8 py-4 text-lg">
                 <Rocket className="w-6 h-6 mr-2" />
                 Start Free Trial
               </Button>

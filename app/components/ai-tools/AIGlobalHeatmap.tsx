@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 interface HeatmapData {
   region: string"
     trend: string"

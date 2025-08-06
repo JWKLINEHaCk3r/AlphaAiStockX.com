@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Brain, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
   Zap, 
   TrendingUp, 
   BarChart3, 
@@ -153,7 +153,7 @@ export default function QuantumAICore() { const [isActive, setIsActive] = useSta
                 <button
                   key={mode}
                   onClick={() => setProcessingMode(mode)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${ processingMode === mode ? 'bg-cyan-600 text-white' : 'text-gray-300 hover: text-white, hover:bg-white/10'
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${ processingMode === mode ? 'bg-cyan-600 text-white' : 'text-gray-300 hover:text-white, hover:bg-white/10'
                   }`}
                 >
                   {mode.charAt(0).toUpperCase() + mode.slice(1)}

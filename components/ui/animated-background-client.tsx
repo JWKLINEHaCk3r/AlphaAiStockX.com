@@ -1,4 +1,5 @@
 'use client';
+
 import { AnimatedBackground } from "./animated-background-client";
 
 import React, { useEffect, useRef } from 'react';
@@ -40,8 +41,8 @@ export default function AnimatedBackground() {
           vy: (Math.random() - 0.5) * 0.5;
           size: Math.random() * 3 + 1,
           color: colors[Math.floor(Math.random() * colors.length)];
-          opacity: Math.random() * 0.5 + 0.3,
-        });
+          opacity: Math.random() * 0.5 + 0.3
+  });
       }
 
       particlesRef.current = particles;
@@ -90,5 +91,5 @@ export default function AnimatedBackground() {
     <canvas
       ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" style={{ background: 'transparent' }}
     />
-  ),
-}
+  )
+  }

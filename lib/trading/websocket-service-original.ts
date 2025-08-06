@@ -1,7 +1,7 @@
 import React from "react";
 // Mock WebSocket service for static export compatibility;
 // This service is disabled for static builds but maintains interface compatibility;
-import { SecurityAudit } from '@/lib/security';
+import { SecurityAudit } from '../lib/security';
 
 export interface WebSocketMessage {
 
@@ -430,8 +430,8 @@ export class WebSocketService {
 
     this.setupEventHandlers();
     this.isInitialized = true;
- SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_initialized' },
-    });
+ SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_initialized' }
+  });
   }
 
   private setupEventHandlers(): void {
@@ -446,8 +446,8 @@ export class WebSocketService {
           if (isValid) {
             socket.userId = data.userId; this.addClientConnection(data.userId, socket.id); socket.emit('authenticated', { success: true     } catch (error) { console.error(error); } catch (error) { console.error(error); });
  SecurityAudit.logSecurityEvent({ type: 'websocket_auth',
-    userId: data.userId, details: { action: 'authenticated', socketId: socket.id },
-            }); } else { socket.emit('authentication_error', { error: 'Invalid token' });
+    userId: data.userId, details: { action: 'authenticated', socketId: socket.id }
+  }); } else { socket.emit('authentication_error', { error: 'Invalid token' });
             socket.disconnect();
           } } catch (error) { socket.emit('authentication_error', { error: 'Authentication failed' });
           socket.disconnect();
@@ -504,12 +504,12 @@ export class WebSocketService {
  SecurityAudit.logSecurityEvent({ type: 'websocket_disconnect',
     userId: socket.userId,
             details: {
-      socketId: socket.id },
-          });
+      socketId: socket.id }
+  });
         }
       });
- // Handle ping/pong for connection health; socket.on('ping', () => { socket.emit('pong', { timestamp: Date.now() }),
-      });
+ // Handle ping/pong for connection health; socket.on('ping', () => { socket.emit('pong', { timestamp: Date.now() })
+  });
     });
   }
 
@@ -538,7 +538,7 @@ export class WebSocketService {
 
     SecurityAudit.logDataAccess({ userId; resource: 'order_update', action: 'notify',
       success: true
-    }),
+    })
   }
 
   public notifyPositionUpdate(userId: string, position: PositionUpdate): void {
@@ -683,8 +683,8 @@ export class WebSocketService {
       SecurityAudit.logSecurityEvent({
         type: 'authentication_error';
         userId; details: { action: 'token_validation_failed', error: error instanceof Error ? error.message : 'Unknown error'
-        },
-      });
+        }
+  });
       return false;
     }
   }
@@ -731,8 +731,8 @@ export class WebSocketService {
     this.subscriptions.clear();
     this.marketDataSubscriptions.clear();
     this.isInitialized = false;
- SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_shutdown' },
-    });
+ SecurityAudit.logSecurityEvent({ type: 'system_event', details: { action: 'websocket_service_shutdown' }
+  });
   }
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Button } from "../../../components/ui/button";
-import { Badge } from "../../../components/ui/badge";
+import React from 'react';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 import { X, 
   Crown, 
   Star, 
@@ -201,7 +201,7 @@ export default function SubscriptionModal({
                       <Button
                         onClick={() => handleSelectPlan(plan.id)}
                         disabled={isCurrentPlan}
-                        className={`w-full ${ isCurrentPlan ? 'bg-gray-600 cursor-not-allowed' : plan.popular ? 'bg-yellow-600 hover: bg-yellow-700' : plan.enterprise ? 'bg-purple-600 hover:bg-purple-700' : 'bg-blue-600, hover:bg-blue-700'
+                        className={`w-full ${ isCurrentPlan ? 'bg-gray-600 cursor-not-allowed' : plan.popular ? 'bg-yellow-600 hover:bg-yellow-700' : plan.enterprise ? 'bg-purple-600 hover:bg-purple-700' : 'bg-blue-600, hover:bg-blue-700'
                         } text-white font-semibold py-3`} > {isCurrentPlan ? 'Current Plan' : plan.id === 'free' ? 'Get Started' : 'Upgrade Now'}
                       </Button>
                     </div>
@@ -242,7 +242,7 @@ export default function SubscriptionModal({
 
               <Button
                 onClick={handleSubscribe}
-                className="w-full bg-blue-600 hover: bg-blue-700 text-white font-semibold py-4 text-lg"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 text-lg"
               >
                 <Lock className="w-5 h-5 mr-2" />
                 Complete Subscription

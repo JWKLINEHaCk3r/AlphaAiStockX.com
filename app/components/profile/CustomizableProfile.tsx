@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "../../../components/ui/calendar";
-import {  TabsTrigger ,  TabsList  } from "../../../components/ui/tabs";
-import {  TabsContent ,  Tabs  } from "../../../components/ui/tabs";
-import { Card } from "../../../components/ui/card";
+import { Calendar } from '../components/ui/calendar';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Calendar } from '../components/ui/calendar';
+import {  TabsTrigger ,  TabsList  } from '../components/ui/tabs';
+import {  TabsContent ,  Tabs  } from '../components/ui/tabs';
+import { Card } from '../components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Alert } from "../../../components/ui/alert";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Alert } from '../components/ui/alert';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { User, 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
   Settings, 
   Bell, 
   Shield, 

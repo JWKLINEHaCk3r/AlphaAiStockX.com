@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Card } from "../../../components/ui/card";
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+    } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Database, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card.js";
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
   Globe, 
   TrendingUp, 
   BarChart3, 
@@ -164,7 +164,7 @@ interface DataMetrics {
             <Button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`${ selectedCategory === category ? 'bg-cyan-600 hover: bg-cyan-700 text-white' : 'bg-white/10, hover:bg-white/20 text-gray-300'
+              className={`${ selectedCategory === category ? 'bg-cyan-600 hover:bg-cyan-700 text-white' : 'bg-white/10, hover:bg-white/20 text-gray-300'
               } transition-colors`} > {category === 'all' ? (
                 <Globe className="w-4 h-4 mr-2" />
               ) : (
@@ -262,7 +262,7 @@ interface DataMetrics {
                     <Button 
                       size="sm" ;
                       variant="outline" "
-                      className="border-green-500 text-green-500 hover: bg-green-500/10"
+                      className="border-green-500 text-green-500 hover:bg-green-500/10"
                     >
                       <CheckCircle className="w-4 h-4" />
                     </Button>

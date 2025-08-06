@@ -37,8 +37,8 @@ export async function apiRequest<T = any>(
     body: data ? JSON.stringify(data) : undefined
     }),
   patch: <T>(endpoint: string, data?: unknown) =>, apiRequest<T>(endpoint, { method: 'PATCH',
-    body: data ? JSON.stringify(data) : undefined }), delete: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'DELETE' }),
-};
+    body: data ? JSON.stringify(data) : undefined }), delete: <T>(endpoint: string) => apiRequest<T>(endpoint, { method: 'DELETE' })
+  };
 
 // WebSocket connection manager;
 export class WSManager {
@@ -143,16 +143,16 @@ export const formatters = { currency: (value: number currency = 'USD') => { retu
     }).format(value)
   }; compactNumber: (value: number) => { return new Intl.NumberFormat('en-US', { notation: 'compact',
     maximumFractionDigits: 1
-    }).format(value),
+    }).format(value)
   };
   date: (date: Date | string) => { const d = new Date(date); return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric'
-    }).format(d),
+    }).format(d)
   };
   time: (date: Date | string) => { const d = new Date(date); return new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit'
-    }).format(d),
+    }).format(d)
   };
   datetime: (date: Date | string) => { const d = new Date(date); return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
-    }).format(d),
+    }).format(d)
   };
 };
 

@@ -1,7 +1,6 @@
+'use client';
+
 import React from 'react';
-"use client";
-
-
 interface NewsItem {
   headline: string"
     impact: string"
