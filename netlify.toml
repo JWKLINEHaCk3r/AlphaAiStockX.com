@@ -3,17 +3,13 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "18"
-  NODE_ENV = "production"  
+  NODE_VERSION = "20"
+  NPM_CONFIG_PRODUCTION = "false"
   NEXT_TELEMETRY_DISABLED = "1"
-
-[functions]
-  node_bundler = "esbuild"
+  CI = "true"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[context.production.environment]
+  NODE_ENV = "production"

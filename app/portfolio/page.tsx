@@ -1,279 +1,267 @@
-'use client'
-
-import React, { useState, useEffect } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-interface Holding {
-  symbol: string
-  name: string
-  shares: number
-  price: number
-  change: number
-  changePercent: number
-}
+import { TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Target, Briefcase } from 'lucide-react'
 
 export default function PortfolioPage() {
-  const [selectedTimeframe, setSelectedTimeframe] = useState('1D')
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [holdings, setHoldings] = useState<Holding[]>([])
-
-  // Simulate data loading
-  useEffect(() => {
-    const loadPortfolioData = async () => {
-      setIsLoading(true)
-      setError(null)
-      
-      try {
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        
-        const mockHoldings: Holding[] = [
-          { symbol: 'AAPL', name: 'Apple Inc.', shares: 150, price: 175.84, change: 2.45, changePercent: 1.42 },
-          { symbol: 'GOOGL', name: 'Alphabet Inc.', shares: 75, price: 2831.23, change: -15.32, changePercent: -0.54 },
-          { symbol: 'MSFT', name: 'Microsoft Corp.', shares: 200, price: 378.85, change: 4.22, changePercent: 1.13 },
-          { symbol: 'TSLA', name: 'Tesla Inc.', shares: 100, price: 248.50, change: -3.15, changePercent: -1.25 },
-          { symbol: 'AMZN', name: 'Amazon.com Inc.', shares: 80, price: 3421.15, change: 12.75, changePercent: 0.37 }
-        ]
-        
-        setHoldings(mockHoldings)
-      } catch (err) {
-        setError('Failed to load portfolio data. Please try again.')
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    loadPortfolioData()
-  }, [selectedTimeframe])
-
-  const getTotalValue = () => {
-    return holdings.reduce((total, holding) => total + (holding.shares * holding.price), 0)
+  const portfolioData = {
+    totalValue: '$124,350.67',
+    dayChange: '+$2,134.89',
+    dayChangePercent: '+1.75%',
+    totalGain: '+$34,250.67',
+    totalGainPercent: '+38.1%',
   }
 
-  const getTotalChange = () => {
-    return holdings.reduce((total, holding) => total + (holding.shares * holding.change), 0)
-  }
+  const holdings = [
+    {
+      symbol: 'AAPL',
+      name: 'Apple Inc.',
+      shares: 150,
+      avgPrice: '$145.32',
+      currentPrice: '$175.43',
+      value: '$26,314.50',
+      gain: '+$4,516.50',
+      gainPercent: '+20.7%',
+      positive: true,
+    },
+    {
+      symbol: 'NVDA',
+      name: 'NVIDIA Corporation',
+      shares: 75,
+      avgPrice: '$380.45',
+      currentPrice: '$432.12',
+      value: '$32,409.00',
+      gain: '+$3,875.25',
+      gainPercent: '+13.6%',
+      positive: true,
+    },
+    {
+      symbol: 'MSFT',
+      name: 'Microsoft Corporation',
+      shares: 80,
+      avgPrice: '$385.67',
+      currentPrice: '$412.78',
+      value: '$33,022.40',
+      gain: '+$2,168.80',
+      gainPercent: '+7.0%',
+      positive: true,
+    },
+    {
+      symbol: 'GOOGL',
+      name: 'Alphabet Inc.',
+      shares: 120,
+      avgPrice: '$148.92',
+      currentPrice: '$142.56',
+      value: '$17,107.20',
+      gain: '-$763.20',
+      gainPercent: '-4.3%',
+      positive: false,
+    },
+    {
+      symbol: 'TSLA',
+      name: 'Tesla Inc.',
+      shares: 60,
+      avgPrice: '$215.34',
+      currentPrice: '$248.67',
+      value: '$14,920.20',
+      gain: '+$1,999.80',
+      gainPercent: '+15.5%',
+      positive: true,
+    },
+  ]
 
-  const LoadingCard = () => (
-    <Card className="bg-gray-900 border-gray-700">
-      <CardContent className="p-6">
-        <div className="animate-pulse">
-          <div className="h-4 bg-gray-700 rounded w-20 mb-2"></div>
-          <div className="h-8 bg-gray-700 rounded w-32"></div>
-        </div>
-      </CardContent>
-    </Card>
-  )
-
-  const ErrorState = () => (
-    <div className="text-center py-12">
-      <div className="text-6xl mb-4">⚠️</div>
-      <h3 className="text-xl font-semibold text-white mb-2">Error Loading Portfolio</h3>
-      <p className="text-gray-400 mb-4">{error}</p>
-      <Button 
-        onClick={() => window.location.reload()} 
-        className="bg-blue-600 hover:bg-blue-700"
-      >
-        🔄 Retry
-      </Button>
-    </div>
-  )
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-black text-white p-4">
-        <div className="max-w-7xl mx-auto">
-          <ErrorState />
-        </div>
-      </div>
-    )
-  }
+  const allocationData = [
+    { sector: 'Technology', percentage: 72.5, color: 'bg-blue-500' },
+    { sector: 'Healthcare', percentage: 12.3, color: 'bg-green-500' },
+    { sector: 'Financial', percentage: 8.7, color: 'bg-purple-500' },
+    { sector: 'Energy', percentage: 4.2, color: 'bg-yellow-500' },
+    { sector: 'Consumer', percentage: 2.3, color: 'bg-red-500' },
+  ]
 
   return (
-    <div className="min-h-screen bg-black text-white p-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-600 bg-clip-text text-transparent">
-            📊 Portfolio Dashboard
+    <div className="min-h-screen bg-black text-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
+            Portfolio Overview
           </h1>
-          <p className="text-gray-400">Track your investments and portfolio performance</p>
-        </header>
+          <p className="text-gray-400">Track your investments and performance</p>
+        </div>
 
         {/* Portfolio Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {isLoading ? (
-            <>
-              <LoadingCard />
-              <LoadingCard />
-              <LoadingCard />
-              <LoadingCard />
-            </>
-          ) : (
-            <>
-              <Card className="bg-gray-900 border-gray-700 hover:border-green-500 transition-colors duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">Total Value</h3>
-                  <p className="text-2xl font-bold text-white">
-                    ${getTotalValue().toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                  </p>
-                </CardContent>
-              </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-gray-900 border-gray-800">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Total Portfolio Value</p>
+                  <p className="text-2xl font-bold text-white">{portfolioData.totalValue}</p>
+                </div>
+                <DollarSign className="h-8 w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
 
-              <Card className="bg-gray-900 border-gray-700 hover:border-blue-500 transition-colors duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">Day Change</h3>
-                  <p className={`text-2xl font-bold ${getTotalChange() >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                    {getTotalChange() >= 0 ? '+' : ''}${getTotalChange().toFixed(2)}
-                  </p>
-                </CardContent>
-              </Card>
+          <Card className="bg-gray-900 border-gray-800">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Today&apos;s Change</p>
+                  <p className="text-2xl font-bold text-green-400">{portfolioData.dayChange}</p>
+                  <p className="text-sm text-green-400">{portfolioData.dayChangePercent}</p>
+                </div>
+                <TrendingUp className="h-8 w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
 
-              <Card className="bg-gray-900 border-gray-700 hover:border-purple-500 transition-colors duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">Holdings</h3>
+          <Card className="bg-gray-900 border-gray-800">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Total Gain/Loss</p>
+                  <p className="text-2xl font-bold text-green-400">{portfolioData.totalGain}</p>
+                  <p className="text-sm text-green-400">{portfolioData.totalGainPercent}</p>
+                </div>
+                <Target className="h-8 w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-900 border-gray-800">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Active Positions</p>
                   <p className="text-2xl font-bold text-white">{holdings.length}</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gray-900 border-gray-700 hover:border-yellow-500 transition-colors duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">Cash Balance</h3>
-                  <p className="text-2xl font-bold text-white">$12,450.00</p>
-                </CardContent>
-              </Card>
-            </>
-          )}
+                  <p className="text-sm text-blue-400">Holdings</p>
+                </div>
+                <Briefcase className="h-8 w-8 text-blue-500" />
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Timeframe Selector */}
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold text-white mb-3">📅 Time Range</h2>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Portfolio timeframes">
-            {['1D', '1W', '1M', '3M', '1Y'].map((timeframe) => (
-              <Button
-                key={timeframe}
-                variant={selectedTimeframe === timeframe ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedTimeframe(timeframe)}
-                disabled={isLoading}
-                className={`
-                  transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black
-                  ${selectedTimeframe === timeframe 
-                    ? 'bg-blue-600 text-white shadow-md border-blue-500' 
-                    : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700 hover:border-gray-500'
-                  }
-                  ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}
-                `}
-                role="button"
-                aria-pressed={selectedTimeframe === timeframe}
-                aria-describedby="timeframe-description"
-              >
-                {timeframe}
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        {/* Holdings Table */}
-        <Card className="bg-gray-900 border-gray-700" id="portfolio-content">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              📋 Current Holdings
-              {isLoading && (
-                <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full"></div>
-              )}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              {isLoading ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Holdings Table */}
+          <div className="lg:col-span-2">
+            <Card className="bg-gray-900 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Current Holdings</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Your stock positions and performance
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <div className="space-y-4">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="animate-pulse flex space-x-4">
-                      <div className="h-4 bg-gray-700 rounded w-16"></div>
-                      <div className="h-4 bg-gray-700 rounded w-32"></div>
-                      <div className="h-4 bg-gray-700 rounded w-20"></div>
-                      <div className="h-4 bg-gray-700 rounded w-24"></div>
-                      <div className="h-4 bg-gray-700 rounded w-20"></div>
-                      <div className="h-4 bg-gray-700 rounded w-28"></div>
+                  {holdings.map((holding) => (
+                    <div
+                      key={holding.symbol}
+                      className="flex items-center justify-between p-4 rounded-lg bg-gray-800/50 border border-gray-700"
+                    >
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                            <span className="text-white font-bold text-sm">{holding.symbol.slice(0, 2)}</span>
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-white">{holding.symbol}</h3>
+                            <p className="text-sm text-gray-400">{holding.name}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center space-x-8 text-right">
+                        <div>
+                          <p className="text-white font-medium">{holding.shares} shares</p>
+                          <p className="text-sm text-gray-400">@ {holding.avgPrice}</p>
+                        </div>
+                        
+                        <div>
+                          <p className="text-white font-medium">{holding.currentPrice}</p>
+                          <p className="text-sm text-gray-400">Current</p>
+                        </div>
+                        
+                        <div>
+                          <p className="text-white font-bold">{holding.value}</p>
+                          <div className={`text-sm ${holding.positive ? 'text-green-400' : 'text-red-400'}`}>
+                            {holding.positive ? '+' : ''}{holding.gain} ({holding.gainPercent})
+                          </div>
+                        </div>
+
+                        <div>
+                          {holding.positive ? (
+                            <TrendingUp className="h-5 w-5 text-green-400" />
+                          ) : (
+                            <TrendingDown className="h-5 w-5 text-red-400" />
+                          )}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <table className="w-full" role="table" aria-label="Portfolio holdings">
-                  <thead>
-                    <tr className="border-b border-gray-700">
-                      <th className="text-left py-3 px-4 font-medium text-gray-400" scope="col">Symbol</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-400" scope="col">Company</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-400" scope="col">Shares</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-400" scope="col">Price</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-400" scope="col">Change</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-400" scope="col">Market Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {holdings.map((holding) => (
-                      <tr 
-                        key={holding.symbol} 
-                        className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors duration-150 focus-within:bg-gray-800/50"
-                        tabIndex={0}
-                        role="row"
-                      >
-                        <td className="py-4 px-4" role="gridcell">
-                          <span className="font-semibold text-white">{holding.symbol}</span>
-                        </td>
-                        <td className="py-4 px-4 text-gray-300" role="gridcell">{holding.name}</td>
-                        <td className="py-4 px-4 text-right text-white" role="gridcell">{holding.shares.toLocaleString()}</td>
-                        <td className="py-4 px-4 text-right text-white" role="gridcell">${holding.price.toFixed(2)}</td>
-                        <td className={`py-4 px-4 text-right ${holding.change >= 0 ? 'text-green-400' : 'text-red-400'}`} role="gridcell">
-                          <span className="flex flex-col items-end">
-                            <span>{holding.change >= 0 ? '+' : ''}${holding.change.toFixed(2)}</span>
-                            <span className="text-sm">({holding.changePercent >= 0 ? '+' : ''}{holding.changePercent.toFixed(2)}%)</span>
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 text-right text-white font-semibold" role="gridcell">
-                          ${(holding.shares * holding.price).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button 
-            className="bg-green-600 hover:bg-green-700 text-white transition-colors duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-black"
-            disabled={isLoading}
-          >
-            🛒 Buy Stocks
-          </Button>
-          <Button 
-            className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black"
-            disabled={isLoading}
-          >
-            💰 Sell Stocks
-          </Button>
-          <Button 
-            variant="outline" 
-            className="border-gray-600 text-gray-300 hover:bg-gray-800 transition-colors duration-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
-            disabled={isLoading}
-          >
-            📈 Add to Watchlist
-          </Button>
-          <Button 
-            variant="outline" 
-            className="border-gray-600 text-gray-300 hover:bg-gray-800 transition-colors duration-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
-            disabled={isLoading}
-          >
-            📊 Generate Report
-          </Button>
+          {/* Portfolio Allocation */}
+          <div>
+            <Card className="bg-gray-900 border-gray-800 mb-6">
+              <CardHeader>
+                <CardTitle className="text-white">Portfolio Allocation</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Sector distribution
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {allocationData.map((sector) => {
+                    const widthClass = sector.percentage >= 70 ? 'w-full' :
+                      sector.percentage >= 50 ? 'w-4/5' :
+                      sector.percentage >= 30 ? 'w-3/5' :
+                      sector.percentage >= 20 ? 'w-2/5' :
+                      sector.percentage >= 10 ? 'w-1/5' : 'w-1/12'
+                    
+                    return (
+                      <div key={sector.sector} className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-300">{sector.sector}</span>
+                          <span className="text-white font-medium">{sector.percentage}%</span>
+                        </div>
+                        <div className="w-full bg-gray-700 rounded-full h-2">
+                          <div className={`h-2 rounded-full ${sector.color} ${widthClass} transition-all duration-300`} />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card className="bg-gray-900 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700">
+                  <DollarSign className="mr-2 h-4 w-4" />
+                  Buy More
+                </Button>
+                <Button className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700">
+                  <TrendingDown className="mr-2 h-4 w-4" />
+                  Sell Position
+                </Button>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700">
+                  <BarChart3 className="mr-2 h-4 w-4" />
+                  Rebalance
+                </Button>
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700">
+                  <PieChart className="mr-2 h-4 w-4" />
+                  View Reports
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

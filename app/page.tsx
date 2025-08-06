@@ -1,150 +1,168 @@
-import Link from 'next/link'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { TradingCard } from '@/components/trading/TradingCard'
+import { TrendingUp, BarChart3, DollarSign, Activity } from 'lucide-react'
+import Link from 'next/link'
 
 export default function HomePage() {
-  const features = [
+  const stats = [
     {
-      title: '🤖 AI Trading',
-      description: 'Advanced AI algorithms for automated trading with real-time market analysis and intelligent decision making.',
-      href: '/ai-trading',
-      stats: { accuracy: '94%', trades: '12 Active', returns: '+18.5%' }
+      title: 'Portfolio Value',
+      value: '$124,350',
+      change: '+12.5%',
+      icon: DollarSign,
+      positive: true,
     },
     {
-      title: '📊 Portfolio Management',
-      description: 'Comprehensive portfolio tracking with detailed analytics, risk assessment, and performance monitoring.',
-      href: '/portfolio',
-      stats: { value: '$125.4K', holdings: '8 Stocks', change: '+2.3%' }
+      title: 'AI Predictions',
+      value: '87%',
+      change: 'Accuracy',
+      icon: Activity,
+      positive: true,
     },
     {
-      title: '📈 Advanced Analytics',
-      description: 'Deep market insights with predictive analytics, risk metrics, and performance benchmarking.',
-      href: '/analytics',
-      stats: { confidence: '87%', outlook: '+8.3%', risk: 'Medium' }
-    }
-  ]
-
-  const marketStats = [
-    { label: 'Portfolio Value', value: '$125,430.50', change: '+2.34%', positive: true },
-    { label: 'Active Trades', value: '12', change: '+3', positive: true },
-    { label: 'AI Accuracy', value: '94.2%', change: '+1.2%', positive: true },
-    { label: 'Monthly Return', value: '+18.5%', change: '+4.2%', positive: true }
+      title: 'Active Trades',
+      value: '23',
+      change: '+5 today',
+      icon: TrendingUp,
+      positive: true,
+    },
+    {
+      title: 'Market Insights',
+      value: '156',
+      change: 'New signals',
+      icon: BarChart3,
+      positive: true,
+    },
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden" role="banner">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black" aria-hidden="true"></div>
-        <div className="relative max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800">
+      <div className="container mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
             AlphaAI StockX
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto animate-fade-in-delay">
-            Revolutionary AI-powered trading platform that combines advanced machine learning with real-time market analytics for professional-grade investment management.
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Revolutionary AI-powered trading platform that uses advanced machine learning to predict market movements and optimize your investment strategy.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
+          <div className="flex gap-4 justify-center">
             <Link href="/ai-trading">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="Start AI Trading - Navigate to AI Trading page"
-              >
-                🚀 Start AI Trading
-              </Button>
-            </Link>
-            <Link href="/portfolio">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="View Portfolio - Navigate to Portfolio page"
-              >
-                📊 View Portfolio
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Market Stats */}
-      <section className="py-16 px-4 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Live Performance Dashboard</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {marketStats.map((stat, index) => (
-              <Card key={index} className="bg-gray-800 border-gray-700 hover:border-blue-500 transition-all duration-300">
-                <CardContent className="p-6 text-center">
-                  <h3 className="text-sm font-medium text-gray-400 mb-2">{stat.label}</h3>
-                  <p className="text-2xl font-bold text-white mb-2">{stat.value}</p>
-                  <p className={`text-sm ${stat.positive ? 'text-green-400' : 'text-red-400'}`}>
-                    {stat.change} today
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Cards */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Platform Features</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <TradingCard key={index} {...feature} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technology Section */}
-      <section className="py-16 px-4 bg-gray-900/30">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8 text-white">Powered by Advanced AI Technology</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-              <div className="text-4xl mb-4">🧠</div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Machine Learning</h3>
-              <p className="text-gray-400">Advanced neural networks analyze millions of data points to identify profitable trading opportunities.</p>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Real-Time Analysis</h3>
-              <p className="text-gray-400">Lightning-fast market data processing with microsecond-level trade execution capabilities.</p>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-              <div className="text-4xl mb-4">🛡️</div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Risk Management</h3>
-              <p className="text-gray-400">Sophisticated risk assessment algorithms protect your portfolio from market volatility.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-white">Ready to Transform Your Trading?</h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Join thousands of traders who have already discovered the power of AI-driven investment strategies.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ai-trading">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-4">
-                🎯 Launch AI Trading
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                Start Trading with AI
               </Button>
             </Link>
             <Link href="/analytics">
-              <Button size="lg" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-4">
-                📊 Explore Analytics
+              <Button variant="outline" size="lg" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                View Analytics
               </Button>
             </Link>
           </div>
         </div>
-      </section>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon
+            return (
+              <Card key={index} className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-300">
+                    {stat.title}
+                  </CardTitle>
+                  <Icon className="h-4 w-4 text-blue-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-white mb-1">
+                    {stat.value}
+                  </div>
+                  <p className={`text-xs ${stat.positive ? 'text-green-400' : 'text-red-400'}`}>
+                    {stat.change}
+                  </p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        {/* Features Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-white">AI Market Analysis</CardTitle>
+              <CardDescription className="text-gray-300">
+                Real-time market analysis powered by advanced machine learning algorithms
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Prediction Accuracy</span>
+                  <span className="text-green-400 font-medium">87%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Markets Analyzed</span>
+                  <span className="text-blue-400 font-medium">500+</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Data Points</span>
+                  <span className="text-purple-400 font-medium">10M+</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-white">Smart Portfolio</CardTitle>
+              <CardDescription className="text-gray-300">
+                Automated portfolio management with risk optimization
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Risk Score</span>
+                  <span className="text-yellow-400 font-medium">Medium</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Diversification</span>
+                  <span className="text-green-400 font-medium">Optimal</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Performance</span>
+                  <span className="text-blue-400 font-medium">+12.5%</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-white">Live Trading</CardTitle>
+              <CardDescription className="text-gray-300">
+                Execute trades with AI recommendations and real-time monitoring
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Active Positions</span>
+                  <span className="text-green-400 font-medium">23</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Success Rate</span>
+                  <span className="text-blue-400 font-medium">78%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Total Profit</span>
+                  <span className="text-purple-400 font-medium">$15,420</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

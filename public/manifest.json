@@ -1,21 +1,27 @@
 {
   "name": "AlphaAI StockX",
   "short_name": "AlphaAI",
-  "description": "Advanced AI-powered stock trading platform",
+  "description": "AI-Powered Trading Platform",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#111827",
   "theme_color": "#3b82f6",
   "icons": [
     {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/icon-512x512.png", 
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "categories": ["finance", "business", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "portrait-primary"
 }

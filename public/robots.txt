@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://alphaai-stockx.netlify.app/sitemap.xml
-Sitemap: https://alphaai-stockx-production.up.railway.app/sitemap.xml
+# Disallow admin/sensitive areas (add as needed)
+# Disallow: /admin/
+# Disallow: /api/private/
 
-# Crawl delay
-Crawl-delay: 1
+# Sitemap location
+Sitemap: https://alphaai-stockx.com/sitemap.xml

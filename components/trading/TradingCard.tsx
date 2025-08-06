@@ -1,46 +1,71 @@
-import React from 'react'
-import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 
-export interface TradingCardProps {
-  title: string
-  description: string
-  href: string
-  stats?: {
-    [key: string]: string
-  }
+interface TradingCardProps {
+  symbol: string
+  price: number
+  change: number
+  changePercent: number
+  confidence: number
+  outlook: 'bullish' | 'bearish' | 'neutral'
+  risk: 'low' | 'medium' | 'high'
 }
 
-export function TradingCard({ title, description, href, stats }: TradingCardProps) {
+export function TradingCard({
+  symbol,
+  price,
+  change,
+  changePercent,
+  confidence,
+  outlook,
+  risk
+}: TradingCardProps) {
+  // Input validation
+  if (!symbol || typeof price !== 'number' || typeof change !== 'number') {
+    return (
+      <Card className="bg-gray-900 border-gray-800">
+        <CardContent className="p-6">
+          <p className="text-red-400">Invalid trading data</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  const isPositive = change > 0
+  const outlookColor = outlook === 'bullish' ? 'text-green-400' : outlook === 'bearish' ? 'text-red-400' : 'text-yellow-400'
+  const riskColor = risk === 'low' ? 'text-green-400' : risk === 'medium' ? 'text-yellow-400' : 'text-red-400'
+
   return (
-    <Card className="trading-card group cursor-pointer">
+    <Card className="bg-gray-900 border-gray-800">
       <CardHeader>
-        <CardTitle className="text-white group-hover:text-blue-400 transition-colors">
-          {title}
+        <CardTitle className="flex justify-between items-center">
+          <span className="text-2xl font-bold">{symbol}</span>
+          <span className="text-xl">${price.toFixed(2)}</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-400 mb-4 leading-relaxed">
-          {description}
-        </p>
-        
-        {stats && (
-          <div className="space-y-2 mb-6">
-            {Object.entries(stats).map(([key, value]) => (
-              <div key={key} className="flex justify-between items-center">
-                <span className="text-gray-500 text-sm capitalize">{key}:</span>
-                <span className="text-white font-semibold">{value}</span>
-              </div>
-            ))}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <span>Change:</span>
+            <span className={isPositive ? 'text-green-400' : 'text-red-400'}>
+              {isPositive ? '+' : ''}{change.toFixed(2)} ({isPositive ? '+' : ''}{changePercent.toFixed(2)}%)
+            </span>
           </div>
-        )}
-        
-        <Link href={href}>
-          <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
-            Explore {title.replace(/🤖|📊|📈/g, '').trim()}
-          </Button>
-        </Link>
+          
+          <div className="flex justify-between items-center">
+            <span>AI Confidence:</span>
+            <span className="text-blue-400">{confidence}%</span>
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <span>Outlook:</span>
+            <span className={outlookColor}>{outlook.toUpperCase()}</span>
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <span>Risk Level:</span>
+            <span className={riskColor}>{risk.toUpperCase()}</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   )
