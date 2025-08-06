@@ -1,16 +1,16 @@
 'use client';
 
-import { Calendar } from '../components/ui/calendar';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Calendar } from '../components/ui/calendar';
-import { Badge } from '../components/ui/badge';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Calendar } from '@/components/ui/calendar';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import { Rocket, Calendar, DollarSign } from 'lucide-react';
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
 
 interface IPOData {
   company: string"

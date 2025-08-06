@@ -1,20 +1,20 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Slider } from '../components/ui/slider';
-import { Card } from '../components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Slider } from '@/components/ui/slider';
+import { Card } from '@/components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from '../components/ui/card';
-import { Label } from '../components/ui/label';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
+    } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { CreditCard, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card.js';
   DollarSign, 
   TrendingUp, 
   Shield, 

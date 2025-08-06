@@ -1,12 +1,12 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Tabs } from '../components/ui/tabs';
-import { Badge } from '../components/ui/badge';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import { Brain"
   Search"
@@ -23,7 +23,7 @@ import AIPatternRecognition from './AIPatternRecognition';
 import AIPortfolioDoctor from './AIPortfolioDoctor';
 import AIStockScreener from './AIStockScreener';
 import AITradeCopilot from './AITradeCopilot';
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
 
 interface ToolStats {
   name: string"

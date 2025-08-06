@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatedBackground } from '../components/ui/animated-background-client';
+import { AnimatedBackground } from '@/components/ui/animated-background-client';
 
 import React, { useRef, useEffect } from 'react';
 

@@ -1,20 +1,20 @@
 'use client';
 
-import { Calendar } from '../components/ui/calendar';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Calendar } from '../components/ui/calendar';
-import { Avatar } from '../components/ui/avatar';
-import { Card } from '../components/ui/card';
+import { Calendar } from '@/components/ui/calendar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Calendar } from '@/components/ui/calendar';
+import { Avatar } from '@/components/ui/avatar';
+import { Card } from '@/components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardDescription"
       CardTitle }
-    } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
+    } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { User, 
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card.js';
   Mail, 
   Phone, 
   Calendar, 

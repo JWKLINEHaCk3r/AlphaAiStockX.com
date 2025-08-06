@@ -1,14 +1,14 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import React from 'react';
-import { Card } from '../components/ui/card';
+import { Card } from '@/components/ui/card';
 import { ArrowUp, ArrowDown, TrendingUp, Star, Clock, Target } from 'lucide-react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+    } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface TradeRecommendation { symbol: string, action: 'BUY' | 'SELL' | 'HOLD'"
   confidence: number"

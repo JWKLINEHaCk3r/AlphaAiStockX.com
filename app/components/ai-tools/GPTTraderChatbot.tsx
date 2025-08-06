@@ -1,17 +1,17 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Input } from '../components/ui/input';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, User, Send, Mic } from 'lucide-react';
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
 
 interface ChatMessage { id: string, type: 'user' | 'bot'"
   content: string"

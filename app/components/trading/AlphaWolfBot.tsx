@@ -1,18 +1,18 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Card } from '../components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
+    } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Bot, 
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
   Play, 
   Pause, 
   Settings, 

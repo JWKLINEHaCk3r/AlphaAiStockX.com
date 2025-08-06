@@ -1,20 +1,20 @@
 'use client';
 
-import { Badge } from '../components/ui/badge';
-import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Card } from '../components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from '../components/ui/card';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Badge } from '../components/ui/badge';
+    } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { Shield, 
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
   CheckCircle, 
   AlertTriangle, 
   Clock, 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Toast } from '../components/ui/toast';
+import { Toast } from '@/components/ui/toast';
 import { Toast } from "./toast";
 import React from 'react'; // Removed circular import;
 
@@ -10,7 +10,7 @@ import { cva
       VariantProps }
     } from "class-variance-authority";
 import { X } from "lucide-react";
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 const ToastProvider = ToastPrimitives.Provider;
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>

@@ -2,7 +2,7 @@ import {  PopoverTrigger ,  PopoverContent  } from "./popover";
 import { Popover } from "./popover";
 // Removed circular import;
 // Removed circular import;
-import React from 'react'; import * as PopoverPrimitive from '@radix-ui/react-popover'; import { cn } from '../lib/utils';
+import React from 'react'; import * as PopoverPrimitive from '@radix-ui/react-popover'; import { cn } from '@/lib/utils';
 
 const Popover = PopoverPrimitive.Root;
 const PopoverTrigger = PopoverPrimitive.Trigger;

@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '../components/ui/button';
+import { Button } from '@/components/ui/button';
 import React from 'react';
- import Navigation from '../components/ui/navigation/index';
+ import Navigation from '@/components/ui/navigation/index';
 import { Button } from "./button"; (); import { useState, useEffect } from 'react';
-import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '../lib/utils';
+import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '@/lib/utils';
 
 interface NavItem {
 

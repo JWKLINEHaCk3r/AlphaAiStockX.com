@@ -1,16 +1,16 @@
 'use client';
 
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Card } from '../components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent"
       CardTitle }
-    } from '../components/ui/card';
-import { Button } from '../components/ui/button';
+    } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { CheckCircle, XCircle, Clock, Play } from 'lucide-react';
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card.js';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card.js';
  interface BuildValidationResult { status: 'idle' | 'running' | 'success' | 'error'"
     message: string;
   details?: string[];

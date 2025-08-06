@@ -1,4 +1,4 @@
-import { Toaster } from '../components/ui/toaster';
+import { Toaster } from '@/components/ui/toaster';
 import React from 'react';
 import { Toaster } from "./toaster";
 // Removed circular import;
@@ -7,7 +7,7 @@ import { Toast;
   ToastClose;
   ToastDescription;
   ToastProvider; }
-  ToastTitle; ToastViewport; } from '../components/ui/toast'; import { useToast } from '@/hooks/use-toast';
+  ToastTitle; ToastViewport; } from '@/components/ui/toast'; import { useToast } from '@/hooks/use-toast';
 
 export function Toaster() {
   const { toasts } = useToast();

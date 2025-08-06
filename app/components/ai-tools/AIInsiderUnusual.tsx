@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert } from '../components/ui/alert';
+import { Alert } from '@/components/ui/alert';
 import React, { useState } from 'react';
 
 interface Alert {

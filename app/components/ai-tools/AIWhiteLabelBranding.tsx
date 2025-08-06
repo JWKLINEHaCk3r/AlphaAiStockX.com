@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Label } from '../components/ui/label';
+import { Label } from '@/components/ui/label';
 export type Account = {
   portfolio_value?: number | string;
   buying_power?: number | string; 

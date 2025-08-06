@@ -1,8 +1,8 @@
 'use client';
 
-import { Card } from '../components/ui/card';
+import { Card } from '@/components/ui/card';
 import React from 'react';
-import { Card } from '../components/ui/card';
+import { Card } from '@/components/ui/card';
 // ...existing code...
 // This file does not contain a local Card component declaration
 // Ensure to import Card from ui/card if needed
