@@ -10,6 +10,3 @@ restartPolicyMaxRetries = 10
 [variables]
 NODE_ENV = "production"
 NEXT_TELEMETRY_DISABLED = "1"
-NPM_CONFIG_LEGACY_PEER_DEPS = "true"
-PNPM_CONFIG_AUTO_INSTALL_PEERS = "true"
-PNPM_CONFIG_STRICT_PEER_DEPENDENCIES = "false"
