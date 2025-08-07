@@ -13,7 +13,11 @@
     "analyze": "cross-env ANALYZE=true next build",
     "test": "echo \"Add tests here\" && exit 0",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "postinstall": "npm run build",
+    "deploy:netlify": "npm install && npm run build",
+    "deploy:railway": "npm install && npm run build",
+    "deploy:vercel": "npm run build"
   },
   "dependencies": {
     "next": "^15.1.4",
@@ -40,5 +44,9 @@
     "cross-env": "^7.0.3",
     "@next/bundle-analyzer": "^15.1.4",
     "prettier-plugin-tailwindcss": "^0.5.9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

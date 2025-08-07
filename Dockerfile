@@ -1,58 +1,37 @@
-# Railway-Optimized Dockerfile for AlphaAI StockX
-FROM node:18-alpine
-
-# Set working directory
+# AlphaAI StockX - Multi-stage Docker build with NPM
+FROM node:18-alpine AS base
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm@9
+# Install dependencies
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+COPY package*.json ./
+RUN npm ci --only=production
 
-# Copy package files
-COPY package.json pnpm-lock.yaml* ./
-
-# Create ALL script files that Railway might need (belt and suspenders approach)
-RUN echo '#!/usr/bin/env node' > fix-all-ui-imports.cjs && \
-    echo 'console.log("✅ UI imports optimization complete");' >> fix-all-ui-imports.cjs && \
-    echo 'process.exit(0);' >> fix-all-ui-imports.cjs && \
-    chmod +x fix-all-ui-imports.cjs
-
-RUN echo '#!/usr/bin/env node' > fix-missing-cards.cjs && \
-    echo 'console.log("✅ Card components verified");' >> fix-missing-cards.cjs && \
-    echo 'process.exit(0);' >> fix-missing-cards.cjs && \
-    chmod +x fix-missing-cards.cjs
-
-RUN echo '#!/usr/bin/env node' > create-missing-components.cjs && \
-    echo 'console.log("✅ Missing components created");' >> create-missing-components.cjs && \
-    echo 'process.exit(0);' >> create-missing-components.cjs && \
-    chmod +x create-missing-components.cjs
-
-RUN echo '#!/usr/bin/env node' > fix-critical-syntax-errors.cjs && \
-    echo 'console.log("✅ Syntax validation complete");' >> fix-critical-syntax-errors.cjs && \
-    echo 'process.exit(0);' >> fix-critical-syntax-errors.cjs && \
-    chmod +x fix-critical-syntax-errors.cjs
-
-# Verify files were created
-RUN ls -la *.cjs
-
-# Configure pnpm for production
-RUN pnpm config set auto-install-peers true && \
-    pnpm config set strict-peer-dependencies false
-
-# Install dependencies - this should now work without exit code 1
-RUN pnpm install --frozen-lockfile --prod=false
-
-# Copy source code
+# Build application  
+FROM base AS builder
+COPY package*.json ./
+RUN npm ci
 COPY . .
+RUN npm run build
 
-# Build the application
-RUN pnpm build
+# Production runtime
+FROM base AS runner
+WORKDIR /app
 
-# Set environment
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Expose port
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
+ENV PORT 3000
 
-# Start command
-CMD ["pnpm", "start"]
+CMD ["node", "server.js"]

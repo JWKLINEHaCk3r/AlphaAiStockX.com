@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "buildCommand": "npm install && npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": [
+    "iad1"
+  ],
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "@vercel/node@2"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
