@@ -1,4 +1,4 @@
-# AlphaAI StockX - Netlify Configuration (PNPM + NPM Support)
+# AlphaAI StockX - Netlify Configuration (PNPM Lockfile Fix)
 [build]
   publish = ".next"
   command = "pnpm install --frozen-lockfile --prod=false && pnpm build"
@@ -9,7 +9,7 @@
   NEXT_TELEMETRY_DISABLED = "1"
   CI = "true"
 
-# Fallback build command if PNPM fails
+# Fallback to NPM if PNPM fails
 [context.production.build]
   command = "pnpm install --frozen-lockfile --prod=false && pnpm build || npm install && npm run build"
 
@@ -27,9 +27,3 @@
   for = "/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# Next.js rewrites
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

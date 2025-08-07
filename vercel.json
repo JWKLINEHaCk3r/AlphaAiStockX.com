@@ -4,12 +4,16 @@
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install --frozen-lockfile --prod=false",
   "framework": "nextjs",
-  "regions": [
-    "iad1"
-  ],
+  "regions": ["iad1"],
   "functions": {
     "app/api/**/*.ts": {
       "runtime": "@vercel/node@2"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
 }

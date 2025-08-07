@@ -1,22 +1,22 @@
-# AlphaAI StockX - Multi-stage Docker build with PNPM
+# AlphaAI StockX - Multi-stage Docker build with NPM (PNPM Fix)
 FROM node:18-alpine AS base
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable
-RUN corepack prepare pnpm@latest --activate
-
+# Install dependencies only when needed
 FROM base AS deps
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install --frozen-lockfile --prod=false
+RUN apk add --no-cache libc6-compat
+COPY package*.json ./
+RUN npm ci --only=production && npm cache clean --force
 
+# Rebuild the source code only when needed
 FROM base AS builder
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install --frozen-lockfile --prod=false
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN pnpm build
+RUN npm run build
 
+# Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
 
@@ -27,12 +27,15 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+
+# Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
 EXPOSE 3000
+
 ENV PORT 3000
 
 CMD ["node", "server.js"]
