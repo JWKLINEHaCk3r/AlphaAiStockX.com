@@ -9,15 +9,16 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf .next",
+    "clean": "rm -rf .next node_modules pnpm-lock.yaml",
     "analyze": "cross-env ANALYZE=true next build",
     "test": "echo \"Add tests here\" && exit 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "postinstall": "npm run build",
-    "deploy:netlify": "npm install && npm run build",
-    "deploy:railway": "npm install && npm run build",
-    "deploy:vercel": "npm run build"
+    "deploy:netlify": "pnpm install --frozen-lockfile --prod=false && pnpm build",
+    "deploy:railway": "pnpm install --frozen-lockfile --prod=false && pnpm build",
+    "deploy:vercel": "pnpm build",
+    "fresh-install": "pnpm clean && pnpm install --no-frozen-lockfile"
   },
   "dependencies": {
     "next": "^15.1.4",
@@ -47,6 +48,7 @@
   },
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  }
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.6"
 }

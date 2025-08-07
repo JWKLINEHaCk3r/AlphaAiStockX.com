@@ -1,21 +1,22 @@
-# AlphaAI StockX - Multi-stage Docker build with NPM
+# AlphaAI StockX - Multi-stage Docker build with PNPM
 FROM node:18-alpine AS base
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies
+# Install pnpm
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
+
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
-COPY package*.json ./
-RUN npm ci --only=production
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile --prod=false
 
-# Build application  
 FROM base AS builder
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile --prod=false
 COPY . .
-RUN npm run build
+RUN pnpm build
 
-# Production runtime
 FROM base AS runner
 WORKDIR /app
 

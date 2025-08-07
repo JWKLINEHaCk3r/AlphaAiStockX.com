@@ -1,23 +1,8 @@
-# Nixpacks configuration for Railway deployment
-# Optimized for AlphaAI StockX platform
-
-[phases.setup]
-nixPkgs = ["nodejs-18_x", "pnpm"]
-
 [phases.install]
-cmds = [
-  "pnpm config set auto-install-peers true",
-  "pnpm config set strict-peer-dependencies false", 
-  "pnpm config set fund false",
-  "pnpm config set audit false"
-]
+cmds = ["pnpm install --frozen-lockfile --prod=false"]
 
 [phases.build]
-cmds = [
-  "echo 'y' | pnpm install --no-frozen-lockfile --prod=false",
-  "pnpm run postinstall",
-  "pnpm build"
-]
+cmds = ["pnpm build"]
 
 [start]
 cmd = "pnpm start"
@@ -25,4 +10,5 @@ cmd = "pnpm start"
 [variables]
 NODE_ENV = "production"
 NEXT_TELEMETRY_DISABLED = "1"
-NPM_CONFIG_LEGACY_PEER_DEPS = "true"
+PNPM_HOME = "/app/.pnpm"
+PATH = "$PNPM_HOME:$PATH"
