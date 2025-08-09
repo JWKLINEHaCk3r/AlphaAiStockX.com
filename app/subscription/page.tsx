@@ -2,6 +2,9 @@
 
 import React from 'react';
 
+// Disable static generation to avoid component resolution issues
+export const dynamic = 'force-dynamic';
+
 export default function SubscriptionPage() {
   const plans = [
     {

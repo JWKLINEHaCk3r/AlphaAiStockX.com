@@ -1,62 +1,76 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import React from 'react';
- import Navigation from '@/components/ui/navigation/index';
-import { Button } from "./button"; (); import { useState, useEffect } from 'react';
-import { Menu, X, Home, TrendingUp, Brain, User, ChevronDown, Sparkles, Zap } from 'lucide-react'; import { cn } from '@/lib/utils';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
-interface NavItem {
-
-  label: string,
-    href: string;
-  icon?: React.ReactNode;
-  children?: NavItem[];
-
-}
-
-const navigation: NavItem[] = [ { label: 'Dashboard', href: '/dashboard',
-    icon: <Home className="w-4 h-4" />
-  }, { label: 'AI Trading', href: '/trading',
-    icon: <Brain className="w-4 h-4" />, children: [ { label: 'Live Trading', href: '/trading/live' }, { label: 'Backtesting', href: '/trading/backtest' }, { label: 'Strategies', href: '/trading/strategies' }, { label: 'AI Agents', href: '/trading/agents' }
-    ];
-  }, { label: 'Analytics', href: '/analytics',
-    icon: <TrendingUp className="w-4 h-4" />, children: [ { label: 'Portfolio', href: '/analytics/portfolio' }, { label: 'Market Scan', href: '/analytics/scanner' }, { label: 'Risk Analysis', href: '/analytics/risk' }, { label: 'Performance', href: '/analytics/performance' }
-    ];
-  }, { label: 'Education', href: '/education',
-    icon: <Sparkles className="w-4 h-4" />
-  }
+const navigationItems = [
+  {
+    label: 'AI Trading',
+    href: '/ai-trading',
+    submenu: [
+      { label: 'Dashboard', href: '/ai-trading/dashboard' },
+      { label: 'Algorithms', href: '/ai-trading/algorithms' },
+      { label: 'Backtesting', href: '/ai-trading/backtesting' }
+    ]
+  },
+  {
+    label: 'Analytics',
+    href: '/analytics',
+    submenu: [
+      { label: 'Market Analysis', href: '/analytics/market' },
+      { label: 'Portfolio', href: '/analytics/portfolio' },
+      { label: 'Risk Assessment', href: '/analytics/risk' }
+    ]
+  },
+  { label: 'Platform', href: '/platform' },
+  { label: 'Subscribe', href: '/subscribe' }
 ];
 
-function DropdownMenu({
-  item;
-  isOpen;
-  onToggle;
-}: {
-  item: NavItem,
-    isOpen: boolean,
-  onToggle: () => void
-}) {
+const mobileNavigationItems = [
+  { label: 'Home', href: '/' },
+  { label: 'AI Trading', href: '/ai-trading' },
+  { label: 'Analytics', href: '/analytics' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Platform', href: '/platform' },
+  { label: 'Subscribe', href: '/subscribe' }
+];
+
+interface DropdownMenuProps {
+  item: {
+    label: string;
+    href: string;
+    submenu?: Array<{ label: string; href: string }>;
+  };
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+function DropdownMenu({ item, isOpen, onToggle }: DropdownMenuProps) {
   return (
     <div className="relative">
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover:text-neon-blue group",
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover:text-neon-blue group"
       >
-        {item.icon},{item.label} <ChevronDown className={cn('w-4 h-4 transition-transform duration-200', isOpen ? 'rotate-180' : '')}
-        />
+        {item.label}
+        <ChevronDown className={cn('w-4 h-4 transition-transform', isOpen && 'rotate-180')} />
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 glass-card border border-neon-blue/20 rounded-xl shadow-glow overflow-hidden z-50">
-          {item.children?.map((child, index) => (
-            <a
-              key={index}
-              href={child.href}
-              className="block px-4 py-3 text-sm transition-colors hover:bg-neon-blue/10, hover:text-neon-blue border-b border-white/5,
-      last: border-b-0";
+        <div className="absolute top-full left-0 mt-1 w-56 bg-black/90 backdrop-blur-md border border-neon-blue/20 rounded-lg shadow-lg">
+          {item.submenu?.map((subItem, index) => (
+            <Link
+              key={subItem.href}
+              href={subItem.href}
+              className={cn(
+                'block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-neon-blue/10 border-b border-gray-800',
+                index === item.submenu!.length - 1 && 'border-b-0'
+              )}
             >
-              {child.label}
-            </a>
+              {subItem.label}
+            </Link>
           ))}
         </div>
       )}
@@ -64,173 +78,135 @@ function DropdownMenu({
   );
 }
 
-function MobileMenu({ isOpen,
-      onClose
-    }: { isOpen: boolean, onClose: () => void }) {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
+function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
       <div className="fixed inset-0 bg-black/80 backdrop-blur-md" onClick={onClose} />
-      <div className="fixed top-0 right-0 h-full w-80 glass-card border-l border-neon-blue/20 p-6 overflow-y-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-xl font-bold neon-text">Menu</h2>
-          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+      <div className="fixed right-0 top-0 h-full w-full max-w-sm bg-black/95 border-l border-neon-blue/20 p-6">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl font-bold text-white">Menu</h2>
+          <button
+            onClick={onClose}
+            className="p-2 text-gray-400 hover:text-white"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>
+        
         <nav className="space-y-2">
-          {navigation.map((item, index) => (
-            <div key={index}>
-              {item.children ? (
-                <div>
+          {mobileNavigationItems.map((item, index) => {
+            const hasSubmenu = navigationItems.find(navItem => navItem.label === item.label)?.submenu;
+            
+            return (
+              <div key={item.href}>
+                {hasSubmenu ? (
                   <button
-                    onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                    className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover:bg-white/10 rounded-lg",
+                    className="flex items-center justify-between w-full px-4 py-3 text-left transition-colors hover:bg-white/10 rounded-lg"
                   >
-                    <div className="flex items-center gap-3">
-                      {item.icon},{item.label}
-                    </div>
-                    <ChevronDown className={cn( 'w-4 h-4 transition-transform'; openDropdown === item.label ? 'rotate-180' : '';
-                      )}
-                    />
+                    <span className="text-gray-300">{item.label}</span>
+                    <ChevronDown className="w-4 h-4 transition-transform" />
                   </button>
-                  {openDropdown === item.label && (
-                    <div className="ml-6 mt-2 space-y-1">
-                      {item.children.map((child, childIndex) => (
-                        <a
-                          key={childIndex}
-                          href={child.href}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-neon-blue transition-colors rounded-lg,
-      hover:bg-white/5"
-                          onClick={onClose}
-                        >
-                          {child.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <a
-                  href={item.href}
-                  className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/10 rounded-lg"
-                  onClick={onClose}
-                >
-                  {item.icon},{item.label}
-                </a>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    className="block px-4 py-3 text-gray-300 transition-colors hover:text-white hover:bg-white/10 rounded-lg"
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
         </nav>
-        <div className="mt-8 pt-8 border-t border-white/10">
-          <div className="space-y-3">
-            <Button variant="default" size="sm" className="w-full">
-              <User className="w-4 h-4 mr-2" />
-              Sign In;
-            </Button>
-            <Button variant="outline" size="sm" className="w-full">
-              Get Started;
-            </Button>
-          </div>
+
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <Button asChild className="w-full bg-neon-blue hover:bg-neon-blue/80">
+            <Link href="/subscribe">Get Started</Link>
+          </Button>
         </div>
       </div>
     </div>
   );
 }
 
-export default function NextLevelNavigation() {
+export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    }; if (typeof window !== 'undefined') { window.addEventListener('scroll', handleScroll); return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
+      setIsScrolled(window.scrollY > 10);
+    };
 
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setOpenDropdown(null);
-    };
- // Skip during SSR; if (typeof document === 'undefined') return; document.addEventListener('click', handleClickOutside); return () => {   if (typeof document !== 'undefined') { document.removeEventListener('click', handleClickOutside);
-        }
-    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      <nav className={cn( 'fixed top-0 left-0 right-0 z-40 transition-all duration-300'; isScrolled ? 'glass-card border-b border-neon-blue/20 shadow-glow' : 'bg-transparent';
-        )}
-      >
-        <div className="max-w-7xl mx-auto px-6">
+      <nav className={cn(
+        'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
+        isScrolled ? 'glass-card border-b border-neon-blue/20 shadow-glow' : 'bg-transparent'
+      )}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center animate-pulse-glow">
-                  <Zap className="w-6 h-6 text-white" />
-                </div>
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AI</span>
               </div>
-              <div className="font-bold text-xl">
-                <span className="neon-text">Alpha</span>
-                <span className="text-neon-orange">AI</span>
-                <span className="text-neon-cyan">StockX</span>
-              </div>
-            </div>
+              <span className="text-xl font-bold text-white">AlphaAI StockX</span>
+            </Link>
+
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
-              {navigation.map((item, index) => (
-                <div key={index} onClick={e => e.stopPropagation()}>
-                  {item.children ? (
+              {navigationItems.map((item) => (
+                <div key={item.href}>
+                  {item.submenu ? (
                     <DropdownMenu
                       item={item}
                       isOpen={openDropdown === item.label}
-                      onToggle={() =>
-                        setOpenDropdown(openDropdown === item.label ? null : item.label);
-                      }
+                      onToggle={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                     />
                   ) : (
-                    <a
+                    <Link
                       href={item.href}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors hover:text-neon-blue rounded-lg,
-      hover:bg-white/10";
+                      className="px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:text-white hover:bg-white/10 rounded-lg"
                     >
-                      {item.icon},{item.label}
-                    </a>
+                      {item.label}
+                    </Link>
                   )}
                 </div>
               ))}
             </div>
-            {/* Desktop Actions */}
-            <div className="hidden lg: flex items-center gap-3">
-              <Button variant="ghost" size="sm">
-                <User className="w-4 h-4 mr-2" />
-                Sign In,
+
+            {/* CTA Button & Mobile Menu */}
+            <div className="flex items-center space-x-4">
+              <Button asChild className="hidden lg:inline-flex bg-neon-blue hover:bg-neon-blue/80">
+                <Link href="/subscribe">Get Started</Link>
               </Button>
-              <Button variant="default" size="sm">
-                Get Started;
-              </Button>
+              
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
             </div>
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="lg: hidden p-2,
-      hover:bg-white/10 rounded-lg transition-colors";
-            >
-              <Menu className="w-6 h-6" />
-            </button>
           </div>
         </div>
       </nav>
-      {/* Mobile Menu */}
+
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
-      {/* Spacer for fixed navigation */}
-      <div className="h-16" />
     </>
   );
 }

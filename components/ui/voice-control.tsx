@@ -1,2 +1,7 @@
 import React from 'react';
-export default voice-control;
+
+export function VoiceControl({ children }: { children?: React.ReactNode }) {
+  return <div className="voice-control">{children}</div>;
+}
+
+export default VoiceControl;

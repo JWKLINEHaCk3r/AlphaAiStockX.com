@@ -1,14 +1,22 @@
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+const config = [
   {
-    extends: ['next/core-web-vitals'],
+    ignores: [
+      '.next/**',
+      'out/**', 
+      'node_modules/**',
+      '.git/**'
+    ],
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
     rules: {
-      '@next/next/no-css-tags': 'off',
-      'react/no-inline-styles': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      'react/no-unescaped-entities': 'off',
-      '@next/next/no-html-link-for-pages': 'off',
+      // Basic rules to catch common issues
+      'no-unused-vars': 'warn',
+      'no-console': 'warn',
+      'prefer-const': 'warn',
     },
   },
-]
+];
+
+export default config;

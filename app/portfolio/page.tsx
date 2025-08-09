@@ -1,6 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card-simple'
+import { Button } from '@/components/ui/button-simple'
 import { TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Target, Briefcase } from 'lucide-react'
+
+// Disable static generation to avoid component resolution issues
+export const dynamic = 'force-dynamic';
 
 export default function PortfolioPage() {
   const portfolioData = {

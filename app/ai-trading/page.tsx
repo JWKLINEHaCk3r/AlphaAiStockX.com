@@ -1,7 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card-simple'
+import { Button } from '@/components/ui/button-simple'
 import { TradingCard } from '@/components/trading/TradingCard'
 import { Bot, Zap, Shield, TrendingUp } from 'lucide-react'
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
 
 export default function AiTradingPage() {
   const aiRecommendations = [

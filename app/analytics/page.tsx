@@ -1,5 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card-simple'
 import { TrendingUp, TrendingDown, BarChart3, PieChart, Activity, Target } from 'lucide-react'
+
+// Disable static generation to avoid component resolution issues
+export const dynamic = 'force-dynamic';
 
 export default function AnalyticsPage() {
   const performanceData = [

@@ -7,7 +7,6 @@ declare global {
   
   namespace NodeJS {
     interface ProcessEnv {
-      NODE_ENV: 'development' | 'production' | 'test';
       NEXTAUTH_URL?: string;
       NEXTAUTH_SECRET?: string;
       DATABASE_URL?: string;
@@ -79,6 +78,28 @@ export interface MarketData {
   marketCap?: number;
   pe?: number;
   timestamp: Date;
+}
+
+// StockData alias for MarketData
+export type StockData = MarketData;
+
+export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+
+export interface APIResponse<T = any> {
+  data: T;
+  success: boolean;
+  message?: string;
+}
+
+export class APIError extends Error {
+  constructor(
+    message: string,
+    public status?: number,
+    public code?: string
+  ) {
+    super(message);
+    this.name = 'APIError';
+  }
 }
 
 export {};

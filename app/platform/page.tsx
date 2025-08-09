@@ -3,6 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 
+// Disable static generation to avoid component resolution issues
+export const dynamic = 'force-dynamic';
+
 export default function Platform() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
@@ -51,7 +54,7 @@ export default function Platform() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/api/auth/signin">
+            <Link href="/auth/signin">
               <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-lg px-8 py-4 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
                 Sign In to Trade
               </button>
