@@ -1,8 +1,8 @@
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button-simple';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card-simple';
 import { TrendingUp, TrendingDown, Brain, Zap, DollarSign, Target } from 'lucide-react';
 
 // AI Market Analysis Card

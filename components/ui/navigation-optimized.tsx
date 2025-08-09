@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 const navigationItems = [
